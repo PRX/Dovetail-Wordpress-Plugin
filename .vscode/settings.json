@@ -1,0 +1,58 @@
+{
+  "cSpell.words": [
+    "ABSPATH",
+    "blockembed",
+    "dashicons",
+    "dataparse",
+    "DOCROOT",
+    "httponly",
+    "nocookie",
+    "pagename",
+    "postname",
+    "shortcode",
+    "SITEURL",
+    "ssot",
+    "uncategorized",
+    "untrailingslashit",
+    "wlwmanifest",
+    "wpcfm",
+    "WPINC",
+    "WPMU",
+    "wpseo"
+  ],
+  "cSpell.ignorePaths": [
+    "package-lock.json",
+    "node_modules",
+    "vscode-extension",
+    ".git/objects",
+    ".vscode",
+    ".vscode-insiders",
+    "wp-content/plugins",
+    "vendor"
+  ],
+  "phpcs.composerJsonPath": "composer.json",
+  "phpcs.executablePath": "./vendor/bin/phpcs",
+  "phpcs.standard": "WordPress",
+  "phpSniffer.autoDetect": true,
+  "phpSniffer.standard": "WordPress",
+  "editorconfig.generateAuto": false,
+  "editor.formatOnSave": true,
+  "[php]": {
+    "editor.defaultFormatter": "wongjn.php-sniffer"
+  },
+  "[html]": {
+    "editor.defaultFormatter": "co6x0.vscode-wp-block-html"
+  },
+  "files.associations": {
+    "*.{c,sc}ss": "tailwindcss"
+  },
+  "editor.quickSuggestions": {
+    "strings": "on"
+  },
+  "editor.defaultFormatter": null,
+  "eslint.format.enable": true,
+  "[javascriptreact]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+  },
+  "typescript.preferences.importModuleSpecifier": "non-relative"
+}
