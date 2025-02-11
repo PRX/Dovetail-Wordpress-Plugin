@@ -5,6 +5,8 @@
  * @package DovetailPodcasts
  */
 
+use Defuse\Crypto\Key;
+
 /**
  * Runs when Dovetail Podcasts is activated
  *
@@ -20,4 +22,8 @@ function dovetail_podcasts_activation_callback() {
 
 	// Store the current version of Dovetail Podcasts.
 	update_option( 'dovetail_podcasts_version', DTPODCASTS_VERSION );
+
+	// Store encryption key.
+	$key = Key::createNewRandomKey();
+	update_option( 'dovetail_podcasts_key', $key->saveToAsciiSafeString() );
 }

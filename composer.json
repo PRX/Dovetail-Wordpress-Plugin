@@ -1,12 +1,27 @@
 {
-    "require-dev": {
-        "squizlabs/php_codesniffer": "*",
-        "dealerdirect/phpcodesniffer-composer-installer": "^0.7.2",
-        "wp-coding-standards/wpcs": "^3.0"
+  "autoload": {
+    "files": [],
+    "psr-4": {
+      "DovetailPodcasts\\": "src/"
     },
-    "config": {
-        "allow-plugins": {
-            "dealerdirect/phpcodesniffer-composer-installer": true
-        }
+    "classmap": [
+      "src/DovetailPodcasts.php"
+    ]
+  },
+  "require-dev": {
+    "squizlabs/php_codesniffer": "*",
+    "dealerdirect/phpcodesniffer-composer-installer": "^0.7.2",
+    "wp-coding-standards/wpcs": "^3.0",
+    "phpcompatibility/phpcompatibility-wp": "*",
+    "slevomat/coding-standard": "*"
+  },
+  "config": {
+    "optimize-autoloader": true,
+    "allow-plugins": {
+      "dealerdirect/phpcodesniffer-composer-installer": true
     }
+  },
+  "require": {
+    "defuse/php-encryption": "^2.4"
+  }
 }

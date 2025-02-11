@@ -22,10 +22,8 @@ function dovetail_podcasts_deactivation_callback() {
 	do_action( 'dovetail_podcasts_deactivate' );
 
 	// TODO: Flush any caches.
-
-	// TODO: Unregister content types and taxonomies?
-
-	// TODO: Flush permalinks (if we unregister content types).
+	wp_cache_flush( 'access_token', 'dovetail_podcasts' );
+	delete_option( 'dovetail_podcasts_settings-authentication' );
 }
 
 /**
@@ -46,10 +44,6 @@ function dovetail_podcasts_uninstall_callback() {
 
 	// Delete data during deactivation.
 	delete_dovetail_podcasts_data();
-
-	// TODO: Delete post data for content types added by plugin?
-
-	// TODO: Delete taxonomy terms data for content types added by plugin?
 }
 
 /**
@@ -63,7 +57,11 @@ function delete_dovetail_podcasts_data() {
 		return;
 	}
 
-	// TODO: Delete all plugin settings.
+	// Delete all plugin settings and caches.
+	delete_option( 'dovetail_podcasts_key' );
+	delete_option( 'dovetail_podcasts_settings-authentication' );
+	delete_option( 'dovetail_podcasts_settings-general' );
+	wp_cache_delete( 'access_token', 'dovetail_podcasts' );
 
 	do_action( 'dovetail_podcasts_delete_data' );
 }

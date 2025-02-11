@@ -37,8 +37,8 @@ function dovetail_podcasts_require_bootstrap_files(): void {
 	if ( file_exists( __DIR__ . '/access-functions.php' ) ) {
 		require_once __DIR__ . '/access-functions.php';
 	}
-	if ( file_exists( __DIR__ . '/src/DovetailPodcasts.php' ) ) {
-		require_once __DIR__ . '/src/DovetailPodcasts.php';
+	if ( file_exists( __DIR__ . '/src/class-dovetailpodcasts.php' ) ) {
+		require_once __DIR__ . '/src/class-dovetailpodcasts.php';
 	}
 }
 
