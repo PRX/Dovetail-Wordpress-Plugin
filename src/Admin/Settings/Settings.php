@@ -150,6 +150,13 @@ class Settings {
 						'options' => $post_types_options,
 						'default' => [ 'post' => 'post' ],
 					],
+					[
+						'name'    => 'delete_media_after_publish',
+						'label'   => __( 'Delete Uploaded Media After Publishing', 'dovetail-podcasts' ),
+						'desc'    => __( "<p>Uploaded audio will be added to the Media Library. When the podcast episode post is published, Dovetail will fetch the file from Wordpress to process for distribution. Dovetail will then host the audio URL's used in podcast feeds and any Dovetail Podcast Players used in this site.</p><p>Check this box if you do not want to keep the audio in the Media Library after it has been published to Dovetail. Only do this if storage on your Wordpress host is too limited or cost prohobitive for the amount of audio your podcasts produce.</p>", 'dovetail-podcasts' ),
+						'type'    => 'checkbox',
+						'default' => false,
+					],
 				]
 			);
 

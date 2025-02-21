@@ -3,7 +3,15 @@
  */
 
 export type AppLocalizer = {
-  [k: string]: string
+  appContainerId: string,
+  postId: number,
+  postStatus: string,
+  postTitle: string,
+  episodeMetaDataField: string,
+  episodeMetaDataJson: string,
+  postMetaboxOptionsJson: string,
+  audioFormats: string[],
+  nonce: string
 };
 
 declare global {

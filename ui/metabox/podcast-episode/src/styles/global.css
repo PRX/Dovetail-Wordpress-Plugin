@@ -1,10 +1,14 @@
 @layer theme, base, components, utilities;
 
-.tailwind {
+@custom-variant dark (&:is(.dark *));
+
+@import "tailwindcss/theme.css" layer(theme);
+
+.tailwind, [data-slot] {
   @import "tailwindcss/preflight.css" layer(base);
 }
-@import "tailwindcss/theme.css" layer(theme);
-@import "tailwindcss/utilities.css" layer(utilities);
+
+@import "tailwindcss/utilities.css" layer(utilities) important;
 
 @layer base {
   :root {
@@ -87,8 +91,14 @@
   a:focus-visible {
     @apply ring ring-offset-2 rounded;
   }
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+  input[type="number"]::-webkit-inner-spin-button {
+    display: none;
+  }
 }
-
 
 @layer utilities {
   .text-wrap-balance {
