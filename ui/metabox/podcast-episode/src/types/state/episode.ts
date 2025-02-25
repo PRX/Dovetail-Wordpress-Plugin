@@ -19,6 +19,15 @@ export type EpisodeEnclosure = {
   url: string,
 
   /**
+   * Filename of the file URL.
+   * Storing this separately so a filename can be shown consistently after publishing to
+   * Dovetail. The `mediaId` and `url` can be removed after publishing, and audio playback
+   * will come from Dovetail audio URL's, in which the filename portion of the URL is decorative.
+   * Always set this when `url` is added or changed, but not when it is removed.
+   */
+  filename: string,
+
+  /**
    * Date the URL was last updated.
    * Use to determine if Dovetail enclosure URL needs to be updated.
    * Set on Wordpress enclosure when new audio file is uploaded.

@@ -21,12 +21,15 @@ export type PostMetaboxOptions = {
 };
 
 export type PostMetaboxState = {
+  podcast: DovetailPodcast,
   episode: EpisodeData,
 };
 
 export type PostMetaboxAction<T = void> = T extends void ? (
-  { type: 'UPDATE_EPISODE', payload: Partial<EpisodeData>} |
-  { type: 'SET_EPISODE_ENCLOSURE', payload: EpisodeEnclosure} |
-  { type: 'UPDATE_EPISODE_ENCLOSURE', payload: Partial<EpisodeEnclosure>} |
-  { type: 'UPDATE_EPISODE_DOVETAIL', payload: Partial<DovetailEpisode>}
+  { type: 'SET_TO_DEFAULT' } |
+  { type: 'SET_PODCAST', payload: DovetailPodcast } |
+  { type: 'UPDATE_EPISODE', payload: Partial<EpisodeData> } |
+  { type: 'SET_EPISODE_ENCLOSURE', payload: EpisodeEnclosure } |
+  { type: 'UPDATE_EPISODE_ENCLOSURE', payload: Partial<EpisodeEnclosure> } |
+  { type: 'UPDATE_EPISODE_DOVETAIL', payload: Partial<DovetailEpisode> }
 ) : ActionWithPayload<T>;

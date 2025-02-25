@@ -9,6 +9,7 @@ namespace DovetailPodcasts\Dovetail;
 
 use Defuse\Crypto\Crypto;
 use Defuse\Crypto\Key;
+use DovetailPodcasts\Utils\Utils;
 
 /**
  * Dovetail API class
@@ -101,7 +102,8 @@ class DovetailApi {
 			return false;
 		}
 
-		$access_token = wp_cache_get( 'access_token', DTPODCASTS_CACHE_GROUP );
+		$transient_key = DTPODCASTS_CACHE_GROUP . '_access_token';
+		$access_token  = get_transient( $transient_key );
 
 		if ( empty( $access_token ) ) {
 			$api_url = "https://{$this->id_domain}/token";
@@ -117,7 +119,7 @@ class DovetailApi {
 
 			if ( is_array( $data ) && isset( $data['access_token'] ) ) {
 				$access_token = $data['access_token'];
-				wp_cache_set( 'access_token', Crypto::encrypt( $access_token, $this->key ), DTPODCASTS_CACHE_GROUP, 60 * 60 - 10 );
+				set_transient( $transient_key, Crypto::encrypt( $access_token, $this->key ), HOUR_IN_SECONDS - MINUTE_IN_SECONDS );
 			}
 		} else {
 			$access_token = Crypto::decrypt( $access_token, $this->key );
@@ -152,7 +154,7 @@ class DovetailApi {
 	}
 
 	/**
-	 * Get information about user the client application belongs to.
+	 * Get collection of podcasts user has access to.
 	 *
 	 * @return array<string,mixed>
 	 */
@@ -168,10 +170,130 @@ class DovetailApi {
 	}
 
 	/**
-	 * Internal method to send API requests.
+	 * Get a specific podcast by id.
+	 *
+	 * @param int $id Dovetail podcast id.
+	 * @return array<string,mixed>
+	 */
+	public function get_podcast( int $id ) {
+		$api_url = "https://{$this->feeder_domain}/api/v1/authorization/podcasts/{$id}";
+		return $this->get( $api_url );
+	}
+
+	/**
+	 * Get collection of episodes belonging to a podcast.
+	 *
+	 * @param int $id Dovetail podcast id.
+	 * @return array<string,mixed>
+	 */
+	public function get_podcast_episodes( int $id ) {
+		$api_url = "https://{$this->feeder_domain}/api/v1/authorization/podcasts/{$id}/episodes";
+		return $this->get( $api_url );
+	}
+
+	/**
+	 * Get a specific episode by id.
+	 *
+	 * @param string $id Dovetail episode id.
+	 * @return array<string,mixed>
+	 */
+	public function get_episode( string $id ) {
+		$api_url = "https://{$this->feeder_domain}/api/v1/authorization/episodes/{$id}";
+		return $this->get( $api_url );
+	}
+
+	/**
+	 * Delete a specific episode by id.
+	 *
+	 * @param string $id Dovetail episode id.
+	 * @return array<string,mixed>
+	 */
+	public function delete_episode( string $id ) {
+		$api_url = "https://{$this->feeder_domain}/api/v1/authorization/episodes/{$id}";
+		return $this->delete( $api_url );
+	}
+
+	/**
+	 * Update a specific episode by id.
+	 *
+	 * @param string              $id Dovetail episode id.
+	 * @param array<string,mixed> $data Dovetail episode data.
+	 * @return array<string,mixed>
+	 */
+	public function update_episode( string $id, array $data ) {
+		$api_url = "https://{$this->feeder_domain}/api/v1/authorization/episodes/{$id}";
+
+		unset( $data['guid'] );
+		unset( $data['id'] );
+		unset( $data['enclosure'] );
+
+		return $this->put( $api_url, $data );
+	}
+
+	/**
+	 * Create a episode.
+	 *
+	 * @param string              $id Dovetail podcast id.
+	 * @param array<string,mixed> $data Dovetail episode data.
+	 * @return array<string,mixed>|false
+	 */
+	public function create_podcast_episode( string $id, array $data ) {
+		$api_url = "https://{$this->feeder_domain}/api/v1/authorization/podcasts/{$id}/episodes";
+
+		unset( $data['id'] );
+		unset( $data['enclosure'] );
+
+		$data['segmentCount'] = 1;
+
+		return $this->post( $api_url, $data );
+	}
+
+	/**
+	 * Get a specific episode by guid.
+	 *
+	 * @param int    $id Dovetail podcast id.
+	 * @param string $guid Dovetail episode guid.
+	 * @return array<string,mixed>|false
+	 */
+	public function get_podcast_episode_by_guid( int $id, string $guid ) {
+		$api_url = "https://{$this->feeder_domain}/api/v1/authorization/podcasts/{$id}/guids/{$guid}";
+		return $this->get( $api_url );
+	}
+
+	/**
+	 * Saves episode data to Dovetail.
+	 *
+	 * @param int                 $podcast_id Id of podcast new episode should be added to.
+	 * @param array<string,mixed> $data Episode data to save.
+	 * @return array<string,mixed>|false
+	 */
+	public function save_episode( int $podcast_id, array $data ) {
+		if ( ! $data || empty( $data ) ) {
+			return $data;
+		}
+
+		$id = isset( $data['id'] ) ? $data['id'] : null;
+
+		unset( $data['id'] );
+		unset( $data['enclosure'] );
+
+		error_log( __FUNCTION__ . '::' . __LINE__ );
+		error_log( $podcast_id );
+		error_log( $id );
+		error_log( print_r( $data, true ) );
+
+		if ( ! $id ) {
+			return $this->create_podcast_episode( $podcast_id, $data );
+		} else {
+			return $this->update_episode( $id, $data );
+		}
+	}
+
+	/**
+	 * Internal method to send API GET requests.
 	 *
 	 * @param string $api_url API URL to request.
-	 * @return mixed
+	 * @return array<string,mixed>|false
 	 */
 	private function get( string $api_url ) {
 
@@ -181,52 +303,98 @@ class DovetailApi {
 	}
 
 	/**
-	 * Internal method to send API requests.
+	 * Internal method to send API POST requests.
 	 *
-	 * @param string $api_url API URL to request.
-	 * @return mixed
+	 * @param string              $api_url API URL to request.
+	 * @param array<string,mixed> $body Body to send with the request. Default null.
+	 * @return array<string,mixed>|false
 	 */
-	private function post( string $api_url ) {
+	private function post( string $api_url, array $body = null ) {
+		$args         = [
+			'body' => wp_json_encode( $body ),
+		];
+		$api_response = wp_remote_post( $api_url, $this->get_http_args( $args ) );
 
-		$api_response = wp_remote_post( $api_url, $this->get_http_args() );
+		$status = wp_remote_retrieve_response_code( $api_response );
+
+		if ( 200 !== $status ) {
+			error_log( __FUNCTION__ . '::' . __LINE__ );
+			error_log( print_r( $api_response, true ) );
+		}
 
 		return $this->parse_body( $api_response );
 	}
 
 	/**
+	 * Internal method to send API PUT requests.
+	 *
+	 * @param string              $api_url API URL to request.
+	 * @param array<string,mixed> $body Body to send with the request. Default null.
+	 * @return array<string,mixed>|false
+	 */
+	private function put( string $api_url, array $body = null ) {
+		$args         = [
+			'method' => 'PUT',
+			'body'   => wp_json_encode( $body ),
+		];
+		$api_response = wp_remote_request( $api_url, $this->get_http_args( $args ) );
+
+		return $this->parse_body( $api_response );
+	}
+
+	/**
+	 * Internal method to send API DELETE requests.
+	 *
+	 * @param string $api_url API URL to request.
+	 * @return bool True on success. False on failure.
+	 */
+	private function delete( string $api_url ) {
+		$args         = [
+			'method' => 'DELETE',
+		];
+		$api_response = wp_remote_request( $api_url, $this->get_http_args( $args ) );
+		$status       = wp_remote_retrieve_response_code( $api_response );
+
+		return 204 === $status;
+	}
+
+	/**
 	 * Get arguments array that should be passed to WP_Http methods.
 	 *
+	 * @param array<mixed,mixed> $args Array to be merged.
 	 * @return array<string,mixed>
 	 */
-	private function get_http_args() {
-		$args = [];
+	private function get_http_args( array $args = [] ) {
+		$new_args = [];
 
 		if ( $this->access_token ) {
-			$args['headers'] = [
+			$new_args['headers'] = [
 				'Authorization' => "Bearer: {$this->access_token}",
 				'Content-Type'  => 'application/json',
 				'User-Agent'    => 'Dovetail Podcasts/' . DTPODCASTS_VERSION,
 			];
 		}
 
-		return $args;
+		return Utils::recursive_array_merge( $new_args, $args );
 	}
 
 	/**
 	 * Parse body from API response.
 	 *
 	 * @param array<string,mixed> $api_response Response array from WP_Http methods.
-	 * @return mixed
+	 * @return array<string,mixed>|false
 	 */
 	private function parse_body( $api_response ) {
 		if ( is_wp_error( $api_response ) ) {
+			error_log( __FUNCTION__ . '::' . __LINE__ );
+			error_log( print_r( $api_response ) );
 			return false;
 		}
 
 		$status   = wp_remote_retrieve_response_code( $api_response );
 		$api_body = false;
 
-		if ( 200 === $status ) {
+		if ( 200 <= $status && 300 > $status ) {
 			$api_body = json_decode( wp_remote_retrieve_body( $api_response ), true );
 		}
 

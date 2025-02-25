@@ -22,7 +22,6 @@ function dovetail_podcasts_deactivation_callback() {
 	do_action( 'dovetail_podcasts_deactivate' );
 
 	// TODO: Flush any caches.
-	wp_cache_flush( 'access_token', 'dovetail_podcasts' );
 	delete_option( 'dovetail_podcasts_settings-authentication' );
 }
 
@@ -57,11 +56,10 @@ function delete_dovetail_podcasts_data() {
 		return;
 	}
 
-	// Delete all plugin settings and caches.
+	// Delete all plugin settings.
 	delete_option( 'dovetail_podcasts_key' );
 	delete_option( 'dovetail_podcasts_settings-authentication' );
 	delete_option( 'dovetail_podcasts_settings-general' );
-	wp_cache_delete( 'access_token', 'dovetail_podcasts' );
 
 	do_action( 'dovetail_podcasts_delete_data' );
 }

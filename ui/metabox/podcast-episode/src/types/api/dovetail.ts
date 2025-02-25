@@ -1,17 +1,3 @@
-
-export type DovetailImage = {
-  href: string,
-  originalUrl: string,
-  format: string,
-  height: number,
-  width: number,
-  size: number,
-  status: string,
-  altText?: string,
-  caption?: string,
-  credit?: string,
-}
-
 export const dovetailEpisodeTypes = [
   ['full', 'Full'],
   ['trailer', 'Trailer'],
@@ -50,12 +36,58 @@ export type DovetailAuthor = {
   email?: Maybe<string>
 }
 
+export type DovetailImage = {
+  href: string,
+  originalUrl: string,
+  format: string,
+  height: number,
+  width: number,
+  size: number,
+  status: string,
+  altText?: string,
+  caption?: string,
+  credit?: string,
+}
+
 export type DovetailPodcast = {
+  /**
+   * Dovetail for the podcast.
+   */
   id: number,
+
+  /**
+   * Title of the podcast.
+   */
   title: string,
+
+  /**
+   * Flag that podcast content is expected to contain explicit content.
+   */
+  explicit: boolean,
+
+  /**
+   * Image used for iTunes.
+   * Usually fairly large, 3000x3000 px.
+   */
   itunesImage?: DovetailImage,
+
+  /**
+   * Image for RSS feed image.
+   * Size and dimensions not guaranteed to be very large.
+   */
   feedImage?: DovetailImage,
+
+  /**
+   * Info of the usual author of podcast episodes.
+   */
   author?: DovetailAuthor
+
+  /**
+   * Template for enclosure URL's.
+   * Use to construct preview URL in admin players that
+   * do not use any URL prefixes.
+   */
+  enclosureTemplate: string;
 }
 
 export type DovetailEpisode = {
@@ -68,12 +100,6 @@ export type DovetailEpisode = {
   id: Maybe<string>,
 
   /**
-   * Episode type.
-   * Default to 'Full'.
-   */
-  type: DovetailEpisodeType,
-
-  /**
    * Dovetail hosted enclosure.
    * Use this enclosure for frontend player.
    * Won't exist until podcast episode is created in Dovetail
@@ -82,9 +108,29 @@ export type DovetailEpisode = {
   enclosure?: Maybe<DovetailEpisodeEnclosure>,
 
   /**
-   * Media
+   * Episode media.
+   * Should only be set by the frontend when audio is added or updated.
+   * Do not initialize post meta box episode data with this prop.
    */
   media?: DovetailMedia[],
+
+  /**
+   * Episode type.
+   * Default to 'Full'.
+   */
+  itunesType: DovetailEpisodeType,
+
+  /**
+   * Podcast's explicit content setting.
+   * Not writable in API.
+   * Should NOT be modified.
+   */
+  explicitContent: boolean;
+
+  /**
+   * Flag episode for explicit content.
+   */
+  explicit?: Maybe<boolean>,
 
   /**
    * Season number.
@@ -95,12 +141,6 @@ export type DovetailEpisode = {
    * Episode number.
    */
   episodeNumber?: Maybe<number>,
-
-  /**
-   * Flag episode for explicit content.
-   * Default to podcast's explicit setting.
-   */
-  explicit: boolean,
 
   /**
    * Title without extraneous information, like season and/or number.

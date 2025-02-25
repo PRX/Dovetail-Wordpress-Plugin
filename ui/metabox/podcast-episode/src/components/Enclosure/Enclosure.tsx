@@ -2,8 +2,7 @@ import type { WP_REST_API_Attachment, WP_REST_API_Error } from 'wp-types';
 import type { EpisodeData, EpisodeEnclosure } from '@/types/state/episode';
 import React, { type ChangeEvent, useCallback, useContext, useEffect, useRef, useState } from 'react';
 import axios, { type AxiosProgressEvent, type AxiosRequestConfig, type AxiosResponse } from 'axios';
-import { filesize } from 'filesize';
-import { CircleCheckBigIcon, CircleCheckIcon, CircleEllipsisIcon, DotIcon, LinkIcon, PauseIcon, PlayIcon, SaveIcon, SkipBackIcon, UploadIcon, XIcon } from 'lucide-react';
+import { CircleCheckBigIcon, CircleEllipsisIcon, LinkIcon, PauseIcon, PlayIcon, SkipBackIcon, UploadIcon, XIcon } from 'lucide-react';
 import { PostMetaboxContext } from '@/lib/contexts/PostMetaboxContext';
 import { cn, formatDuration } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
@@ -11,7 +10,6 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { Badge } from '@/components/ui/badge';
 import { Slider } from '@/components/ui/slider';
 import { Separator } from '@/components/ui/separator';
-import lastItem from '@/lib/utils/last-item';
 import { Input } from '@/components/ui/input';
 
 export type EnclosureStatus = 'no-audio' | 'uploading' | 'complete' | 'error';
@@ -28,11 +26,11 @@ export type EnclosureProps = {
 }
 
 export function Enclosure({ onChange}: EnclosureProps) {
-  const { audioFormats, postId, postStatus } = window.appLocalizer;
+  const { audioFormats, postStatus } = window.appLocalizer;
   const { state, options } = useContext(PostMetaboxContext);
-  const { episode } = state || {};
+  const { episode, podcast } = state || {};
   const { enclosure, dovetail } = episode || {};
-  const { mediaId, url } = enclosure || {};
+  const { mediaId, url, filename: audioSrcFilename } = enclosure || {};
   const regexAudioUrlPattern = `^https?:\\/\\/.+\\/[a-z0-9_\\-]+\\.(${audioFormats.join('|')})$`;
   const initialEpisode = useRef<EpisodeData>(episode);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -49,9 +47,18 @@ export function Enclosure({ onChange}: EnclosureProps) {
   const [audioCurrentTime, setAudioCurrentTime] = useState(0);
   const [editingRemoteUrl, setEditingRemoteUrl] = useState(false);
   const hasUnsavedChanges = (url !== initialEpisode.current?.enclosure?.url);
-  const hasSourceUrl = !!url;
-  const audioSourceUrl = hasUnsavedChanges || !dovetail?.id ? url : dovetail.enclosure.href;
-  const audioFilename = audioSourceUrl?.split('/').pop();
+  const hasEnclosureUrl = !!url;
+  const audioSrcUrl = hasUnsavedChanges || !dovetail?.id ? url : [
+    podcast.enclosureTemplate.replace(/\{[^\}]+\}/g, ''),
+    podcast.id,
+    dovetail.id,
+    // Dovetail audio URL doesn't require a filename, so we will use the
+    // enclosure filename for consistency in what will be displayed, since
+    // depending on what actions are taken in Dovetail, the Dovetail enclosure href filename
+    // can change. Even the original source of the media for the enclosure can be
+    // altered to a Dovetail URL.
+    audioSrcFilename
+  ].join('/');
 
   // Store initial episode data.
   initialEpisode.current = initialEpisode.current || episode;
@@ -74,7 +81,6 @@ export function Enclosure({ onChange}: EnclosureProps) {
   }, [status]);
 
   const handleAudioLoadedMetadata = useCallback(() => {
-    console.log(audioRef.current.duration, audioInfo);
     if (audioInfo && audioRef.current.duration === audioInfo.duration) return;
 
     setAudioInfo({
@@ -87,8 +93,6 @@ export function Enclosure({ onChange}: EnclosureProps) {
     const { valid } = evt.target.validity;
     const hasNewRemoteUrl = !!newRemoteUrl?.length;
 
-    console.log(evt.target.validity);
-
     // Bail if:
     // - Empty value
     // - Invalid input
@@ -96,6 +100,7 @@ export function Enclosure({ onChange}: EnclosureProps) {
 
     doOnChange({
       url: newRemoteUrl,
+      filename: newRemoteUrl.split('/').pop(),
       dateUpdated: new Date()
     });
     setStatus('complete');
@@ -117,7 +122,7 @@ export function Enclosure({ onChange}: EnclosureProps) {
         {!editingRemoteUrl ?
           (
             <>
-            <span className='grow'>{audioFilename}</span>
+            <span className='grow'>{audioSrcFilename}</span>
             <span className='flex flex-wrap gap-1 min-w-fit'>
               <Button type='button' variant={mediaId ? 'outline' : 'ghost'} size='icon'
                 className='w-[1.5em] min-w-[1.5rem] h-auto p-1 aspect-square'
@@ -169,7 +174,7 @@ export function Enclosure({ onChange}: EnclosureProps) {
       <div className='grid gap-2'>
         <div className='flex flex-wrap gap-2'>
           { audioInfo?.duration ? <Badge variant='secondary'>{formatDuration(audioInfo.duration)}</Badge> : null}
-          {hasSourceUrl && !dovetail?.id && <Badge variant='outline'><CircleEllipsisIcon className='text-sky-500' />Not Published To Dovetail</Badge>}
+          {hasEnclosureUrl && !dovetail?.id && <Badge variant='outline'><CircleEllipsisIcon className='text-sky-500' />Not Published To Dovetail</Badge>}
           {episode?.dovetail?.id && <Badge variant='outline'><CircleCheckBigIcon className='text-green-500' />Published To Dovetail</Badge>}
           { hasUnsavedChanges && (
             'publish' === postStatus ? (
@@ -217,10 +222,6 @@ export function Enclosure({ onChange}: EnclosureProps) {
   function handleEditFileClick() {
     openFileDialog();
     setPlaying(false);
-  }
-
-  function handleEditRemoteUrlClick() {
-    setEditingRemoteUrl(true);
   }
 
   async function handleChange(evt: ChangeEvent<HTMLInputElement>) {
@@ -274,6 +275,7 @@ export function Enclosure({ onChange}: EnclosureProps) {
     doOnChange({
       mediaId: data.id,
       url: data.source_url,
+      filename: data.source_url.split('/').pop(),
       dateUpdated: new Date()
     })
     setAttachedMedia((currentAttachedMedia) => {
@@ -302,10 +304,10 @@ export function Enclosure({ onChange}: EnclosureProps) {
   }, [])
 
   useEffect(() => {
-    if (!audioSourceUrl) return;
+    if (!audioSrcUrl) return;
 
-    audioRef.current.src = audioSourceUrl;
-  }, [audioSourceUrl])
+    audioRef.current.src = audioSrcUrl;
+  }, [audioSrcUrl])
 
   useEffect(() => {
     if (playing) {

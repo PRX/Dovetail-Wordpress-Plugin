@@ -8,7 +8,7 @@
   @import "tailwindcss/preflight.css" layer(base);
 }
 
-@import "tailwindcss/utilities.css" layer(utilities) important;
+@import "tailwindcss/utilities.css" layer(utilities);
 
 @layer base {
   :root {
