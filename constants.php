@@ -56,4 +56,9 @@ function dovetail_podcasts_setup_constants() {
 	if ( ! defined( 'DTPODCASTS_POST_META_KEY' ) ) {
 		define( 'DTPODCASTS_POST_META_KEY', '_dovetail_podcasts_episode' );
 	}
+
+	// REST API base route.
+	if ( ! defined( 'DTPODCASTS_API_ROUTE_BASE' ) ) {
+		define( 'DTPODCASTS_API_ROUTE_BASE', 'dovetail/v1' );
+	}
 }

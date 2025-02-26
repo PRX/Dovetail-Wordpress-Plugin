@@ -2,7 +2,7 @@ import type { WP_REST_API_Attachment, WP_REST_API_Error } from 'wp-types';
 import type { EpisodeData, EpisodeEnclosure } from '@/types/state/episode';
 import React, { type ChangeEvent, useCallback, useContext, useEffect, useRef, useState } from 'react';
 import axios, { type AxiosProgressEvent, type AxiosRequestConfig, type AxiosResponse } from 'axios';
-import { CircleCheckBigIcon, CircleEllipsisIcon, LinkIcon, PauseIcon, PlayIcon, SkipBackIcon, UploadIcon, XIcon } from 'lucide-react';
+import { CircleAlertIcon, CircleCheckBigIcon, CircleEllipsisIcon, CircleSlashIcon, FileWarningIcon, LinkIcon, LoaderCircleIcon, LoaderIcon, LoaderPinwheelIcon, PauseIcon, PlayIcon, SkipBackIcon, UploadIcon, XIcon } from 'lucide-react';
 import { PostMetaboxContext } from '@/lib/contexts/PostMetaboxContext';
 import { cn, formatDuration } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
@@ -11,8 +11,14 @@ import { Badge } from '@/components/ui/badge';
 import { Slider } from '@/components/ui/slider';
 import { Separator } from '@/components/ui/separator';
 import { Input } from '@/components/ui/input';
+import { DovetailEnclosureStatus, dovetailEnclosureStatuses } from '@/types/api';
 
-export type EnclosureStatus = 'no-audio' | 'uploading' | 'complete' | 'error';
+export type EnclosureStatus =
+  'no-audio' |
+  'media-uploading' |
+  'audio-ready' |
+  'media-error' |
+  `dovetail-${(typeof dovetailEnclosureStatuses)[number]}`;
 
 export type AudioInfo = {
   /**
@@ -23,6 +29,20 @@ export type AudioInfo = {
 
 export type EnclosureProps = {
   onChange?(enclosure: EpisodeEnclosure): void
+}
+
+function getEnclosureStatus(episode: EpisodeData): EnclosureStatus {
+  const { enclosure, dovetail } = episode || {};
+
+  if ( dovetail?.id ) {
+    return `dovetail-${dovetail.enclosure.status}`;
+  }
+
+  if (enclosure?.url) {
+    return 'audio-ready';
+  }
+
+  return 'no-audio';
 }
 
 export function Enclosure({ onChange}: EnclosureProps) {
@@ -36,19 +56,19 @@ export function Enclosure({ onChange}: EnclosureProps) {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const urlInputRef = useRef<HTMLInputElement>(null);
   const audioRef = useRef<HTMLAudioElement>(null);
-  const [status, setStatus] = useState<EnclosureStatus>(url ? 'complete' : 'no-audio');
+  const [status, setStatus] = useState<EnclosureStatus>(getEnclosureStatus(episode));
   const [attachedMedia, setAttachedMedia] = useState(options?.attachedMedia)
   const [media, setMedia] = useState<WP_REST_API_Attachment>(attachedMedia.get(`${mediaId}`));
-  const [audioInfo, setAudioInfo] = useState<AudioInfo>(media?.media_details ? {
-    duration: media.media_details.length as number
-  } : null);
+  const [audioInfo, setAudioInfo] = useState<AudioInfo>({
+    duration: dovetail.enclosure?.duration || media?.media_details?.length as number || 0
+  });
   const [uploadProgress, setUploadProgress] = useState(0);
   const [playing, setPlaying] = useState(false);
   const [audioCurrentTime, setAudioCurrentTime] = useState(0);
   const [editingRemoteUrl, setEditingRemoteUrl] = useState(false);
   const hasUnsavedChanges = (url !== initialEpisode.current?.enclosure?.url);
   const hasEnclosureUrl = !!url;
-  const audioSrcUrl = hasUnsavedChanges || !dovetail?.id ? url : [
+  const audioSrcUrl = hasUnsavedChanges || !dovetail?.id || 'publish' !== postStatus || 'complete' !== dovetail.enclosure.status ? url : [
     podcast.enclosureTemplate.replace(/\{[^\}]+\}/g, ''),
     podcast.id,
     dovetail.id,
@@ -71,7 +91,7 @@ export function Enclosure({ onChange}: EnclosureProps) {
   }, [onChange]);
 
   const handleMainButtonClick = useCallback(() => {
-    if ('complete' === status) {
+    if ('audio-ready' === status) {
       // Play/Pause audio.
       setPlaying((isPlaying) => !isPlaying);
     } else {
@@ -81,12 +101,10 @@ export function Enclosure({ onChange}: EnclosureProps) {
   }, [status]);
 
   const handleAudioLoadedMetadata = useCallback(() => {
-    if (audioInfo && audioRef.current.duration === audioInfo.duration) return;
-
     setAudioInfo({
       duration: audioRef.current.duration
     });
-  }, [audioInfo?.duration]);
+  }, []);
 
   const handleRemoteUrlChange = useCallback((evt: ChangeEvent<HTMLInputElement>) => {
     const newRemoteUrl = evt.target.value.trim();
@@ -103,7 +121,7 @@ export function Enclosure({ onChange}: EnclosureProps) {
       filename: newRemoteUrl.split('/').pop(),
       dateUpdated: new Date()
     });
-    setStatus('complete');
+    setStatus('audio-ready');
     setEditingRemoteUrl(false);
   }, [onChange])
 
@@ -116,99 +134,25 @@ export function Enclosure({ onChange}: EnclosureProps) {
         />
       </div>
     ),
-    'uploading': `Uploading Audio File...`,
-    'complete': (
-      <div className='flex items-center gap-2'>
-        {!editingRemoteUrl ?
-          (
-            <>
-            <span className='grow'>{audioSrcFilename}</span>
-            <span className='flex flex-wrap gap-1 min-w-fit'>
-              <Button type='button' variant={mediaId ? 'outline' : 'ghost'} size='icon'
-                className='w-[1.5em] min-w-[1.5rem] h-auto p-1 aspect-square'
-                title='Upload New Audio File'
-                onClick={handleEditFileClick}
-              >
-                <UploadIcon className='size-full' />
-              </Button>
-              <Button type='button' variant={url && !mediaId ? 'outline' : 'ghost'} size='icon'
-                className='w-[1.5em] min-w-[1.5rem] h-auto p-1 aspect-square'
-                title='Change Remote Audio URL'
-                onClick={() => {
-                  setEditingRemoteUrl(true);
-                  setPlaying(false);
-                }}
-              >
-                <LinkIcon className='size-full' />
-              </Button>
-            </span>
-            </>
-          ) : (
-            <>
-            <Input type='url' defaultValue={!mediaId ? url : null} pattern={regexAudioUrlPattern} ref={urlInputRef}
-              placeholder='Paste remote URL to audio file...'
-              onChangeCapture={handleRemoteUrlChange}
-              onFocus={(evt) => { evt.target.select() }}
-              autoFocus
-            />
-            <Button type='button' variant={url && !mediaId ? 'outline' : 'ghost'} size='icon'
-              className='w-[1.5em] min-w-[1.5rem] h-auto p-1 aspect-square'
-              title='Upload New Audio File'
-              onClick={() => {
-                setEditingRemoteUrl(false);
-              }}
-            >
-              <XIcon className='size-full' />
-            </Button>
-            </>
-          )
-        }
-      </div>
-    ),
-    'error': 'Oops! Upload failed.'
+    'media-uploading': `Uploading Audio File...`,
+    'audio-ready': null,
+    'media-error': 'Oops! Upload failed.',
+    'dovetail-processing': <span className='grow'>{audioSrcFilename}</span>,
+    'dovetail-complete': null,
+    'dovetail-incomplete': null,
+    'dovetail-invalid': null,
+    'dovetail-error': null
   }[status];
   const info = {
     'no-audio': <>Supported audio formats: <samp>{audioFormats.map((v) => `.${v}`).join(', ')}</samp></>,
-    'uploading': `${Math.round(uploadProgress * 100)}%`,
-    'complete': audioInfo ? (
-      <div className='grid gap-2'>
-        <div className='flex flex-wrap gap-2'>
-          { audioInfo?.duration ? <Badge variant='secondary'>{formatDuration(audioInfo.duration)}</Badge> : null}
-          {hasEnclosureUrl && !dovetail?.id && <Badge variant='outline'><CircleEllipsisIcon className='text-sky-500' />Not Published To Dovetail</Badge>}
-          {episode?.dovetail?.id && <Badge variant='outline'><CircleCheckBigIcon className='text-green-500' />Published To Dovetail</Badge>}
-          { hasUnsavedChanges && (
-            'publish' === postStatus ? (
-              <Badge>Unpublished Audio Change</Badge>
-            ) : (
-              <Badge>Unsaved Audio Change</Badge>
-            )
-          )}
-        </div>
-        {!!audioInfo && (
-          <div className='flex items-center gap-3'>
-            <Button type='button' size='icon' variant='ghost' className='rounded-full aspect-square' aria-label='Return To Beginning'
-              onClick={() => {
-                audioRef.current.currentTime = 0;
-              }}
-            ><SkipBackIcon /></Button>
-            <Slider min={0} max={audioInfo.duration} step={0.1} value={[audioCurrentTime]} onValueChange={(v) => {
-              audioRef.current.currentTime = v[0];
-            }} />
-            <span className='flex items-center gap-1 h-[1em] font-mono'>
-              <span>{formatDuration(audioCurrentTime)}</span>
-              <Separator orientation='vertical' />
-              <span className='text-gray-300'>{formatDuration(audioInfo.duration)}</span>
-            </span>
-          </div>
-        )}
-      </div>
-    ) : (
-      <div className='flex flex-wrap gap-2'>
-        <Skeleton className='w-[8ch] h-[1em]' />
-        <Skeleton className='w-[12ch] h-[1em]' />
-      </div>
-    ),
-    'error': 'Try uploading your file again. If error persists, contact your Dovetail support representative.'
+    'media-uploading': `${Math.round(uploadProgress * 100)}%`,
+    'audio-ready': null,
+    'media-error': 'Try uploading your file again. If error persists, contact your Dovetail support representative.',
+    'dovetail-processing': null,
+    'dovetail-complete': null,
+    'dovetail-incomplete': 'Action required in Dovetail to complete publishing episode.',
+    'dovetail-invalid': 'Invalid audio file provided.',
+    'dovetail-error': 'There was an error processing episode audio. Try again by selecting another audio source, and saving post.',
   }[status];
 
   function openFileDialog() {
@@ -255,7 +199,7 @@ export function Enclosure({ onChange}: EnclosureProps) {
     fd.append('title', file.name);
     fd.append('post', `${window.appLocalizer.postId}`);
 
-    setStatus('uploading');
+    setStatus('media-uploading');
 
     await axios.post<WP_REST_API_Attachment, AxiosResponse<WP_REST_API_Attachment>, FormData>('/wp-json/wp/v2/media', fd, config)
       .then((res) => {
@@ -284,13 +228,13 @@ export function Enclosure({ onChange}: EnclosureProps) {
       return newAttachedMedia;
     })
     setMedia(data);
-    setStatus('complete');
+    setStatus('audio-ready');
   }
 
   function handleUploadError(err: WP_REST_API_Error) {
     // Handle errors.
     console.log(err);
-    setStatus('error');
+    setStatus('media-error');
   }
 
   useEffect(() => {
@@ -328,6 +272,10 @@ export function Enclosure({ onChange}: EnclosureProps) {
     }
   }, [mediaId, media])
 
+  useEffect(() => {
+    setStatus(getEnclosureStatus(episode));
+  }, [episode?.dovetail?.enclosure?.status])
+
   return (
     <div data-status={status} className='max-w-full @container/enclosure'>
       <input type="file" accept={(audioFormats || []).map((v) => `.${v}`).join(', ')} style={{ display: 'none' }} onChange={handleChange} ref={fileInputRef} />
@@ -339,15 +287,39 @@ export function Enclosure({ onChange}: EnclosureProps) {
               'grid place-items-center [&_>_*]:col-span-full [&_>_*]:row-span-full w-[clamp(4rem,10cqw,5rem)] h-auto aspect-square rounded-full',
               {
                 'text-sky-200 hover:text-sky-500': 'no-audio' === status,
-                'text-sky-500 hover:text-sky-500': 'uploading' === status,
-                'text-sky-500 hover:text-green-500': 'complete' === status,
-                'text-rose-500 hover:text-sky-500': 'error' === status,
+                'text-sky-500 hover:text-sky-500 animate-color-cycle': ([
+                  'media-uploading',
+                  'dovetail-processing'
+                ] as EnclosureStatus[]).includes(status),
+                'text-sky-500 hover:text-green-500': ([
+                  'audio-ready',
+                  'dovetail-complete'
+                ] as EnclosureStatus[]).includes(status),
+                'text-rose-500 hover:text-sky-500': 'media-error' === status,
+                'text-lime-500 hover:text-lime-500': 'dovetail-incomplete' === status,
+                'text-orange-500 hover:text-orange-500': 'dovetail-invalid' === status,
+                'text-rose-500 hover:text-rose-500': 'dovetail-error' === status,
               }
             )}
+            disabled={([
+              'media-uploading',
+              'dovetail-processing',
+              'dovetail-incomplete',
+              'dovetail-invalid',
+              'dovetail-error'
+            ] as EnclosureStatus[]).includes(status)}
             onClick={handleMainButtonClick}
-            aria-label={'complete' === status ? (
-              !playing ? 'Play' : 'Pause'
-            ) : 'Upload Audio File'}
+            aria-label={{
+              'no-audio': 'Upload Audio File',
+              'media-uploading': 'Uploading...',
+              'media-error': 'Media Error',
+              'audio-ready': !playing ? 'Play' : 'Pause',
+              'dovetail-processing': 'Processing Audio...',
+              'dovetail-complete': !playing ? 'Play' : 'Pause',
+              'dovetail-incomplete': 'Incomplete',
+              'dovetail-invalid': 'Invalid',
+              'dovetail-error': 'error',
+            }[status]}
           >
             <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" className='size-full'>
               <circle cx="50" cy="50" r="40" className='fill-none stroke-slate-200 stroke-4' />
@@ -355,7 +327,7 @@ export function Enclosure({ onChange}: EnclosureProps) {
                 className={cn('fill-none stroke-current stroke-4', {
                   // 'stroke-none': 'upload' === status
                 })}
-                {...('uploading' === status && {
+                {...('media-uploading' === status && {
                   pathLength: 100,
                   strokeLinecap: 'round',
                   strokeDasharray: 100,
@@ -365,17 +337,106 @@ export function Enclosure({ onChange}: EnclosureProps) {
             </svg>
             {{
               'no-audio': <UploadIcon className='size-[40%]' />,
-              'uploading': <UploadIcon className='size-[40%]' />,
-              'complete': !playing ?
+              'media-uploading': <UploadIcon className='size-[40%]' />,
+              'media-error': <UploadIcon className='size-[40%]' />,
+              'audio-ready': !playing ?
                 <PlayIcon className='size-[40%]' /> :
                 <PauseIcon className='size-[40%]' />,
-              'error': <UploadIcon className='size-[40%]' />
+              'dovetail-processing': <LoaderIcon className='size-[60%] animate-spin' />,
+              'dovetail-incomplete': <CircleSlashIcon className='size-[40%]' />,
+              'dovetail-invalid': <FileWarningIcon className='size-[40%]' />,
+              'dovetail-error': <CircleAlertIcon className='size-[40%]' />,
+              'dovetail-complete': !playing ?
+                <PlayIcon className='size-[40%]' /> :
+                <PauseIcon className='size-[40%]' />,
             }[status]}
           </Button>
         </div>
         <div className='grow grid gap-1.5'>
-          <div className='font-bold text-[clamp(var(--text-sm),3cqw,var(--text-xl))] break-all text-balance'>{message}</div>
-          <div className='text-balance leading-none'>{info}</div>
+          <div className='font-bold text-[clamp(var(--text-sm),3cqw,var(--text-xl))] break-all text-balance'>
+            {message || (
+              <div className='flex items-center gap-2'>
+                {!editingRemoteUrl ?
+                  (
+                    <>
+                    <span className='grow'>{audioSrcFilename}</span>
+                    <span className='flex flex-wrap gap-1 min-w-fit'>
+                      <Button type='button' variant={mediaId ? 'outline' : 'ghost'} size='icon'
+                        className='w-[1.5em] min-w-[1.5rem] h-auto p-1 aspect-square'
+                        title='Upload New Audio File'
+                        onClick={handleEditFileClick}
+                      >
+                        <UploadIcon className='size-full' />
+                      </Button>
+                      <Button type='button' variant={url && !mediaId ? 'outline' : 'ghost'} size='icon'
+                        className='w-[1.5em] min-w-[1.5rem] h-auto p-1 aspect-square'
+                        title='Change Remote Audio URL'
+                        onClick={() => {
+                          setEditingRemoteUrl(true);
+                          setPlaying(false);
+                        }}
+                      >
+                        <LinkIcon className='size-full' />
+                      </Button>
+                    </span>
+                    </>
+                  ) : (
+                    <>
+                    <Input type='url' defaultValue={!mediaId ? url : null} pattern={regexAudioUrlPattern} ref={urlInputRef}
+                      placeholder='Paste remote URL to audio file...'
+                      onChangeCapture={handleRemoteUrlChange}
+                      onFocus={(evt) => { evt.target.select() }}
+                      autoFocus
+                    />
+                    <Button type='button' variant={url && !mediaId ? 'outline' : 'ghost'} size='icon'
+                      className='w-[1.5em] min-w-[1.5rem] h-auto p-1 aspect-square'
+                      title='Upload New Audio File'
+                      onClick={() => {
+                        setEditingRemoteUrl(false);
+                      }}
+                    >
+                      <XIcon className='size-full' />
+                    </Button>
+                    </>
+                  )
+                }
+              </div>
+            )}
+          </div>
+          <div className='text-balance leading-none'>
+            {info || (
+              <div className='grid gap-2'>
+                <div className='flex flex-wrap gap-2'>
+                  { audioInfo?.duration ? <Badge variant='secondary'>{formatDuration(audioInfo.duration)}</Badge> : <Skeleton className='w-[8ch] h-[1em]' /> }
+                  { hasEnclosureUrl && !dovetail?.id && <Badge variant='outline'><CircleEllipsisIcon className='text-sky-500' />Not Published To Dovetail</Badge> }
+                  { 'dovetail-processing' === status && <Badge variant='outline'><LoaderIcon className='text-sky-500 animate-spin' />Dovetail Processing Audio...</Badge> }
+                  { 'dovetail-complete' === status && <Badge variant='outline'><CircleCheckBigIcon className='text-green-500' />Published To Dovetail</Badge> }
+                  { hasUnsavedChanges && (
+                    'publish' === postStatus ? (
+                      <Badge>Unpublished Audio Change</Badge>
+                    ) : (
+                      <Badge>Unsaved Audio Change</Badge>
+                    )
+                  )}
+                </div>
+                <div className='flex items-center gap-3'>
+                  <Button type='button' size='icon' variant='ghost' className='rounded-full aspect-square' aria-label='Return To Beginning'
+                    onClick={() => {
+                      audioRef.current.currentTime = 0;
+                    }}
+                  ><SkipBackIcon /></Button>
+                  <Slider min={0} max={audioInfo.duration} step={0.1} value={[audioCurrentTime]} onValueChange={(v) => {
+                    audioRef.current.currentTime = v[0];
+                  }} />
+                  <span className='flex items-center gap-1 h-[1em] font-mono'>
+                    <span>{formatDuration(audioCurrentTime)}</span>
+                    <Separator orientation='vertical' />
+                    <span className='text-gray-300'>{formatDuration(audioInfo.duration)}</span>
+                  </span>
+                </div>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </div>

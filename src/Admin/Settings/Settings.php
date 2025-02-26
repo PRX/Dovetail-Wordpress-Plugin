@@ -43,7 +43,7 @@ class Settings {
 	 */
 	public function init() {
 		$this->settings_api = new SettingsApi( [ 'page_slugs' => self::PAGE_SLUG ] );
-		$this->api          = new DovetailApi();
+		$this->dovetail_api = new DovetailApi();
 
 		add_action( 'admin_menu', [ $this, 'add_options_page' ] );
 		add_action( 'init', [ $this, 'register_settings' ] );
@@ -86,7 +86,7 @@ class Settings {
 	 */
 	public function register_settings() {
 
-		$have_valid_creds = $this->api->has_valid_client_credentials();
+		$have_valid_creds = $this->dovetail_api->has_valid_client_credentials();
 
 		if ( ! $have_valid_creds ) {
 			// Dovetail authenication fields.
@@ -216,8 +216,8 @@ class Settings {
 			return;
 		}
 
-		$have_valid_creds = $this->api->has_valid_client_credentials();
-		if ( ! $have_valid_creds && $this->api->has_client_credentials ) {
+		$have_valid_creds = $this->dovetail_api->has_valid_client_credentials();
+		if ( ! $have_valid_creds && $this->dovetail_api->has_client_credentials ) {
 			add_settings_error( DTPODCASTS_SETTINGS_SECTION_PREFIX . 'authentication', 'invalid-credentials', 'Provided client credetials are invalid.', 'error' );
 		}
 
@@ -250,8 +250,8 @@ class Settings {
 	 * @return void
 	 */
 	public function render_user_profile() {
-		$user_info = $this->api->get_user_info();
-		$podcasts  = $this->api->get_podcasts();
+		list( $user_info ) = $this->dovetail_api->get_user_info();
+		list( $podcasts )  = $this->dovetail_api->get_podcasts();
 		?>
 		<section id="dovetail-app-summary">
 			<header>

@@ -1,7 +1,9 @@
 import { dovetailEpisodeTypes, type DovetailEpisode, type DovetailEpisodeType, type DovetailPodcast } from '@/types/api';
 import type { PostMetaboxAction, PostMetaboxOptions, PostMetaboxState } from '@/types/state/postMetabox';
 import type { EpisodeData, EpisodeEnclosure } from '@/types/state/episode';
-import React, { ChangeEvent, useEffect, useReducer, useState } from 'react';
+import React, { ChangeEvent, useEffect, useReducer, useRef, useState } from 'react';
+import axios from 'axios';
+import { PodcastIcon, DiamondPlusIcon, EllipsisVerticalIcon, ReplaceIcon, ChevronDownIcon, TrashIcon, AlertCircleIcon, Undo2Icon, EraserIcon } from 'lucide-react';
 import { useShowHide } from '@/hooks/use-show-hide';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Button, buttonVariants } from '@/components/ui/button';
@@ -9,7 +11,6 @@ import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
 import { Input } from '@/components/ui/input';
 import { Separator } from '@/components/ui/separator';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
-import { PodcastIcon, DiamondPlusIcon, EllipsisVerticalIcon, ReplaceIcon, ChevronDownIcon, TrashIcon, AlertCircleIcon, Undo2Icon } from 'lucide-react';
 import { Enclosure } from '@/components/Enclosure';
 import { PostMetaboxContext } from '@/lib/contexts/PostMetaboxContext';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
@@ -18,6 +19,7 @@ import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/component
 import { cn } from '@/lib/utils';
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from '@/components/ui/alert-dialog';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
+import { useInterval } from '@/hooks/use-Interval';
 
 export type PostMetaboxProps = {
   /**
@@ -128,8 +130,7 @@ function postMetaboxStateReducer(state: PostMetaboxState, action: PostMetaboxAct
                * Enforce their original values here in case the payload
                * unintentionally overrides them.
                */
-              id: dovetail.id,
-              enclosure: dovetail.enclosure
+              id: dovetail.id
             }
           }
         }
@@ -206,7 +207,6 @@ function PostMetabox({ field, episode: initialEpisodeData, options }: PostMetabo
     .filter(([k]) => ['cleanTitle', 'seasonNumber', 'episodeNumber', 'author'].includes(k))
     .reduce((a, [,v]) => a || !!v, false);
   const selectPodcastDialog = useShowHide();
-  const alertPodcastChangeDialog = useShowHide();
   const alertRestEpisodeDialog = useShowHide();
   const additionalFields = useShowHide(hasAdditionalFieldsValues);
 
@@ -243,6 +243,28 @@ function PostMetabox({ field, episode: initialEpisodeData, options }: PostMetabo
     })()
   }, [])
 
+  useInterval<DovetailEpisode>(async () => {
+    const { id } = dovetail || {};
+
+    if (!id) return dovetail;
+
+    const res = await axios.get<DovetailEpisode>(`/wp-json/dovetail/v1/episodes/${id}`);
+
+    return res.data;
+  }, (e) => {
+    const { id, enclosure } = e || {};
+
+    if (!id || !enclosure) return false;
+
+    const isProcessing = 'processing' === enclosure.status;
+
+    if (! isProcessing ) {
+      dispatch({ type: 'UPDATE_EPISODE_DOVETAIL', payload: { enclosure } });
+    }
+
+    return isProcessing;
+  }, 2000, [dovetail?.id]);
+
   return (
     <PostMetaboxContext.Provider value={{ state, options }}>
       <div className='mt-[12px] @container/main'>
@@ -255,14 +277,27 @@ function PostMetabox({ field, episode: initialEpisodeData, options }: PostMetabo
           ) : (
             <>
             <input type='hidden' name={`${field}_DELETE`} value='DELETE' />
-            <Alert variant='destructive'>
-              <AlertCircleIcon className='size-4' />
-              <AlertTitle>Dovetail Episode Will Be Deleted...</AlertTitle>
-              <AlertDescription className='max-w-[80ch]'>
-                It's not too late! Dovetail episode will only be deleted when the post is saved. You can still choose to keep the Dovetail episode associated with this post.
-                <Button variant='secondary' onClick={() => { restoreEpisode() }}><Undo2Icon />Keep Dovetail Episode</Button>
-              </AlertDescription>
-            </Alert>
+            {!initialEpisodeData?.dovetail?.id ? (
+              <Alert>
+                <EraserIcon className='size-4' />
+                <AlertTitle>Podcast Episode Will Be Removed...</AlertTitle>
+                <AlertDescription className='max-w-[80ch]'>
+                  This podcast episode has not been added to Dovetail yet, so it is safe to remove this data from the post. Data will be removed when post is saved, but you can still choose to keep it.
+                  <Separator orientation='horizontal' className='my-2' />
+                  <Button variant='secondary' onClick={() => { restoreEpisode() }}><Undo2Icon />Keep Podcast Episode</Button>
+                </AlertDescription>
+              </Alert>
+            ) : (
+              <Alert variant='destructive'>
+                <AlertCircleIcon className='size-4' />
+                <AlertTitle>Dovetail Episode Will Be Deleted...</AlertTitle>
+                <AlertDescription className='max-w-[80ch]'>
+                  It's not too late! Dovetail episode will only be deleted when the post is saved. You can still choose to keep the Dovetail episode associated with this post.
+                  <Separator orientation='horizontal' className='my-2' />
+                  <Button variant='secondary' onClick={() => { restoreEpisode() }}><Undo2Icon />Keep Dovetail Episode</Button>
+                </AlertDescription>
+              </Alert>
+            )}
             </>
           )
         ) : (

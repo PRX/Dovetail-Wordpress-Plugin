@@ -124,14 +124,14 @@ class PostMetaBox {
 
 		if ( ! isset( $meta['dovetail']['id'] ) ) {
 			// Check if this post was imported into Dovetail.
-			$podcasts_api = $this->dovetail_api->get_podcasts();
+			list( $podcasts_api ) = $this->dovetail_api->get_podcasts();
 			if (
 				$podcasts_api &&
 				is_array( $podcasts_api ) &&
 				isset( $podcasts_api['_embedded']['prx:items'] )
 			) {
 				foreach ( $podcasts_api['_embedded']['prx:items'] as $p ) {
-					$e = $this->dovetail_api->get_podcast_episode_by_guid( $p['id'], $post->guid );
+					list( $e ) = $this->dovetail_api->get_podcast_episode_by_guid( $p['id'], $post->guid );
 					if ( $e ) {
 						$meta['podcastId'] = $p['id'];
 						$meta['dovetail']  = $this->parse_episode_api_data( $e );
@@ -144,12 +144,20 @@ class PostMetaBox {
 			// This post has been connected to a Dovetail episode.
 			// Get current Dovetail episode data so changes in Dovetail do not get reverted
 			// when user saves post changes to post.
-			$e = $this->dovetail_api->get_episode( $meta['dovetail']['id'] );
+			list( $e ) = $this->dovetail_api->get_episode( $meta['dovetail']['id'] );
 			if ( $e ) {
 				$meta['dovetail'] = $this->parse_episode_api_data( $e );
+			} else {
+				// Episode was not found? May have been deleted in Dovetail.
+				// Remove dovetail id and enclosure meta data.
+				unset( $meta['dovetail']['id'] );
+				unset( $meta['dovetail']['enclosure'] );
 			}
 		}
-		update_post_meta( $post->ID, DTPODCASTS_POST_META_KEY, $meta );
+
+		if ( ! empty( $meta ) ) {
+			update_post_meta( $post->ID, DTPODCASTS_POST_META_KEY, $meta );
+		}
 
 		return $meta;
 	}
@@ -215,8 +223,8 @@ class PostMetaBox {
 			);
 		}
 
-		$podcasts_api = $this->dovetail_api->get_podcasts();
-		$podcasts     = $podcasts_api && is_array( $podcasts_api ) ? array_map(
+		list( $podcasts_api ) = $this->dovetail_api->get_podcasts();
+		$podcasts             = $podcasts_api && is_array( $podcasts_api ) ? array_map(
 			static fn( $p ) => [
 				'enclosureTemplate' => $p['enclosureTemplate'],
 				'id'                => $p['id'],
@@ -308,6 +316,8 @@ class PostMetaBox {
 	 * @return void
 	 */
 	public function save_post( int $post_id, \WP_Post $post, bool $update ) {
+		error_log( __FUNCTION__ . '::' . __LINE__ );
+		error_log( print_r( $post, true ) );
 
 		$nonce_key = DTPODCASTS_POST_META_KEY . '_nonce';
 		if ( ! isset( $_POST[ $nonce_key ] ) ) {
@@ -344,18 +354,22 @@ class PostMetaBox {
 		 */
 		$delete_json_key = DTPODCASTS_POST_META_KEY . '_json_DELETE';
 		if ( isset( $_POST[ $delete_json_key ] ) ) {
-			$dt_episode_deleted = false;
+			error_log( 'DELETING PODCAST EPISODE DATA!!!!' );
+
+			$do_delete_post_meta = true;
 			if ( isset( $meta['dovetail']['id'] ) ) {
+				// Only remove meta data when Dovetail episode is successfully deleted.
+				$do_delete_post_meta = false;
 				// Episode has to be unpublished before it can be delete.
-				$unpublished = $this->dovetail_api->update_episode( $meta['dovetail']['id'], [ 'publishedAt' => null ] );
+				list( $unpublished ) = $this->dovetail_api->update_episode( $meta['dovetail']['id'], [ 'publishedAt' => null ] );
 				if ( ! isset( $unpublished['publishedAt'] ) ) {
-					$dt_episode_deleted = $this->dovetail_api->delete_episode( $meta['dovetail']['id'] );
+					$do_delete_post_meta = $this->dovetail_api->delete_episode( $meta['dovetail']['id'] );
 				}
 			}
-			if ( $dt_episode_deleted ) {
+			if ( $do_delete_post_meta ) {
 				// Delete meta data if episode was successfully deleted.
 				delete_post_meta( $post_id, DTPODCASTS_POST_META_KEY );
-				unset( $meta );
+				$meta = null;
 			}
 		}
 
@@ -376,8 +390,22 @@ class PostMetaBox {
 			}
 		}
 
+		/**
+		 * Bail is there is no meta data at this point.
+		 * It was either not submitted or was deleted.
+		 */
+		if ( ! isset( $meta ) || empty( $meta ) ) {
+			error_log( __FUNCTION__ . '::' . __LINE__ );
+			error_log( 'No meta data. Bailing out!' );
+			return;
+		}
+
+		// TODO: May want to include `draft` with future publish dates.
+		// May want to handle separately due to logic around date props driving
+		// Dovetail episode publishing status. May need to set `releasedAt` instead
+		// of `publishedAt`. Do we need a Drop Date field?
 		if (
-			'publish' === $post->post_status &&
+			in_array( $post->post_status, [ 'publish', 'future' ], true ) &&
 			isset( $meta['podcastId'] ) &&
 			is_numeric( $meta['podcastId'] ) &&
 			isset( $meta['enclosure']['url'] ) &&
@@ -388,7 +416,7 @@ class PostMetaBox {
 			error_log( __FUNCTION__ . '::' . __LINE__ );
 			error_log( wp_json_encode( $episode_data, JSON_PRETTY_PRINT ) );
 
-			$response_data = $this->dovetail_api->save_episode( $meta['podcastId'], $episode_data );
+			list( $response_data ) = $this->dovetail_api->save_episode( $meta['podcastId'], $episode_data );
 
 			error_log( __FUNCTION__ . '::' . __LINE__ );
 			error_log( print_r( $response_data, true ) );

@@ -89,6 +89,82 @@ class DovetailApi {
 			$this->access_token           = $this->get_access_token();
 			$this->has_client_credentials = true;
 		}
+
+		$this->init();
+	}
+
+	/**
+	 * Initialize actions and filters.
+	 *
+	 * @return void
+	 */
+	public function init() {
+		add_action( 'rest_api_init', [ $this, 'rest_api_init' ] );
+	}
+
+	/**
+	 * Initialize REST API routes.
+	 *
+	 * @return void
+	 */
+	public function rest_api_init() {
+
+		register_rest_route(
+			DTPODCASTS_API_ROUTE_BASE,
+			'episodes/(?P<id>[a-f0-9-]+)',
+			[
+				'methods'             => \WP_REST_Server::READABLE,
+				'callback'            => [ $this, 'rest_get_episode' ],
+				'permission_callback' => '__return_true',
+				'args'                => [],
+			]
+		);
+	}
+
+	/**
+	 * REST API callback to get episode by id.
+	 *
+	 * @param \WP_REST_Request $request REST request object with `id` parameter.
+	 * @return \WP_REST_Response
+	 */
+	public function rest_get_episode( \WP_REST_Request $request ) {
+
+		$id                  = $request->get_param( 'id' );
+		list( $data, $resp ) = $this->get_episode( $id );
+		$return              = false;
+
+		if ( is_array( $data ) && ! empty( $data ) ) {
+			$return = [
+				'id'              => $data['id'],
+				'enclosure'       => $data['_links']['enclosure'],
+				'itunesType'      => $data['itunesType'],
+				'explicitContent' => $data['explicitContent'],
+				'explicit'        => isset( $data['explicit'] ) ? 'true' === $data['explicit'] : $data['explicitContent'],
+				'seasonNumber'    => isset( $data['seasonNumber'] ) ? $data['seasonNumber'] : null,
+				'episodeNumber'   => isset( $data['episodeNumber'] ) ? $data['episodeNumber'] : null,
+				'cleanTitle'      => isset( $data['cleanTitle'] ) ? $data['cleanTitle'] : null,
+				'author'          => isset( $data['author'] ) && ! empty( $data['author'] ) ? $data['author'] : null,
+			];
+		}
+
+		return $this->rest_response( $return, $resp );
+	}
+
+	/**
+	 * Create REST response.
+	 *
+	 * @param array<string,mixed>|false $data REST response data.
+	 * @param array<string,mixed>       $api_response Response array from WP_Http methods.
+	 * @return \WP_REST_Response|\WP_Error
+	 */
+	private function rest_response( $data, $api_response ) {
+		$status = wp_remote_retrieve_response_code( $api_response );
+
+		if ( $data ) {
+			return new \WP_REST_Response( $data, $status );
+		}
+
+		return new \WP_Error( 'rest_no_route', __( 'Not Found.', 'dovetail-podcasts' ), $response );
 	}
 
 	/**
@@ -106,8 +182,8 @@ class DovetailApi {
 		$access_token  = get_transient( $transient_key );
 
 		if ( empty( $access_token ) ) {
-			$api_url = "https://{$this->id_domain}/token";
-			$api_url = add_query_arg(
+			$api_url      = "https://{$this->id_domain}/token";
+			$api_url      = add_query_arg(
 				[
 					'grant_type'    => 'client_credentials',
 					'client_id'     => $this->client_key,
@@ -115,7 +191,7 @@ class DovetailApi {
 				],
 				$api_url
 			);
-			$data    = $this->post( $api_url );
+			list( $data ) = $this->post( $api_url );
 
 			if ( is_array( $data ) && isset( $data['access_token'] ) ) {
 				$access_token = $data['access_token'];
@@ -223,6 +299,8 @@ class DovetailApi {
 	public function update_episode( string $id, array $data ) {
 		$api_url = "https://{$this->feeder_domain}/api/v1/authorization/episodes/{$id}";
 
+		// Strip props we don't want to risk overriding.
+		// Dovetail API should already protect from this, but things have been know to happen.
 		unset( $data['guid'] );
 		unset( $data['id'] );
 		unset( $data['enclosure'] );
@@ -240,6 +318,8 @@ class DovetailApi {
 	public function create_podcast_episode( string $id, array $data ) {
 		$api_url = "https://{$this->feeder_domain}/api/v1/authorization/podcasts/{$id}/episodes";
 
+		// Strip props we don't want to risk overriding.
+		// Dovetail API should already protect from this, but things have been know to happen.
 		unset( $data['id'] );
 		unset( $data['enclosure'] );
 
@@ -272,8 +352,11 @@ class DovetailApi {
 			return $data;
 		}
 
+		// Store id before it is stripped from request data.
 		$id = isset( $data['id'] ) ? $data['id'] : null;
 
+		// Strip props we don't want to risk overriding.
+		// Dovetail API should already protect from this, but things have been know to happen.
 		unset( $data['id'] );
 		unset( $data['enclosure'] );
 
@@ -314,13 +397,6 @@ class DovetailApi {
 			'body' => wp_json_encode( $body ),
 		];
 		$api_response = wp_remote_post( $api_url, $this->get_http_args( $args ) );
-
-		$status = wp_remote_retrieve_response_code( $api_response );
-
-		if ( 200 !== $status ) {
-			error_log( __FUNCTION__ . '::' . __LINE__ );
-			error_log( print_r( $api_response, true ) );
-		}
 
 		return $this->parse_body( $api_response );
 	}
@@ -382,13 +458,11 @@ class DovetailApi {
 	 * Parse body from API response.
 	 *
 	 * @param array<string,mixed> $api_response Response array from WP_Http methods.
-	 * @return array<string,mixed>|false
+	 * @return array<int,array<string,mixed>|false>
 	 */
 	private function parse_body( $api_response ) {
 		if ( is_wp_error( $api_response ) ) {
-			error_log( __FUNCTION__ . '::' . __LINE__ );
-			error_log( print_r( $api_response ) );
-			return false;
+			return [ false, $api_response ];
 		}
 
 		$status   = wp_remote_retrieve_response_code( $api_response );
@@ -398,6 +472,6 @@ class DovetailApi {
 			$api_body = json_decode( wp_remote_retrieve_body( $api_response ), true );
 		}
 
-		return $api_body;
+		return [ $api_body, $api_response ];
 	}
 }

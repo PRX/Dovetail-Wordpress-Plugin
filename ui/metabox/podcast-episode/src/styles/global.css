@@ -106,6 +106,31 @@
   }
 }
 
+@theme {
+  --animate-color-cycle: color-cycle 10s linear infinite alternate;
+
+  @keyframes color-cycle {
+    0%{
+      color: var(--color-orange-500);
+    }
+    20% {
+      color: var(--color-amber-500);
+    }
+    40% {
+      color: var(--color-lime-500);
+    }
+    60% {
+      color: var(--color-emerald-500);
+    }
+    80% {
+      color: var(--color-fuchsia-500);
+    }
+    100% {
+      color: var(--color-pink-500);
+    }
+  }
+}
+
 .rdp-dropdown_icon {
   display: inline-block;
 }
