@@ -55,7 +55,11 @@ class PostMetaBox {
 		$this->post_types = $this->settings_api->get_option( 'post_types', 'general' );
 
 		add_action( 'add_meta_boxes', [ $this, 'initialize_meta_box' ], 999, 2 );
-		add_action( 'save_post', [ $this, 'save_post' ], 999, 3 );
+		add_action( 'save_post', [ $this, 'save_post' ], 999, 2 );
+		add_action( 'trashed_post', [ $this, 'trashed_post' ], 999 );
+		add_action( 'before_delete_post', [ $this, 'before_delete_post' ], 999, 2 );
+		add_action( 'publish_to_draft', [ $this, 'publish_future_to_draft' ], 999 );
+		add_action( 'future_to_draft', [ $this, 'publish_future_to_draft' ], 999 );
 	}
 
 	/**
@@ -108,9 +112,6 @@ class PostMetaBox {
 
 		$meta = get_post_meta( $post_id, DTPODCASTS_POST_META_KEY, true );
 
-		error_log( __FUNCTION__ . '::' . __LINE__ );
-		error_log( print_r( $meta, true ) );
-
 		if ( isset( $meta['enclosure']['mediaId'] ) ) {
 			$media = get_post( $meta['enclosure']['mediaId'] );
 			if ( ! $media ) {
@@ -132,9 +133,26 @@ class PostMetaBox {
 			) {
 				foreach ( $podcasts_api['_embedded']['prx:items'] as $p ) {
 					list( $e ) = $this->dovetail_api->get_podcast_episode_by_guid( $p['id'], $post->guid );
+
 					if ( $e ) {
+						if ( ! is_array( $meta ) ) {
+							$meta = [];
+						}
 						$meta['podcastId'] = $p['id'];
 						$meta['dovetail']  = $this->parse_episode_api_data( $e );
+
+						// Media's original URL should be trusted to be to an existing file.
+						// It may be a Dovetail URL depending on what processing has been done to it.
+						$meta['enclosure']['url'] = $e['media'][0]['originalUrl'];
+						// Enclosure's href should still contain the original filename.
+						$meta['enclosure']['filename'] = basename( $e['_links']['enclosure']['href'] );
+
+						// Check if an attachment exists for the enclosure href filename.
+						$media_id = $this->get_attachment_id( $e['_links']['enclosure']['href'] );
+						if ( $media_id > 0 ) {
+							$meta['enclosure']['mediaId'] = $media_id;
+							$meta['enclosure']['url']     = wp_get_attachment_url( $media_id );
+						}
 
 						break;
 					}
@@ -144,10 +162,11 @@ class PostMetaBox {
 			// This post has been connected to a Dovetail episode.
 			// Get current Dovetail episode data so changes in Dovetail do not get reverted
 			// when user saves post changes to post.
-			list( $e ) = $this->dovetail_api->get_episode( $meta['dovetail']['id'] );
+			list( $e, $resp ) = $this->dovetail_api->get_episode( $meta['dovetail']['id'] );
+			$status           = wp_remote_retrieve_response_code( $resp );
 			if ( $e ) {
 				$meta['dovetail'] = $this->parse_episode_api_data( $e );
-			} else {
+			} elseif ( '404' === $status ) {
 				// Episode was not found? May have been deleted in Dovetail.
 				// Remove dovetail id and enclosure meta data.
 				unset( $meta['dovetail']['id'] );
@@ -155,8 +174,11 @@ class PostMetaBox {
 			}
 		}
 
+		// If we have meta data, save it again with updates that may have come from Dovetail API.
 		if ( ! empty( $meta ) ) {
-			update_post_meta( $post->ID, DTPODCASTS_POST_META_KEY, $meta );
+			if ( ! add_post_meta( $post->ID, DTPODCASTS_POST_META_KEY, $meta, true ) ) {
+				update_post_meta( $post->ID, DTPODCASTS_POST_META_KEY, $meta );
+			}
 		}
 
 		return $meta;
@@ -312,12 +334,9 @@ class PostMetaBox {
 	 *
 	 * @param int      $post_id Post ID.
 	 * @param \WP_Post $post Post object.
-	 * @param bool     $update Whether this is an existing post being updated.
 	 * @return void
 	 */
-	public function save_post( int $post_id, \WP_Post $post, bool $update ) {
-		error_log( __FUNCTION__ . '::' . __LINE__ );
-		error_log( print_r( $post, true ) );
+	public function save_post( int $post_id, \WP_Post $post ) {
 
 		$nonce_key = DTPODCASTS_POST_META_KEY . '_nonce';
 		if ( ! isset( $_POST[ $nonce_key ] ) ) {
@@ -332,10 +351,7 @@ class PostMetaBox {
 			return;
 		}
 
-		// Check if post type matches settings.
-		$post_types = $this->settings_api->get_option( 'post_types', 'general' );
-		$post_types = is_array( $post_types ) ? $post_types : [];
-		if ( ! in_array( $post->post_type, $post_types, true ) ) {
+		if ( ! $this->is_podcast_episode_post_type( $post->post_type ) ) {
 			return;
 		}
 
@@ -354,8 +370,6 @@ class PostMetaBox {
 		 */
 		$delete_json_key = DTPODCASTS_POST_META_KEY . '_json_DELETE';
 		if ( isset( $_POST[ $delete_json_key ] ) ) {
-			error_log( 'DELETING PODCAST EPISODE DATA!!!!' );
-
 			$do_delete_post_meta = true;
 			if ( isset( $meta['dovetail']['id'] ) ) {
 				// Only remove meta data when Dovetail episode is successfully deleted.
@@ -395,8 +409,6 @@ class PostMetaBox {
 		 * It was either not submitted or was deleted.
 		 */
 		if ( ! isset( $meta ) || empty( $meta ) ) {
-			error_log( __FUNCTION__ . '::' . __LINE__ );
-			error_log( 'No meta data. Bailing out!' );
 			return;
 		}
 
@@ -413,13 +425,7 @@ class PostMetaBox {
 		) {
 			$episode_data = $this->prepare_episode_api_data( $meta, $post );
 
-			error_log( __FUNCTION__ . '::' . __LINE__ );
-			error_log( wp_json_encode( $episode_data, JSON_PRETTY_PRINT ) );
-
 			list( $response_data ) = $this->dovetail_api->save_episode( $meta['podcastId'], $episode_data );
-
-			error_log( __FUNCTION__ . '::' . __LINE__ );
-			error_log( print_r( $response_data, true ) );
 
 			// Update meta box data with Dovetail data.
 			if ( ! empty( $response_data ) ) {
@@ -436,6 +442,92 @@ class PostMetaBox {
 		if ( ! add_post_meta( $post_id, DTPODCASTS_POST_META_KEY, $meta, true ) ) {
 			update_post_meta( $post_id, DTPODCASTS_POST_META_KEY, $meta );
 		}
+	}
+
+	/**
+	 * Post trashed hook
+	 *
+	 * Should unpublish the Dovetail episode.
+	 *
+	 * @param int $post_id Post ID.
+	 * @return void
+	 */
+	public function trashed_post( int $post_id ) {
+		$post = get_post( $post_id );
+
+		if ( ! $this->is_podcast_episode_post_type( $post->post_type ) ) {
+			return;
+		}
+
+		$meta = get_post_meta( $post->ID, DTPODCASTS_POST_META_KEY, true );
+
+		if ( ! isset( $meta['dovetail']['id'] ) ) {
+			return;
+		}
+
+		$this->dovetail_api->update_episode(
+			$meta['dovetail']['id'],
+			[
+				'publishedAt' => null,
+			]
+		);
+	}
+
+	/**
+	 * Post before delete hook
+	 *
+	 * Should delete the Dovetail episode when appropriate.
+	 * Done as before_delete_post hook so we have access to meta data.
+	 *
+	 * @param int      $post_id Post ID.
+	 * @param \WP_Post $post Post object.
+	 * @return void
+	 */
+	public function before_delete_post( int $post_id, \WP_Post $post ) {
+
+		if ( ! $this->is_podcast_episode_post_type( $post->post_type ) ) {
+			return;
+		}
+
+		$meta = get_post_meta( $post_id, DTPODCASTS_POST_META_KEY, true );
+
+		if ( ! isset( $meta['dovetail']['id'] ) ) {
+			return;
+		}
+
+		// Episode has to be unpublished before it can be delete.
+		list( $unpublished ) = $this->dovetail_api->update_episode( $meta['dovetail']['id'], [ 'publishedAt' => null ] );
+		if ( ! isset( $unpublished['publishedAt'] ) ) {
+			$this->dovetail_api->delete_episode( $meta['dovetail']['id'] );
+		}
+	}
+
+	/**
+	 * Post publish/future to draft transition hook
+	 *
+	 * Should unpublish the Dovetail episode when appropriate.
+	 *
+	 * @param \WP_Post $post Post object.
+	 * @return void
+	 */
+	public function publish_future_to_draft( \WP_Post $post ) {
+
+		if ( ! $this->is_podcast_episode_post_type( $post->post_type ) ) {
+			return;
+		}
+
+		$meta = get_post_meta( $post->ID, DTPODCASTS_POST_META_KEY, true );
+
+		if ( ! isset( $meta['dovetail']['id'] ) ) {
+			return;
+		}
+
+		$this->dovetail_api->update_episode(
+			$meta['dovetail']['id'],
+			[
+				'publishedAt' => null,
+			]
+		);
 	}
 
 	/**
@@ -505,5 +597,70 @@ class PostMetaBox {
 		}
 
 		return null;
+	}
+
+	/**
+	 * Determine if a post type is configured to be a podcast episode.
+	 *
+	 * @param string $post_type Post type to check.
+	 * @return bool
+	 */
+	private function is_podcast_episode_post_type( string $post_type ) {
+		$post_types = $this->settings_api->get_option( 'post_types', 'general' );
+		$post_types = is_array( $post_types ) ? $post_types : [];
+
+		if ( in_array( $post_type, $post_types, true ) ) {
+			return true;
+		}
+
+		return false;
+	}
+
+	/**
+	 * Get an attachment ID given a URL.
+	 *
+	 * @param string $url Attachment file url.
+	 * @return int Attachment ID on success, 0 on failure
+	 */
+	private function get_attachment_id( $url ) {
+
+		$attachment_id = 0;
+
+		$dir = wp_upload_dir();
+
+		if ( false !== strpos( $url, $dir['baseurl'] . '/' ) ) { // Is URL in uploads directory?
+			$file = basename( $url );
+
+			$query_args = [
+				'post_type'   => 'attachment',
+				'post_status' => 'inherit',
+				'fields'      => 'ids',
+				'meta_query'  => [
+					[
+						'value'   => $file,
+						'compare' => 'LIKE',
+						'key'     => '_wp_attachment_metadata',
+					],
+				],
+			];
+
+			$query = new WP_Query( $query_args );
+
+			if ( $query->have_posts() ) {
+				foreach ( $query->posts as $post_id ) {
+					$meta = wp_get_attachment_metadata( $post_id );
+
+					$original_file       = basename( $meta['file'] );
+					$cropped_image_files = wp_list_pluck( $meta['sizes'], 'file' );
+
+					if ( $original_file === $file || in_array( $file, $cropped_image_files, true ) ) {
+						$attachment_id = $post_id;
+						break;
+					}
+				}
+			}
+		}
+
+		return $attachment_id;
 	}
 }

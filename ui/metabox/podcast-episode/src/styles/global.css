@@ -108,6 +108,9 @@
 
 @theme {
   --animate-color-cycle: color-cycle 10s linear infinite alternate;
+  --animate-processing-spinner:
+    processing-spinner 3s ease infinite,
+    spin 1s linear infinite;
 
   @keyframes color-cycle {
     0%{
@@ -127,6 +130,17 @@
     }
     100% {
       color: var(--color-pink-500);
+    }
+  }
+
+  @keyframes processing-spinner {
+    0%,
+    100% {
+      stroke-dasharray: 84 5 4 5 2;
+      stroke-dashoffset: 5;
+    }
+    50% {
+      stroke-dashoffset: 78;
     }
   }
 }

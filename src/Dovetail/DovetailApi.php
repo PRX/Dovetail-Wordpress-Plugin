@@ -336,7 +336,9 @@ class DovetailApi {
 	 * @return array<string,mixed>|false
 	 */
 	public function get_podcast_episode_by_guid( int $id, string $guid ) {
+		$guid    = rawurlencode( $guid );
 		$api_url = "https://{$this->feeder_domain}/api/v1/authorization/podcasts/{$id}/guids/{$guid}";
+
 		return $this->get( $api_url );
 	}
 
@@ -359,11 +361,6 @@ class DovetailApi {
 		// Dovetail API should already protect from this, but things have been know to happen.
 		unset( $data['id'] );
 		unset( $data['enclosure'] );
-
-		error_log( __FUNCTION__ . '::' . __LINE__ );
-		error_log( $podcast_id );
-		error_log( $id );
-		error_log( print_r( $data, true ) );
 
 		if ( ! $id ) {
 			return $this->create_podcast_episode( $podcast_id, $data );

@@ -20,6 +20,7 @@ import { cn } from '@/lib/utils';
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from '@/components/ui/alert-dialog';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { useInterval } from '@/hooks/use-Interval';
+import { useAfterSave } from '@/hooks/use-after-save';
 
 export type PostMetaboxProps = {
   /**
@@ -209,6 +210,7 @@ function PostMetabox({ field, episode: initialEpisodeData, options }: PostMetabo
   const selectPodcastDialog = useShowHide();
   const alertRestEpisodeDialog = useShowHide();
   const additionalFields = useShowHide(hasAdditionalFieldsValues);
+  const isAfterSave = useAfterSave();
 
   console.log(episode);
   console.log(options);
@@ -237,16 +239,31 @@ function PostMetabox({ field, episode: initialEpisodeData, options }: PostMetabo
     dispatch({ type: 'UPDATE_EPISODE_DOVETAIL', payload });
   }
 
-  useEffect(() => {
+useEffect(() => {
+    if (!isAfterSave) return;
+
     (async () => {
-      // Init stuff here.
+
+      const { id, enclosure } = dovetail || {};
+
+      if (!id) return dovetail;
+
+      const res = await axios.get<DovetailEpisode>(`/wp-json/dovetail/v1/episodes/${id}`);
+      const { enclosure: resEnc } = res.data || {};
+
+      if ( enclosure.status !== resEnc.status ) {
+        dispatch({ type: 'UPDATE_EPISODE_DOVETAIL', payload: { enclosure: resEnc } });
+      }
+
     })()
-  }, [])
+  }, [isAfterSave, dovetail?.id])
 
   useInterval<DovetailEpisode>(async () => {
-    const { id } = dovetail || {};
+    const { id, enclosure } = dovetail || {};
 
-    if (!id) return dovetail;
+    const isProcessing = 'processing' === enclosure.status;
+
+    if (!id || !isProcessing) return dovetail;
 
     const res = await axios.get<DovetailEpisode>(`/wp-json/dovetail/v1/episodes/${id}`);
 
@@ -263,7 +280,7 @@ function PostMetabox({ field, episode: initialEpisodeData, options }: PostMetabo
     }
 
     return isProcessing;
-  }, 2000, [dovetail?.id]);
+  }, 2000, [dovetail?.id, dovetail?.enclosure?.status]);
 
   return (
     <PostMetaboxContext.Provider value={{ state, options }}>

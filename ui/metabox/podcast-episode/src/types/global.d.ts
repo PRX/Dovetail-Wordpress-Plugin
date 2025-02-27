@@ -18,4 +18,8 @@ declare global {
   interface Window {
     appLocalizer: AppLocalizer;
   }
+
+  const wp: {
+    data: typeof import('@wordpress/data');
+  };
 }

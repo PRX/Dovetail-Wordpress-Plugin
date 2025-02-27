@@ -2,7 +2,7 @@ import type { WP_REST_API_Attachment, WP_REST_API_Error } from 'wp-types';
 import type { EpisodeData, EpisodeEnclosure } from '@/types/state/episode';
 import React, { type ChangeEvent, useCallback, useContext, useEffect, useRef, useState } from 'react';
 import axios, { type AxiosProgressEvent, type AxiosRequestConfig, type AxiosResponse } from 'axios';
-import { CircleAlertIcon, CircleCheckBigIcon, CircleEllipsisIcon, CircleSlashIcon, FileWarningIcon, LinkIcon, LoaderCircleIcon, LoaderIcon, LoaderPinwheelIcon, PauseIcon, PlayIcon, SkipBackIcon, UploadIcon, XIcon } from 'lucide-react';
+import { AlertCircleIcon, CircleAlertIcon, CircleCheckBigIcon, CircleEllipsisIcon, CircleSlashIcon, FileWarningIcon, LinkIcon, LoaderCircleIcon, LoaderIcon, LoaderPinwheelIcon, PauseIcon, PlayIcon, SkipBackIcon, UploadIcon, XIcon } from 'lucide-react';
 import { PostMetaboxContext } from '@/lib/contexts/PostMetaboxContext';
 import { cn, formatDuration } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
@@ -12,6 +12,7 @@ import { Slider } from '@/components/ui/slider';
 import { Separator } from '@/components/ui/separator';
 import { Input } from '@/components/ui/input';
 import { DovetailEnclosureStatus, dovetailEnclosureStatuses } from '@/types/api';
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 
 export type EnclosureStatus =
   'no-audio' |
@@ -68,7 +69,8 @@ export function Enclosure({ onChange}: EnclosureProps) {
   const [editingRemoteUrl, setEditingRemoteUrl] = useState(false);
   const hasUnsavedChanges = (url !== initialEpisode.current?.enclosure?.url);
   const hasEnclosureUrl = !!url;
-  const audioSrcUrl = hasUnsavedChanges || !dovetail?.id || 'publish' !== postStatus || 'complete' !== dovetail.enclosure.status ? url : [
+  const useEnclosureUrl = hasUnsavedChanges || !dovetail?.id || 'publish' !== postStatus || 'complete' !== dovetail.enclosure.status;
+  const audioSrcUrl = useEnclosureUrl ? url : [
     podcast.enclosureTemplate.replace(/\{[^\}]+\}/g, ''),
     podcast.id,
     dovetail.id,
@@ -91,12 +93,21 @@ export function Enclosure({ onChange}: EnclosureProps) {
   }, [onChange]);
 
   const handleMainButtonClick = useCallback(() => {
-    if ('audio-ready' === status) {
-      // Play/Pause audio.
-      setPlaying((isPlaying) => !isPlaying);
-    } else {
+    if (([
+      'no-audio',
+      'media-error'
+    ] as EnclosureStatus[]).includes(status)) {
       // Open file upload dialog.
       openFileDialog();
+    }
+    if (([
+      'audio-ready',
+      'dovetail-processing',
+      'dovetail-complete',
+      'dovetail-incomplete'
+    ] as EnclosureStatus[]).includes(status)) {
+      // Play/Pause audio.
+      setPlaying((isPlaying) => !isPlaying);
     }
   }, [status]);
 
@@ -137,7 +148,7 @@ export function Enclosure({ onChange}: EnclosureProps) {
     'media-uploading': `Uploading Audio File...`,
     'audio-ready': null,
     'media-error': 'Oops! Upload failed.',
-    'dovetail-processing': <span className='grow'>{audioSrcFilename}</span>,
+    'dovetail-processing': null,
     'dovetail-complete': null,
     'dovetail-incomplete': null,
     'dovetail-invalid': null,
@@ -150,7 +161,7 @@ export function Enclosure({ onChange}: EnclosureProps) {
     'media-error': 'Try uploading your file again. If error persists, contact your Dovetail support representative.',
     'dovetail-processing': null,
     'dovetail-complete': null,
-    'dovetail-incomplete': 'Action required in Dovetail to complete publishing episode.',
+    'dovetail-incomplete': null,
     'dovetail-invalid': 'Invalid audio file provided.',
     'dovetail-error': 'There was an error processing episode audio. Try again by selecting another audio source, and saving post.',
   }[status];
@@ -273,14 +284,17 @@ export function Enclosure({ onChange}: EnclosureProps) {
   }, [mediaId, media])
 
   useEffect(() => {
+    if (initialEpisode.current?.enclosure.dateUpdated != episode?.enclosure?.dateUpdated) {
+      initialEpisode.current = episode;
+    }
     setStatus(getEnclosureStatus(episode));
   }, [episode?.dovetail?.enclosure?.status])
 
   return (
     <div data-status={status} className='max-w-full @container/enclosure'>
       <input type="file" accept={(audioFormats || []).map((v) => `.${v}`).join(', ')} style={{ display: 'none' }} onChange={handleChange} ref={fileInputRef} />
-      <div className='flex flex-wrap items-center justify-center gap-3'>
-        <div className='min-w-fit'>
+      <div className='grid @md/enclosure:grid-cols-[min-content_4fr] items-center justify-center gap-3'>
+        <div className='justify-self-center'>
           <Button type='button'
             variant='ghost' size='icon'
             className={cn(
@@ -303,8 +317,6 @@ export function Enclosure({ onChange}: EnclosureProps) {
             )}
             disabled={([
               'media-uploading',
-              'dovetail-processing',
-              'dovetail-incomplete',
               'dovetail-invalid',
               'dovetail-error'
             ] as EnclosureStatus[]).includes(status)}
@@ -313,24 +325,21 @@ export function Enclosure({ onChange}: EnclosureProps) {
               'no-audio': 'Upload Audio File',
               'media-uploading': 'Uploading...',
               'media-error': 'Media Error',
-              'audio-ready': !playing ? 'Play' : 'Pause',
-              'dovetail-processing': 'Processing Audio...',
-              'dovetail-complete': !playing ? 'Play' : 'Pause',
+              'audio-ready': null,
+              'dovetail-processing': null,
+              'dovetail-complete': null,
               'dovetail-incomplete': 'Incomplete',
               'dovetail-invalid': 'Invalid',
               'dovetail-error': 'error',
-            }[status]}
+            }[status] || !playing ? 'Play' : 'Pause'}
           >
             <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" className='size-full'>
               <circle cx="50" cy="50" r="40" className='fill-none stroke-slate-200 stroke-4' />
-              <circle cx="50" cy="50" r="40"
+              <circle cx="50" cy="50" r="40" pathLength={100} strokeLinecap='round' strokeDasharray={100}
                 className={cn('fill-none stroke-current stroke-4', {
-                  // 'stroke-none': 'upload' === status
+                  'animate-processing-spinner origin-center': 'dovetail-processing' === status
                 })}
                 {...('media-uploading' === status && {
-                  pathLength: 100,
-                  strokeLinecap: 'round',
-                  strokeDasharray: 100,
                   strokeDashoffset: (1 - uploadProgress) * 100
                 })}
               />
@@ -339,45 +348,68 @@ export function Enclosure({ onChange}: EnclosureProps) {
               'no-audio': <UploadIcon className='size-[40%]' />,
               'media-uploading': <UploadIcon className='size-[40%]' />,
               'media-error': <UploadIcon className='size-[40%]' />,
-              'audio-ready': !playing ?
-                <PlayIcon className='size-[40%]' /> :
-                <PauseIcon className='size-[40%]' />,
-              'dovetail-processing': <LoaderIcon className='size-[60%] animate-spin' />,
-              'dovetail-incomplete': <CircleSlashIcon className='size-[40%]' />,
+              'audio-ready': null,
+              'dovetail-processing': null,
+              'dovetail-incomplete': null,
               'dovetail-invalid': <FileWarningIcon className='size-[40%]' />,
               'dovetail-error': <CircleAlertIcon className='size-[40%]' />,
-              'dovetail-complete': !playing ?
+              'dovetail-complete': null,
+            }[status] || (
+              !playing ?
                 <PlayIcon className='size-[40%]' /> :
-                <PauseIcon className='size-[40%]' />,
-            }[status]}
+                <PauseIcon className='size-[40%]' />
+            )}
           </Button>
         </div>
-        <div className='grow grid gap-1.5'>
+        <div className='grid gap-1.5'>
           <div className='font-bold text-[clamp(var(--text-sm),3cqw,var(--text-xl))] break-all text-balance'>
             {message || (
               <div className='flex items-center gap-2'>
-                {!editingRemoteUrl ?
+                {!editingRemoteUrl && !([
+                  'media-uploading',
+                  'dovetail-processing'
+                ] as EnclosureStatus[]).includes(status) ?
                   (
                     <>
-                    <span className='grow'>{audioSrcFilename}</span>
+                    <span className='grow'>
+                      <Tooltip>
+                        <TooltipTrigger asChild><span className='max-w-[80ch] inline-block break-all'>{audioSrcFilename}</span></TooltipTrigger>
+                        <TooltipContent>
+                          {useEnclosureUrl ? (
+                            <p>Listening to source audio file:</p>
+                          ) : (
+                            <p>Listening to Dovetail audio file:</p>
+                          )}
+                          <p><samp>{audioSrcUrl}</samp></p>
+                        </TooltipContent>
+                      </Tooltip>
+                    </span>
                     <span className='flex flex-wrap gap-1 min-w-fit'>
-                      <Button type='button' variant={mediaId ? 'outline' : 'ghost'} size='icon'
-                        className='w-[1.5em] min-w-[1.5rem] h-auto p-1 aspect-square'
-                        title='Upload New Audio File'
-                        onClick={handleEditFileClick}
-                      >
-                        <UploadIcon className='size-full' />
-                      </Button>
-                      <Button type='button' variant={url && !mediaId ? 'outline' : 'ghost'} size='icon'
-                        className='w-[1.5em] min-w-[1.5rem] h-auto p-1 aspect-square'
-                        title='Change Remote Audio URL'
-                        onClick={() => {
-                          setEditingRemoteUrl(true);
-                          setPlaying(false);
-                        }}
-                      >
-                        <LinkIcon className='size-full' />
-                      </Button>
+                      <Tooltip>
+                        <TooltipTrigger asChild>
+                          <Button type='button' variant={mediaId ? 'outline' : 'ghost'} size='icon'
+                            className='w-[1.5em] min-w-[1.5rem] h-auto p-1 aspect-square'
+                            onClick={handleEditFileClick}
+                          >
+                            <UploadIcon className='size-full' />
+                          </Button>
+                        </TooltipTrigger>
+                        <TooltipContent>Upload {mediaId ? 'New' : ''} Audio File</TooltipContent>
+                      </Tooltip>
+                      <Tooltip>
+                        <TooltipTrigger asChild>
+                          <Button type='button' variant={url && !mediaId ? 'outline' : 'ghost'} size='icon'
+                            className='w-[1.5em] min-w-[1.5rem] h-auto p-1 aspect-square'
+                            onClick={() => {
+                              setEditingRemoteUrl(true);
+                              setPlaying(false);
+                            }}
+                          >
+                            <LinkIcon className='size-full' />
+                          </Button>
+                        </TooltipTrigger>
+                        <TooltipContent>{url && !mediaId ? 'Change' : 'Use'} Remote Audio URL</TooltipContent>
+                      </Tooltip>
                     </span>
                     </>
                   ) : (
@@ -411,6 +443,17 @@ export function Enclosure({ onChange}: EnclosureProps) {
                   { hasEnclosureUrl && !dovetail?.id && <Badge variant='outline'><CircleEllipsisIcon className='text-sky-500' />Not Published To Dovetail</Badge> }
                   { 'dovetail-processing' === status && <Badge variant='outline'><LoaderIcon className='text-sky-500 animate-spin' />Dovetail Processing Audio...</Badge> }
                   { 'dovetail-complete' === status && <Badge variant='outline'><CircleCheckBigIcon className='text-green-500' />Published To Dovetail</Badge> }
+                  { 'dovetail-incomplete' === status && (
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <Badge className='bg-orange-500 text-white'><AlertCircleIcon />Dovetail Action Required</Badge>
+                      </TooltipTrigger>
+                      <TooltipContent className='w-[60ch]'>
+                        <p>Changes to audio are not ready to be published in Dovetail. This is usually means some action in regards to ad placements is needed.</p>
+                        <p>Once all incomplete actions are completed, the audio change will be processed and updated in your Dovetail feeds.</p>
+                      </TooltipContent>
+                    </Tooltip>
+                  )}
                   { hasUnsavedChanges && (
                     'publish' === postStatus ? (
                       <Badge>Unpublished Audio Change</Badge>
