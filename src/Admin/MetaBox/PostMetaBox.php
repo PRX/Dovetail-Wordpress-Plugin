@@ -9,6 +9,7 @@ namespace DovetailPodcasts\Admin\MetaBox;
 
 use DovetailPodcasts\Admin\Settings\SettingsApi;
 use DovetailPodcasts\Dovetail\DovetailApi;
+use DovetailPodcasts\Utils\Utils;
 
 /**
  * PostMetaBox class
@@ -116,10 +117,16 @@ class PostMetaBox {
 			$media = get_post( $meta['enclosure']['mediaId'] );
 			if ( ! $media ) {
 				// Episode media was deleted since the last time this post was edited.
-				// Remove media id and update metadata.
+				// Remove media id and url, and update post metadata.
 				unset( $meta['enclosure']['mediaId'] );
 				unset( $meta['enclosure']['url'] );
 				update_post_meta( $post->ID, DTPODCASTS_POST_META_KEY, $meta );
+			} elseif ( 'trash' === $media->post_status ) {
+				// Episode was trashed, probably by `delete_offloaded_media` method.
+				// Remove media id and url, but DO NOT update post metadata.
+				// This will keep frontend from trying to fetch media details.
+				unset( $meta['enclosure']['mediaId'] );
+				unset( $meta['enclosure']['url'] );
 			}
 		}
 
@@ -168,9 +175,10 @@ class PostMetaBox {
 				$meta['dovetail'] = $this->parse_episode_api_data( $e );
 			} elseif ( '404' === $status ) {
 				// Episode was not found? May have been deleted in Dovetail.
-				// Remove dovetail id and enclosure meta data.
+				// Remove dovetail id, enclosure, and media meta data.
 				unset( $meta['dovetail']['id'] );
 				unset( $meta['dovetail']['enclosure'] );
+				unset( $meta['dovetail']['media'] );
 			}
 		}
 
@@ -194,6 +202,7 @@ class PostMetaBox {
 		if ( ! empty( $data ) ) {
 			return [
 				'id'              => $data['id'],
+				'media'           => $data['media'],
 				'enclosure'       => $data['_links']['enclosure'],
 				'itunesType'      => $data['itunesType'],
 				'explicitContent' => $data['explicitContent'],
@@ -202,6 +211,10 @@ class PostMetaBox {
 				'episodeNumber'   => isset( $data['episodeNumber'] ) ? $data['episodeNumber'] : null,
 				'cleanTitle'      => isset( $data['cleanTitle'] ) ? $data['cleanTitle'] : null,
 				'author'          => isset( $data['author'] ) && ! empty( $data['author'] ) ? $data['author'] : null,
+				'image'           => isset( $data['image'] ) && ! empty( $data['image'] ) ? [
+					'id'          => isset( $data['image']['id'] ) ? $data['image']['id'] : null,
+					'originalUrl' => $data['image']['originalUrl'],
+				] : null,
 			];
 		}
 
@@ -400,7 +413,15 @@ class PostMetaBox {
 			$new_meta      = json_decode( $new_meta_json, true );
 
 			if ( is_array( $new_meta ) ) {
-				$meta = $new_meta;
+				// Some meta props are not managed by the frontend. We need to preserve their last values.
+				$preserve = [];
+				// Image is updated by the post's feature image.
+				// This prop is kept to determine original URL changes.
+				if ( isset( $meta['dovetail']['image'] ) ) {
+					$preserve['dovetail']['image'] = $meta['dovetail']['image'];
+				}
+
+				$meta = Utils::recursive_array_merge( $preserve, $new_meta );
 			}
 		}
 
@@ -442,6 +463,8 @@ class PostMetaBox {
 		if ( ! add_post_meta( $post_id, DTPODCASTS_POST_META_KEY, $meta, true ) ) {
 			update_post_meta( $post_id, DTPODCASTS_POST_META_KEY, $meta );
 		}
+
+		$this->delete_offloaded_media( $meta, $post );
 	}
 
 	/**
@@ -531,6 +554,22 @@ class PostMetaBox {
 	}
 
 	/**
+	 * Get the image for a specific dovetail episode.
+	 *
+	 * @param string $id Dovetail episode id.
+	 * @return array<string,mixed>
+	 */
+	private function get_dovetail_episode_image( string $id ) {
+		$episode = $this->dovetail_api->get_episode( $id );
+
+		if ( isset( $episode['image'] ) ) {
+			return $episode['image'];
+		}
+
+		return false;
+	}
+
+	/**
 	 * Prepare episode api body data, using passed or current meta data for the passed or current post.
 	 *
 	 * @param array<string,mixed> $meta Episode meta data to use in the data.
@@ -564,10 +603,14 @@ class PostMetaBox {
 
 			$attachment_id = get_post_thumbnail_id( $post );
 			if ( $attachment_id ) {
+				$href     = wp_get_attachment_url( $attachment_id );
+				$caption  = wp_get_attachment_caption( $attachment_id );
+				$alt_text = trim( get_post_meta( $attachment_id, '_wp_attachment_image_alt', true ) );
+
 				$data['image'] = [
-					'href'    => wp_get_attachment_url( $attachment_id ),
-					'alt'     => trim( wp_strip_all_tags( get_post_meta( $attachment_id, '_wp_attachment_image_alt', true ) ) ),
-					'caption' => wp_get_attachment_caption( $attachment_id ),
+					'href'    => $href,
+					'caption' => ! empty( $caption ) ? $caption : null,
+					'altText' => ! empty( $alt_text ) ? $alt_text : null,
 				];
 			}
 
@@ -591,6 +634,13 @@ class PostMetaBox {
 				$data['media'] = [
 					[ 'href' => $meta['enclosure']['url'] ],
 				];
+			}
+
+			// TODO: Will have to update this if we ever support multiple audio segments.
+			if ( isset( $data['media'][0]['originalUrl'] ) ) {
+				// Media was not updated from initial load.
+				// Remove media before sending update.
+				unset( $data['media'] );
 			}
 
 			return $data;
@@ -662,5 +712,38 @@ class PostMetaBox {
 		}
 
 		return $attachment_id;
+	}
+
+	/**
+	 * Delete media when podcast episode has been published to Dovetail.
+	 *
+	 * @param array<string,mixed> $meta Episode meta data to use in the data.
+	 * @param \WP_Post            $post Post object.
+	 * @return void
+	 */
+	private function delete_offloaded_media( array $meta, \WP_Post $post ) {
+		$delete_media = $this->settings_api->get_option( 'delete_media_after_publish', 'general' );
+		$delete_media = isset( $delete_media ) ? 'on' === $delete_media : false;
+
+		if ( ! $delete_media ||
+			'publish' !== $post->post_status ||
+			! isset( $meta['dovetail']['id'] ) ||
+			! isset( $meta['enclosure']['mediaId'] )
+		) {
+			return;
+		}
+
+		// Trash post so file is (hopefully) not deleted immediately.
+		// Dovetail may still be downloading the file during processing. May be a thing when a published
+		// podcast episode post updates audio file.
+		wp_trash_post( $meta['enclosure']['mediaId'] );
+
+		if ( ! get_post_status( $meta['enclosure']['mediaId'] ) ) {
+			// Episode media was deleted.
+			// Remove media id and url, and update metadata.
+			unset( $meta['enclosure']['mediaId'] );
+			unset( $meta['enclosure']['url'] );
+			update_post_meta( $post->ID, DTPODCASTS_POST_META_KEY, $meta );
+		}
 	}
 }

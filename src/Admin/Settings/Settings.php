@@ -139,6 +139,8 @@ class Settings {
 			}
 			$post_types_options = array_map( static fn( $pt ) => $pt->label, $post_types );
 
+			$offload_plugins = $this->get_installed_offload_plugins();
+
 			$this->settings_api->register_fields(
 				'general',
 				[
@@ -153,7 +155,59 @@ class Settings {
 					[
 						'name'    => 'delete_media_after_publish',
 						'label'   => __( 'Delete Uploaded Media After Publishing', 'dovetail-podcasts' ),
-						'desc'    => __( "<p>Uploaded audio will be added to the Media Library. When the podcast episode post is published, Dovetail will fetch the file from Wordpress to process for distribution. Dovetail will then host the audio URL's used in podcast feeds and any Dovetail Podcast Players used in this site.</p><p>Check this box if you do not want to keep the audio in the Media Library after it has been published to Dovetail. Only do this if storage on your Wordpress host is too limited or cost prohobitive for the amount of audio your podcasts produce.</p>", 'dovetail-podcasts' ),
+						'desc'    => '<p>' . esc_html__( "Uploaded audio will be added to the Media Library. When the podcast episode post is published, Dovetail will fetch the file from Wordpress to process for distribution. Dovetail will then host the audio URL's used in podcast feeds and any Dovetail Podcast Players used in this site.", 'dovetail-podcasts' ) . '</p>' .
+						'<p>' . esc_html__( 'Enable this if you do not want to keep the audio in the Media Library after it has been published to Dovetail. Only do this if storage on your Wordpress host is too limited or cost prohobitive for the amount of audio your podcasts produce.', 'dovetail-podcasts' ) . '</p>' . (
+							empty( $offload_plugins ) ? (
+								// TRANSLATORS: %1$s is a URL path to the admin plugin search page with query parameters for relavant plugins.
+								'<p>' . sprintf( __( 'We recommend installing a <a href="%1$s" target="_blank">Media Library offloading plugin</a> to address media storage issues.', 'dovetail-podcasts' ), '/wp-admin/plugin-install.php?s=aws%2520s3%2520offload%2520media%2520library&tab=search&type=term' ) . '</p>'
+							) : (
+								! empty( $offload_plugins['active'] ) ? (
+									'<details class="plugins-info success"><summary>' . esc_html__( 'Great work! It looks like your Media Library files are being offloaded to remote storage. You should NOT need to enable this option.', 'dovetail-podcasts' ) . '</summary><dl>' . (
+										implode(
+											'',
+											array_map(
+												static fn( $p ) => (
+													'<dt>' . esc_html( $p['details']['Title'] ) . '</dt>' .
+													'<dd>' . esc_html( $p['details']['Description'] ) . '</dd>' .
+													'<dd><ul class="keywords">' . implode(
+														'',
+														array_map(
+															static fn( $v ) => (
+															'<li>' . esc_html( $v ) . '</li>'
+															),
+															$p['keywords']
+														)
+													) . '</ul></dd>'
+												),
+												$offload_plugins['active']
+											)
+										)
+									) . '</dl></details>'
+								) : (
+									'<details class="plugins-info warn" open><summary>' . esc_html__( 'Do NOT enable this yet! It looks like you have plugins installed that could offload your Media Library files to remote storage. We recomend activating one of these plugins before choosing to delete published media.', 'dovetail-podcasts' ) . '</summary><dl>' . (
+										implode(
+											'',
+											array_map(
+												static fn( $p ) => (
+													'<dt>' . esc_html( $p['details']['Title'] ) . '</dt>' .
+													'<dd>' . esc_html( $p['details']['Description'] ) . '</dd>' .
+													'<dd><ul class="keywords">' . implode(
+														'',
+														array_map(
+															static fn( $v ) => (
+															'<li>' . esc_html( $v ) . '</li>'
+															),
+															$p['keywords']
+														)
+													) . '</ul></dd>'
+												),
+												$offload_plugins['disabled']
+											)
+										)
+									) . '</dl></details>'
+								)
+							)
+						),
 						'type'    => 'checkbox',
 						'default' => false,
 					],
@@ -302,5 +356,80 @@ class Settings {
 			<audio controls></audio>
 		</section>
 		<?php
+	}
+
+
+	/**
+	 * Get list of installed media library file offloading plugins.
+	 *
+	 * @return array<string,mixed>
+	 */
+	public function get_installed_offload_plugins() {
+		// The `get_plugins` function may not be available depending on what
+		// hook this method is called in. Let's make sure it is loaded.
+		if ( ! function_exists( 'get_plugins' ) ) {
+			require_once ABSPATH . 'wp-admin/includes/plugin.php';
+		}
+
+		$plugins = get_plugins();
+
+		// Regex ready list of keywords to qualify a plugin.
+		$include_keywords = [
+			'media library',
+			'offload',
+			'cloud storage',
+			'AWS S3',
+			'Amazon S3',
+			'Google Cloud',
+			'DigitalOcean',
+			'Cloudflare R2',
+			'Mini\.?io',
+			'Wasabi',
+			'Linode',
+			'Backblaze',
+			'DreamHost',
+		];
+		$include_regex    = $this->create_keyword_regex( $include_keywords );
+		// Regex ready list of keywords to disqualify a plugin.
+		$exclude_keywords = [
+			'image optimization',
+			'image optimizer',
+		];
+		$exclude_regex    = $this->create_keyword_regex( $exclude_keywords );
+
+		$found = [];
+
+		foreach ( $plugins as $plugin => $details ) {
+			$plugin_text = $details['Description'] . $details['Name'] . $details['Title'];
+			if ( preg_match_all( $include_regex, $plugin_text, $matches ) ) {
+				if ( ! preg_match( $exclude_regex, $plugin_text ) ) {
+					$status = is_plugin_active( $plugin ) ? 'active' : 'disabled';
+
+					$found[ $status ][ $plugin ] = [
+						'keywords' => array_unique( array_filter( $matches[0] ) ),
+						'details'  => $details,
+					];
+				}
+			}
+		}
+
+		return $found;
+	}
+
+	/**
+	 * Create a regular expression string to match and capture a set of keywords.
+	 *
+	 * @param array<int,string> $keywords Array of keywords.
+	 * @return string
+	 */
+	private function create_keyword_regex( array $keywords ) {
+		return str_replace(
+			'{patterns}',
+			implode(
+				'|',
+				array_map( static fn( $v ) => "({$v})", $keywords )
+			),
+			'~{patterns}~im'
+		);
 	}
 }

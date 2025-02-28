@@ -903,6 +903,7 @@ class SettingsApi {
 			'checked'    => [],
 			'disabled'   => [],
 			'selected'   => [],
+			'open'       => [],
 		];
 
 		return [
@@ -947,6 +948,8 @@ class SettingsApi {
 			'dl'       => $allowed_atts,
 			'dt'       => $allowed_atts,
 			'dd'       => $allowed_atts,
+			'details'  => $allowed_atts,
+			'summary'  => $allowed_atts,
 		];
 	}
 }

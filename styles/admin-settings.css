@@ -1,12 +1,23 @@
 :root {
+  --dtpc-primary: #0072a3;
+  --dtpc-primary-contrast: white;
+  --dtpc-secondary: #535355;
+  --dtpc-secondary-contrast: white;
   --dtpc-success: #198754;
+  --dtpc-success-contrast: white;
+  --dtpc-warn: #ffc107;
+  --dtpc-warn-contrast: black;
+  --dtpc-danger: #dc3545;
+  --dtpc-danger-contrast: white;
+  --dtpc-info: #75bbe1;
+  --dtpc-info-contrast: black;
 }
 
 p {
   font-size: inherit;
 }
 
-.success {
+.text-success {
   color: var(--dtpc-success);
 }
 
@@ -48,6 +59,110 @@ p {
   th {
     padding: 0;
     text-wrap: balance;
+  }
+
+  details.plugins-info {
+    --_accent-color: var(--accent-color, var(--dtpc-secondary, currentColor));
+    --_accent-color-contrast: var(
+      --accent-color-contrast,
+      var(--dtpc-secondary-contrast, white)
+    );
+    --_details-padding: var(--details-padding, 1rem);
+
+    margin-block-start: 1rem;
+    padding: var(--_details-padding);
+
+    border: 2px solid var(--_accent-color);
+    border-radius: 0.25rem;
+
+    summary {
+      position: relative;
+      list-style: none;
+      font-weight: 500;
+
+      &::before {
+        /* Dashicons: Arrow Right */
+        content: "\f139";
+        position: absolute;
+        display: block;
+        top: 0;
+        right: calc(100% + var(--_details-padding));
+
+        padding: 0.25rem;
+        background-color: var(--_accent-color);
+
+        border-radius: 0.25rem 0 0 0.25rem;
+
+        color: var(--_accent-color-contrast);
+        font-family: "dashicons";
+        font-size: 1.5em;
+      }
+    }
+
+    dl {
+      border-block-start: 1px solid var(--_accent-color);
+    }
+
+    dt {
+      font-weight: 700;
+      margin-block-start: 1em;
+
+      + dd {
+        margin-block-start: 0.5em;
+      }
+    }
+
+    ul.keywords {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5em;
+
+      margin-block: 0;
+
+      li {
+        display: inline-block;
+        min-width: fit-content;
+
+        padding: 0.25em 0.75em;
+
+        border-radius: 100vw;
+
+        background-color: var(--dtpc-secondary);
+
+        color: var(--dtpc-secondary-contrast);
+        font-size: 0.8em;
+        text-transform: capitalize;
+      }
+    }
+
+    &.success {
+      --accent-color: var(--dtpc-success);
+      --accent-color-contrast: var(--dtpc-success-contrast);
+    }
+
+    &.info {
+      --accent-color: var(--dtpc-info);
+      --accent-color-contrast: var(--dtpc-info-contrast);
+    }
+
+    &.warn {
+      --accent-color: var(--dtpc-warn);
+      --accent-color-contrast: var(--dtpc-warn-contrast);
+    }
+
+    &.danger {
+      --accent-color: var(--dtpc-danger);
+      --accent-color-contrast: var(--dtpc-danger-contrast);
+    }
+
+    &[open] {
+      summary {
+        &::before {
+          /* Dashicons: Arrow Down */
+          content: "\f140";
+        }
+      }
+    }
   }
 
   @container metabox (width >= 782px) {

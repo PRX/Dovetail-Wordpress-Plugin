@@ -137,6 +137,7 @@ class DovetailApi {
 			$return = [
 				'id'              => $data['id'],
 				'enclosure'       => $data['_links']['enclosure'],
+				'media'           => $data['media'],
 				'itunesType'      => $data['itunesType'],
 				'explicitContent' => $data['explicitContent'],
 				'explicit'        => isset( $data['explicit'] ) ? 'true' === $data['explicit'] : $data['explicitContent'],

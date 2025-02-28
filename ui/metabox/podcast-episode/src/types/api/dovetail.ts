@@ -15,6 +15,7 @@ export const dovetailEnclosureStatuses = [
 export type DovetailEnclosureStatus = (typeof dovetailEnclosureStatuses)[number];
 
 export type DovetailMedia = {
+  originalUrl?: string,
   href: string,
   filename?: string,
   type?: string,

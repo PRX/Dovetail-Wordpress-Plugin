@@ -261,7 +261,7 @@ useEffect(() => {
   useInterval<DovetailEpisode>(async () => {
     const { id, enclosure } = dovetail || {};
 
-    const isProcessing = 'processing' === enclosure.status;
+    const isProcessing = 'processing' === enclosure?.status;
 
     if (!id || !isProcessing) return dovetail;
 
