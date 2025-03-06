@@ -7,6 +7,7 @@ export type AppLocalizer = {
   postId: number,
   postStatus: string,
   postTitle: string,
+  episodeMetaDataKey: string,
   episodeMetaDataField: string,
   episodeMetaDataJson: string,
   postMetaboxOptionsJson: string,

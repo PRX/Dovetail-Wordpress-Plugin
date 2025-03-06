@@ -165,7 +165,7 @@ class DovetailApi {
 			return new \WP_REST_Response( $data, $status );
 		}
 
-		return new \WP_Error( 'rest_no_route', __( 'Not Found.', 'dovetail-podcasts' ), $response );
+		return new \WP_Error( 'rest_no_route', __( 'Not Found.', 'dovetail-podcasts' ), $api_response );
 	}
 
 	/**
@@ -324,6 +324,7 @@ class DovetailApi {
 		unset( $data['id'] );
 		unset( $data['enclosure'] );
 
+		// TODO: Set `medium = 'uncut'`.
 		$data['segmentCount'] = 1;
 
 		return $this->post( $api_url, $data );

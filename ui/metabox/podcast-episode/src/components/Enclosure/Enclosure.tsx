@@ -1,8 +1,9 @@
 import type { WP_REST_API_Attachment, WP_REST_API_Error } from 'wp-types';
+import type { dovetailEnclosureStatuses } from '@/types/api';
 import type { EpisodeData, EpisodeEnclosure } from '@/types/state/episode';
 import React, { type ChangeEvent, useCallback, useContext, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import axios, { type AxiosProgressEvent, type AxiosRequestConfig, type AxiosResponse } from 'axios';
-import { AlertCircleIcon, CircleAlertIcon, CircleCheckBigIcon, CircleEllipsisIcon, CircleSlashIcon, FileWarningIcon, LinkIcon, LoaderCircleIcon, LoaderIcon, LoaderPinwheelIcon, PauseIcon, PlayIcon, SkipBackIcon, UploadIcon, XIcon } from 'lucide-react';
+import { AlertCircleIcon, BanIcon, CheckIcon, CircleAlertIcon, CircleCheckBigIcon, CircleEllipsisIcon, CircleSlashIcon, FileWarningIcon, LinkIcon, LoaderCircleIcon, LoaderIcon, LoaderPinwheelIcon, PauseIcon, PlayIcon, SkipBackIcon, Undo2Icon, UndoIcon, UnlinkIcon, UploadIcon, XIcon } from 'lucide-react';
 import { PostMetaboxContext } from '@/lib/contexts/PostMetaboxContext';
 import { cn, formatDuration } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
@@ -11,7 +12,6 @@ import { Badge } from '@/components/ui/badge';
 import { Slider } from '@/components/ui/slider';
 import { Separator } from '@/components/ui/separator';
 import { Input } from '@/components/ui/input';
-import { DovetailEnclosureStatus, dovetailEnclosureStatuses } from '@/types/api';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 
 export type EnclosureStatus =
@@ -52,7 +52,7 @@ export function Enclosure({ onChange}: EnclosureProps) {
   const { episode, podcast } = state || {};
   const { enclosure, dovetail } = episode || {};
   const { mediaId, url, filename: audioSrcFilename } = enclosure || {};
-  const regexAudioUrlPattern = `^https?:\\/\\/.+\\/[a-z0-9_\\-]+\\.(${audioFormats.join('|')})$`;
+  const regexAudioUrlPattern = `^https?:\\/\\/.+\\/[\\w\\.\\-%]+\\.(${audioFormats.join('|')})$`;
   const initialEpisode = useRef<EpisodeData>(episode);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const urlInputRef = useRef<HTMLInputElement>(null);
@@ -60,6 +60,7 @@ export function Enclosure({ onChange}: EnclosureProps) {
   const [status, setStatus] = useState<EnclosureStatus>(getEnclosureStatus(episode));
   const [attachedMedia, setAttachedMedia] = useState(options?.attachedMedia)
   const [media, setMedia] = useState<WP_REST_API_Attachment>(attachedMedia.get(`${mediaId}`));
+  const [remoteUrl, setRemoteUrl] = useState(!mediaId ? url : null);
   const [audioInfo, setAudioInfo] = useState<AudioInfo>({
     duration: dovetail.enclosure?.duration || media?.media_details?.length as number || 0
   });
@@ -72,7 +73,10 @@ export function Enclosure({ onChange}: EnclosureProps) {
   const useOriginalUrl = hasUnsavedChanges || !dovetail?.id || 'publish' !== postStatus || 'complete' !== dovetail.enclosure.status;
   const audioSrcUrl = useOriginalUrl ?
     // Try to use initial dovetail media's original URL in cases when offloaded media was deleted and url is missing.
-    url || initialEpisode.current?.dovetail?.media?.[0]?.originalUrl :
+    remoteUrl || url || initialEpisode.current?.dovetail?.media?.[0]?.originalUrl :
+    // Construct a dovetail enclosure URL. We do not want use the href from the dovetail enclosure
+    // since it will be prefixed with analytics prefixes, and audio played in the admin should not
+    // affect those metrics.
     [
       podcast.enclosureTemplate.replace(/\{[^\}]+\}/g, ''),
       podcast.id,
@@ -121,35 +125,59 @@ export function Enclosure({ onChange}: EnclosureProps) {
     setPlaying(false);
   }, []);
 
-  const handleRemoteUrlChange = useCallback((evt: ChangeEvent<HTMLInputElement>) => {
-    const newRemoteUrl = evt.target.value.trim();
-    const { valid } = evt.target.validity;
-    const hasNewRemoteUrl = !!newRemoteUrl?.length;
+  const commitRemoteUrlChange = useCallback(() => {
+    const urlInput = urlInputRef.current;
+
+    if (!urlInput) return;
+
+    const newRemoteUrl = urlInput.value.trim();
+    const { valid } = urlInput.validity;
+    const hasUrlChanged = newRemoteUrl !== initialEpisode.current?.enclosure?.url;
+    const wasUsingMedia = !!initialEpisode.current?.enclosure?.mediaId;
+    const isPublishedToDovetail = !!dovetail?.id;
 
     // Bail if:
-    // - Empty value
+    // - URL is empty and was using media
+    // - URL is empty and is published in Dovetail
     // - Invalid input
-    if (!hasNewRemoteUrl || !valid) return;
+    if (!valid || (!newRemoteUrl.length && (wasUsingMedia || isPublishedToDovetail))) {
+      setEditingRemoteUrl(false);
+      return
+    };
 
-    doOnChange({
-      url: newRemoteUrl,
-      filename: newRemoteUrl.split('/').pop(),
-      dateUpdated: new Date()
-    });
-    setStatus('audio-ready');
+    const newEnclosure = {
+      url: newRemoteUrl || null,
+      filename: newRemoteUrl.split('/').pop() || null,
+      dateUpdated: hasUrlChanged ? new Date() : initialEpisode.current?.enclosure?.dateUpdated || null
+    };
+    doOnChange(newEnclosure);
+
+    setRemoteUrl(newEnclosure.url);
+    setStatus(newEnclosure.url ? 'audio-ready' : 'no-audio');
     setEditingRemoteUrl(false);
-  }, [onChange])
+  }, [onChange, remoteUrl, dovetail?.id])
+
+  const handleRemoteUrlChange = useCallback((evt: ChangeEvent<HTMLInputElement>) => {
+    const newRemoteUrl = evt.target.value.trim();
+
+    if (!initialEpisode.current?.enclosure?.url && newRemoteUrl) {
+      commitRemoteUrlChange();
+    } else {
+      setRemoteUrl(newRemoteUrl);
+    }
+  }, [commitRemoteUrlChange, setRemoteUrl])
 
   const message = {
     'no-audio': (
       <div className='flex items-center gap-2'>
-        <Input type='url' pattern={regexAudioUrlPattern} ref={urlInputRef}
+        <Input ref={urlInputRef} type='url'
+          pattern={regexAudioUrlPattern}
           placeholder='Paste remote URL to audio file...'
-          onChangeCapture={handleRemoteUrlChange}
+          onChange={handleRemoteUrlChange}
         />
       </div>
     ),
-    'media-uploading': `Uploading Audio File...`,
+    'media-uploading': uploadProgress < 1 ? `Uploading Audio File...` : 'Upload Complete.',
     'audio-ready': null,
     'media-error': 'Oops! Upload failed.',
     'dovetail-processing': null,
@@ -160,7 +188,7 @@ export function Enclosure({ onChange}: EnclosureProps) {
   }[status];
   const info = {
     'no-audio': <>Supported audio formats: <samp>{audioFormats.map((v) => `.${v}`).join(', ')}</samp></>,
-    'media-uploading': `${Math.round(uploadProgress * 100)}%`,
+    'media-uploading': uploadProgress < 1 ? `${Math.round(uploadProgress * 100)}%` : 'Media is being added to your library...',
     'audio-ready': null,
     'media-error': 'Try uploading your file again. If error persists, contact your Dovetail support representative.',
     'dovetail-processing': null,
@@ -184,18 +212,14 @@ export function Enclosure({ onChange}: EnclosureProps) {
   }
 
   async function handleChange(evt: ChangeEvent<HTMLInputElement>) {
-    // Start upload.
+    // Get selected file.
     const file = evt.target.files[0];
-    const fd = new FormData();
-    const headers = {
-      'Content-Disposition': `attachment; filename=${file.name}`,
-      'X-Wp-Nonce': window.appLocalizer.nonce,
-      'content-type': file.type
-    }
-    const config: AxiosRequestConfig = {
-      headers,
-      onUploadProgress: handleUploadProgress
-    }
+
+    // Clear input value since we don't want it submitted with post save,
+    // and want to make sure if the audio change is undone, the user can still
+    // select the same file again.
+    // DO NOT trigger the change event, so we don't call this handler infinitely.
+    evt.target.value = '';
 
     // Check for attached media that has the same file name and size as the selected file.
     const existingMedia = [...attachedMedia.values()].find(({media_details: { filesize }, source_url}) => {
@@ -210,6 +234,17 @@ export function Enclosure({ onChange}: EnclosureProps) {
       return;
     }
 
+    // Start upload.
+    const fd = new FormData();
+    const headers = {
+      'Content-Disposition': `attachment; filename=${file.name}`,
+      'X-Wp-Nonce': window.appLocalizer.nonce,
+      'content-type': file.type
+    }
+    const config: AxiosRequestConfig = {
+      headers,
+      onUploadProgress: handleUploadProgress
+    }
     fd.append('file', file);
     fd.append('title', file.name);
     fd.append('post', `${window.appLocalizer.postId}`);
@@ -302,6 +337,14 @@ export function Enclosure({ onChange}: EnclosureProps) {
     }
     setStatus(getEnclosureStatus(episode));
   }, [episode?.dovetail?.enclosure?.status])
+
+  useEffect(() => {
+    setStatus(getEnclosureStatus(episode));
+  }, [episode?.enclosure?.url])
+
+  useEffect(() => {
+    setRemoteUrl(!mediaId ? url : null);
+  }, [mediaId, url])
 
   return (
     <div data-status={status} className='max-w-full @container/enclosure'>
@@ -429,22 +472,48 @@ export function Enclosure({ onChange}: EnclosureProps) {
                     </>
                   ) : (
                     <>
-                    <Input type='url' defaultValue={!mediaId ? url : null} pattern={regexAudioUrlPattern} ref={urlInputRef}
+                    <Input ref={urlInputRef} type='url'
+                      defaultValue={remoteUrl}
+                      pattern={regexAudioUrlPattern}
                       placeholder='Paste remote URL to audio file...'
-                      onChangeCapture={handleRemoteUrlChange}
+                      onChange={handleRemoteUrlChange}
                       onFocus={(evt) => { evt.target.select() }}
                       autoFocus
                     />
-                    <Button type='button' variant={url && !mediaId ? 'outline' : 'ghost'} size='icon'
-                      className='w-[1.5em] min-w-[1.5rem] h-auto p-1 aspect-square'
-                      title='Upload New Audio File'
-                      onClick={() => {
-                        setEditingRemoteUrl(false);
-                      }}
-                    >
-                      <XIcon className='size-full' />
-                    </Button>
-                    </>
+                    {(!!remoteUrl?.trim().length || !dovetail?.id) && remoteUrl !== url && (
+                      <Tooltip>
+                        <TooltipTrigger asChild>
+                          <Button type='button' variant={url && !mediaId ? 'outline' : 'ghost'} size='icon'
+                            className='w-[1.5em] min-w-[1.5rem] h-auto p-1 aspect-square'
+                            onClick={() => {
+                              commitRemoteUrlChange();
+                            }}
+                          >
+                            {!mediaId && !remoteUrl?.trim().length ? (
+                              <UnlinkIcon className='size-full' />
+                            ) : (
+                              <CheckIcon className='size-full' />
+                            )}
+                          </Button>
+                        </TooltipTrigger>
+                        <TooltipContent>{!mediaId && !remoteUrl?.trim().length ? 'Remove' : 'Confirm'}</TooltipContent>
+                      </Tooltip>
+                    )}
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <Button type='button' variant={url && !mediaId ? 'outline' : 'ghost'} size='icon'
+                          className='w-[1.5em] min-w-[1.5rem] h-auto p-1 aspect-square'
+                          onClick={() => {
+                            setRemoteUrl(!mediaId ? url : null);
+                            setEditingRemoteUrl(false);
+                          }}
+                        >
+                          <BanIcon className='size-full' />
+                        </Button>
+                      </TooltipTrigger>
+                      <TooltipContent>Cancel</TooltipContent>
+                    </Tooltip>
+                  </>
                   )
                 }
               </div>
@@ -457,7 +526,7 @@ export function Enclosure({ onChange}: EnclosureProps) {
                   { audioInfo?.duration ? <Badge variant='secondary'>{formatDuration(audioInfo.duration)}</Badge> : <Skeleton className='w-[8ch] h-[1em]' /> }
                   { hasEnclosureUrl && !dovetail?.id && <Badge variant='outline'><CircleEllipsisIcon className='text-sky-500' />Not Published To Dovetail</Badge> }
                   { 'dovetail-processing' === status && <Badge variant='outline'><LoaderIcon className='text-sky-500 animate-spin' />Dovetail Processing Audio...</Badge> }
-                  { 'dovetail-complete' === status && <Badge variant='outline'><CircleCheckBigIcon className='text-green-500' />Published To Dovetail</Badge> }
+                  { 'dovetail-complete' === status && !hasUnsavedChanges && <Badge variant='outline'><CircleCheckBigIcon className='text-green-500' />Published To Dovetail</Badge> }
                   { 'dovetail-incomplete' === status && (
                     <Tooltip>
                       <TooltipTrigger asChild>
@@ -470,11 +539,23 @@ export function Enclosure({ onChange}: EnclosureProps) {
                     </Tooltip>
                   )}
                   { hasUnsavedChanges && (
-                    'publish' === postStatus ? (
-                      <Badge>Unpublished Audio Change</Badge>
-                    ) : (
-                      <Badge>Unsaved Audio Change</Badge>
-                    )
+                    <Tooltip>
+                      <Badge className='pr-0.5 gap-2'>
+                        { 'publish' === postStatus ? 'Unpublished Audio Change' : 'Unsaved Audio Change' }
+                        <TooltipTrigger asChild>
+                          <Button type='button' variant='secondary' size='icon'
+                            className='w-[1.5em] h-auto aspect-square p-0.5 rounded-full rounded-s-none'
+                            onClick={() => {
+                              setEditingRemoteUrl(false);
+                              doOnChange(initialEpisode.current?.enclosure || null);
+                            }}
+                          >
+                            <Undo2Icon className='size-full' />
+                          </Button>
+                        </TooltipTrigger>
+                      </Badge>
+                      <TooltipContent>Undo Audio Change</TooltipContent>
+                    </Tooltip>
                   )}
                 </div>
                 <div className='flex items-center gap-3'>

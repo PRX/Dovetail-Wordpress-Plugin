@@ -1,5 +1,5 @@
 import { dovetailEpisodeTypes, type DovetailEpisode, type DovetailEpisodeType, type DovetailPodcast } from '@/types/api';
-import type { PostMetaboxAction, PostMetaboxOptions, PostMetaboxState } from '@/types/state/postMetabox';
+import { type PostMetaboxAction, POST_META_BOX_KEY, type PostMetaboxOptions, type PostMetaboxState } from '@/types/state/postMetabox';
 import type { EpisodeData, EpisodeEnclosure } from '@/types/state/episode';
 import React, { ChangeEvent, useEffect, useReducer, useRef, useState } from 'react';
 import axios from 'axios';
@@ -20,7 +20,13 @@ import { cn } from '@/lib/utils';
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from '@/components/ui/alert-dialog';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { useInterval } from '@/hooks/use-Interval';
-import { useAfterSave } from '@/hooks/use-after-save';
+import { useEditorSaving } from '@/hooks/use-editor-saving';
+import { WP_Post, WP_REST_API_Post } from 'wp-types';
+import { Skeleton } from '@/components/ui/skeleton';
+
+export type WP_REST_API_Post_With_Meta_Data<T> = WP_REST_API_Post & {
+  meta: Partial<T>
+}
 
 export type PostMetaboxProps = {
   /**
@@ -46,6 +52,7 @@ export type PostMetaboxControlProps = {
 };
 
 const defaultPostMetaboxState = {
+  podcast: null,
   episode: {
     dovetail: {
       id: null,
@@ -73,6 +80,18 @@ function postMetaboxStateReducer(state: PostMetaboxState, action: PostMetaboxAct
       return {
         ...state,
         podcast: action.payload
+      }
+
+    case 'SET_PODCAST_TO_DEFAULT':
+      return {
+        ...state,
+        podcast: defaultPostMetaboxState.podcast
+      }
+
+    case 'SET_EPISODE':
+      return {
+        ...state,
+        episode: action.payload
       }
 
     case 'UPDATE_EPISODE':
@@ -191,9 +210,12 @@ function PostMetaboxControl({ children, forId, label }: PostMetaboxControlProps)
   )
 }
 
-function PostMetabox({ field, episode: initialEpisodeData, options }: PostMetaboxProps) {
-  const { postTitle } = window.appLocalizer;
+function PostMetabox({ field, episode: _episode, options }: PostMetaboxProps) {
+  const { postId, postTitle } = window.appLocalizer;
   const { podcasts } = options;
+  const [isSaving, isAfterSave] = useEditorSaving();
+  const [isUiLocked, setIsUiLocked] = useState(false);
+  const [initialEpisodeData, setInitialEpisodeData] = useState(_episode);
   const [state, dispatch] = useReducer(postMetaboxStateReducer, {
     ...defaultPostMetaboxState,
     podcast: podcasts?.find(({ id }) => initialEpisodeData?.podcastId === id),
@@ -210,10 +232,17 @@ function PostMetabox({ field, episode: initialEpisodeData, options }: PostMetabo
   const selectPodcastDialog = useShowHide();
   const alertRestEpisodeDialog = useShowHide();
   const additionalFields = useShowHide(hasAdditionalFieldsValues);
-  const isAfterSave = useAfterSave();
 
-  console.log(episode);
-  console.log(options);
+  console.log('Episode', episode);
+  console.log('Options', options);
+  console.log('Podcast', podcast);
+
+  function setEpisode(payload: EpisodeData) {
+    dispatch({ type: 'SET_EPISODE', payload });
+    dispatch({ type: 'SET_PODCAST',
+      payload: podcasts?.find(({ id }) => payload.podcastId === id)
+    });
+  }
 
   function resetEpisode() {
     dispatch({ type: 'SET_TO_DEFAULT' });
@@ -221,7 +250,9 @@ function PostMetabox({ field, episode: initialEpisodeData, options }: PostMetabo
 
   function restoreEpisode() {
     dispatch({ type: 'UPDATE_EPISODE', payload: initialEpisodeData });
-    dispatch({ type: 'SET_PODCAST', payload: podcasts?.find(({ id }) => initialEpisodeData?.podcastId === id)});
+    dispatch({ type: 'SET_PODCAST',
+      payload: podcasts?.find(({ id }) => initialEpisodeData?.podcastId === id)
+    });
   }
 
   function setEpisodePodcastId(data: DovetailPodcast) {
@@ -238,40 +269,50 @@ function PostMetabox({ field, episode: initialEpisodeData, options }: PostMetabo
   function updateEpisodeDovetail(payload: Partial<DovetailEpisode>) {
     dispatch({ type: 'UPDATE_EPISODE_DOVETAIL', payload });
   }
+useEffect(() => {
+  // Only lock once is is locked.
+  setIsUiLocked((locked) => isSaving || locked );
+}, [isSaving]);
 
 useEffect(() => {
     if (!isAfterSave) return;
 
+    // Update local episode data with last saved data.
     (async () => {
+      const res = await axios.get<WP_REST_API_Post_With_Meta_Data<{
+        [POST_META_BOX_KEY]: EpisodeData
+      }>>(`/wp-json/wp/v2/posts/${postId}`);
+      const { meta } = res.data || {};
+      const { [POST_META_BOX_KEY]: episodeMetaData } = (!Array.isArray(meta) && meta) || {};
 
-      const { id, enclosure } = dovetail || {};
-
-      if (!id) return dovetail;
-
-      const res = await axios.get<DovetailEpisode>(`/wp-json/dovetail/v1/episodes/${id}`);
-      const { enclosure: resEnc } = res.data || {};
-
-      if ( enclosure.status !== resEnc.status ) {
-        dispatch({ type: 'UPDATE_EPISODE_DOVETAIL', payload: { enclosure: resEnc } });
+      if (episodeMetaData) {
+        setEpisode(episodeMetaData);
+      } else {
+        resetEpisode();
       }
 
+      // Treat block editor after save as a "page refresh" of the classic editor.
+      // Update initial episode data.
+      setInitialEpisodeData(episodeMetaData || null);
+
+      setIsUiLocked(false);
     })()
-  }, [isAfterSave, dovetail?.id])
+  }, [isAfterSave])
 
   useInterval<DovetailEpisode>(async () => {
     const { id, enclosure } = dovetail || {};
 
     const isProcessing = 'processing' === enclosure?.status;
 
-    if (!id || !isProcessing) return dovetail;
+    if (!id || !isProcessing) return null;
 
     const res = await axios.get<DovetailEpisode>(`/wp-json/dovetail/v1/episodes/${id}`);
 
     return res.data;
-  }, (e) => {
-    const { id, enclosure } = e || {};
+  }, (data) => {
+    const { id, enclosure } = data || {};
 
-    if (!id || !enclosure) return false;
+    if (!id || !enclosure) return !!dovetail?.id;
 
     const isProcessing = 'processing' === enclosure.status;
 
@@ -282,9 +323,21 @@ useEffect(() => {
     return isProcessing;
   }, 2000, [dovetail?.id, dovetail?.enclosure?.status]);
 
+  // useEffect(() => {
+  //   if (wp?.data && wp.data.select('core/editor').getEditedPostAttribute('meta')) {
+  //     // @ts-expect-error
+  //     wp.data.dispatch('core/editor').editPost({
+  //       meta: {
+  //         _dovetail_podcasts_episode: episode
+  //       }
+  //     })
+  //   }
+  // }, [episode])
+
   return (
     <PostMetaboxContext.Provider value={{ state, options }}>
-      <div className='mt-[12px] @container/main'>
+      <div className='mt-[12px] @container/main relative' {...(isUiLocked && { inert: true })}>
+        {isUiLocked && <Skeleton className='absolute -inset-2 z-10 bg-gradient-to-br from-indigo-500/20 via-purple-500/20 to-pink-500/20' />}
         {!episode?.podcastId ? (
           !initialEpisodeData?.podcastId ? (
             <Button size='lg' variant='outline' className='w-full' type='button' onClick={selectPodcastDialog.show}>

@@ -55,12 +55,66 @@ class PostMetaBox {
 
 		$this->post_types = $this->settings_api->get_option( 'post_types', 'general' );
 
+		foreach ( $this->post_types as $post_type ) {
+			add_action( "rest_prepare_{$post_type}", [ $this, 'rest_prepare' ], 999, 3 );
+		}
+
 		add_action( 'add_meta_boxes', [ $this, 'initialize_meta_box' ], 999, 2 );
 		add_action( 'save_post', [ $this, 'save_post' ], 999, 2 );
 		add_action( 'trashed_post', [ $this, 'trashed_post' ], 999 );
 		add_action( 'before_delete_post', [ $this, 'before_delete_post' ], 999, 2 );
 		add_action( 'publish_to_draft', [ $this, 'publish_future_to_draft' ], 999 );
 		add_action( 'future_to_draft', [ $this, 'publish_future_to_draft' ], 999 );
+	}
+
+	/**
+	 * Add episode meta data to REST response.
+	 *
+	 * @param \WP_REST_Response $response The response object.
+	 * @param \WP_Post          $post Post object.
+	 * @param \WP_REST_Request  $request The request object.
+	 * @return \WP_REST_Response
+	 */
+	public function rest_prepare( \WP_REST_Response $response, \WP_Post $post, \WP_REST_Request $request ) {
+
+		if ( empty( $post ) && isset( $GLOBALS['post'] ) ) {
+			$post = $GLOBALS['post'];
+		} else {
+			$param_id = $request->get_param( 'id' );
+			$post     = get_post( $param_id );
+		}
+
+		if ( $post instanceof WP_Post || is_object( $post ) ) {
+			$post_id = $post->ID;
+		}
+
+		if ( ! isset( $post_id ) || empty( $post_id ) ) {
+			return $response;
+		}
+
+		if ( 'GET' === $request->get_method() ) {
+			$meta = $this->get_episode_meta_data( $post_id );
+
+			if ( ! empty( $meta ) ) {
+				$response->data['meta'][ DTPODCASTS_POST_META_KEY ] = $meta;
+			}
+		}
+
+		/**
+		 * Block editor saves will do a PUT of data and return it's response before our `save_post`
+		 * hook is called with POST data containing our nonce string. We need to echo back meta data
+		 * sent in the PUT body so the editor state retains the edits to the metadata.
+		 */
+		if ( 'PUT' === $request->get_method() ) {
+			$body = $request->get_body();
+			$data = json_decode( $body, true );
+
+			if ( isset( $data['meta'][ DTPODCASTS_POST_META_KEY ] ) ) {
+				$response->data['meta'][ DTPODCASTS_POST_META_KEY ] = $data['meta'][ DTPODCASTS_POST_META_KEY ];
+			}
+		}
+
+		return $response;
 	}
 
 	/**
@@ -86,6 +140,7 @@ class PostMetaBox {
 				'postId'                 => $post->ID,
 				'postStatus'             => $post->post_status,
 				'postTitle'              => $post->post_title,
+				'episodeMetaDataKey'     => DTPODCASTS_POST_META_KEY,
 				'episodeMetaDataField'   => DTPODCASTS_POST_META_KEY . '_json',
 				'episodeMetaDataJson'    => wp_json_encode( $meta ),
 				'postMetaboxOptionsJson' => wp_json_encode( $options ),
@@ -320,7 +375,17 @@ class PostMetaBox {
 			add_action( 'admin_enqueue_scripts', [ $this, 'admin_enqueue_scripts' ] );
 		}
 
-		add_meta_box( 'dovetail-podcasts-episode', 'Podcast Episode', [ $this, 'render_meta_box' ], $this->post_types, 'normal' );
+		add_meta_box(
+			'dovetail-podcasts-episode',
+			'Dovetail Podcast Episode',
+			[ $this, 'render_meta_box' ],
+			$this->post_types,
+			'normal',
+			'default',
+			[
+				'__block_editor_compatible_meta_box' => true,
+			]
+		);
 	}
 
 	/**
@@ -410,19 +475,22 @@ class PostMetaBox {
 		$json_key = DTPODCASTS_POST_META_KEY . '_json';
 		if ( isset( $_POST[ $json_key ] ) ) {
 			$new_meta_json = sanitize_text_field( wp_unslash( $_POST[ $json_key ] ) );
-			$new_meta      = json_decode( $new_meta_json, true );
+		}
 
-			if ( is_array( $new_meta ) ) {
-				// Some meta props are not managed by the frontend. We need to preserve their last values.
-				$preserve = [];
-				// Image is updated by the post's feature image.
-				// This prop is kept to determine original URL changes.
-				if ( isset( $meta['dovetail']['image'] ) ) {
-					$preserve['dovetail']['image'] = $meta['dovetail']['image'];
-				}
+		if ( ! empty( $new_meta_json ) ) {
+			$new_meta = json_decode( $new_meta_json, true );
+		}
 
-				$meta = Utils::recursive_array_merge( $preserve, $new_meta );
+		if ( is_array( $new_meta ) ) {
+			// Some meta props are not managed by the frontend. We need to preserve their last values.
+			$preserve = [];
+			// Image is updated by the post's feature image.
+			// This prop is kept to determine original URL changes.
+			if ( isset( $meta['dovetail']['image'] ) ) {
+				$preserve['dovetail']['image'] = $meta['dovetail']['image'];
 			}
+
+			$meta = Utils::recursive_array_merge( $preserve, $new_meta );
 		}
 
 		/**
@@ -622,7 +690,27 @@ class PostMetaBox {
 				]
 			);
 			if ( ! is_wp_error( $post_categories ) && ! empty( $post_categories ) ) {
-				$data['categories'] = $post_categories;
+				$categories = $post_categories;
+			}
+
+			$post_tags = wp_get_post_tags(
+				$post->ID,
+				[
+					'fields' => 'names',
+				]
+			);
+			if ( ! is_wp_error( $post_tags ) && ! empty( $post_tags ) ) {
+				$categories = isset( $categories ) && is_array( $categories ) ?
+					array_merge( $categories, $post_tags ) :
+					$post_tags;
+			}
+
+			if ( isset( $categories ) && is_array( $categories ) ) {
+				$categories = array_unique( $categories );
+
+				sort( $categories, SORT_STRING );
+
+				$data['categories'] = $categories;
 			}
 
 			if (
