@@ -35,7 +35,7 @@ export type EnclosureProps = {
 function getEnclosureStatus(episode: EpisodeData): EnclosureStatus {
   const { enclosure, dovetail } = episode || {};
 
-  if ( dovetail?.id ) {
+  if ( enclosure?.url && dovetail?.id ) {
     return `dovetail-${dovetail.enclosure.status}`;
   }
 
@@ -69,8 +69,7 @@ export function Enclosure({ onChange}: EnclosureProps) {
   const [audioCurrentTime, setAudioCurrentTime] = useState(0);
   const [editingRemoteUrl, setEditingRemoteUrl] = useState(false);
   const hasUnsavedChanges = (url !== initialEpisode.current?.enclosure?.url);
-  const hasEnclosureUrl = !!url;
-  const useOriginalUrl = hasUnsavedChanges || !dovetail?.id || 'publish' !== postStatus || 'complete' !== dovetail.enclosure.status;
+  const useOriginalUrl = hasUnsavedChanges || 'publish' !== postStatus || 'complete' !== dovetail?.enclosure?.status;
   const audioSrcUrl = useOriginalUrl ?
     // Try to use initial dovetail media's original URL in cases when offloaded media was deleted and url is missing.
     remoteUrl || url || initialEpisode.current?.dovetail?.media?.[0]?.originalUrl :
@@ -524,10 +523,9 @@ export function Enclosure({ onChange}: EnclosureProps) {
               <div className='grid gap-2'>
                 <div className='flex flex-wrap gap-2'>
                   { audioInfo?.duration ? <Badge variant='secondary'>{formatDuration(audioInfo.duration)}</Badge> : <Skeleton className='w-[8ch] h-[1em]' /> }
-                  { hasEnclosureUrl && !dovetail?.id && <Badge variant='outline'><CircleEllipsisIcon className='text-sky-500' />Not Published To Dovetail</Badge> }
                   { 'dovetail-processing' === status && <Badge variant='outline'><LoaderIcon className='text-sky-500 animate-spin' />Dovetail Processing Audio...</Badge> }
-                  { 'dovetail-complete' === status && !hasUnsavedChanges && <Badge variant='outline'><CircleCheckBigIcon className='text-green-500' />Published To Dovetail</Badge> }
-                  { 'dovetail-incomplete' === status && (
+                  { 'dovetail-complete' === status && !hasUnsavedChanges && <Badge variant='outline'><CircleCheckBigIcon className='text-green-500' />Dovetail Audio {'publish' === postStatus ? 'Published' : 'Ready'}</Badge> }
+                  { !!dovetail?.enclosure?.size && 'dovetail-incomplete' === status && (
                     <Tooltip>
                       <TooltipTrigger asChild>
                         <Badge className='bg-orange-500 text-white'><AlertCircleIcon />Dovetail Action Required</Badge>

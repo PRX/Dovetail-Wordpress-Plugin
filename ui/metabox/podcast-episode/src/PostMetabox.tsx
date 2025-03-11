@@ -111,9 +111,9 @@ function postMetaboxStateReducer(state: PostMetaboxState, action: PostMetaboxAct
           enclosure: action.payload,
           dovetail: {
             ...dovetail,
-            media: [
+            media: action.payload ? [
               { href: action.payload.url }
-            ]
+            ] : null
           }
         }
       }
@@ -211,7 +211,7 @@ function PostMetaboxControl({ children, forId, label }: PostMetaboxControlProps)
 }
 
 function PostMetabox({ field, episode: _episode, options }: PostMetaboxProps) {
-  const { postId, postTitle } = window.appLocalizer;
+  const { postId, postStatus, postTitle, restGetRoute, nonce } = window.appLocalizer;
   const { podcasts } = options;
   const [isSaving, isAfterSave] = useEditorSaving();
   const [isUiLocked, setIsUiLocked] = useState(false);
@@ -236,6 +236,7 @@ function PostMetabox({ field, episode: _episode, options }: PostMetaboxProps) {
   console.log('Episode', episode);
   console.log('Options', options);
   console.log('Podcast', podcast);
+  console.log('REST GET Route', restGetRoute);
 
   function setEpisode(payload: EpisodeData) {
     dispatch({ type: 'SET_EPISODE', payload });
@@ -269,20 +270,35 @@ function PostMetabox({ field, episode: _episode, options }: PostMetaboxProps) {
   function updateEpisodeDovetail(payload: Partial<DovetailEpisode>) {
     dispatch({ type: 'UPDATE_EPISODE_DOVETAIL', payload });
   }
-useEffect(() => {
-  // Only lock once is is locked.
-  setIsUiLocked((locked) => isSaving || locked );
-}, [isSaving]);
 
-useEffect(() => {
+  useEffect(() => {
+    if (!document) return;
+
+    if (podcast) {
+      document.querySelector('body').setAttribute('data-podcast-episode', 'true');
+    } else {
+      document.querySelector('body').removeAttribute('data-podcast-episode');
+    }
+  }, [podcast])
+
+  useEffect(() => {
+    // Only lock once is is locked.
+    setIsUiLocked((locked) => isSaving || locked );
+  }, [isSaving]);
+
+  useEffect(() => {
     if (!isAfterSave) return;
 
     // Update local episode data with last saved data.
     (async () => {
       const res = await axios.get<WP_REST_API_Post_With_Meta_Data<{
         [POST_META_BOX_KEY]: EpisodeData
-      }>>(`/wp-json/wp/v2/posts/${postId}`);
-      const { meta } = res.data || {};
+      }>>(`/wp-json${restGetRoute}/${postId}`, {
+        headers: {
+          'X-Wp-Nonce': nonce
+        }})
+        .catch((e):any => null);
+      const { meta } = res?.data || {};
       const { [POST_META_BOX_KEY]: episodeMetaData } = (!Array.isArray(meta) && meta) || {};
 
       if (episodeMetaData) {
@@ -322,17 +338,6 @@ useEffect(() => {
 
     return isProcessing;
   }, 2000, [dovetail?.id, dovetail?.enclosure?.status]);
-
-  // useEffect(() => {
-  //   if (wp?.data && wp.data.select('core/editor').getEditedPostAttribute('meta')) {
-  //     // @ts-expect-error
-  //     wp.data.dispatch('core/editor').editPost({
-  //       meta: {
-  //         _dovetail_podcasts_episode: episode
-  //       }
-  //     })
-  //   }
-  // }, [episode])
 
   return (
     <PostMetaboxContext.Provider value={{ state, options }}>
@@ -386,7 +391,7 @@ useEffect(() => {
                   </DropdownMenuTrigger>
                   <DropdownMenuContent side='left' align='start'>
                     {/* Show option to change podcast until episode has been published and has a Dovetail episode id. */}
-                    {!dovetail?.id && (
+                    { !['publish', 'future'].includes(postStatus) && (
                       <>
                       <DropdownMenuItem
                         onSelect={selectPodcastDialog.show}
@@ -425,7 +430,7 @@ useEffect(() => {
                       value={dovetail.itunesType}
                       onValueChange={(itunesType: DovetailEpisodeType) => { updateEpisodeDovetail({ itunesType }) }}
                     >
-                      <SelectTrigger className='bg-white w-fit'>
+                      <SelectTrigger className='bg-white @md/group-1:w-fit'>
                         <SelectValue />
                       </SelectTrigger>
                       <SelectContent>

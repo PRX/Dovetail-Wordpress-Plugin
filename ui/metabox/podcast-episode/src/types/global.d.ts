@@ -5,8 +5,10 @@
 export type AppLocalizer = {
   appContainerId: string,
   postId: number,
+  postType: string,
   postStatus: string,
   postTitle: string,
+  restGetRoute: string,
   episodeMetaDataKey: string,
   episodeMetaDataField: string,
   episodeMetaDataJson: string,

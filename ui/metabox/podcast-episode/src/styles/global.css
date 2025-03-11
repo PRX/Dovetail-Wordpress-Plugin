@@ -145,6 +145,10 @@
   }
 }
 
+.dtpc-postbox-title {
+  @apply grid grid-cols-[1.5rem_1fr] items-center gap-2 leading-none;
+}
+
 .rdp-dropdown_icon {
   display: inline-block;
 }
@@ -154,5 +158,84 @@
   :has(.rdp-dropdown_icon) {
     display: inline-flex;
     align-items: center;
+  }
+}
+
+[data-podcast-episode] {
+  .editor-post-featured-image__preview {
+    .editor-post-featured-image__preview-image {
+      aspect-ratio: 1;
+    }
+  }
+}
+
+/* Fix sidebar layout */
+/* Ensures sidebar sortable area has a hit area, even when empty. */
+/* Aligns postbox layout and spacing to components panels. */
+.interface-complementary-area.editor-sidebar {
+  display: flex;
+  flex-direction: column;
+
+  .editor-sidebar__panel {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+
+    .components-panel__body {
+      [data-wp-component="Flex"] {
+        height: auto;
+        max-height: 100%;
+      }
+    }
+  }
+
+  #poststuff {
+    .hndle {
+      padding: 0;
+    }
+  }
+
+  .postbox {
+    .postbox-header {
+      padding: 16px;
+      border-top: 0;
+    }
+    .inside {
+      margin: 0;
+      padding: 0 16px 16px;
+    }
+
+    &.closed {
+      .postbox-header {
+        border-bottom: 1px solid #ddd;
+      }
+    }
+  }
+}
+
+:has(> .edit-post-meta-boxes-area.is-side) {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+
+  .edit-post-meta-boxes-area.is-side {
+    flex-grow: 1;
+    display: grid;
+
+    :has(.meta-box-sortables.ui-sortable) {
+      display: inherit;
+
+      .meta-box-sortables {
+        min-height: 280px;
+      }
+    }
+
+    .edit-post-meta-boxes-area__clear {
+      display: none;
+    }
+
+    #poststuff {
+      margin: 0;
+    }
   }
 }

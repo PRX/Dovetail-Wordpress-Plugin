@@ -101,7 +101,7 @@ class PostMetaBox {
 		}
 
 		/**
-		 * Block editor saves will do a PUT of data and return it's response before our `save_post`
+		 * Block editor saves will do a PUT of post content data our `save_post`
 		 * hook is called with POST data containing our nonce string. We need to echo back meta data
 		 * sent in the PUT body so the editor state retains the edits to the metadata.
 		 */
@@ -138,6 +138,8 @@ class PostMetaBox {
 			[
 				'appContainerId'         => self::APP_CONTAINER_ID,
 				'postId'                 => $post->ID,
+				'postType'               => $post->post_type,
+				'restGetRoute'           => rest_get_route_for_post_type_items( $post->post_type ),
 				'postStatus'             => $post->post_status,
 				'postTitle'              => $post->post_title,
 				'episodeMetaDataKey'     => DTPODCASTS_POST_META_KEY,
@@ -377,7 +379,7 @@ class PostMetaBox {
 
 		add_meta_box(
 			'dovetail-podcasts-episode',
-			'Dovetail Podcast Episode',
+			'<span class="dtpc-postbox-title"><span class="dtpc-icon-bg-logo" style="aspect-ratio: 1; background-size: contain; background-image: url(' . DT_LOGO_DATA_SVG . ');"></span> Podcast Episode</span>',
 			[ $this, 'render_meta_box' ],
 			$this->post_types,
 			'normal',
@@ -481,7 +483,31 @@ class PostMetaBox {
 			$new_meta = json_decode( $new_meta_json, true );
 		}
 
-		if ( is_array( $new_meta ) ) {
+		if (
+			isset( $meta['podcastId'] ) &&
+			is_numeric( $meta['podcastId'] ) &&
+			isset( $new_meta['podcastId'] ) &&
+			$meta['podcastId'] !== $new_meta['podcastId'] &&
+			isset( $meta['dovetail']['id'] ) &&
+			! empty( $meta['dovetail']['id'] )
+		) {
+			// Podcast has changed.
+			// We need to delete existing episode from that previous podcast.
+			$this->delete_episode( $meta['dovetail']['id'] );
+
+			// New meta will still contain deleted episode id.
+			// Unset episode id so a new episode will be created in the current podcast.
+			unset( $new_meta['dovetail']['id'] );
+			// Reset media to enclosure url to ensure audio is reprocessed on new episode.
+			unset( $new_meta['dovetail']['media'] );
+			if ( isset( $new_meta['enclosure']['url'] ) ) {
+				$new_meta['dovetail']['media'] = [
+					[ 'href' => $new_meta['enclosure']['url'] ],
+				];
+			}
+		}
+
+		if ( isset( $new_meta ) && is_array( $new_meta ) ) {
 			// Some meta props are not managed by the frontend. We need to preserve their last values.
 			$preserve = [];
 			// Image is updated by the post's feature image.
@@ -494,23 +520,16 @@ class PostMetaBox {
 		}
 
 		/**
-		 * Bail is there is no meta data at this point.
+		 * Bail is there if no meta data at this point.
 		 * It was either not submitted or was deleted.
 		 */
 		if ( ! isset( $meta ) || empty( $meta ) ) {
 			return;
 		}
 
-		// TODO: May want to include `draft` with future publish dates.
-		// May want to handle separately due to logic around date props driving
-		// Dovetail episode publishing status. May need to set `releasedAt` instead
-		// of `publishedAt`. Do we need a Drop Date field?
 		if (
-			in_array( $post->post_status, [ 'publish', 'future' ], true ) &&
 			isset( $meta['podcastId'] ) &&
-			is_numeric( $meta['podcastId'] ) &&
-			isset( $meta['enclosure']['url'] ) &&
-			! empty( $meta['enclosure']['url'] )
+			is_numeric( $meta['podcastId'] )
 		) {
 			$episode_data = $this->prepare_episode_api_data( $meta, $post );
 
@@ -587,10 +606,7 @@ class PostMetaBox {
 		}
 
 		// Episode has to be unpublished before it can be delete.
-		list( $unpublished ) = $this->dovetail_api->update_episode( $meta['dovetail']['id'], [ 'publishedAt' => null ] );
-		if ( ! isset( $unpublished['publishedAt'] ) ) {
-			$this->dovetail_api->delete_episode( $meta['dovetail']['id'] );
-		}
+		$this->delete_episode( $meta['dovetail']['id'] );
 	}
 
 	/**
@@ -619,6 +635,22 @@ class PostMetaBox {
 				'publishedAt' => null,
 			]
 		);
+	}
+
+	/**
+	 * Delete episode by id.
+	 *
+	 * @param string $id Dovetail episode id.
+	 * @return bool True when successful, false on failure.
+	 */
+	private function delete_episode( string $id ) {
+		// Episode has to be unpublished before it can be delete.
+		list( $unpublished ) = $this->dovetail_api->update_episode( $id, [ 'publishedAt' => null ] );
+		if ( $unpublished && ! isset( $unpublished['publishedAt'] ) ) {
+			return $this->dovetail_api->delete_episode( $id );
+		}
+
+		return false;
 	}
 
 	/**
@@ -659,7 +691,7 @@ class PostMetaBox {
 				$data,
 				[
 					'guid'        => $post->guid,
-					'publishedAt' => $post->post_date_gmt,
+					'publishedAt' => null,
 					'title'       => $post->post_title,
 					'description' => $post->post_content,
 					'subtitle'    => $post->post_excerpt,
@@ -668,6 +700,12 @@ class PostMetaBox {
 					'categories'  => null,
 				]
 			);
+
+			if ( in_array( $post->post_status, [ 'publish', 'future' ], true ) ) {
+				$data['publishedAt'] = $post->post_date_gmt;
+			} elseif ( ! empty( $post->post_date_gmt ) ) {
+				$data['releasedAt'] = $post->post_date_gmt;
+			}
 
 			$attachment_id = get_post_thumbnail_id( $post );
 			if ( $attachment_id ) {

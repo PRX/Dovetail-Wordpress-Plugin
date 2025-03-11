@@ -6,12 +6,11 @@ import { useRef, useState, useEffect } from 'react';
 /**
  * Returns saving status, saved status, and current editor meta data.
  */
-export function useEditorSaving(): [boolean,boolean,Maybe<{[k: string]: EpisodeData}>] {
+export function useEditorSaving(): [boolean,boolean] {
     const [ isPostSaved, setIsPostSaved ] = useState( false );
     const [ isSavingPost, setIsSavingPost ] = useState( false );
     const [ isAutosavingPost, setIsAutosavingPost ] = useState( false );
-    const [ editorMeta, setEditorMeta ] = useState( null );
-    const isSaving = isSavingPost || isAutosavingPost;
+    const isSaving = isSavingPost && !isAutosavingPost;
     const isPostSavingInProgress = useRef( false );
 
     useEffect(() => {
@@ -24,7 +23,6 @@ export function useEditorSaving(): [boolean,boolean,Maybe<{[k: string]: EpisodeD
 
         setIsSavingPost( select.isSavingPost() );
         setIsAutosavingPost( select.isAutosavingPost() );
-        setEditorMeta( select.getEditedPostAttribute('meta') );
       });
 
       return () => {
@@ -44,5 +42,5 @@ export function useEditorSaving(): [boolean,boolean,Maybe<{[k: string]: EpisodeD
       }
     }, [ isSaving ] );
 
-    return [isSaving, isPostSaved, editorMeta];
+    return [isSaving, isPostSaved];
 };
