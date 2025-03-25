@@ -11,7 +11,8 @@
       "src/types/*",
       "src/types/**/*",
       "node_modules/@types",
-      "node_modules/wp-types/index.ts"
+      "node_modules/wp-types/index.ts",
+			"../../../types/**/*"
     ],
     "lib": [
       "dom",
@@ -24,14 +25,16 @@
     "esModuleInterop": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "jsx": "react",
+    "jsx": "react-jsx",
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@_types/*": ["../../../types/*"]
     },
     "incremental": true
   },
   "include": [
-    "src/**/*"
+    "src/**/*",
+		"../../../types/**/*"
   ],
   "exclude": ["node_modules"]
 }

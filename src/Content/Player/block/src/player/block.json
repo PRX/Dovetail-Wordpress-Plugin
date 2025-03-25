@@ -1,0 +1,53 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "dovetail-podcasts/player",
+	"version": "0.1.0",
+	"title": "Dovetail Podcasts Player",
+	"category": "media",
+	"icon": "controls-play",
+	"description": "Customizable player for podcast episodes.",
+	"allowedBlocks": [
+		"dovetail-podcasts/play-button"
+	],
+	"example": {},
+	"supports": {
+		"html": false,
+		"background": {
+			"backgroundImage": true,
+			"backgroundSize": true
+		},
+		"color": {
+			"text": true,
+			"link": false,
+			"background": true,
+			"gradients": true,
+			"enableContrastChecker": true
+		},
+		"spacing": {
+			"margin": true,
+			"padding": true,
+			"blockGap": true
+		}
+	},
+	"textdomain": "dovetail-podcasts",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css",
+	"render": "file:./render.php",
+	"viewScript": "file:./view.js",
+	"attributes": {
+		"post_id": {
+			"type": "integer"
+		},
+		"post_type": {
+			"type": "string"
+		},
+		"src": {
+			"type": "string"
+		},
+		"duration": {
+			"type": "number"
+		}
+	}
+}

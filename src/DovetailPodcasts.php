@@ -6,6 +6,7 @@
  */
 
 use DovetailPodcasts\Admin\Admin;
+use DovetailPodcasts\Content\Player\Player;
 
 /**
  * Class DovetailPodcasts
@@ -18,7 +19,6 @@ final class DovetailPodcasts {
 	 * Stores the instance of the DovetailPodcasts class.
 	 *
 	 * @var ?\DovetailPodcasts The one true DovetailPodcasts.
-	 * @since  0.0.0
 	 */
 	private static $instance;
 
@@ -26,7 +26,6 @@ final class DovetailPodcasts {
 	 * The instance of the DovetailPodcasts object.
 	 *
 	 * @return \DovetailPodcasts - The one true DovetailPodcasts.
-	 * @since  0.0.0
 	 */
 	public static function instance() {
 		if ( ! isset( self::$instance ) || ! ( self::$instance instanceof self ) ) {
@@ -49,7 +48,6 @@ final class DovetailPodcasts {
 	 * therefore, we don't want the object to be cloned.
 	 *
 	 * @return void
-	 * @since  0.0.0
 	 */
 	public function __clone() {
 		// Cloning instances of the class is forbidden.
@@ -60,7 +58,6 @@ final class DovetailPodcasts {
 	 * Disable de-serializing of the class.
 	 *
 	 * @return void
-	 * @since  0.0.0
 	 */
 	public function __wakeup() {
 		// De-serializing instances of the class is forbidden.
@@ -71,7 +68,6 @@ final class DovetailPodcasts {
 	 * Setup plugin constants.
 	 *
 	 * @return void
-	 * @since  0.0.0
 	 */
 	private function setup_constants() {
 		dovetail_podcasts_setup_constants();
@@ -80,8 +76,6 @@ final class DovetailPodcasts {
 	/**
 	 * Include required files.
 	 * Uses composer's autoload.
-	 *
-	 * @since  0.0.0
 	 */
 	private function includes(): void {
 	}
@@ -99,7 +93,8 @@ final class DovetailPodcasts {
 		// Initialize Admin functionality.
 		add_action( 'after_setup_theme', [ $this, 'init_admin' ] );
 
-		// TODO: Add post create, update, delete hooks.
+		// TODO: Initialize content functionality (player).
+		add_action( 'init', [ $this, 'init_player' ], 999 );
 	}
 
 	/**
@@ -153,5 +148,15 @@ final class DovetailPodcasts {
 	public function init_admin() {
 		$admin = new Admin();
 		$admin->init();
+	}
+
+	/**
+	 * Initialize player functionality.
+	 *
+	 * @return void
+	 */
+	public function init_player() {
+		$player = new Player();
+		$player->init();
 	}
 }

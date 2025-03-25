@@ -9,8 +9,3 @@ declare module '*.png';
 declare module '*.jpg';
 declare module '*.jpeg';
 declare module '*.gif';
-
-/**
- * Value is expected but could be `null`.
- */
-type Maybe<T> = T | null;

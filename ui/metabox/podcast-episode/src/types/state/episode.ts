@@ -2,7 +2,7 @@
  * Episode definitions.
  */
 
-import type { DovetailEpisode } from "@/types/api/dovetail";
+import type { DovetailEpisode } from "@_types/api/dovetail";
 
 export type EpisodeEnclosure = {
   /**

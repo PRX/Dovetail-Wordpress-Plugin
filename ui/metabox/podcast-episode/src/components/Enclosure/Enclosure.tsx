@@ -1,9 +1,9 @@
 import type { WP_REST_API_Attachment, WP_REST_API_Error } from 'wp-types';
-import type { dovetailEnclosureStatuses } from '@/types/api';
+import type { dovetailEnclosureStatuses } from '@_types/api';
 import type { EpisodeData, EpisodeEnclosure } from '@/types/state/episode';
-import React, { type ChangeEvent, useCallback, useContext, useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { type ChangeEvent, useCallback, useContext, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import axios, { type AxiosProgressEvent, type AxiosRequestConfig, type AxiosResponse } from 'axios';
-import { AlertCircleIcon, BanIcon, CheckIcon, CircleAlertIcon, CircleCheckBigIcon, CircleEllipsisIcon, CircleSlashIcon, FileWarningIcon, LinkIcon, LoaderCircleIcon, LoaderIcon, LoaderPinwheelIcon, PauseIcon, PlayIcon, SkipBackIcon, Undo2Icon, UndoIcon, UnlinkIcon, UploadIcon, XIcon } from 'lucide-react';
+import { AlertCircleIcon, BanIcon, CheckIcon, CircleAlertIcon, CircleCheckBigIcon, FileWarningIcon, LinkIcon, LoaderIcon, PauseIcon, PlayIcon, SkipBackIcon, Undo2Icon, UnlinkIcon, UploadIcon } from 'lucide-react';
 import { PostMetaboxContext } from '@/lib/contexts/PostMetaboxContext';
 import { cn, formatDuration } from '@/lib/utils';
 import { Button } from '@/components/ui/button';

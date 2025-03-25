@@ -2,8 +2,8 @@
  * Define PostMetabox State Types.
  */
 
-import type { Action, ActionWithPayload } from "@/types/state/action";
-import type { DovetailEpisode, DovetailPodcast } from "@/types/api";
+import type { ActionWithPayload } from "@/types/state/action";
+import type { DovetailEpisode, DovetailPodcast } from "@_types/api";
 import type { EpisodeData, EpisodeEnclosure } from "@/types/state/episode";
 import type { WP_REST_API_Attachment } from "wp-types";
 

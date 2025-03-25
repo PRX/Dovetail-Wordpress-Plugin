@@ -177,7 +177,7 @@ class SettingsApi {
 		 * Filter the setting field config.
 		 *
 		 * @param array<string,mixed>  $field_config The field config for the setting.
-		 * @param string               $field_name   The name of the field (unfilterable in the config).
+		 * @param string               $field_name   The name of the field (not filterable in the config).
 		 * @param string               $section      The slug of the section the field is registered to.
 		 */
 		$field = apply_filters( 'dovetail_podcasts_setting_field_config', $field_config, $field_name, $section );
@@ -375,7 +375,7 @@ class SettingsApi {
 	}
 
 	/**
-	 * Displays a multicheckbox for a settings field.
+	 * Displays a multi-checkbox for a settings field.
 	 *
 	 * @param array<string,mixed> $args Settings field args.
 	 *

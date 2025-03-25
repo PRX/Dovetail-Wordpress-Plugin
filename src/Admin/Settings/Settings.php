@@ -86,10 +86,10 @@ class Settings {
 	 */
 	public function register_settings() {
 
-		$have_valid_creds = $this->dovetail_api->has_valid_client_credentials();
+		$have_valid_credentials = $this->dovetail_api->has_valid_client_credentials();
 
-		if ( ! $have_valid_creds ) {
-			// Dovetail authenication fields.
+		if ( ! $have_valid_credentials ) {
+			// Dovetail authentication fields.
 			$this->settings_api->register_section(
 				'authentication',
 				[
@@ -123,7 +123,7 @@ class Settings {
 				]
 			);
 
-			// Get posttypes that support the features we need.
+			// Get post types that support the features we need.
 			$post_types_by_supports = get_post_types_by_support(
 				[
 					'title',
@@ -156,9 +156,9 @@ class Settings {
 						'name'    => 'delete_media_after_publish',
 						'label'   => __( 'Delete Uploaded Media After Publishing', 'dovetail-podcasts' ),
 						'desc'    => '<p>' . esc_html__( "Uploaded audio will be added to the Media Library. When the podcast episode post is published, Dovetail will fetch the file from Wordpress to process for distribution. Dovetail will then host the audio URL's used in podcast feeds and any Dovetail Podcast Players used in this site.", 'dovetail-podcasts' ) . '</p>' .
-						'<p>' . esc_html__( 'Enable this if you do not want to keep the audio in the Media Library after it has been published to Dovetail. Only do this if storage on your Wordpress host is too limited or cost prohobitive for the amount of audio your podcasts produce.', 'dovetail-podcasts' ) . '</p>' . (
+						'<p>' . esc_html__( 'Enable this if you do not want to keep the audio in the Media Library after it has been published to Dovetail. Only do this if storage on your Wordpress host is too limited or cost prohibitive for the amount of audio your podcasts produce.', 'dovetail-podcasts' ) . '</p>' . (
 							empty( $offload_plugins ) ? (
-								// TRANSLATORS: %1$s is a URL path to the admin plugin search page with query parameters for relavant plugins.
+								// TRANSLATORS: %1$s is a URL path to the admin plugin search page with query parameters for relevant plugins.
 								'<p>' . sprintf( __( 'We recommend installing a <a href="%1$s" target="_blank">Media Library offloading plugin</a> to address media storage issues.', 'dovetail-podcasts' ), '/wp-admin/plugin-install.php?s=aws%2520s3%2520offload%2520media%2520library&tab=search&type=term' ) . '</p>'
 							) : (
 								! empty( $offload_plugins['active'] ) ? (
@@ -184,7 +184,7 @@ class Settings {
 										)
 									) . '</dl></details>'
 								) : (
-									'<details class="plugins-info warn" open><summary>' . esc_html__( 'Do NOT enable this yet! It looks like you have plugins installed that could offload your Media Library files to remote storage. We recomend activating one of these plugins before choosing to delete published media.', 'dovetail-podcasts' ) . '</summary><dl>' . (
+									'<details class="plugins-info warn" open><summary>' . esc_html__( 'Do NOT enable this yet! It looks like you have plugins installed that could offload your Media Library files to remote storage. We recommend activating one of these plugins before choosing to delete published media.', 'dovetail-podcasts' ) . '</summary><dl>' . (
 										implode(
 											'',
 											array_map(
@@ -227,7 +227,7 @@ class Settings {
 			$this->settings_api->register_section(
 				'manage',
 				[
-					'title' => __( 'Mangage Client Application', 'dovetail-podcasts' ),
+					'title' => __( 'Manage Client Application', 'dovetail-podcasts' ),
 				]
 			);
 
@@ -237,7 +237,7 @@ class Settings {
 					[
 						'name'              => 'delete_client_app_credentials',
 						'label'             => __( 'Delete Client App Credentials', 'dovetail-podcasts' ),
-						'desc'              => __( 'Enter <strong>DELETE</strong> to remove the current Client Application credentials. Only do this if a new Client Application needs to be used. Posts that were published to a podcasts not owned by the new Client Application user will no longer have updates synced to Doevtail.', 'dovetail-podcasts' ),
+						'desc'              => __( 'Enter <strong>DELETE</strong> to remove the current Client Application credentials. Only do this if a new Client Application needs to be used. Posts that were published to a podcasts not owned by the new Client Application user will no longer have updates synced to Dovetail.', 'dovetail-podcasts' ),
 						'type'              => 'text',
 						'sanitize_callback' => static function ( string $value ) {
 							if ( 'DELETE' === $value ) {
@@ -270,9 +270,9 @@ class Settings {
 			return;
 		}
 
-		$have_valid_creds = $this->dovetail_api->has_valid_client_credentials();
-		if ( ! $have_valid_creds && $this->dovetail_api->has_client_credentials ) {
-			add_settings_error( DTPODCASTS_SETTINGS_SECTION_PREFIX . 'authentication', 'invalid-credentials', 'Provided client credetials are invalid.', 'error' );
+		$have_valid_credentials = $this->dovetail_api->has_valid_client_credentials();
+		if ( ! $have_valid_credentials && $this->dovetail_api->has_client_credentials ) {
+			add_settings_error( DTPODCASTS_SETTINGS_SECTION_PREFIX . 'authentication', 'invalid-credentials', 'Provided client credentials are invalid.', 'error' );
 		}
 
 		$post_types = $this->settings_api->get_option( 'post_types', 'general' );
@@ -299,7 +299,7 @@ class Settings {
 	}
 
 	/**
-	 * Render profile block for aunthenticated Dovetail user.
+	 * Render profile block for authenticated Dovetail user.
 	 *
 	 * @return void
 	 */

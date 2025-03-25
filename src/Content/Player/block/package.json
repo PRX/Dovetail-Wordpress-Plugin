@@ -1,0 +1,29 @@
+{
+	"name": "player",
+	"version": "0.1.0",
+	"description": "Example block scaffolded with Create Block tool.",
+	"author": "The WordPress Contributors",
+	"license": "GPL-2.0-or-later",
+	"main": "build/index.js",
+	"scripts": {
+		"build": "wp-scripts build --blocks-manifest --webpack-copy-php",
+		"format": "wp-scripts format",
+		"lint:css": "wp-scripts lint-style",
+		"lint:js": "wp-scripts lint-js",
+		"packages-update": "wp-scripts packages-update",
+		"plugin-zip": "wp-scripts plugin-zip",
+		"start": "wp-scripts build-blocks-manifest --output=./blocks-manifest.php && wp-scripts start --webpack-copy-php"
+	},
+	"devDependencies": {
+		"@types/react": "^19.0.12",
+		"@wordpress/scripts": "^30.13.0",
+		"ts-loader": "^9.5.2"
+	},
+	"dependencies": {
+		"class-variance-authority": "^0.7.1",
+		"clsx": "^2.1.1",
+		"lucide-react": "^0.483.0",
+		"react": "^18.3.1",
+		"react-dom": "^18.3.1"
+	}
+}

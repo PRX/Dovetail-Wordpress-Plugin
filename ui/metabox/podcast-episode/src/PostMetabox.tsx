@@ -1,7 +1,7 @@
-import { dovetailEpisodeTypes, type DovetailEpisode, type DovetailEpisodeType, type DovetailPodcast } from '@/types/api';
+import { dovetailEpisodeTypes, type DovetailEpisode, type DovetailEpisodeType, type DovetailPodcast } from '../../../../types/api';
 import { type PostMetaboxAction, POST_META_BOX_KEY, type PostMetaboxOptions, type PostMetaboxState } from '@/types/state/postMetabox';
 import type { EpisodeData, EpisodeEnclosure } from '@/types/state/episode';
-import React, { ChangeEvent, useEffect, useReducer, useRef, useState } from 'react';
+import React, { ChangeEvent, useEffect, useReducer, useState } from 'react';
 import axios from 'axios';
 import { PodcastIcon, DiamondPlusIcon, EllipsisVerticalIcon, ReplaceIcon, ChevronDownIcon, TrashIcon, AlertCircleIcon, Undo2Icon, EraserIcon } from 'lucide-react';
 import { useShowHide } from '@/hooks/use-show-hide';
@@ -21,7 +21,7 @@ import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, 
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { useInterval } from '@/hooks/use-Interval';
 import { useEditorSaving } from '@/hooks/use-editor-saving';
-import { WP_Post, WP_REST_API_Post } from 'wp-types';
+import { WP_REST_API_Post } from 'wp-types';
 import { Skeleton } from '@/components/ui/skeleton';
 
 export type WP_REST_API_Post_With_Meta_Data<T> = WP_REST_API_Post & {
@@ -184,7 +184,7 @@ function PodcastsMenu({ podcasts, onSelect }: {podcasts: DovetailPodcast[], onSe
       </DialogHeader>
       <ScrollArea className='min-h-fit max-h-full rounded-md border border-slate-300'>
         <div className='grid grid-cols-[repeat(auto-fill,minmax(20rem,1fr))] gap-2 p-4'>
-        { filtered.map((podcast) => {
+        { filtered?.map((podcast) => {
             const { title, id } = podcast;
 
             return (
@@ -375,7 +375,7 @@ function PostMetabox({ field, episode: _episode, options }: PostMetaboxProps) {
             )}
             </>
           )
-        ) : (
+        ) : podcast && (
           <>
             <input type='hidden' name={field} value={JSON.stringify(episode)} />
             <div className='grid grid-cols-[3rem_1fr_min-content] items-start justify-items-start gap-4 bg-linear-to-r from-slate-100 p-3 rounded'>

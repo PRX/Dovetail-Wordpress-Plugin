@@ -22,6 +22,7 @@ module.exports = {
       },
       {
         test: /\.css$/i,
+        exclude: /node_modules/,
         use: [
           // Creates `style` nodes from JS strings
           "style-loader",
@@ -50,6 +51,7 @@ module.exports = {
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src/"),
+      "@_types": path.resolve(__dirname, "../../../types/")
     },
     extensions: ["", ".js", ".jsx", ".ts", ".tsx"],
   },
