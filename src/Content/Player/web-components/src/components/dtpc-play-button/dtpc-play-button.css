@@ -1,0 +1,28 @@
+:host {
+  --_bg-color: var(--dtpc-play-button--bg-color, transparent);
+  --_text-color: var(--dtpc-play-button--text-color, currentColor);
+
+  display: inline-grid;
+  place-items: center;
+  justify-content: stretch;
+  aspect-ratio: 1;
+  min-width: 1rem;
+
+  background-color: var(--_bg-color);
+
+  color: var(--_text-color);
+
+  cursor: pointer;
+  user-select: none;
+}
+
+.lucide-icon {
+  display: grid;
+  place-items: center;
+  width: 100%;
+
+  svg {
+    width: 100%;
+    height: auto;
+  }
+}

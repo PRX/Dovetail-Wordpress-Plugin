@@ -1,0 +1,39 @@
+{
+  "extends": "../tsconfig.json",
+  "compileOnSave": false,
+  "compilerOptions": {
+		"sourceMap": false,
+    "outDir": "./build",
+    "target": "ES2020",
+    "useDefineForClassFields": true,
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "skipLibCheck": true,
+    "jsx": "react-jsx",
+    "allowSyntheticDefaultImports": true,
+    "declarationDir": "./build/types",
+    "typeRoots": [
+      "src/types/*",
+      "src/types/**/*",
+			"../../../../types/*",
+			"../../../../types/**/*"
+    ],
+    "allowJs": true,
+    "strict": false,
+    "forceConsistentCasingInFileNames": true,
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "paths": {
+      "@/*": ["./src/*"],
+      "@_types/*": ["../../../../types/*"]
+    },
+    "incremental": true
+  },
+  "include": [
+    "src",
+		"../../../../types",
+	],
+  "exclude": ["node_modules"]
+}

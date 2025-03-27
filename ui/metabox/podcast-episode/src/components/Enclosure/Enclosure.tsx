@@ -288,7 +288,7 @@ export function Enclosure({ onChange}: EnclosureProps) {
 
   useEffect(() => {
     audioRef.current = new Audio();
-    audioRef.current.preload = 'metadata';
+    audioRef.current.preload = 'none';
     audioRef.current.addEventListener('timeupdate', handleAudioTimeUpdate);
     audioRef.current.addEventListener(
       'loadedmetadata',

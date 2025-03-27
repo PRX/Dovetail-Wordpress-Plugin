@@ -1,0 +1,43 @@
+{
+	"name": "dovetail-podcasts-player-blocks",
+	"version": "0.1.0",
+	"description": "Wordpress blocks for Dovetail Podcasts audio player.",
+	"author": "PRX",
+	"license": "GPL-2.0-or-later",
+	"main": "build/index.js",
+	"module": "build/index.js",
+	"types": "build/types/index.d.js",
+	"publishConfig": {
+		"access": "public"
+	},
+	"scripts": {
+		"build": "npm run build:blocks-manifest && npm run build:wp-scripts",
+		"build:blocks-manifest": "wp-scripts build-blocks-manifest --output=./blocks-manifest.php",
+		"build:wp-scripts": "wp-scripts build --webpack-copy-php",
+		"build:tsc": "tsc -p . --outDir ./dist",
+		"format": "wp-scripts format",
+		"lint:css": "wp-scripts lint-style",
+		"lint:js": "wp-scripts lint-js",
+		"packages-update": "wp-scripts packages-update",
+		"plugin-zip": "wp-scripts plugin-zip",
+		"start": "npm run build:blocks-manifest && wp-scripts start --webpack-copy-php",
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"devDependencies": {
+		"@types/react": "^18.0.0",
+		"@wordpress/scripts": "^30.13.0",
+		"ignore-loader": "^0.1.2",
+		"lucide-react": "^0.484.0",
+		"react": "^18.0.0",
+		"react-dom": "^18.0.0",
+		"source-map-loader": "^5.0.0",
+		"ts-loader": "^9.5.2",
+		"typescript": "^5.8.2"
+	},
+	"dependencies": {
+		"@stencil/react-output-target": "^0.8.2",
+		"class-variance-authority": "^0.7.1",
+		"clsx": "^2.1.1",
+		"dovetail-podcasts-player-web-components": "*"
+	}
+}

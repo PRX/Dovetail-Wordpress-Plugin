@@ -27,13 +27,6 @@ class Player {
 	}
 
 	/**
-	 * Include required files.
-	 */
-	public function includes(): void {
-		require_once DTPODCASTS_PLUGIN_DIR . 'blocks/player/player.php';
-	}
-
-	/**
 	 * Setup actions.
 	 */
 	private function actions(): void {
@@ -56,8 +49,8 @@ class Player {
 	 */
 	private function player_block() {
 
-		$build_dir            = __DIR__ . '/block/build';
-		$blocks_manifest_path = __DIR__ . '/block/blocks-manifest.php';
+		$build_dir            = __DIR__ . '/blocks/build';
+		$blocks_manifest_path = __DIR__ . '/blocks/blocks-manifest.php';
 
 		if ( function_exists( 'wp_register_block_types_from_metadata_collection' ) ) { // Function introduced in WordPress 6.8.
 			wp_register_block_types_from_metadata_collection( $build_dir, $blocks_manifest_path );
@@ -73,6 +66,7 @@ class Player {
 	}
 
 	/**
+	 * TODO: Remove this method. Probably won't be hooking any blocks.
 	 * Hooked block types hook to insert player block.
 	 *
 	 * @param string[]                                        $hooked_blocks The list of hooked block types.
@@ -196,6 +190,9 @@ class Player {
 	 * @return string
 	 */
 	public function render_player_block( $atts, string $content, \WP_Block $block ) {
+		error_log( __FUNCTION__ );
+		error_log( $content );
+		// error_log( print_r( $block->inner_blocks, true ) );
 
 		if ( ! is_array( $atts ) ) {
 			$atts = [];
@@ -228,17 +225,21 @@ class Player {
 
 		$wrapper_attributes = get_block_wrapper_attributes(
 			[
-				'data-src'      => $audio_src,
-				'data-duration' => $atts['duration'],
+				'src' => $audio_src,
 			]
 		);
+
+		$inner_blocks_html = '';
+		foreach ( $block->inner_blocks as $inner_block ) {
+			$inner_blocks_html .= $inner_block->render();
+		}
 
 		return implode(
 			'',
 			[
-				sprintf( '<div %1$s>', $wrapper_attributes ),
-				$content,
-				'</div>',
+				sprintf( '<dtpc-player %1$s>', $wrapper_attributes ),
+				$inner_blocks_html,
+				'</dtpc-player>',
 			]
 		);
 	}
@@ -247,9 +248,13 @@ class Player {
 	 * Render Dovetail podcast player block.
 	 *
 	 * @param array<string,string> $atts Block attributes.
+	 * @param string               $content Block content.
+	 * @param \WP_Block            $block Block instance object.
 	 * @return string
 	 */
-	public function render_play_button_block( $atts ) {
+	public function render_play_button_block( $atts, string $content, \WP_Block $block ) {
+		error_log( __FUNCTION__ );
+		error_log( $content );
 
 		if ( ! is_array( $atts ) ) {
 			$atts = [];
@@ -267,8 +272,8 @@ class Player {
 		return implode(
 			'',
 			[
-				sprintf( '<div %1$s>', $wrapper_attributes ),
-				'</div>',
+				sprintf( '<dtpc-play-button %1$s>', $wrapper_attributes ),
+				'</dtpc-play-button>',
 			]
 		);
 	}
@@ -392,20 +397,20 @@ class Player {
 	 */
 	public static function get_allowed_wp_kses_html() {
 		$allowed_atts = [
-			'class'    => [],
-			'controls' => [],
-			'data-src' => [],
-			'id'       => [],
-			'name'     => [],
-			'src'      => [],
-			'style'    => [],
-			'tabindex' => [],
+			'class' => [],
+			'id'    => [],
+			'style' => [],
 		];
 
 		return [
-			'div'   => $allowed_atts,
-			'span'  => $allowed_atts,
-			'audio' => $allowed_atts,
+			'div'              => $allowed_atts,
+			'dtpc-player'      => array_merge(
+				[
+					'src' => [],
+				],
+				$allowed_atts
+			),
+			'dtpc-play-button' => $allowed_atts,
 		];
 	}
 }
