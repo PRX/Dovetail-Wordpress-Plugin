@@ -51,17 +51,29 @@ class Player {
 
 		$build_dir            = __DIR__ . '/blocks/build';
 		$blocks_manifest_path = __DIR__ . '/blocks/blocks-manifest.php';
+		$manifest_data        = require $blocks_manifest_path;
 
+		// Register blocks.
 		if ( function_exists( 'wp_register_block_types_from_metadata_collection' ) ) { // Function introduced in WordPress 6.8.
 			wp_register_block_types_from_metadata_collection( $build_dir, $blocks_manifest_path );
 		} else {
 			if ( function_exists( 'wp_register_block_metadata_collection' ) ) { // Function introduced in WordPress 6.7.
 				wp_register_block_metadata_collection( $build_dir, $blocks_manifest_path );
 			}
-			$manifest_data = require $blocks_manifest_path;
 			foreach ( array_keys( $manifest_data ) as $block_type ) {
 				register_block_type( $build_dir . "/{$block_type}" );
 			}
+		}
+
+		// Register shortcodes.
+		foreach ( array_keys( $manifest_data ) as $block_type ) {
+			$callback = "render_{$block_type}_shortcode";
+
+			if ( ! method_exists( $this, $callback ) ) {
+				$callback = 'render_block_shortcode';
+			}
+
+			add_shortcode( DTPODCASTS_SHORTCODE_PREFIX . $block_type, [ $this, $callback ] );
 		}
 	}
 
@@ -92,7 +104,6 @@ class Player {
 	 * Setup shortcodes.
 	 */
 	private function shortcodes(): void {
-		add_shortcode( DTPODCASTS_SHORTCODE_PREFIX . 'player', [ $this, 'render_player_shortcode' ] );
 		add_shortcode( DTPODCASTS_SHORTCODE_PREFIX . 'enclosure-href', [ $this, 'render_enclosure_href_shortcode' ] );
 	}
 
@@ -192,7 +203,6 @@ class Player {
 	public function render_player_block( $atts, string $content, \WP_Block $block ) {
 		error_log( __FUNCTION__ );
 		error_log( $content );
-		// error_log( print_r( $block->inner_blocks, true ) );
 
 		if ( ! is_array( $atts ) ) {
 			$atts = [];
@@ -279,19 +289,117 @@ class Player {
 	}
 
 	/**
-	 * Render Dovetail podcast player shortcode.
+	 * Render Dovetail Podcast player progress bar block.
 	 *
-	 * @param array<string,string> $atts Shortcode attributes.
+	 * @param array<string,string> $atts Block attributes.
+	 * @param string               $content Block content.
+	 * @param \WP_Block            $block Block instance object.
 	 * @return string
 	 */
-	public function render_player_shortcode( $atts ) {
+	public function render_progress_bar_block( $atts, string $content, \WP_Block $block ) {
+		error_log( __FUNCTION__ );
+		error_log( $content );
+
+		if ( ! is_array( $atts ) ) {
+			$atts = [];
+		}
+
+		$atts = shortcode_atts(
+			[
+				// TODO: Add default atts here.
+			],
+			$atts
+		);
+
+		$wrapper_attributes = get_block_wrapper_attributes();
+
+		return implode(
+			'',
+			[
+				sprintf( '<dtpc-progress-bar %1$s>', $wrapper_attributes ),
+				'</dtpc-progress-bar>',
+			]
+		);
+	}
+
+	/**
+	 * Render block shortcode.
+	 *
+	 * @param array<string,string> $atts Shortcode attributes.
+	 * @param string|null          $content Shortcode content or null if not set.
+	 * @param string               $shortcode_tag Shortcode tag.
+	 * @return string
+	 */
+	public function render_block_shortcode( array $atts, string $content, string $shortcode_tag ) {
+
+		$block_type = preg_replace( '~^' . DTPODCASTS_SHORTCODE_PREFIX . '~', '', $shortcode_tag );
+
+		error_log( $block_type );
 
 		return render_block(
 			[
-				'blockName' => 'dovetail-podcasts/player',
+				'blockName' => "dovetail-podcasts/{$block_type}",
 				'attrs'     => $atts,
 			]
 		);
+	}
+
+	/**
+	 * Render Dovetail podcast player shortcode.
+	 *
+	 * @param array<string,string> $atts Shortcode attributes.
+	 * @param string|null          $content Shortcode content or null if not set.
+	 * @return string
+	 */
+	public function render_player_shortcode( array $atts, string $content = null ) {
+
+		$block = [
+			'blockName'   => 'dovetail-podcasts/player',
+			'attrs'       => $atts,
+			'innerBlocks' => [],
+		];
+
+		if ( $content ) {
+			// Only render player block shortcodes in the content.
+
+			// Get registered player blocks.
+			$blocks_manifest_path = __DIR__ . '/blocks/blocks-manifest.php';
+			$manifest_data        = require $blocks_manifest_path;
+
+			// Generate the short code tags of the blocks.
+			$shortcode_tags = [];
+			foreach ( array_keys( $manifest_data ) as $block_type ) {
+				if ( 'player' !== $block_type ) {
+					$shortcode_tags[] = DTPODCASTS_SHORTCODE_PREFIX . $block_type;
+				}
+			}
+
+			// Get content that matches our player block short codes.
+			$pattern = get_shortcode_regex( $shortcode_tags );
+			preg_match_all( "/{$pattern}/", $content, $matches, PREG_SET_ORDER );
+
+			// Add inner blocks for matching content.
+			foreach ( $matches as $match ) {
+				$block_type             = preg_replace( '~^' . DTPODCASTS_SHORTCODE_PREFIX . '~', '', $match[2] );
+				$block['innerBlocks'][] = [
+					'blockName' => "dovetail-podcasts/{$block_type}",
+					'attrs'     => shortcode_parse_atts( $match[3] ),
+				];
+			}
+		} else {
+			// Make sure there are default controls when the shortcode has no content.
+			$block['innerBlocks'] = [
+				[
+					'blockName' => 'dovetail-podcasts/play-button',
+				],
+				[
+					'blockName' => 'dovetail-podcasts/progress-bar',
+				],
+				// TODO: Add volume slider.
+			];
+		}
+
+		return render_block( $block );
 	}
 
 	/**
@@ -403,14 +511,20 @@ class Player {
 		];
 
 		return [
-			'div'              => $allowed_atts,
-			'dtpc-player'      => array_merge(
+			'div'               => $allowed_atts,
+			'dtpc-player'       => array_merge(
 				[
 					'src' => [],
 				],
 				$allowed_atts
 			),
-			'dtpc-play-button' => $allowed_atts,
+			'dtpc-play-button'  => $allowed_atts,
+			'dtpc-progress-bar' => array_merge(
+				[
+					'duration' => [],
+				],
+				$allowed_atts
+			),
 		];
 	}
 }

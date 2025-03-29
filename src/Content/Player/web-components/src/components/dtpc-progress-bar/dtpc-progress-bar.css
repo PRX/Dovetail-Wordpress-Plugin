@@ -1,0 +1,151 @@
+:host {
+  --_dtpc-progress-bar--spacing: var(--dtpc-progress-bar--spacing, 0.5rem);
+  --_dtpc-progress-bar--thumb--color: var(--dtpc-progress-bar--thumb--height, var(--_dtpc-player--primary-color));
+  --_dtpc-progress-bar--thumb--size: var(--dtpc-progress-bar--thumb--size, 1.25rem);
+  --_dtpc-progress-bar--progress--color: var(--dtpc-progress-bar--progress--color, currentColor);
+  --_dtpc-progress-bar--track--color: var(--dtpc-progress-bar--track--color, transparent);
+  --_dtpc-progress-bar--track--height: var(--dtpc-progress-bar--track--height, 0.5rem);
+  --_dtpc-progress-bar--track--radius: var(--dtpc-progress-bar--track--radius, 100vw);
+  --_dtpc-progress-bar--track--border-color: var(--dtpc-progress-bar--track--border-color, currentColor);
+  --_dtpc-progress-bar--track--border-width: var(--dtpc-progress-bar--track--border-width, 0.125rem);
+  --_dtpc-progress-bar--track--border-offset: var(--dtpc-progress-bar--track--border-offset, 0.125rem);
+
+  display: contents;
+}
+
+.wrapper {
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  gap: var(--_dtpc-progress-bar--spacing);
+}
+
+.track {
+  --_thumb--color: var(--_dtpc-progress-bar--thumb--color);
+  --_thumb--size: var(--_dtpc-progress-bar--thumb--size);
+  --_track--color: var(--_dtpc-progress-bar--track--color);
+  --_track--height: var(--_dtpc-progress-bar--track--height);
+  --_track--radius: var(--_dtpc-progress-bar--track--radius);
+  --_track--border-color: var(--_dtpc-progress-bar--track--border-color);
+  --_track--border-width: var(--_dtpc-progress-bar--track--border-width);
+  --_track--border-offset: var(--_dtpc-progress-bar--track--border-offset);
+  --_track--gutter: calc(var(--_thumb--size) / 4);
+
+  flex-grow: 1;
+  isolation: isolate;
+  display: grid;
+  align-items: center;
+  grid-template-columns: [range-start] var(--_track--gutter) [track-start] 1fr [track-end] var(--_track--gutter) [range-end];
+  grid-template-rows: [range-start] [track-start] var(--_track--height) [track-end] [range-end];
+
+  &::before {
+    content: '';
+
+    grid-area: track;
+    place-self: stretch;
+
+    outline-style: solid;
+    outline-color: var(--_track--border-color);
+    outline-width: var(--_track--border-width);
+    outline-offset: var(--_track--border-offset);
+
+    border-radius: var(--_track--radius);
+
+    background-color: var(--_track--color);
+  }
+}
+
+.progress {
+  --_progress--color: var(--_dtpc-progress-bar--progress--color);
+
+  grid-area: track;
+  place-self: stretch;
+
+  width: calc(var(--progress, 0) * (100% - var(--_track--gutter)) + var(--_track--gutter));
+  min-width: calc(var(--_thumb--size) / 2);
+
+  border-radius: var(--_track--radius);
+
+  background-color: var(--_progress--color);
+
+  &:not([data-show]) {
+    visibility: hidden;
+  }
+}
+
+.range {
+  grid-area: range;
+  display: grid;
+  grid-template-columns: calc(var(--progress, 0) * (100% - var(--_thumb--size))) [thumb-start] var(--_thumb--size) [thumb-end];
+  grid-template-rows: [thumb-start] var(--_track--height) [thumb-end];
+  align-items: center;
+  justify-items: center;
+
+  min-width: var(--_track--height);
+}
+
+.thumb {
+  grid-area: thumb;
+  display: grid;
+  aspect-ratio: 1;
+  width: var(--_thumb--size);
+
+  &::after {
+    content: '';
+
+    transition-property: scale, opacity;
+    transition-duration: 200ms;
+    transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+    display: block;
+    scale: 0;
+    opacity: 0;
+
+    border-radius: 100vw;
+
+    background-color: var(--_thumb--color);
+  }
+
+  .wrapper:where(:hover, :focus-within) & {
+    &::after {
+      scale: 1;
+      opacity: 1;
+    }
+  }
+}
+
+input {
+  grid-area: range;
+
+  outline: 0;
+  border: 0;
+  margin: 0;
+  padding: 0;
+  opacity: 0;
+
+  /* Chrome */
+  @media screen and (-webkit-min-device-pixel-ratio: 0) {
+    & {
+      appearance: none;
+      height: var(--_track--height);
+      background-color: transparent;
+    }
+    &::-webkit-slider-runnable-track {
+      appearance: none;
+      position: relative;
+      height: var(--_track--height);
+    }
+    &::-webkit-slider-thumb {
+      appearance: none;
+      position: relative;
+      display: block;
+      top: 50%;
+      left: 0;
+      translate: 0 -50%;
+      aspect-ratio: 1;
+      width: var(--_thumb--size);
+      height: auto;
+      cursor: ew-resize;
+    }
+  }
+}

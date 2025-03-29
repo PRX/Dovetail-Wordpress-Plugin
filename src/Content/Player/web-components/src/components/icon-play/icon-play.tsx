@@ -1,6 +1,6 @@
 import { Component, Element, h, Host, Prop } from '@stencil/core';
 import { Play as LucidePlay, createElement } from 'lucide';
-import { attributesToObject } from '../../utils';
+import { attributesToObject } from '@/lib/utils/dom';
 
 @Component({
   tag: 'icon-play'

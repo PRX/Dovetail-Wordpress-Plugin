@@ -1,7 +1,7 @@
-import { attributesToObject } from './utils';
+import { attributesToObject } from './attributesToObject';
 
 describe('attributesToObject', () => {
-  it('returns empty string for no names defined', () => {
+  it('maps element attributes to object', () => {
     const mockElement = document.createElement('div')
     mockElement.setAttribute('id', '123');
 

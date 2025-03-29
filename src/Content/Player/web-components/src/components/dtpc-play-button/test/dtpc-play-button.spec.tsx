@@ -8,9 +8,11 @@ describe('dtpc-play-button', () => {
       html: `<dtpc-play-button></dtpc-play-button>`,
     });
     expect(page.root).toEqualHtml(`
-      <dtpc-play-button role="button" title="Play">
+      <dtpc-play-button>
         <mock:shadow-root>
-          <icon-play></icon-play>
+          <button data-status="paused" title="Play" type="button">
+            <icon-play></icon-play>
+          </button>
         </mock:shadow-root>
       </dtpc-play-button>
     `);

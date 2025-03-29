@@ -1,0 +1,41 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "dovetail-podcasts/progress-bar",
+  "version": "0.1.0",
+  "title": "Dovetail Podcasts Player Progress Bar",
+  "category": "media",
+  "icon": "minus",
+  "description": "Progress bar for Dovetail Podcasts Player.",
+  "ancestor": [
+    "dovetail-podcasts/player"
+  ],
+  "example": {},
+  "supports": {
+    "html": false,
+    "color": {
+      "background": true,
+      "text": true
+    },
+    "spacing": {
+      "margin": false,
+      "padding": true
+    }
+  },
+  "textdomain": "dovetail-podcasts",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css",
+  "render": "file:./render.php",
+  "viewScript": "file:./view.js",
+  "attributes": {
+    "icon-style": {
+      "type": "string",
+      "enum": [
+        "outline",
+        "solid"
+      ],
+      "default": "outline"
+    }
+  }
+}

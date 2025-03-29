@@ -43,6 +43,7 @@
     "generate": "stencil generate"
   },
   "devDependencies": {
+    "@stencil-community/postcss": "^2.2.0",
     "@stencil/core": "^4.27.1",
     "@stencil/react-output-target": "^0.8.2",
     "@types/jest": "^29.5.14",
@@ -58,5 +59,8 @@
     "url": "https://github.com/stenciljs/component-starter/issues"
   },
   "homepage": "https://github.com/stenciljs/component-starter#readme",
-  "author": "PRX"
+  "author": "PRX",
+  "dependencies": {
+    "clsx": "^2.1.1"
+  }
 }

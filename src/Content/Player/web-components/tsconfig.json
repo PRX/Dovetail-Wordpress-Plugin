@@ -16,11 +16,10 @@
     "jsx": "react",
     "jsxFactory": "h",
     "jsxFragmentFactory": "h.Fragment",
-    "skipLibCheck": true
-  },
-  "paths": {
-    "@utils/*": ["./src/utils/*"],
-    "@_types/*": ["../../../../types/*"]
+    "skipLibCheck": true,
+    "paths": {
+      "@/*": ["./src/*"],
+    },
   },
   "include": [
     "src"

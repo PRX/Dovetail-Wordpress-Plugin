@@ -15,6 +15,9 @@ export namespace Components {
          */
         "src": string;
     }
+    interface DtpcProgressBar {
+        "duration": number;
+    }
     interface IconPause {
         "alignmentBaseline": any;
         "baselineShift": any;
@@ -180,8 +183,28 @@ export namespace Components {
         "y": any;
     }
 }
+export interface DtpcPlayButtonCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLDtpcPlayButtonElement;
+}
+export interface DtpcProgressBarCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLDtpcProgressBarElement;
+}
 declare global {
+    interface HTMLDtpcPlayButtonElementEventMap {
+        "bind-audio-events": any;
+        "toggle-pause": any;
+    }
     interface HTMLDtpcPlayButtonElement extends Components.DtpcPlayButton, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLDtpcPlayButtonElementEventMap>(type: K, listener: (this: HTMLDtpcPlayButtonElement, ev: DtpcPlayButtonCustomEvent<HTMLDtpcPlayButtonElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLDtpcPlayButtonElementEventMap>(type: K, listener: (this: HTMLDtpcPlayButtonElement, ev: DtpcPlayButtonCustomEvent<HTMLDtpcPlayButtonElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLDtpcPlayButtonElement: {
         prototype: HTMLDtpcPlayButtonElement;
@@ -192,6 +215,24 @@ declare global {
     var HTMLDtpcPlayerElement: {
         prototype: HTMLDtpcPlayerElement;
         new (): HTMLDtpcPlayerElement;
+    };
+    interface HTMLDtpcProgressBarElementEventMap {
+        "bind-audio-events": any;
+        "update-current-time": number;
+    }
+    interface HTMLDtpcProgressBarElement extends Components.DtpcProgressBar, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLDtpcProgressBarElementEventMap>(type: K, listener: (this: HTMLDtpcProgressBarElement, ev: DtpcProgressBarCustomEvent<HTMLDtpcProgressBarElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLDtpcProgressBarElementEventMap>(type: K, listener: (this: HTMLDtpcProgressBarElement, ev: DtpcProgressBarCustomEvent<HTMLDtpcProgressBarElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLDtpcProgressBarElement: {
+        prototype: HTMLDtpcProgressBarElement;
+        new (): HTMLDtpcProgressBarElement;
     };
     interface HTMLIconPauseElement extends Components.IconPause, HTMLStencilElement {
     }
@@ -208,6 +249,7 @@ declare global {
     interface HTMLElementTagNameMap {
         "dtpc-play-button": HTMLDtpcPlayButtonElement;
         "dtpc-player": HTMLDtpcPlayerElement;
+        "dtpc-progress-bar": HTMLDtpcProgressBarElement;
         "icon-pause": HTMLIconPauseElement;
         "icon-play": HTMLIconPlayElement;
     }
@@ -215,12 +257,19 @@ declare global {
 declare namespace LocalJSX {
     interface DtpcPlayButton {
         "iconStyle"?: string;
+        "onBind-audio-events"?: (event: DtpcPlayButtonCustomEvent<any>) => void;
+        "onToggle-pause"?: (event: DtpcPlayButtonCustomEvent<any>) => void;
     }
     interface DtpcPlayer {
         /**
           * Audio source URL.
          */
         "src"?: string;
+    }
+    interface DtpcProgressBar {
+        "duration"?: number;
+        "onBind-audio-events"?: (event: DtpcProgressBarCustomEvent<any>) => void;
+        "onUpdate-current-time"?: (event: DtpcProgressBarCustomEvent<number>) => void;
     }
     interface IconPause {
         "alignmentBaseline"?: any;
@@ -389,6 +438,7 @@ declare namespace LocalJSX {
     interface IntrinsicElements {
         "dtpc-play-button": DtpcPlayButton;
         "dtpc-player": DtpcPlayer;
+        "dtpc-progress-bar": DtpcProgressBar;
         "icon-pause": IconPause;
         "icon-play": IconPlay;
     }
@@ -399,6 +449,7 @@ declare module "@stencil/core" {
         interface IntrinsicElements {
             "dtpc-play-button": LocalJSX.DtpcPlayButton & JSXBase.HTMLAttributes<HTMLDtpcPlayButtonElement>;
             "dtpc-player": LocalJSX.DtpcPlayer & JSXBase.HTMLAttributes<HTMLDtpcPlayerElement>;
+            "dtpc-progress-bar": LocalJSX.DtpcProgressBar & JSXBase.HTMLAttributes<HTMLDtpcProgressBarElement>;
             "icon-pause": LocalJSX.IconPause & JSXBase.HTMLAttributes<HTMLIconPauseElement>;
             "icon-play": LocalJSX.IconPlay & JSXBase.HTMLAttributes<HTMLIconPlayElement>;
         }

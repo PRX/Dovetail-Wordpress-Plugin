@@ -5,15 +5,113 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0" />
     <title>Stencil Component Starter</title>
 
+    <style>
+      :root {
+        font-family: Avenir, Montserrat, Corbel, 'URW Gothic', source-sans-pro, sans-serif;
+        font-weight: normal;
+
+        padding: 1.25rem;
+      }
+
+      :where(body) > * {
+        margin-block: 0;
+        & + * {
+          margin-block-start: 1.25em;
+        }
+      }
+
+      .player-layout {
+        display: grid;
+        gap: 0.5rem;
+        padding: 1rem;
+
+        border-style: solid;
+        border-color: color-mix(in oklch, currentColor 10%, transparent);
+        border-width: 0.125rem;
+
+        & > * {
+          margin: 0;
+        }
+      }
+
+      table.icons {
+        width: 100%;
+
+        border-spacing: 0;
+        border-block: 3px solid #cdcdcd;
+
+
+        :where(th,td) {
+          padding: 0.5rem 1rem;
+          align-items: center;
+        }
+        th {
+          border-block-end: 2px solid #cdcdcd;
+        }
+        th:first-of-type {
+          text-align: start;
+        }
+        td:not(:first-of-type) {
+          text-align: center;
+        }
+        tr + tr {
+          td {
+            border-block-start: 1px solid #cdcdcd;
+          }
+        }
+
+        .lucide-icon {
+          display: grid;
+          place-items: center;
+        }
+      }
+    </style>
+
     <script type="module" src="/build/dovetail-podcasts-player-web-components.esm.js"></script>
     <script nomodule src="/build/dovetail-podcasts-player-web-components.js"></script>
   </head>
   <body>
-    <dtpc-player src="https://dovetail.staging.prxu.org/9000/ddb3f52a-6e52-45a3-a23d-80aa54d79b62/StGC_Epi5_Jan_Jones_Blackhurst_Seg_A.mp3?_from=wp%2Fdtpc%2Fdt-plugin-demo-wordpress.lndo.site">
-      <dtpc-play-button></dtpc-play-button>
-    </dtpc-player>
+    <h1>Dovetail Podcast Player</h1>
+
+    <h2>Layouts</h2>
+    <section class="player-layout">
+      <h3>Default</h3>
+      <div class="content">
+        <dtpc-player src="https://dts.podtrac.com/redirect.mp3/dovetail.prxu.org/_/93/0af0c559-ce0d-472e-b406-1f029ca8b157/SongExploder267_GreenDay_1.mp3">
+          <dtpc-play-button></dtpc-play-button>
+          <dtpc-progress-bar duration="1300.166531"></dtpc-progress-bar>
+        </dtpc-player>
+      </div>
+    </section>
+
     <h2>Icons</h2>
-    <icon-play></icon-play>
-    <icon-pause></icon-pause>
+    <table class="icons">
+      <thead>
+          <th></th>
+          <th>Outline</th>
+          <th>Solid</th>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Play</td>
+          <td>
+            <icon-play></icon-play>
+          </td>
+          <td>
+            <icon-play fill="currentColor" stroke="none"></icon-play>
+          </td>
+        </tr>
+        <tr>
+          <td>Pause</td>
+          <td>
+            <icon-pause></icon-pause>
+          </td>
+          <td>
+            <icon-pause fill="currentColor" stroke="none"></icon-pause>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
   </body>
 </html>

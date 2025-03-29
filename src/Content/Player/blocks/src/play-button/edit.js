@@ -31,7 +31,7 @@ import "./editor.scss";
  */
 
 import { cn } from "@/utils";
-import { DtpcPlayButton, IconPlay } from "@/components";
+import { IconPlay } from "@/components";
 
 export default function Edit(props) {
 	const { attributes } = props;

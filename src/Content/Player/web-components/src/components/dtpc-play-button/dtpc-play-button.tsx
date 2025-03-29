@@ -4,22 +4,52 @@
  * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-i18n/
  */
 import { __ } from "@wordpress/i18n";
-import { Component, Host, Listen, Prop, State, h } from '@stencil/core';
+import { Component, Event as StencilEvent, EventEmitter, Host, Prop, State, h, Element } from '@stencil/core';
+import { attributesToObject } from "@/lib/utils/dom";
 
 @Component({
   tag: 'dtpc-play-button',
   styleUrl: 'dtpc-play-button.css',
-  shadow: true,
+  shadow: true
 })
 export class DtpcPlayButton {
+
+  @Element() el: HTMLElement;
+
+  audio: HTMLAudioElement;
 
   @Prop({ attribute: 'icon-style'}) iconStyle: string = 'outline';
 
   @State() playing: boolean = false;
 
-  @Listen('click', { capture: false })
+  @StencilEvent({
+    eventName: 'bind-audio-events',
+    bubbles: true,
+    composed: false
+  }) bindAudioEvents: EventEmitter;
+
+  @StencilEvent({
+    eventName: 'toggle-pause',
+    bubbles: true,
+  }) togglePause: EventEmitter;
+
+  componentDidLoad() {
+    ((self) => self.bindAudioEvents.emit([
+      ['play', () => { self.handlePlay(); }],
+      ['pause', () => { self.handlePause(); }]
+    ]))(this);
+  }
+
+  handlePlay() {
+    this.playing = true;
+  }
+
+  handlePause() {
+    this.playing = false;
+  }
+
   handleClick() {
-    this.playing = !this.playing;
+    this.togglePause.emit();
   }
 
   render() {
@@ -32,13 +62,21 @@ export class DtpcPlayButton {
         stroke: 'none'
       })
     }
+    const buttonAttributes = {
+      ...attributesToObject(this.el),
+      type: 'button',
+      title: label,
+      'data-status': this.playing ? 'playing' : 'paused'
+    }
 
     return (
-      <Host role="button" title={label}>
-        {this.playing ?
-          <icon-pause {...iconProps}></icon-pause> :
-          <icon-play {...iconProps}></icon-play>
-        }
+      <Host>
+        <button {...buttonAttributes} onClick={() => this.handleClick()}>
+          {this.playing ?
+            <icon-pause {...iconProps}></icon-pause> :
+            <icon-play {...iconProps}></icon-play>
+          }
+        </button>
       </Host>
     );
   }

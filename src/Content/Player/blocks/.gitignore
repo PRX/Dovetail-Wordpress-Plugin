@@ -29,5 +29,5 @@ node_modules/
 # dotenv environment variables file
 .env
 
-# Build files
-build/
+# dist type files
+dist/

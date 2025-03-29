@@ -1,6 +1,6 @@
 import { Component, Element, h, Host, Prop } from '@stencil/core';
 import { Pause as LucidePause, createElement } from 'lucide';
-import { attributesToObject } from '../../utils';
+import { attributesToObject } from '@/lib/utils/dom';
 
 @Component({
   tag: 'icon-pause'

@@ -1,19 +1,99 @@
 :host {
-  --_bg-color: var(--dtpc-play-button--bg-color, transparent);
-  --_text-color: var(--dtpc-play-button--text-color, currentColor);
+  --_dtpc-play-button--size: var(--dtpc-play-button--size, 1.5rem);
+  --_dtpc-play-button--padding: var(--dtpc-play-button--padding, 0.325rem);
+  --_dtpc-play-button--text-color: var(--dtpc-play-button--text-color, currentColor);
+  --_dtpc-play-button--text-color--hover: var(--dtpc-play-button--text-color--hover, var(--_dtpc-play-button--text-color));
+  --_dtpc-play-button--text-color--playing: var(--dtpc-play-button--text-color--playing, var(--_dtpc-play-button--text-color--hover));
+  --_dtpc-play-button--bg-color: var(--dtpc-play-button--bg-color, transparent);
+  --_dtpc-play-button--bg-color--hover: var(--dtpc-play-button--bg-color--hover, var(--_dtpc-player--secondary-color));
+  --_dtpc-play-button--bg-color--playing: var(--dtpc-play-button--bg-color--playing, var(--_dtpc-player--primary-color));
+  --_dtpc-play-button--bg-opacity: var(--dtpc-play-button--bg-opacity, 0);
+  --_dtpc-play-button--bg-opacity--hover: var(--dtpc-play-button--bg-opacity--hover, 10%);
+  --_dtpc-play-button--bg-opacity--playing: var(--dtpc-play-button--bg-opacity--playing, 20%);
+  --_dtpc-play-button--border-color: var(--dtpc-play-button--border-color, currentColor);
+  --_dtpc-play-button--border-color--hover: var(--dtpc-play-button--border-color--hover, var(--_dtpc-play-button--border-color));
+  --_dtpc-play-button--border-color--playing: var(--dtpc-play-button--border-color--playing, var(--_dtpc-play-button--border-color--hover));
+  --_dtpc-play-button--radius: var(--dtpc-play-button--radius, 100vw);
+  --_dtpc-play-button--radius--hover: var(--dtpc-play-button--radius--hover, var(--_dtpc-play-button--radius));
+  --_dtpc-play-button--radius--playing: var(--dtpc-play-button--radius--playing, var(--_dtpc-play-button--radius--hover));
+  --_dtpc-play-button--border-width: var(--dtpc-play-button--border-width, 0.125rem);
+  --_dtpc-play-button--border-width--hover: var(--dtpc-play-button--border-width--hover, var(--_dtpc-play-button--border-width));
+  --_dtpc-play-button--border-width--playing: var(--dtpc-play-button--border-width--playing, var(--_dtpc-play-button--border-width--hover));
+  --_dtpc-play-button--focus-ring-color: var(--dtpc-play-button--focus-ring-color, var(--_dtpc-player--info-color));
+  --_dtpc-play-button--focus-ring-offset: var(--dtpc-play-button--focus-ring-offset, 0.125rem);
+  --_dtpc-play-button--focus-ring-width: var(--dtpc-play-button--focus-ring-width, 2px);
 
-  display: inline-grid;
+  display: contents;
+}
+
+button {
+  --_size: var(--_dtpc-play-button--size);
+  --_padding: var(--_dtpc-play-button--padding);
+  --_text-color: var(--_dtpc-play-button--text-color);
+  --_bg-color: var(--_dtpc-play-button--bg-color);
+  --_bg-opacity: var(--_dtpc-play-button--bg-opacity);
+  --_border-color: var(--_dtpc-play-button--border-color);
+  --_border-radius: var(--_dtpc-play-button--radius);
+  --_border-width: var(--_dtpc-play-button--border-width);
+  --_focus-ring-color: var(--_dtpc-play-button--focus-ring-color);
+  --_focus-ring-offset: var(--_dtpc-play-button--focus-ring-offset);
+  --_focus-ring-width: var(--_dtpc-play-button--focus-ring-width);
+
+  all: unset;
+
+  transition-property: background-color, border-color, border-width, border-radius, color;
+  transition-duration: 200ms;
+  transition-timing-function: ease;
+
+  box-sizing: content-box;
+  display: grid;
   place-items: center;
   justify-content: stretch;
   aspect-ratio: 1;
-  min-width: 1rem;
+  width: var(--_size);
 
-  background-color: var(--_bg-color);
+  padding: var(--_padding);
+
+  border-style: solid;
+  border-color: var(--_border-color);
+  border-width: var(--_border-width);
+  border-radius: var(--_border-radius);
+
+  background-color: color-mix(in oklch, var(--_bg-color) var(--_bg-opacity), transparent);
 
   color: var(--_text-color);
 
   cursor: pointer;
   user-select: none;
+
+  &:hover {
+    --_dtpc-play-button--text-color: var(--_dtpc-play-button--text-color--hover);
+    --_dtpc-play-button--bg-color: var(--_dtpc-play-button--bg-color--hover);
+    --_dtpc-play-button--bg-opacity: var(--_dtpc-play-button--bg-opacity--hover);
+    --_dtpc-play-button--border-color: var(--_dtpc-play-button--border-color--hover);
+    --_dtpc-play-button--border-width: var(--_dtpc-play-button--border-width--hover);
+    --_dtpc-play-button--radius: var(--_dtpc-play-button--radius--hover);
+  }
+
+  &[data-status='playing'] {
+    --_dtpc-play-button--text-color: var(--_dtpc-play-button--text-color--playing);
+    --_dtpc-play-button--bg-color: var(--_dtpc-play-button--bg-color--playing);
+    --_dtpc-play-button--bg-opacity: var(--_dtpc-play-button--bg-opacity--playing);
+    --_dtpc-play-button--border-color: var(--_dtpc-play-button--border-color--playing);
+    --_dtpc-play-button--border-width: var(--_dtpc-play-button--border-width--playing);
+    --_dtpc-play-button--radius: var(--_dtpc-play-button--radius--playing);
+
+    &:hover {
+      --_dtpc-play-button--bg-opacity: var(--_dtpc-play-button--bg-opacity--hover);
+    }
+  }
+
+  &:focus-visible {
+    outline-style: solid;
+    outline-offset: var(--_focus-ring-offset);
+    outline-color: var(--_focus-ring-color);
+    outline-width: var(--_focus-ring-width);
+  }
 }
 
 .lucide-icon {

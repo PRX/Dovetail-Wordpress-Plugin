@@ -7,5 +7,12 @@
 
 .wp-block-dovetail-podcasts-player {
 	box-sizing: border-box;
-	display: grid;
+	display: block;
+
+	/* Override WP block focus style on child blocks. */
+	:where(.wp-site-blocks) & {
+		& > :is(:focus) {
+			outline: none;
+		}
+	}
 }

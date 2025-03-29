@@ -3,7 +3,6 @@ const defaultConfig = require("@wordpress/scripts/config/webpack.config");
 
 module.exports = {
 	...defaultConfig,
-	devtool: "eval-cheap-source-map",
 	module: {
 		...defaultConfig.module,
 		rules: [
@@ -11,12 +10,11 @@ module.exports = {
 			{
 				test: /\.(jsx?|tsx?)$/,
 				use: ["ts-loader"],
-				exclude: /node_modules/,
+				exclude: [/node_modules/],
 			},
 			{
 				test: /\.js\.map$/,
 				loader: "ignore-loader",
-				// use: "source-map-loader",
 				enforce: "pre",
 			},
 		],

@@ -34,7 +34,14 @@ return array(
 		'render' => 'file:./render.php',
 		'viewScript' => 'file:./view.js',
 		'attributes' => array(
-			
+			'icon-style' => array(
+				'type' => 'string',
+				'enum' => array(
+					'outline',
+					'solid'
+				),
+				'default' => 'outline'
+			)
 		)
 	),
 	'player' => array(
@@ -89,6 +96,49 @@ return array(
 			),
 			'duration' => array(
 				'type' => 'number'
+			)
+		)
+	),
+	'progress-bar' => array(
+		'$schema' => 'https://schemas.wp.org/trunk/block.json',
+		'apiVersion' => 3,
+		'name' => 'dovetail-podcasts/progress-bar',
+		'version' => '0.1.0',
+		'title' => 'Dovetail Podcasts Player Progress Bar',
+		'category' => 'media',
+		'icon' => 'minus',
+		'description' => 'Progress bar for Dovetail Podcasts Player.',
+		'ancestor' => array(
+			'dovetail-podcasts/player'
+		),
+		'example' => array(
+			
+		),
+		'supports' => array(
+			'html' => false,
+			'color' => array(
+				'background' => true,
+				'text' => true
+			),
+			'spacing' => array(
+				'margin' => false,
+				'padding' => true
+			)
+		),
+		'textdomain' => 'dovetail-podcasts',
+		'editorScript' => 'file:./index.js',
+		'editorStyle' => 'file:./index.css',
+		'style' => 'file:./style-index.css',
+		'render' => 'file:./render.php',
+		'viewScript' => 'file:./view.js',
+		'attributes' => array(
+			'icon-style' => array(
+				'type' => 'string',
+				'enum' => array(
+					'outline',
+					'solid'
+				),
+				'default' => 'outline'
 			)
 		)
 	)

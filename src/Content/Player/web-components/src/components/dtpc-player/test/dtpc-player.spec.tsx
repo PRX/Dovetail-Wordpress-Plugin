@@ -10,8 +10,12 @@ describe('dtpc-player', () => {
     expect(page.root).toEqualHtml(`
       <dtpc-player>
         <mock:shadow-root>
-          <audio preload="none"></audio>
-          <slot></slot>
+          <div class="wrapper">
+            <div part="backdrop"></div>
+            <div class="main">
+              <slot></slot>
+            </div>
+          </div>
         </mock:shadow-root>
       </dtpc-player>
     `);

@@ -1,3 +1,34 @@
 :host {
-  display: block;
+  --_dtpc-player--primary-color: var(--dtpc-player--primary-color, hsl(198, 100%, 32%));
+  --_dtpc-player--secondary-color: var(--dtpc-player--primary-color, hsl(240, 1%, 33%));
+  --_dtpc-player--info-color: var(--dtpc-player--primary-color, hsl(201, 64%, 67%));
+  --_dtpc-player--bg-color: var(--dtpc-player--bg-color, transparent);
+  --_dtpc-player--bg-opacity: var(--dtpc-player--bg-opacity, 1);
+  --_dtpc-player--bg-blur: var(--dtpc-player--bg-blur, 0);
+  --_dtpc-player--padding: var(--dtpc-player--padding, 0);
+  --_dtpc-player--padding-inline: var(--dtpc-player--padding-inline, var(--_padding));
+  --_dtpc-player--padding-block: var(--dtpc-player--padding-block, var(--_padding));
+  --_dtpc-player--spacing: var(--dtpc-player--spacing, 0.5rem);
+}
+
+.wrapper {
+  display: grid;
+
+  & > * {
+    grid-column: 1 / -1;
+    grid-row: 1 / -1;
+  }
+}
+
+.main {
+  --_spacing: var(--_dtpc-player--spacing);
+  --_padding-inline: var(--_dtpc-player--padding-inline);
+  --_padding-block: var(--_dtpc-player--padding-block);
+
+  display: flex;
+  align-items: center;
+  gap: var(--_spacing);
+
+  padding-inline: var(--_padding-inline);
+  padding-block: var(--_padding-block);
 }

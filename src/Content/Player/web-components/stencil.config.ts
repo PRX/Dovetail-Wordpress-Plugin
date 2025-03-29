@@ -1,4 +1,5 @@
 import { Config } from '@stencil/core';
+import { postcss } from "@stencil-community/postcss";
 import { reactOutputTarget } from '@stencil/react-output-target';
 
 export const config: Config = {
@@ -26,7 +27,14 @@ export const config: Config = {
       serviceWorker: null, // disable service workers
     },
   ],
+  plugins: [
+    postcss()
+  ],
   testing: {
     browserHeadless: "shell",
+    setupFilesAfterEnv: ['<rootDir>/tests/setup.js']
   },
+  devServer: {
+    reloadStrategy: 'pageReload'
+  }
 };
