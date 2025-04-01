@@ -5,7 +5,7 @@
  */
 import { __ } from "@wordpress/i18n";
 import { Component, Event as StencilEvent, EventEmitter, Host, Prop, State, h, Element } from '@stencil/core';
-import { attributesToObject } from "@/lib/utils/dom";
+import type { PlayerState } from "@/store/player";
 
 @Component({
   tag: 'dtpc-play-button',
@@ -14,30 +14,30 @@ import { attributesToObject } from "@/lib/utils/dom";
 })
 export class DtpcPlayButton {
 
-  @Element() el: HTMLElement;
+  state: PlayerState;
 
-  audio: HTMLAudioElement;
+  @Element() el: HTMLElement;
 
   @Prop({ attribute: 'icon-style'}) iconStyle: string = 'outline';
 
   @State() playing: boolean = false;
 
   @StencilEvent({
-    eventName: 'bind-audio-events',
+    eventName: 'dtpc-control-init',
     bubbles: true,
-    composed: false
-  }) bindAudioEvents: EventEmitter;
+    cancelable: true
+  }) initControl: EventEmitter;
 
-  @StencilEvent({
-    eventName: 'toggle-pause',
-    bubbles: true,
-  }) togglePause: EventEmitter;
+  componentWillLoad() {
+    const self = this;
+
+    this.initControl.emit((state: PlayerState) => self.state = state);
+  }
 
   componentDidLoad() {
-    ((self) => self.bindAudioEvents.emit([
-      ['play', () => { self.handlePlay(); }],
-      ['pause', () => { self.handlePause(); }]
-    ]))(this);
+    const self = this;
+    this.state.audioElm.addEventListener('play', () => self.handlePlay());
+    this.state.audioElm.addEventListener('pause', () => self.handlePause());
   }
 
   handlePlay() {
@@ -49,7 +49,18 @@ export class DtpcPlayButton {
   }
 
   handleClick() {
-    this.togglePause.emit();
+    if (this.state.audioElm.paused) {
+      this.state.audioElm.play()
+        .then(() => {
+          // Setup media session.
+          console.log('This is from teh state audio elm playing...')
+        })
+        .catch((e) => {
+          console.error(e);
+        })
+    } else {
+      this.state.audioElm.pause();
+    }
   }
 
   render() {
@@ -63,7 +74,6 @@ export class DtpcPlayButton {
       })
     }
     const buttonAttributes = {
-      ...attributesToObject(this.el),
       type: 'button',
       title: label,
       'data-status': this.playing ? 'playing' : 'paused'

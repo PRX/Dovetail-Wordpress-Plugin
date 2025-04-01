@@ -284,28 +284,6 @@ module.exports = webpackEmptyAsyncContext;
 
 /***/ }),
 
-/***/ "../web-components/dist/components/attributesToObject.js":
-/*!***************************************************************!*\
-  !*** ../web-components/dist/components/attributesToObject.js ***!
-  \***************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   a: () => (/* binding */ attributesToObject)
-/* harmony export */ });
-function attributesToObject(el) {
-  let result = {};
-  for (let i = 0; i < el.attributes.length; i++) {
-    result[el.attributes[i].name] = el.attributes[i].value;
-  }
-  return result;
-}
-
-
-/***/ }),
-
 /***/ "../web-components/dist/components/dtpc-play-button.js":
 /*!*************************************************************!*\
   !*** ../web-components/dist/components/dtpc-play-button.js ***!
@@ -319,12 +297,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   defineCustomElement: () => (/* binding */ defineCustomElement)
 /* harmony export */ });
 /* harmony import */ var _index2_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index2.js */ "../web-components/dist/components/index2.js");
-/* harmony import */ var _lucide_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./lucide.js */ "../web-components/dist/components/lucide.js");
-/* harmony import */ var _icon_pause2_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./icon-pause2.js */ "../web-components/dist/components/icon-pause2.js");
-/* harmony import */ var _icon_play2_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./icon-play2.js */ "../web-components/dist/components/icon-play2.js");
-/* harmony import */ var _attributesToObject_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./attributesToObject.js */ "../web-components/dist/components/attributesToObject.js");
-
-
+/* harmony import */ var _icon_pause2_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./icon-pause2.js */ "../web-components/dist/components/icon-pause2.js");
+/* harmony import */ var _icon_play2_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./icon-play2.js */ "../web-components/dist/components/icon-play2.js");
 
 
 
@@ -1276,11 +1250,11 @@ const _n = i18n._n.bind(i18n);
 const _nx = i18n._nx.bind(i18n);
 const isRTL = i18n.isRTL.bind(i18n);
 const hasTranslation = i18n.hasTranslation.bind(i18n);
-const dtpcPlayButtonCss = ":host {\n  --_dtpc-play-button--size: var(--dtpc-play-button--size, 1.5rem);\n  --_dtpc-play-button--padding: var(--dtpc-play-button--padding, 0.325rem);\n  --_dtpc-play-button--text-color: var(--dtpc-play-button--text-color, currentColor);\n  --_dtpc-play-button--text-color--hover: var(--dtpc-play-button--text-color--hover, var(--_dtpc-play-button--text-color));\n  --_dtpc-play-button--text-color--playing: var(--dtpc-play-button--text-color--playing, var(--_dtpc-play-button--text-color--hover));\n  --_dtpc-play-button--bg-color: var(--dtpc-play-button--bg-color, transparent);\n  --_dtpc-play-button--bg-color--hover: var(--dtpc-play-button--bg-color--hover, var(--_dtpc-player--secondary-color));\n  --_dtpc-play-button--bg-color--playing: var(--dtpc-play-button--bg-color--playing, var(--_dtpc-player--primary-color));\n  --_dtpc-play-button--bg-opacity: var(--dtpc-play-button--bg-opacity, 0);\n  --_dtpc-play-button--bg-opacity--hover: var(--dtpc-play-button--bg-opacity--hover, 10%);\n  --_dtpc-play-button--bg-opacity--playing: var(--dtpc-play-button--bg-opacity--playing, 20%);\n  --_dtpc-play-button--border-color: var(--dtpc-play-button--border-color, currentColor);\n  --_dtpc-play-button--border-color--hover: var(--dtpc-play-button--border-color--hover, var(--_dtpc-play-button--border-color));\n  --_dtpc-play-button--border-color--playing: var(--dtpc-play-button--border-color--playing, var(--_dtpc-play-button--border-color--hover));\n  --_dtpc-play-button--radius: var(--dtpc-play-button--radius, 100vw);\n  --_dtpc-play-button--radius--hover: var(--dtpc-play-button--radius--hover, var(--_dtpc-play-button--radius));\n  --_dtpc-play-button--radius--playing: var(--dtpc-play-button--radius--playing, var(--_dtpc-play-button--radius--hover));\n  --_dtpc-play-button--border-width: var(--dtpc-play-button--border-width, 0.125rem);\n  --_dtpc-play-button--border-width--hover: var(--dtpc-play-button--border-width--hover, var(--_dtpc-play-button--border-width));\n  --_dtpc-play-button--border-width--playing: var(--dtpc-play-button--border-width--playing, var(--_dtpc-play-button--border-width--hover));\n  --_dtpc-play-button--focus-ring-color: var(--dtpc-play-button--focus-ring-color, var(--_dtpc-player--info-color));\n  --_dtpc-play-button--focus-ring-offset: var(--dtpc-play-button--focus-ring-offset, 0.125rem);\n  --_dtpc-play-button--focus-ring-width: var(--dtpc-play-button--focus-ring-width, 2px);\n\n  display: contents;\n}\n\nbutton {\n  --_size: var(--_dtpc-play-button--size);\n  --_padding: var(--_dtpc-play-button--padding);\n  --_text-color: var(--_dtpc-play-button--text-color);\n  --_bg-color: var(--_dtpc-play-button--bg-color);\n  --_bg-opacity: var(--_dtpc-play-button--bg-opacity);\n  --_border-color: var(--_dtpc-play-button--border-color);\n  --_border-radius: var(--_dtpc-play-button--radius);\n  --_border-width: var(--_dtpc-play-button--border-width);\n  --_focus-ring-color: var(--_dtpc-play-button--focus-ring-color);\n  --_focus-ring-offset: var(--_dtpc-play-button--focus-ring-offset);\n  --_focus-ring-width: var(--_dtpc-play-button--focus-ring-width);\n\n  all: unset;\n\n  transition-property: background-color, border-color, border-width, border-radius, color;\n  transition-duration: 200ms;\n  transition-timing-function: ease;\n\n  box-sizing: content-box;\n  display: grid;\n  place-items: center;\n  justify-content: stretch;\n  aspect-ratio: 1;\n  width: var(--_size);\n\n  padding: var(--_padding);\n\n  border-style: solid;\n  border-color: var(--_border-color);\n  border-width: var(--_border-width);\n  border-radius: var(--_border-radius);\n\n  background-color: color-mix(in oklch, var(--_bg-color) var(--_bg-opacity), transparent);\n\n  color: var(--_text-color);\n\n  cursor: pointer;\n  user-select: none;\n\n  &:hover {\n    --_dtpc-play-button--text-color: var(--_dtpc-play-button--text-color--hover);\n    --_dtpc-play-button--bg-color: var(--_dtpc-play-button--bg-color--hover);\n    --_dtpc-play-button--bg-opacity: var(--_dtpc-play-button--bg-opacity--hover);\n    --_dtpc-play-button--border-color: var(--_dtpc-play-button--border-color--hover);\n    --_dtpc-play-button--border-width: var(--_dtpc-play-button--border-width--hover);\n    --_dtpc-play-button--radius: var(--_dtpc-play-button--radius--hover);\n  }\n\n  &[data-status='playing'] {\n    --_dtpc-play-button--text-color: var(--_dtpc-play-button--text-color--playing);\n    --_dtpc-play-button--bg-color: var(--_dtpc-play-button--bg-color--playing);\n    --_dtpc-play-button--bg-opacity: var(--_dtpc-play-button--bg-opacity--playing);\n    --_dtpc-play-button--border-color: var(--_dtpc-play-button--border-color--playing);\n    --_dtpc-play-button--border-width: var(--_dtpc-play-button--border-width--playing);\n    --_dtpc-play-button--radius: var(--_dtpc-play-button--radius--playing);\n\n    &:hover {\n      --_dtpc-play-button--bg-opacity: var(--_dtpc-play-button--bg-opacity--hover);\n    }\n  }\n\n  &:focus-visible {\n    outline-style: solid;\n    outline-offset: var(--_focus-ring-offset);\n    outline-color: var(--_focus-ring-color);\n    outline-width: var(--_focus-ring-width);\n  }\n}\n\n.lucide-icon {\n  display: grid;\n  place-items: center;\n  width: 100%;\n\n  svg {\n    width: 100%;\n    height: auto;\n  }\n}\n";
+const dtpcPlayButtonCss = ":host {\n  --_dtpc-play-button--size: var(--dtpc-play-button--size, 1.5rem);\n  --_dtpc-play-button--padding: var(--dtpc-play-button--padding, 0.325rem);\n  --_dtpc-play-button--foreground: var(--dtpc-play-button--foreground, var(--_dtpc-player--foreground, currentColor));\n  --_dtpc-play-button--foreground--hover: var(--dtpc-play-button--foreground--hover, var(--_dtpc-player--surface));\n  --_dtpc-play-button--foreground--playing: var(--dtpc-play-button--foreground--playing, var(--_dtpc-play-button--foreground));\n  --_dtpc-play-button--surface: var(--_dtpc-play-button--surface, var(--_dtpc-player--surface));\n  --_dtpc-play-button--surface--hover: var(--dtpc-play-button--surface--hover, var(--_dtpc-player--foreground));\n  --_dtpc-play-button--surface--playing: var(--dtpc-play-button--surface--playing, var(--_dtpc-player--surface));\n  --_dtpc-play-button--surface-opacity: var(--dtpc-play-button--surface-opacity, 0);\n  --_dtpc-play-button--surface-opacity--hover: var(--dtpc-play-button--surface-opacity--hover, 100%);\n  --_dtpc-play-button--surface-opacity--playing: var(--dtpc-play-button--surface-opacity--playing, 0);\n  --_dtpc-play-button--border-color: var(--dtpc-play-button--border-color, transparent);\n  --_dtpc-play-button--border-color--hover: var(--dtpc-play-button--border-color--hover, var(--_dtpc-play-button--foreground));\n  --_dtpc-play-button--border-color--playing: var(--dtpc-play-button--border-color--playing, var(--_dtpc-play-button--border-color--hover));\n  --_dtpc-play-button--border-radius: var(--dtpc-play-button--border-radius, 100vw);\n  --_dtpc-play-button--border-radius--hover: var(--dtpc-play-button--border-radius--hover, var(--_dtpc-play-button--border-radius));\n  --_dtpc-play-button--border-radius--playing: var(--dtpc-play-button--border-radius--playing, var(--_dtpc-play-button--border-radius--hover));\n  --_dtpc-play-button--border-width: var(--dtpc-play-button--border-width, 0.125rem);\n  --_dtpc-play-button--border-width--hover: var(--dtpc-play-button--border-width--hover, var(--_dtpc-play-button--border-width));\n  --_dtpc-play-button--border-width--playing: var(--dtpc-play-button--border-width--playing, var(--_dtpc-play-button--border-width--hover));\n  --_dtpc-play-button--focus-ring-color: var(--dtpc-play-button--focus-ring-color, var(--_dtpc-player--highlight));\n  --_dtpc-play-button--focus-ring-offset: var(--dtpc-play-button--focus-ring-offset, 0.125rem);\n  --_dtpc-play-button--focus-ring-width: var(--dtpc-play-button--focus-ring-width, 2px);\n}\n\nbutton {\n  --_size: var(--_dtpc-play-button--size);\n  --_padding: var(--_dtpc-play-button--padding);\n  --_foreground: var(--_dtpc-play-button--foreground);\n  --_surface: var(--_dtpc-play-button--surface);\n  --_surface-opacity: var(--_dtpc-play-button--surface-opacity);\n  --_border-color: var(--_dtpc-play-button--border-color);\n  --_border-radius: var(--_dtpc-play-button--border-radius);\n  --_border-width: var(--_dtpc-play-button--border-width);\n  --_focus-ring-color: var(--_dtpc-play-button--focus-ring-color);\n  --_focus-ring-offset: var(--_dtpc-play-button--focus-ring-offset);\n  --_focus-ring-width: var(--_dtpc-play-button--focus-ring-width);\n\n  all: unset;\n\n  transition-property: background-color, border-color, border-width, border-radius, color;\n  transition-duration: 200ms;\n  transition-timing-function: ease;\n\n  box-sizing: content-box;\n  display: grid;\n  place-items: center;\n  justify-content: stretch;\n  aspect-ratio: 1;\n  width: var(--_size);\n\n  padding: var(--_padding);\n\n  border-style: solid;\n  border-color: var(--_border-color);\n  border-width: var(--_border-width);\n  border-radius: var(--_border-radius);\n\n  background-color: color-mix(in oklch, var(--_surface) var(--_surface-opacity), transparent);\n\n  cursor: pointer;\n  user-select: none;\n\n  &:hover {\n    --_dtpc-play-button--foreground: var(--_dtpc-play-button--foreground--hover);\n    --_dtpc-play-button--surface: var(--_dtpc-play-button--surface--hover);\n    --_dtpc-play-button--surface-opacity: var(--_dtpc-play-button--surface-opacity--hover);\n    --_dtpc-play-button--border-color: var(--_dtpc-play-button--border-color--hover);\n    --_dtpc-play-button--border-width: var(--_dtpc-play-button--border-width--hover);\n    --_dtpc-play-button--border-radius: var(--_dtpc-play-button--border-radius--hover);\n  }\n\n  &:where([data-status='playing']) {\n    --_dtpc-play-button--foreground: var(--_dtpc-play-button--foreground--playing);\n    --_dtpc-play-button--surface: var(--_dtpc-play-button--surface--playing);\n    --_dtpc-play-button--surface-opacity: var(--_dtpc-play-button--surface-opacity--playing);\n    --_dtpc-play-button--border-color: var(--_dtpc-play-button--border-color--playing);\n    --_dtpc-play-button--border-width: var(--_dtpc-play-button--border-width--playing);\n    --_dtpc-play-button--border-radius: var(--_dtpc-play-button--border-radius--playing);\n\n    &:hover {\n      --_dtpc-play-button--surface-opacity: var(--_dtpc-play-button--surface-opacity--hover);\n    }\n  }\n\n  &:focus-visible {\n    outline-style: solid;\n    outline-offset: var(--_focus-ring-offset);\n    outline-color: var(--_focus-ring-color);\n    outline-width: var(--_focus-ring-width);\n  }\n}\n\n.lucide-icon {\n  display: grid;\n  place-items: center;\n  width: 100%;\n\n  color: var(--_foreground);\n\n  svg {\n    width: 100%;\n    height: auto;\n  }\n}\n";
 const DtpcPlayButton$1 = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.p)(class DtpcPlayButton extends _index2_js__WEBPACK_IMPORTED_MODULE_0__.H {
   constructor() {
     super();
-    Object.defineProperty(this, "audio", {
+    Object.defineProperty(this, "state", {
       enumerable: true,
       configurable: true,
       writable: true,
@@ -1298,13 +1272,7 @@ const DtpcPlayButton$1 = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.p)(class Dtp
       writable: true,
       value: false
     });
-    Object.defineProperty(this, "bindAudioEvents", {
-      enumerable: true,
-      configurable: true,
-      writable: true,
-      value: void 0
-    });
-    Object.defineProperty(this, "togglePause", {
+    Object.defineProperty(this, "initControl", {
       enumerable: true,
       configurable: true,
       writable: true,
@@ -1312,18 +1280,19 @@ const DtpcPlayButton$1 = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.p)(class Dtp
     });
     this.__registerHost();
     this.__attachShadow();
-    this.bindAudioEvents = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.c)(this, "bind-audio-events", 5);
-    this.togglePause = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.c)(this, "toggle-pause", 7);
+    this.initControl = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.c)(this, "dtpc-control-init", 7);
   }
   get el() {
     return this;
   }
+  componentWillLoad() {
+    const self = this;
+    this.initControl.emit(state => self.state = state);
+  }
   componentDidLoad() {
-    (self => self.bindAudioEvents.emit([['play', () => {
-      self.handlePlay();
-    }], ['pause', () => {
-      self.handlePause();
-    }]]))(this);
+    const self = this;
+    this.state.audioElm.addEventListener('play', () => self.handlePlay());
+    this.state.audioElm.addEventListener('pause', () => self.handlePause());
   }
   handlePlay() {
     this.playing = true;
@@ -1332,7 +1301,15 @@ const DtpcPlayButton$1 = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.p)(class Dtp
     this.playing = false;
   }
   handleClick() {
-    this.togglePause.emit();
+    if (this.state.audioElm.paused) {
+      this.state.audioElm.play().then(() => {
+        console.log('This is from teh state audio elm playing...');
+      }).catch(e => {
+        console.error(e);
+      });
+    } else {
+      this.state.audioElm.pause();
+    }
   }
   render() {
     const label = this.playing ? __('Pause', 'dovetail-podcasts') : __('Play', 'dovetail-podcasts');
@@ -1343,15 +1320,14 @@ const DtpcPlayButton$1 = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.p)(class Dtp
       })
     };
     const buttonAttributes = {
-      ...(0,_attributesToObject_js__WEBPACK_IMPORTED_MODULE_4__.a)(this.el),
       type: 'button',
       title: label,
       'data-status': this.playing ? 'playing' : 'paused'
     };
     return (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)(_index2_js__WEBPACK_IMPORTED_MODULE_0__.d, {
-      key: 'c3c470946316923022d940bd1f5f167f9531bbe3'
+      key: '3bb1b4394c13f10a6e913319eb5251e779bf4aaa'
     }, (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)("button", {
-      key: 'aaa0c2bee1a5a8e6d677c6d3ea5b0d2ea1499d82',
+      key: '38108c3ed6d1f41f8236564bb71c53924539d83d',
       ...buttonAttributes,
       onClick: () => this.handleClick()
     }, this.playing ? (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)("icon-pause", {
@@ -1381,12 +1357,12 @@ function defineCustomElement$1() {
         break;
       case "icon-pause":
         if (!customElements.get(tagName)) {
-          (0,_icon_pause2_js__WEBPACK_IMPORTED_MODULE_2__.d)();
+          (0,_icon_pause2_js__WEBPACK_IMPORTED_MODULE_1__.d)();
         }
         break;
       case "icon-play":
         if (!customElements.get(tagName)) {
-          (0,_icon_play2_js__WEBPACK_IMPORTED_MODULE_3__.d)();
+          (0,_icon_play2_js__WEBPACK_IMPORTED_MODULE_2__.d)();
         }
         break;
     }
@@ -1413,11 +1389,201 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _index2_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index2.js */ "../web-components/dist/components/index2.js");
 
-const dtpcPlayerCss = ":host {\n  --_dtpc-player--primary-color: var(--dtpc-player--primary-color, hsl(198, 100%, 32%));\n  --_dtpc-player--secondary-color: var(--dtpc-player--primary-color, hsl(240, 1%, 33%));\n  --_dtpc-player--info-color: var(--dtpc-player--primary-color, hsl(201, 64%, 67%));\n  --_dtpc-player--bg-color: var(--dtpc-player--bg-color, transparent);\n  --_dtpc-player--bg-opacity: var(--dtpc-player--bg-opacity, 1);\n  --_dtpc-player--bg-blur: var(--dtpc-player--bg-blur, 0);\n  --_dtpc-player--padding: var(--dtpc-player--padding, 0);\n  --_dtpc-player--padding-inline: var(--dtpc-player--padding-inline, var(--_padding));\n  --_dtpc-player--padding-block: var(--dtpc-player--padding-block, var(--_padding));\n  --_dtpc-player--spacing: var(--dtpc-player--spacing, 0.5rem);\n}\n\n.wrapper {\n  display: grid;\n\n  & > * {\n    grid-column: 1 / -1;\n    grid-row: 1 / -1;\n  }\n}\n\n.main {\n  --_spacing: var(--_dtpc-player--spacing);\n  --_padding-inline: var(--_dtpc-player--padding-inline);\n  --_padding-block: var(--_dtpc-player--padding-block);\n\n  display: flex;\n  align-items: center;\n  gap: var(--_spacing);\n\n  padding-inline: var(--_padding-inline);\n  padding-block: var(--_padding-block);\n}\n";
+const appendToMap = (map, propName, value) => {
+  const items = map.get(propName);
+  if (!items) {
+    map.set(propName, [value]);
+  } else if (!items.includes(value)) {
+    items.push(value);
+  }
+};
+const debounce = (fn, ms) => {
+  let timeoutId;
+  return (...args) => {
+    if (timeoutId) {
+      clearTimeout(timeoutId);
+    }
+    timeoutId = setTimeout(() => {
+      timeoutId = 0;
+      fn(...args);
+    }, ms);
+  };
+};
+const isConnected = maybeElement => !('isConnected' in maybeElement) || maybeElement.isConnected;
+const cleanupElements = debounce(map => {
+  for (let key of map.keys()) {
+    map.set(key, map.get(key).filter(isConnected));
+  }
+}, 2000);
+const stencilSubscription = () => {
+  if (typeof _index2_js__WEBPACK_IMPORTED_MODULE_0__.e !== 'function') {
+    return {};
+  }
+  const elmsToUpdate = new Map();
+  return {
+    dispose: () => elmsToUpdate.clear(),
+    get: propName => {
+      const elm = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.e)();
+      if (elm) {
+        appendToMap(elmsToUpdate, propName, elm);
+      }
+    },
+    set: propName => {
+      const elements = elmsToUpdate.get(propName);
+      if (elements) {
+        elmsToUpdate.set(propName, elements.filter(_index2_js__WEBPACK_IMPORTED_MODULE_0__.f));
+      }
+      cleanupElements(elmsToUpdate);
+    },
+    reset: () => {
+      elmsToUpdate.forEach(elms => elms.forEach(_index2_js__WEBPACK_IMPORTED_MODULE_0__.f));
+      cleanupElements(elmsToUpdate);
+    }
+  };
+};
+const unwrap = val => typeof val === 'function' ? val() : val;
+const createObservableMap = (defaultState, shouldUpdate = (a, b) => a !== b) => {
+  const unwrappedState = unwrap(defaultState);
+  let states = new Map(Object.entries(unwrappedState !== null && unwrappedState !== void 0 ? unwrappedState : {}));
+  const handlers = {
+    dispose: [],
+    get: [],
+    set: [],
+    reset: []
+  };
+  const reset = () => {
+    var _unwrap;
+    states = new Map(Object.entries((_unwrap = unwrap(defaultState)) !== null && _unwrap !== void 0 ? _unwrap : {}));
+    handlers.reset.forEach(cb => cb());
+  };
+  const dispose = () => {
+    handlers.dispose.forEach(cb => cb());
+    reset();
+  };
+  const get = propName => {
+    handlers.get.forEach(cb => cb(propName));
+    return states.get(propName);
+  };
+  const set = (propName, value) => {
+    const oldValue = states.get(propName);
+    if (shouldUpdate(value, oldValue, propName)) {
+      states.set(propName, value);
+      handlers.set.forEach(cb => cb(propName, value, oldValue));
+    }
+  };
+  const state = typeof Proxy === 'undefined' ? {} : new Proxy(unwrappedState, {
+    get(_, propName) {
+      return get(propName);
+    },
+    ownKeys(_) {
+      return Array.from(states.keys());
+    },
+    getOwnPropertyDescriptor() {
+      return {
+        enumerable: true,
+        configurable: true
+      };
+    },
+    has(_, propName) {
+      return states.has(propName);
+    },
+    set(_, propName, value) {
+      set(propName, value);
+      return true;
+    }
+  });
+  const on = (eventName, callback) => {
+    handlers[eventName].push(callback);
+    return () => {
+      removeFromArray(handlers[eventName], callback);
+    };
+  };
+  const onChange = (propName, cb) => {
+    const unSet = on('set', (key, newValue) => {
+      if (key === propName) {
+        cb(newValue);
+      }
+    });
+    const unReset = on('reset', () => cb(unwrap(defaultState)[propName]));
+    return () => {
+      unSet();
+      unReset();
+    };
+  };
+  const use = (...subscriptions) => {
+    const unsubs = subscriptions.reduce((unsubs, subscription) => {
+      if (subscription.set) {
+        unsubs.push(on('set', subscription.set));
+      }
+      if (subscription.get) {
+        unsubs.push(on('get', subscription.get));
+      }
+      if (subscription.reset) {
+        unsubs.push(on('reset', subscription.reset));
+      }
+      if (subscription.dispose) {
+        unsubs.push(on('dispose', subscription.dispose));
+      }
+      return unsubs;
+    }, []);
+    return () => unsubs.forEach(unsub => unsub());
+  };
+  const forceUpdate = key => {
+    const oldValue = states.get(key);
+    handlers.set.forEach(cb => cb(key, oldValue, oldValue));
+  };
+  return {
+    state,
+    get,
+    set,
+    on,
+    onChange,
+    use,
+    dispose,
+    reset,
+    forceUpdate
+  };
+};
+const removeFromArray = (array, item) => {
+  const index = array.indexOf(item);
+  if (index >= 0) {
+    array[index] = array[array.length - 1];
+    array.length--;
+  }
+};
+const createStore = (defaultState, shouldUpdate) => {
+  const map = createObservableMap(defaultState, shouldUpdate);
+  map.use(stencilSubscription());
+  return map;
+};
+class playerStateFactory {
+  constructor() {
+    Object.defineProperty(this, "stores", {
+      enumerable: true,
+      configurable: true,
+      writable: true,
+      value: []
+    });
+  }
+  createStore(src) {
+    const audioElm = new Audio();
+    audioElm.preload = 'none';
+    audioElm.src = src;
+    const newStore = createStore({
+      audioElm,
+      playing: false,
+      seekTime: 0
+    });
+    this.stores.push(newStore);
+    return newStore;
+  }
+}
+const factory = new playerStateFactory();
+const dtpcPlayerCss = ":host {\n  --_dtpc-player--foreground: var(--dtpc-player--primary-base, currentColor);\n  --_dtpc-player--highlight: var(--dtpc-player--highlight, hsl(201, 64%, 67%));\n  --_dtpc-player--surface: var(--dtpc-player--surface, white);\n  --_dtpc-player--surface-opacity: var(--dtpc-player--bg-opacity, 0);\n  --_dtpc-player--surface-blur: var(--dtpc-player--bg-blur, 0);\n  --_dtpc-player--padding: var(--dtpc-player--padding, 0);\n  --_dtpc-player--padding-inline: var(--dtpc-player--padding-inline, var(--_dtpc-player--padding));\n  --_dtpc-player--padding-block: var(--dtpc-player--padding-block, var(--_dtpc-player--padding));\n  --_dtpc-player--spacing: var(--dtpc-player--spacing, 0.5rem);\n  --_dtpc-player--time--color: var(--dtpc-player--time--font-size, var(--_dtpc-player--foreground));\n  --_dtpc-player--time--font-size: var(--dtpc-player--time--font-size, 0.875rem);\n  --_dtpc-player--time--font-family: var(--dtpc-player--time--font-family, ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, 'DejaVu Sans Mono', monospace);\n  --_dtpc-player--time--font-weight: var(--dtpc-player--time--font-weight, inherit);\n}\n\n.wrapper {\n  display: grid;\n\n  & > * {\n    grid-column: 1 / -1;\n    grid-row: 1 / -1;\n  }\n}\n\n.main {\n  --_spacing: var(--_dtpc-player--spacing);\n  --_padding-inline: var(--_dtpc-player--padding-inline);\n  --_padding-block: var(--_dtpc-player--padding-block);\n\n  display: flex;\n  align-items: center;\n  gap: var(--_spacing);\n\n  padding-inline: var(--_padding-inline);\n  padding-block: var(--_padding-block);\n}\n";
 const DtpcPlayer$1 = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.p)(class DtpcPlayer extends _index2_js__WEBPACK_IMPORTED_MODULE_0__.H {
   constructor() {
     super();
-    Object.defineProperty(this, "audio", {
+    Object.defineProperty(this, "state", {
       enumerable: true,
       configurable: true,
       writable: true,
@@ -1433,52 +1599,37 @@ const DtpcPlayer$1 = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.p)(class DtpcPla
     this.__attachShadow();
   }
   connectedCallback() {
-    this.audio = new Audio();
-    this.audio.src = this.src;
-    this.audio.preload = 'none';
+    this.state = factory.createStore(this.src).state;
   }
   disconnectedCallback() {
-    this.audio.pause();
-    delete this.audio;
+    this.state.audioElm.pause();
+  }
+  handleControlInit(e) {
+    if (e.detail instanceof Function) {
+      e.stopPropagation();
+      e.detail(this.state);
+    }
   }
   watchSrcHandler(newSrc) {
-    if (!this.audio.paused) {
-      this.audio.pause();
+    if (!this.state.audioElm.paused) {
+      this.state.audioElm.pause();
     }
-    this.audio.src = newSrc;
-  }
-  pauseAudioHandler() {
-    if (this.audio.paused) {
-      this.audio.play().then(() => {}).catch(err => {
-        console.error(err);
-      });
-    } else {
-      this.audio.pause();
-    }
-  }
-  updateCurrentTime(event) {
-    console.log('update-current-time received:', event.detail);
-    this.audio.currentTime = event.detail;
-  }
-  handleBindAudio(event) {
-    event.detail.forEach(([n, cb]) => {
-      this.audio.addEventListener(n, cb);
-    });
+    this.state.audioElm.src = newSrc;
   }
   render() {
     return (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)(_index2_js__WEBPACK_IMPORTED_MODULE_0__.d, {
-      key: '5d12e01dffab6cea55b1734cd5e3cb6db10fdccb'
+      key: 'c0e2a1a4e47dc74046ffe95f8f4ad619a4cf5f41'
     }, (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", {
-      key: '88a0150898cc580421ec5bb9e7ab03d0e3250e33',
+      key: '6248ea41ebb6c07c0d06d490230dd307e9b7ef74',
       class: "wrapper"
     }, (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", {
-      key: '95573b6aa92ea7f2ad63272096b2b19945a02f1c',
+      key: 'a6dddbb52abf2bde86c7294865bc339c072aa345',
       part: "backdrop"
     }), (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", {
-      key: '38e7154cbb964db6b1186a36b0b4fdbbe2ea7eba',
+      key: '1ebd66fea9671f0378ad0fd4eaa8535e1fbf8675',
       class: "main"
     }, (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)("slot", {
-      key: '6e197251131558e038243a0d38022770d2244c82'
+      key: '5ff7fe1c01a0713caa5cf05fd0a71a93af6dcf93'
     }))));
   }
   static get watchers() {
@@ -1491,7 +1642,7 @@ const DtpcPlayer$1 = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.p)(class DtpcPla
   }
 }, [1, "dtpc-player", {
   "src": [1]
-}, [[0, "toggle-pause", "pauseAudioHandler"], [0, "update-current-time", "updateCurrentTime"], [0, "bind-audio-events", "handleBindAudio"]], {
+}, [[0, "dtpc-control-init", "handleControlInit"]], {
   "src": ["watchSrcHandler"]
 }]);
 function defineCustomElement$1() {
@@ -1530,10 +1681,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _index2_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index2.js */ "../web-components/dist/components/index2.js");
 
-const dtpcProgressBarCss = ":host {\n  --_dtpc-progress-bar--spacing: var(--dtpc-progress-bar--spacing, 0.5rem);\n  --_dtpc-progress-bar--thumb--color: var(--dtpc-progress-bar--thumb--height, var(--_dtpc-player--primary-color));\n  --_dtpc-progress-bar--thumb--size: var(--dtpc-progress-bar--thumb--size, 1.25rem);\n  --_dtpc-progress-bar--progress--color: var(--dtpc-progress-bar--progress--color, currentColor);\n  --_dtpc-progress-bar--track--color: var(--dtpc-progress-bar--track--color, transparent);\n  --_dtpc-progress-bar--track--height: var(--dtpc-progress-bar--track--height, 0.5rem);\n  --_dtpc-progress-bar--track--radius: var(--dtpc-progress-bar--track--radius, 100vw);\n  --_dtpc-progress-bar--track--border-color: var(--dtpc-progress-bar--track--border-color, currentColor);\n  --_dtpc-progress-bar--track--border-width: var(--dtpc-progress-bar--track--border-width, 0.125rem);\n  --_dtpc-progress-bar--track--border-offset: var(--dtpc-progress-bar--track--border-offset, 0.125rem);\n\n  display: contents;\n}\n\n.wrapper {\n  flex-grow: 1;\n  display: flex;\n  align-items: center;\n  gap: var(--_dtpc-progress-bar--spacing);\n}\n\n.track {\n  --_thumb--color: var(--_dtpc-progress-bar--thumb--color);\n  --_thumb--size: var(--_dtpc-progress-bar--thumb--size);\n  --_track--color: var(--_dtpc-progress-bar--track--color);\n  --_track--height: var(--_dtpc-progress-bar--track--height);\n  --_track--radius: var(--_dtpc-progress-bar--track--radius);\n  --_track--border-color: var(--_dtpc-progress-bar--track--border-color);\n  --_track--border-width: var(--_dtpc-progress-bar--track--border-width);\n  --_track--border-offset: var(--_dtpc-progress-bar--track--border-offset);\n  --_track--gutter: calc(var(--_thumb--size) / 4);\n\n  flex-grow: 1;\n  isolation: isolate;\n  display: grid;\n  align-items: center;\n  grid-template-columns: [range-start] var(--_track--gutter) [track-start] 1fr [track-end] var(--_track--gutter) [range-end];\n  grid-template-rows: [range-start] [track-start] var(--_track--height) [track-end] [range-end];\n\n  &::before {\n    content: '';\n\n    grid-area: track;\n    place-self: stretch;\n\n    outline-style: solid;\n    outline-color: var(--_track--border-color);\n    outline-width: var(--_track--border-width);\n    outline-offset: var(--_track--border-offset);\n\n    border-radius: var(--_track--radius);\n\n    background-color: var(--_track--color);\n  }\n}\n\n.progress {\n  --_progress--color: var(--_dtpc-progress-bar--progress--color);\n\n  grid-area: track;\n  place-self: stretch;\n\n  width: calc(var(--progress, 0) * (100% - var(--_track--gutter)) + var(--_track--gutter));\n  min-width: calc(var(--_thumb--size) / 2);\n\n  border-radius: var(--_track--radius);\n\n  background-color: var(--_progress--color);\n\n  &:not([data-show]) {\n    visibility: hidden;\n  }\n}\n\n.range {\n  grid-area: range;\n  display: grid;\n  grid-template-columns: calc(var(--progress, 0) * (100% - var(--_thumb--size))) [thumb-start] var(--_thumb--size) [thumb-end];\n  grid-template-rows: [thumb-start] var(--_track--height) [thumb-end];\n  align-items: center;\n  justify-items: center;\n\n  min-width: var(--_track--height);\n}\n\n.thumb {\n  grid-area: thumb;\n  display: grid;\n  aspect-ratio: 1;\n  width: var(--_thumb--size);\n\n  &::after {\n    content: '';\n\n    transition-property: scale, opacity;\n    transition-duration: 200ms;\n    transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);\n\n    display: block;\n    scale: 0;\n    opacity: 0;\n\n    border-radius: 100vw;\n\n    background-color: var(--_thumb--color);\n  }\n\n  .wrapper:where(:hover, :focus-within) & {\n    &::after {\n      scale: 1;\n      opacity: 1;\n    }\n  }\n}\n\ninput {\n  grid-area: range;\n\n  outline: 0;\n  border: 0;\n  margin: 0;\n  padding: 0;\n  opacity: 0;\n\n  /* Chrome */\n  @media screen and (-webkit-min-device-pixel-ratio: 0) {\n    & {\n      appearance: none;\n      height: var(--_track--height);\n      background-color: transparent;\n    }\n    &::-webkit-slider-runnable-track {\n      appearance: none;\n      position: relative;\n      height: var(--_track--height);\n    }\n    &::-webkit-slider-thumb {\n      appearance: none;\n      position: relative;\n      display: block;\n      top: 50%;\n      left: 0;\n      translate: 0 -50%;\n      aspect-ratio: 1;\n      width: var(--_thumb--size);\n      height: auto;\n      cursor: ew-resize;\n    }\n  }\n}\n";
+const dtpcProgressBarCss = ":host {\n  --_dtpc-progress-bar--spacing: var(--dtpc-progress-bar--spacing, 0.5rem);\n  --_dtpc-progress-bar--scrubber--color: var(--dtpc-progress-bar--scrubber--color, var(--_dtpc-player--surface, white));\n  --_dtpc-progress-bar--scrubber--size: var(--dtpc-progress-bar--scrubber--size, 1.25rem);\n  --_dtpc-progress-bar--scrubber--border-color: var(--dtpc-progress-bar--scrubber--border-color, var(--_dtpc-player--foreground, currentColor));\n  --_dtpc-progress-bar--scrubber--border-width: var(--dtpc-progress-bar--scrubber--border-width, 0.125rem);\n  --_dtpc-progress-bar--scrubber--border-radius: var(--dtpc-progress-bar--scrubber--border-radius, 100vw);\n  --_dtpc-progress-bar--progress--color: var(--dtpc-progress-bar--progress--color, var(--_dtpc-player--foreground, currentColor));\n  --_dtpc-progress-bar--track--color: var(--dtpc-progress-bar--track--color, var(--_dtpc-player--surface, transparent));\n  --_dtpc-progress-bar--track--height: var(--dtpc-progress-bar--track--height, 0.5rem);\n  --_dtpc-progress-bar--track--radius: var(--dtpc-progress-bar--track--radius, 100vw);\n  --_dtpc-progress-bar--track--border-color: var(--dtpc-progress-bar--track--border-color, var(--_dtpc-player--foreground, currentColor));\n  --_dtpc-progress-bar--track--border-width: var(--dtpc-progress-bar--track--border-width, 0.125rem);\n  --_dtpc-progress-bar--track--border-offset: var(--dtpc-progress-bar--track--border-offset, 0.125rem);\n  --_dtpc-progress-bar--focus-ring-color: var(--dtpc-progress-bar--focus-ring-color, var(--_dtpc-player--highlight));\n  --_dtpc-progress-bar--focus-ring-offset: var(--dtpc-progress-bar--focus-ring-offset, 0.125rem);\n  --_dtpc-progress-bar--focus-ring-width: var(--dtpc-progress-bar--focus-ring-width, 2px);\n\n  display: contents;\n}\n\n.wrapper {\n  flex-grow: 1;\n  display: flex;\n  align-items: center;\n  gap: var(--_dtpc-progress-bar--spacing);\n}\n\n.track {\n  --_scrubber--color: var(--_dtpc-progress-bar--scrubber--color);\n  --_scrubber--size: var(--_dtpc-progress-bar--scrubber--size);\n  --_scrubber--border-color: var(--_dtpc-progress-bar--scrubber--border-color);\n  --_scrubber--border-width: var(--_dtpc-progress-bar--scrubber--border-width);\n  --_scrubber--border-radius: var(--_dtpc-progress-bar--scrubber--border-radius);\n  --_scrubber--focus-ring-color: var(--_dtpc-progress-bar--focus-ring-color);\n  --_scrubber--focus-ring-offset: var(--_dtpc-progress-bar--focus-ring-offset);\n  --_scrubber--focus-ring-width: var(--_dtpc-progress-bar--focus-ring-width);\n  --_track--color: var(--_dtpc-progress-bar--track--color);\n  --_track--height: var(--_dtpc-progress-bar--track--height);\n  --_track--radius: var(--_dtpc-progress-bar--track--radius);\n  --_track--border-color: var(--_dtpc-progress-bar--track--border-color);\n  --_track--border-width: var(--_dtpc-progress-bar--track--border-width);\n  --_track--border-offset: var(--_dtpc-progress-bar--track--border-offset);\n  --_track--gutter: calc(var(--_scrubber--size) / 4);\n\n  flex-grow: 1;\n  isolation: isolate;\n  display: grid;\n  align-items: center;\n  grid-template-columns: [range-start] var(--_track--gutter) [track-start] 1fr [track-end] var(--_track--gutter) [range-end];\n  grid-template-rows: [range-start] [track-start] var(--_track--height) [track-end] [range-end];\n\n  &::before {\n    content: '';\n\n    grid-area: track;\n    place-self: stretch;\n\n    outline-style: solid;\n    outline-color: var(--_track--border-color);\n    outline-width: var(--_track--border-width);\n    outline-offset: var(--_track--border-offset);\n\n    border-radius: var(--_track--radius);\n\n    background-color: var(--_track--color);\n  }\n}\n\n.progress {\n  --_progress--color: var(--_dtpc-progress-bar--progress--color);\n\n  grid-area: track;\n  place-self: stretch;\n\n  width: calc(var(--progress, 0) * (100% - var(--_track--gutter)) + var(--_track--gutter));\n  min-width: calc(var(--_scrubber--size) / 2);\n\n  border-radius: var(--_track--radius);\n\n  background-color: var(--_progress--color);\n\n  &:not([data-show]) {\n    visibility: hidden;\n  }\n}\n\n.range {\n  grid-area: range;\n  display: grid;\n  grid-template-columns: calc(var(--progress, 0) * (100% - var(--_scrubber--size))) [thumb-start] var(--_scrubber--size) [thumb-end];\n  grid-template-rows: [thumb-start] var(--_track--height) [thumb-end];\n  align-items: center;\n  justify-items: center;\n\n  min-width: var(--_track--height);\n}\n\n.scrubber {\n  grid-area: thumb;\n  display: grid;\n  aspect-ratio: 1;\n  width: var(--_scrubber--size);\n\n  &::after {\n    content: '';\n\n    transition-property: scale, opacity;\n    transition-duration: 200ms;\n    transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);\n\n    display: block;\n    scale: 0;\n    opacity: 0;\n\n    border-style: solid;\n    border-color: var(--_scrubber--border-color);\n    border-width: var(--_scrubber--border-width);\n    border-radius: var(--_scrubber--border-radius);\n\n    background-color: var(--_scrubber--color);\n  }\n\n  .wrapper:where(:hover, :focus-within) & {\n    &::after {\n      scale: 1;\n      opacity: 1;\n    }\n  }\n\n  .wrapper:has(input:focus-visible) & {\n    &::after {\n      outline-style: solid;\n      outline-offset: var(--_scrubber--focus-ring-offset);\n      outline-color: var(--_scrubber--focus-ring-color);\n      outline-width: var(--_scrubber--focus-ring-width);\n    }\n  }\n}\n\ninput {\n  grid-area: range;\n\n  outline: 0;\n  border: 0;\n  margin: 0;\n  padding: 0;\n  opacity: 0;\n\n  /* Chrome */\n  @media screen and (-webkit-min-device-pixel-ratio: 0) {\n    & {\n      appearance: none;\n      height: var(--_track--height);\n      background-color: transparent;\n    }\n    &::-webkit-slider-runnable-track {\n      appearance: none;\n      position: relative;\n      height: var(--_track--height);\n    }\n    &::-webkit-slider-thumb {\n      appearance: none;\n      position: relative;\n      display: block;\n      top: 50%;\n      left: 0;\n      translate: 0 -50%;\n      aspect-ratio: 1;\n      width: var(--_scrubber--size);\n      height: auto;\n      cursor: ew-resize;\n    }\n  }\n}\n";
 const DtpcProgressBar$1 = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.p)(class DtpcProgressBar extends _index2_js__WEBPACK_IMPORTED_MODULE_0__.H {
   constructor() {
     super();
+    Object.defineProperty(this, "state", {
+      enumerable: true,
+      configurable: true,
+      writable: true,
+      value: void 0
+    });
     Object.defineProperty(this, "duration", {
       enumerable: true,
       configurable: true,
@@ -1558,13 +1715,7 @@ const DtpcProgressBar$1 = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.p)(class Dt
       writable: true,
       value: void 0
     });
-    Object.defineProperty(this, "bindAudioEvents", {
-      enumerable: true,
-      configurable: true,
-      writable: true,
-      value: void 0
-    });
-    Object.defineProperty(this, "updateCurrentTime", {
+    Object.defineProperty(this, "initControl", {
       enumerable: true,
       configurable: true,
       writable: true,
@@ -1572,20 +1723,24 @@ const DtpcProgressBar$1 = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.p)(class Dt
     });
     this.__registerHost();
     this.__attachShadow();
-    this.bindAudioEvents = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.c)(this, "bind-audio-events", 5);
-    this.updateCurrentTime = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.c)(this, "update-current-time", 5);
+    this.initControl = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.c)(this, "dtpc-control-init", 7);
   }
-  connectedCallback() {
-    this.audioDuration = this.duration;
+  componentWillLoad() {
+    const self = this;
+    this.initControl.emit(state => self.state = state);
   }
   componentDidLoad() {
-    (self => self.bindAudioEvents.emit([['loadedmetadata', e => {
+    const self = this;
+    this.state.audioElm.addEventListener('loadedmetadata', e => {
       self.handleLoadedMetaData(e);
-    }], ['timeupdate', e => {
+    });
+    this.state.audioElm.addEventListener('timeupdate', e => {
       self.handleTimeUpdate(e);
-    }]]))(this);
+    });
+    this.audioDuration = this.state.audioElm.duration || this.duration;
   }
   handleLoadedMetaData(event) {
+    this.currentTime = event.target.currentTime;
     this.audioDuration = event.target.duration;
   }
   handleTimeUpdate(event) {
@@ -1596,46 +1751,45 @@ const DtpcProgressBar$1 = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.p)(class Dt
       value
     } = event.target;
     const newTime = parseFloat(value);
-    console.log(value, newTime);
+    this.state.seekTime = newTime;
     this.seekTime = newTime;
   }
   handleChange() {
     this.currentTime = this.seekTime;
     this.seekTime = 0;
-    this.updateCurrentTime.emit(this.currentTime);
+    this.state.audioElm.currentTime = this.currentTime;
+    this.state.seekTime = 0;
   }
   render() {
-    const progress = this.audioDuration && (this.seekTime || this.currentTime) / this.audioDuration;
+    const time = this.seekTime || this.currentTime;
+    const progress = this.audioDuration && time / this.audioDuration;
     return (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)(_index2_js__WEBPACK_IMPORTED_MODULE_0__.d, {
-      key: '226053709c6fbc5168b3402a593259e231011263',
+      key: 'a878792cd354dbde5677e654ac1e429e001036cf'
+    }, (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", {
+      key: 'fe11722f2ad0509dab89063ef82c6bafccc508f4',
+      class: "wrapper",
       "aria-label": "Seek slider",
       "aria-valuemin": "0",
       "aria-valuemax": this.audioDuration,
-      "aria-valuenow": this.currentTime
+      "aria-valuenow": time
     }, (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", {
-      key: '277d78b51808995ef9c2dce320e4b4007261cb71',
-      class: "wrapper"
-    }, (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)("slot", {
-      key: '300f2b1b6c9e400be7ca4fc37f7c094472684aaf',
-      name: "before"
-    }), (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", {
-      key: 'e97917b1e07a7ad9eb8b2f95e30b41540d70f445',
+      key: '088708368078564a9a19e2de63121f0b1a686474',
       class: "track",
       style: {
         '--progress': `${progress}`
       }
     }, (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", {
-      key: '55803cf5e8d8dc27db0953c2fc3ab45e8d0bbfa1',
+      key: 'd835fd5cd9bf6b19537591763249cef785134ed9',
       class: "progress",
       "data-show": !!progress
     }), (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", {
-      key: '5d12af86af0caed926d0d75ff98167c395bd73c5',
+      key: 'b494c88d27eb33554ba85665944e9268b0b1e79b',
       class: "range"
     }, (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", {
-      key: '6160913d7dbaf9f019e2e297eae19ac9381c5395',
-      class: "thumb"
+      key: '2d281c4c60606a08d49e1c6fb1afe0855d5e2015',
+      class: "scrubber"
     })), (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)("input", {
-      key: 'c714f4e7c5b715af1c55f8ea3f19a30cfe8466e3',
+      key: '40e972597dc239feb5872741266619855ed7b233',
       tabindex: 0,
       type: "range",
       disabled: !this.audioDuration,
@@ -1643,13 +1797,10 @@ const DtpcProgressBar$1 = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.p)(class Dt
       min: 0,
       max: this.audioDuration,
       step: 1,
-      value: this.seekTime || this.currentTime,
+      value: time,
       onInput: e => this.handleInput(e),
       onChange: () => this.handleChange()
-    })), (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)("slot", {
-      key: 'b7cd70d4b372f5243f64cf58844ddfc365691bb7',
-      name: "before"
-    })));
+    }))));
   }
   static get style() {
     return dtpcProgressBarCss;
@@ -1678,6 +1829,314 @@ function defineCustomElement$1() {
 defineCustomElement$1(DtpcProgressBar$1);
 const DtpcProgressBar = DtpcProgressBar$1;
 const defineCustomElement = defineCustomElement$1;
+
+
+/***/ }),
+
+/***/ "../web-components/dist/components/dtpc-time-current.js":
+/*!**************************************************************!*\
+  !*** ../web-components/dist/components/dtpc-time-current.js ***!
+  \**************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   DtpcTimeCurrent: () => (/* binding */ DtpcTimeCurrent),
+/* harmony export */   defineCustomElement: () => (/* binding */ defineCustomElement)
+/* harmony export */ });
+/* harmony import */ var _dtpc_time_current2_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./dtpc-time-current2.js */ "../web-components/dist/components/dtpc-time-current2.js");
+
+const DtpcTimeCurrent = _dtpc_time_current2_js__WEBPACK_IMPORTED_MODULE_0__.D;
+const defineCustomElement = _dtpc_time_current2_js__WEBPACK_IMPORTED_MODULE_0__.d;
+
+
+/***/ }),
+
+/***/ "../web-components/dist/components/dtpc-time-current2.js":
+/*!***************************************************************!*\
+  !*** ../web-components/dist/components/dtpc-time-current2.js ***!
+  \***************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   D: () => (/* binding */ DtpcTimeCurrent),
+/* harmony export */   d: () => (/* binding */ defineCustomElement)
+/* harmony export */ });
+/* harmony import */ var _index2_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index2.js */ "../web-components/dist/components/index2.js");
+/* harmony import */ var _index3_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./index3.js */ "../web-components/dist/components/index3.js");
+
+
+const dtpcTimeCurrentCss = ":host{--_dtpc-time-current--color:var(--dtpc-time-current--color, var(--_dtpc-player--time--color, currentColor));--_dtpc-time-current--font-family:var(--dtpc-time-current--font-family, var(--_dtpc-player--time--font-family, inherit));--_dtpc-time-current--font-size:var(--dtpc-time-current--font-size, var(--_dtpc-player--time--font-size, inherit));--_dtpc-time-current--font-weight:var(--dtpc-time-current--font-weight, var(--_dtpc-player--time--font-weight, inherit));color:var(--_dtpc-time-current--color);font-family:var(--_dtpc-time-current--font-family);font-size:var(--_dtpc-time-current--font-size);font-weight:var(--_dtpc-time-current--font-weight)}";
+const DtpcTimeCurrent = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.p)(class DtpcTimeCurrent extends _index2_js__WEBPACK_IMPORTED_MODULE_0__.H {
+  constructor() {
+    super();
+    Object.defineProperty(this, "state", {
+      enumerable: true,
+      configurable: true,
+      writable: true,
+      value: void 0
+    });
+    Object.defineProperty(this, "currentTime", {
+      enumerable: true,
+      configurable: true,
+      writable: true,
+      value: 0
+    });
+    Object.defineProperty(this, "initControl", {
+      enumerable: true,
+      configurable: true,
+      writable: true,
+      value: void 0
+    });
+    this.__registerHost();
+    this.__attachShadow();
+    this.initControl = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.c)(this, "dtpc-control-init", 7);
+  }
+  componentWillLoad() {
+    const self = this;
+    this.initControl.emit(state => self.state = state);
+  }
+  componentDidLoad() {
+    const self = this;
+    this.state.audioElm.addEventListener('timeupdate', e => {
+      self.handleTimeUpdate(e);
+    });
+  }
+  handleTimeUpdate(event) {
+    this.currentTime = event.target.currentTime;
+  }
+  render() {
+    const time = this.state.seekTime || this.state.audioElm.currentTime;
+    const displayTime = (0,_index3_js__WEBPACK_IMPORTED_MODULE_1__.f)(time);
+    return (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)(_index2_js__WEBPACK_IMPORTED_MODULE_0__.d, {
+      key: '11618c4cbd34d68dff73afb3be2fd3c3dcf69a90'
+    }, displayTime);
+  }
+  static get style() {
+    return dtpcTimeCurrentCss;
+  }
+}, [1, "dtpc-time-current", {
+  "currentTime": [32]
+}]);
+function defineCustomElement() {
+  if (typeof customElements === "undefined") {
+    return;
+  }
+  const components = ["dtpc-time-current"];
+  components.forEach(tagName => {
+    switch (tagName) {
+      case "dtpc-time-current":
+        if (!customElements.get(tagName)) {
+          customElements.define(tagName, DtpcTimeCurrent);
+        }
+        break;
+    }
+  });
+}
+defineCustomElement(DtpcTimeCurrent);
+
+
+/***/ }),
+
+/***/ "../web-components/dist/components/dtpc-time-display.js":
+/*!**************************************************************!*\
+  !*** ../web-components/dist/components/dtpc-time-display.js ***!
+  \**************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   DtpcTimeDisplay: () => (/* binding */ DtpcTimeDisplay),
+/* harmony export */   defineCustomElement: () => (/* binding */ defineCustomElement)
+/* harmony export */ });
+/* harmony import */ var _index2_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index2.js */ "../web-components/dist/components/index2.js");
+/* harmony import */ var _dtpc_time_current2_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./dtpc-time-current2.js */ "../web-components/dist/components/dtpc-time-current2.js");
+/* harmony import */ var _dtpc_time_duration2_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./dtpc-time-duration2.js */ "../web-components/dist/components/dtpc-time-duration2.js");
+
+
+
+const dtpcTimeDisplayCss = ":host{--_dtpc-time-display--spacing:var(--dtpc-time-display--spacing, 0.25rem);color:var(--_dtpc-player--time--color, currentColor);font-family:var(--_dtpc-player--time--font-family, inherit);font-size:var(--_dtpc-player--time--font-size, inherit);font-weight:var(--_dtpc-player--time--font-weight, inherit)}.wrapper{--_spacing:var(--_dtpc-time-display--spacing);display:flex;align-items:baseline;gap:var(--_spacing)}";
+const DtpcTimeDisplay$1 = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.p)(class DtpcTimeDisplay extends _index2_js__WEBPACK_IMPORTED_MODULE_0__.H {
+  constructor() {
+    super();
+    Object.defineProperty(this, "duration", {
+      enumerable: true,
+      configurable: true,
+      writable: true,
+      value: 0
+    });
+    this.__registerHost();
+    this.__attachShadow();
+  }
+  render() {
+    return (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)(_index2_js__WEBPACK_IMPORTED_MODULE_0__.d, {
+      key: '8f8ab9f247ce596f7443d76fdbade7db06a7d6d0'
+    }, (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", {
+      key: '29340255b1828d3914035e1482d74aebd3a18e0a',
+      class: "wrapper"
+    }, (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)("dtpc-time-current", {
+      key: '64e0889a4b23b2cd6bce3eb50191530a8113bed2'
+    }), (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)("span", {
+      key: '7161aae4a722a3fb960776af2226c0194b34da5a',
+      class: "separator"
+    }, "/"), (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)("dtpc-time-duration", {
+      key: 'd3afb53e3a50ff3cc2e74af9334e1655efe7db15',
+      duration: this.duration
+    })));
+  }
+  static get style() {
+    return dtpcTimeDisplayCss;
+  }
+}, [1, "dtpc-time-display", {
+  "duration": [2]
+}]);
+function defineCustomElement$1() {
+  if (typeof customElements === "undefined") {
+    return;
+  }
+  const components = ["dtpc-time-display", "dtpc-time-current", "dtpc-time-duration"];
+  components.forEach(tagName => {
+    switch (tagName) {
+      case "dtpc-time-display":
+        if (!customElements.get(tagName)) {
+          customElements.define(tagName, DtpcTimeDisplay$1);
+        }
+        break;
+      case "dtpc-time-current":
+        if (!customElements.get(tagName)) {
+          (0,_dtpc_time_current2_js__WEBPACK_IMPORTED_MODULE_1__.d)();
+        }
+        break;
+      case "dtpc-time-duration":
+        if (!customElements.get(tagName)) {
+          (0,_dtpc_time_duration2_js__WEBPACK_IMPORTED_MODULE_2__.d)();
+        }
+        break;
+    }
+  });
+}
+defineCustomElement$1(DtpcTimeDisplay$1);
+const DtpcTimeDisplay = DtpcTimeDisplay$1;
+const defineCustomElement = defineCustomElement$1;
+
+
+/***/ }),
+
+/***/ "../web-components/dist/components/dtpc-time-duration.js":
+/*!***************************************************************!*\
+  !*** ../web-components/dist/components/dtpc-time-duration.js ***!
+  \***************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   DtpcTimeDuration: () => (/* binding */ DtpcTimeDuration),
+/* harmony export */   defineCustomElement: () => (/* binding */ defineCustomElement)
+/* harmony export */ });
+/* harmony import */ var _dtpc_time_duration2_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./dtpc-time-duration2.js */ "../web-components/dist/components/dtpc-time-duration2.js");
+
+const DtpcTimeDuration = _dtpc_time_duration2_js__WEBPACK_IMPORTED_MODULE_0__.D;
+const defineCustomElement = _dtpc_time_duration2_js__WEBPACK_IMPORTED_MODULE_0__.d;
+
+
+/***/ }),
+
+/***/ "../web-components/dist/components/dtpc-time-duration2.js":
+/*!****************************************************************!*\
+  !*** ../web-components/dist/components/dtpc-time-duration2.js ***!
+  \****************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   D: () => (/* binding */ DtpcTimeDuration),
+/* harmony export */   d: () => (/* binding */ defineCustomElement)
+/* harmony export */ });
+/* harmony import */ var _index2_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index2.js */ "../web-components/dist/components/index2.js");
+/* harmony import */ var _index3_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./index3.js */ "../web-components/dist/components/index3.js");
+
+
+const dtpcTimeDurationCss = ":host{--_dtpc-time-duration--color:var(--dtpc-time-duration--color, var(--_dtpc-player--time--color, currentColor));--_dtpc-time-duration--font-family:var(--dtpc-time-duration--font-family, var(--_dtpc-player--time--font-family, inherit));--_dtpc-time-duration--font-size:var(--dtpc-time-duration--font-size, var(--_dtpc-player--time--font-size, inherit));--_dtpc-time-duration--font-weight:var(--dtpc-time-duration--font-weight, var(--_dtpc-player--time--font-weight, inherit));color:var(--_dtpc-time-duration--color);font-family:var(--_dtpc-time-duration--font-family);font-size:var(--_dtpc-time-duration--font-size);font-weight:var(--_dtpc-time-duration--font-weight)}";
+const DtpcTimeDuration = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.p)(class DtpcTimeDuration extends _index2_js__WEBPACK_IMPORTED_MODULE_0__.H {
+  constructor() {
+    super();
+    Object.defineProperty(this, "state", {
+      enumerable: true,
+      configurable: true,
+      writable: true,
+      value: void 0
+    });
+    Object.defineProperty(this, "duration", {
+      enumerable: true,
+      configurable: true,
+      writable: true,
+      value: 0
+    });
+    Object.defineProperty(this, "audioDuration", {
+      enumerable: true,
+      configurable: true,
+      writable: true,
+      value: this.duration
+    });
+    Object.defineProperty(this, "initControl", {
+      enumerable: true,
+      configurable: true,
+      writable: true,
+      value: void 0
+    });
+    this.__registerHost();
+    this.__attachShadow();
+    this.initControl = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.c)(this, "dtpc-control-init", 7);
+  }
+  componentWillLoad() {
+    const self = this;
+    this.initControl.emit(state => self.state = state);
+  }
+  componentDidLoad() {
+    const self = this;
+    this.state.audioElm.addEventListener('loadedmetadata', e => {
+      self.handleLoadedMetaData(e);
+    });
+    this.audioDuration = this.state.audioElm.duration || this.duration;
+  }
+  handleLoadedMetaData(event) {
+    this.audioDuration = event.target.duration;
+  }
+  render() {
+    const displayDuration = (0,_index3_js__WEBPACK_IMPORTED_MODULE_1__.f)(this.audioDuration);
+    return (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)(_index2_js__WEBPACK_IMPORTED_MODULE_0__.d, {
+      key: 'ba08d84a4a9a58ae578d331c668d1d59cb2692e8'
+    }, displayDuration);
+  }
+  static get style() {
+    return dtpcTimeDurationCss;
+  }
+}, [1, "dtpc-time-duration", {
+  "duration": [2],
+  "audioDuration": [32]
+}]);
+function defineCustomElement() {
+  if (typeof customElements === "undefined") {
+    return;
+  }
+  const components = ["dtpc-time-duration"];
+  components.forEach(tagName => {
+    switch (tagName) {
+      case "dtpc-time-duration":
+        if (!customElements.get(tagName)) {
+          customElements.define(tagName, DtpcTimeDuration);
+        }
+        break;
+    }
+  });
+}
+defineCustomElement(DtpcTimeDuration);
 
 
 /***/ }),
@@ -1716,7 +2175,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _index2_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index2.js */ "../web-components/dist/components/index2.js");
 /* harmony import */ var _lucide_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./lucide.js */ "../web-components/dist/components/lucide.js");
-/* harmony import */ var _attributesToObject_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./attributesToObject.js */ "../web-components/dist/components/attributesToObject.js");
+/* harmony import */ var _index4_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./index4.js */ "../web-components/dist/components/index4.js");
 
 
 
@@ -2210,9 +2669,9 @@ const IconPause = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.p)(class IconPause 
   }
   render() {
     const inner = (0,_lucide_js__WEBPACK_IMPORTED_MODULE_1__.c)(_lucide_js__WEBPACK_IMPORTED_MODULE_1__.P);
-    Object.entries(Object.assign({}, (0,_attributesToObject_js__WEBPACK_IMPORTED_MODULE_2__.a)(this.el), this.getProps())).forEach(([name, value]) => inner.setAttribute(name, value));
+    Object.entries(Object.assign({}, (0,_index4_js__WEBPACK_IMPORTED_MODULE_2__.a)(this.el), this.getProps())).forEach(([name, value]) => inner.setAttribute(name, value));
     return (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)(_index2_js__WEBPACK_IMPORTED_MODULE_0__.d, {
-      key: '97f3d07ea25e9c67440ccfa96b3c9c17654f9d77',
+      key: '30e94ad121b108f268253c140b35879c3bcdc466',
       innerHTML: inner.outerHTML,
       class: "lucide-icon"
     });
@@ -2362,7 +2821,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _index2_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index2.js */ "../web-components/dist/components/index2.js");
 /* harmony import */ var _lucide_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./lucide.js */ "../web-components/dist/components/lucide.js");
-/* harmony import */ var _attributesToObject_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./attributesToObject.js */ "../web-components/dist/components/attributesToObject.js");
+/* harmony import */ var _index4_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./index4.js */ "../web-components/dist/components/index4.js");
 
 
 
@@ -2856,9 +3315,9 @@ const IconPlay = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.p)(class IconPlay ex
   }
   render() {
     const inner = (0,_lucide_js__WEBPACK_IMPORTED_MODULE_1__.c)(_lucide_js__WEBPACK_IMPORTED_MODULE_1__.a);
-    Object.entries(Object.assign({}, (0,_attributesToObject_js__WEBPACK_IMPORTED_MODULE_2__.a)(this.el), this.getProps())).forEach(([name, value]) => inner.setAttribute(name, value));
+    Object.entries(Object.assign({}, (0,_index4_js__WEBPACK_IMPORTED_MODULE_2__.a)(this.el), this.getProps())).forEach(([name, value]) => inner.setAttribute(name, value));
     return (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)(_index2_js__WEBPACK_IMPORTED_MODULE_0__.d, {
-      key: '9a18c526ec246310e272d8b2ae369d2ceb0d48ef',
+      key: '8fedae6b21b2163da05e3ea8cf5650927019b5cc',
       innerHTML: inner.outerHTML,
       class: "lucide-icon"
     });
@@ -2988,6 +3447,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   b: () => (/* binding */ setPlatformOptions),
 /* harmony export */   c: () => (/* binding */ createEvent),
 /* harmony export */   d: () => (/* binding */ Host),
+/* harmony export */   e: () => (/* binding */ getRenderingRef),
+/* harmony export */   f: () => (/* binding */ forceUpdate),
 /* harmony export */   g: () => (/* binding */ getAssetPath),
 /* harmony export */   h: () => (/* binding */ h),
 /* harmony export */   p: () => (/* binding */ proxyCustomElement),
@@ -6777,6 +7238,77 @@ var insertChildVNodeAnnotations = (doc, vnodeChild, cmpData, hostId, depth, inde
 
 /***/ }),
 
+/***/ "../web-components/dist/components/index3.js":
+/*!***************************************************!*\
+  !*** ../web-components/dist/components/index3.js ***!
+  \***************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   c: () => (/* binding */ cn),
+/* harmony export */   f: () => (/* binding */ formatDuration)
+/* harmony export */ });
+/* harmony import */ var _index4_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index4.js */ "../web-components/dist/components/index4.js");
+
+function r(e) {
+  var t,
+    f,
+    n = "";
+  if ("string" == typeof e || "number" == typeof e) n += e;else if ("object" == typeof e) if (Array.isArray(e)) {
+    var o = e.length;
+    for (t = 0; t < o; t++) e[t] && (f = r(e[t])) && (n && (n += " "), n += f);
+  } else for (f in e) e[f] && (n && (n += " "), n += f);
+  return n;
+}
+function clsx() {
+  for (var e, t, f = 0, n = "", o = arguments.length; f < o; f++) (e = arguments[f]) && (t = r(e)) && (n && (n += " "), n += t);
+  return n;
+}
+function cn(...inputs) {
+  return clsx(inputs);
+}
+const formatDuration = inputSeconds => {
+  let duration = '00:00';
+  if (typeof inputSeconds === 'string' && inputSeconds.indexOf(':') > -1) {
+    return inputSeconds;
+  }
+  const totalSeconds = typeof inputSeconds === 'string' ? parseInt(inputSeconds, 10) : inputSeconds;
+  if (typeof totalSeconds === 'number' && totalSeconds > 0) {
+    const hours = Math.floor(totalSeconds / 3600);
+    const minutes = Math.floor(totalSeconds % 3600 / 60);
+    const seconds = Math.round(totalSeconds % 60);
+    duration = [...(hours ? [hours] : []), String(minutes).padStart(2, '0'), String(seconds).padStart(2, '0')].join(':');
+  }
+  return duration;
+};
+
+
+/***/ }),
+
+/***/ "../web-components/dist/components/index4.js":
+/*!***************************************************!*\
+  !*** ../web-components/dist/components/index4.js ***!
+  \***************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   a: () => (/* binding */ attributesToObject)
+/* harmony export */ });
+function attributesToObject(el) {
+  let result = {};
+  for (let i = 0; i < el.attributes.length; i++) {
+    result[el.attributes[i].name] = el.attributes[i].value;
+  }
+  return result;
+}
+
+
+/***/ }),
+
 /***/ "../web-components/dist/components/lucide.js":
 /*!***************************************************!*\
   !*** ../web-components/dist/components/lucide.js ***!
@@ -6790,8 +7322,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   a: () => (/* binding */ Play),
 /* harmony export */   c: () => (/* binding */ createElement)
 /* harmony export */ });
-/* harmony import */ var _attributesToObject_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./attributesToObject.js */ "../web-components/dist/components/attributesToObject.js");
-
 const defaultAttributes = {
   xmlns: "http://www.w3.org/2000/svg",
   width: 24,
@@ -25795,6 +26325,36 @@ var map = {
 		7,
 		"web-components_dist_dovetail-podcasts-player-web-components_dtpc-progress-bar_entry_js_map"
 	],
+	"./dtpc-time-current.entry.js": [
+		"../web-components/dist/dovetail-podcasts-player-web-components/dtpc-time-current.entry.js",
+		9,
+		"web-components_dist_dovetail-podcasts-player-web-components_dtpc-time-current_entry_js"
+	],
+	"./dtpc-time-current.entry.js.map": [
+		"../web-components/dist/dovetail-podcasts-player-web-components/dtpc-time-current.entry.js.map",
+		7,
+		"web-components_dist_dovetail-podcasts-player-web-components_dtpc-time-current_entry_js_map"
+	],
+	"./dtpc-time-display.entry.js": [
+		"../web-components/dist/dovetail-podcasts-player-web-components/dtpc-time-display.entry.js",
+		9,
+		"web-components_dist_dovetail-podcasts-player-web-components_dtpc-time-display_entry_js"
+	],
+	"./dtpc-time-display.entry.js.map": [
+		"../web-components/dist/dovetail-podcasts-player-web-components/dtpc-time-display.entry.js.map",
+		7,
+		"web-components_dist_dovetail-podcasts-player-web-components_dtpc-time-display_entry_js_map"
+	],
+	"./dtpc-time-duration.entry.js": [
+		"../web-components/dist/dovetail-podcasts-player-web-components/dtpc-time-duration.entry.js",
+		9,
+		"web-components_dist_dovetail-podcasts-player-web-components_dtpc-time-duration_entry_js"
+	],
+	"./dtpc-time-duration.entry.js.map": [
+		"../web-components/dist/dovetail-podcasts-player-web-components/dtpc-time-duration.entry.js.map",
+		7,
+		"web-components_dist_dovetail-podcasts-player-web-components_dtpc-time-duration_entry_js_map"
+	],
 	"./icon-pause.entry.js": [
 		"../web-components/dist/dovetail-podcasts-player-web-components/icon-pause.entry.js",
 		9,
@@ -25861,27 +26421,27 @@ const globalScripts = () => {};
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   setNonce: () => (/* reexport safe */ _index_ZFNzDU8A_js__WEBPACK_IMPORTED_MODULE_0__.s)
+/* harmony export */   setNonce: () => (/* reexport safe */ _index_gWzpa9PG_js__WEBPACK_IMPORTED_MODULE_0__.s)
 /* harmony export */ });
-/* harmony import */ var _index_ZFNzDU8A_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index-ZFNzDU8A.js */ "../web-components/dist/dovetail-podcasts-player-web-components/index-ZFNzDU8A.js");
+/* harmony import */ var _index_gWzpa9PG_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index-gWzpa9PG.js */ "../web-components/dist/dovetail-podcasts-player-web-components/index-gWzpa9PG.js");
 /* harmony import */ var _app_globals_DQuL1Twl_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./app-globals-DQuL1Twl.js */ "../web-components/dist/dovetail-podcasts-player-web-components/app-globals-DQuL1Twl.js");
 
 
 
 var patchBrowser = () => {
-  if (_index_ZFNzDU8A_js__WEBPACK_IMPORTED_MODULE_0__.B.isDev && !_index_ZFNzDU8A_js__WEBPACK_IMPORTED_MODULE_0__.B.isTesting) {
-    (0,_index_ZFNzDU8A_js__WEBPACK_IMPORTED_MODULE_0__.c)("Running in development mode.");
+  if (_index_gWzpa9PG_js__WEBPACK_IMPORTED_MODULE_0__.B.isDev && !_index_gWzpa9PG_js__WEBPACK_IMPORTED_MODULE_0__.B.isTesting) {
+    (0,_index_gWzpa9PG_js__WEBPACK_IMPORTED_MODULE_0__.c)("Running in development mode.");
   }
-  if (_index_ZFNzDU8A_js__WEBPACK_IMPORTED_MODULE_0__.B.cloneNodeFix) {
-    patchCloneNodeFix(_index_ZFNzDU8A_js__WEBPACK_IMPORTED_MODULE_0__.H.prototype);
+  if (_index_gWzpa9PG_js__WEBPACK_IMPORTED_MODULE_0__.B.cloneNodeFix) {
+    patchCloneNodeFix(_index_gWzpa9PG_js__WEBPACK_IMPORTED_MODULE_0__.H.prototype);
   }
-  const scriptElm = _index_ZFNzDU8A_js__WEBPACK_IMPORTED_MODULE_0__.B.scriptDataOpts ? _index_ZFNzDU8A_js__WEBPACK_IMPORTED_MODULE_0__.w.document && Array.from(_index_ZFNzDU8A_js__WEBPACK_IMPORTED_MODULE_0__.w.document.querySelectorAll("script")).find(s => new RegExp(`/${_index_ZFNzDU8A_js__WEBPACK_IMPORTED_MODULE_0__.N}(\\.esm)?\\.js($|\\?|#)`).test(s.src) || s.getAttribute("data-stencil-namespace") === _index_ZFNzDU8A_js__WEBPACK_IMPORTED_MODULE_0__.N) : null;
+  const scriptElm = _index_gWzpa9PG_js__WEBPACK_IMPORTED_MODULE_0__.B.scriptDataOpts ? _index_gWzpa9PG_js__WEBPACK_IMPORTED_MODULE_0__.w.document && Array.from(_index_gWzpa9PG_js__WEBPACK_IMPORTED_MODULE_0__.w.document.querySelectorAll("script")).find(s => new RegExp(`/${_index_gWzpa9PG_js__WEBPACK_IMPORTED_MODULE_0__.N}(\\.esm)?\\.js($|\\?|#)`).test(s.src) || s.getAttribute("data-stencil-namespace") === _index_gWzpa9PG_js__WEBPACK_IMPORTED_MODULE_0__.N) : null;
   const importMeta = "file:///Users/rick/Projects/PRX/dt-plugin-demo-wordpress/wordpress/wp-content/plugins/dovetail-podcasts/src/Content/Player/web-components/dist/dovetail-podcasts-player-web-components/dovetail-podcasts-player-web-components.esm.js";
-  const opts = _index_ZFNzDU8A_js__WEBPACK_IMPORTED_MODULE_0__.B.scriptDataOpts ? (scriptElm || {})["data-opts"] || {} : {};
+  const opts = _index_gWzpa9PG_js__WEBPACK_IMPORTED_MODULE_0__.B.scriptDataOpts ? (scriptElm || {})["data-opts"] || {} : {};
   if (importMeta !== "") {
     opts.resourcesUrl = new URL(".", importMeta).href;
   }
-  return (0,_index_ZFNzDU8A_js__WEBPACK_IMPORTED_MODULE_0__.p)(opts);
+  return (0,_index_gWzpa9PG_js__WEBPACK_IMPORTED_MODULE_0__.p)(opts);
 };
 var patchCloneNodeFix = HTMLElementPrototype => {
   const nativeCloneNodeFn = HTMLElementPrototype.cloneNode;
@@ -25903,18 +26463,25 @@ var patchCloneNodeFix = HTMLElementPrototype => {
 };
 patchBrowser().then(async options => {
   await (0,_app_globals_DQuL1Twl_js__WEBPACK_IMPORTED_MODULE_1__.g)();
-  return (0,_index_ZFNzDU8A_js__WEBPACK_IMPORTED_MODULE_0__.b)([["dtpc-play-button", [[1, "dtpc-play-button", {
+  return (0,_index_gWzpa9PG_js__WEBPACK_IMPORTED_MODULE_0__.b)([["dtpc-play-button", [[1, "dtpc-play-button", {
     "iconStyle": [1, "icon-style"],
     "playing": [32]
+  }]]], ["dtpc-time-display", [[1, "dtpc-time-display", {
+    "duration": [2]
   }]]], ["dtpc-player", [[1, "dtpc-player", {
     "src": [1]
-  }, [[0, "toggle-pause", "pauseAudioHandler"], [0, "update-current-time", "updateCurrentTime"], [0, "bind-audio-events", "handleBindAudio"]], {
+  }, [[0, "dtpc-control-init", "handleControlInit"]], {
     "src": ["watchSrcHandler"]
   }]]], ["dtpc-progress-bar", [[1, "dtpc-progress-bar", {
     "duration": [2],
     "audioDuration": [32],
     "currentTime": [32],
     "seekTime": [32]
+  }]]], ["dtpc-time-current", [[1, "dtpc-time-current", {
+    "currentTime": [32]
+  }]]], ["dtpc-time-duration", [[1, "dtpc-time-duration", {
+    "duration": [2],
+    "audioDuration": [32]
   }]]], ["icon-pause", [[0, "icon-pause", {
     "alignmentBaseline": [8, "alignment-baseline"],
     "baselineShift": [8, "baseline-shift"],
@@ -26082,9 +26649,9 @@ patchBrowser().then(async options => {
 
 /***/ }),
 
-/***/ "../web-components/dist/dovetail-podcasts-player-web-components/index-ZFNzDU8A.js":
+/***/ "../web-components/dist/dovetail-podcasts-player-web-components/index-gWzpa9PG.js":
 /*!****************************************************************************************!*\
-  !*** ../web-components/dist/dovetail-podcasts-player-web-components/index-ZFNzDU8A.js ***!
+  !*** ../web-components/dist/dovetail-podcasts-player-web-components/index-gWzpa9PG.js ***!
   \****************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -26098,6 +26665,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   b: () => (/* binding */ bootstrapLazy),
 /* harmony export */   c: () => (/* binding */ consoleDevInfo),
 /* harmony export */   d: () => (/* binding */ Host),
+/* harmony export */   e: () => (/* binding */ getRenderingRef),
+/* harmony export */   f: () => (/* binding */ forceUpdate),
 /* harmony export */   g: () => (/* binding */ getElement),
 /* harmony export */   h: () => (/* binding */ h),
 /* harmony export */   p: () => (/* binding */ promiseResolve),
@@ -29903,6 +30472,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   DtpcPlayButton: () => (/* reexport safe */ _stencil_generated_components__WEBPACK_IMPORTED_MODULE_0__.DtpcPlayButton),
 /* harmony export */   DtpcPlayer: () => (/* reexport safe */ _stencil_generated_components__WEBPACK_IMPORTED_MODULE_0__.DtpcPlayer),
 /* harmony export */   DtpcProgressBar: () => (/* reexport safe */ _stencil_generated_components__WEBPACK_IMPORTED_MODULE_0__.DtpcProgressBar),
+/* harmony export */   DtpcTimeCurrent: () => (/* reexport safe */ _stencil_generated_components__WEBPACK_IMPORTED_MODULE_0__.DtpcTimeCurrent),
+/* harmony export */   DtpcTimeDisplay: () => (/* reexport safe */ _stencil_generated_components__WEBPACK_IMPORTED_MODULE_0__.DtpcTimeDisplay),
+/* harmony export */   DtpcTimeDuration: () => (/* reexport safe */ _stencil_generated_components__WEBPACK_IMPORTED_MODULE_0__.DtpcTimeDuration),
 /* harmony export */   IconPause: () => (/* reexport safe */ _stencil_generated_components__WEBPACK_IMPORTED_MODULE_0__.IconPause),
 /* harmony export */   IconPlay: () => (/* reexport safe */ _stencil_generated_components__WEBPACK_IMPORTED_MODULE_0__.IconPlay)
 /* harmony export */ });
@@ -29923,6 +30495,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   DtpcPlayButton: () => (/* binding */ DtpcPlayButton),
 /* harmony export */   DtpcPlayer: () => (/* binding */ DtpcPlayer),
 /* harmony export */   DtpcProgressBar: () => (/* binding */ DtpcProgressBar),
+/* harmony export */   DtpcTimeCurrent: () => (/* binding */ DtpcTimeCurrent),
+/* harmony export */   DtpcTimeDisplay: () => (/* binding */ DtpcTimeDisplay),
+/* harmony export */   DtpcTimeDuration: () => (/* binding */ DtpcTimeDuration),
 /* harmony export */   IconPause: () => (/* binding */ IconPause),
 /* harmony export */   IconPlay: () => (/* binding */ IconPlay)
 /* harmony export */ });
@@ -29930,11 +30505,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var dovetail_podcasts_player_web_components_dist_components_dtpc_play_button_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! dovetail-podcasts-player-web-components/dist/components/dtpc-play-button.js */ "../web-components/dist/components/dtpc-play-button.js");
 /* harmony import */ var dovetail_podcasts_player_web_components_dist_components_dtpc_player_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! dovetail-podcasts-player-web-components/dist/components/dtpc-player.js */ "../web-components/dist/components/dtpc-player.js");
 /* harmony import */ var dovetail_podcasts_player_web_components_dist_components_dtpc_progress_bar_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! dovetail-podcasts-player-web-components/dist/components/dtpc-progress-bar.js */ "../web-components/dist/components/dtpc-progress-bar.js");
-/* harmony import */ var dovetail_podcasts_player_web_components_dist_components_icon_pause_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! dovetail-podcasts-player-web-components/dist/components/icon-pause.js */ "../web-components/dist/components/icon-pause.js");
-/* harmony import */ var dovetail_podcasts_player_web_components_dist_components_icon_play_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! dovetail-podcasts-player-web-components/dist/components/icon-play.js */ "../web-components/dist/components/icon-play.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var dovetail_podcasts_player_web_components_dist_components_dtpc_time_current_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! dovetail-podcasts-player-web-components/dist/components/dtpc-time-current.js */ "../web-components/dist/components/dtpc-time-current.js");
+/* harmony import */ var dovetail_podcasts_player_web_components_dist_components_dtpc_time_display_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! dovetail-podcasts-player-web-components/dist/components/dtpc-time-display.js */ "../web-components/dist/components/dtpc-time-display.js");
+/* harmony import */ var dovetail_podcasts_player_web_components_dist_components_dtpc_time_duration_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! dovetail-podcasts-player-web-components/dist/components/dtpc-time-duration.js */ "../web-components/dist/components/dtpc-time-duration.js");
+/* harmony import */ var dovetail_podcasts_player_web_components_dist_components_icon_pause_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! dovetail-podcasts-player-web-components/dist/components/icon-pause.js */ "../web-components/dist/components/icon-pause.js");
+/* harmony import */ var dovetail_podcasts_player_web_components_dist_components_icon_play_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! dovetail-podcasts-player-web-components/dist/components/icon-play.js */ "../web-components/dist/components/icon-play.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_9__);
 'use client';
+
+
+
 
 
 
@@ -29946,43 +30527,66 @@ __webpack_require__.r(__webpack_exports__);
 const DtpcPlayButton = (0,_stencil_react_output_target_runtime__WEBPACK_IMPORTED_MODULE_0__.createComponent)({
   tagName: 'dtpc-play-button',
   elementClass: dovetail_podcasts_player_web_components_dist_components_dtpc_play_button_js__WEBPACK_IMPORTED_MODULE_1__.DtpcPlayButton,
-  react: (react__WEBPACK_IMPORTED_MODULE_6___default()),
+  react: (react__WEBPACK_IMPORTED_MODULE_9___default()),
   events: {
-    onBindAudioEvents: 'bind-audio-events',
-    onTogglePause: 'toggle-pause'
+    onDtpcControlInit: 'dtpc-control-init'
   },
   defineCustomElement: dovetail_podcasts_player_web_components_dist_components_dtpc_play_button_js__WEBPACK_IMPORTED_MODULE_1__.defineCustomElement
 });
 const DtpcPlayer = (0,_stencil_react_output_target_runtime__WEBPACK_IMPORTED_MODULE_0__.createComponent)({
   tagName: 'dtpc-player',
   elementClass: dovetail_podcasts_player_web_components_dist_components_dtpc_player_js__WEBPACK_IMPORTED_MODULE_2__.DtpcPlayer,
-  react: (react__WEBPACK_IMPORTED_MODULE_6___default()),
+  react: (react__WEBPACK_IMPORTED_MODULE_9___default()),
   events: {},
   defineCustomElement: dovetail_podcasts_player_web_components_dist_components_dtpc_player_js__WEBPACK_IMPORTED_MODULE_2__.defineCustomElement
 });
 const DtpcProgressBar = (0,_stencil_react_output_target_runtime__WEBPACK_IMPORTED_MODULE_0__.createComponent)({
   tagName: 'dtpc-progress-bar',
   elementClass: dovetail_podcasts_player_web_components_dist_components_dtpc_progress_bar_js__WEBPACK_IMPORTED_MODULE_3__.DtpcProgressBar,
-  react: (react__WEBPACK_IMPORTED_MODULE_6___default()),
+  react: (react__WEBPACK_IMPORTED_MODULE_9___default()),
   events: {
-    onBindAudioEvents: 'bind-audio-events',
-    onUpdateCurrentTime: 'update-current-time'
+    onDtpcControlInit: 'dtpc-control-init'
   },
   defineCustomElement: dovetail_podcasts_player_web_components_dist_components_dtpc_progress_bar_js__WEBPACK_IMPORTED_MODULE_3__.defineCustomElement
 });
+const DtpcTimeCurrent = (0,_stencil_react_output_target_runtime__WEBPACK_IMPORTED_MODULE_0__.createComponent)({
+  tagName: 'dtpc-time-current',
+  elementClass: dovetail_podcasts_player_web_components_dist_components_dtpc_time_current_js__WEBPACK_IMPORTED_MODULE_4__.DtpcTimeCurrent,
+  react: (react__WEBPACK_IMPORTED_MODULE_9___default()),
+  events: {
+    onDtpcControlInit: 'dtpc-control-init'
+  },
+  defineCustomElement: dovetail_podcasts_player_web_components_dist_components_dtpc_time_current_js__WEBPACK_IMPORTED_MODULE_4__.defineCustomElement
+});
+const DtpcTimeDisplay = (0,_stencil_react_output_target_runtime__WEBPACK_IMPORTED_MODULE_0__.createComponent)({
+  tagName: 'dtpc-time-display',
+  elementClass: dovetail_podcasts_player_web_components_dist_components_dtpc_time_display_js__WEBPACK_IMPORTED_MODULE_5__.DtpcTimeDisplay,
+  react: (react__WEBPACK_IMPORTED_MODULE_9___default()),
+  events: {},
+  defineCustomElement: dovetail_podcasts_player_web_components_dist_components_dtpc_time_display_js__WEBPACK_IMPORTED_MODULE_5__.defineCustomElement
+});
+const DtpcTimeDuration = (0,_stencil_react_output_target_runtime__WEBPACK_IMPORTED_MODULE_0__.createComponent)({
+  tagName: 'dtpc-time-duration',
+  elementClass: dovetail_podcasts_player_web_components_dist_components_dtpc_time_duration_js__WEBPACK_IMPORTED_MODULE_6__.DtpcTimeDuration,
+  react: (react__WEBPACK_IMPORTED_MODULE_9___default()),
+  events: {
+    onDtpcControlInit: 'dtpc-control-init'
+  },
+  defineCustomElement: dovetail_podcasts_player_web_components_dist_components_dtpc_time_duration_js__WEBPACK_IMPORTED_MODULE_6__.defineCustomElement
+});
 const IconPause = (0,_stencil_react_output_target_runtime__WEBPACK_IMPORTED_MODULE_0__.createComponent)({
   tagName: 'icon-pause',
-  elementClass: dovetail_podcasts_player_web_components_dist_components_icon_pause_js__WEBPACK_IMPORTED_MODULE_4__.IconPause,
-  react: (react__WEBPACK_IMPORTED_MODULE_6___default()),
+  elementClass: dovetail_podcasts_player_web_components_dist_components_icon_pause_js__WEBPACK_IMPORTED_MODULE_7__.IconPause,
+  react: (react__WEBPACK_IMPORTED_MODULE_9___default()),
   events: {},
-  defineCustomElement: dovetail_podcasts_player_web_components_dist_components_icon_pause_js__WEBPACK_IMPORTED_MODULE_4__.defineCustomElement
+  defineCustomElement: dovetail_podcasts_player_web_components_dist_components_icon_pause_js__WEBPACK_IMPORTED_MODULE_7__.defineCustomElement
 });
 const IconPlay = (0,_stencil_react_output_target_runtime__WEBPACK_IMPORTED_MODULE_0__.createComponent)({
   tagName: 'icon-play',
-  elementClass: dovetail_podcasts_player_web_components_dist_components_icon_play_js__WEBPACK_IMPORTED_MODULE_5__.IconPlay,
-  react: (react__WEBPACK_IMPORTED_MODULE_6___default()),
+  elementClass: dovetail_podcasts_player_web_components_dist_components_icon_play_js__WEBPACK_IMPORTED_MODULE_8__.IconPlay,
+  react: (react__WEBPACK_IMPORTED_MODULE_9___default()),
   events: {},
-  defineCustomElement: dovetail_podcasts_player_web_components_dist_components_icon_play_js__WEBPACK_IMPORTED_MODULE_5__.defineCustomElement
+  defineCustomElement: dovetail_podcasts_player_web_components_dist_components_icon_play_js__WEBPACK_IMPORTED_MODULE_8__.defineCustomElement
 });
 
 /***/ }),
@@ -30420,7 +31024,7 @@ module.exports = window["ReactJSXRuntime"];
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames based on template
-/******/ 			return "" + chunkId + ".js?ver=" + {"vendors-node_modules_stencil_react-output-target_dist_ssr_js":"420a85123a82786e2e56","web-components_dist_dovetail-podcasts-player-web-components_dtpc-play-button_entry_js":"4e894141336569fa1e5a","web-components_dist_dovetail-podcasts-player-web-components_dtpc-play-button_entry_js_map":"5bbb991af4940ebf23f8","web-components_dist_dovetail-podcasts-player-web-components_dtpc-player_entry_js":"02ee6f078ca5d2be9845","web-components_dist_dovetail-podcasts-player-web-components_dtpc-player_entry_js_map":"f808ae8e2a96676f835b","web-components_dist_dovetail-podcasts-player-web-components_dtpc-progress-bar_entry_js":"2e523af551fcaaada29e","web-components_dist_dovetail-podcasts-player-web-components_dtpc-progress-bar_entry_js_map":"dc81bd14c01dc3a49103","web-components_dist_dovetail-podcasts-player-web-components_icon-pause_entry_js":"0660132c832eaacc37da","web-components_dist_dovetail-podcasts-player-web-components_icon-pause_entry_js_map":"4e0d650c87cc3bfcc0db","web-components_dist_dovetail-podcasts-player-web-components_icon-play_entry_js":"4591183f33cce9a46a6a","web-components_dist_dovetail-podcasts-player-web-components_icon-play_entry_js_map":"d19c163be96ee039b5d6","vendors-node_modules_html-react-parser_esm_index_mjs":"c8d909fd5406a4303fdc"}[chunkId] + "";
+/******/ 			return "" + chunkId + ".js?ver=" + {"vendors-node_modules_stencil_react-output-target_dist_ssr_js":"420a85123a82786e2e56","web-components_dist_dovetail-podcasts-player-web-components_dtpc-play-button_entry_js":"af69ad8c42e1bf852f27","web-components_dist_dovetail-podcasts-player-web-components_dtpc-play-button_entry_js_map":"5bbb991af4940ebf23f8","web-components_dist_dovetail-podcasts-player-web-components_dtpc-player_entry_js":"5b3ba36179a9fbae5d68","web-components_dist_dovetail-podcasts-player-web-components_dtpc-player_entry_js_map":"f808ae8e2a96676f835b","web-components_dist_dovetail-podcasts-player-web-components_dtpc-progress-bar_entry_js":"d1ea892e0bd806159d05","web-components_dist_dovetail-podcasts-player-web-components_dtpc-progress-bar_entry_js_map":"dc81bd14c01dc3a49103","web-components_dist_dovetail-podcasts-player-web-components_dtpc-time-current_entry_js":"4a21bcabce071bdecc65","web-components_dist_dovetail-podcasts-player-web-components_dtpc-time-current_entry_js_map":"bb8c5aa33ef54c554d89","web-components_dist_dovetail-podcasts-player-web-components_dtpc-time-display_entry_js":"f2ec1de1752d7f4b1eda","web-components_dist_dovetail-podcasts-player-web-components_dtpc-time-display_entry_js_map":"aaf1fd52803e76911572","web-components_dist_dovetail-podcasts-player-web-components_dtpc-time-duration_entry_js":"3c88fe24c2070919899a","web-components_dist_dovetail-podcasts-player-web-components_dtpc-time-duration_entry_js_map":"08bc2ca21ade90159f20","web-components_dist_dovetail-podcasts-player-web-components_icon-pause_entry_js":"35c6591097662140732b","web-components_dist_dovetail-podcasts-player-web-components_icon-pause_entry_js_map":"4e0d650c87cc3bfcc0db","web-components_dist_dovetail-podcasts-player-web-components_icon-play_entry_js":"31cd5a32c62669eb4cb5","web-components_dist_dovetail-podcasts-player-web-components_icon-play_entry_js_map":"d19c163be96ee039b5d6","vendors-node_modules_html-react-parser_esm_index_mjs":"c8d909fd5406a4303fdc"}[chunkId] + "";
 /******/ 		};
 /******/ 	})();
 /******/ 	

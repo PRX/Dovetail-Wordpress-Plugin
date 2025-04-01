@@ -8,5 +8,5 @@
  * to consume components of this package as outlined in the `README.md`.
  */
 
-export * from './lib/utils/dom/attributesToObject';
+export * from './lib/utils';
 export type * from './components';

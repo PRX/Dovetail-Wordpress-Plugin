@@ -202,6 +202,7 @@ class Player {
 	 */
 	public function render_player_block( $atts, string $content, \WP_Block $block ) {
 		error_log( __FUNCTION__ );
+		error_log( print_r( $atts, true ) );
 		error_log( $content );
 
 		if ( ! is_array( $atts ) ) {
@@ -209,11 +210,7 @@ class Player {
 		}
 
 		$atts = shortcode_atts(
-			[
-				'src'      => '',
-				'duration' => 0,
-				'post_id'  => null,
-			],
+			$this->get_block_attributes_defaults( 'player' ),
 			$atts
 		);
 
@@ -264,20 +261,18 @@ class Player {
 	 */
 	public function render_play_button_block( $atts, string $content, \WP_Block $block ) {
 		error_log( __FUNCTION__ );
-		error_log( $content );
+		error_log( print_r( $atts, true ) );
 
 		if ( ! is_array( $atts ) ) {
 			$atts = [];
 		}
 
 		$atts = shortcode_atts(
-			[
-				// TODO: Add default atts here.
-			],
+			$this->get_block_attributes_defaults( 'play-button' ),
 			$atts
 		);
 
-		$wrapper_attributes = get_block_wrapper_attributes();
+		$wrapper_attributes = get_block_wrapper_attributes( $atts );
 
 		return implode(
 			'',
@@ -298,26 +293,120 @@ class Player {
 	 */
 	public function render_progress_bar_block( $atts, string $content, \WP_Block $block ) {
 		error_log( __FUNCTION__ );
-		error_log( $content );
+		error_log( print_r( $atts, true ) );
 
 		if ( ! is_array( $atts ) ) {
 			$atts = [];
 		}
 
 		$atts = shortcode_atts(
-			[
-				// TODO: Add default atts here.
-			],
+			$this->get_block_attributes_defaults( 'progress-bar' ),
 			$atts
 		);
 
-		$wrapper_attributes = get_block_wrapper_attributes();
+		$wrapper_attributes = get_block_wrapper_attributes( $atts );
 
 		return implode(
 			'',
 			[
 				sprintf( '<dtpc-progress-bar %1$s>', $wrapper_attributes ),
 				'</dtpc-progress-bar>',
+			]
+		);
+	}
+
+	/**
+	 * Render Dovetail Podcast player time current block.
+	 *
+	 * @param array<string,string> $atts Block attributes.
+	 * @param string               $content Block content.
+	 * @param \WP_Block            $block Block instance object.
+	 * @return string
+	 */
+	public function render_time_current_block( $atts, string $content, \WP_Block $block ) {
+		error_log( __FUNCTION__ );
+		error_log( print_r( $atts, true ) );
+
+		if ( ! is_array( $atts ) ) {
+			$atts = [];
+		}
+
+		$atts = shortcode_atts(
+			$this->get_block_attributes_defaults( 'time-current' ),
+			$atts
+		);
+
+		$wrapper_attributes = get_block_wrapper_attributes( $atts );
+
+		return implode(
+			'',
+			[
+				sprintf( '<dtpc-time-current %1$s>', $wrapper_attributes ),
+				'</dtpc-time-current>',
+			]
+		);
+	}
+
+	/**
+	 * Render Dovetail Podcast player time display block.
+	 *
+	 * @param array<string,string> $atts Block attributes.
+	 * @param string               $content Block content.
+	 * @param \WP_Block            $block Block instance object.
+	 * @return string
+	 */
+	public function render_time_display_block( $atts, string $content, \WP_Block $block ) {
+		error_log( __FUNCTION__ );
+		error_log( print_r( $atts, true ) );
+
+		if ( ! is_array( $atts ) ) {
+			$atts = [];
+		}
+
+		$atts = shortcode_atts(
+			$this->get_block_attributes_defaults( 'time-display' ),
+			$atts
+		);
+
+		$wrapper_attributes = get_block_wrapper_attributes( $atts );
+
+		return implode(
+			'',
+			[
+				sprintf( '<dtpc-time-display %1$s>', $wrapper_attributes ),
+				'</dtpc-time-display>',
+			]
+		);
+	}
+
+	/**
+	 * Render Dovetail Podcast player time duration block.
+	 *
+	 * @param array<string,string> $atts Block attributes.
+	 * @param string               $content Block content.
+	 * @param \WP_Block            $block Block instance object.
+	 * @return string
+	 */
+	public function render_time_duration_block( $atts, string $content, \WP_Block $block ) {
+		error_log( __FUNCTION__ );
+		error_log( print_r( $atts, true ) );
+
+		if ( ! is_array( $atts ) ) {
+			$atts = [];
+		}
+
+		$atts = shortcode_atts(
+			$this->get_block_attributes_defaults( 'time-duration' ),
+			$atts
+		);
+
+		$wrapper_attributes = get_block_wrapper_attributes( $atts );
+
+		return implode(
+			'',
+			[
+				sprintf( '<dtpc-time-duration %1$s>', $wrapper_attributes ),
+				'</dtpc-time-duration>',
 			]
 		);
 	}
@@ -353,6 +442,27 @@ class Player {
 	 */
 	public function render_player_shortcode( array $atts, string $content = null ) {
 
+		if ( ! is_array( $atts ) ) {
+			$atts = [];
+		}
+
+		$atts = shortcode_atts(
+			$this->get_block_attributes_defaults( 'player' ),
+			$atts
+		);
+
+		if ( empty( $atts['src'] ) ) {
+			// No src passed as an attribute.
+			// Try to get one from the post meta data.
+			$enclosure = $this->get_dovetail_enclosure( $atts['post_id'] );
+
+			if ( ! empty( $enclosure ) ) {
+				// Use enclosure href and continue.
+				$atts['src']      = $enclosure['href'];
+				$atts['duration'] = $enclosure['duration'];
+			}
+		}
+
 		$block = [
 			'blockName'   => 'dovetail-podcasts/player',
 			'attrs'       => $atts,
@@ -381,9 +491,13 @@ class Player {
 			// Add inner blocks for matching content.
 			foreach ( $matches as $match ) {
 				$block_type             = preg_replace( '~^' . DTPODCASTS_SHORTCODE_PREFIX . '~', '', $match[2] );
+				$default_atts           = $this->get_block_attributes_defaults( $block_type );
 				$block['innerBlocks'][] = [
 					'blockName' => "dovetail-podcasts/{$block_type}",
-					'attrs'     => shortcode_parse_atts( $match[3] ),
+					'attrs'     => shortcode_atts(
+						$default_atts,
+						array_merge( shortcode_parse_atts( $match[3] ), $atts )
+					),
 				];
 			}
 		} else {
@@ -394,6 +508,9 @@ class Player {
 				],
 				[
 					'blockName' => 'dovetail-podcasts/progress-bar',
+				],
+				[
+					'blockName' => 'dovetail-podcasts/time-display',
 				],
 				// TODO: Add volume slider.
 			];
@@ -429,6 +546,24 @@ class Player {
 			],
 			$src
 		);
+	}
+
+	/**
+	 * Get default values for block type's attributes.
+	 *
+	 * @param string $block_type Block type key from blocks manifest array.
+	 * @return array<string,mixed>
+	 */
+	public function get_block_attributes_defaults( string $block_type ) {
+		// Get registered player blocks.
+		$blocks_manifest_path = __DIR__ . '/blocks/blocks-manifest.php';
+		$manifest_data        = require $blocks_manifest_path;
+
+		$default_atts = isset( $manifest_data[ $block_type ]['attributes'] ) ?
+		array_map( static fn( $attr ) => isset( $attr['default'] ) ? $attr['default'] : null, $manifest_data[ $block_type ]['attributes'] ) :
+		[];
+
+		return $default_atts;
 	}
 
 	/**
@@ -511,15 +646,28 @@ class Player {
 		];
 
 		return [
-			'div'               => $allowed_atts,
-			'dtpc-player'       => array_merge(
+			'div'                => $allowed_atts,
+			'dtpc-player'        => array_merge(
 				[
 					'src' => [],
 				],
 				$allowed_atts
 			),
-			'dtpc-play-button'  => $allowed_atts,
-			'dtpc-progress-bar' => array_merge(
+			'dtpc-play-button'   => $allowed_atts,
+			'dtpc-progress-bar'  => array_merge(
+				[
+					'duration' => [],
+				],
+				$allowed_atts
+			),
+			'dtpc-time-current'  => $allowed_atts,
+			'dtpc-time-display'  => array_merge(
+				[
+					'duration' => [],
+				],
+				$allowed_atts
+			),
+			'dtpc-time-duration' => array_merge(
 				[
 					'duration' => [],
 				],

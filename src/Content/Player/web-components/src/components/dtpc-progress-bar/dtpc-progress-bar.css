@@ -1,14 +1,20 @@
 :host {
   --_dtpc-progress-bar--spacing: var(--dtpc-progress-bar--spacing, 0.5rem);
-  --_dtpc-progress-bar--thumb--color: var(--dtpc-progress-bar--thumb--height, var(--_dtpc-player--primary-color));
-  --_dtpc-progress-bar--thumb--size: var(--dtpc-progress-bar--thumb--size, 1.25rem);
-  --_dtpc-progress-bar--progress--color: var(--dtpc-progress-bar--progress--color, currentColor);
-  --_dtpc-progress-bar--track--color: var(--dtpc-progress-bar--track--color, transparent);
+  --_dtpc-progress-bar--scrubber--color: var(--dtpc-progress-bar--scrubber--color, var(--_dtpc-player--surface, white));
+  --_dtpc-progress-bar--scrubber--size: var(--dtpc-progress-bar--scrubber--size, 1.25rem);
+  --_dtpc-progress-bar--scrubber--border-color: var(--dtpc-progress-bar--scrubber--border-color, var(--_dtpc-player--foreground, currentColor));
+  --_dtpc-progress-bar--scrubber--border-width: var(--dtpc-progress-bar--scrubber--border-width, 0.125rem);
+  --_dtpc-progress-bar--scrubber--border-radius: var(--dtpc-progress-bar--scrubber--border-radius, 100vw);
+  --_dtpc-progress-bar--progress--color: var(--dtpc-progress-bar--progress--color, var(--_dtpc-player--foreground, currentColor));
+  --_dtpc-progress-bar--track--color: var(--dtpc-progress-bar--track--color, var(--_dtpc-player--surface, transparent));
   --_dtpc-progress-bar--track--height: var(--dtpc-progress-bar--track--height, 0.5rem);
   --_dtpc-progress-bar--track--radius: var(--dtpc-progress-bar--track--radius, 100vw);
-  --_dtpc-progress-bar--track--border-color: var(--dtpc-progress-bar--track--border-color, currentColor);
+  --_dtpc-progress-bar--track--border-color: var(--dtpc-progress-bar--track--border-color, var(--_dtpc-player--foreground, currentColor));
   --_dtpc-progress-bar--track--border-width: var(--dtpc-progress-bar--track--border-width, 0.125rem);
   --_dtpc-progress-bar--track--border-offset: var(--dtpc-progress-bar--track--border-offset, 0.125rem);
+  --_dtpc-progress-bar--focus-ring-color: var(--dtpc-progress-bar--focus-ring-color, var(--_dtpc-player--highlight));
+  --_dtpc-progress-bar--focus-ring-offset: var(--dtpc-progress-bar--focus-ring-offset, 0.125rem);
+  --_dtpc-progress-bar--focus-ring-width: var(--dtpc-progress-bar--focus-ring-width, 2px);
 
   display: contents;
 }
@@ -21,15 +27,21 @@
 }
 
 .track {
-  --_thumb--color: var(--_dtpc-progress-bar--thumb--color);
-  --_thumb--size: var(--_dtpc-progress-bar--thumb--size);
+  --_scrubber--color: var(--_dtpc-progress-bar--scrubber--color);
+  --_scrubber--size: var(--_dtpc-progress-bar--scrubber--size);
+  --_scrubber--border-color: var(--_dtpc-progress-bar--scrubber--border-color);
+  --_scrubber--border-width: var(--_dtpc-progress-bar--scrubber--border-width);
+  --_scrubber--border-radius: var(--_dtpc-progress-bar--scrubber--border-radius);
+  --_scrubber--focus-ring-color: var(--_dtpc-progress-bar--focus-ring-color);
+  --_scrubber--focus-ring-offset: var(--_dtpc-progress-bar--focus-ring-offset);
+  --_scrubber--focus-ring-width: var(--_dtpc-progress-bar--focus-ring-width);
   --_track--color: var(--_dtpc-progress-bar--track--color);
   --_track--height: var(--_dtpc-progress-bar--track--height);
   --_track--radius: var(--_dtpc-progress-bar--track--radius);
   --_track--border-color: var(--_dtpc-progress-bar--track--border-color);
   --_track--border-width: var(--_dtpc-progress-bar--track--border-width);
   --_track--border-offset: var(--_dtpc-progress-bar--track--border-offset);
-  --_track--gutter: calc(var(--_thumb--size) / 4);
+  --_track--gutter: calc(var(--_scrubber--size) / 4);
 
   flex-grow: 1;
   isolation: isolate;
@@ -62,7 +74,7 @@
   place-self: stretch;
 
   width: calc(var(--progress, 0) * (100% - var(--_track--gutter)) + var(--_track--gutter));
-  min-width: calc(var(--_thumb--size) / 2);
+  min-width: calc(var(--_scrubber--size) / 2);
 
   border-radius: var(--_track--radius);
 
@@ -76,7 +88,7 @@
 .range {
   grid-area: range;
   display: grid;
-  grid-template-columns: calc(var(--progress, 0) * (100% - var(--_thumb--size))) [thumb-start] var(--_thumb--size) [thumb-end];
+  grid-template-columns: calc(var(--progress, 0) * (100% - var(--_scrubber--size))) [thumb-start] var(--_scrubber--size) [thumb-end];
   grid-template-rows: [thumb-start] var(--_track--height) [thumb-end];
   align-items: center;
   justify-items: center;
@@ -84,11 +96,11 @@
   min-width: var(--_track--height);
 }
 
-.thumb {
+.scrubber {
   grid-area: thumb;
   display: grid;
   aspect-ratio: 1;
-  width: var(--_thumb--size);
+  width: var(--_scrubber--size);
 
   &::after {
     content: '';
@@ -101,15 +113,27 @@
     scale: 0;
     opacity: 0;
 
-    border-radius: 100vw;
+    border-style: solid;
+    border-color: var(--_scrubber--border-color);
+    border-width: var(--_scrubber--border-width);
+    border-radius: var(--_scrubber--border-radius);
 
-    background-color: var(--_thumb--color);
+    background-color: var(--_scrubber--color);
   }
 
   .wrapper:where(:hover, :focus-within) & {
     &::after {
       scale: 1;
       opacity: 1;
+    }
+  }
+
+  .wrapper:has(input:focus-visible) & {
+    &::after {
+      outline-style: solid;
+      outline-offset: var(--_scrubber--focus-ring-offset);
+      outline-color: var(--_scrubber--focus-ring-color);
+      outline-width: var(--_scrubber--focus-ring-width);
     }
   }
 }
@@ -143,7 +167,7 @@ input {
       left: 0;
       translate: 0 -50%;
       aspect-ratio: 1;
-      width: var(--_thumb--size);
+      width: var(--_scrubber--size);
       height: auto;
       cursor: ew-resize;
     }

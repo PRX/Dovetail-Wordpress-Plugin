@@ -12,24 +12,21 @@ import { createComponent } from '@stencil/react-output-target/runtime';
 import { DtpcPlayButton as DtpcPlayButtonElement, defineCustomElement as defineDtpcPlayButton } from "dovetail-podcasts-player-web-components/dist/components/dtpc-play-button.js";
 import { DtpcPlayer as DtpcPlayerElement, defineCustomElement as defineDtpcPlayer } from "dovetail-podcasts-player-web-components/dist/components/dtpc-player.js";
 import { DtpcProgressBar as DtpcProgressBarElement, defineCustomElement as defineDtpcProgressBar } from "dovetail-podcasts-player-web-components/dist/components/dtpc-progress-bar.js";
+import { DtpcTimeCurrent as DtpcTimeCurrentElement, defineCustomElement as defineDtpcTimeCurrent } from "dovetail-podcasts-player-web-components/dist/components/dtpc-time-current.js";
+import { DtpcTimeDisplay as DtpcTimeDisplayElement, defineCustomElement as defineDtpcTimeDisplay } from "dovetail-podcasts-player-web-components/dist/components/dtpc-time-display.js";
+import { DtpcTimeDuration as DtpcTimeDurationElement, defineCustomElement as defineDtpcTimeDuration } from "dovetail-podcasts-player-web-components/dist/components/dtpc-time-duration.js";
 import { IconPause as IconPauseElement, defineCustomElement as defineIconPause } from "dovetail-podcasts-player-web-components/dist/components/icon-pause.js";
 import { IconPlay as IconPlayElement, defineCustomElement as defineIconPlay } from "dovetail-podcasts-player-web-components/dist/components/icon-play.js";
 import React from 'react';
 
-type DtpcPlayButtonEvents = {
-    onBindAudioEvents: EventName<CustomEvent<any>>,
-    onTogglePause: EventName<CustomEvent<any>>
-};
+type DtpcPlayButtonEvents = { onDtpcControlInit: EventName<CustomEvent<any>> };
 
 export const DtpcPlayButton: StencilReactComponent<DtpcPlayButtonElement, DtpcPlayButtonEvents> = /*@__PURE__*/ createComponent<DtpcPlayButtonElement, DtpcPlayButtonEvents>({
     tagName: 'dtpc-play-button',
     elementClass: DtpcPlayButtonElement,
     // @ts-ignore - React type of Stencil Output Target may differ from the React version used in the Nuxt.js project, this can be ignored.
     react: React,
-    events: {
-        onBindAudioEvents: 'bind-audio-events',
-        onTogglePause: 'toggle-pause'
-    } as DtpcPlayButtonEvents,
+    events: { onDtpcControlInit: 'dtpc-control-init' } as DtpcPlayButtonEvents,
     defineCustomElement: defineDtpcPlayButton
 });
 
@@ -44,21 +41,48 @@ export const DtpcPlayer: StencilReactComponent<DtpcPlayerElement, DtpcPlayerEven
     defineCustomElement: defineDtpcPlayer
 });
 
-type DtpcProgressBarEvents = {
-    onBindAudioEvents: EventName<CustomEvent<any>>,
-    onUpdateCurrentTime: EventName<CustomEvent<number>>
-};
+type DtpcProgressBarEvents = { onDtpcControlInit: EventName<CustomEvent<any>> };
 
 export const DtpcProgressBar: StencilReactComponent<DtpcProgressBarElement, DtpcProgressBarEvents> = /*@__PURE__*/ createComponent<DtpcProgressBarElement, DtpcProgressBarEvents>({
     tagName: 'dtpc-progress-bar',
     elementClass: DtpcProgressBarElement,
     // @ts-ignore - React type of Stencil Output Target may differ from the React version used in the Nuxt.js project, this can be ignored.
     react: React,
-    events: {
-        onBindAudioEvents: 'bind-audio-events',
-        onUpdateCurrentTime: 'update-current-time'
-    } as DtpcProgressBarEvents,
+    events: { onDtpcControlInit: 'dtpc-control-init' } as DtpcProgressBarEvents,
     defineCustomElement: defineDtpcProgressBar
+});
+
+type DtpcTimeCurrentEvents = { onDtpcControlInit: EventName<CustomEvent<any>> };
+
+export const DtpcTimeCurrent: StencilReactComponent<DtpcTimeCurrentElement, DtpcTimeCurrentEvents> = /*@__PURE__*/ createComponent<DtpcTimeCurrentElement, DtpcTimeCurrentEvents>({
+    tagName: 'dtpc-time-current',
+    elementClass: DtpcTimeCurrentElement,
+    // @ts-ignore - React type of Stencil Output Target may differ from the React version used in the Nuxt.js project, this can be ignored.
+    react: React,
+    events: { onDtpcControlInit: 'dtpc-control-init' } as DtpcTimeCurrentEvents,
+    defineCustomElement: defineDtpcTimeCurrent
+});
+
+type DtpcTimeDisplayEvents = NonNullable<unknown>;
+
+export const DtpcTimeDisplay: StencilReactComponent<DtpcTimeDisplayElement, DtpcTimeDisplayEvents> = /*@__PURE__*/ createComponent<DtpcTimeDisplayElement, DtpcTimeDisplayEvents>({
+    tagName: 'dtpc-time-display',
+    elementClass: DtpcTimeDisplayElement,
+    // @ts-ignore - React type of Stencil Output Target may differ from the React version used in the Nuxt.js project, this can be ignored.
+    react: React,
+    events: {} as DtpcTimeDisplayEvents,
+    defineCustomElement: defineDtpcTimeDisplay
+});
+
+type DtpcTimeDurationEvents = { onDtpcControlInit: EventName<CustomEvent<any>> };
+
+export const DtpcTimeDuration: StencilReactComponent<DtpcTimeDurationElement, DtpcTimeDurationEvents> = /*@__PURE__*/ createComponent<DtpcTimeDurationElement, DtpcTimeDurationEvents>({
+    tagName: 'dtpc-time-duration',
+    elementClass: DtpcTimeDurationElement,
+    // @ts-ignore - React type of Stencil Output Target may differ from the React version used in the Nuxt.js project, this can be ignored.
+    react: React,
+    events: { onDtpcControlInit: 'dtpc-control-init' } as DtpcTimeDurationEvents,
+    defineCustomElement: defineDtpcTimeDuration
 });
 
 type IconPauseEvents = NonNullable<unknown>;

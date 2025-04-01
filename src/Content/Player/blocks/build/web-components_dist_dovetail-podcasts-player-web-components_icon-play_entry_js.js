@@ -1,27 +1,6 @@
 "use strict";
 (globalThis["webpackChunkdovetail_podcasts_player_blocks"] = globalThis["webpackChunkdovetail_podcasts_player_blocks"] || []).push([["web-components_dist_dovetail-podcasts-player-web-components_icon-play_entry_js"],{
 
-/***/ "../web-components/dist/dovetail-podcasts-player-web-components/attributesToObject-BprZZpRs.js":
-/*!*****************************************************************************************************!*\
-  !*** ../web-components/dist/dovetail-podcasts-player-web-components/attributesToObject-BprZZpRs.js ***!
-  \*****************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   a: () => (/* binding */ attributesToObject)
-/* harmony export */ });
-function attributesToObject(el) {
-  let result = {};
-  for (let i = 0; i < el.attributes.length; i++) {
-    result[el.attributes[i].name] = el.attributes[i].value;
-  }
-  return result;
-}
-
-
-/***/ }),
-
 /***/ "../web-components/dist/dovetail-podcasts-player-web-components/icon-play.entry.js":
 /*!*****************************************************************************************!*\
   !*** ../web-components/dist/dovetail-podcasts-player-web-components/icon-play.entry.js ***!
@@ -32,11 +11,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   icon_play: () => (/* binding */ IconPlay)
 /* harmony export */ });
-/* harmony import */ var _index_ZFNzDU8A_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index-ZFNzDU8A.js */ "../web-components/dist/dovetail-podcasts-player-web-components/index-ZFNzDU8A.js");
+/* harmony import */ var _index_gWzpa9PG_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index-gWzpa9PG.js */ "../web-components/dist/dovetail-podcasts-player-web-components/index-gWzpa9PG.js");
 /* harmony import */ var _lucide_DCAzs0GW_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./lucide-DCAzs0GW.js */ "../web-components/dist/dovetail-podcasts-player-web-components/lucide-DCAzs0GW.js");
-/* harmony import */ var _index_CtJeLluF_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./index-CtJeLluF.js */ "../web-components/dist/dovetail-podcasts-player-web-components/index-CtJeLluF.js");
-/* harmony import */ var _attributesToObject_BprZZpRs_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./attributesToObject-BprZZpRs.js */ "../web-components/dist/dovetail-podcasts-player-web-components/attributesToObject-BprZZpRs.js");
-
+/* harmony import */ var _index_BprZZpRs_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./index-BprZZpRs.js */ "../web-components/dist/dovetail-podcasts-player-web-components/index-BprZZpRs.js");
 
 
 
@@ -522,16 +499,16 @@ const IconPlay = class {
       writable: true,
       value: void 0
     });
-    (0,_index_ZFNzDU8A_js__WEBPACK_IMPORTED_MODULE_0__.r)(this, hostRef);
+    (0,_index_gWzpa9PG_js__WEBPACK_IMPORTED_MODULE_0__.r)(this, hostRef);
   }
   get el() {
-    return (0,_index_ZFNzDU8A_js__WEBPACK_IMPORTED_MODULE_0__.g)(this);
+    return (0,_index_gWzpa9PG_js__WEBPACK_IMPORTED_MODULE_0__.g)(this);
   }
   render() {
     const inner = (0,_lucide_DCAzs0GW_js__WEBPACK_IMPORTED_MODULE_1__.c)(_lucide_DCAzs0GW_js__WEBPACK_IMPORTED_MODULE_1__.a);
-    Object.entries(Object.assign({}, (0,_attributesToObject_BprZZpRs_js__WEBPACK_IMPORTED_MODULE_3__.a)(this.el), this.getProps())).forEach(([name, value]) => inner.setAttribute(name, value));
-    return (0,_index_ZFNzDU8A_js__WEBPACK_IMPORTED_MODULE_0__.h)(_index_ZFNzDU8A_js__WEBPACK_IMPORTED_MODULE_0__.d, {
-      key: '9a18c526ec246310e272d8b2ae369d2ceb0d48ef',
+    Object.entries(Object.assign({}, (0,_index_BprZZpRs_js__WEBPACK_IMPORTED_MODULE_2__.a)(this.el), this.getProps())).forEach(([name, value]) => inner.setAttribute(name, value));
+    return (0,_index_gWzpa9PG_js__WEBPACK_IMPORTED_MODULE_0__.h)(_index_gWzpa9PG_js__WEBPACK_IMPORTED_MODULE_0__.d, {
+      key: '8fedae6b21b2163da05e3ea8cf5650927019b5cc',
       innerHTML: inner.outerHTML,
       class: "lucide-icon"
     });
@@ -550,14 +527,23 @@ const IconPlay = class {
 
 /***/ }),
 
-/***/ "../web-components/dist/dovetail-podcasts-player-web-components/index-CtJeLluF.js":
+/***/ "../web-components/dist/dovetail-podcasts-player-web-components/index-BprZZpRs.js":
 /*!****************************************************************************************!*\
-  !*** ../web-components/dist/dovetail-podcasts-player-web-components/index-CtJeLluF.js ***!
+  !*** ../web-components/dist/dovetail-podcasts-player-web-components/index-BprZZpRs.js ***!
   \****************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _attributesToObject_BprZZpRs_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./attributesToObject-BprZZpRs.js */ "../web-components/dist/dovetail-podcasts-player-web-components/attributesToObject-BprZZpRs.js");
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   a: () => (/* binding */ attributesToObject)
+/* harmony export */ });
+function attributesToObject(el) {
+  let result = {};
+  for (let i = 0; i < el.attributes.length; i++) {
+    result[el.attributes[i].name] = el.attributes[i].value;
+  }
+  return result;
+}
 
 
 /***/ }),
@@ -19541,4 +19527,4 @@ const createIcons = ({
 /***/ })
 
 }]);
-//# sourceMappingURL=web-components_dist_dovetail-podcasts-player-web-components_icon-play_entry_js.js.map?ver=4591183f33cce9a46a6a
+//# sourceMappingURL=web-components_dist_dovetail-podcasts-player-web-components_icon-play_entry_js.js.map?ver=31cd5a32c62669eb4cb5

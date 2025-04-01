@@ -46,6 +46,7 @@
     "@stencil-community/postcss": "^2.2.0",
     "@stencil/core": "^4.27.1",
     "@stencil/react-output-target": "^0.8.2",
+    "@stencil/store": "^2.1.2",
     "@types/jest": "^29.5.14",
     "@types/node": "^22.13.5",
     "@wordpress/i18n": "^5.20.0",

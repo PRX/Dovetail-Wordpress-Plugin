@@ -1,4 +1,6 @@
 import { Component, Host, Listen, Prop, Watch, h } from '@stencil/core';
+import { playerState } from '@/store';
+import type { PlayerState } from '@/store/player';
 
 @Component({
   tag: 'dtpc-player',
@@ -7,7 +9,7 @@ import { Component, Host, Listen, Prop, Watch, h } from '@stencil/core';
 })
 export class DtpcPlayer {
 
-  audio: HTMLAudioElement
+  state: PlayerState;
 
   /**
    * Audio source URL.
@@ -15,51 +17,27 @@ export class DtpcPlayer {
   @Prop() src: string;
 
   connectedCallback() {
-    this.audio = new Audio();
-    this.audio.src = this.src;
-    this.audio.preload = 'none';
+    this.state = playerState.createStore(this.src).state;
   }
 
   disconnectedCallback() {
-    this.audio.pause();
-    delete this.audio;
+    this.state.audioElm.pause();
+  }
+
+  @Listen('dtpc-control-init')
+  handleControlInit(e: CustomEvent){
+    if (e.detail instanceof Function) {
+      e.stopPropagation();
+      e.detail(this.state);
+    }
   }
 
   @Watch('src')
   watchSrcHandler(newSrc: string) {
-    if (!this.audio.paused) {
-      this.audio.pause();
+    if (!this.state.audioElm.paused) {
+      this.state.audioElm.pause();
     }
-    this.audio.src = newSrc;
-  }
-
-  @Listen('toggle-pause')
-  pauseAudioHandler() {
-    if (this.audio.paused) {
-      this.audio.play()
-        .then(() => {
-          // Setup media session events.
-        })
-        .catch((err) => {
-          console.error(err);
-        });
-    } else {
-      this.audio.pause();
-    }
-
-  }
-
-  @Listen('update-current-time')
-  updateCurrentTime(event: CustomEvent) {
-    console.log('update-current-time received:', event.detail)
-    this.audio.currentTime = event.detail;
-  }
-
-  @Listen('bind-audio-events')
-  handleBindAudio(event: CustomEvent) {
-    event.detail.forEach(([n, cb]) => {
-      this.audio.addEventListener(n, cb);
-    })
+    this.state.audioElm.src = newSrc;
   }
 
   render() {

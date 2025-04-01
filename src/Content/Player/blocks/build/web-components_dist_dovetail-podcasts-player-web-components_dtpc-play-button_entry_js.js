@@ -1,27 +1,6 @@
 "use strict";
 (globalThis["webpackChunkdovetail_podcasts_player_blocks"] = globalThis["webpackChunkdovetail_podcasts_player_blocks"] || []).push([["web-components_dist_dovetail-podcasts-player-web-components_dtpc-play-button_entry_js"],{
 
-/***/ "../web-components/dist/dovetail-podcasts-player-web-components/attributesToObject-BprZZpRs.js":
-/*!*****************************************************************************************************!*\
-  !*** ../web-components/dist/dovetail-podcasts-player-web-components/attributesToObject-BprZZpRs.js ***!
-  \*****************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   a: () => (/* binding */ attributesToObject)
-/* harmony export */ });
-function attributesToObject(el) {
-  let result = {};
-  for (let i = 0; i < el.attributes.length; i++) {
-    result[el.attributes[i].name] = el.attributes[i].value;
-  }
-  return result;
-}
-
-
-/***/ }),
-
 /***/ "../web-components/dist/dovetail-podcasts-player-web-components/dtpc-play-button.entry.js":
 /*!************************************************************************************************!*\
   !*** ../web-components/dist/dovetail-podcasts-player-web-components/dtpc-play-button.entry.js ***!
@@ -32,11 +11,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   dtpc_play_button: () => (/* binding */ DtpcPlayButton)
 /* harmony export */ });
-/* harmony import */ var _index_ZFNzDU8A_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index-ZFNzDU8A.js */ "../web-components/dist/dovetail-podcasts-player-web-components/index-ZFNzDU8A.js");
-/* harmony import */ var _index_CtJeLluF_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./index-CtJeLluF.js */ "../web-components/dist/dovetail-podcasts-player-web-components/index-CtJeLluF.js");
-/* harmony import */ var _attributesToObject_BprZZpRs_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./attributesToObject-BprZZpRs.js */ "../web-components/dist/dovetail-podcasts-player-web-components/attributesToObject-BprZZpRs.js");
-
-
+/* harmony import */ var _index_gWzpa9PG_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index-gWzpa9PG.js */ "../web-components/dist/dovetail-podcasts-player-web-components/index-gWzpa9PG.js");
 
 function memize(fn, options) {
   var size = 0;
@@ -986,10 +961,10 @@ const _n = i18n._n.bind(i18n);
 const _nx = i18n._nx.bind(i18n);
 const isRTL = i18n.isRTL.bind(i18n);
 const hasTranslation = i18n.hasTranslation.bind(i18n);
-const dtpcPlayButtonCss = ":host {\n  --_dtpc-play-button--size: var(--dtpc-play-button--size, 1.5rem);\n  --_dtpc-play-button--padding: var(--dtpc-play-button--padding, 0.325rem);\n  --_dtpc-play-button--text-color: var(--dtpc-play-button--text-color, currentColor);\n  --_dtpc-play-button--text-color--hover: var(--dtpc-play-button--text-color--hover, var(--_dtpc-play-button--text-color));\n  --_dtpc-play-button--text-color--playing: var(--dtpc-play-button--text-color--playing, var(--_dtpc-play-button--text-color--hover));\n  --_dtpc-play-button--bg-color: var(--dtpc-play-button--bg-color, transparent);\n  --_dtpc-play-button--bg-color--hover: var(--dtpc-play-button--bg-color--hover, var(--_dtpc-player--secondary-color));\n  --_dtpc-play-button--bg-color--playing: var(--dtpc-play-button--bg-color--playing, var(--_dtpc-player--primary-color));\n  --_dtpc-play-button--bg-opacity: var(--dtpc-play-button--bg-opacity, 0);\n  --_dtpc-play-button--bg-opacity--hover: var(--dtpc-play-button--bg-opacity--hover, 10%);\n  --_dtpc-play-button--bg-opacity--playing: var(--dtpc-play-button--bg-opacity--playing, 20%);\n  --_dtpc-play-button--border-color: var(--dtpc-play-button--border-color, currentColor);\n  --_dtpc-play-button--border-color--hover: var(--dtpc-play-button--border-color--hover, var(--_dtpc-play-button--border-color));\n  --_dtpc-play-button--border-color--playing: var(--dtpc-play-button--border-color--playing, var(--_dtpc-play-button--border-color--hover));\n  --_dtpc-play-button--radius: var(--dtpc-play-button--radius, 100vw);\n  --_dtpc-play-button--radius--hover: var(--dtpc-play-button--radius--hover, var(--_dtpc-play-button--radius));\n  --_dtpc-play-button--radius--playing: var(--dtpc-play-button--radius--playing, var(--_dtpc-play-button--radius--hover));\n  --_dtpc-play-button--border-width: var(--dtpc-play-button--border-width, 0.125rem);\n  --_dtpc-play-button--border-width--hover: var(--dtpc-play-button--border-width--hover, var(--_dtpc-play-button--border-width));\n  --_dtpc-play-button--border-width--playing: var(--dtpc-play-button--border-width--playing, var(--_dtpc-play-button--border-width--hover));\n  --_dtpc-play-button--focus-ring-color: var(--dtpc-play-button--focus-ring-color, var(--_dtpc-player--info-color));\n  --_dtpc-play-button--focus-ring-offset: var(--dtpc-play-button--focus-ring-offset, 0.125rem);\n  --_dtpc-play-button--focus-ring-width: var(--dtpc-play-button--focus-ring-width, 2px);\n\n  display: contents;\n}\n\nbutton {\n  --_size: var(--_dtpc-play-button--size);\n  --_padding: var(--_dtpc-play-button--padding);\n  --_text-color: var(--_dtpc-play-button--text-color);\n  --_bg-color: var(--_dtpc-play-button--bg-color);\n  --_bg-opacity: var(--_dtpc-play-button--bg-opacity);\n  --_border-color: var(--_dtpc-play-button--border-color);\n  --_border-radius: var(--_dtpc-play-button--radius);\n  --_border-width: var(--_dtpc-play-button--border-width);\n  --_focus-ring-color: var(--_dtpc-play-button--focus-ring-color);\n  --_focus-ring-offset: var(--_dtpc-play-button--focus-ring-offset);\n  --_focus-ring-width: var(--_dtpc-play-button--focus-ring-width);\n\n  all: unset;\n\n  transition-property: background-color, border-color, border-width, border-radius, color;\n  transition-duration: 200ms;\n  transition-timing-function: ease;\n\n  box-sizing: content-box;\n  display: grid;\n  place-items: center;\n  justify-content: stretch;\n  aspect-ratio: 1;\n  width: var(--_size);\n\n  padding: var(--_padding);\n\n  border-style: solid;\n  border-color: var(--_border-color);\n  border-width: var(--_border-width);\n  border-radius: var(--_border-radius);\n\n  background-color: color-mix(in oklch, var(--_bg-color) var(--_bg-opacity), transparent);\n\n  color: var(--_text-color);\n\n  cursor: pointer;\n  user-select: none;\n\n  &:hover {\n    --_dtpc-play-button--text-color: var(--_dtpc-play-button--text-color--hover);\n    --_dtpc-play-button--bg-color: var(--_dtpc-play-button--bg-color--hover);\n    --_dtpc-play-button--bg-opacity: var(--_dtpc-play-button--bg-opacity--hover);\n    --_dtpc-play-button--border-color: var(--_dtpc-play-button--border-color--hover);\n    --_dtpc-play-button--border-width: var(--_dtpc-play-button--border-width--hover);\n    --_dtpc-play-button--radius: var(--_dtpc-play-button--radius--hover);\n  }\n\n  &[data-status='playing'] {\n    --_dtpc-play-button--text-color: var(--_dtpc-play-button--text-color--playing);\n    --_dtpc-play-button--bg-color: var(--_dtpc-play-button--bg-color--playing);\n    --_dtpc-play-button--bg-opacity: var(--_dtpc-play-button--bg-opacity--playing);\n    --_dtpc-play-button--border-color: var(--_dtpc-play-button--border-color--playing);\n    --_dtpc-play-button--border-width: var(--_dtpc-play-button--border-width--playing);\n    --_dtpc-play-button--radius: var(--_dtpc-play-button--radius--playing);\n\n    &:hover {\n      --_dtpc-play-button--bg-opacity: var(--_dtpc-play-button--bg-opacity--hover);\n    }\n  }\n\n  &:focus-visible {\n    outline-style: solid;\n    outline-offset: var(--_focus-ring-offset);\n    outline-color: var(--_focus-ring-color);\n    outline-width: var(--_focus-ring-width);\n  }\n}\n\n.lucide-icon {\n  display: grid;\n  place-items: center;\n  width: 100%;\n\n  svg {\n    width: 100%;\n    height: auto;\n  }\n}\n";
+const dtpcPlayButtonCss = ":host {\n  --_dtpc-play-button--size: var(--dtpc-play-button--size, 1.5rem);\n  --_dtpc-play-button--padding: var(--dtpc-play-button--padding, 0.325rem);\n  --_dtpc-play-button--foreground: var(--dtpc-play-button--foreground, var(--_dtpc-player--foreground, currentColor));\n  --_dtpc-play-button--foreground--hover: var(--dtpc-play-button--foreground--hover, var(--_dtpc-player--surface));\n  --_dtpc-play-button--foreground--playing: var(--dtpc-play-button--foreground--playing, var(--_dtpc-play-button--foreground));\n  --_dtpc-play-button--surface: var(--_dtpc-play-button--surface, var(--_dtpc-player--surface));\n  --_dtpc-play-button--surface--hover: var(--dtpc-play-button--surface--hover, var(--_dtpc-player--foreground));\n  --_dtpc-play-button--surface--playing: var(--dtpc-play-button--surface--playing, var(--_dtpc-player--surface));\n  --_dtpc-play-button--surface-opacity: var(--dtpc-play-button--surface-opacity, 0);\n  --_dtpc-play-button--surface-opacity--hover: var(--dtpc-play-button--surface-opacity--hover, 100%);\n  --_dtpc-play-button--surface-opacity--playing: var(--dtpc-play-button--surface-opacity--playing, 0);\n  --_dtpc-play-button--border-color: var(--dtpc-play-button--border-color, transparent);\n  --_dtpc-play-button--border-color--hover: var(--dtpc-play-button--border-color--hover, var(--_dtpc-play-button--foreground));\n  --_dtpc-play-button--border-color--playing: var(--dtpc-play-button--border-color--playing, var(--_dtpc-play-button--border-color--hover));\n  --_dtpc-play-button--border-radius: var(--dtpc-play-button--border-radius, 100vw);\n  --_dtpc-play-button--border-radius--hover: var(--dtpc-play-button--border-radius--hover, var(--_dtpc-play-button--border-radius));\n  --_dtpc-play-button--border-radius--playing: var(--dtpc-play-button--border-radius--playing, var(--_dtpc-play-button--border-radius--hover));\n  --_dtpc-play-button--border-width: var(--dtpc-play-button--border-width, 0.125rem);\n  --_dtpc-play-button--border-width--hover: var(--dtpc-play-button--border-width--hover, var(--_dtpc-play-button--border-width));\n  --_dtpc-play-button--border-width--playing: var(--dtpc-play-button--border-width--playing, var(--_dtpc-play-button--border-width--hover));\n  --_dtpc-play-button--focus-ring-color: var(--dtpc-play-button--focus-ring-color, var(--_dtpc-player--highlight));\n  --_dtpc-play-button--focus-ring-offset: var(--dtpc-play-button--focus-ring-offset, 0.125rem);\n  --_dtpc-play-button--focus-ring-width: var(--dtpc-play-button--focus-ring-width, 2px);\n}\n\nbutton {\n  --_size: var(--_dtpc-play-button--size);\n  --_padding: var(--_dtpc-play-button--padding);\n  --_foreground: var(--_dtpc-play-button--foreground);\n  --_surface: var(--_dtpc-play-button--surface);\n  --_surface-opacity: var(--_dtpc-play-button--surface-opacity);\n  --_border-color: var(--_dtpc-play-button--border-color);\n  --_border-radius: var(--_dtpc-play-button--border-radius);\n  --_border-width: var(--_dtpc-play-button--border-width);\n  --_focus-ring-color: var(--_dtpc-play-button--focus-ring-color);\n  --_focus-ring-offset: var(--_dtpc-play-button--focus-ring-offset);\n  --_focus-ring-width: var(--_dtpc-play-button--focus-ring-width);\n\n  all: unset;\n\n  transition-property: background-color, border-color, border-width, border-radius, color;\n  transition-duration: 200ms;\n  transition-timing-function: ease;\n\n  box-sizing: content-box;\n  display: grid;\n  place-items: center;\n  justify-content: stretch;\n  aspect-ratio: 1;\n  width: var(--_size);\n\n  padding: var(--_padding);\n\n  border-style: solid;\n  border-color: var(--_border-color);\n  border-width: var(--_border-width);\n  border-radius: var(--_border-radius);\n\n  background-color: color-mix(in oklch, var(--_surface) var(--_surface-opacity), transparent);\n\n  cursor: pointer;\n  user-select: none;\n\n  &:hover {\n    --_dtpc-play-button--foreground: var(--_dtpc-play-button--foreground--hover);\n    --_dtpc-play-button--surface: var(--_dtpc-play-button--surface--hover);\n    --_dtpc-play-button--surface-opacity: var(--_dtpc-play-button--surface-opacity--hover);\n    --_dtpc-play-button--border-color: var(--_dtpc-play-button--border-color--hover);\n    --_dtpc-play-button--border-width: var(--_dtpc-play-button--border-width--hover);\n    --_dtpc-play-button--border-radius: var(--_dtpc-play-button--border-radius--hover);\n  }\n\n  &:where([data-status='playing']) {\n    --_dtpc-play-button--foreground: var(--_dtpc-play-button--foreground--playing);\n    --_dtpc-play-button--surface: var(--_dtpc-play-button--surface--playing);\n    --_dtpc-play-button--surface-opacity: var(--_dtpc-play-button--surface-opacity--playing);\n    --_dtpc-play-button--border-color: var(--_dtpc-play-button--border-color--playing);\n    --_dtpc-play-button--border-width: var(--_dtpc-play-button--border-width--playing);\n    --_dtpc-play-button--border-radius: var(--_dtpc-play-button--border-radius--playing);\n\n    &:hover {\n      --_dtpc-play-button--surface-opacity: var(--_dtpc-play-button--surface-opacity--hover);\n    }\n  }\n\n  &:focus-visible {\n    outline-style: solid;\n    outline-offset: var(--_focus-ring-offset);\n    outline-color: var(--_focus-ring-color);\n    outline-width: var(--_focus-ring-width);\n  }\n}\n\n.lucide-icon {\n  display: grid;\n  place-items: center;\n  width: 100%;\n\n  color: var(--_foreground);\n\n  svg {\n    width: 100%;\n    height: auto;\n  }\n}\n";
 const DtpcPlayButton = class {
   constructor(hostRef) {
-    Object.defineProperty(this, "audio", {
+    Object.defineProperty(this, "state", {
       enumerable: true,
       configurable: true,
       writable: true,
@@ -1007,31 +982,26 @@ const DtpcPlayButton = class {
       writable: true,
       value: false
     });
-    Object.defineProperty(this, "bindAudioEvents", {
+    Object.defineProperty(this, "initControl", {
       enumerable: true,
       configurable: true,
       writable: true,
       value: void 0
     });
-    Object.defineProperty(this, "togglePause", {
-      enumerable: true,
-      configurable: true,
-      writable: true,
-      value: void 0
-    });
-    (0,_index_ZFNzDU8A_js__WEBPACK_IMPORTED_MODULE_0__.r)(this, hostRef);
-    this.bindAudioEvents = (0,_index_ZFNzDU8A_js__WEBPACK_IMPORTED_MODULE_0__.a)(this, "bind-audio-events", 5);
-    this.togglePause = (0,_index_ZFNzDU8A_js__WEBPACK_IMPORTED_MODULE_0__.a)(this, "toggle-pause", 7);
+    (0,_index_gWzpa9PG_js__WEBPACK_IMPORTED_MODULE_0__.r)(this, hostRef);
+    this.initControl = (0,_index_gWzpa9PG_js__WEBPACK_IMPORTED_MODULE_0__.a)(this, "dtpc-control-init", 7);
   }
   get el() {
-    return (0,_index_ZFNzDU8A_js__WEBPACK_IMPORTED_MODULE_0__.g)(this);
+    return (0,_index_gWzpa9PG_js__WEBPACK_IMPORTED_MODULE_0__.g)(this);
+  }
+  componentWillLoad() {
+    const self = this;
+    this.initControl.emit(state => self.state = state);
   }
   componentDidLoad() {
-    (self => self.bindAudioEvents.emit([['play', () => {
-      self.handlePlay();
-    }], ['pause', () => {
-      self.handlePause();
-    }]]))(this);
+    const self = this;
+    this.state.audioElm.addEventListener('play', () => self.handlePlay());
+    this.state.audioElm.addEventListener('pause', () => self.handlePause());
   }
   handlePlay() {
     this.playing = true;
@@ -1040,7 +1010,15 @@ const DtpcPlayButton = class {
     this.playing = false;
   }
   handleClick() {
-    this.togglePause.emit();
+    if (this.state.audioElm.paused) {
+      this.state.audioElm.play().then(() => {
+        console.log('This is from teh state audio elm playing...');
+      }).catch(e => {
+        console.error(e);
+      });
+    } else {
+      this.state.audioElm.pause();
+    }
   }
   render() {
     const label = this.playing ? __('Pause', 'dovetail-podcasts') : __('Play', 'dovetail-podcasts');
@@ -1051,20 +1029,19 @@ const DtpcPlayButton = class {
       })
     };
     const buttonAttributes = {
-      ...(0,_attributesToObject_BprZZpRs_js__WEBPACK_IMPORTED_MODULE_2__.a)(this.el),
       type: 'button',
       title: label,
       'data-status': this.playing ? 'playing' : 'paused'
     };
-    return (0,_index_ZFNzDU8A_js__WEBPACK_IMPORTED_MODULE_0__.h)(_index_ZFNzDU8A_js__WEBPACK_IMPORTED_MODULE_0__.d, {
-      key: 'c3c470946316923022d940bd1f5f167f9531bbe3'
-    }, (0,_index_ZFNzDU8A_js__WEBPACK_IMPORTED_MODULE_0__.h)("button", {
-      key: 'aaa0c2bee1a5a8e6d677c6d3ea5b0d2ea1499d82',
+    return (0,_index_gWzpa9PG_js__WEBPACK_IMPORTED_MODULE_0__.h)(_index_gWzpa9PG_js__WEBPACK_IMPORTED_MODULE_0__.d, {
+      key: '3bb1b4394c13f10a6e913319eb5251e779bf4aaa'
+    }, (0,_index_gWzpa9PG_js__WEBPACK_IMPORTED_MODULE_0__.h)("button", {
+      key: '38108c3ed6d1f41f8236564bb71c53924539d83d',
       ...buttonAttributes,
       onClick: () => this.handleClick()
-    }, this.playing ? (0,_index_ZFNzDU8A_js__WEBPACK_IMPORTED_MODULE_0__.h)("icon-pause", {
+    }, this.playing ? (0,_index_gWzpa9PG_js__WEBPACK_IMPORTED_MODULE_0__.h)("icon-pause", {
       ...iconProps
-    }) : (0,_index_ZFNzDU8A_js__WEBPACK_IMPORTED_MODULE_0__.h)("icon-play", {
+    }) : (0,_index_gWzpa9PG_js__WEBPACK_IMPORTED_MODULE_0__.h)("icon-play", {
       ...iconProps
     })));
   }
@@ -1072,19 +1049,7 @@ const DtpcPlayButton = class {
 DtpcPlayButton.style = dtpcPlayButtonCss;
 
 
-/***/ }),
-
-/***/ "../web-components/dist/dovetail-podcasts-player-web-components/index-CtJeLluF.js":
-/*!****************************************************************************************!*\
-  !*** ../web-components/dist/dovetail-podcasts-player-web-components/index-CtJeLluF.js ***!
-  \****************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _attributesToObject_BprZZpRs_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./attributesToObject-BprZZpRs.js */ "../web-components/dist/dovetail-podcasts-player-web-components/attributesToObject-BprZZpRs.js");
-
-
 /***/ })
 
 }]);
-//# sourceMappingURL=web-components_dist_dovetail-podcasts-player-web-components_dtpc-play-button_entry_js.js.map?ver=4e894141336569fa1e5a
+//# sourceMappingURL=web-components_dist_dovetail-podcasts-player-web-components_dtpc-play-button_entry_js.js.map?ver=af69ad8c42e1bf852f27

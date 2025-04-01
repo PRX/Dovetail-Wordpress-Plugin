@@ -1,4 +1,5 @@
-import { Component, Event as StencilEvent, Host, Prop, h, EventEmitter, State } from '@stencil/core';
+import { Component, Event as StencilEvent, EventEmitter, Host, Prop, h, State } from '@stencil/core';
+import type { PlayerState } from "@/store/player";
 
 @Component({
   tag: 'dtpc-progress-bar',
@@ -6,6 +7,8 @@ import { Component, Event as StencilEvent, Host, Prop, h, EventEmitter, State } 
   shadow: true,
 })
 export class DtpcProgressBar {
+
+  state: PlayerState;
 
   @Prop() duration: number = 0;
 
@@ -16,29 +19,28 @@ export class DtpcProgressBar {
   @State() seekTime: number;
 
   @StencilEvent({
-    eventName: 'bind-audio-events',
+    eventName: 'dtpc-control-init',
     bubbles: true,
-    composed: false
-  }) bindAudioEvents: EventEmitter;
+    cancelable: true
+  }) initControl: EventEmitter;
 
-  @StencilEvent({
-    eventName: 'update-current-time',
-    bubbles: true,
-    composed: false
-  }) updateCurrentTime: EventEmitter<number>;
+  componentWillLoad() {
+    const self = this;
 
-  connectedCallback() {
-    this.audioDuration = this.duration;
+    this.initControl.emit((state: PlayerState) => self.state = state);
   }
 
   componentDidLoad() {
-    ((self) => self.bindAudioEvents.emit([
-      ['loadedmetadata', (e: Event) => { self.handleLoadedMetaData(e); }],
-      ['timeupdate', (e: Event) => { self.handleTimeUpdate(e); }]
-    ]))(this);
+    const self = this;
+
+    this.state.audioElm.addEventListener('loadedmetadata', (e: Event) => { self.handleLoadedMetaData(e); });
+    this.state.audioElm.addEventListener('timeupdate', (e: Event) => { self.handleTimeUpdate(e); });
+
+    this.audioDuration = this.state.audioElm.duration || this.duration;
   }
 
   handleLoadedMetaData(event: Event) {
+    this.currentTime = (event.target as HTMLAudioElement).currentTime;
     this.audioDuration = (event.target as HTMLAudioElement).duration;
   }
 
@@ -50,31 +52,31 @@ export class DtpcProgressBar {
     const { value } = (event.target as HTMLInputElement);
     const newTime = parseFloat(value);
 
-    console.log(value, newTime);
+    this.state.seekTime = newTime;
     this.seekTime = newTime;
   }
 
   handleChange() {
     this.currentTime = this.seekTime;
     this.seekTime = 0;
-    this.updateCurrentTime.emit(this.currentTime);
+    this.state.audioElm.currentTime = this.currentTime;
+    this.state.seekTime = 0;
   }
 
   render() {
-    const progress = this.audioDuration && (this.seekTime || this.currentTime) / this.audioDuration;
+    const time = this.seekTime || this.currentTime
+    const progress = this.audioDuration && time / this.audioDuration;
 
     return (
-      <Host aria-label="Seek slider" aria-valuemin="0" aria-valuemax={this.audioDuration} aria-valuenow={this.currentTime}>
-        <div class="wrapper">
-          <slot name="before" />
+      <Host>
+        <div class="wrapper" aria-label="Seek slider" aria-valuemin="0" aria-valuemax={this.audioDuration} aria-valuenow={time}>
           <div class="track" style={{ '--progress': `${progress}` }}>
             <div class="progress" data-show={!!progress}></div>
             <div class="range">
-              <div class="thumb"></div>
+              <div class="scrubber"></div>
             </div>
-            <input tabindex={0} type="range" disabled={!this.audioDuration} defaultValue="0" min={0} max={this.audioDuration} step={1} value={this.seekTime || this.currentTime} onInput={(e: Event) => this.handleInput(e)} onChange={() => this.handleChange()} />
+            <input tabindex={0} type="range" disabled={!this.audioDuration} defaultValue="0" min={0} max={this.audioDuration} step={1} value={time} onInput={(e: Event) => this.handleInput(e)} onChange={() => this.handleChange()} />
           </div>
-          <slot name="before" />
         </div>
       </Host>
     );

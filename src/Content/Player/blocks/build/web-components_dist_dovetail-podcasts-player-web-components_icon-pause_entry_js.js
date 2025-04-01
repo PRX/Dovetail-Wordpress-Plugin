@@ -1,27 +1,6 @@
 "use strict";
 (globalThis["webpackChunkdovetail_podcasts_player_blocks"] = globalThis["webpackChunkdovetail_podcasts_player_blocks"] || []).push([["web-components_dist_dovetail-podcasts-player-web-components_icon-pause_entry_js"],{
 
-/***/ "../web-components/dist/dovetail-podcasts-player-web-components/attributesToObject-BprZZpRs.js":
-/*!*****************************************************************************************************!*\
-  !*** ../web-components/dist/dovetail-podcasts-player-web-components/attributesToObject-BprZZpRs.js ***!
-  \*****************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   a: () => (/* binding */ attributesToObject)
-/* harmony export */ });
-function attributesToObject(el) {
-  let result = {};
-  for (let i = 0; i < el.attributes.length; i++) {
-    result[el.attributes[i].name] = el.attributes[i].value;
-  }
-  return result;
-}
-
-
-/***/ }),
-
 /***/ "../web-components/dist/dovetail-podcasts-player-web-components/icon-pause.entry.js":
 /*!******************************************************************************************!*\
   !*** ../web-components/dist/dovetail-podcasts-player-web-components/icon-pause.entry.js ***!
@@ -32,11 +11,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   icon_pause: () => (/* binding */ IconPause)
 /* harmony export */ });
-/* harmony import */ var _index_ZFNzDU8A_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index-ZFNzDU8A.js */ "../web-components/dist/dovetail-podcasts-player-web-components/index-ZFNzDU8A.js");
+/* harmony import */ var _index_gWzpa9PG_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index-gWzpa9PG.js */ "../web-components/dist/dovetail-podcasts-player-web-components/index-gWzpa9PG.js");
 /* harmony import */ var _lucide_DCAzs0GW_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./lucide-DCAzs0GW.js */ "../web-components/dist/dovetail-podcasts-player-web-components/lucide-DCAzs0GW.js");
-/* harmony import */ var _index_CtJeLluF_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./index-CtJeLluF.js */ "../web-components/dist/dovetail-podcasts-player-web-components/index-CtJeLluF.js");
-/* harmony import */ var _attributesToObject_BprZZpRs_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./attributesToObject-BprZZpRs.js */ "../web-components/dist/dovetail-podcasts-player-web-components/attributesToObject-BprZZpRs.js");
-
+/* harmony import */ var _index_BprZZpRs_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./index-BprZZpRs.js */ "../web-components/dist/dovetail-podcasts-player-web-components/index-BprZZpRs.js");
 
 
 
@@ -522,16 +499,16 @@ const IconPause = class {
       writable: true,
       value: void 0
     });
-    (0,_index_ZFNzDU8A_js__WEBPACK_IMPORTED_MODULE_0__.r)(this, hostRef);
+    (0,_index_gWzpa9PG_js__WEBPACK_IMPORTED_MODULE_0__.r)(this, hostRef);
   }
   get el() {
-    return (0,_index_ZFNzDU8A_js__WEBPACK_IMPORTED_MODULE_0__.g)(this);
+    return (0,_index_gWzpa9PG_js__WEBPACK_IMPORTED_MODULE_0__.g)(this);
   }
   render() {
     const inner = (0,_lucide_DCAzs0GW_js__WEBPACK_IMPORTED_MODULE_1__.c)(_lucide_DCAzs0GW_js__WEBPACK_IMPORTED_MODULE_1__.P);
-    Object.entries(Object.assign({}, (0,_attributesToObject_BprZZpRs_js__WEBPACK_IMPORTED_MODULE_3__.a)(this.el), this.getProps())).forEach(([name, value]) => inner.setAttribute(name, value));
-    return (0,_index_ZFNzDU8A_js__WEBPACK_IMPORTED_MODULE_0__.h)(_index_ZFNzDU8A_js__WEBPACK_IMPORTED_MODULE_0__.d, {
-      key: '97f3d07ea25e9c67440ccfa96b3c9c17654f9d77',
+    Object.entries(Object.assign({}, (0,_index_BprZZpRs_js__WEBPACK_IMPORTED_MODULE_2__.a)(this.el), this.getProps())).forEach(([name, value]) => inner.setAttribute(name, value));
+    return (0,_index_gWzpa9PG_js__WEBPACK_IMPORTED_MODULE_0__.h)(_index_gWzpa9PG_js__WEBPACK_IMPORTED_MODULE_0__.d, {
+      key: '30e94ad121b108f268253c140b35879c3bcdc466',
       innerHTML: inner.outerHTML,
       class: "lucide-icon"
     });
@@ -550,14 +527,23 @@ const IconPause = class {
 
 /***/ }),
 
-/***/ "../web-components/dist/dovetail-podcasts-player-web-components/index-CtJeLluF.js":
+/***/ "../web-components/dist/dovetail-podcasts-player-web-components/index-BprZZpRs.js":
 /*!****************************************************************************************!*\
-  !*** ../web-components/dist/dovetail-podcasts-player-web-components/index-CtJeLluF.js ***!
+  !*** ../web-components/dist/dovetail-podcasts-player-web-components/index-BprZZpRs.js ***!
   \****************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _attributesToObject_BprZZpRs_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./attributesToObject-BprZZpRs.js */ "../web-components/dist/dovetail-podcasts-player-web-components/attributesToObject-BprZZpRs.js");
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   a: () => (/* binding */ attributesToObject)
+/* harmony export */ });
+function attributesToObject(el) {
+  let result = {};
+  for (let i = 0; i < el.attributes.length; i++) {
+    result[el.attributes[i].name] = el.attributes[i].value;
+  }
+  return result;
+}
 
 
 /***/ }),
@@ -19541,4 +19527,4 @@ const createIcons = ({
 /***/ })
 
 }]);
-//# sourceMappingURL=web-components_dist_dovetail-podcasts-player-web-components_icon-pause_entry_js.js.map?ver=0660132c832eaacc37da
+//# sourceMappingURL=web-components_dist_dovetail-podcasts-player-web-components_icon-pause_entry_js.js.map?ver=35c6591097662140732b

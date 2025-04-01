@@ -41,7 +41,7 @@ export default function Edit(props) {
 		className: cn({}, className),
 	};
 
-	console.log("play button: attributes", attributes);
+	console.log("progress bar: attributes", attributes);
 
 	return (
 		<span {...blockProps}>

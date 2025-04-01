@@ -14,7 +14,6 @@
   "supports": {
     "html": false,
     "color": {
-      "background": true,
       "text": true
     },
     "spacing": {
@@ -29,13 +28,9 @@
   "render": "file:./render.php",
   "viewScript": "file:./view.js",
   "attributes": {
-    "icon-style": {
-      "type": "string",
-      "enum": [
-        "outline",
-        "solid"
-      ],
-      "default": "outline"
+    "duration": {
+      "type": "number",
+      "default": 0
     }
   }
 }

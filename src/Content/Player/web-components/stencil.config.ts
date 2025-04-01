@@ -5,6 +5,7 @@ import { reactOutputTarget } from '@stencil/react-output-target';
 export const config: Config = {
   namespace: 'dovetail-podcasts-player-web-components',
   buildDist: true,
+  globalStyle: 'src/styles/global.css',
   outputTargets: [
     reactOutputTarget({
       // Relative path to where the React components will be generated

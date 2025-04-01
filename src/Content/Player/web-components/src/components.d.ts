@@ -18,6 +18,14 @@ export namespace Components {
     interface DtpcProgressBar {
         "duration": number;
     }
+    interface DtpcTimeCurrent {
+    }
+    interface DtpcTimeDisplay {
+        "duration": number;
+    }
+    interface DtpcTimeDuration {
+        "duration": number;
+    }
     interface IconPause {
         "alignmentBaseline": any;
         "baselineShift": any;
@@ -191,10 +199,17 @@ export interface DtpcProgressBarCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLDtpcProgressBarElement;
 }
+export interface DtpcTimeCurrentCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLDtpcTimeCurrentElement;
+}
+export interface DtpcTimeDurationCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLDtpcTimeDurationElement;
+}
 declare global {
     interface HTMLDtpcPlayButtonElementEventMap {
-        "bind-audio-events": any;
-        "toggle-pause": any;
+        "dtpc-control-init": any;
     }
     interface HTMLDtpcPlayButtonElement extends Components.DtpcPlayButton, HTMLStencilElement {
         addEventListener<K extends keyof HTMLDtpcPlayButtonElementEventMap>(type: K, listener: (this: HTMLDtpcPlayButtonElement, ev: DtpcPlayButtonCustomEvent<HTMLDtpcPlayButtonElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
@@ -217,8 +232,7 @@ declare global {
         new (): HTMLDtpcPlayerElement;
     };
     interface HTMLDtpcProgressBarElementEventMap {
-        "bind-audio-events": any;
-        "update-current-time": number;
+        "dtpc-control-init": any;
     }
     interface HTMLDtpcProgressBarElement extends Components.DtpcProgressBar, HTMLStencilElement {
         addEventListener<K extends keyof HTMLDtpcProgressBarElementEventMap>(type: K, listener: (this: HTMLDtpcProgressBarElement, ev: DtpcProgressBarCustomEvent<HTMLDtpcProgressBarElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
@@ -233,6 +247,46 @@ declare global {
     var HTMLDtpcProgressBarElement: {
         prototype: HTMLDtpcProgressBarElement;
         new (): HTMLDtpcProgressBarElement;
+    };
+    interface HTMLDtpcTimeCurrentElementEventMap {
+        "dtpc-control-init": any;
+    }
+    interface HTMLDtpcTimeCurrentElement extends Components.DtpcTimeCurrent, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLDtpcTimeCurrentElementEventMap>(type: K, listener: (this: HTMLDtpcTimeCurrentElement, ev: DtpcTimeCurrentCustomEvent<HTMLDtpcTimeCurrentElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLDtpcTimeCurrentElementEventMap>(type: K, listener: (this: HTMLDtpcTimeCurrentElement, ev: DtpcTimeCurrentCustomEvent<HTMLDtpcTimeCurrentElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLDtpcTimeCurrentElement: {
+        prototype: HTMLDtpcTimeCurrentElement;
+        new (): HTMLDtpcTimeCurrentElement;
+    };
+    interface HTMLDtpcTimeDisplayElement extends Components.DtpcTimeDisplay, HTMLStencilElement {
+    }
+    var HTMLDtpcTimeDisplayElement: {
+        prototype: HTMLDtpcTimeDisplayElement;
+        new (): HTMLDtpcTimeDisplayElement;
+    };
+    interface HTMLDtpcTimeDurationElementEventMap {
+        "dtpc-control-init": any;
+    }
+    interface HTMLDtpcTimeDurationElement extends Components.DtpcTimeDuration, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLDtpcTimeDurationElementEventMap>(type: K, listener: (this: HTMLDtpcTimeDurationElement, ev: DtpcTimeDurationCustomEvent<HTMLDtpcTimeDurationElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLDtpcTimeDurationElementEventMap>(type: K, listener: (this: HTMLDtpcTimeDurationElement, ev: DtpcTimeDurationCustomEvent<HTMLDtpcTimeDurationElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLDtpcTimeDurationElement: {
+        prototype: HTMLDtpcTimeDurationElement;
+        new (): HTMLDtpcTimeDurationElement;
     };
     interface HTMLIconPauseElement extends Components.IconPause, HTMLStencilElement {
     }
@@ -250,6 +304,9 @@ declare global {
         "dtpc-play-button": HTMLDtpcPlayButtonElement;
         "dtpc-player": HTMLDtpcPlayerElement;
         "dtpc-progress-bar": HTMLDtpcProgressBarElement;
+        "dtpc-time-current": HTMLDtpcTimeCurrentElement;
+        "dtpc-time-display": HTMLDtpcTimeDisplayElement;
+        "dtpc-time-duration": HTMLDtpcTimeDurationElement;
         "icon-pause": HTMLIconPauseElement;
         "icon-play": HTMLIconPlayElement;
     }
@@ -257,8 +314,7 @@ declare global {
 declare namespace LocalJSX {
     interface DtpcPlayButton {
         "iconStyle"?: string;
-        "onBind-audio-events"?: (event: DtpcPlayButtonCustomEvent<any>) => void;
-        "onToggle-pause"?: (event: DtpcPlayButtonCustomEvent<any>) => void;
+        "onDtpc-control-init"?: (event: DtpcPlayButtonCustomEvent<any>) => void;
     }
     interface DtpcPlayer {
         /**
@@ -268,8 +324,17 @@ declare namespace LocalJSX {
     }
     interface DtpcProgressBar {
         "duration"?: number;
-        "onBind-audio-events"?: (event: DtpcProgressBarCustomEvent<any>) => void;
-        "onUpdate-current-time"?: (event: DtpcProgressBarCustomEvent<number>) => void;
+        "onDtpc-control-init"?: (event: DtpcProgressBarCustomEvent<any>) => void;
+    }
+    interface DtpcTimeCurrent {
+        "onDtpc-control-init"?: (event: DtpcTimeCurrentCustomEvent<any>) => void;
+    }
+    interface DtpcTimeDisplay {
+        "duration"?: number;
+    }
+    interface DtpcTimeDuration {
+        "duration"?: number;
+        "onDtpc-control-init"?: (event: DtpcTimeDurationCustomEvent<any>) => void;
     }
     interface IconPause {
         "alignmentBaseline"?: any;
@@ -439,6 +504,9 @@ declare namespace LocalJSX {
         "dtpc-play-button": DtpcPlayButton;
         "dtpc-player": DtpcPlayer;
         "dtpc-progress-bar": DtpcProgressBar;
+        "dtpc-time-current": DtpcTimeCurrent;
+        "dtpc-time-display": DtpcTimeDisplay;
+        "dtpc-time-duration": DtpcTimeDuration;
         "icon-pause": IconPause;
         "icon-play": IconPlay;
     }
@@ -450,6 +518,9 @@ declare module "@stencil/core" {
             "dtpc-play-button": LocalJSX.DtpcPlayButton & JSXBase.HTMLAttributes<HTMLDtpcPlayButtonElement>;
             "dtpc-player": LocalJSX.DtpcPlayer & JSXBase.HTMLAttributes<HTMLDtpcPlayerElement>;
             "dtpc-progress-bar": LocalJSX.DtpcProgressBar & JSXBase.HTMLAttributes<HTMLDtpcProgressBarElement>;
+            "dtpc-time-current": LocalJSX.DtpcTimeCurrent & JSXBase.HTMLAttributes<HTMLDtpcTimeCurrentElement>;
+            "dtpc-time-display": LocalJSX.DtpcTimeDisplay & JSXBase.HTMLAttributes<HTMLDtpcTimeDisplayElement>;
+            "dtpc-time-duration": LocalJSX.DtpcTimeDuration & JSXBase.HTMLAttributes<HTMLDtpcTimeDurationElement>;
             "icon-pause": LocalJSX.IconPause & JSXBase.HTMLAttributes<HTMLIconPauseElement>;
             "icon-play": LocalJSX.IconPlay & JSXBase.HTMLAttributes<HTMLIconPlayElement>;
         }
