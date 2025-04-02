@@ -653,7 +653,12 @@ class Player {
 				],
 				$allowed_atts
 			),
-			'dtpc-play-button'   => $allowed_atts,
+			'dtpc-play-button'   => array_merge(
+				[
+					'icon-style' => [],
+				],
+				$allowed_atts
+			),
 			'dtpc-progress-bar'  => array_merge(
 				[
 					'duration' => [],

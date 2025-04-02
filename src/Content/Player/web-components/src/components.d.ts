@@ -18,6 +18,15 @@ export namespace Components {
     interface DtpcProgressBar {
         "duration": number;
     }
+    interface DtpcSlider {
+        "defaultValue": number;
+        "disabled": boolean;
+        "max": number;
+        "min": number;
+        "orient": 'vertical' | 'horizontal';
+        "step": number;
+        "value": number;
+    }
     interface DtpcTimeCurrent {
     }
     interface DtpcTimeDisplay {
@@ -199,6 +208,10 @@ export interface DtpcProgressBarCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLDtpcProgressBarElement;
 }
+export interface DtpcSliderCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLDtpcSliderElement;
+}
 export interface DtpcTimeCurrentCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLDtpcTimeCurrentElement;
@@ -247,6 +260,24 @@ declare global {
     var HTMLDtpcProgressBarElement: {
         prototype: HTMLDtpcProgressBarElement;
         new (): HTMLDtpcProgressBarElement;
+    };
+    interface HTMLDtpcSliderElementEventMap {
+        "slider-change": number;
+        "slider-input": number;
+    }
+    interface HTMLDtpcSliderElement extends Components.DtpcSlider, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLDtpcSliderElementEventMap>(type: K, listener: (this: HTMLDtpcSliderElement, ev: DtpcSliderCustomEvent<HTMLDtpcSliderElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLDtpcSliderElementEventMap>(type: K, listener: (this: HTMLDtpcSliderElement, ev: DtpcSliderCustomEvent<HTMLDtpcSliderElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLDtpcSliderElement: {
+        prototype: HTMLDtpcSliderElement;
+        new (): HTMLDtpcSliderElement;
     };
     interface HTMLDtpcTimeCurrentElementEventMap {
         "dtpc-control-init": any;
@@ -304,6 +335,7 @@ declare global {
         "dtpc-play-button": HTMLDtpcPlayButtonElement;
         "dtpc-player": HTMLDtpcPlayerElement;
         "dtpc-progress-bar": HTMLDtpcProgressBarElement;
+        "dtpc-slider": HTMLDtpcSliderElement;
         "dtpc-time-current": HTMLDtpcTimeCurrentElement;
         "dtpc-time-display": HTMLDtpcTimeDisplayElement;
         "dtpc-time-duration": HTMLDtpcTimeDurationElement;
@@ -325,6 +357,17 @@ declare namespace LocalJSX {
     interface DtpcProgressBar {
         "duration"?: number;
         "onDtpc-control-init"?: (event: DtpcProgressBarCustomEvent<any>) => void;
+    }
+    interface DtpcSlider {
+        "defaultValue"?: number;
+        "disabled"?: boolean;
+        "max"?: number;
+        "min"?: number;
+        "onSlider-change"?: (event: DtpcSliderCustomEvent<number>) => void;
+        "onSlider-input"?: (event: DtpcSliderCustomEvent<number>) => void;
+        "orient"?: 'vertical' | 'horizontal';
+        "step"?: number;
+        "value"?: number;
     }
     interface DtpcTimeCurrent {
         "onDtpc-control-init"?: (event: DtpcTimeCurrentCustomEvent<any>) => void;
@@ -504,6 +547,7 @@ declare namespace LocalJSX {
         "dtpc-play-button": DtpcPlayButton;
         "dtpc-player": DtpcPlayer;
         "dtpc-progress-bar": DtpcProgressBar;
+        "dtpc-slider": DtpcSlider;
         "dtpc-time-current": DtpcTimeCurrent;
         "dtpc-time-display": DtpcTimeDisplay;
         "dtpc-time-duration": DtpcTimeDuration;
@@ -518,6 +562,7 @@ declare module "@stencil/core" {
             "dtpc-play-button": LocalJSX.DtpcPlayButton & JSXBase.HTMLAttributes<HTMLDtpcPlayButtonElement>;
             "dtpc-player": LocalJSX.DtpcPlayer & JSXBase.HTMLAttributes<HTMLDtpcPlayerElement>;
             "dtpc-progress-bar": LocalJSX.DtpcProgressBar & JSXBase.HTMLAttributes<HTMLDtpcProgressBarElement>;
+            "dtpc-slider": LocalJSX.DtpcSlider & JSXBase.HTMLAttributes<HTMLDtpcSliderElement>;
             "dtpc-time-current": LocalJSX.DtpcTimeCurrent & JSXBase.HTMLAttributes<HTMLDtpcTimeCurrentElement>;
             "dtpc-time-display": LocalJSX.DtpcTimeDisplay & JSXBase.HTMLAttributes<HTMLDtpcTimeDisplayElement>;
             "dtpc-time-duration": LocalJSX.DtpcTimeDuration & JSXBase.HTMLAttributes<HTMLDtpcTimeDurationElement>;

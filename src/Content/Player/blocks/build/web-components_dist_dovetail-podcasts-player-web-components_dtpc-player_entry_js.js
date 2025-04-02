@@ -11,7 +11,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   dtpc_player: () => (/* binding */ DtpcPlayer)
 /* harmony export */ });
-/* harmony import */ var _index_gWzpa9PG_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index-gWzpa9PG.js */ "../web-components/dist/dovetail-podcasts-player-web-components/index-gWzpa9PG.js");
+/* harmony import */ var _index_C336hbsD_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index-C336hbsD.js */ "../web-components/dist/dovetail-podcasts-player-web-components/index-C336hbsD.js");
 
 const appendToMap = (map, propName, value) => {
   const items = map.get(propName);
@@ -40,14 +40,14 @@ const cleanupElements = debounce(map => {
   }
 }, 2000);
 const stencilSubscription = () => {
-  if (typeof _index_gWzpa9PG_js__WEBPACK_IMPORTED_MODULE_0__.e !== 'function') {
+  if (typeof _index_C336hbsD_js__WEBPACK_IMPORTED_MODULE_0__.e !== 'function') {
     return {};
   }
   const elmsToUpdate = new Map();
   return {
     dispose: () => elmsToUpdate.clear(),
     get: propName => {
-      const elm = (0,_index_gWzpa9PG_js__WEBPACK_IMPORTED_MODULE_0__.e)();
+      const elm = (0,_index_C336hbsD_js__WEBPACK_IMPORTED_MODULE_0__.e)();
       if (elm) {
         appendToMap(elmsToUpdate, propName, elm);
       }
@@ -55,12 +55,12 @@ const stencilSubscription = () => {
     set: propName => {
       const elements = elmsToUpdate.get(propName);
       if (elements) {
-        elmsToUpdate.set(propName, elements.filter(_index_gWzpa9PG_js__WEBPACK_IMPORTED_MODULE_0__.f));
+        elmsToUpdate.set(propName, elements.filter(_index_C336hbsD_js__WEBPACK_IMPORTED_MODULE_0__.f));
       }
       cleanupElements(elmsToUpdate);
     },
     reset: () => {
-      elmsToUpdate.forEach(elms => elms.forEach(_index_gWzpa9PG_js__WEBPACK_IMPORTED_MODULE_0__.f));
+      elmsToUpdate.forEach(elms => elms.forEach(_index_C336hbsD_js__WEBPACK_IMPORTED_MODULE_0__.f));
       cleanupElements(elmsToUpdate);
     }
   };
@@ -196,7 +196,7 @@ class playerStateFactory {
     const newStore = createStore({
       audioElm,
       playing: false,
-      seekTime: 0
+      seekTime: null
     });
     this.stores.push(newStore);
     return newStore;
@@ -218,7 +218,7 @@ const DtpcPlayer = class {
       writable: true,
       value: void 0
     });
-    (0,_index_gWzpa9PG_js__WEBPACK_IMPORTED_MODULE_0__.r)(this, hostRef);
+    (0,_index_C336hbsD_js__WEBPACK_IMPORTED_MODULE_0__.r)(this, hostRef);
   }
   connectedCallback() {
     this.state = factory.createStore(this.src).state;
@@ -239,19 +239,19 @@ const DtpcPlayer = class {
     this.state.audioElm.src = newSrc;
   }
   render() {
-    return (0,_index_gWzpa9PG_js__WEBPACK_IMPORTED_MODULE_0__.h)(_index_gWzpa9PG_js__WEBPACK_IMPORTED_MODULE_0__.d, {
-      key: 'c0e2a1a4e47dc74046ffe95f8f4ad619a4cf5f41'
-    }, (0,_index_gWzpa9PG_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", {
-      key: '6248ea41ebb6c07c0d06d490230dd307e9b7ef74',
+    return (0,_index_C336hbsD_js__WEBPACK_IMPORTED_MODULE_0__.h)(_index_C336hbsD_js__WEBPACK_IMPORTED_MODULE_0__.d, {
+      key: '6369937f3894435ba917d222a554f27c9069ddcd'
+    }, (0,_index_C336hbsD_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", {
+      key: 'ae7e03096cd6c66be76cfbe223079d956866d0cc',
       class: "wrapper"
-    }, (0,_index_gWzpa9PG_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", {
-      key: 'a6dddbb52abf2bde86c7294865bc339c072aa345',
+    }, (0,_index_C336hbsD_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", {
+      key: 'd32df788658bd2d73d315134d53cf56418408573',
       part: "backdrop"
-    }), (0,_index_gWzpa9PG_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", {
-      key: '1ebd66fea9671f0378ad0fd4eaa8535e1fbf8675',
+    }), (0,_index_C336hbsD_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", {
+      key: '7a1c4b25cb5e749f44a462c01a29486b02e116f6',
       class: "main"
-    }, (0,_index_gWzpa9PG_js__WEBPACK_IMPORTED_MODULE_0__.h)("slot", {
-      key: '5ff7fe1c01a0713caa5cf05fd0a71a93af6dcf93'
+    }, (0,_index_C336hbsD_js__WEBPACK_IMPORTED_MODULE_0__.h)("slot", {
+      key: '0f279a3986f316cfd43f818c60fc08f8ef30a609'
     }))));
   }
   static get watchers() {
@@ -266,4 +266,4 @@ DtpcPlayer.style = dtpcPlayerCss;
 /***/ })
 
 }]);
-//# sourceMappingURL=web-components_dist_dovetail-podcasts-player-web-components_dtpc-player_entry_js.js.map?ver=5b3ba36179a9fbae5d68
+//# sourceMappingURL=web-components_dist_dovetail-podcasts-player-web-components_dtpc-player_entry_js.js.map?ver=4456beff62cf5379efff

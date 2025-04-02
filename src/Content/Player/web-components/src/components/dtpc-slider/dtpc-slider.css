@@ -1,0 +1,206 @@
+:host {
+  --_dtpc-slider--scrubber--color: var(--dtpc-slider--scrubber--color, currentColor);
+  --_dtpc-slider--scrubber--size: var(--dtpc-slider--scrubber--size, 1.25rem);
+  --_dtpc-slider--scrubber--border-color: var(--dtpc-slider--scrubber--border-color, transparent);
+  --_dtpc-slider--scrubber--border-width: var(--dtpc-slider--scrubber--border-width, 0);
+  --_dtpc-slider--scrubber--border-radius: var(--dtpc-slider--scrubber--border-radius, 100vw);
+  --_dtpc-slider--progress--color: var(--dtpc-slider--progress--color, currentColor);
+  --_dtpc-slider--track--color: var(--dtpc-slider--track--color, color-mix(in oklch, currentColor 20%, transparent));
+  --_dtpc-slider--track--height: var(--dtpc-slider--track--height, 0.25rem);
+  --_dtpc-slider--track--radius: var(--dtpc-slider--track--radius, 100vw);
+  --_dtpc-slider--track--border-color: var(--dtpc-slider--track--border-color, transparent);
+  --_dtpc-slider--track--border-width: var(--dtpc-slider--track--border-width, 0);
+  --_dtpc-slider--track--border-offset: var(--dtpc-slider--track--border-offset, 0);
+  --_dtpc-slider--focus-ring-color: var(--dtpc-slider--focus-ring-color, var(--_dtpc-player--highlight));
+  --_dtpc-slider--focus-ring-offset: var(--dtpc-slider--focus-ring-offset, 0.125rem);
+  --_dtpc-slider--focus-ring-width: var(--dtpc-slider--focus-ring-width, 2px);
+
+  display: contents;
+}
+
+.track {
+  --_scrubber--color: var(--_dtpc-slider--scrubber--color);
+  --_scrubber--size: var(--_dtpc-slider--scrubber--size);
+  --_scrubber--border-color: var(--_dtpc-slider--scrubber--border-color);
+  --_scrubber--border-width: var(--_dtpc-slider--scrubber--border-width);
+  --_scrubber--border-radius: var(--_dtpc-slider--scrubber--border-radius);
+  --_scrubber--focus-ring-color: var(--_dtpc-slider--focus-ring-color);
+  --_scrubber--focus-ring-offset: var(--_dtpc-slider--focus-ring-offset);
+  --_scrubber--focus-ring-width: var(--_dtpc-slider--focus-ring-width);
+  --_track--color: var(--_dtpc-slider--track--color);
+  --_track--height: var(--_dtpc-slider--track--height);
+  --_track--radius: var(--_dtpc-slider--track--radius);
+  --_track--border-color: var(--_dtpc-slider--track--border-color);
+  --_track--border-width: var(--_dtpc-slider--track--border-width);
+  --_track--border-offset: var(--_dtpc-slider--track--border-offset);
+  --_track--gutter: calc(var(--_scrubber--size) / 2);
+
+  flex-grow: 1;
+  isolation: isolate;
+  display: grid;
+  align-items: center;
+  grid-template-columns: [range-start] var(--_track--gutter) [track-start] 1fr [track-end] var(--_track--gutter) [range-end];
+  grid-template-rows: [range-start] [track-start] var(--_track--height) [track-end] [range-end];
+
+  &::before {
+    content: '';
+
+    grid-area: track;
+    grid-row: 1;
+    place-self: stretch;
+
+    outline-style: solid;
+    outline-color: var(--_track--border-color);
+    outline-width: var(--_track--border-width);
+    outline-offset: var(--_track--border-offset);
+
+    border-radius: var(--_track--radius);
+
+    background-color: var(--_track--color);
+  }
+
+  &:has(input[orient='vertical']) {
+    writing-mode: vertical-lr;
+    direction: rtl;
+    height: 100px;
+
+    margin-block: calc(var(--_scrubber--size) / 2);
+  }
+}
+
+.progress {
+  --_progress--color: var(--_dtpc-slider--progress--color);
+  --_length: calc(var(--progress, 0) * (100% - var(--_track--gutter) * 2));
+
+  grid-area: range;
+  grid-row: 1;
+  place-self: stretch;
+
+  display: grid;
+  grid-template-columns: var(--_track--gutter) minmax(var(--_track--height), var(--_length)) 1fr var(--_track--gutter);
+
+  &:not([data-show]) {
+    visibility: hidden;
+  }
+
+  &::before {
+    content: '';
+    grid-column: 2;
+
+    border-radius: var(--_track--radius);
+
+    background-color: var(--_progress--color);
+  }
+}
+
+.range {
+  grid-area: range;
+  grid-row: 1;
+
+  display: grid;
+  grid-template-columns: calc(var(--progress, 0) * (100% - var(--_scrubber--size))) [thumb-start] var(--_scrubber--size) [thumb-end];
+  grid-template-rows: [thumb-start] var(--_track--height) [thumb-end];
+  align-items: center;
+  justify-items: center;
+
+  min-width: var(--_track--height);
+}
+
+.scrubber {
+  grid-area: thumb;
+  display: grid;
+  aspect-ratio: 1;
+  width: var(--_scrubber--size);
+
+  &::after {
+    content: '';
+
+    transition-property: scale, opacity;
+    transition-duration: 200ms;
+    transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+    display: block;
+    scale: 0;
+    opacity: 0;
+
+    border-style: solid;
+    border-color: var(--_scrubber--border-color);
+    border-width: var(--_scrubber--border-width);
+    border-radius: var(--_scrubber--border-radius);
+
+    background-color: var(--_scrubber--color);
+  }
+
+  .track:has(input:not(:disabled)):where(:hover, :focus-within) & {
+    &::after {
+      scale: 1;
+      opacity: 1;
+    }
+  }
+
+  .track:has(input:focus-visible) & {
+    &::after {
+      outline-style: solid;
+      outline-offset: var(--_scrubber--focus-ring-offset);
+      outline-color: var(--_scrubber--focus-ring-color);
+      outline-width: var(--_scrubber--focus-ring-width);
+    }
+  }
+}
+
+input {
+  grid-area: range;
+  grid-row: 1;
+
+  appearance: none;
+  background-color: transparent;
+  outline: 0;
+  border: 0;
+  margin: 0;
+  padding: 0;
+  opacity: 0;
+
+  block-size: var(--_track--height);
+
+  &[orient='vertical'] {
+    writing-mode: vertical-lr;
+    direction: rtl;
+    vertical-align: bottom;
+  }
+
+  /* Chrome */
+  @media screen and (-webkit-min-device-pixel-ratio: 0) {
+    &::-webkit-slider-runnable-track {
+      appearance: none;
+      position: relative;
+      block-size: var(--_track--height);
+    }
+    &::-webkit-slider-thumb {
+      appearance: none;
+      position: relative;
+      display: block;
+      top: 50%;
+      left: 0;
+      translate: 0 -50%;
+      aspect-ratio: 1;
+      width: var(--_scrubber--size);
+      height: auto;
+      cursor: ew-resize;
+    }
+
+    &[orient='vertical'] {
+      &::-webkit-slider-thumb {
+        left: 50%;
+        top: 0;
+        translate: -50% 0;
+        cursor: ns-resize;
+      }
+    }
+
+    &:disabled {
+      &::-webkit-slider-thumb {
+        cursor: default;
+      }
+    }
+  }
+}

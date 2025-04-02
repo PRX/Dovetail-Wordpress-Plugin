@@ -18,7 +18,7 @@ class playerStateFactory {
     const newStore = createStore<PlayerState>({
       audioElm,
       playing: false,
-      seekTime: 0,
+      seekTime: null,
     });
 
     this.stores.push(newStore);

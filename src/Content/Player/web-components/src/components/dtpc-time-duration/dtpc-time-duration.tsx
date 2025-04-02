@@ -24,15 +24,18 @@ export class DtpcTimeDuration {
   componentWillLoad() {
     const self = this;
 
-    this.initControl.emit((state: PlayerState) => self.state = state);
+    this.audioDuration = this.duration;
+
+    this.initControl.emit((state: PlayerState) => {
+      self.state = state;
+      self.audioDuration = state.audioElm.duration || this.duration;;
+    });
   }
 
   componentDidLoad() {
     const self = this;
 
     this.state.audioElm.addEventListener('loadedmetadata', (e: Event) => { self.handleLoadedMetaData(e); });
-
-    this.audioDuration = this.state.audioElm.duration || this.duration;
   }
 
   handleLoadedMetaData(event: Event) {

@@ -36,7 +36,7 @@ export class DtpcTimeCurrent {
   }
 
   render() {
-    const time = this.state.seekTime || this.state.audioElm.currentTime;
+    const time = this.state.seekTime !== null ? this.state.seekTime : this.state.audioElm.currentTime;
     const displayTime = formatDuration(time);
 
     return (

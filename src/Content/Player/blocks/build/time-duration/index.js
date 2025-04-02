@@ -1341,9 +1341,9 @@ const DtpcPlayButton$1 = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.p)(class Dtp
       'data-status': this.playing ? 'playing' : 'paused'
     };
     return (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)(_index2_js__WEBPACK_IMPORTED_MODULE_0__.d, {
-      key: '3bb1b4394c13f10a6e913319eb5251e779bf4aaa'
+      key: '1134eaa61e80d83ec19b98cb2a005c3603263b15'
     }, (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)("button", {
-      key: '38108c3ed6d1f41f8236564bb71c53924539d83d',
+      key: '84e1c130686ba0ad85d8a7ad268ab0429d18884a',
       ...buttonAttributes,
       onClick: () => this.handleClick()
     }, this.playing ? (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)("icon-pause", {
@@ -1588,7 +1588,7 @@ class playerStateFactory {
     const newStore = createStore({
       audioElm,
       playing: false,
-      seekTime: 0
+      seekTime: null
     });
     this.stores.push(newStore);
     return newStore;
@@ -1634,18 +1634,18 @@ const DtpcPlayer$1 = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.p)(class DtpcPla
   }
   render() {
     return (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)(_index2_js__WEBPACK_IMPORTED_MODULE_0__.d, {
-      key: 'c0e2a1a4e47dc74046ffe95f8f4ad619a4cf5f41'
+      key: '6369937f3894435ba917d222a554f27c9069ddcd'
     }, (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", {
-      key: '6248ea41ebb6c07c0d06d490230dd307e9b7ef74',
+      key: 'ae7e03096cd6c66be76cfbe223079d956866d0cc',
       class: "wrapper"
     }, (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", {
-      key: 'a6dddbb52abf2bde86c7294865bc339c072aa345',
+      key: 'd32df788658bd2d73d315134d53cf56418408573',
       part: "backdrop"
     }), (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", {
-      key: '1ebd66fea9671f0378ad0fd4eaa8535e1fbf8675',
+      key: '7a1c4b25cb5e749f44a462c01a29486b02e116f6',
       class: "main"
     }, (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)("slot", {
-      key: '5ff7fe1c01a0713caa5cf05fd0a71a93af6dcf93'
+      key: '0f279a3986f316cfd43f818c60fc08f8ef30a609'
     }))));
   }
   static get watchers() {
@@ -1696,8 +1696,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   defineCustomElement: () => (/* binding */ defineCustomElement)
 /* harmony export */ });
 /* harmony import */ var _index2_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index2.js */ "../web-components/dist/components/index2.js");
+/* harmony import */ var _dtpc_slider2_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./dtpc-slider2.js */ "../web-components/dist/components/dtpc-slider2.js");
 
-const dtpcProgressBarCss = ":host {\n  --_dtpc-progress-bar--spacing: var(--dtpc-progress-bar--spacing, 0.5rem);\n  --_dtpc-progress-bar--scrubber--color: var(--dtpc-progress-bar--scrubber--color, var(--_dtpc-player--surface, white));\n  --_dtpc-progress-bar--scrubber--size: var(--dtpc-progress-bar--scrubber--size, 1.25rem);\n  --_dtpc-progress-bar--scrubber--border-color: var(--dtpc-progress-bar--scrubber--border-color, var(--_dtpc-player--foreground, currentColor));\n  --_dtpc-progress-bar--scrubber--border-width: var(--dtpc-progress-bar--scrubber--border-width, 0.125rem);\n  --_dtpc-progress-bar--scrubber--border-radius: var(--dtpc-progress-bar--scrubber--border-radius, 100vw);\n  --_dtpc-progress-bar--progress--color: var(--dtpc-progress-bar--progress--color, var(--_dtpc-player--foreground, currentColor));\n  --_dtpc-progress-bar--track--color: var(--dtpc-progress-bar--track--color, var(--_dtpc-player--surface, transparent));\n  --_dtpc-progress-bar--track--height: var(--dtpc-progress-bar--track--height, 0.5rem);\n  --_dtpc-progress-bar--track--radius: var(--dtpc-progress-bar--track--radius, 100vw);\n  --_dtpc-progress-bar--track--border-color: var(--dtpc-progress-bar--track--border-color, var(--_dtpc-player--foreground, currentColor));\n  --_dtpc-progress-bar--track--border-width: var(--dtpc-progress-bar--track--border-width, 0.125rem);\n  --_dtpc-progress-bar--track--border-offset: var(--dtpc-progress-bar--track--border-offset, 0.125rem);\n  --_dtpc-progress-bar--focus-ring-color: var(--dtpc-progress-bar--focus-ring-color, var(--_dtpc-player--highlight));\n  --_dtpc-progress-bar--focus-ring-offset: var(--dtpc-progress-bar--focus-ring-offset, 0.125rem);\n  --_dtpc-progress-bar--focus-ring-width: var(--dtpc-progress-bar--focus-ring-width, 2px);\n\n  display: contents;\n}\n\n.wrapper {\n  flex-grow: 1;\n  display: flex;\n  align-items: center;\n  gap: var(--_dtpc-progress-bar--spacing);\n}\n\n.track {\n  --_scrubber--color: var(--_dtpc-progress-bar--scrubber--color);\n  --_scrubber--size: var(--_dtpc-progress-bar--scrubber--size);\n  --_scrubber--border-color: var(--_dtpc-progress-bar--scrubber--border-color);\n  --_scrubber--border-width: var(--_dtpc-progress-bar--scrubber--border-width);\n  --_scrubber--border-radius: var(--_dtpc-progress-bar--scrubber--border-radius);\n  --_scrubber--focus-ring-color: var(--_dtpc-progress-bar--focus-ring-color);\n  --_scrubber--focus-ring-offset: var(--_dtpc-progress-bar--focus-ring-offset);\n  --_scrubber--focus-ring-width: var(--_dtpc-progress-bar--focus-ring-width);\n  --_track--color: var(--_dtpc-progress-bar--track--color);\n  --_track--height: var(--_dtpc-progress-bar--track--height);\n  --_track--radius: var(--_dtpc-progress-bar--track--radius);\n  --_track--border-color: var(--_dtpc-progress-bar--track--border-color);\n  --_track--border-width: var(--_dtpc-progress-bar--track--border-width);\n  --_track--border-offset: var(--_dtpc-progress-bar--track--border-offset);\n  --_track--gutter: calc(var(--_scrubber--size) / 4);\n\n  flex-grow: 1;\n  isolation: isolate;\n  display: grid;\n  align-items: center;\n  grid-template-columns: [range-start] var(--_track--gutter) [track-start] 1fr [track-end] var(--_track--gutter) [range-end];\n  grid-template-rows: [range-start] [track-start] var(--_track--height) [track-end] [range-end];\n\n  &::before {\n    content: '';\n\n    grid-area: track;\n    place-self: stretch;\n\n    outline-style: solid;\n    outline-color: var(--_track--border-color);\n    outline-width: var(--_track--border-width);\n    outline-offset: var(--_track--border-offset);\n\n    border-radius: var(--_track--radius);\n\n    background-color: var(--_track--color);\n  }\n}\n\n.progress {\n  --_progress--color: var(--_dtpc-progress-bar--progress--color);\n\n  grid-area: track;\n  place-self: stretch;\n\n  width: calc(var(--progress, 0) * (100% - var(--_track--gutter)) + var(--_track--gutter));\n  min-width: calc(var(--_scrubber--size) / 2);\n\n  border-radius: var(--_track--radius);\n\n  background-color: var(--_progress--color);\n\n  &:not([data-show]) {\n    visibility: hidden;\n  }\n}\n\n.range {\n  grid-area: range;\n  display: grid;\n  grid-template-columns: calc(var(--progress, 0) * (100% - var(--_scrubber--size))) [thumb-start] var(--_scrubber--size) [thumb-end];\n  grid-template-rows: [thumb-start] var(--_track--height) [thumb-end];\n  align-items: center;\n  justify-items: center;\n\n  min-width: var(--_track--height);\n}\n\n.scrubber {\n  grid-area: thumb;\n  display: grid;\n  aspect-ratio: 1;\n  width: var(--_scrubber--size);\n\n  &::after {\n    content: '';\n\n    transition-property: scale, opacity;\n    transition-duration: 200ms;\n    transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);\n\n    display: block;\n    scale: 0;\n    opacity: 0;\n\n    border-style: solid;\n    border-color: var(--_scrubber--border-color);\n    border-width: var(--_scrubber--border-width);\n    border-radius: var(--_scrubber--border-radius);\n\n    background-color: var(--_scrubber--color);\n  }\n\n  .wrapper:where(:hover, :focus-within) & {\n    &::after {\n      scale: 1;\n      opacity: 1;\n    }\n  }\n\n  .wrapper:has(input:focus-visible) & {\n    &::after {\n      outline-style: solid;\n      outline-offset: var(--_scrubber--focus-ring-offset);\n      outline-color: var(--_scrubber--focus-ring-color);\n      outline-width: var(--_scrubber--focus-ring-width);\n    }\n  }\n}\n\ninput {\n  grid-area: range;\n\n  outline: 0;\n  border: 0;\n  margin: 0;\n  padding: 0;\n  opacity: 0;\n\n  /* Chrome */\n  @media screen and (-webkit-min-device-pixel-ratio: 0) {\n    & {\n      appearance: none;\n      height: var(--_track--height);\n      background-color: transparent;\n    }\n    &::-webkit-slider-runnable-track {\n      appearance: none;\n      position: relative;\n      height: var(--_track--height);\n    }\n    &::-webkit-slider-thumb {\n      appearance: none;\n      position: relative;\n      display: block;\n      top: 50%;\n      left: 0;\n      translate: 0 -50%;\n      aspect-ratio: 1;\n      width: var(--_scrubber--size);\n      height: auto;\n      cursor: ew-resize;\n    }\n  }\n}\n";
+
+const dtpcProgressBarCss = ":host{--dtpc-slider--scrubber--color:var(--dtpc-progress-bar--scrubber--color, var(--_dtpc-player--surface, white));--dtpc-slider--scrubber--size:var(--dtpc-progress-bar--scrubber--size, 1.25rem);--dtpc-slider--scrubber--border-color:var(--dtpc-progress-bar--scrubber--border-color, var(--_dtpc-player--foreground, currentColor));--dtpc-slider--scrubber--border-width:var(--dtpc-progress-bar--scrubber--border-width, 0.125rem);--dtpc-slider--scrubber--border-radius:var(--dtpc-progress-bar--scrubber--border-radius, 100vw);--dtpc-slider--progress--color:var(--dtpc-progress-bar--progress--color, var(--_dtpc-player--foreground, currentColor));--dtpc-slider--track--color:var(--dtpc-progress-bar--track--color, var(--_dtpc-player--surface, transparent));--dtpc-slider--track--height:var(--dtpc-progress-bar--track--height, 0.5rem);--dtpc-slider--track--radius:var(--dtpc-progress-bar--track--radius, 100vw);--dtpc-slider--track--border-color:var(--dtpc-progress-bar--track--border-color, var(--_dtpc-player--foreground, currentColor));--dtpc-slider--track--border-width:var(--dtpc-progress-bar--track--border-width, 0.125rem);--dtpc-slider--track--border-offset:var(--dtpc-progress-bar--track--border-offset, 0.125rem);--dtpc-slider--focus-ring-color:var(--dtpc-progress-bar--focus-ring-color, var(--_dtpc-player--highlight));--dtpc-slider--focus-ring-offset:var(--dtpc-progress-bar--focus-ring-offset, 0.125rem);--dtpc-slider--focus-ring-width:var(--dtpc-progress-bar--focus-ring-width, 2px);display:contents}.wrapper{flex-grow:1;display:grid;align-items:center}";
 const DtpcProgressBar$1 = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.p)(class DtpcProgressBar extends _index2_js__WEBPACK_IMPORTED_MODULE_0__.H {
   constructor() {
     super();
@@ -1743,7 +1745,11 @@ const DtpcProgressBar$1 = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.p)(class Dt
   }
   componentWillLoad() {
     const self = this;
-    this.initControl.emit(state => self.state = state);
+    this.audioDuration = this.duration;
+    this.initControl.emit(state => {
+      self.state = state;
+      self.audioDuration = state.audioElm.duration || this.duration;
+    });
   }
   componentDidLoad() {
     const self = this;
@@ -1753,7 +1759,6 @@ const DtpcProgressBar$1 = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.p)(class Dt
     this.state.audioElm.addEventListener('timeupdate', e => {
       self.handleTimeUpdate(e);
     });
-    this.audioDuration = this.state.audioElm.duration || this.duration;
   }
   handleLoadedMetaData(event) {
     this.currentTime = event.target.currentTime;
@@ -1763,60 +1768,34 @@ const DtpcProgressBar$1 = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.p)(class Dt
     this.currentTime = event.target.currentTime;
   }
   handleInput(event) {
-    const {
-      value
-    } = event.target;
-    const newTime = parseFloat(value);
-    this.state.seekTime = newTime;
-    this.seekTime = newTime;
+    this.state.seekTime = event.detail;
+    this.seekTime = event.detail;
   }
-  handleChange() {
-    this.currentTime = this.seekTime;
-    this.seekTime = 0;
+  handleChange(event) {
+    this.currentTime = event.detail;
+    this.seekTime = null;
     this.state.audioElm.currentTime = this.currentTime;
-    this.state.seekTime = 0;
+    this.state.seekTime = this.seekTime;
   }
   render() {
-    const time = this.seekTime || this.currentTime;
-    const progress = this.audioDuration && time / this.audioDuration;
-    return (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)(_index2_js__WEBPACK_IMPORTED_MODULE_0__.d, {
-      key: 'a878792cd354dbde5677e654ac1e429e001036cf'
-    }, (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", {
-      key: 'fe11722f2ad0509dab89063ef82c6bafccc508f4',
+    const time = this.seekTime !== null ? this.seekTime : this.currentTime;
+    return (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", {
+      key: 'f4b295a1301caf4959834abb008301c98047249a',
       class: "wrapper",
       "aria-label": "Seek slider",
       "aria-valuemin": "0",
       "aria-valuemax": this.audioDuration,
       "aria-valuenow": time
-    }, (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", {
-      key: '088708368078564a9a19e2de63121f0b1a686474',
-      class: "track",
-      style: {
-        '--progress': `${progress}`
-      }
-    }, (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", {
-      key: 'd835fd5cd9bf6b19537591763249cef785134ed9',
-      class: "progress",
-      "data-show": !!progress
-    }), (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", {
-      key: 'b494c88d27eb33554ba85665944e9268b0b1e79b',
-      class: "range"
-    }, (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", {
-      key: '2d281c4c60606a08d49e1c6fb1afe0855d5e2015',
-      class: "scrubber"
-    })), (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)("input", {
-      key: '40e972597dc239feb5872741266619855ed7b233',
+    }, (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)("dtpc-slider", {
+      key: 'c5f82861796bf8a8d314e0e913ac3aebfc3ce1a2',
       tabindex: 0,
-      type: "range",
       disabled: !this.audioDuration,
-      defaultValue: "0",
+      defaultValue: 0,
       min: 0,
       max: this.audioDuration,
       step: 1,
-      value: time,
-      onInput: e => this.handleInput(e),
-      onChange: () => this.handleChange()
-    }))));
+      value: time
+    }));
   }
   static get style() {
     return dtpcProgressBarCss;
@@ -1826,17 +1805,22 @@ const DtpcProgressBar$1 = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.p)(class Dt
   "audioDuration": [32],
   "currentTime": [32],
   "seekTime": [32]
-}]);
+}, [[0, "slider-input", "handleInput"], [0, "slider-change", "handleChange"]]]);
 function defineCustomElement$1() {
   if (typeof customElements === "undefined") {
     return;
   }
-  const components = ["dtpc-progress-bar"];
+  const components = ["dtpc-progress-bar", "dtpc-slider"];
   components.forEach(tagName => {
     switch (tagName) {
       case "dtpc-progress-bar":
         if (!customElements.get(tagName)) {
           customElements.define(tagName, DtpcProgressBar$1);
+        }
+        break;
+      case "dtpc-slider":
+        if (!customElements.get(tagName)) {
+          (0,_dtpc_slider2_js__WEBPACK_IMPORTED_MODULE_1__.d)();
         }
         break;
     }
@@ -1845,6 +1829,211 @@ function defineCustomElement$1() {
 defineCustomElement$1(DtpcProgressBar$1);
 const DtpcProgressBar = DtpcProgressBar$1;
 const defineCustomElement = defineCustomElement$1;
+
+
+/***/ }),
+
+/***/ "../web-components/dist/components/dtpc-slider.js":
+/*!********************************************************!*\
+  !*** ../web-components/dist/components/dtpc-slider.js ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   DtpcSlider: () => (/* binding */ DtpcSlider),
+/* harmony export */   defineCustomElement: () => (/* binding */ defineCustomElement)
+/* harmony export */ });
+/* harmony import */ var _dtpc_slider2_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./dtpc-slider2.js */ "../web-components/dist/components/dtpc-slider2.js");
+
+const DtpcSlider = _dtpc_slider2_js__WEBPACK_IMPORTED_MODULE_0__.D;
+const defineCustomElement = _dtpc_slider2_js__WEBPACK_IMPORTED_MODULE_0__.d;
+
+
+/***/ }),
+
+/***/ "../web-components/dist/components/dtpc-slider2.js":
+/*!*********************************************************!*\
+  !*** ../web-components/dist/components/dtpc-slider2.js ***!
+  \*********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   D: () => (/* binding */ DtpcSlider),
+/* harmony export */   d: () => (/* binding */ defineCustomElement)
+/* harmony export */ });
+/* harmony import */ var _index2_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index2.js */ "../web-components/dist/components/index2.js");
+
+const dtpcSliderCss = ":host {\n  --_dtpc-slider--scrubber--color: var(--dtpc-slider--scrubber--color, currentColor);\n  --_dtpc-slider--scrubber--size: var(--dtpc-slider--scrubber--size, 1.25rem);\n  --_dtpc-slider--scrubber--border-color: var(--dtpc-slider--scrubber--border-color, transparent);\n  --_dtpc-slider--scrubber--border-width: var(--dtpc-slider--scrubber--border-width, 0);\n  --_dtpc-slider--scrubber--border-radius: var(--dtpc-slider--scrubber--border-radius, 100vw);\n  --_dtpc-slider--progress--color: var(--dtpc-slider--progress--color, currentColor);\n  --_dtpc-slider--track--color: var(--dtpc-slider--track--color, color-mix(in oklch, currentColor 20%, transparent));\n  --_dtpc-slider--track--height: var(--dtpc-slider--track--height, 0.25rem);\n  --_dtpc-slider--track--radius: var(--dtpc-slider--track--radius, 100vw);\n  --_dtpc-slider--track--border-color: var(--dtpc-slider--track--border-color, transparent);\n  --_dtpc-slider--track--border-width: var(--dtpc-slider--track--border-width, 0);\n  --_dtpc-slider--track--border-offset: var(--dtpc-slider--track--border-offset, 0);\n  --_dtpc-slider--focus-ring-color: var(--dtpc-slider--focus-ring-color, var(--_dtpc-player--highlight));\n  --_dtpc-slider--focus-ring-offset: var(--dtpc-slider--focus-ring-offset, 0.125rem);\n  --_dtpc-slider--focus-ring-width: var(--dtpc-slider--focus-ring-width, 2px);\n\n  display: contents;\n}\n\n.track {\n  --_scrubber--color: var(--_dtpc-slider--scrubber--color);\n  --_scrubber--size: var(--_dtpc-slider--scrubber--size);\n  --_scrubber--border-color: var(--_dtpc-slider--scrubber--border-color);\n  --_scrubber--border-width: var(--_dtpc-slider--scrubber--border-width);\n  --_scrubber--border-radius: var(--_dtpc-slider--scrubber--border-radius);\n  --_scrubber--focus-ring-color: var(--_dtpc-slider--focus-ring-color);\n  --_scrubber--focus-ring-offset: var(--_dtpc-slider--focus-ring-offset);\n  --_scrubber--focus-ring-width: var(--_dtpc-slider--focus-ring-width);\n  --_track--color: var(--_dtpc-slider--track--color);\n  --_track--height: var(--_dtpc-slider--track--height);\n  --_track--radius: var(--_dtpc-slider--track--radius);\n  --_track--border-color: var(--_dtpc-slider--track--border-color);\n  --_track--border-width: var(--_dtpc-slider--track--border-width);\n  --_track--border-offset: var(--_dtpc-slider--track--border-offset);\n  --_track--gutter: calc(var(--_scrubber--size) / 2);\n\n  flex-grow: 1;\n  isolation: isolate;\n  display: grid;\n  align-items: center;\n  grid-template-columns: [range-start] var(--_track--gutter) [track-start] 1fr [track-end] var(--_track--gutter) [range-end];\n  grid-template-rows: [range-start] [track-start] var(--_track--height) [track-end] [range-end];\n\n  &::before {\n    content: '';\n\n    grid-area: track;\n    grid-row: 1;\n    place-self: stretch;\n\n    outline-style: solid;\n    outline-color: var(--_track--border-color);\n    outline-width: var(--_track--border-width);\n    outline-offset: var(--_track--border-offset);\n\n    border-radius: var(--_track--radius);\n\n    background-color: var(--_track--color);\n  }\n\n  &:has(input[orient='vertical']) {\n    writing-mode: vertical-lr;\n    direction: rtl;\n    height: 100px;\n\n    margin-block: calc(var(--_scrubber--size) / 2);\n  }\n}\n\n.progress {\n  --_progress--color: var(--_dtpc-slider--progress--color);\n  --_length: calc(var(--progress, 0) * (100% - var(--_track--gutter) * 2));\n\n  grid-area: range;\n  grid-row: 1;\n  place-self: stretch;\n\n  display: grid;\n  grid-template-columns: var(--_track--gutter) minmax(var(--_track--height), var(--_length)) 1fr var(--_track--gutter);\n\n  &:not([data-show]) {\n    visibility: hidden;\n  }\n\n  &::before {\n    content: '';\n    grid-column: 2;\n\n    border-radius: var(--_track--radius);\n\n    background-color: var(--_progress--color);\n  }\n}\n\n.range {\n  grid-area: range;\n  grid-row: 1;\n\n  display: grid;\n  grid-template-columns: calc(var(--progress, 0) * (100% - var(--_scrubber--size))) [thumb-start] var(--_scrubber--size) [thumb-end];\n  grid-template-rows: [thumb-start] var(--_track--height) [thumb-end];\n  align-items: center;\n  justify-items: center;\n\n  min-width: var(--_track--height);\n}\n\n.scrubber {\n  grid-area: thumb;\n  display: grid;\n  aspect-ratio: 1;\n  width: var(--_scrubber--size);\n\n  &::after {\n    content: '';\n\n    transition-property: scale, opacity;\n    transition-duration: 200ms;\n    transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);\n\n    display: block;\n    scale: 0;\n    opacity: 0;\n\n    border-style: solid;\n    border-color: var(--_scrubber--border-color);\n    border-width: var(--_scrubber--border-width);\n    border-radius: var(--_scrubber--border-radius);\n\n    background-color: var(--_scrubber--color);\n  }\n\n  .track:has(input:not(:disabled)):where(:hover, :focus-within) & {\n    &::after {\n      scale: 1;\n      opacity: 1;\n    }\n  }\n\n  .track:has(input:focus-visible) & {\n    &::after {\n      outline-style: solid;\n      outline-offset: var(--_scrubber--focus-ring-offset);\n      outline-color: var(--_scrubber--focus-ring-color);\n      outline-width: var(--_scrubber--focus-ring-width);\n    }\n  }\n}\n\ninput {\n  grid-area: range;\n  grid-row: 1;\n\n  appearance: none;\n  background-color: transparent;\n  outline: 0;\n  border: 0;\n  margin: 0;\n  padding: 0;\n  opacity: 0;\n\n  block-size: var(--_track--height);\n\n  &[orient='vertical'] {\n    writing-mode: vertical-lr;\n    direction: rtl;\n    vertical-align: bottom;\n  }\n\n  /* Chrome */\n  @media screen and (-webkit-min-device-pixel-ratio: 0) {\n    &::-webkit-slider-runnable-track {\n      appearance: none;\n      position: relative;\n      block-size: var(--_track--height);\n    }\n    &::-webkit-slider-thumb {\n      appearance: none;\n      position: relative;\n      display: block;\n      top: 50%;\n      left: 0;\n      translate: 0 -50%;\n      aspect-ratio: 1;\n      width: var(--_scrubber--size);\n      height: auto;\n      cursor: ew-resize;\n    }\n\n    &[orient='vertical'] {\n      &::-webkit-slider-thumb {\n        left: 50%;\n        top: 0;\n        translate: -50% 0;\n        cursor: ns-resize;\n      }\n    }\n\n    &:disabled {\n      &::-webkit-slider-thumb {\n        cursor: default;\n      }\n    }\n  }\n}\n";
+const DtpcSlider = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.p)(class DtpcSlider extends _index2_js__WEBPACK_IMPORTED_MODULE_0__.H {
+  constructor() {
+    super();
+    Object.defineProperty(this, "disabled", {
+      enumerable: true,
+      configurable: true,
+      writable: true,
+      value: false
+    });
+    Object.defineProperty(this, "defaultValue", {
+      enumerable: true,
+      configurable: true,
+      writable: true,
+      value: 0
+    });
+    Object.defineProperty(this, "value", {
+      enumerable: true,
+      configurable: true,
+      writable: true,
+      value: null
+    });
+    Object.defineProperty(this, "min", {
+      enumerable: true,
+      configurable: true,
+      writable: true,
+      value: 0
+    });
+    Object.defineProperty(this, "max", {
+      enumerable: true,
+      configurable: true,
+      writable: true,
+      value: 100
+    });
+    Object.defineProperty(this, "step", {
+      enumerable: true,
+      configurable: true,
+      writable: true,
+      value: 1
+    });
+    Object.defineProperty(this, "orient", {
+      enumerable: true,
+      configurable: true,
+      writable: true,
+      value: void 0
+    });
+    Object.defineProperty(this, "currentValue", {
+      enumerable: true,
+      configurable: true,
+      writable: true,
+      value: 0
+    });
+    Object.defineProperty(this, "sliderChange", {
+      enumerable: true,
+      configurable: true,
+      writable: true,
+      value: void 0
+    });
+    Object.defineProperty(this, "sliderInput", {
+      enumerable: true,
+      configurable: true,
+      writable: true,
+      value: void 0
+    });
+    this.__registerHost();
+    this.__attachShadow();
+    this.sliderChange = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.c)(this, "slider-change", 7);
+    this.sliderInput = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.c)(this, "slider-input", 7);
+  }
+  get el() {
+    return this;
+  }
+  handleValueChange(newValue) {
+    this.currentValue = newValue;
+  }
+  handleChange(e) {
+    this.currentValue = parseFloat(e.target.value);
+    this.sliderChange.emit(this.currentValue);
+  }
+  handleInput(e) {
+    this.currentValue = parseFloat(e.target.value);
+    this.sliderInput.emit(this.currentValue);
+  }
+  connectedCallback() {
+    this.currentValue = this.value !== null ? this.value : this.defaultValue;
+  }
+  render() {
+    const {
+      min,
+      max,
+      defaultValue,
+      currentValue,
+      step,
+      orient,
+      disabled
+    } = this;
+    const progress = this.currentValue / this.max;
+    const inputAttributes = {
+      min,
+      max,
+      step,
+      orient,
+      defaultValue: `${defaultValue}`,
+      value: currentValue,
+      disabled: disabled || !max,
+      onChange: e => this.handleChange(e),
+      onInput: e => this.handleInput(e)
+    };
+    return (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", {
+      key: '4ad685adddb074978dda54fce6f8428274464024',
+      class: "track",
+      style: {
+        '--progress': `${progress}`
+      }
+    }, (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", {
+      key: '46897489b8d9324d764c25f5ff8d71ef2e2ac28b',
+      class: "progress",
+      "data-show": !!max
+    }), (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", {
+      key: '6c2f854b10fa11e029c10d5674b4910d3b1b6abf',
+      class: "range"
+    }, (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", {
+      key: 'b658d8fce1f2be8232eb335c35fa8be6d142b50f',
+      class: "scrubber"
+    })), (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)("input", {
+      key: 'bec688dbfb45911e2af6bb6ccef95244f0d226b2',
+      type: 'range',
+      ...inputAttributes,
+      value: this.currentValue
+    }));
+  }
+  static get watchers() {
+    return {
+      "value": ["handleValueChange"]
+    };
+  }
+  static get style() {
+    return dtpcSliderCss;
+  }
+}, [1, "dtpc-slider", {
+  "disabled": [4],
+  "defaultValue": [2, "default-value"],
+  "value": [2],
+  "min": [2],
+  "max": [2],
+  "step": [2],
+  "orient": [1],
+  "currentValue": [32]
+}, undefined, {
+  "value": ["handleValueChange"]
+}]);
+function defineCustomElement() {
+  if (typeof customElements === "undefined") {
+    return;
+  }
+  const components = ["dtpc-slider"];
+  components.forEach(tagName => {
+    switch (tagName) {
+      case "dtpc-slider":
+        if (!customElements.get(tagName)) {
+          customElements.define(tagName, DtpcSlider);
+        }
+        break;
+    }
+  });
+}
+defineCustomElement(DtpcSlider);
 
 
 /***/ }),
@@ -1925,10 +2114,10 @@ const DtpcTimeCurrent = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.p)(class Dtpc
     this.currentTime = event.target.currentTime;
   }
   render() {
-    const time = this.state.seekTime || this.state.audioElm.currentTime;
+    const time = this.state.seekTime !== null ? this.state.seekTime : this.state.audioElm.currentTime;
     const displayTime = (0,_index3_js__WEBPACK_IMPORTED_MODULE_1__.f)(time);
     return (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)(_index2_js__WEBPACK_IMPORTED_MODULE_0__.d, {
-      key: '11618c4cbd34d68dff73afb3be2fd3c3dcf69a90'
+      key: 'be16b8bd787a25673e4a9c7950b73ee11728d9b2'
     }, displayTime);
   }
   static get style() {
@@ -1990,17 +2179,17 @@ const DtpcTimeDisplay$1 = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.p)(class Dt
   }
   render() {
     return (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)(_index2_js__WEBPACK_IMPORTED_MODULE_0__.d, {
-      key: '8f8ab9f247ce596f7443d76fdbade7db06a7d6d0'
+      key: 'f874eef1fa90b26db15c2b2bfaf2cb17996ed238'
     }, (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", {
-      key: '29340255b1828d3914035e1482d74aebd3a18e0a',
+      key: '166e55f9fa30b2f9eb99378d21cdaa3236207f63',
       class: "wrapper"
     }, (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)("dtpc-time-current", {
-      key: '64e0889a4b23b2cd6bce3eb50191530a8113bed2'
+      key: 'b9d44b23a59119aceb2efb75bfdfe2dda844c9dd'
     }), (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)("span", {
-      key: '7161aae4a722a3fb960776af2226c0194b34da5a',
+      key: 'db2a04f56db336f42d66ce83524e4026a06f83ec',
       class: "separator"
     }, "/"), (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)("dtpc-time-duration", {
-      key: 'd3afb53e3a50ff3cc2e74af9334e1655efe7db15',
+      key: '65cafd0c30751e48d715fdeb6d73e6e0bddbf5f3',
       duration: this.duration
     })));
   }
@@ -2112,14 +2301,18 @@ const DtpcTimeDuration = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.p)(class Dtp
   }
   componentWillLoad() {
     const self = this;
-    this.initControl.emit(state => self.state = state);
+    this.audioDuration = this.duration;
+    this.initControl.emit(state => {
+      self.state = state;
+      self.audioDuration = state.audioElm.duration || this.duration;
+      ;
+    });
   }
   componentDidLoad() {
     const self = this;
     this.state.audioElm.addEventListener('loadedmetadata', e => {
       self.handleLoadedMetaData(e);
     });
-    this.audioDuration = this.state.audioElm.duration || this.duration;
   }
   handleLoadedMetaData(event) {
     this.audioDuration = event.target.duration;
@@ -2127,7 +2320,7 @@ const DtpcTimeDuration = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.p)(class Dtp
   render() {
     const displayDuration = (0,_index3_js__WEBPACK_IMPORTED_MODULE_1__.f)(this.audioDuration);
     return (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)(_index2_js__WEBPACK_IMPORTED_MODULE_0__.d, {
-      key: 'ba08d84a4a9a58ae578d331c668d1d59cb2692e8'
+      key: '5943618f51b40661d3280076729efb37216ecb9b'
     }, displayDuration);
   }
   static get style() {
@@ -2687,7 +2880,7 @@ const IconPause = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.p)(class IconPause 
     const inner = (0,_lucide_js__WEBPACK_IMPORTED_MODULE_1__.c)(_lucide_js__WEBPACK_IMPORTED_MODULE_1__.P);
     Object.entries(Object.assign({}, (0,_index4_js__WEBPACK_IMPORTED_MODULE_2__.a)(this.el), this.getProps())).forEach(([name, value]) => inner.setAttribute(name, value));
     return (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)(_index2_js__WEBPACK_IMPORTED_MODULE_0__.d, {
-      key: '30e94ad121b108f268253c140b35879c3bcdc466',
+      key: 'd29e53275c7bb18238ec3b6b5099e0c0979c4090',
       innerHTML: inner.outerHTML,
       class: "lucide-icon"
     });
@@ -3333,7 +3526,7 @@ const IconPlay = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.p)(class IconPlay ex
     const inner = (0,_lucide_js__WEBPACK_IMPORTED_MODULE_1__.c)(_lucide_js__WEBPACK_IMPORTED_MODULE_1__.a);
     Object.entries(Object.assign({}, (0,_index4_js__WEBPACK_IMPORTED_MODULE_2__.a)(this.el), this.getProps())).forEach(([name, value]) => inner.setAttribute(name, value));
     return (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)(_index2_js__WEBPACK_IMPORTED_MODULE_0__.d, {
-      key: '8fedae6b21b2163da05e3ea8cf5650927019b5cc',
+      key: 'd07bbd4349a4663c429a8a35139d4b4904e77eeb',
       innerHTML: inner.outerHTML,
       class: "lucide-icon"
     });
@@ -3513,7 +3706,7 @@ const BUILD = {
   observeAttribute: true,
   profile: true,
   prop: true,
-  propBoolean: false,
+  propBoolean: true,
   propMutable: false,
   propNumber: true,
   propString: true,
@@ -26316,6 +26509,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   DtpcPlayButton: () => (/* reexport safe */ _stencil_generated_components__WEBPACK_IMPORTED_MODULE_0__.DtpcPlayButton),
 /* harmony export */   DtpcPlayer: () => (/* reexport safe */ _stencil_generated_components__WEBPACK_IMPORTED_MODULE_0__.DtpcPlayer),
 /* harmony export */   DtpcProgressBar: () => (/* reexport safe */ _stencil_generated_components__WEBPACK_IMPORTED_MODULE_0__.DtpcProgressBar),
+/* harmony export */   DtpcSlider: () => (/* reexport safe */ _stencil_generated_components__WEBPACK_IMPORTED_MODULE_0__.DtpcSlider),
 /* harmony export */   DtpcTimeCurrent: () => (/* reexport safe */ _stencil_generated_components__WEBPACK_IMPORTED_MODULE_0__.DtpcTimeCurrent),
 /* harmony export */   DtpcTimeDisplay: () => (/* reexport safe */ _stencil_generated_components__WEBPACK_IMPORTED_MODULE_0__.DtpcTimeDisplay),
 /* harmony export */   DtpcTimeDuration: () => (/* reexport safe */ _stencil_generated_components__WEBPACK_IMPORTED_MODULE_0__.DtpcTimeDuration),
@@ -26339,6 +26533,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   DtpcPlayButton: () => (/* binding */ DtpcPlayButton),
 /* harmony export */   DtpcPlayer: () => (/* binding */ DtpcPlayer),
 /* harmony export */   DtpcProgressBar: () => (/* binding */ DtpcProgressBar),
+/* harmony export */   DtpcSlider: () => (/* binding */ DtpcSlider),
 /* harmony export */   DtpcTimeCurrent: () => (/* binding */ DtpcTimeCurrent),
 /* harmony export */   DtpcTimeDisplay: () => (/* binding */ DtpcTimeDisplay),
 /* harmony export */   DtpcTimeDuration: () => (/* binding */ DtpcTimeDuration),
@@ -26349,14 +26544,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var dovetail_podcasts_player_web_components_dist_components_dtpc_play_button_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! dovetail-podcasts-player-web-components/dist/components/dtpc-play-button.js */ "../web-components/dist/components/dtpc-play-button.js");
 /* harmony import */ var dovetail_podcasts_player_web_components_dist_components_dtpc_player_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! dovetail-podcasts-player-web-components/dist/components/dtpc-player.js */ "../web-components/dist/components/dtpc-player.js");
 /* harmony import */ var dovetail_podcasts_player_web_components_dist_components_dtpc_progress_bar_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! dovetail-podcasts-player-web-components/dist/components/dtpc-progress-bar.js */ "../web-components/dist/components/dtpc-progress-bar.js");
-/* harmony import */ var dovetail_podcasts_player_web_components_dist_components_dtpc_time_current_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! dovetail-podcasts-player-web-components/dist/components/dtpc-time-current.js */ "../web-components/dist/components/dtpc-time-current.js");
-/* harmony import */ var dovetail_podcasts_player_web_components_dist_components_dtpc_time_display_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! dovetail-podcasts-player-web-components/dist/components/dtpc-time-display.js */ "../web-components/dist/components/dtpc-time-display.js");
-/* harmony import */ var dovetail_podcasts_player_web_components_dist_components_dtpc_time_duration_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! dovetail-podcasts-player-web-components/dist/components/dtpc-time-duration.js */ "../web-components/dist/components/dtpc-time-duration.js");
-/* harmony import */ var dovetail_podcasts_player_web_components_dist_components_icon_pause_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! dovetail-podcasts-player-web-components/dist/components/icon-pause.js */ "../web-components/dist/components/icon-pause.js");
-/* harmony import */ var dovetail_podcasts_player_web_components_dist_components_icon_play_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! dovetail-podcasts-player-web-components/dist/components/icon-play.js */ "../web-components/dist/components/icon-play.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var dovetail_podcasts_player_web_components_dist_components_dtpc_slider_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! dovetail-podcasts-player-web-components/dist/components/dtpc-slider.js */ "../web-components/dist/components/dtpc-slider.js");
+/* harmony import */ var dovetail_podcasts_player_web_components_dist_components_dtpc_time_current_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! dovetail-podcasts-player-web-components/dist/components/dtpc-time-current.js */ "../web-components/dist/components/dtpc-time-current.js");
+/* harmony import */ var dovetail_podcasts_player_web_components_dist_components_dtpc_time_display_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! dovetail-podcasts-player-web-components/dist/components/dtpc-time-display.js */ "../web-components/dist/components/dtpc-time-display.js");
+/* harmony import */ var dovetail_podcasts_player_web_components_dist_components_dtpc_time_duration_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! dovetail-podcasts-player-web-components/dist/components/dtpc-time-duration.js */ "../web-components/dist/components/dtpc-time-duration.js");
+/* harmony import */ var dovetail_podcasts_player_web_components_dist_components_icon_pause_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! dovetail-podcasts-player-web-components/dist/components/icon-pause.js */ "../web-components/dist/components/icon-pause.js");
+/* harmony import */ var dovetail_podcasts_player_web_components_dist_components_icon_play_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! dovetail-podcasts-player-web-components/dist/components/icon-play.js */ "../web-components/dist/components/icon-play.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_10__);
 'use client';
+
 
 
 
@@ -26371,7 +26568,7 @@ __webpack_require__.r(__webpack_exports__);
 const DtpcPlayButton = (0,_stencil_react_output_target_runtime__WEBPACK_IMPORTED_MODULE_0__.createComponent)({
   tagName: 'dtpc-play-button',
   elementClass: dovetail_podcasts_player_web_components_dist_components_dtpc_play_button_js__WEBPACK_IMPORTED_MODULE_1__.DtpcPlayButton,
-  react: (react__WEBPACK_IMPORTED_MODULE_9___default()),
+  react: (react__WEBPACK_IMPORTED_MODULE_10___default()),
   events: {
     onDtpcControlInit: 'dtpc-control-init'
   },
@@ -26380,57 +26577,67 @@ const DtpcPlayButton = (0,_stencil_react_output_target_runtime__WEBPACK_IMPORTED
 const DtpcPlayer = (0,_stencil_react_output_target_runtime__WEBPACK_IMPORTED_MODULE_0__.createComponent)({
   tagName: 'dtpc-player',
   elementClass: dovetail_podcasts_player_web_components_dist_components_dtpc_player_js__WEBPACK_IMPORTED_MODULE_2__.DtpcPlayer,
-  react: (react__WEBPACK_IMPORTED_MODULE_9___default()),
+  react: (react__WEBPACK_IMPORTED_MODULE_10___default()),
   events: {},
   defineCustomElement: dovetail_podcasts_player_web_components_dist_components_dtpc_player_js__WEBPACK_IMPORTED_MODULE_2__.defineCustomElement
 });
 const DtpcProgressBar = (0,_stencil_react_output_target_runtime__WEBPACK_IMPORTED_MODULE_0__.createComponent)({
   tagName: 'dtpc-progress-bar',
   elementClass: dovetail_podcasts_player_web_components_dist_components_dtpc_progress_bar_js__WEBPACK_IMPORTED_MODULE_3__.DtpcProgressBar,
-  react: (react__WEBPACK_IMPORTED_MODULE_9___default()),
+  react: (react__WEBPACK_IMPORTED_MODULE_10___default()),
   events: {
     onDtpcControlInit: 'dtpc-control-init'
   },
   defineCustomElement: dovetail_podcasts_player_web_components_dist_components_dtpc_progress_bar_js__WEBPACK_IMPORTED_MODULE_3__.defineCustomElement
 });
+const DtpcSlider = (0,_stencil_react_output_target_runtime__WEBPACK_IMPORTED_MODULE_0__.createComponent)({
+  tagName: 'dtpc-slider',
+  elementClass: dovetail_podcasts_player_web_components_dist_components_dtpc_slider_js__WEBPACK_IMPORTED_MODULE_4__.DtpcSlider,
+  react: (react__WEBPACK_IMPORTED_MODULE_10___default()),
+  events: {
+    onSliderChange: 'slider-change',
+    onSliderInput: 'slider-input'
+  },
+  defineCustomElement: dovetail_podcasts_player_web_components_dist_components_dtpc_slider_js__WEBPACK_IMPORTED_MODULE_4__.defineCustomElement
+});
 const DtpcTimeCurrent = (0,_stencil_react_output_target_runtime__WEBPACK_IMPORTED_MODULE_0__.createComponent)({
   tagName: 'dtpc-time-current',
-  elementClass: dovetail_podcasts_player_web_components_dist_components_dtpc_time_current_js__WEBPACK_IMPORTED_MODULE_4__.DtpcTimeCurrent,
-  react: (react__WEBPACK_IMPORTED_MODULE_9___default()),
+  elementClass: dovetail_podcasts_player_web_components_dist_components_dtpc_time_current_js__WEBPACK_IMPORTED_MODULE_5__.DtpcTimeCurrent,
+  react: (react__WEBPACK_IMPORTED_MODULE_10___default()),
   events: {
     onDtpcControlInit: 'dtpc-control-init'
   },
-  defineCustomElement: dovetail_podcasts_player_web_components_dist_components_dtpc_time_current_js__WEBPACK_IMPORTED_MODULE_4__.defineCustomElement
+  defineCustomElement: dovetail_podcasts_player_web_components_dist_components_dtpc_time_current_js__WEBPACK_IMPORTED_MODULE_5__.defineCustomElement
 });
 const DtpcTimeDisplay = (0,_stencil_react_output_target_runtime__WEBPACK_IMPORTED_MODULE_0__.createComponent)({
   tagName: 'dtpc-time-display',
-  elementClass: dovetail_podcasts_player_web_components_dist_components_dtpc_time_display_js__WEBPACK_IMPORTED_MODULE_5__.DtpcTimeDisplay,
-  react: (react__WEBPACK_IMPORTED_MODULE_9___default()),
+  elementClass: dovetail_podcasts_player_web_components_dist_components_dtpc_time_display_js__WEBPACK_IMPORTED_MODULE_6__.DtpcTimeDisplay,
+  react: (react__WEBPACK_IMPORTED_MODULE_10___default()),
   events: {},
-  defineCustomElement: dovetail_podcasts_player_web_components_dist_components_dtpc_time_display_js__WEBPACK_IMPORTED_MODULE_5__.defineCustomElement
+  defineCustomElement: dovetail_podcasts_player_web_components_dist_components_dtpc_time_display_js__WEBPACK_IMPORTED_MODULE_6__.defineCustomElement
 });
 const DtpcTimeDuration = (0,_stencil_react_output_target_runtime__WEBPACK_IMPORTED_MODULE_0__.createComponent)({
   tagName: 'dtpc-time-duration',
-  elementClass: dovetail_podcasts_player_web_components_dist_components_dtpc_time_duration_js__WEBPACK_IMPORTED_MODULE_6__.DtpcTimeDuration,
-  react: (react__WEBPACK_IMPORTED_MODULE_9___default()),
+  elementClass: dovetail_podcasts_player_web_components_dist_components_dtpc_time_duration_js__WEBPACK_IMPORTED_MODULE_7__.DtpcTimeDuration,
+  react: (react__WEBPACK_IMPORTED_MODULE_10___default()),
   events: {
     onDtpcControlInit: 'dtpc-control-init'
   },
-  defineCustomElement: dovetail_podcasts_player_web_components_dist_components_dtpc_time_duration_js__WEBPACK_IMPORTED_MODULE_6__.defineCustomElement
+  defineCustomElement: dovetail_podcasts_player_web_components_dist_components_dtpc_time_duration_js__WEBPACK_IMPORTED_MODULE_7__.defineCustomElement
 });
 const IconPause = (0,_stencil_react_output_target_runtime__WEBPACK_IMPORTED_MODULE_0__.createComponent)({
   tagName: 'icon-pause',
-  elementClass: dovetail_podcasts_player_web_components_dist_components_icon_pause_js__WEBPACK_IMPORTED_MODULE_7__.IconPause,
-  react: (react__WEBPACK_IMPORTED_MODULE_9___default()),
+  elementClass: dovetail_podcasts_player_web_components_dist_components_icon_pause_js__WEBPACK_IMPORTED_MODULE_8__.IconPause,
+  react: (react__WEBPACK_IMPORTED_MODULE_10___default()),
   events: {},
-  defineCustomElement: dovetail_podcasts_player_web_components_dist_components_icon_pause_js__WEBPACK_IMPORTED_MODULE_7__.defineCustomElement
+  defineCustomElement: dovetail_podcasts_player_web_components_dist_components_icon_pause_js__WEBPACK_IMPORTED_MODULE_8__.defineCustomElement
 });
 const IconPlay = (0,_stencil_react_output_target_runtime__WEBPACK_IMPORTED_MODULE_0__.createComponent)({
   tagName: 'icon-play',
-  elementClass: dovetail_podcasts_player_web_components_dist_components_icon_play_js__WEBPACK_IMPORTED_MODULE_8__.IconPlay,
-  react: (react__WEBPACK_IMPORTED_MODULE_9___default()),
+  elementClass: dovetail_podcasts_player_web_components_dist_components_icon_play_js__WEBPACK_IMPORTED_MODULE_9__.IconPlay,
+  react: (react__WEBPACK_IMPORTED_MODULE_10___default()),
   events: {},
-  defineCustomElement: dovetail_podcasts_player_web_components_dist_components_icon_play_js__WEBPACK_IMPORTED_MODULE_8__.defineCustomElement
+  defineCustomElement: dovetail_podcasts_player_web_components_dist_components_icon_play_js__WEBPACK_IMPORTED_MODULE_9__.defineCustomElement
 });
 
 /***/ }),

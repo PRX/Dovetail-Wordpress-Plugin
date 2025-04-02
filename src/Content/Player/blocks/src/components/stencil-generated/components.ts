@@ -12,6 +12,7 @@ import { createComponent } from '@stencil/react-output-target/runtime';
 import { DtpcPlayButton as DtpcPlayButtonElement, defineCustomElement as defineDtpcPlayButton } from "dovetail-podcasts-player-web-components/dist/components/dtpc-play-button.js";
 import { DtpcPlayer as DtpcPlayerElement, defineCustomElement as defineDtpcPlayer } from "dovetail-podcasts-player-web-components/dist/components/dtpc-player.js";
 import { DtpcProgressBar as DtpcProgressBarElement, defineCustomElement as defineDtpcProgressBar } from "dovetail-podcasts-player-web-components/dist/components/dtpc-progress-bar.js";
+import { DtpcSlider as DtpcSliderElement, defineCustomElement as defineDtpcSlider } from "dovetail-podcasts-player-web-components/dist/components/dtpc-slider.js";
 import { DtpcTimeCurrent as DtpcTimeCurrentElement, defineCustomElement as defineDtpcTimeCurrent } from "dovetail-podcasts-player-web-components/dist/components/dtpc-time-current.js";
 import { DtpcTimeDisplay as DtpcTimeDisplayElement, defineCustomElement as defineDtpcTimeDisplay } from "dovetail-podcasts-player-web-components/dist/components/dtpc-time-display.js";
 import { DtpcTimeDuration as DtpcTimeDurationElement, defineCustomElement as defineDtpcTimeDuration } from "dovetail-podcasts-player-web-components/dist/components/dtpc-time-duration.js";
@@ -50,6 +51,23 @@ export const DtpcProgressBar: StencilReactComponent<DtpcProgressBarElement, Dtpc
     react: React,
     events: { onDtpcControlInit: 'dtpc-control-init' } as DtpcProgressBarEvents,
     defineCustomElement: defineDtpcProgressBar
+});
+
+type DtpcSliderEvents = {
+    onSliderChange: EventName<CustomEvent<number>>,
+    onSliderInput: EventName<CustomEvent<number>>
+};
+
+export const DtpcSlider: StencilReactComponent<DtpcSliderElement, DtpcSliderEvents> = /*@__PURE__*/ createComponent<DtpcSliderElement, DtpcSliderEvents>({
+    tagName: 'dtpc-slider',
+    elementClass: DtpcSliderElement,
+    // @ts-ignore - React type of Stencil Output Target may differ from the React version used in the Nuxt.js project, this can be ignored.
+    react: React,
+    events: {
+        onSliderChange: 'slider-change',
+        onSliderInput: 'slider-input'
+    } as DtpcSliderEvents,
+    defineCustomElement: defineDtpcSlider
 });
 
 type DtpcTimeCurrentEvents = { onDtpcControlInit: EventName<CustomEvent<any>> };

@@ -11,7 +11,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   icon_pause: () => (/* binding */ IconPause)
 /* harmony export */ });
-/* harmony import */ var _index_gWzpa9PG_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index-gWzpa9PG.js */ "../web-components/dist/dovetail-podcasts-player-web-components/index-gWzpa9PG.js");
+/* harmony import */ var _index_C336hbsD_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index-C336hbsD.js */ "../web-components/dist/dovetail-podcasts-player-web-components/index-C336hbsD.js");
 /* harmony import */ var _lucide_DCAzs0GW_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./lucide-DCAzs0GW.js */ "../web-components/dist/dovetail-podcasts-player-web-components/lucide-DCAzs0GW.js");
 /* harmony import */ var _index_BprZZpRs_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./index-BprZZpRs.js */ "../web-components/dist/dovetail-podcasts-player-web-components/index-BprZZpRs.js");
 
@@ -499,16 +499,16 @@ const IconPause = class {
       writable: true,
       value: void 0
     });
-    (0,_index_gWzpa9PG_js__WEBPACK_IMPORTED_MODULE_0__.r)(this, hostRef);
+    (0,_index_C336hbsD_js__WEBPACK_IMPORTED_MODULE_0__.r)(this, hostRef);
   }
   get el() {
-    return (0,_index_gWzpa9PG_js__WEBPACK_IMPORTED_MODULE_0__.g)(this);
+    return (0,_index_C336hbsD_js__WEBPACK_IMPORTED_MODULE_0__.g)(this);
   }
   render() {
     const inner = (0,_lucide_DCAzs0GW_js__WEBPACK_IMPORTED_MODULE_1__.c)(_lucide_DCAzs0GW_js__WEBPACK_IMPORTED_MODULE_1__.P);
     Object.entries(Object.assign({}, (0,_index_BprZZpRs_js__WEBPACK_IMPORTED_MODULE_2__.a)(this.el), this.getProps())).forEach(([name, value]) => inner.setAttribute(name, value));
-    return (0,_index_gWzpa9PG_js__WEBPACK_IMPORTED_MODULE_0__.h)(_index_gWzpa9PG_js__WEBPACK_IMPORTED_MODULE_0__.d, {
-      key: '30e94ad121b108f268253c140b35879c3bcdc466',
+    return (0,_index_C336hbsD_js__WEBPACK_IMPORTED_MODULE_0__.h)(_index_C336hbsD_js__WEBPACK_IMPORTED_MODULE_0__.d, {
+      key: 'd29e53275c7bb18238ec3b6b5099e0c0979c4090',
       innerHTML: inner.outerHTML,
       class: "lucide-icon"
     });
@@ -19527,4 +19527,4 @@ const createIcons = ({
 /***/ })
 
 }]);
-//# sourceMappingURL=web-components_dist_dovetail-podcasts-player-web-components_icon-pause_entry_js.js.map?ver=35c6591097662140732b
+//# sourceMappingURL=web-components_dist_dovetail-podcasts-player-web-components_icon-pause_entry_js.js.map?ver=be212443091cfe3d422e

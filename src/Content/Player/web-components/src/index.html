@@ -74,6 +74,7 @@
     <h1>Dovetail Podcast Player</h1>
 
     <h2>Layouts</h2>
+
     <section class="player-layout">
       <h3>Default</h3>
       <div class="content">
@@ -94,6 +95,19 @@
           <dtpc-progress-bar duration="1300.166531"></dtpc-progress-bar>
           <dtpc-time-display duration="1300.166531"></dtpc-time-display>
         </dtpc-player>
+      </div>
+    </section>
+
+    <h2>Shared UI</h2>
+
+    <section class="player-layout">
+      <h3>Slider</h3>
+      <div class="content">
+        <h4>Horizontal</h4>
+        <dtpc-slider default-value="40" min="0" max="100" step="1"></dtpc-slider>
+
+        <h4>Vertical</h4>
+        <dtpc-slider default-value="40" min="0" max="100" step="1" orient="vertical"></dtpc-slider>
       </div>
     </section>
 

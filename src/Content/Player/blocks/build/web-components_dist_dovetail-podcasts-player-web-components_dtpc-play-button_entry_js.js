@@ -11,7 +11,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   dtpc_play_button: () => (/* binding */ DtpcPlayButton)
 /* harmony export */ });
-/* harmony import */ var _index_gWzpa9PG_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index-gWzpa9PG.js */ "../web-components/dist/dovetail-podcasts-player-web-components/index-gWzpa9PG.js");
+/* harmony import */ var _index_C336hbsD_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index-C336hbsD.js */ "../web-components/dist/dovetail-podcasts-player-web-components/index-C336hbsD.js");
 
 function memize(fn, options) {
   var size = 0;
@@ -988,11 +988,11 @@ const DtpcPlayButton = class {
       writable: true,
       value: void 0
     });
-    (0,_index_gWzpa9PG_js__WEBPACK_IMPORTED_MODULE_0__.r)(this, hostRef);
-    this.initControl = (0,_index_gWzpa9PG_js__WEBPACK_IMPORTED_MODULE_0__.a)(this, "dtpc-control-init", 7);
+    (0,_index_C336hbsD_js__WEBPACK_IMPORTED_MODULE_0__.r)(this, hostRef);
+    this.initControl = (0,_index_C336hbsD_js__WEBPACK_IMPORTED_MODULE_0__.a)(this, "dtpc-control-init", 7);
   }
   get el() {
-    return (0,_index_gWzpa9PG_js__WEBPACK_IMPORTED_MODULE_0__.g)(this);
+    return (0,_index_C336hbsD_js__WEBPACK_IMPORTED_MODULE_0__.g)(this);
   }
   componentWillLoad() {
     const self = this;
@@ -1033,15 +1033,15 @@ const DtpcPlayButton = class {
       title: label,
       'data-status': this.playing ? 'playing' : 'paused'
     };
-    return (0,_index_gWzpa9PG_js__WEBPACK_IMPORTED_MODULE_0__.h)(_index_gWzpa9PG_js__WEBPACK_IMPORTED_MODULE_0__.d, {
-      key: '3bb1b4394c13f10a6e913319eb5251e779bf4aaa'
-    }, (0,_index_gWzpa9PG_js__WEBPACK_IMPORTED_MODULE_0__.h)("button", {
-      key: '38108c3ed6d1f41f8236564bb71c53924539d83d',
+    return (0,_index_C336hbsD_js__WEBPACK_IMPORTED_MODULE_0__.h)(_index_C336hbsD_js__WEBPACK_IMPORTED_MODULE_0__.d, {
+      key: '1134eaa61e80d83ec19b98cb2a005c3603263b15'
+    }, (0,_index_C336hbsD_js__WEBPACK_IMPORTED_MODULE_0__.h)("button", {
+      key: '84e1c130686ba0ad85d8a7ad268ab0429d18884a',
       ...buttonAttributes,
       onClick: () => this.handleClick()
-    }, this.playing ? (0,_index_gWzpa9PG_js__WEBPACK_IMPORTED_MODULE_0__.h)("icon-pause", {
+    }, this.playing ? (0,_index_C336hbsD_js__WEBPACK_IMPORTED_MODULE_0__.h)("icon-pause", {
       ...iconProps
-    }) : (0,_index_gWzpa9PG_js__WEBPACK_IMPORTED_MODULE_0__.h)("icon-play", {
+    }) : (0,_index_C336hbsD_js__WEBPACK_IMPORTED_MODULE_0__.h)("icon-play", {
       ...iconProps
     })));
   }
@@ -1052,4 +1052,4 @@ DtpcPlayButton.style = dtpcPlayButtonCss;
 /***/ })
 
 }]);
-//# sourceMappingURL=web-components_dist_dovetail-podcasts-player-web-components_dtpc-play-button_entry_js.js.map?ver=af69ad8c42e1bf852f27
+//# sourceMappingURL=web-components_dist_dovetail-podcasts-player-web-components_dtpc-play-button_entry_js.js.map?ver=84d170d77190ac0c3972
