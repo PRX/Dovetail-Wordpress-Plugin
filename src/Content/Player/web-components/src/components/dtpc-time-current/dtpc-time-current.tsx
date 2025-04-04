@@ -1,4 +1,4 @@
-import { Component, Event as StencilEvent, EventEmitter, Host, h, State } from '@stencil/core';
+import { Component, Event as StencilEvent, EventEmitter, Host, h } from '@stencil/core';
 import { formatDuration } from '@/lib/utils';
 import type { PlayerState } from "@/store/player";
 
@@ -10,8 +10,6 @@ import type { PlayerState } from "@/store/player";
 export class DtpcTimeCurrent {
 
   state: PlayerState;
-
-  @State() currentTime: number = 0;
 
   @StencilEvent({
     eventName: 'dtpc-control-init',
@@ -25,18 +23,9 @@ export class DtpcTimeCurrent {
     this.initControl.emit((state: PlayerState) => self.state = state);
   }
 
-  componentDidLoad() {
-    const self = this;
-
-    this.state.audioElm.addEventListener('timeupdate', (e: Event) => { self.handleTimeUpdate(e); })
-  }
-
-  handleTimeUpdate(event: Event) {
-    this.currentTime = (event.target as HTMLAudioElement).currentTime;
-  }
-
   render() {
-    const time = this.state.seekTime !== null ? this.state.seekTime : this.state.audioElm.currentTime;
+    const { seekTime, currentTime } = this.state;
+    const time = seekTime !== null ? seekTime : currentTime;
     const displayTime = formatDuration(time);
 
     return (

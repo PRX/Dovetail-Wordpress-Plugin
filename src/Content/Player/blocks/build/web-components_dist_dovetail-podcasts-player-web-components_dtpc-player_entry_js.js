@@ -11,7 +11,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   dtpc_player: () => (/* binding */ DtpcPlayer)
 /* harmony export */ });
-/* harmony import */ var _index_C336hbsD_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index-C336hbsD.js */ "../web-components/dist/dovetail-podcasts-player-web-components/index-C336hbsD.js");
+/* harmony import */ var _index_ngapiRTG_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index-ngapiRTG.js */ "../web-components/dist/dovetail-podcasts-player-web-components/index-ngapiRTG.js");
 
 const appendToMap = (map, propName, value) => {
   const items = map.get(propName);
@@ -40,14 +40,14 @@ const cleanupElements = debounce(map => {
   }
 }, 2000);
 const stencilSubscription = () => {
-  if (typeof _index_C336hbsD_js__WEBPACK_IMPORTED_MODULE_0__.e !== 'function') {
+  if (typeof _index_ngapiRTG_js__WEBPACK_IMPORTED_MODULE_0__.g !== 'function') {
     return {};
   }
   const elmsToUpdate = new Map();
   return {
     dispose: () => elmsToUpdate.clear(),
     get: propName => {
-      const elm = (0,_index_C336hbsD_js__WEBPACK_IMPORTED_MODULE_0__.e)();
+      const elm = (0,_index_ngapiRTG_js__WEBPACK_IMPORTED_MODULE_0__.g)();
       if (elm) {
         appendToMap(elmsToUpdate, propName, elm);
       }
@@ -55,12 +55,12 @@ const stencilSubscription = () => {
     set: propName => {
       const elements = elmsToUpdate.get(propName);
       if (elements) {
-        elmsToUpdate.set(propName, elements.filter(_index_C336hbsD_js__WEBPACK_IMPORTED_MODULE_0__.f));
+        elmsToUpdate.set(propName, elements.filter(_index_ngapiRTG_js__WEBPACK_IMPORTED_MODULE_0__.f));
       }
       cleanupElements(elmsToUpdate);
     },
     reset: () => {
-      elmsToUpdate.forEach(elms => elms.forEach(_index_C336hbsD_js__WEBPACK_IMPORTED_MODULE_0__.f));
+      elmsToUpdate.forEach(elms => elms.forEach(_index_ngapiRTG_js__WEBPACK_IMPORTED_MODULE_0__.f));
       cleanupElements(elmsToUpdate);
     }
   };
@@ -195,7 +195,11 @@ class playerStateFactory {
     audioElm.src = src;
     const newStore = createStore({
       audioElm,
-      playing: false,
+      currentTime: audioElm.currentTime,
+      duration: audioElm.duration,
+      muted: audioElm.muted,
+      playing: !audioElm.paused,
+      volume: audioElm.volume,
       seekTime: null
     });
     this.stores.push(newStore);
@@ -203,7 +207,7 @@ class playerStateFactory {
   }
 }
 const factory = new playerStateFactory();
-const dtpcPlayerCss = ":host {\n  --_dtpc-player--foreground: var(--dtpc-player--primary-base, currentColor);\n  --_dtpc-player--highlight: var(--dtpc-player--highlight, hsl(201, 64%, 67%));\n  --_dtpc-player--surface: var(--dtpc-player--surface, white);\n  --_dtpc-player--surface-opacity: var(--dtpc-player--bg-opacity, 0);\n  --_dtpc-player--surface-blur: var(--dtpc-player--bg-blur, 0);\n  --_dtpc-player--padding: var(--dtpc-player--padding, 0);\n  --_dtpc-player--padding-inline: var(--dtpc-player--padding-inline, var(--_dtpc-player--padding));\n  --_dtpc-player--padding-block: var(--dtpc-player--padding-block, var(--_dtpc-player--padding));\n  --_dtpc-player--spacing: var(--dtpc-player--spacing, 0.5rem);\n  --_dtpc-player--time--color: var(--dtpc-player--time--font-size, var(--_dtpc-player--foreground));\n  --_dtpc-player--time--font-size: var(--dtpc-player--time--font-size, 0.875rem);\n  --_dtpc-player--time--font-family: var(--dtpc-player--time--font-family, ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, 'DejaVu Sans Mono', monospace);\n  --_dtpc-player--time--font-weight: var(--dtpc-player--time--font-weight, inherit);\n}\n\n.wrapper {\n  display: grid;\n\n  & > * {\n    grid-column: 1 / -1;\n    grid-row: 1 / -1;\n  }\n}\n\n.main {\n  --_spacing: var(--_dtpc-player--spacing);\n  --_padding-inline: var(--_dtpc-player--padding-inline);\n  --_padding-block: var(--_dtpc-player--padding-block);\n\n  display: flex;\n  align-items: center;\n  gap: var(--_spacing);\n\n  padding-inline: var(--_padding-inline);\n  padding-block: var(--_padding-block);\n}\n";
+const dtpcPlayerCss = ":host {\n  --_dtpc-player--foreground: var(--dtpc-player--primary-base, CanvasText);\n  --_dtpc-player--highlight: var(--dtpc-player--highlight, LinkText);\n  --_dtpc-player--surface: var(--dtpc-player--surface, Canvas);\n  --_dtpc-player--surface-opacity: var(--dtpc-player--bg-opacity, 0);\n  --_dtpc-player--surface-blur: var(--dtpc-player--bg-blur, 0);\n  --_dtpc-player--padding: var(--dtpc-player--padding, 0);\n  --_dtpc-player--padding-inline: var(--dtpc-player--padding-inline, var(--_dtpc-player--padding));\n  --_dtpc-player--padding-block: var(--dtpc-player--padding-block, var(--_dtpc-player--padding));\n  --_dtpc-player--spacing: var(--dtpc-player--spacing, 0.5rem);\n\n  /* Time */\n  --_dtpc-player--time--color: var(--dtpc-player--time--font-size, var(--_dtpc-player--foreground));\n  --_dtpc-player--time--font-size: var(--dtpc-player--time--font-size, 0.875rem);\n  --_dtpc-player--time--font-family: var(--dtpc-player--time--font-family, ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, 'DejaVu Sans Mono', monospace);\n  --_dtpc-player--time--font-weight: var(--dtpc-player--time--font-weight, inherit);\n}\n\n.wrapper {\n  display: grid;\n\n  & > * {\n    grid-column: 1 / -1;\n    grid-row: 1 / -1;\n  }\n}\n\n.main {\n  --_spacing: var(--_dtpc-player--spacing);\n  --_padding-inline: var(--_dtpc-player--padding-inline);\n  --_padding-block: var(--_dtpc-player--padding-block);\n\n  display: flex;\n  align-items: center;\n  gap: var(--_spacing);\n\n  padding-inline: var(--_padding-inline);\n  padding-block: var(--_padding-block);\n}\n";
 const DtpcPlayer = class {
   constructor(hostRef) {
     Object.defineProperty(this, "state", {
@@ -218,13 +222,46 @@ const DtpcPlayer = class {
       writable: true,
       value: void 0
     });
-    (0,_index_C336hbsD_js__WEBPACK_IMPORTED_MODULE_0__.r)(this, hostRef);
+    (0,_index_ngapiRTG_js__WEBPACK_IMPORTED_MODULE_0__.r)(this, hostRef);
   }
   connectedCallback() {
-    this.state = factory.createStore(this.src).state;
+    const {
+      state,
+      onChange
+    } = factory.createStore(this.src);
+    const {
+      audioElm
+    } = state;
+    let previousSeekTime = state.seekTime;
+    this.state = state;
+    onChange('seekTime', seekTime => {
+      if (previousSeekTime !== null && seekTime === null) {
+        audioElm.currentTime = previousSeekTime;
+        state.currentTime = previousSeekTime;
+      }
+      previousSeekTime = seekTime;
+    });
+    onChange('muted', muted => audioElm.muted = muted);
+    onChange('volume', volume => audioElm.volume = volume);
+    state.audioElm.addEventListener('loadedmetadata', e => {
+      state.currentTime = e.target.currentTime;
+      state.duration = e.target.duration;
+    });
+    state.audioElm.addEventListener('timeupdate', e => state.currentTime = e.target.currentTime);
+    state.audioElm.addEventListener('play', () => state.playing = true);
+    state.audioElm.addEventListener('pause', () => state.playing = false);
   }
   disconnectedCallback() {
     this.state.audioElm.pause();
+  }
+  handleTogglePaused() {
+    if (this.state.audioElm.paused) {
+      this.state.audioElm.play().then(() => {}).catch(e => {
+        console.error(e);
+      });
+    } else {
+      this.state.audioElm.pause();
+    }
   }
   handleControlInit(e) {
     if (e.detail instanceof Function) {
@@ -239,19 +276,19 @@ const DtpcPlayer = class {
     this.state.audioElm.src = newSrc;
   }
   render() {
-    return (0,_index_C336hbsD_js__WEBPACK_IMPORTED_MODULE_0__.h)(_index_C336hbsD_js__WEBPACK_IMPORTED_MODULE_0__.d, {
-      key: '6369937f3894435ba917d222a554f27c9069ddcd'
-    }, (0,_index_C336hbsD_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", {
-      key: 'ae7e03096cd6c66be76cfbe223079d956866d0cc',
+    return (0,_index_ngapiRTG_js__WEBPACK_IMPORTED_MODULE_0__.h)(_index_ngapiRTG_js__WEBPACK_IMPORTED_MODULE_0__.d, {
+      key: 'cde20f2883fe586d3efdd23855aeebb0e43708f1'
+    }, (0,_index_ngapiRTG_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", {
+      key: 'a8a7b3a09b121b47e758029e85168271f04b8281',
       class: "wrapper"
-    }, (0,_index_C336hbsD_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", {
-      key: 'd32df788658bd2d73d315134d53cf56418408573',
+    }, (0,_index_ngapiRTG_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", {
+      key: '35c7813fd534645b0a378746bc4463efc9ff1337',
       part: "backdrop"
-    }), (0,_index_C336hbsD_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", {
-      key: '7a1c4b25cb5e749f44a462c01a29486b02e116f6',
+    }), (0,_index_ngapiRTG_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", {
+      key: '8ae893040d00c900ceb20e867fc7a427b737ea6f',
       class: "main"
-    }, (0,_index_C336hbsD_js__WEBPACK_IMPORTED_MODULE_0__.h)("slot", {
-      key: '0f279a3986f316cfd43f818c60fc08f8ef30a609'
+    }, (0,_index_ngapiRTG_js__WEBPACK_IMPORTED_MODULE_0__.h)("slot", {
+      key: '9228924b317f820cdfea83668283135bc640a933'
     }))));
   }
   static get watchers() {
@@ -266,4 +303,4 @@ DtpcPlayer.style = dtpcPlayerCss;
 /***/ })
 
 }]);
-//# sourceMappingURL=web-components_dist_dovetail-podcasts-player-web-components_dtpc-player_entry_js.js.map?ver=4456beff62cf5379efff
+//# sourceMappingURL=web-components_dist_dovetail-podcasts-player-web-components_dtpc-player_entry_js.js.map?ver=35316722465723208c1a

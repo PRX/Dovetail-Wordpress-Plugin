@@ -28,22 +28,13 @@ export class DtpcTimeDuration {
 
     this.initControl.emit((state: PlayerState) => {
       self.state = state;
-      self.audioDuration = state.audioElm.duration || this.duration;;
+      self.audioDuration = state.duration || this.duration;
     });
   }
 
-  componentDidLoad() {
-    const self = this;
-
-    this.state.audioElm.addEventListener('loadedmetadata', (e: Event) => { self.handleLoadedMetaData(e); });
-  }
-
-  handleLoadedMetaData(event: Event) {
-    this.audioDuration = (event.target as HTMLAudioElement).duration;
-  }
-
   render() {
-    const displayDuration = formatDuration(this.audioDuration);
+    const { duration } = this.state;
+    const displayDuration = formatDuration( duration || this.audioDuration );
 
     return (
       <Host>

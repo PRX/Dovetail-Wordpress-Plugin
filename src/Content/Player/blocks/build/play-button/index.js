@@ -300,6 +300,199 @@ module.exports = webpackEmptyAsyncContext;
 
 /***/ }),
 
+/***/ "../web-components/dist/components/dtpc-button.js":
+/*!********************************************************!*\
+  !*** ../web-components/dist/components/dtpc-button.js ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   DtpcButton: () => (/* binding */ DtpcButton),
+/* harmony export */   defineCustomElement: () => (/* binding */ defineCustomElement)
+/* harmony export */ });
+/* harmony import */ var _dtpc_button2_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./dtpc-button2.js */ "../web-components/dist/components/dtpc-button2.js");
+
+const DtpcButton = _dtpc_button2_js__WEBPACK_IMPORTED_MODULE_0__.D;
+const defineCustomElement = _dtpc_button2_js__WEBPACK_IMPORTED_MODULE_0__.d;
+
+
+/***/ }),
+
+/***/ "../web-components/dist/components/dtpc-button2.js":
+/*!*********************************************************!*\
+  !*** ../web-components/dist/components/dtpc-button2.js ***!
+  \*********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   D: () => (/* binding */ DtpcButton),
+/* harmony export */   d: () => (/* binding */ defineCustomElement)
+/* harmony export */ });
+/* harmony import */ var _index2_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index2.js */ "../web-components/dist/components/index2.js");
+/* harmony import */ var _index3_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./index3.js */ "../web-components/dist/components/index3.js");
+/* harmony import */ var _index4_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./index4.js */ "../web-components/dist/components/index4.js");
+
+
+
+const dtpcButtonCss = ":host {\n  --_dtpc-button--size: var(--dtpc-button--size, 1.5rem);\n  --_dtpc-button--padding: var(--dtpc-button--padding, 0.325rem);\n  --_dtpc-button--foreground: var(--dtpc-button--foreground, CanvasText);\n  --_dtpc-button--foreground--hover: var(--dtpc-button--foreground--hover, CanvasText);\n  --_dtpc-button--foreground--active: var(--dtpc-button--foreground--active, CanvasText);\n  --_dtpc-button--surface: var(--_dtpc-button--surface, CanvasText);\n  --_dtpc-button--surface--hover: var(--dtpc-button--surface--hover, CanvasText);\n  --_dtpc-button--surface--active: var(--dtpc-button--surface--active, CanvasText);\n  --_dtpc-button--surface-opacity: var(--dtpc-button--surface-opacity, 0);\n  --_dtpc-button--surface-opacity--hover: var(--dtpc-button--surface-opacity--hover, 20%);\n  --_dtpc-button--surface-opacity--active: var(--dtpc-button--surface-opacity--active, 10%);\n  --_dtpc-button--border-color: var(--dtpc-button--border-color, transparent);\n  --_dtpc-button--border-color--hover: var(--dtpc-button--border-color--hover, transparent);\n  --_dtpc-button--border-color--active: var(--dtpc-button--border-color--active, transparent);\n  --_dtpc-button--border-radius: var(--dtpc-button--border-radius, 100vw);\n  --_dtpc-button--border-radius--hover: var(--dtpc-button--border-radius--hover, 100vw);\n  --_dtpc-button--border-radius--active: var(--dtpc-button--border-radius--active, 100vw);\n  --_dtpc-button--border-width: var(--dtpc-button--border-width, 0);\n  --_dtpc-button--border-width--hover: var(--dtpc-button--border-width--hover, 0);\n  --_dtpc-button--border-width--active: var(--dtpc-button--border-width--active, 0);\n  --_dtpc-button--focus-ring-color: var(--dtpc-button--focus-ring-color, LinkText);\n  --_dtpc-button--focus-ring-offset: var(--dtpc-button--focus-ring-offset, 0.125rem);\n  --_dtpc-button--focus-ring-width: var(--dtpc-button--focus-ring-width, 2px);\n}\n\n:host {\n  --_size: var(--_dtpc-button--size);\n  --_padding: var(--_dtpc-button--padding);\n  --_foreground: var(--_dtpc-button--foreground);\n  --_surface: var(--_dtpc-button--surface);\n  --_surface-opacity: var(--_dtpc-button--surface-opacity);\n  --_border-color: var(--_dtpc-button--border-color);\n  --_border-radius: var(--_dtpc-button--border-radius);\n  --_border-width: var(--_dtpc-button--border-width);\n  --_focus-ring-color: var(--_dtpc-button--focus-ring-color);\n  --_focus-ring-offset: var(--_dtpc-button--focus-ring-offset);\n  --_focus-ring-width: var(--_dtpc-button--focus-ring-width);\n\n  all: unset;\n\n  transition-property: background-color, border-color, border-width, border-radius, color;\n  transition-duration: 200ms;\n  transition-timing-function: ease;\n\n  box-sizing: content-box;\n  display: inline-grid;\n  place-items: stretch;\n  justify-content: stretch;\n  aspect-ratio: 1;\n  width: var(--_size);\n\n  padding: var(--_padding);\n\n  border-style: solid;\n  border-color: var(--_border-color);\n  border-width: var(--_border-width);\n  border-radius: var(--_border-radius);\n\n  background-color: color-mix(in oklch, var(--_surface) var(--_surface-opacity), transparent);\n\n  color: var(--_foreground);\n\n  cursor: pointer;\n  user-select: none;\n}\n\n:host(:hover) {\n  --_foreground: var(--_dtpc-button--foreground--hover);\n  --_surface: var(--_dtpc-button--surface--hover);\n  --_surface-opacity: var(--_dtpc-button--surface-opacity--hover);\n  --_border-color: var(--_dtpc-button--border-color--hover);\n  --_border-width: var(--_dtpc-button--border-width--hover);\n  --_border-radius: var(--_dtpc-button--border-radius--hover);\n}\n\n:host(:active) {\n  --_foreground: var(--_dtpc-button--foreground--active);\n  --_surface: var(--_dtpc-button--surface--active);\n  --_surface-opacity: var(--_dtpc-button--surface-opacity--active);\n  --_border-color: var(--_dtpc-button--border-color--active);\n  --_border-width: var(--_dtpc-button--border-width--active);\n  --_border-radius: var(--_dtpc-button--border-radius--active);\n}\n\n:host(:focus-visible) {\n  outline-style: solid;\n  outline-offset: var(--_focus-ring-offset);\n  outline-color: var(--_focus-ring-color);\n  outline-width: var(--_focus-ring-width);\n}\n\n.lucide-icon {\n  display: grid;\n  place-items: center;\n  aspect-ratio: 1;\n  width: 100%;\n\n  svg {\n    width: 100%;\n    height: auto;\n  }\n}\n";
+const DtpcButton = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.p)(class DtpcButton extends _index2_js__WEBPACK_IMPORTED_MODULE_0__.H {
+  constructor() {
+    super();
+    this.__registerHost();
+  }
+  get el() {
+    return this;
+  }
+  handleKeyDown(ev) {
+    console.log(ev);
+    if (ev.code === 'Space') {
+      this.el.click();
+    }
+  }
+  render() {
+    const buttonAttributes = (0,_index4_js__WEBPACK_IMPORTED_MODULE_2__.a)(this.el);
+    return (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)(_index2_js__WEBPACK_IMPORTED_MODULE_0__.d, {
+      key: '82ae4a6d9191c435e24ff27127b600625e59ca48',
+      role: "button",
+      tabindex: "0",
+      ...buttonAttributes
+    }, (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)("slot", {
+      key: '2f60e169d1c1763d7b27a611e25eb4828667a509'
+    }));
+  }
+  static get style() {
+    return dtpcButtonCss;
+  }
+}, [4, "dtpc-button", undefined, [[0, "keydown", "handleKeyDown"]]]);
+function defineCustomElement() {
+  if (typeof customElements === "undefined") {
+    return;
+  }
+  const components = ["dtpc-button"];
+  components.forEach(tagName => {
+    switch (tagName) {
+      case "dtpc-button":
+        if (!customElements.get(tagName)) {
+          customElements.define(tagName, DtpcButton);
+        }
+        break;
+    }
+  });
+}
+defineCustomElement(DtpcButton);
+
+
+/***/ }),
+
+/***/ "../web-components/dist/components/dtpc-mute-button.js":
+/*!*************************************************************!*\
+  !*** ../web-components/dist/components/dtpc-mute-button.js ***!
+  \*************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   DtpcMuteButton: () => (/* binding */ DtpcMuteButton),
+/* harmony export */   defineCustomElement: () => (/* binding */ defineCustomElement)
+/* harmony export */ });
+/* harmony import */ var _index2_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index2.js */ "../web-components/dist/components/index2.js");
+/* harmony import */ var _index5_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./index5.js */ "../web-components/dist/components/index5.js");
+/* harmony import */ var _dtpc_button2_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./dtpc-button2.js */ "../web-components/dist/components/dtpc-button2.js");
+/* harmony import */ var _icon_volume2_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./icon-volume2.js */ "../web-components/dist/components/icon-volume2.js");
+
+
+
+
+const dtpcMuteButtonCss = ":host{--dtpc-button--size:var(--dtpc-play-button--size);--dtpc-button--padding:var(--dtpc-play-button--padding);--dtpc-button--foreground:var(--dtpc-play-button--foreground);--dtpc-button--foreground--hover:var(--dtpc-play-button--foreground--hover);--dtpc-button--foreground--active:var(--dtpc-play-button--foreground--playing);--dtpc-button--surface:var(--dtpc-play-button--surface);--dtpc-button--surface--hover:var(--dtpc-play-button--surface--hover);--dtpc-button--surface--active:var(--dtpc-play-button--surface--playing);--dtpc-button--surface-opacity:var(--dtpc-play-button--surface-opacity);--dtpc-button--surface-opacity--hover:var(--dtpc-play-button--surface-opacity--hover);--dtpc-button--surface-opacity--active:var(--dtpc-play-button--surface-opacity--playing);--dtpc-button--border-color:var(--dtpc-play-button--border-color);--dtpc-button--border-color--hover:var(--dtpc-play-button--border-color--hover);--dtpc-button--border-color--active:var(--dtpc-play-button--border-color--playing);--dtpc-button--border-radius:var(--dtpc-play-button--border-radius);--dtpc-button--border-radius--hover:var(--dtpc-play-button--border-radius--hover);--dtpc-button--border-radius--active:var(--dtpc-play-button--border-radius--playing);--dtpc-button--border-width:var(--dtpc-play-button--border-width);--dtpc-button--border-width--hover:var(--dtpc-play-button--border-width--hover);--dtpc-button--border-width--active:var(--dtpc-play-button--border-width--playing);--dtpc-button--focus-ring-color:var(--dtpc-play-button--focus-ring-color);--dtpc-button--focus-ring-offset:var(--dtpc-play-button--focus-ring-offset);--dtpc-button--focus-ring-width:var(--dtpc-play-button--focus-ring-width)}";
+const DtpcMuteButton$1 = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.p)(class DtpcMuteButton extends _index2_js__WEBPACK_IMPORTED_MODULE_0__.H {
+  constructor() {
+    super();
+    Object.defineProperty(this, "state", {
+      enumerable: true,
+      configurable: true,
+      writable: true,
+      value: void 0
+    });
+    Object.defineProperty(this, "initControl", {
+      enumerable: true,
+      configurable: true,
+      writable: true,
+      value: void 0
+    });
+    this.__registerHost();
+    this.__attachShadow();
+    this.initControl = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.c)(this, "dtpc-control-init", 7);
+  }
+  componentWillLoad() {
+    const self = this;
+    this.initControl.emit(state => self.state = state);
+  }
+  handleClick() {
+    if (!this.state?.audioElm) return;
+    this.state.audioElm.muted = !this.state.audioElm.muted;
+    this.state.muted = this.state.audioElm.muted;
+  }
+  render() {
+    const {
+      muted,
+      volume
+    } = this.state || {};
+    const label = muted ? (0,_index5_js__WEBPACK_IMPORTED_MODULE_1__._)('Unmute', 'dovetail-podcasts') : (0,_index5_js__WEBPACK_IMPORTED_MODULE_1__._)('Mute', 'dovetail-podcasts');
+    const buttonAttributes = {
+      title: label
+    };
+    return (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)(_index2_js__WEBPACK_IMPORTED_MODULE_0__.d, {
+      key: '016ccdcaea411dbc9a5f1075beabbe03e7ab3a7f'
+    }, (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)("dtpc-button", {
+      key: 'f109969c26c4c879bd542fc3ee5b9293efa3142e',
+      ...buttonAttributes
+    }, (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)("icon-volume", {
+      key: '71b1a1b71ce15a6093cc1a5c5546e7f21a2a25c6',
+      muted: muted,
+      level: volume
+    })));
+  }
+  static get style() {
+    return dtpcMuteButtonCss;
+  }
+}, [1, "dtpc-mute-button", undefined, [[0, "click", "handleClick"]]]);
+function defineCustomElement$1() {
+  if (typeof customElements === "undefined") {
+    return;
+  }
+  const components = ["dtpc-mute-button", "dtpc-button", "icon-volume"];
+  components.forEach(tagName => {
+    switch (tagName) {
+      case "dtpc-mute-button":
+        if (!customElements.get(tagName)) {
+          customElements.define(tagName, DtpcMuteButton$1);
+        }
+        break;
+      case "dtpc-button":
+        if (!customElements.get(tagName)) {
+          (0,_dtpc_button2_js__WEBPACK_IMPORTED_MODULE_2__.d)();
+        }
+        break;
+      case "icon-volume":
+        if (!customElements.get(tagName)) {
+          (0,_icon_volume2_js__WEBPACK_IMPORTED_MODULE_3__.d)();
+        }
+        break;
+    }
+  });
+}
+defineCustomElement$1(DtpcMuteButton$1);
+const DtpcMuteButton = DtpcMuteButton$1;
+const defineCustomElement = defineCustomElement$1;
+
+
+/***/ }),
+
 /***/ "../web-components/dist/components/dtpc-play-button.js":
 /*!*************************************************************!*\
   !*** ../web-components/dist/components/dtpc-play-button.js ***!
@@ -313,960 +506,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   defineCustomElement: () => (/* binding */ defineCustomElement)
 /* harmony export */ });
 /* harmony import */ var _index2_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index2.js */ "../web-components/dist/components/index2.js");
-/* harmony import */ var _icon_pause2_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./icon-pause2.js */ "../web-components/dist/components/icon-pause2.js");
-/* harmony import */ var _icon_play2_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./icon-play2.js */ "../web-components/dist/components/icon-play2.js");
+/* harmony import */ var _index5_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./index5.js */ "../web-components/dist/components/index5.js");
+/* harmony import */ var _dtpc_button2_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./dtpc-button2.js */ "../web-components/dist/components/dtpc-button2.js");
+/* harmony import */ var _icon_pause2_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./icon-pause2.js */ "../web-components/dist/components/icon-pause2.js");
+/* harmony import */ var _icon_play2_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./icon-play2.js */ "../web-components/dist/components/icon-play2.js");
 
 
 
-function memize(fn, options) {
-  var size = 0;
-  var head;
-  var tail;
-  options = options || {};
-  function memoized() {
-    var node = head,
-      len = arguments.length,
-      args,
-      i;
-    searchCache: while (node) {
-      if (node.args.length !== arguments.length) {
-        node = node.next;
-        continue;
-      }
-      for (i = 0; i < len; i++) {
-        if (node.args[i] !== arguments[i]) {
-          node = node.next;
-          continue searchCache;
-        }
-      }
-      if (node !== head) {
-        if (node === tail) {
-          tail = node.prev;
-        }
-        node.prev.next = node.next;
-        if (node.next) {
-          node.next.prev = node.prev;
-        }
-        node.next = head;
-        node.prev = null;
-        head.prev = node;
-        head = node;
-      }
-      return node.val;
-    }
-    args = new Array(len);
-    for (i = 0; i < len; i++) {
-      args[i] = arguments[i];
-    }
-    node = {
-      args: args,
-      val: fn.apply(null, args)
-    };
-    if (head) {
-      head.prev = node;
-      node.next = head;
-    } else {
-      tail = node;
-    }
-    if (size === options.maxSize) {
-      tail = tail.prev;
-      tail.next = null;
-    } else {
-      size++;
-    }
-    head = node;
-    return node.val;
-  }
-  memoized.clear = function () {
-    head = null;
-    tail = null;
-    size = 0;
-  };
-  return memoized;
-}
-var commonjsGlobal = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof __webpack_require__.g !== 'undefined' ? __webpack_require__.g : typeof self !== 'undefined' ? self : {};
-function getDefaultExportFromCjs(x) {
-  return x && x.__esModule && Object.prototype.hasOwnProperty.call(x, 'default') ? x['default'] : x;
-}
-function getDefaultExportFromNamespaceIfPresent(n) {
-  return n && Object.prototype.hasOwnProperty.call(n, 'default') ? n['default'] : n;
-}
-function getDefaultExportFromNamespaceIfNotNamed(n) {
-  return n && Object.prototype.hasOwnProperty.call(n, 'default') && Object.keys(n).length === 1 ? n['default'] : n;
-}
-function getAugmentedNamespace(n) {
-  if (n.__esModule) return n;
-  var f = n.default;
-  if (typeof f == "function") {
-    var a = function a() {
-      if (this instanceof a) {
-        return Reflect.construct(f, arguments, this.constructor);
-      }
-      return f.apply(this, arguments);
-    };
-    a.prototype = f.prototype;
-  } else a = {};
-  Object.defineProperty(a, '__esModule', {
-    value: true
-  });
-  Object.keys(n).forEach(function (k) {
-    var d = Object.getOwnPropertyDescriptor(n, k);
-    Object.defineProperty(a, k, d.get ? d : {
-      enumerable: true,
-      get: function () {
-        return n[k];
-      }
-    });
-  });
-  return a;
-}
-var sprintf$1 = {};
-var hasRequiredSprintf;
-function requireSprintf() {
-  if (hasRequiredSprintf) return sprintf$1;
-  hasRequiredSprintf = 1;
-  (function (exports) {
-    !function () {
-      'use strict';
 
-      var re = {
-        not_string: /[^s]/,
-        not_bool: /[^t]/,
-        not_type: /[^T]/,
-        not_primitive: /[^v]/,
-        number: /[diefg]/,
-        numeric_arg: /[bcdiefguxX]/,
-        json: /[j]/,
-        not_json: /[^j]/,
-        text: /^[^\x25]+/,
-        modulo: /^\x25{2}/,
-        placeholder: /^\x25(?:([1-9]\d*)\$|\(([^)]+)\))?(\+)?(0|'[^$])?(-)?(\d+)?(?:\.(\d+))?([b-gijostTuvxX])/,
-        key: /^([a-z_][a-z_\d]*)/i,
-        key_access: /^\.([a-z_][a-z_\d]*)/i,
-        index_access: /^\[(\d+)\]/,
-        sign: /^[+-]/
-      };
-      function sprintf(key) {
-        return sprintf_format(sprintf_parse(key), arguments);
-      }
-      function vsprintf(fmt, argv) {
-        return sprintf.apply(null, [fmt].concat(argv || []));
-      }
-      function sprintf_format(parse_tree, argv) {
-        var cursor = 1,
-          tree_length = parse_tree.length,
-          arg,
-          output = '',
-          i,
-          k,
-          ph,
-          pad,
-          pad_character,
-          pad_length,
-          is_positive,
-          sign;
-        for (i = 0; i < tree_length; i++) {
-          if (typeof parse_tree[i] === 'string') {
-            output += parse_tree[i];
-          } else if (typeof parse_tree[i] === 'object') {
-            ph = parse_tree[i];
-            if (ph.keys) {
-              arg = argv[cursor];
-              for (k = 0; k < ph.keys.length; k++) {
-                if (arg == undefined) {
-                  throw new Error(sprintf('[sprintf] Cannot access property "%s" of undefined value "%s"', ph.keys[k], ph.keys[k - 1]));
-                }
-                arg = arg[ph.keys[k]];
-              }
-            } else if (ph.param_no) {
-              arg = argv[ph.param_no];
-            } else {
-              arg = argv[cursor++];
-            }
-            if (re.not_type.test(ph.type) && re.not_primitive.test(ph.type) && arg instanceof Function) {
-              arg = arg();
-            }
-            if (re.numeric_arg.test(ph.type) && typeof arg !== 'number' && isNaN(arg)) {
-              throw new TypeError(sprintf('[sprintf] expecting number but found %T', arg));
-            }
-            if (re.number.test(ph.type)) {
-              is_positive = arg >= 0;
-            }
-            switch (ph.type) {
-              case 'b':
-                arg = parseInt(arg, 10).toString(2);
-                break;
-              case 'c':
-                arg = String.fromCharCode(parseInt(arg, 10));
-                break;
-              case 'd':
-              case 'i':
-                arg = parseInt(arg, 10);
-                break;
-              case 'j':
-                arg = JSON.stringify(arg, null, ph.width ? parseInt(ph.width) : 0);
-                break;
-              case 'e':
-                arg = ph.precision ? parseFloat(arg).toExponential(ph.precision) : parseFloat(arg).toExponential();
-                break;
-              case 'f':
-                arg = ph.precision ? parseFloat(arg).toFixed(ph.precision) : parseFloat(arg);
-                break;
-              case 'g':
-                arg = ph.precision ? String(Number(arg.toPrecision(ph.precision))) : parseFloat(arg);
-                break;
-              case 'o':
-                arg = (parseInt(arg, 10) >>> 0).toString(8);
-                break;
-              case 's':
-                arg = String(arg);
-                arg = ph.precision ? arg.substring(0, ph.precision) : arg;
-                break;
-              case 't':
-                arg = String(!!arg);
-                arg = ph.precision ? arg.substring(0, ph.precision) : arg;
-                break;
-              case 'T':
-                arg = Object.prototype.toString.call(arg).slice(8, -1).toLowerCase();
-                arg = ph.precision ? arg.substring(0, ph.precision) : arg;
-                break;
-              case 'u':
-                arg = parseInt(arg, 10) >>> 0;
-                break;
-              case 'v':
-                arg = arg.valueOf();
-                arg = ph.precision ? arg.substring(0, ph.precision) : arg;
-                break;
-              case 'x':
-                arg = (parseInt(arg, 10) >>> 0).toString(16);
-                break;
-              case 'X':
-                arg = (parseInt(arg, 10) >>> 0).toString(16).toUpperCase();
-                break;
-            }
-            if (re.json.test(ph.type)) {
-              output += arg;
-            } else {
-              if (re.number.test(ph.type) && (!is_positive || ph.sign)) {
-                sign = is_positive ? '+' : '-';
-                arg = arg.toString().replace(re.sign, '');
-              } else {
-                sign = '';
-              }
-              pad_character = ph.pad_char ? ph.pad_char === '0' ? '0' : ph.pad_char.charAt(1) : ' ';
-              pad_length = ph.width - (sign + arg).length;
-              pad = ph.width ? pad_length > 0 ? pad_character.repeat(pad_length) : '' : '';
-              output += ph.align ? sign + arg + pad : pad_character === '0' ? sign + pad + arg : pad + sign + arg;
-            }
-          }
-        }
-        return output;
-      }
-      var sprintf_cache = Object.create(null);
-      function sprintf_parse(fmt) {
-        if (sprintf_cache[fmt]) {
-          return sprintf_cache[fmt];
-        }
-        var _fmt = fmt,
-          match,
-          parse_tree = [],
-          arg_names = 0;
-        while (_fmt) {
-          if ((match = re.text.exec(_fmt)) !== null) {
-            parse_tree.push(match[0]);
-          } else if ((match = re.modulo.exec(_fmt)) !== null) {
-            parse_tree.push('%');
-          } else if ((match = re.placeholder.exec(_fmt)) !== null) {
-            if (match[2]) {
-              arg_names |= 1;
-              var field_list = [],
-                replacement_field = match[2],
-                field_match = [];
-              if ((field_match = re.key.exec(replacement_field)) !== null) {
-                field_list.push(field_match[1]);
-                while ((replacement_field = replacement_field.substring(field_match[0].length)) !== '') {
-                  if ((field_match = re.key_access.exec(replacement_field)) !== null) {
-                    field_list.push(field_match[1]);
-                  } else if ((field_match = re.index_access.exec(replacement_field)) !== null) {
-                    field_list.push(field_match[1]);
-                  } else {
-                    throw new SyntaxError('[sprintf] failed to parse named argument key');
-                  }
-                }
-              } else {
-                throw new SyntaxError('[sprintf] failed to parse named argument key');
-              }
-              match[2] = field_list;
-            } else {
-              arg_names |= 2;
-            }
-            if (arg_names === 3) {
-              throw new Error('[sprintf] mixing positional and named placeholders is not (yet) supported');
-            }
-            parse_tree.push({
-              placeholder: match[0],
-              param_no: match[1],
-              keys: match[2],
-              sign: match[3],
-              pad_char: match[4],
-              align: match[5],
-              width: match[6],
-              precision: match[7],
-              type: match[8]
-            });
-          } else {
-            throw new SyntaxError('[sprintf] unexpected placeholder');
-          }
-          _fmt = _fmt.substring(match[0].length);
-        }
-        return sprintf_cache[fmt] = parse_tree;
-      }
-      if (true) {
-        exports['sprintf'] = sprintf;
-        exports['vsprintf'] = vsprintf;
-      }
-      if (typeof window !== 'undefined') {
-        window['sprintf'] = sprintf;
-        window['vsprintf'] = vsprintf;
-        if (false) {}
-      }
-    }();
-  })(sprintf$1);
-  return sprintf$1;
-}
-var sprintfExports = requireSprintf();
-var sprintfjs = getDefaultExportFromCjs(sprintfExports);
-const logErrorOnce = memize(console.error);
-function sprintf(format, ...args) {
-  try {
-    return sprintfjs.sprintf(format, ...args);
-  } catch (error) {
-    if (error instanceof Error) {
-      logErrorOnce('sprintf error: \n\n' + error.toString());
-    }
-    return format;
-  }
-}
-var PRECEDENCE, OPENERS, TERMINATORS, PATTERN;
-PRECEDENCE = {
-  '(': 9,
-  '!': 8,
-  '*': 7,
-  '/': 7,
-  '%': 7,
-  '+': 6,
-  '-': 6,
-  '<': 5,
-  '<=': 5,
-  '>': 5,
-  '>=': 5,
-  '==': 4,
-  '!=': 4,
-  '&&': 3,
-  '||': 2,
-  '?': 1,
-  '?:': 1
-};
-OPENERS = ['(', '?'];
-TERMINATORS = {
-  ')': ['('],
-  ':': ['?', '?:']
-};
-PATTERN = /<=|>=|==|!=|&&|\|\||\?:|\(|!|\*|\/|%|\+|-|<|>|\?|\)|:/;
-function postfix(expression) {
-  var terms = [],
-    stack = [],
-    match,
-    operator,
-    term,
-    element;
-  while (match = expression.match(PATTERN)) {
-    operator = match[0];
-    term = expression.substr(0, match.index).trim();
-    if (term) {
-      terms.push(term);
-    }
-    while (element = stack.pop()) {
-      if (TERMINATORS[operator]) {
-        if (TERMINATORS[operator][0] === element) {
-          operator = TERMINATORS[operator][1] || operator;
-          break;
-        }
-      } else if (OPENERS.indexOf(element) >= 0 || PRECEDENCE[element] < PRECEDENCE[operator]) {
-        stack.push(element);
-        break;
-      }
-      terms.push(element);
-    }
-    if (!TERMINATORS[operator]) {
-      stack.push(operator);
-    }
-    expression = expression.substr(match.index + operator.length);
-  }
-  expression = expression.trim();
-  if (expression) {
-    terms.push(expression);
-  }
-  return terms.concat(stack.reverse());
-}
-var OPERATORS = {
-  '!': function (a) {
-    return !a;
-  },
-  '*': function (a, b) {
-    return a * b;
-  },
-  '/': function (a, b) {
-    return a / b;
-  },
-  '%': function (a, b) {
-    return a % b;
-  },
-  '+': function (a, b) {
-    return a + b;
-  },
-  '-': function (a, b) {
-    return a - b;
-  },
-  '<': function (a, b) {
-    return a < b;
-  },
-  '<=': function (a, b) {
-    return a <= b;
-  },
-  '>': function (a, b) {
-    return a > b;
-  },
-  '>=': function (a, b) {
-    return a >= b;
-  },
-  '==': function (a, b) {
-    return a === b;
-  },
-  '!=': function (a, b) {
-    return a !== b;
-  },
-  '&&': function (a, b) {
-    return a && b;
-  },
-  '||': function (a, b) {
-    return a || b;
-  },
-  '?:': function (a, b, c) {
-    if (a) {
-      throw b;
-    }
-    return c;
-  }
-};
-function evaluate(postfix, variables) {
-  var stack = [],
-    i,
-    j,
-    args,
-    getOperatorResult,
-    term,
-    value;
-  for (i = 0; i < postfix.length; i++) {
-    term = postfix[i];
-    getOperatorResult = OPERATORS[term];
-    if (getOperatorResult) {
-      j = getOperatorResult.length;
-      args = Array(j);
-      while (j--) {
-        args[j] = stack.pop();
-      }
-      try {
-        value = getOperatorResult.apply(null, args);
-      } catch (earlyReturn) {
-        return earlyReturn;
-      }
-    } else if (variables.hasOwnProperty(term)) {
-      value = variables[term];
-    } else {
-      value = +term;
-    }
-    stack.push(value);
-  }
-  return stack[0];
-}
-function compile(expression) {
-  var terms = postfix(expression);
-  return function (variables) {
-    return evaluate(terms, variables);
-  };
-}
-function pluralForms(expression) {
-  var evaluate = compile(expression);
-  return function (n) {
-    return +evaluate({
-      n: n
-    });
-  };
-}
-var DEFAULT_OPTIONS = {
-  contextDelimiter: '\u0004',
-  onMissingKey: null
-};
-function getPluralExpression(pf) {
-  var parts, i, part;
-  parts = pf.split(';');
-  for (i = 0; i < parts.length; i++) {
-    part = parts[i].trim();
-    if (part.indexOf('plural=') === 0) {
-      return part.substr(7);
-    }
-  }
-}
-function Tannin(data, options) {
-  var key;
-  this.data = data;
-  this.pluralForms = {};
-  this.options = {};
-  for (key in DEFAULT_OPTIONS) {
-    this.options[key] = options !== undefined && key in options ? options[key] : DEFAULT_OPTIONS[key];
-  }
-}
-Tannin.prototype.getPluralForm = function (domain, n) {
-  var getPluralForm = this.pluralForms[domain],
-    config,
-    plural,
-    pf;
-  if (!getPluralForm) {
-    config = this.data[domain][''];
-    pf = config['Plural-Forms'] || config['plural-forms'] || config.plural_forms;
-    if (typeof pf !== 'function') {
-      plural = getPluralExpression(config['Plural-Forms'] || config['plural-forms'] || config.plural_forms);
-      pf = pluralForms(plural);
-    }
-    getPluralForm = this.pluralForms[domain] = pf;
-  }
-  return getPluralForm(n);
-};
-Tannin.prototype.dcnpgettext = function (domain, context, singular, plural, n) {
-  var index, key, entry;
-  if (n === undefined) {
-    index = 0;
-  } else {
-    index = this.getPluralForm(domain, n);
-  }
-  key = singular;
-  if (context) {
-    key = context + this.options.contextDelimiter + singular;
-  }
-  entry = this.data[domain][key];
-  if (entry && entry[index]) {
-    return entry[index];
-  }
-  if (this.options.onMissingKey) {
-    this.options.onMissingKey(singular, domain);
-  }
-  return index === 0 ? singular : plural;
-};
-const DEFAULT_LOCALE_DATA = {
-  '': {
-    plural_forms(n) {
-      return n === 1 ? 0 : 1;
-    }
-  }
-};
-const I18N_HOOK_REGEXP = /^i18n\.(n?gettext|has_translation)(_|$)/;
-const createI18n = (initialData, initialDomain, hooks) => {
-  const tannin = new Tannin({});
-  const listeners = new Set();
-  const notifyListeners = () => {
-    listeners.forEach(listener => listener());
-  };
-  const subscribe = callback => {
-    listeners.add(callback);
-    return () => listeners.delete(callback);
-  };
-  const getLocaleData = (domain = 'default') => tannin.data[domain];
-  const doSetLocaleData = (data, domain = 'default') => {
-    tannin.data[domain] = {
-      ...tannin.data[domain],
-      ...data
-    };
-    tannin.data[domain][''] = {
-      ...DEFAULT_LOCALE_DATA[''],
-      ...tannin.data[domain]?.['']
-    };
-    delete tannin.pluralForms[domain];
-  };
-  const setLocaleData = (data, domain) => {
-    doSetLocaleData(data, domain);
-    notifyListeners();
-  };
-  const addLocaleData = (data, domain = 'default') => {
-    tannin.data[domain] = {
-      ...tannin.data[domain],
-      ...data,
-      '': {
-        ...DEFAULT_LOCALE_DATA[''],
-        ...tannin.data[domain]?.[''],
-        ...data?.['']
-      }
-    };
-    delete tannin.pluralForms[domain];
-    notifyListeners();
-  };
-  const resetLocaleData = (data, domain) => {
-    tannin.data = {};
-    tannin.pluralForms = {};
-    setLocaleData(data, domain);
-  };
-  const dcnpgettext = (domain = 'default', context, single, plural, number) => {
-    if (!tannin.data[domain]) {
-      doSetLocaleData(undefined, domain);
-    }
-    return tannin.dcnpgettext(domain, context, single, plural, number);
-  };
-  const getFilterDomain = (domain = 'default') => domain;
-  const __ = (text, domain) => {
-    let translation = dcnpgettext(domain, undefined, text);
-    if (!hooks) {
-      return translation;
-    }
-    translation = hooks.applyFilters('i18n.gettext', translation, text, domain);
-    return hooks.applyFilters('i18n.gettext_' + getFilterDomain(domain), translation, text, domain);
-  };
-  const _x = (text, context, domain) => {
-    let translation = dcnpgettext(domain, context, text);
-    if (!hooks) {
-      return translation;
-    }
-    translation = hooks.applyFilters('i18n.gettext_with_context', translation, text, context, domain);
-    return hooks.applyFilters('i18n.gettext_with_context_' + getFilterDomain(domain), translation, text, context, domain);
-  };
-  const _n = (single, plural, number, domain) => {
-    let translation = dcnpgettext(domain, undefined, single, plural, number);
-    if (!hooks) {
-      return translation;
-    }
-    translation = hooks.applyFilters('i18n.ngettext', translation, single, plural, number, domain);
-    return hooks.applyFilters('i18n.ngettext_' + getFilterDomain(domain), translation, single, plural, number, domain);
-  };
-  const _nx = (single, plural, number, context, domain) => {
-    let translation = dcnpgettext(domain, context, single, plural, number);
-    if (!hooks) {
-      return translation;
-    }
-    translation = hooks.applyFilters('i18n.ngettext_with_context', translation, single, plural, number, context, domain);
-    return hooks.applyFilters('i18n.ngettext_with_context_' + getFilterDomain(domain), translation, single, plural, number, context, domain);
-  };
-  const isRTL = () => {
-    return 'rtl' === _x('ltr', 'text direction');
-  };
-  const hasTranslation = (single, context, domain) => {
-    const key = context ? context + '\u0004' + single : single;
-    let result = !!tannin.data?.[domain !== null && domain !== void 0 ? domain : 'default']?.[key];
-    if (hooks) {
-      result = hooks.applyFilters('i18n.has_translation', result, single, context, domain);
-      result = hooks.applyFilters('i18n.has_translation_' + getFilterDomain(domain), result, single, context, domain);
-    }
-    return result;
-  };
-  if (initialData) {
-    setLocaleData(initialData, initialDomain);
-  }
-  if (hooks) {
-    const onHookAddedOrRemoved = hookName => {
-      if (I18N_HOOK_REGEXP.test(hookName)) {
-        notifyListeners();
-      }
-    };
-    hooks.addAction('hookAdded', 'core/i18n', onHookAddedOrRemoved);
-    hooks.addAction('hookRemoved', 'core/i18n', onHookAddedOrRemoved);
-  }
-  return {
-    getLocaleData,
-    setLocaleData,
-    addLocaleData,
-    resetLocaleData,
-    subscribe,
-    __,
-    _x,
-    _n,
-    _nx,
-    isRTL,
-    hasTranslation
-  };
-};
-function validateNamespace(namespace) {
-  if ('string' !== typeof namespace || '' === namespace) {
-    console.error('The namespace must be a non-empty string.');
-    return false;
-  }
-  if (!/^[a-zA-Z][a-zA-Z0-9_.\-\/]*$/.test(namespace)) {
-    console.error('The namespace can only contain numbers, letters, dashes, periods, underscores and slashes.');
-    return false;
-  }
-  return true;
-}
-function validateHookName(hookName) {
-  if ('string' !== typeof hookName || '' === hookName) {
-    console.error('The hook name must be a non-empty string.');
-    return false;
-  }
-  if (/^__/.test(hookName)) {
-    console.error('The hook name cannot begin with `__`.');
-    return false;
-  }
-  if (!/^[a-zA-Z][a-zA-Z0-9_.-]*$/.test(hookName)) {
-    console.error('The hook name can only contain numbers, letters, dashes, periods and underscores.');
-    return false;
-  }
-  return true;
-}
-function createAddHook(hooks, storeKey) {
-  return function addHook(hookName, namespace, callback, priority = 10) {
-    const hooksStore = hooks[storeKey];
-    if (!validateHookName(hookName)) {
-      return;
-    }
-    if (!validateNamespace(namespace)) {
-      return;
-    }
-    if ('function' !== typeof callback) {
-      console.error('The hook callback must be a function.');
-      return;
-    }
-    if ('number' !== typeof priority) {
-      console.error('If specified, the hook priority must be a number.');
-      return;
-    }
-    const handler = {
-      callback,
-      priority,
-      namespace
-    };
-    if (hooksStore[hookName]) {
-      const handlers = hooksStore[hookName].handlers;
-      let i;
-      for (i = handlers.length; i > 0; i--) {
-        if (priority >= handlers[i - 1].priority) {
-          break;
-        }
-      }
-      if (i === handlers.length) {
-        handlers[i] = handler;
-      } else {
-        handlers.splice(i, 0, handler);
-      }
-      hooksStore.__current.forEach(hookInfo => {
-        if (hookInfo.name === hookName && hookInfo.currentIndex >= i) {
-          hookInfo.currentIndex++;
-        }
-      });
-    } else {
-      hooksStore[hookName] = {
-        handlers: [handler],
-        runs: 0
-      };
-    }
-    if (hookName !== 'hookAdded') {
-      hooks.doAction('hookAdded', hookName, namespace, callback, priority);
-    }
-  };
-}
-function createRemoveHook(hooks, storeKey, removeAll = false) {
-  return function removeHook(hookName, namespace) {
-    const hooksStore = hooks[storeKey];
-    if (!validateHookName(hookName)) {
-      return;
-    }
-    if (!removeAll && !validateNamespace(namespace)) {
-      return;
-    }
-    if (!hooksStore[hookName]) {
-      return 0;
-    }
-    let handlersRemoved = 0;
-    if (removeAll) {
-      handlersRemoved = hooksStore[hookName].handlers.length;
-      hooksStore[hookName] = {
-        runs: hooksStore[hookName].runs,
-        handlers: []
-      };
-    } else {
-      const handlers = hooksStore[hookName].handlers;
-      for (let i = handlers.length - 1; i >= 0; i--) {
-        if (handlers[i].namespace === namespace) {
-          handlers.splice(i, 1);
-          handlersRemoved++;
-          hooksStore.__current.forEach(hookInfo => {
-            if (hookInfo.name === hookName && hookInfo.currentIndex >= i) {
-              hookInfo.currentIndex--;
-            }
-          });
-        }
-      }
-    }
-    if (hookName !== 'hookRemoved') {
-      hooks.doAction('hookRemoved', hookName, namespace);
-    }
-    return handlersRemoved;
-  };
-}
-function createHasHook(hooks, storeKey) {
-  return function hasHook(hookName, namespace) {
-    const hooksStore = hooks[storeKey];
-    if ('undefined' !== typeof namespace) {
-      return hookName in hooksStore && hooksStore[hookName].handlers.some(hook => hook.namespace === namespace);
-    }
-    return hookName in hooksStore;
-  };
-}
-function createRunHook(hooks, storeKey, returnFirstArg, async) {
-  return function runHook(hookName, ...args) {
-    const hooksStore = hooks[storeKey];
-    if (!hooksStore[hookName]) {
-      hooksStore[hookName] = {
-        handlers: [],
-        runs: 0
-      };
-    }
-    hooksStore[hookName].runs++;
-    const handlers = hooksStore[hookName].handlers;
-    if (true) {
-      if ('hookAdded' !== hookName && hooksStore.all) {
-        handlers.push(...hooksStore.all.handlers);
-      }
-    }
-    if (!handlers || !handlers.length) {
-      return returnFirstArg ? args[0] : undefined;
-    }
-    const hookInfo = {
-      name: hookName,
-      currentIndex: 0
-    };
-    async function asyncRunner() {
-      try {
-        hooksStore.__current.add(hookInfo);
-        let result = returnFirstArg ? args[0] : undefined;
-        while (hookInfo.currentIndex < handlers.length) {
-          const handler = handlers[hookInfo.currentIndex];
-          result = await handler.callback.apply(null, args);
-          if (returnFirstArg) {
-            args[0] = result;
-          }
-          hookInfo.currentIndex++;
-        }
-        return returnFirstArg ? result : undefined;
-      } finally {
-        hooksStore.__current.delete(hookInfo);
-      }
-    }
-    function syncRunner() {
-      try {
-        hooksStore.__current.add(hookInfo);
-        let result = returnFirstArg ? args[0] : undefined;
-        while (hookInfo.currentIndex < handlers.length) {
-          const handler = handlers[hookInfo.currentIndex];
-          result = handler.callback.apply(null, args);
-          if (returnFirstArg) {
-            args[0] = result;
-          }
-          hookInfo.currentIndex++;
-        }
-        return returnFirstArg ? result : undefined;
-      } finally {
-        hooksStore.__current.delete(hookInfo);
-      }
-    }
-    return (async ? asyncRunner : syncRunner)();
-  };
-}
-function createCurrentHook(hooks, storeKey) {
-  return function currentHook() {
-    var _currentArray$at$name;
-    const hooksStore = hooks[storeKey];
-    const currentArray = Array.from(hooksStore.__current);
-    return (_currentArray$at$name = currentArray.at(-1)?.name) !== null && _currentArray$at$name !== void 0 ? _currentArray$at$name : null;
-  };
-}
-function createDoingHook(hooks, storeKey) {
-  return function doingHook(hookName) {
-    const hooksStore = hooks[storeKey];
-    if ('undefined' === typeof hookName) {
-      return hooksStore.__current.size > 0;
-    }
-    return Array.from(hooksStore.__current).some(hook => hook.name === hookName);
-  };
-}
-function createDidHook(hooks, storeKey) {
-  return function didHook(hookName) {
-    const hooksStore = hooks[storeKey];
-    if (!validateHookName(hookName)) {
-      return;
-    }
-    return hooksStore[hookName] && hooksStore[hookName].runs ? hooksStore[hookName].runs : 0;
-  };
-}
-class _Hooks {
-  constructor() {
-    this.actions = Object.create(null);
-    this.actions.__current = new Set();
-    this.filters = Object.create(null);
-    this.filters.__current = new Set();
-    this.addAction = createAddHook(this, 'actions');
-    this.addFilter = createAddHook(this, 'filters');
-    this.removeAction = createRemoveHook(this, 'actions');
-    this.removeFilter = createRemoveHook(this, 'filters');
-    this.hasAction = createHasHook(this, 'actions');
-    this.hasFilter = createHasHook(this, 'filters');
-    this.removeAllActions = createRemoveHook(this, 'actions', true);
-    this.removeAllFilters = createRemoveHook(this, 'filters', true);
-    this.doAction = createRunHook(this, 'actions', false, false);
-    this.doActionAsync = createRunHook(this, 'actions', false, true);
-    this.applyFilters = createRunHook(this, 'filters', true, false);
-    this.applyFiltersAsync = createRunHook(this, 'filters', true, true);
-    this.currentAction = createCurrentHook(this, 'actions');
-    this.currentFilter = createCurrentHook(this, 'filters');
-    this.doingAction = createDoingHook(this, 'actions');
-    this.doingFilter = createDoingHook(this, 'filters');
-    this.didAction = createDidHook(this, 'actions');
-    this.didFilter = createDidHook(this, 'filters');
-  }
-}
-function createHooks() {
-  return new _Hooks();
-}
-const defaultHooks = createHooks();
-const {
-  addAction,
-  addFilter,
-  removeAction,
-  removeFilter,
-  hasAction,
-  hasFilter,
-  removeAllActions,
-  removeAllFilters,
-  doAction,
-  doActionAsync,
-  applyFilters,
-  applyFiltersAsync,
-  currentAction,
-  currentFilter,
-  doingAction,
-  doingFilter,
-  didAction,
-  didFilter,
-  actions,
-  filters
-} = defaultHooks;
-const i18n = createI18n(undefined, undefined, defaultHooks);
-const getLocaleData = i18n.getLocaleData.bind(i18n);
-const setLocaleData = i18n.setLocaleData.bind(i18n);
-const resetLocaleData = i18n.resetLocaleData.bind(i18n);
-const subscribe = i18n.subscribe.bind(i18n);
-const __ = i18n.__.bind(i18n);
-const _x = i18n._x.bind(i18n);
-const _n = i18n._n.bind(i18n);
-const _nx = i18n._nx.bind(i18n);
-const isRTL = i18n.isRTL.bind(i18n);
-const hasTranslation = i18n.hasTranslation.bind(i18n);
-const dtpcPlayButtonCss = ":host {\n  --_dtpc-play-button--size: var(--dtpc-play-button--size, 1.5rem);\n  --_dtpc-play-button--padding: var(--dtpc-play-button--padding, 0.325rem);\n  --_dtpc-play-button--foreground: var(--dtpc-play-button--foreground, var(--_dtpc-player--foreground, currentColor));\n  --_dtpc-play-button--foreground--hover: var(--dtpc-play-button--foreground--hover, var(--_dtpc-player--surface));\n  --_dtpc-play-button--foreground--playing: var(--dtpc-play-button--foreground--playing, var(--_dtpc-play-button--foreground));\n  --_dtpc-play-button--surface: var(--_dtpc-play-button--surface, var(--_dtpc-player--surface));\n  --_dtpc-play-button--surface--hover: var(--dtpc-play-button--surface--hover, var(--_dtpc-player--foreground));\n  --_dtpc-play-button--surface--playing: var(--dtpc-play-button--surface--playing, var(--_dtpc-player--surface));\n  --_dtpc-play-button--surface-opacity: var(--dtpc-play-button--surface-opacity, 0);\n  --_dtpc-play-button--surface-opacity--hover: var(--dtpc-play-button--surface-opacity--hover, 100%);\n  --_dtpc-play-button--surface-opacity--playing: var(--dtpc-play-button--surface-opacity--playing, 0);\n  --_dtpc-play-button--border-color: var(--dtpc-play-button--border-color, transparent);\n  --_dtpc-play-button--border-color--hover: var(--dtpc-play-button--border-color--hover, var(--_dtpc-play-button--foreground));\n  --_dtpc-play-button--border-color--playing: var(--dtpc-play-button--border-color--playing, var(--_dtpc-play-button--border-color--hover));\n  --_dtpc-play-button--border-radius: var(--dtpc-play-button--border-radius, 100vw);\n  --_dtpc-play-button--border-radius--hover: var(--dtpc-play-button--border-radius--hover, var(--_dtpc-play-button--border-radius));\n  --_dtpc-play-button--border-radius--playing: var(--dtpc-play-button--border-radius--playing, var(--_dtpc-play-button--border-radius--hover));\n  --_dtpc-play-button--border-width: var(--dtpc-play-button--border-width, 0.125rem);\n  --_dtpc-play-button--border-width--hover: var(--dtpc-play-button--border-width--hover, var(--_dtpc-play-button--border-width));\n  --_dtpc-play-button--border-width--playing: var(--dtpc-play-button--border-width--playing, var(--_dtpc-play-button--border-width--hover));\n  --_dtpc-play-button--focus-ring-color: var(--dtpc-play-button--focus-ring-color, var(--_dtpc-player--highlight));\n  --_dtpc-play-button--focus-ring-offset: var(--dtpc-play-button--focus-ring-offset, 0.125rem);\n  --_dtpc-play-button--focus-ring-width: var(--dtpc-play-button--focus-ring-width, 2px);\n}\n\nbutton {\n  --_size: var(--_dtpc-play-button--size);\n  --_padding: var(--_dtpc-play-button--padding);\n  --_foreground: var(--_dtpc-play-button--foreground);\n  --_surface: var(--_dtpc-play-button--surface);\n  --_surface-opacity: var(--_dtpc-play-button--surface-opacity);\n  --_border-color: var(--_dtpc-play-button--border-color);\n  --_border-radius: var(--_dtpc-play-button--border-radius);\n  --_border-width: var(--_dtpc-play-button--border-width);\n  --_focus-ring-color: var(--_dtpc-play-button--focus-ring-color);\n  --_focus-ring-offset: var(--_dtpc-play-button--focus-ring-offset);\n  --_focus-ring-width: var(--_dtpc-play-button--focus-ring-width);\n\n  all: unset;\n\n  transition-property: background-color, border-color, border-width, border-radius, color;\n  transition-duration: 200ms;\n  transition-timing-function: ease;\n\n  box-sizing: content-box;\n  display: grid;\n  place-items: center;\n  justify-content: stretch;\n  aspect-ratio: 1;\n  width: var(--_size);\n\n  padding: var(--_padding);\n\n  border-style: solid;\n  border-color: var(--_border-color);\n  border-width: var(--_border-width);\n  border-radius: var(--_border-radius);\n\n  background-color: color-mix(in oklch, var(--_surface) var(--_surface-opacity), transparent);\n\n  cursor: pointer;\n  user-select: none;\n\n  &:hover {\n    --_dtpc-play-button--foreground: var(--_dtpc-play-button--foreground--hover);\n    --_dtpc-play-button--surface: var(--_dtpc-play-button--surface--hover);\n    --_dtpc-play-button--surface-opacity: var(--_dtpc-play-button--surface-opacity--hover);\n    --_dtpc-play-button--border-color: var(--_dtpc-play-button--border-color--hover);\n    --_dtpc-play-button--border-width: var(--_dtpc-play-button--border-width--hover);\n    --_dtpc-play-button--border-radius: var(--_dtpc-play-button--border-radius--hover);\n  }\n\n  &:where([data-status='playing']) {\n    --_dtpc-play-button--foreground: var(--_dtpc-play-button--foreground--playing);\n    --_dtpc-play-button--surface: var(--_dtpc-play-button--surface--playing);\n    --_dtpc-play-button--surface-opacity: var(--_dtpc-play-button--surface-opacity--playing);\n    --_dtpc-play-button--border-color: var(--_dtpc-play-button--border-color--playing);\n    --_dtpc-play-button--border-width: var(--_dtpc-play-button--border-width--playing);\n    --_dtpc-play-button--border-radius: var(--_dtpc-play-button--border-radius--playing);\n\n    &:hover {\n      --_dtpc-play-button--surface-opacity: var(--_dtpc-play-button--surface-opacity--hover);\n    }\n  }\n\n  &:focus-visible {\n    outline-style: solid;\n    outline-offset: var(--_focus-ring-offset);\n    outline-color: var(--_focus-ring-color);\n    outline-width: var(--_focus-ring-width);\n  }\n}\n\n.lucide-icon {\n  display: grid;\n  place-items: center;\n  width: 100%;\n\n  color: var(--_foreground);\n\n  svg {\n    width: 100%;\n    height: auto;\n  }\n}\n";
+
+const dtpcPlayButtonCss = ":host {\n  --dtpc-button--size: var(--dtpc-play-button--size, 2rem);\n  --dtpc-button--padding: var(--dtpc-play-button--padding, 0.5rem);\n  --dtpc-button--foreground: var(--dtpc-play-button--foreground);\n  --dtpc-button--foreground--hover: var(--dtpc-play-button--foreground--hover, Canvas);\n  --dtpc-button--foreground--active: var(--dtpc-play-button--foreground--playing);\n  --dtpc-button--surface: var(--dtpc-play-button--surface);\n  --dtpc-button--surface--hover: var(--dtpc-play-button--surface--hover, CanvasText);\n  --dtpc-button--surface--active: var(--dtpc-play-button--surface--playing);\n  --dtpc-button--surface-opacity: var(--dtpc-play-button--surface-opacity);\n  --dtpc-button--surface-opacity--hover: var(--dtpc-play-button--surface-opacity--hover, 100%);\n  --dtpc-button--surface-opacity--active: var(--dtpc-play-button--surface-opacity--playing, 0);\n  --dtpc-button--border-color: var(--dtpc-play-button--border-color, transparent);\n  --dtpc-button--border-color--hover: var(--dtpc-play-button--border-color--hover, transparent);\n  --dtpc-button--border-color--active: var(--dtpc-play-button--border-color--playing, CanvasText);\n  --dtpc-button--border-radius: var(--dtpc-play-button--border-radius);\n  --dtpc-button--border-radius--hover: var(--dtpc-play-button--border-radius--hover);\n  --dtpc-button--border-radius--active: var(--dtpc-play-button--border-radius--playing);\n  --dtpc-button--border-width: var(--dtpc-play-button--border-width, 0.125);\n  --dtpc-button--border-width--hover: var(--dtpc-play-button--border-width--hover, 0.125);\n  --dtpc-button--border-width--active: var(--dtpc-play-button--border-width--playing, 0.125);\n  --dtpc-button--focus-ring-color: var(--dtpc-play-button--focus-ring-color);\n  --dtpc-button--focus-ring-offset: var(--dtpc-play-button--focus-ring-offset);\n  --dtpc-button--focus-ring-width: var(--dtpc-play-button--focus-ring-width);\n}\n\n:host([data-status='playing']) {\n  --dtpc-button--foreground: var(--dtpc-button--foreground--active);\n  --dtpc-button--surface: var(--dtpc-button--surface--active);\n  --dtpc-button--surface-opacity: var(--dtpc-button--surface-opacity--active);\n  --dtpc-button--border-color: var(--dtpc-button--border-color--active);\n  --dtpc-button--border-width: var(--dtpc-button--border-width--active);\n  --dtpc-button--border-radius: var(--dtpc-button--border-radius--active);\n\n  &:hover {\n    --dtpc-button--surface-opacity: var(--dtpc-button--surface-opacity--hover);\n  }\n}\n";
 const DtpcPlayButton$1 = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.p)(class DtpcPlayButton extends _index2_js__WEBPACK_IMPORTED_MODULE_0__.H {
   constructor() {
     super();
@@ -1276,19 +525,13 @@ const DtpcPlayButton$1 = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.p)(class Dtp
       writable: true,
       value: void 0
     });
-    Object.defineProperty(this, "iconStyle", {
-      enumerable: true,
-      configurable: true,
-      writable: true,
-      value: 'outline'
-    });
-    Object.defineProperty(this, "playing", {
-      enumerable: true,
-      configurable: true,
-      writable: true,
-      value: false
-    });
     Object.defineProperty(this, "initControl", {
+      enumerable: true,
+      configurable: true,
+      writable: true,
+      value: void 0
+    });
+    Object.defineProperty(this, "togglePaused", {
       enumerable: true,
       configurable: true,
       writable: true,
@@ -1297,73 +540,41 @@ const DtpcPlayButton$1 = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.p)(class Dtp
     this.__registerHost();
     this.__attachShadow();
     this.initControl = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.c)(this, "dtpc-control-init", 7);
-  }
-  get el() {
-    return this;
+    this.togglePaused = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.c)(this, "audio-toggle-paused", 7);
   }
   componentWillLoad() {
     const self = this;
     this.initControl.emit(state => self.state = state);
   }
-  componentDidLoad() {
-    const self = this;
-    this.state.audioElm.addEventListener('play', () => self.handlePlay());
-    this.state.audioElm.addEventListener('pause', () => self.handlePause());
-  }
-  handlePlay() {
-    this.playing = true;
-  }
-  handlePause() {
-    this.playing = false;
-  }
   handleClick() {
-    if (this.state.audioElm.paused) {
-      this.state.audioElm.play().then(() => {
-        console.log('This is from teh state audio elm playing...');
-      }).catch(e => {
-        console.error(e);
-      });
-    } else {
-      this.state.audioElm.pause();
-    }
+    this.togglePaused.emit();
   }
   render() {
-    const label = this.playing ? __('Pause', 'dovetail-podcasts') : __('Play', 'dovetail-podcasts');
-    const iconProps = {
-      ...('solid' === this.iconStyle && {
-        fill: 'currentColor',
-        stroke: 'none'
-      })
-    };
+    const {
+      playing
+    } = this.state;
+    const label = playing ? (0,_index5_js__WEBPACK_IMPORTED_MODULE_1__._)('Pause', 'dovetail-podcasts') : (0,_index5_js__WEBPACK_IMPORTED_MODULE_1__._)('Play', 'dovetail-podcasts');
     const buttonAttributes = {
       type: 'button',
-      title: label,
-      'data-status': this.playing ? 'playing' : 'paused'
+      title: label
     };
     return (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)(_index2_js__WEBPACK_IMPORTED_MODULE_0__.d, {
-      key: '1134eaa61e80d83ec19b98cb2a005c3603263b15'
-    }, (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)("button", {
-      key: '84e1c130686ba0ad85d8a7ad268ab0429d18884a',
-      ...buttonAttributes,
-      onClick: () => this.handleClick()
-    }, this.playing ? (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)("icon-pause", {
-      ...iconProps
-    }) : (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)("icon-play", {
-      ...iconProps
-    })));
+      key: 'e2cab90940539931b2bd43e2705efabd5525afc2',
+      "data-status": playing ? 'playing' : 'paused'
+    }, (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)("dtpc-button", {
+      key: 'd65f82e16cabbfa0072830f7c175080ceb02cd51',
+      ...buttonAttributes
+    }, playing ? (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)("icon-pause", null) : (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)("icon-play", null)));
   }
   static get style() {
     return dtpcPlayButtonCss;
   }
-}, [1, "dtpc-play-button", {
-  "iconStyle": [1, "icon-style"],
-  "playing": [32]
-}]);
+}, [1, "dtpc-play-button", undefined, [[0, "click", "handleClick"]]]);
 function defineCustomElement$1() {
   if (typeof customElements === "undefined") {
     return;
   }
-  const components = ["dtpc-play-button", "icon-pause", "icon-play"];
+  const components = ["dtpc-play-button", "dtpc-button", "icon-pause", "icon-play"];
   components.forEach(tagName => {
     switch (tagName) {
       case "dtpc-play-button":
@@ -1371,14 +582,19 @@ function defineCustomElement$1() {
           customElements.define(tagName, DtpcPlayButton$1);
         }
         break;
+      case "dtpc-button":
+        if (!customElements.get(tagName)) {
+          (0,_dtpc_button2_js__WEBPACK_IMPORTED_MODULE_2__.d)();
+        }
+        break;
       case "icon-pause":
         if (!customElements.get(tagName)) {
-          (0,_icon_pause2_js__WEBPACK_IMPORTED_MODULE_1__.d)();
+          (0,_icon_pause2_js__WEBPACK_IMPORTED_MODULE_3__.d)();
         }
         break;
       case "icon-play":
         if (!customElements.get(tagName)) {
-          (0,_icon_play2_js__WEBPACK_IMPORTED_MODULE_2__.d)();
+          (0,_icon_play2_js__WEBPACK_IMPORTED_MODULE_4__.d)();
         }
         break;
     }
@@ -1587,7 +803,11 @@ class playerStateFactory {
     audioElm.src = src;
     const newStore = createStore({
       audioElm,
-      playing: false,
+      currentTime: audioElm.currentTime,
+      duration: audioElm.duration,
+      muted: audioElm.muted,
+      playing: !audioElm.paused,
+      volume: audioElm.volume,
       seekTime: null
     });
     this.stores.push(newStore);
@@ -1595,7 +815,7 @@ class playerStateFactory {
   }
 }
 const factory = new playerStateFactory();
-const dtpcPlayerCss = ":host {\n  --_dtpc-player--foreground: var(--dtpc-player--primary-base, currentColor);\n  --_dtpc-player--highlight: var(--dtpc-player--highlight, hsl(201, 64%, 67%));\n  --_dtpc-player--surface: var(--dtpc-player--surface, white);\n  --_dtpc-player--surface-opacity: var(--dtpc-player--bg-opacity, 0);\n  --_dtpc-player--surface-blur: var(--dtpc-player--bg-blur, 0);\n  --_dtpc-player--padding: var(--dtpc-player--padding, 0);\n  --_dtpc-player--padding-inline: var(--dtpc-player--padding-inline, var(--_dtpc-player--padding));\n  --_dtpc-player--padding-block: var(--dtpc-player--padding-block, var(--_dtpc-player--padding));\n  --_dtpc-player--spacing: var(--dtpc-player--spacing, 0.5rem);\n  --_dtpc-player--time--color: var(--dtpc-player--time--font-size, var(--_dtpc-player--foreground));\n  --_dtpc-player--time--font-size: var(--dtpc-player--time--font-size, 0.875rem);\n  --_dtpc-player--time--font-family: var(--dtpc-player--time--font-family, ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, 'DejaVu Sans Mono', monospace);\n  --_dtpc-player--time--font-weight: var(--dtpc-player--time--font-weight, inherit);\n}\n\n.wrapper {\n  display: grid;\n\n  & > * {\n    grid-column: 1 / -1;\n    grid-row: 1 / -1;\n  }\n}\n\n.main {\n  --_spacing: var(--_dtpc-player--spacing);\n  --_padding-inline: var(--_dtpc-player--padding-inline);\n  --_padding-block: var(--_dtpc-player--padding-block);\n\n  display: flex;\n  align-items: center;\n  gap: var(--_spacing);\n\n  padding-inline: var(--_padding-inline);\n  padding-block: var(--_padding-block);\n}\n";
+const dtpcPlayerCss = ":host {\n  --_dtpc-player--foreground: var(--dtpc-player--primary-base, CanvasText);\n  --_dtpc-player--highlight: var(--dtpc-player--highlight, LinkText);\n  --_dtpc-player--surface: var(--dtpc-player--surface, Canvas);\n  --_dtpc-player--surface-opacity: var(--dtpc-player--bg-opacity, 0);\n  --_dtpc-player--surface-blur: var(--dtpc-player--bg-blur, 0);\n  --_dtpc-player--padding: var(--dtpc-player--padding, 0);\n  --_dtpc-player--padding-inline: var(--dtpc-player--padding-inline, var(--_dtpc-player--padding));\n  --_dtpc-player--padding-block: var(--dtpc-player--padding-block, var(--_dtpc-player--padding));\n  --_dtpc-player--spacing: var(--dtpc-player--spacing, 0.5rem);\n\n  /* Time */\n  --_dtpc-player--time--color: var(--dtpc-player--time--font-size, var(--_dtpc-player--foreground));\n  --_dtpc-player--time--font-size: var(--dtpc-player--time--font-size, 0.875rem);\n  --_dtpc-player--time--font-family: var(--dtpc-player--time--font-family, ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, 'DejaVu Sans Mono', monospace);\n  --_dtpc-player--time--font-weight: var(--dtpc-player--time--font-weight, inherit);\n}\n\n.wrapper {\n  display: grid;\n\n  & > * {\n    grid-column: 1 / -1;\n    grid-row: 1 / -1;\n  }\n}\n\n.main {\n  --_spacing: var(--_dtpc-player--spacing);\n  --_padding-inline: var(--_dtpc-player--padding-inline);\n  --_padding-block: var(--_dtpc-player--padding-block);\n\n  display: flex;\n  align-items: center;\n  gap: var(--_spacing);\n\n  padding-inline: var(--_padding-inline);\n  padding-block: var(--_padding-block);\n}\n";
 const DtpcPlayer$1 = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.p)(class DtpcPlayer extends _index2_js__WEBPACK_IMPORTED_MODULE_0__.H {
   constructor() {
     super();
@@ -1615,10 +835,43 @@ const DtpcPlayer$1 = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.p)(class DtpcPla
     this.__attachShadow();
   }
   connectedCallback() {
-    this.state = factory.createStore(this.src).state;
+    const {
+      state,
+      onChange
+    } = factory.createStore(this.src);
+    const {
+      audioElm
+    } = state;
+    let previousSeekTime = state.seekTime;
+    this.state = state;
+    onChange('seekTime', seekTime => {
+      if (previousSeekTime !== null && seekTime === null) {
+        audioElm.currentTime = previousSeekTime;
+        state.currentTime = previousSeekTime;
+      }
+      previousSeekTime = seekTime;
+    });
+    onChange('muted', muted => audioElm.muted = muted);
+    onChange('volume', volume => audioElm.volume = volume);
+    state.audioElm.addEventListener('loadedmetadata', e => {
+      state.currentTime = e.target.currentTime;
+      state.duration = e.target.duration;
+    });
+    state.audioElm.addEventListener('timeupdate', e => state.currentTime = e.target.currentTime);
+    state.audioElm.addEventListener('play', () => state.playing = true);
+    state.audioElm.addEventListener('pause', () => state.playing = false);
   }
   disconnectedCallback() {
     this.state.audioElm.pause();
+  }
+  handleTogglePaused() {
+    if (this.state.audioElm.paused) {
+      this.state.audioElm.play().then(() => {}).catch(e => {
+        console.error(e);
+      });
+    } else {
+      this.state.audioElm.pause();
+    }
   }
   handleControlInit(e) {
     if (e.detail instanceof Function) {
@@ -1634,18 +887,18 @@ const DtpcPlayer$1 = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.p)(class DtpcPla
   }
   render() {
     return (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)(_index2_js__WEBPACK_IMPORTED_MODULE_0__.d, {
-      key: '6369937f3894435ba917d222a554f27c9069ddcd'
+      key: 'cde20f2883fe586d3efdd23855aeebb0e43708f1'
     }, (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", {
-      key: 'ae7e03096cd6c66be76cfbe223079d956866d0cc',
+      key: 'a8a7b3a09b121b47e758029e85168271f04b8281',
       class: "wrapper"
     }, (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", {
-      key: 'd32df788658bd2d73d315134d53cf56418408573',
+      key: '35c7813fd534645b0a378746bc4463efc9ff1337',
       part: "backdrop"
     }), (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", {
-      key: '7a1c4b25cb5e749f44a462c01a29486b02e116f6',
+      key: '8ae893040d00c900ceb20e867fc7a427b737ea6f',
       class: "main"
     }, (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)("slot", {
-      key: '0f279a3986f316cfd43f818c60fc08f8ef30a609'
+      key: '9228924b317f820cdfea83668283135bc640a933'
     }))));
   }
   static get watchers() {
@@ -1658,7 +911,7 @@ const DtpcPlayer$1 = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.p)(class DtpcPla
   }
 }, [1, "dtpc-player", {
   "src": [1]
-}, [[0, "dtpc-control-init", "handleControlInit"]], {
+}, [[0, "audio-toggle-paused", "handleTogglePaused"], [0, "dtpc-control-init", "handleControlInit"]], {
   "src": ["watchSrcHandler"]
 }]);
 function defineCustomElement$1() {
@@ -1721,18 +974,6 @@ const DtpcProgressBar$1 = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.p)(class Dt
       writable: true,
       value: this.duration
     });
-    Object.defineProperty(this, "currentTime", {
-      enumerable: true,
-      configurable: true,
-      writable: true,
-      value: 0
-    });
-    Object.defineProperty(this, "seekTime", {
-      enumerable: true,
-      configurable: true,
-      writable: true,
-      value: void 0
-    });
     Object.defineProperty(this, "initControl", {
       enumerable: true,
       configurable: true,
@@ -1748,51 +989,37 @@ const DtpcProgressBar$1 = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.p)(class Dt
     this.audioDuration = this.duration;
     this.initControl.emit(state => {
       self.state = state;
-      self.audioDuration = state.audioElm.duration || this.duration;
+      self.audioDuration = state.duration || this.duration;
     });
-  }
-  componentDidLoad() {
-    const self = this;
-    this.state.audioElm.addEventListener('loadedmetadata', e => {
-      self.handleLoadedMetaData(e);
-    });
-    this.state.audioElm.addEventListener('timeupdate', e => {
-      self.handleTimeUpdate(e);
-    });
-  }
-  handleLoadedMetaData(event) {
-    this.currentTime = event.target.currentTime;
-    this.audioDuration = event.target.duration;
-  }
-  handleTimeUpdate(event) {
-    this.currentTime = event.target.currentTime;
   }
   handleInput(event) {
     this.state.seekTime = event.detail;
-    this.seekTime = event.detail;
   }
-  handleChange(event) {
-    this.currentTime = event.detail;
-    this.seekTime = null;
-    this.state.audioElm.currentTime = this.currentTime;
-    this.state.seekTime = this.seekTime;
+  handleChange() {
+    this.state.seekTime = null;
   }
   render() {
-    const time = this.seekTime !== null ? this.seekTime : this.currentTime;
+    const {
+      seekTime,
+      currentTime,
+      duration
+    } = this.state;
+    const time = seekTime !== null ? seekTime : currentTime;
+    const max = duration || this.audioDuration;
     return (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", {
-      key: 'f4b295a1301caf4959834abb008301c98047249a',
+      key: '07ddbf91e448facc8e77a33813da327e78ca82dd',
       class: "wrapper",
       "aria-label": "Seek slider",
       "aria-valuemin": "0",
-      "aria-valuemax": this.audioDuration,
+      "aria-valuemax": max,
       "aria-valuenow": time
     }, (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)("dtpc-slider", {
-      key: 'c5f82861796bf8a8d314e0e913ac3aebfc3ce1a2',
+      key: '80763f72c2ae423c35e733a06224cc7f3a752e5e',
       tabindex: 0,
-      disabled: !this.audioDuration,
+      disabled: !max,
       defaultValue: 0,
       min: 0,
-      max: this.audioDuration,
+      max: max,
       step: 1,
       value: time
     }));
@@ -1802,9 +1029,7 @@ const DtpcProgressBar$1 = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.p)(class Dt
   }
 }, [1, "dtpc-progress-bar", {
   "duration": [2],
-  "audioDuration": [32],
-  "currentTime": [32],
-  "seekTime": [32]
+  "audioDuration": [32]
 }, [[0, "slider-input", "handleInput"], [0, "slider-change", "handleChange"]]]);
 function defineCustomElement$1() {
   if (typeof customElements === "undefined") {
@@ -1867,7 +1092,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _index2_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index2.js */ "../web-components/dist/components/index2.js");
 
-const dtpcSliderCss = ":host {\n  --_dtpc-slider--scrubber--color: var(--dtpc-slider--scrubber--color, currentColor);\n  --_dtpc-slider--scrubber--size: var(--dtpc-slider--scrubber--size, 1.25rem);\n  --_dtpc-slider--scrubber--border-color: var(--dtpc-slider--scrubber--border-color, transparent);\n  --_dtpc-slider--scrubber--border-width: var(--dtpc-slider--scrubber--border-width, 0);\n  --_dtpc-slider--scrubber--border-radius: var(--dtpc-slider--scrubber--border-radius, 100vw);\n  --_dtpc-slider--progress--color: var(--dtpc-slider--progress--color, currentColor);\n  --_dtpc-slider--track--color: var(--dtpc-slider--track--color, color-mix(in oklch, currentColor 20%, transparent));\n  --_dtpc-slider--track--height: var(--dtpc-slider--track--height, 0.25rem);\n  --_dtpc-slider--track--radius: var(--dtpc-slider--track--radius, 100vw);\n  --_dtpc-slider--track--border-color: var(--dtpc-slider--track--border-color, transparent);\n  --_dtpc-slider--track--border-width: var(--dtpc-slider--track--border-width, 0);\n  --_dtpc-slider--track--border-offset: var(--dtpc-slider--track--border-offset, 0);\n  --_dtpc-slider--focus-ring-color: var(--dtpc-slider--focus-ring-color, var(--_dtpc-player--highlight));\n  --_dtpc-slider--focus-ring-offset: var(--dtpc-slider--focus-ring-offset, 0.125rem);\n  --_dtpc-slider--focus-ring-width: var(--dtpc-slider--focus-ring-width, 2px);\n\n  display: contents;\n}\n\n.track {\n  --_scrubber--color: var(--_dtpc-slider--scrubber--color);\n  --_scrubber--size: var(--_dtpc-slider--scrubber--size);\n  --_scrubber--border-color: var(--_dtpc-slider--scrubber--border-color);\n  --_scrubber--border-width: var(--_dtpc-slider--scrubber--border-width);\n  --_scrubber--border-radius: var(--_dtpc-slider--scrubber--border-radius);\n  --_scrubber--focus-ring-color: var(--_dtpc-slider--focus-ring-color);\n  --_scrubber--focus-ring-offset: var(--_dtpc-slider--focus-ring-offset);\n  --_scrubber--focus-ring-width: var(--_dtpc-slider--focus-ring-width);\n  --_track--color: var(--_dtpc-slider--track--color);\n  --_track--height: var(--_dtpc-slider--track--height);\n  --_track--radius: var(--_dtpc-slider--track--radius);\n  --_track--border-color: var(--_dtpc-slider--track--border-color);\n  --_track--border-width: var(--_dtpc-slider--track--border-width);\n  --_track--border-offset: var(--_dtpc-slider--track--border-offset);\n  --_track--gutter: calc(var(--_scrubber--size) / 2);\n\n  flex-grow: 1;\n  isolation: isolate;\n  display: grid;\n  align-items: center;\n  grid-template-columns: [range-start] var(--_track--gutter) [track-start] 1fr [track-end] var(--_track--gutter) [range-end];\n  grid-template-rows: [range-start] [track-start] var(--_track--height) [track-end] [range-end];\n\n  &::before {\n    content: '';\n\n    grid-area: track;\n    grid-row: 1;\n    place-self: stretch;\n\n    outline-style: solid;\n    outline-color: var(--_track--border-color);\n    outline-width: var(--_track--border-width);\n    outline-offset: var(--_track--border-offset);\n\n    border-radius: var(--_track--radius);\n\n    background-color: var(--_track--color);\n  }\n\n  &:has(input[orient='vertical']) {\n    writing-mode: vertical-lr;\n    direction: rtl;\n    height: 100px;\n\n    margin-block: calc(var(--_scrubber--size) / 2);\n  }\n}\n\n.progress {\n  --_progress--color: var(--_dtpc-slider--progress--color);\n  --_length: calc(var(--progress, 0) * (100% - var(--_track--gutter) * 2));\n\n  grid-area: range;\n  grid-row: 1;\n  place-self: stretch;\n\n  display: grid;\n  grid-template-columns: var(--_track--gutter) minmax(var(--_track--height), var(--_length)) 1fr var(--_track--gutter);\n\n  &:not([data-show]) {\n    visibility: hidden;\n  }\n\n  &::before {\n    content: '';\n    grid-column: 2;\n\n    border-radius: var(--_track--radius);\n\n    background-color: var(--_progress--color);\n  }\n}\n\n.range {\n  grid-area: range;\n  grid-row: 1;\n\n  display: grid;\n  grid-template-columns: calc(var(--progress, 0) * (100% - var(--_scrubber--size))) [thumb-start] var(--_scrubber--size) [thumb-end];\n  grid-template-rows: [thumb-start] var(--_track--height) [thumb-end];\n  align-items: center;\n  justify-items: center;\n\n  min-width: var(--_track--height);\n}\n\n.scrubber {\n  grid-area: thumb;\n  display: grid;\n  aspect-ratio: 1;\n  width: var(--_scrubber--size);\n\n  &::after {\n    content: '';\n\n    transition-property: scale, opacity;\n    transition-duration: 200ms;\n    transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);\n\n    display: block;\n    scale: 0;\n    opacity: 0;\n\n    border-style: solid;\n    border-color: var(--_scrubber--border-color);\n    border-width: var(--_scrubber--border-width);\n    border-radius: var(--_scrubber--border-radius);\n\n    background-color: var(--_scrubber--color);\n  }\n\n  .track:has(input:not(:disabled)):where(:hover, :focus-within) & {\n    &::after {\n      scale: 1;\n      opacity: 1;\n    }\n  }\n\n  .track:has(input:focus-visible) & {\n    &::after {\n      outline-style: solid;\n      outline-offset: var(--_scrubber--focus-ring-offset);\n      outline-color: var(--_scrubber--focus-ring-color);\n      outline-width: var(--_scrubber--focus-ring-width);\n    }\n  }\n}\n\ninput {\n  grid-area: range;\n  grid-row: 1;\n\n  appearance: none;\n  background-color: transparent;\n  outline: 0;\n  border: 0;\n  margin: 0;\n  padding: 0;\n  opacity: 0;\n\n  block-size: var(--_track--height);\n\n  &[orient='vertical'] {\n    writing-mode: vertical-lr;\n    direction: rtl;\n    vertical-align: bottom;\n  }\n\n  /* Chrome */\n  @media screen and (-webkit-min-device-pixel-ratio: 0) {\n    &::-webkit-slider-runnable-track {\n      appearance: none;\n      position: relative;\n      block-size: var(--_track--height);\n    }\n    &::-webkit-slider-thumb {\n      appearance: none;\n      position: relative;\n      display: block;\n      top: 50%;\n      left: 0;\n      translate: 0 -50%;\n      aspect-ratio: 1;\n      width: var(--_scrubber--size);\n      height: auto;\n      cursor: ew-resize;\n    }\n\n    &[orient='vertical'] {\n      &::-webkit-slider-thumb {\n        left: 50%;\n        top: 0;\n        translate: -50% 0;\n        cursor: ns-resize;\n      }\n    }\n\n    &:disabled {\n      &::-webkit-slider-thumb {\n        cursor: default;\n      }\n    }\n  }\n}\n";
+const dtpcSliderCss = ":host {\n  --_dtpc-slider--scrubber--color: var(--dtpc-slider--scrubber--color, currentColor);\n  --_dtpc-slider--scrubber--size: var(--dtpc-slider--scrubber--size, 1.25rem);\n  --_dtpc-slider--scrubber--border-color: var(--dtpc-slider--scrubber--border-color, transparent);\n  --_dtpc-slider--scrubber--border-width: var(--dtpc-slider--scrubber--border-width, 0);\n  --_dtpc-slider--scrubber--border-radius: var(--dtpc-slider--scrubber--border-radius, 100vw);\n  --_dtpc-slider--progress--color: var(--dtpc-slider--progress--color, currentColor);\n  --_dtpc-slider--track--color: var(--dtpc-slider--track--color, color-mix(in oklch, currentColor 20%, transparent));\n  --_dtpc-slider--track--height: var(--dtpc-slider--track--height, 0.25rem);\n  --_dtpc-slider--track--radius: var(--dtpc-slider--track--radius, 100vw);\n  --_dtpc-slider--track--border-color: var(--dtpc-slider--track--border-color, transparent);\n  --_dtpc-slider--track--border-width: var(--dtpc-slider--track--border-width, 0);\n  --_dtpc-slider--track--border-offset: var(--dtpc-slider--track--border-offset, 0);\n  --_dtpc-slider--focus-ring-color: var(--dtpc-slider--focus-ring-color, var(--_dtpc-player--highlight));\n  --_dtpc-slider--focus-ring-offset: var(--dtpc-slider--focus-ring-offset, 0.125rem);\n  --_dtpc-slider--focus-ring-width: var(--dtpc-slider--focus-ring-width, 2px);\n\n  display: contents;\n}\n\n.track {\n  --_scrubber--color: var(--_dtpc-slider--scrubber--color);\n  --_scrubber--size: var(--_dtpc-slider--scrubber--size);\n  --_scrubber--border-color: var(--_dtpc-slider--scrubber--border-color);\n  --_scrubber--border-width: var(--_dtpc-slider--scrubber--border-width);\n  --_scrubber--border-radius: var(--_dtpc-slider--scrubber--border-radius);\n  --_scrubber--focus-ring-color: var(--_dtpc-slider--focus-ring-color);\n  --_scrubber--focus-ring-offset: var(--_dtpc-slider--focus-ring-offset);\n  --_scrubber--focus-ring-width: var(--_dtpc-slider--focus-ring-width);\n  --_track--color: var(--_dtpc-slider--track--color);\n  --_track--height: var(--_dtpc-slider--track--height);\n  --_track--radius: var(--_dtpc-slider--track--radius);\n  --_track--border-color: var(--_dtpc-slider--track--border-color);\n  --_track--border-width: var(--_dtpc-slider--track--border-width);\n  --_track--border-offset: var(--_dtpc-slider--track--border-offset);\n  --_track--gutter: calc(var(--_scrubber--size) / 2);\n\n  isolation: isolate;\n  display: inline-grid;\n  align-items: center;\n  grid-template-columns: [range-start] var(--_track--gutter) [track-start] 1fr [track-end] var(--_track--gutter) [range-end];\n  grid-template-rows: [range-start] [track-start] var(--_track--height) [track-end] [range-end];\n\n  &::before {\n    content: '';\n\n    grid-area: track;\n    grid-row: 1;\n    place-self: stretch;\n\n    outline-style: solid;\n    outline-color: var(--_track--border-color);\n    outline-width: var(--_track--border-width);\n    outline-offset: var(--_track--border-offset);\n\n    border-radius: var(--_track--radius);\n\n    background-color: var(--_track--color);\n  }\n\n  &:has(input[orient='vertical']) {\n    writing-mode: vertical-lr;\n    direction: rtl;\n    height: 100px;\n\n    margin-block: calc(var(--_scrubber--size) / 2);\n  }\n}\n\n.progress {\n  --_progress--color: var(--_dtpc-slider--progress--color);\n  --_length: calc(var(--progress, 0) * (100% - var(--_track--gutter) * 2));\n\n  grid-area: range;\n  grid-row: 1;\n  place-self: stretch;\n\n  display: grid;\n  grid-template-columns: var(--_track--gutter) minmax(var(--_track--height), var(--_length)) 1fr var(--_track--gutter);\n\n  &:not([data-show]) {\n    visibility: hidden;\n  }\n\n  &::before {\n    content: '';\n    grid-column: 2;\n\n    border-radius: var(--_track--radius);\n\n    background-color: var(--_progress--color);\n  }\n}\n\n.range {\n  grid-area: range;\n  grid-row: 1;\n\n  display: grid;\n  grid-template-columns: calc(var(--progress, 0) * (100% - var(--_scrubber--size))) [thumb-start] var(--_scrubber--size) [thumb-end];\n  grid-template-rows: [thumb-start] var(--_track--height) [thumb-end];\n  align-items: center;\n  justify-items: center;\n\n  min-width: var(--_track--height);\n}\n\n.scrubber {\n  grid-area: thumb;\n  display: grid;\n  aspect-ratio: 1;\n  width: var(--_scrubber--size);\n\n  &::after {\n    content: '';\n\n    transition-property: scale, opacity;\n    transition-duration: 200ms;\n    transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);\n\n    display: block;\n    scale: 0;\n    opacity: 0;\n\n    border-style: solid;\n    border-color: var(--_scrubber--border-color);\n    border-width: var(--_scrubber--border-width);\n    border-radius: var(--_scrubber--border-radius);\n\n    background-color: var(--_scrubber--color);\n  }\n\n  .track:has(input:not(:disabled)):where(:hover, :focus-within) & {\n    &::after {\n      scale: 1;\n      opacity: 1;\n    }\n  }\n\n  .track:has(input:focus-visible) & {\n    &::after {\n      outline-style: solid;\n      outline-offset: var(--_scrubber--focus-ring-offset);\n      outline-color: var(--_scrubber--focus-ring-color);\n      outline-width: var(--_scrubber--focus-ring-width);\n    }\n  }\n}\n\ninput {\n  grid-area: range;\n  grid-row: 1;\n\n  appearance: none;\n  background-color: transparent;\n  outline: 0;\n  border: 0;\n  margin: 0;\n  padding: 0;\n  opacity: 0;\n\n  block-size: var(--_track--height);\n\n  &[orient='vertical'] {\n    writing-mode: vertical-lr;\n    direction: rtl;\n    vertical-align: bottom;\n  }\n\n  /* Chrome */\n  @media screen and (-webkit-min-device-pixel-ratio: 0) {\n    &::-webkit-slider-runnable-track {\n      appearance: none;\n      position: relative;\n      block-size: var(--_track--height);\n    }\n    &::-webkit-slider-thumb {\n      appearance: none;\n      position: relative;\n      display: block;\n      top: 50%;\n      left: 0;\n      translate: 0 -50%;\n      aspect-ratio: 1;\n      width: var(--_scrubber--size);\n      height: auto;\n      cursor: ew-resize;\n    }\n\n    &[orient='vertical'] {\n      &::-webkit-slider-thumb {\n        left: 50%;\n        top: 0;\n        translate: -50% 0;\n        cursor: ns-resize;\n      }\n    }\n\n    &:disabled {\n      &::-webkit-slider-thumb {\n        cursor: default;\n      }\n    }\n  }\n}\n";
 const DtpcSlider = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.p)(class DtpcSlider extends _index2_js__WEBPACK_IMPORTED_MODULE_0__.H {
   constructor() {
     super();
@@ -1976,23 +1201,23 @@ const DtpcSlider = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.p)(class DtpcSlide
       onInput: e => this.handleInput(e)
     };
     return (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", {
-      key: '4ad685adddb074978dda54fce6f8428274464024',
+      key: '1533f7a24e27e4bf45e2efd4ac5f47d163442449',
       class: "track",
       style: {
         '--progress': `${progress}`
       }
     }, (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", {
-      key: '46897489b8d9324d764c25f5ff8d71ef2e2ac28b',
+      key: '32588e48cf547c191a6bd9a0e0f58f5613b74553',
       class: "progress",
       "data-show": !!max
     }), (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", {
-      key: '6c2f854b10fa11e029c10d5674b4910d3b1b6abf',
+      key: 'eaee545cdce52ae0a5535ad6daea2c9a1f3281af',
       class: "range"
     }, (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", {
-      key: 'b658d8fce1f2be8232eb335c35fa8be6d142b50f',
+      key: '21fb9e15068a8f8a084201b78e68f69c73c78265',
       class: "scrubber"
     })), (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)("input", {
-      key: 'bec688dbfb45911e2af6bb6ccef95244f0d226b2',
+      key: '336158225b83f5a1dc9997c484648548b14fb7a6',
       type: 'range',
       ...inputAttributes,
       value: this.currentValue
@@ -2084,12 +1309,6 @@ const DtpcTimeCurrent = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.p)(class Dtpc
       writable: true,
       value: void 0
     });
-    Object.defineProperty(this, "currentTime", {
-      enumerable: true,
-      configurable: true,
-      writable: true,
-      value: 0
-    });
     Object.defineProperty(this, "initControl", {
       enumerable: true,
       configurable: true,
@@ -2104,28 +1323,21 @@ const DtpcTimeCurrent = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.p)(class Dtpc
     const self = this;
     this.initControl.emit(state => self.state = state);
   }
-  componentDidLoad() {
-    const self = this;
-    this.state.audioElm.addEventListener('timeupdate', e => {
-      self.handleTimeUpdate(e);
-    });
-  }
-  handleTimeUpdate(event) {
-    this.currentTime = event.target.currentTime;
-  }
   render() {
-    const time = this.state.seekTime !== null ? this.state.seekTime : this.state.audioElm.currentTime;
+    const {
+      seekTime,
+      currentTime
+    } = this.state;
+    const time = seekTime !== null ? seekTime : currentTime;
     const displayTime = (0,_index3_js__WEBPACK_IMPORTED_MODULE_1__.f)(time);
     return (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)(_index2_js__WEBPACK_IMPORTED_MODULE_0__.d, {
-      key: 'be16b8bd787a25673e4a9c7950b73ee11728d9b2'
+      key: 'ebaea779f625855ef285e03d7fd170de92d78971'
     }, displayTime);
   }
   static get style() {
     return dtpcTimeCurrentCss;
   }
-}, [1, "dtpc-time-current", {
-  "currentTime": [32]
-}]);
+}, [1, "dtpc-time-current"]);
 function defineCustomElement() {
   if (typeof customElements === "undefined") {
     return;
@@ -2179,17 +1391,17 @@ const DtpcTimeDisplay$1 = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.p)(class Dt
   }
   render() {
     return (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)(_index2_js__WEBPACK_IMPORTED_MODULE_0__.d, {
-      key: 'f874eef1fa90b26db15c2b2bfaf2cb17996ed238'
+      key: 'ed890b1d9b0c60125658ea61857e5b9cc9acbd93'
     }, (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", {
-      key: '166e55f9fa30b2f9eb99378d21cdaa3236207f63',
+      key: '2db4f3f5401ed0a07b8ef9f512069bfb7d7f80c5',
       class: "wrapper"
     }, (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)("dtpc-time-current", {
-      key: 'b9d44b23a59119aceb2efb75bfdfe2dda844c9dd'
+      key: '642a525e02fc18ad6006b17a8aa5ff271b326720'
     }), (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)("span", {
-      key: 'db2a04f56db336f42d66ce83524e4026a06f83ec',
+      key: '76c5450ef4a952a5327b16e332dcdf58b0f485c5',
       class: "separator"
     }, "/"), (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)("dtpc-time-duration", {
-      key: '65cafd0c30751e48d715fdeb6d73e6e0bddbf5f3',
+      key: '2ca8cdd64ef706e58d665292893110f532434a2b',
       duration: this.duration
     })));
   }
@@ -2304,23 +1516,16 @@ const DtpcTimeDuration = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.p)(class Dtp
     this.audioDuration = this.duration;
     this.initControl.emit(state => {
       self.state = state;
-      self.audioDuration = state.audioElm.duration || this.duration;
-      ;
+      self.audioDuration = state.duration || this.duration;
     });
-  }
-  componentDidLoad() {
-    const self = this;
-    this.state.audioElm.addEventListener('loadedmetadata', e => {
-      self.handleLoadedMetaData(e);
-    });
-  }
-  handleLoadedMetaData(event) {
-    this.audioDuration = event.target.duration;
   }
   render() {
-    const displayDuration = (0,_index3_js__WEBPACK_IMPORTED_MODULE_1__.f)(this.audioDuration);
+    const {
+      duration
+    } = this.state;
+    const displayDuration = (0,_index3_js__WEBPACK_IMPORTED_MODULE_1__.f)(duration || this.audioDuration);
     return (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)(_index2_js__WEBPACK_IMPORTED_MODULE_0__.d, {
-      key: '5943618f51b40661d3280076729efb37216ecb9b'
+      key: '28f945fa94afb1d800e8b4ad734b62c51b521ae2'
     }, displayDuration);
   }
   static get style() {
@@ -2880,7 +2085,7 @@ const IconPause = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.p)(class IconPause 
     const inner = (0,_lucide_js__WEBPACK_IMPORTED_MODULE_1__.c)(_lucide_js__WEBPACK_IMPORTED_MODULE_1__.P);
     Object.entries(Object.assign({}, (0,_index4_js__WEBPACK_IMPORTED_MODULE_2__.a)(this.el), this.getProps())).forEach(([name, value]) => inner.setAttribute(name, value));
     return (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)(_index2_js__WEBPACK_IMPORTED_MODULE_0__.d, {
-      key: 'd29e53275c7bb18238ec3b6b5099e0c0979c4090',
+      key: '5e70bc287e91dd28a4515e8dd437392257b7da03',
       innerHTML: inner.outerHTML,
       class: "lucide-icon"
     });
@@ -3526,7 +2731,7 @@ const IconPlay = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.p)(class IconPlay ex
     const inner = (0,_lucide_js__WEBPACK_IMPORTED_MODULE_1__.c)(_lucide_js__WEBPACK_IMPORTED_MODULE_1__.a);
     Object.entries(Object.assign({}, (0,_index4_js__WEBPACK_IMPORTED_MODULE_2__.a)(this.el), this.getProps())).forEach(([name, value]) => inner.setAttribute(name, value));
     return (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)(_index2_js__WEBPACK_IMPORTED_MODULE_0__.d, {
-      key: 'd07bbd4349a4663c429a8a35139d4b4904e77eeb',
+      key: '849adc95f74ae9680edda63099a79eef613a44ef',
       innerHTML: inner.outerHTML,
       class: "lucide-icon"
     });
@@ -3642,6 +2847,667 @@ defineCustomElement(IconPlay);
 
 /***/ }),
 
+/***/ "../web-components/dist/components/icon-volume.js":
+/*!********************************************************!*\
+  !*** ../web-components/dist/components/icon-volume.js ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   IconVolume: () => (/* binding */ IconVolume),
+/* harmony export */   defineCustomElement: () => (/* binding */ defineCustomElement)
+/* harmony export */ });
+/* harmony import */ var _icon_volume2_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./icon-volume2.js */ "../web-components/dist/components/icon-volume2.js");
+
+const IconVolume = _icon_volume2_js__WEBPACK_IMPORTED_MODULE_0__.I;
+const defineCustomElement = _icon_volume2_js__WEBPACK_IMPORTED_MODULE_0__.d;
+
+
+/***/ }),
+
+/***/ "../web-components/dist/components/icon-volume2.js":
+/*!*********************************************************!*\
+  !*** ../web-components/dist/components/icon-volume2.js ***!
+  \*********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   I: () => (/* binding */ IconVolume),
+/* harmony export */   d: () => (/* binding */ defineCustomElement)
+/* harmony export */ });
+/* harmony import */ var _index2_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index2.js */ "../web-components/dist/components/index2.js");
+/* harmony import */ var _lucide_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./lucide.js */ "../web-components/dist/components/lucide.js");
+/* harmony import */ var _index4_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./index4.js */ "../web-components/dist/components/index4.js");
+
+
+
+const IconVolume = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.p)(class IconVolume extends _index2_js__WEBPACK_IMPORTED_MODULE_0__.H {
+  constructor() {
+    super();
+    Object.defineProperty(this, "level", {
+      enumerable: true,
+      configurable: true,
+      writable: true,
+      value: 0.8
+    });
+    Object.defineProperty(this, "muted", {
+      enumerable: true,
+      configurable: true,
+      writable: true,
+      value: false
+    });
+    Object.defineProperty(this, "alignmentBaseline", {
+      enumerable: true,
+      configurable: true,
+      writable: true,
+      value: void 0
+    });
+    Object.defineProperty(this, "baselineShift", {
+      enumerable: true,
+      configurable: true,
+      writable: true,
+      value: void 0
+    });
+    Object.defineProperty(this, "clipPath", {
+      enumerable: true,
+      configurable: true,
+      writable: true,
+      value: void 0
+    });
+    Object.defineProperty(this, "clipRule", {
+      enumerable: true,
+      configurable: true,
+      writable: true,
+      value: void 0
+    });
+    Object.defineProperty(this, "color", {
+      enumerable: true,
+      configurable: true,
+      writable: true,
+      value: void 0
+    });
+    Object.defineProperty(this, "colorInterpolation", {
+      enumerable: true,
+      configurable: true,
+      writable: true,
+      value: void 0
+    });
+    Object.defineProperty(this, "colorInterpolationFilters", {
+      enumerable: true,
+      configurable: true,
+      writable: true,
+      value: void 0
+    });
+    Object.defineProperty(this, "colorRendering", {
+      enumerable: true,
+      configurable: true,
+      writable: true,
+      value: void 0
+    });
+    Object.defineProperty(this, "cursor", {
+      enumerable: true,
+      configurable: true,
+      writable: true,
+      value: void 0
+    });
+    Object.defineProperty(this, "cx", {
+      enumerable: true,
+      configurable: true,
+      writable: true,
+      value: void 0
+    });
+    Object.defineProperty(this, "cy", {
+      enumerable: true,
+      configurable: true,
+      writable: true,
+      value: void 0
+    });
+    Object.defineProperty(this, "d", {
+      enumerable: true,
+      configurable: true,
+      writable: true,
+      value: void 0
+    });
+    Object.defineProperty(this, "direction", {
+      enumerable: true,
+      configurable: true,
+      writable: true,
+      value: void 0
+    });
+    Object.defineProperty(this, "display", {
+      enumerable: true,
+      configurable: true,
+      writable: true,
+      value: void 0
+    });
+    Object.defineProperty(this, "dominantBaseline", {
+      enumerable: true,
+      configurable: true,
+      writable: true,
+      value: void 0
+    });
+    Object.defineProperty(this, "fill", {
+      enumerable: true,
+      configurable: true,
+      writable: true,
+      value: void 0
+    });
+    Object.defineProperty(this, "fillOpacity", {
+      enumerable: true,
+      configurable: true,
+      writable: true,
+      value: void 0
+    });
+    Object.defineProperty(this, "fillRule", {
+      enumerable: true,
+      configurable: true,
+      writable: true,
+      value: void 0
+    });
+    Object.defineProperty(this, "filter", {
+      enumerable: true,
+      configurable: true,
+      writable: true,
+      value: void 0
+    });
+    Object.defineProperty(this, "floodColor", {
+      enumerable: true,
+      configurable: true,
+      writable: true,
+      value: void 0
+    });
+    Object.defineProperty(this, "floodOpacity", {
+      enumerable: true,
+      configurable: true,
+      writable: true,
+      value: void 0
+    });
+    Object.defineProperty(this, "font", {
+      enumerable: true,
+      configurable: true,
+      writable: true,
+      value: void 0
+    });
+    Object.defineProperty(this, "fontFamily", {
+      enumerable: true,
+      configurable: true,
+      writable: true,
+      value: void 0
+    });
+    Object.defineProperty(this, "fontKerning", {
+      enumerable: true,
+      configurable: true,
+      writable: true,
+      value: void 0
+    });
+    Object.defineProperty(this, "fontSize", {
+      enumerable: true,
+      configurable: true,
+      writable: true,
+      value: void 0
+    });
+    Object.defineProperty(this, "fontSizeAdjust", {
+      enumerable: true,
+      configurable: true,
+      writable: true,
+      value: void 0
+    });
+    Object.defineProperty(this, "fontStretch", {
+      enumerable: true,
+      configurable: true,
+      writable: true,
+      value: void 0
+    });
+    Object.defineProperty(this, "fontStyle", {
+      enumerable: true,
+      configurable: true,
+      writable: true,
+      value: void 0
+    });
+    Object.defineProperty(this, "fontVariant", {
+      enumerable: true,
+      configurable: true,
+      writable: true,
+      value: void 0
+    });
+    Object.defineProperty(this, "fontWeight", {
+      enumerable: true,
+      configurable: true,
+      writable: true,
+      value: void 0
+    });
+    Object.defineProperty(this, "height", {
+      enumerable: true,
+      configurable: true,
+      writable: true,
+      value: void 0
+    });
+    Object.defineProperty(this, "imageRendering", {
+      enumerable: true,
+      configurable: true,
+      writable: true,
+      value: void 0
+    });
+    Object.defineProperty(this, "isolation", {
+      enumerable: true,
+      configurable: true,
+      writable: true,
+      value: void 0
+    });
+    Object.defineProperty(this, "letterSpacing", {
+      enumerable: true,
+      configurable: true,
+      writable: true,
+      value: void 0
+    });
+    Object.defineProperty(this, "lightingColor", {
+      enumerable: true,
+      configurable: true,
+      writable: true,
+      value: void 0
+    });
+    Object.defineProperty(this, "marker", {
+      enumerable: true,
+      configurable: true,
+      writable: true,
+      value: void 0
+    });
+    Object.defineProperty(this, "markerEnd", {
+      enumerable: true,
+      configurable: true,
+      writable: true,
+      value: void 0
+    });
+    Object.defineProperty(this, "markerMid", {
+      enumerable: true,
+      configurable: true,
+      writable: true,
+      value: void 0
+    });
+    Object.defineProperty(this, "markerStart", {
+      enumerable: true,
+      configurable: true,
+      writable: true,
+      value: void 0
+    });
+    Object.defineProperty(this, "mask", {
+      enumerable: true,
+      configurable: true,
+      writable: true,
+      value: void 0
+    });
+    Object.defineProperty(this, "maskClip", {
+      enumerable: true,
+      configurable: true,
+      writable: true,
+      value: void 0
+    });
+    Object.defineProperty(this, "maskComposite", {
+      enumerable: true,
+      configurable: true,
+      writable: true,
+      value: void 0
+    });
+    Object.defineProperty(this, "maskImage", {
+      enumerable: true,
+      configurable: true,
+      writable: true,
+      value: void 0
+    });
+    Object.defineProperty(this, "maskMode", {
+      enumerable: true,
+      configurable: true,
+      writable: true,
+      value: void 0
+    });
+    Object.defineProperty(this, "maskOrigin", {
+      enumerable: true,
+      configurable: true,
+      writable: true,
+      value: void 0
+    });
+    Object.defineProperty(this, "maskPosition", {
+      enumerable: true,
+      configurable: true,
+      writable: true,
+      value: void 0
+    });
+    Object.defineProperty(this, "maskRepeat", {
+      enumerable: true,
+      configurable: true,
+      writable: true,
+      value: void 0
+    });
+    Object.defineProperty(this, "maskSize", {
+      enumerable: true,
+      configurable: true,
+      writable: true,
+      value: void 0
+    });
+    Object.defineProperty(this, "maskType", {
+      enumerable: true,
+      configurable: true,
+      writable: true,
+      value: void 0
+    });
+    Object.defineProperty(this, "opacity", {
+      enumerable: true,
+      configurable: true,
+      writable: true,
+      value: void 0
+    });
+    Object.defineProperty(this, "overflow", {
+      enumerable: true,
+      configurable: true,
+      writable: true,
+      value: void 0
+    });
+    Object.defineProperty(this, "pointerEvents", {
+      enumerable: true,
+      configurable: true,
+      writable: true,
+      value: void 0
+    });
+    Object.defineProperty(this, "r", {
+      enumerable: true,
+      configurable: true,
+      writable: true,
+      value: void 0
+    });
+    Object.defineProperty(this, "rx", {
+      enumerable: true,
+      configurable: true,
+      writable: true,
+      value: void 0
+    });
+    Object.defineProperty(this, "ry", {
+      enumerable: true,
+      configurable: true,
+      writable: true,
+      value: void 0
+    });
+    Object.defineProperty(this, "shapeRendering", {
+      enumerable: true,
+      configurable: true,
+      writable: true,
+      value: void 0
+    });
+    Object.defineProperty(this, "stopColor", {
+      enumerable: true,
+      configurable: true,
+      writable: true,
+      value: void 0
+    });
+    Object.defineProperty(this, "stopOpacity", {
+      enumerable: true,
+      configurable: true,
+      writable: true,
+      value: void 0
+    });
+    Object.defineProperty(this, "stroke", {
+      enumerable: true,
+      configurable: true,
+      writable: true,
+      value: void 0
+    });
+    Object.defineProperty(this, "strokeDasharray", {
+      enumerable: true,
+      configurable: true,
+      writable: true,
+      value: void 0
+    });
+    Object.defineProperty(this, "strokeDashoffset", {
+      enumerable: true,
+      configurable: true,
+      writable: true,
+      value: void 0
+    });
+    Object.defineProperty(this, "strokeLinecap", {
+      enumerable: true,
+      configurable: true,
+      writable: true,
+      value: void 0
+    });
+    Object.defineProperty(this, "strokeLinejoin", {
+      enumerable: true,
+      configurable: true,
+      writable: true,
+      value: void 0
+    });
+    Object.defineProperty(this, "strokeMiterlimit", {
+      enumerable: true,
+      configurable: true,
+      writable: true,
+      value: void 0
+    });
+    Object.defineProperty(this, "strokeOpacity", {
+      enumerable: true,
+      configurable: true,
+      writable: true,
+      value: void 0
+    });
+    Object.defineProperty(this, "strokeWidth", {
+      enumerable: true,
+      configurable: true,
+      writable: true,
+      value: void 0
+    });
+    Object.defineProperty(this, "textAnchor", {
+      enumerable: true,
+      configurable: true,
+      writable: true,
+      value: void 0
+    });
+    Object.defineProperty(this, "textDecoration", {
+      enumerable: true,
+      configurable: true,
+      writable: true,
+      value: void 0
+    });
+    Object.defineProperty(this, "textOrientation", {
+      enumerable: true,
+      configurable: true,
+      writable: true,
+      value: void 0
+    });
+    Object.defineProperty(this, "textRendering", {
+      enumerable: true,
+      configurable: true,
+      writable: true,
+      value: void 0
+    });
+    Object.defineProperty(this, "transform", {
+      enumerable: true,
+      configurable: true,
+      writable: true,
+      value: void 0
+    });
+    Object.defineProperty(this, "transformBox", {
+      enumerable: true,
+      configurable: true,
+      writable: true,
+      value: void 0
+    });
+    Object.defineProperty(this, "transformOrigin", {
+      enumerable: true,
+      configurable: true,
+      writable: true,
+      value: void 0
+    });
+    Object.defineProperty(this, "unicodeBidi", {
+      enumerable: true,
+      configurable: true,
+      writable: true,
+      value: void 0
+    });
+    Object.defineProperty(this, "visibility", {
+      enumerable: true,
+      configurable: true,
+      writable: true,
+      value: void 0
+    });
+    Object.defineProperty(this, "width", {
+      enumerable: true,
+      configurable: true,
+      writable: true,
+      value: void 0
+    });
+    Object.defineProperty(this, "wordSpacing", {
+      enumerable: true,
+      configurable: true,
+      writable: true,
+      value: void 0
+    });
+    Object.defineProperty(this, "writingMode", {
+      enumerable: true,
+      configurable: true,
+      writable: true,
+      value: void 0
+    });
+    Object.defineProperty(this, "x", {
+      enumerable: true,
+      configurable: true,
+      writable: true,
+      value: void 0
+    });
+    Object.defineProperty(this, "y", {
+      enumerable: true,
+      configurable: true,
+      writable: true,
+      value: void 0
+    });
+    this.__registerHost();
+  }
+  get el() {
+    return this;
+  }
+  render() {
+    const icon = this.muted || !this.level ? _lucide_js__WEBPACK_IMPORTED_MODULE_1__.V : this.level >= 0.5 && _lucide_js__WEBPACK_IMPORTED_MODULE_1__.b || _lucide_js__WEBPACK_IMPORTED_MODULE_1__.d;
+    const inner = (0,_lucide_js__WEBPACK_IMPORTED_MODULE_1__.c)(icon);
+    Object.entries(Object.assign({}, (0,_index4_js__WEBPACK_IMPORTED_MODULE_2__.a)(this.el), this.getProps())).forEach(([name, value]) => inner.setAttribute(name, value));
+    return (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)(_index2_js__WEBPACK_IMPORTED_MODULE_0__.d, {
+      key: 'f969b9ae3ece6f501b76d07ec892160f0a3eb400',
+      innerHTML: inner.outerHTML,
+      class: "lucide-icon"
+    });
+  }
+  getProps() {
+    const props = ['color', 'cursor', 'cx', 'cy', 'd', 'direction', 'display', 'fill', 'filter', 'font', 'height', 'isolation', 'marker', 'mask', 'opacity', 'overflow', 'r', 'rx', 'ry', 'stroke', 'transform', 'visibility', 'width', 'x', 'y'];
+    return props.reduce((acc, prop) => {
+      if (this[prop] !== undefined && this[prop] !== null) {
+        acc[prop] = this[prop];
+      }
+      return acc;
+    }, {});
+  }
+}, [0, "icon-volume", {
+  "level": [2],
+  "muted": [4],
+  "alignmentBaseline": [8, "alignment-baseline"],
+  "baselineShift": [8, "baseline-shift"],
+  "clipPath": [8, "clip-path"],
+  "clipRule": [8, "clip-rule"],
+  "color": [8],
+  "colorInterpolation": [8, "color-interpolation"],
+  "colorInterpolationFilters": [8, "color-interpolation-filters"],
+  "colorRendering": [8, "color-rendering"],
+  "cursor": [8],
+  "cx": [8],
+  "cy": [8],
+  "d": [8],
+  "direction": [8],
+  "display": [8],
+  "dominantBaseline": [8, "dominant-baseline"],
+  "fill": [8],
+  "fillOpacity": [8, "fill-opacity"],
+  "fillRule": [8, "fill-rule"],
+  "filter": [8],
+  "floodColor": [8, "flood-color"],
+  "floodOpacity": [8, "flood-opacity"],
+  "font": [8],
+  "fontFamily": [8, "font-family"],
+  "fontKerning": [8, "font-kerning"],
+  "fontSize": [8, "font-size"],
+  "fontSizeAdjust": [8, "font-size-adjust"],
+  "fontStretch": [8, "font-stretch"],
+  "fontStyle": [8, "font-style"],
+  "fontVariant": [8, "font-variant"],
+  "fontWeight": [8, "font-weight"],
+  "height": [8],
+  "imageRendering": [8, "image-rendering"],
+  "isolation": [8],
+  "letterSpacing": [8, "letter-spacing"],
+  "lightingColor": [8, "lighting-color"],
+  "marker": [8],
+  "markerEnd": [8, "marker-end"],
+  "markerMid": [8, "marker-mid"],
+  "markerStart": [8, "marker-start"],
+  "mask": [8],
+  "maskClip": [8, "mask-clip"],
+  "maskComposite": [8, "mask-composite"],
+  "maskImage": [8, "mask-image"],
+  "maskMode": [8, "mask-mode"],
+  "maskOrigin": [8, "mask-origin"],
+  "maskPosition": [8, "mask-position"],
+  "maskRepeat": [8, "mask-repeat"],
+  "maskSize": [8, "mask-size"],
+  "maskType": [8, "mask-type"],
+  "opacity": [8],
+  "overflow": [8],
+  "pointerEvents": [8, "pointer-events"],
+  "r": [8],
+  "rx": [8],
+  "ry": [8],
+  "shapeRendering": [8, "shape-rendering"],
+  "stopColor": [8, "stop-color"],
+  "stopOpacity": [8, "stop-opacity"],
+  "stroke": [8],
+  "strokeDasharray": [8, "stroke-dasharray"],
+  "strokeDashoffset": [8, "stroke-dashoffset"],
+  "strokeLinecap": [8, "stroke-linecap"],
+  "strokeLinejoin": [8, "stroke-linejoin"],
+  "strokeMiterlimit": [8, "stroke-miterlimit"],
+  "strokeOpacity": [8, "stroke-opacity"],
+  "strokeWidth": [8, "stroke-width"],
+  "textAnchor": [8, "text-anchor"],
+  "textDecoration": [8, "text-decoration"],
+  "textOrientation": [8, "text-orientation"],
+  "textRendering": [8, "text-rendering"],
+  "transform": [8],
+  "transformBox": [8, "transform-box"],
+  "transformOrigin": [8, "transform-origin"],
+  "unicodeBidi": [8, "unicode-bidi"],
+  "visibility": [8],
+  "width": [8],
+  "wordSpacing": [8, "word-spacing"],
+  "writingMode": [8, "writing-mode"],
+  "x": [8],
+  "y": [8]
+}]);
+function defineCustomElement() {
+  if (typeof customElements === "undefined") {
+    return;
+  }
+  const components = ["icon-volume"];
+  components.forEach(tagName => {
+    switch (tagName) {
+      case "icon-volume":
+        if (!customElements.get(tagName)) {
+          customElements.define(tagName, IconVolume);
+        }
+        break;
+    }
+  });
+}
+defineCustomElement(IconVolume);
+
+
+/***/ }),
+
 /***/ "../web-components/dist/components/index2.js":
 /*!***************************************************!*\
   !*** ../web-components/dist/components/index2.js ***!
@@ -3718,7 +3584,7 @@ const BUILD = {
   shadowDom: true,
   slot: true,
   slotChildNodesFix: false,
-  slotRelocation: false,
+  slotRelocation: true,
   state: true,
   style: true,
   svg: false,
@@ -7518,6 +7384,969 @@ function attributesToObject(el) {
 
 /***/ }),
 
+/***/ "../web-components/dist/components/index5.js":
+/*!***************************************************!*\
+  !*** ../web-components/dist/components/index5.js ***!
+  \***************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   _: () => (/* binding */ __)
+/* harmony export */ });
+function memize(fn, options) {
+  var size = 0;
+  var head;
+  var tail;
+  options = options || {};
+  function memoized() {
+    var node = head,
+      len = arguments.length,
+      args,
+      i;
+    searchCache: while (node) {
+      if (node.args.length !== arguments.length) {
+        node = node.next;
+        continue;
+      }
+      for (i = 0; i < len; i++) {
+        if (node.args[i] !== arguments[i]) {
+          node = node.next;
+          continue searchCache;
+        }
+      }
+      if (node !== head) {
+        if (node === tail) {
+          tail = node.prev;
+        }
+        node.prev.next = node.next;
+        if (node.next) {
+          node.next.prev = node.prev;
+        }
+        node.next = head;
+        node.prev = null;
+        head.prev = node;
+        head = node;
+      }
+      return node.val;
+    }
+    args = new Array(len);
+    for (i = 0; i < len; i++) {
+      args[i] = arguments[i];
+    }
+    node = {
+      args: args,
+      val: fn.apply(null, args)
+    };
+    if (head) {
+      head.prev = node;
+      node.next = head;
+    } else {
+      tail = node;
+    }
+    if (size === options.maxSize) {
+      tail = tail.prev;
+      tail.next = null;
+    } else {
+      size++;
+    }
+    head = node;
+    return node.val;
+  }
+  memoized.clear = function () {
+    head = null;
+    tail = null;
+    size = 0;
+  };
+  return memoized;
+}
+var commonjsGlobal = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof __webpack_require__.g !== 'undefined' ? __webpack_require__.g : typeof self !== 'undefined' ? self : {};
+function getDefaultExportFromCjs(x) {
+  return x && x.__esModule && Object.prototype.hasOwnProperty.call(x, 'default') ? x['default'] : x;
+}
+function getDefaultExportFromNamespaceIfPresent(n) {
+  return n && Object.prototype.hasOwnProperty.call(n, 'default') ? n['default'] : n;
+}
+function getDefaultExportFromNamespaceIfNotNamed(n) {
+  return n && Object.prototype.hasOwnProperty.call(n, 'default') && Object.keys(n).length === 1 ? n['default'] : n;
+}
+function getAugmentedNamespace(n) {
+  if (n.__esModule) return n;
+  var f = n.default;
+  if (typeof f == "function") {
+    var a = function a() {
+      if (this instanceof a) {
+        return Reflect.construct(f, arguments, this.constructor);
+      }
+      return f.apply(this, arguments);
+    };
+    a.prototype = f.prototype;
+  } else a = {};
+  Object.defineProperty(a, '__esModule', {
+    value: true
+  });
+  Object.keys(n).forEach(function (k) {
+    var d = Object.getOwnPropertyDescriptor(n, k);
+    Object.defineProperty(a, k, d.get ? d : {
+      enumerable: true,
+      get: function () {
+        return n[k];
+      }
+    });
+  });
+  return a;
+}
+var sprintf$1 = {};
+var hasRequiredSprintf;
+function requireSprintf() {
+  if (hasRequiredSprintf) return sprintf$1;
+  hasRequiredSprintf = 1;
+  (function (exports) {
+    !function () {
+      'use strict';
+
+      var re = {
+        not_string: /[^s]/,
+        not_bool: /[^t]/,
+        not_type: /[^T]/,
+        not_primitive: /[^v]/,
+        number: /[diefg]/,
+        numeric_arg: /[bcdiefguxX]/,
+        json: /[j]/,
+        not_json: /[^j]/,
+        text: /^[^\x25]+/,
+        modulo: /^\x25{2}/,
+        placeholder: /^\x25(?:([1-9]\d*)\$|\(([^)]+)\))?(\+)?(0|'[^$])?(-)?(\d+)?(?:\.(\d+))?([b-gijostTuvxX])/,
+        key: /^([a-z_][a-z_\d]*)/i,
+        key_access: /^\.([a-z_][a-z_\d]*)/i,
+        index_access: /^\[(\d+)\]/,
+        sign: /^[+-]/
+      };
+      function sprintf(key) {
+        return sprintf_format(sprintf_parse(key), arguments);
+      }
+      function vsprintf(fmt, argv) {
+        return sprintf.apply(null, [fmt].concat(argv || []));
+      }
+      function sprintf_format(parse_tree, argv) {
+        var cursor = 1,
+          tree_length = parse_tree.length,
+          arg,
+          output = '',
+          i,
+          k,
+          ph,
+          pad,
+          pad_character,
+          pad_length,
+          is_positive,
+          sign;
+        for (i = 0; i < tree_length; i++) {
+          if (typeof parse_tree[i] === 'string') {
+            output += parse_tree[i];
+          } else if (typeof parse_tree[i] === 'object') {
+            ph = parse_tree[i];
+            if (ph.keys) {
+              arg = argv[cursor];
+              for (k = 0; k < ph.keys.length; k++) {
+                if (arg == undefined) {
+                  throw new Error(sprintf('[sprintf] Cannot access property "%s" of undefined value "%s"', ph.keys[k], ph.keys[k - 1]));
+                }
+                arg = arg[ph.keys[k]];
+              }
+            } else if (ph.param_no) {
+              arg = argv[ph.param_no];
+            } else {
+              arg = argv[cursor++];
+            }
+            if (re.not_type.test(ph.type) && re.not_primitive.test(ph.type) && arg instanceof Function) {
+              arg = arg();
+            }
+            if (re.numeric_arg.test(ph.type) && typeof arg !== 'number' && isNaN(arg)) {
+              throw new TypeError(sprintf('[sprintf] expecting number but found %T', arg));
+            }
+            if (re.number.test(ph.type)) {
+              is_positive = arg >= 0;
+            }
+            switch (ph.type) {
+              case 'b':
+                arg = parseInt(arg, 10).toString(2);
+                break;
+              case 'c':
+                arg = String.fromCharCode(parseInt(arg, 10));
+                break;
+              case 'd':
+              case 'i':
+                arg = parseInt(arg, 10);
+                break;
+              case 'j':
+                arg = JSON.stringify(arg, null, ph.width ? parseInt(ph.width) : 0);
+                break;
+              case 'e':
+                arg = ph.precision ? parseFloat(arg).toExponential(ph.precision) : parseFloat(arg).toExponential();
+                break;
+              case 'f':
+                arg = ph.precision ? parseFloat(arg).toFixed(ph.precision) : parseFloat(arg);
+                break;
+              case 'g':
+                arg = ph.precision ? String(Number(arg.toPrecision(ph.precision))) : parseFloat(arg);
+                break;
+              case 'o':
+                arg = (parseInt(arg, 10) >>> 0).toString(8);
+                break;
+              case 's':
+                arg = String(arg);
+                arg = ph.precision ? arg.substring(0, ph.precision) : arg;
+                break;
+              case 't':
+                arg = String(!!arg);
+                arg = ph.precision ? arg.substring(0, ph.precision) : arg;
+                break;
+              case 'T':
+                arg = Object.prototype.toString.call(arg).slice(8, -1).toLowerCase();
+                arg = ph.precision ? arg.substring(0, ph.precision) : arg;
+                break;
+              case 'u':
+                arg = parseInt(arg, 10) >>> 0;
+                break;
+              case 'v':
+                arg = arg.valueOf();
+                arg = ph.precision ? arg.substring(0, ph.precision) : arg;
+                break;
+              case 'x':
+                arg = (parseInt(arg, 10) >>> 0).toString(16);
+                break;
+              case 'X':
+                arg = (parseInt(arg, 10) >>> 0).toString(16).toUpperCase();
+                break;
+            }
+            if (re.json.test(ph.type)) {
+              output += arg;
+            } else {
+              if (re.number.test(ph.type) && (!is_positive || ph.sign)) {
+                sign = is_positive ? '+' : '-';
+                arg = arg.toString().replace(re.sign, '');
+              } else {
+                sign = '';
+              }
+              pad_character = ph.pad_char ? ph.pad_char === '0' ? '0' : ph.pad_char.charAt(1) : ' ';
+              pad_length = ph.width - (sign + arg).length;
+              pad = ph.width ? pad_length > 0 ? pad_character.repeat(pad_length) : '' : '';
+              output += ph.align ? sign + arg + pad : pad_character === '0' ? sign + pad + arg : pad + sign + arg;
+            }
+          }
+        }
+        return output;
+      }
+      var sprintf_cache = Object.create(null);
+      function sprintf_parse(fmt) {
+        if (sprintf_cache[fmt]) {
+          return sprintf_cache[fmt];
+        }
+        var _fmt = fmt,
+          match,
+          parse_tree = [],
+          arg_names = 0;
+        while (_fmt) {
+          if ((match = re.text.exec(_fmt)) !== null) {
+            parse_tree.push(match[0]);
+          } else if ((match = re.modulo.exec(_fmt)) !== null) {
+            parse_tree.push('%');
+          } else if ((match = re.placeholder.exec(_fmt)) !== null) {
+            if (match[2]) {
+              arg_names |= 1;
+              var field_list = [],
+                replacement_field = match[2],
+                field_match = [];
+              if ((field_match = re.key.exec(replacement_field)) !== null) {
+                field_list.push(field_match[1]);
+                while ((replacement_field = replacement_field.substring(field_match[0].length)) !== '') {
+                  if ((field_match = re.key_access.exec(replacement_field)) !== null) {
+                    field_list.push(field_match[1]);
+                  } else if ((field_match = re.index_access.exec(replacement_field)) !== null) {
+                    field_list.push(field_match[1]);
+                  } else {
+                    throw new SyntaxError('[sprintf] failed to parse named argument key');
+                  }
+                }
+              } else {
+                throw new SyntaxError('[sprintf] failed to parse named argument key');
+              }
+              match[2] = field_list;
+            } else {
+              arg_names |= 2;
+            }
+            if (arg_names === 3) {
+              throw new Error('[sprintf] mixing positional and named placeholders is not (yet) supported');
+            }
+            parse_tree.push({
+              placeholder: match[0],
+              param_no: match[1],
+              keys: match[2],
+              sign: match[3],
+              pad_char: match[4],
+              align: match[5],
+              width: match[6],
+              precision: match[7],
+              type: match[8]
+            });
+          } else {
+            throw new SyntaxError('[sprintf] unexpected placeholder');
+          }
+          _fmt = _fmt.substring(match[0].length);
+        }
+        return sprintf_cache[fmt] = parse_tree;
+      }
+      if (true) {
+        exports['sprintf'] = sprintf;
+        exports['vsprintf'] = vsprintf;
+      }
+      if (typeof window !== 'undefined') {
+        window['sprintf'] = sprintf;
+        window['vsprintf'] = vsprintf;
+        if (false) {}
+      }
+    }();
+  })(sprintf$1);
+  return sprintf$1;
+}
+var sprintfExports = requireSprintf();
+var sprintfjs = getDefaultExportFromCjs(sprintfExports);
+const logErrorOnce = memize(console.error);
+function sprintf(format, ...args) {
+  try {
+    return sprintfjs.sprintf(format, ...args);
+  } catch (error) {
+    if (error instanceof Error) {
+      logErrorOnce('sprintf error: \n\n' + error.toString());
+    }
+    return format;
+  }
+}
+var PRECEDENCE, OPENERS, TERMINATORS, PATTERN;
+PRECEDENCE = {
+  '(': 9,
+  '!': 8,
+  '*': 7,
+  '/': 7,
+  '%': 7,
+  '+': 6,
+  '-': 6,
+  '<': 5,
+  '<=': 5,
+  '>': 5,
+  '>=': 5,
+  '==': 4,
+  '!=': 4,
+  '&&': 3,
+  '||': 2,
+  '?': 1,
+  '?:': 1
+};
+OPENERS = ['(', '?'];
+TERMINATORS = {
+  ')': ['('],
+  ':': ['?', '?:']
+};
+PATTERN = /<=|>=|==|!=|&&|\|\||\?:|\(|!|\*|\/|%|\+|-|<|>|\?|\)|:/;
+function postfix(expression) {
+  var terms = [],
+    stack = [],
+    match,
+    operator,
+    term,
+    element;
+  while (match = expression.match(PATTERN)) {
+    operator = match[0];
+    term = expression.substr(0, match.index).trim();
+    if (term) {
+      terms.push(term);
+    }
+    while (element = stack.pop()) {
+      if (TERMINATORS[operator]) {
+        if (TERMINATORS[operator][0] === element) {
+          operator = TERMINATORS[operator][1] || operator;
+          break;
+        }
+      } else if (OPENERS.indexOf(element) >= 0 || PRECEDENCE[element] < PRECEDENCE[operator]) {
+        stack.push(element);
+        break;
+      }
+      terms.push(element);
+    }
+    if (!TERMINATORS[operator]) {
+      stack.push(operator);
+    }
+    expression = expression.substr(match.index + operator.length);
+  }
+  expression = expression.trim();
+  if (expression) {
+    terms.push(expression);
+  }
+  return terms.concat(stack.reverse());
+}
+var OPERATORS = {
+  '!': function (a) {
+    return !a;
+  },
+  '*': function (a, b) {
+    return a * b;
+  },
+  '/': function (a, b) {
+    return a / b;
+  },
+  '%': function (a, b) {
+    return a % b;
+  },
+  '+': function (a, b) {
+    return a + b;
+  },
+  '-': function (a, b) {
+    return a - b;
+  },
+  '<': function (a, b) {
+    return a < b;
+  },
+  '<=': function (a, b) {
+    return a <= b;
+  },
+  '>': function (a, b) {
+    return a > b;
+  },
+  '>=': function (a, b) {
+    return a >= b;
+  },
+  '==': function (a, b) {
+    return a === b;
+  },
+  '!=': function (a, b) {
+    return a !== b;
+  },
+  '&&': function (a, b) {
+    return a && b;
+  },
+  '||': function (a, b) {
+    return a || b;
+  },
+  '?:': function (a, b, c) {
+    if (a) {
+      throw b;
+    }
+    return c;
+  }
+};
+function evaluate(postfix, variables) {
+  var stack = [],
+    i,
+    j,
+    args,
+    getOperatorResult,
+    term,
+    value;
+  for (i = 0; i < postfix.length; i++) {
+    term = postfix[i];
+    getOperatorResult = OPERATORS[term];
+    if (getOperatorResult) {
+      j = getOperatorResult.length;
+      args = Array(j);
+      while (j--) {
+        args[j] = stack.pop();
+      }
+      try {
+        value = getOperatorResult.apply(null, args);
+      } catch (earlyReturn) {
+        return earlyReturn;
+      }
+    } else if (variables.hasOwnProperty(term)) {
+      value = variables[term];
+    } else {
+      value = +term;
+    }
+    stack.push(value);
+  }
+  return stack[0];
+}
+function compile(expression) {
+  var terms = postfix(expression);
+  return function (variables) {
+    return evaluate(terms, variables);
+  };
+}
+function pluralForms(expression) {
+  var evaluate = compile(expression);
+  return function (n) {
+    return +evaluate({
+      n: n
+    });
+  };
+}
+var DEFAULT_OPTIONS = {
+  contextDelimiter: '\u0004',
+  onMissingKey: null
+};
+function getPluralExpression(pf) {
+  var parts, i, part;
+  parts = pf.split(';');
+  for (i = 0; i < parts.length; i++) {
+    part = parts[i].trim();
+    if (part.indexOf('plural=') === 0) {
+      return part.substr(7);
+    }
+  }
+}
+function Tannin(data, options) {
+  var key;
+  this.data = data;
+  this.pluralForms = {};
+  this.options = {};
+  for (key in DEFAULT_OPTIONS) {
+    this.options[key] = options !== undefined && key in options ? options[key] : DEFAULT_OPTIONS[key];
+  }
+}
+Tannin.prototype.getPluralForm = function (domain, n) {
+  var getPluralForm = this.pluralForms[domain],
+    config,
+    plural,
+    pf;
+  if (!getPluralForm) {
+    config = this.data[domain][''];
+    pf = config['Plural-Forms'] || config['plural-forms'] || config.plural_forms;
+    if (typeof pf !== 'function') {
+      plural = getPluralExpression(config['Plural-Forms'] || config['plural-forms'] || config.plural_forms);
+      pf = pluralForms(plural);
+    }
+    getPluralForm = this.pluralForms[domain] = pf;
+  }
+  return getPluralForm(n);
+};
+Tannin.prototype.dcnpgettext = function (domain, context, singular, plural, n) {
+  var index, key, entry;
+  if (n === undefined) {
+    index = 0;
+  } else {
+    index = this.getPluralForm(domain, n);
+  }
+  key = singular;
+  if (context) {
+    key = context + this.options.contextDelimiter + singular;
+  }
+  entry = this.data[domain][key];
+  if (entry && entry[index]) {
+    return entry[index];
+  }
+  if (this.options.onMissingKey) {
+    this.options.onMissingKey(singular, domain);
+  }
+  return index === 0 ? singular : plural;
+};
+const DEFAULT_LOCALE_DATA = {
+  '': {
+    plural_forms(n) {
+      return n === 1 ? 0 : 1;
+    }
+  }
+};
+const I18N_HOOK_REGEXP = /^i18n\.(n?gettext|has_translation)(_|$)/;
+const createI18n = (initialData, initialDomain, hooks) => {
+  const tannin = new Tannin({});
+  const listeners = new Set();
+  const notifyListeners = () => {
+    listeners.forEach(listener => listener());
+  };
+  const subscribe = callback => {
+    listeners.add(callback);
+    return () => listeners.delete(callback);
+  };
+  const getLocaleData = (domain = 'default') => tannin.data[domain];
+  const doSetLocaleData = (data, domain = 'default') => {
+    tannin.data[domain] = {
+      ...tannin.data[domain],
+      ...data
+    };
+    tannin.data[domain][''] = {
+      ...DEFAULT_LOCALE_DATA[''],
+      ...tannin.data[domain]?.['']
+    };
+    delete tannin.pluralForms[domain];
+  };
+  const setLocaleData = (data, domain) => {
+    doSetLocaleData(data, domain);
+    notifyListeners();
+  };
+  const addLocaleData = (data, domain = 'default') => {
+    tannin.data[domain] = {
+      ...tannin.data[domain],
+      ...data,
+      '': {
+        ...DEFAULT_LOCALE_DATA[''],
+        ...tannin.data[domain]?.[''],
+        ...data?.['']
+      }
+    };
+    delete tannin.pluralForms[domain];
+    notifyListeners();
+  };
+  const resetLocaleData = (data, domain) => {
+    tannin.data = {};
+    tannin.pluralForms = {};
+    setLocaleData(data, domain);
+  };
+  const dcnpgettext = (domain = 'default', context, single, plural, number) => {
+    if (!tannin.data[domain]) {
+      doSetLocaleData(undefined, domain);
+    }
+    return tannin.dcnpgettext(domain, context, single, plural, number);
+  };
+  const getFilterDomain = (domain = 'default') => domain;
+  const __ = (text, domain) => {
+    let translation = dcnpgettext(domain, undefined, text);
+    if (!hooks) {
+      return translation;
+    }
+    translation = hooks.applyFilters('i18n.gettext', translation, text, domain);
+    return hooks.applyFilters('i18n.gettext_' + getFilterDomain(domain), translation, text, domain);
+  };
+  const _x = (text, context, domain) => {
+    let translation = dcnpgettext(domain, context, text);
+    if (!hooks) {
+      return translation;
+    }
+    translation = hooks.applyFilters('i18n.gettext_with_context', translation, text, context, domain);
+    return hooks.applyFilters('i18n.gettext_with_context_' + getFilterDomain(domain), translation, text, context, domain);
+  };
+  const _n = (single, plural, number, domain) => {
+    let translation = dcnpgettext(domain, undefined, single, plural, number);
+    if (!hooks) {
+      return translation;
+    }
+    translation = hooks.applyFilters('i18n.ngettext', translation, single, plural, number, domain);
+    return hooks.applyFilters('i18n.ngettext_' + getFilterDomain(domain), translation, single, plural, number, domain);
+  };
+  const _nx = (single, plural, number, context, domain) => {
+    let translation = dcnpgettext(domain, context, single, plural, number);
+    if (!hooks) {
+      return translation;
+    }
+    translation = hooks.applyFilters('i18n.ngettext_with_context', translation, single, plural, number, context, domain);
+    return hooks.applyFilters('i18n.ngettext_with_context_' + getFilterDomain(domain), translation, single, plural, number, context, domain);
+  };
+  const isRTL = () => {
+    return 'rtl' === _x('ltr', 'text direction');
+  };
+  const hasTranslation = (single, context, domain) => {
+    const key = context ? context + '\u0004' + single : single;
+    let result = !!tannin.data?.[domain !== null && domain !== void 0 ? domain : 'default']?.[key];
+    if (hooks) {
+      result = hooks.applyFilters('i18n.has_translation', result, single, context, domain);
+      result = hooks.applyFilters('i18n.has_translation_' + getFilterDomain(domain), result, single, context, domain);
+    }
+    return result;
+  };
+  if (initialData) {
+    setLocaleData(initialData, initialDomain);
+  }
+  if (hooks) {
+    const onHookAddedOrRemoved = hookName => {
+      if (I18N_HOOK_REGEXP.test(hookName)) {
+        notifyListeners();
+      }
+    };
+    hooks.addAction('hookAdded', 'core/i18n', onHookAddedOrRemoved);
+    hooks.addAction('hookRemoved', 'core/i18n', onHookAddedOrRemoved);
+  }
+  return {
+    getLocaleData,
+    setLocaleData,
+    addLocaleData,
+    resetLocaleData,
+    subscribe,
+    __,
+    _x,
+    _n,
+    _nx,
+    isRTL,
+    hasTranslation
+  };
+};
+function validateNamespace(namespace) {
+  if ('string' !== typeof namespace || '' === namespace) {
+    console.error('The namespace must be a non-empty string.');
+    return false;
+  }
+  if (!/^[a-zA-Z][a-zA-Z0-9_.\-\/]*$/.test(namespace)) {
+    console.error('The namespace can only contain numbers, letters, dashes, periods, underscores and slashes.');
+    return false;
+  }
+  return true;
+}
+function validateHookName(hookName) {
+  if ('string' !== typeof hookName || '' === hookName) {
+    console.error('The hook name must be a non-empty string.');
+    return false;
+  }
+  if (/^__/.test(hookName)) {
+    console.error('The hook name cannot begin with `__`.');
+    return false;
+  }
+  if (!/^[a-zA-Z][a-zA-Z0-9_.-]*$/.test(hookName)) {
+    console.error('The hook name can only contain numbers, letters, dashes, periods and underscores.');
+    return false;
+  }
+  return true;
+}
+function createAddHook(hooks, storeKey) {
+  return function addHook(hookName, namespace, callback, priority = 10) {
+    const hooksStore = hooks[storeKey];
+    if (!validateHookName(hookName)) {
+      return;
+    }
+    if (!validateNamespace(namespace)) {
+      return;
+    }
+    if ('function' !== typeof callback) {
+      console.error('The hook callback must be a function.');
+      return;
+    }
+    if ('number' !== typeof priority) {
+      console.error('If specified, the hook priority must be a number.');
+      return;
+    }
+    const handler = {
+      callback,
+      priority,
+      namespace
+    };
+    if (hooksStore[hookName]) {
+      const handlers = hooksStore[hookName].handlers;
+      let i;
+      for (i = handlers.length; i > 0; i--) {
+        if (priority >= handlers[i - 1].priority) {
+          break;
+        }
+      }
+      if (i === handlers.length) {
+        handlers[i] = handler;
+      } else {
+        handlers.splice(i, 0, handler);
+      }
+      hooksStore.__current.forEach(hookInfo => {
+        if (hookInfo.name === hookName && hookInfo.currentIndex >= i) {
+          hookInfo.currentIndex++;
+        }
+      });
+    } else {
+      hooksStore[hookName] = {
+        handlers: [handler],
+        runs: 0
+      };
+    }
+    if (hookName !== 'hookAdded') {
+      hooks.doAction('hookAdded', hookName, namespace, callback, priority);
+    }
+  };
+}
+function createRemoveHook(hooks, storeKey, removeAll = false) {
+  return function removeHook(hookName, namespace) {
+    const hooksStore = hooks[storeKey];
+    if (!validateHookName(hookName)) {
+      return;
+    }
+    if (!removeAll && !validateNamespace(namespace)) {
+      return;
+    }
+    if (!hooksStore[hookName]) {
+      return 0;
+    }
+    let handlersRemoved = 0;
+    if (removeAll) {
+      handlersRemoved = hooksStore[hookName].handlers.length;
+      hooksStore[hookName] = {
+        runs: hooksStore[hookName].runs,
+        handlers: []
+      };
+    } else {
+      const handlers = hooksStore[hookName].handlers;
+      for (let i = handlers.length - 1; i >= 0; i--) {
+        if (handlers[i].namespace === namespace) {
+          handlers.splice(i, 1);
+          handlersRemoved++;
+          hooksStore.__current.forEach(hookInfo => {
+            if (hookInfo.name === hookName && hookInfo.currentIndex >= i) {
+              hookInfo.currentIndex--;
+            }
+          });
+        }
+      }
+    }
+    if (hookName !== 'hookRemoved') {
+      hooks.doAction('hookRemoved', hookName, namespace);
+    }
+    return handlersRemoved;
+  };
+}
+function createHasHook(hooks, storeKey) {
+  return function hasHook(hookName, namespace) {
+    const hooksStore = hooks[storeKey];
+    if ('undefined' !== typeof namespace) {
+      return hookName in hooksStore && hooksStore[hookName].handlers.some(hook => hook.namespace === namespace);
+    }
+    return hookName in hooksStore;
+  };
+}
+function createRunHook(hooks, storeKey, returnFirstArg, async) {
+  return function runHook(hookName, ...args) {
+    const hooksStore = hooks[storeKey];
+    if (!hooksStore[hookName]) {
+      hooksStore[hookName] = {
+        handlers: [],
+        runs: 0
+      };
+    }
+    hooksStore[hookName].runs++;
+    const handlers = hooksStore[hookName].handlers;
+    if (true) {
+      if ('hookAdded' !== hookName && hooksStore.all) {
+        handlers.push(...hooksStore.all.handlers);
+      }
+    }
+    if (!handlers || !handlers.length) {
+      return returnFirstArg ? args[0] : undefined;
+    }
+    const hookInfo = {
+      name: hookName,
+      currentIndex: 0
+    };
+    async function asyncRunner() {
+      try {
+        hooksStore.__current.add(hookInfo);
+        let result = returnFirstArg ? args[0] : undefined;
+        while (hookInfo.currentIndex < handlers.length) {
+          const handler = handlers[hookInfo.currentIndex];
+          result = await handler.callback.apply(null, args);
+          if (returnFirstArg) {
+            args[0] = result;
+          }
+          hookInfo.currentIndex++;
+        }
+        return returnFirstArg ? result : undefined;
+      } finally {
+        hooksStore.__current.delete(hookInfo);
+      }
+    }
+    function syncRunner() {
+      try {
+        hooksStore.__current.add(hookInfo);
+        let result = returnFirstArg ? args[0] : undefined;
+        while (hookInfo.currentIndex < handlers.length) {
+          const handler = handlers[hookInfo.currentIndex];
+          result = handler.callback.apply(null, args);
+          if (returnFirstArg) {
+            args[0] = result;
+          }
+          hookInfo.currentIndex++;
+        }
+        return returnFirstArg ? result : undefined;
+      } finally {
+        hooksStore.__current.delete(hookInfo);
+      }
+    }
+    return (async ? asyncRunner : syncRunner)();
+  };
+}
+function createCurrentHook(hooks, storeKey) {
+  return function currentHook() {
+    var _currentArray$at$name;
+    const hooksStore = hooks[storeKey];
+    const currentArray = Array.from(hooksStore.__current);
+    return (_currentArray$at$name = currentArray.at(-1)?.name) !== null && _currentArray$at$name !== void 0 ? _currentArray$at$name : null;
+  };
+}
+function createDoingHook(hooks, storeKey) {
+  return function doingHook(hookName) {
+    const hooksStore = hooks[storeKey];
+    if ('undefined' === typeof hookName) {
+      return hooksStore.__current.size > 0;
+    }
+    return Array.from(hooksStore.__current).some(hook => hook.name === hookName);
+  };
+}
+function createDidHook(hooks, storeKey) {
+  return function didHook(hookName) {
+    const hooksStore = hooks[storeKey];
+    if (!validateHookName(hookName)) {
+      return;
+    }
+    return hooksStore[hookName] && hooksStore[hookName].runs ? hooksStore[hookName].runs : 0;
+  };
+}
+class _Hooks {
+  constructor() {
+    this.actions = Object.create(null);
+    this.actions.__current = new Set();
+    this.filters = Object.create(null);
+    this.filters.__current = new Set();
+    this.addAction = createAddHook(this, 'actions');
+    this.addFilter = createAddHook(this, 'filters');
+    this.removeAction = createRemoveHook(this, 'actions');
+    this.removeFilter = createRemoveHook(this, 'filters');
+    this.hasAction = createHasHook(this, 'actions');
+    this.hasFilter = createHasHook(this, 'filters');
+    this.removeAllActions = createRemoveHook(this, 'actions', true);
+    this.removeAllFilters = createRemoveHook(this, 'filters', true);
+    this.doAction = createRunHook(this, 'actions', false, false);
+    this.doActionAsync = createRunHook(this, 'actions', false, true);
+    this.applyFilters = createRunHook(this, 'filters', true, false);
+    this.applyFiltersAsync = createRunHook(this, 'filters', true, true);
+    this.currentAction = createCurrentHook(this, 'actions');
+    this.currentFilter = createCurrentHook(this, 'filters');
+    this.doingAction = createDoingHook(this, 'actions');
+    this.doingFilter = createDoingHook(this, 'filters');
+    this.didAction = createDidHook(this, 'actions');
+    this.didFilter = createDidHook(this, 'filters');
+  }
+}
+function createHooks() {
+  return new _Hooks();
+}
+const defaultHooks = createHooks();
+const {
+  addAction,
+  addFilter,
+  removeAction,
+  removeFilter,
+  hasAction,
+  hasFilter,
+  removeAllActions,
+  removeAllFilters,
+  doAction,
+  doActionAsync,
+  applyFilters,
+  applyFiltersAsync,
+  currentAction,
+  currentFilter,
+  doingAction,
+  doingFilter,
+  didAction,
+  didFilter,
+  actions,
+  filters
+} = defaultHooks;
+const i18n = createI18n(undefined, undefined, defaultHooks);
+const getLocaleData = i18n.getLocaleData.bind(i18n);
+const setLocaleData = i18n.setLocaleData.bind(i18n);
+const resetLocaleData = i18n.resetLocaleData.bind(i18n);
+const subscribe = i18n.subscribe.bind(i18n);
+const __ = i18n.__.bind(i18n);
+const _x = i18n._x.bind(i18n);
+const _n = i18n._n.bind(i18n);
+const _nx = i18n._nx.bind(i18n);
+const isRTL = i18n.isRTL.bind(i18n);
+const hasTranslation = i18n.hasTranslation.bind(i18n);
+
+
+/***/ }),
+
 /***/ "../web-components/dist/components/lucide.js":
 /*!***************************************************!*\
   !*** ../web-components/dist/components/lucide.js ***!
@@ -7528,8 +8357,11 @@ function attributesToObject(el) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   P: () => (/* binding */ Pause),
+/* harmony export */   V: () => (/* binding */ VolumeOff),
 /* harmony export */   a: () => (/* binding */ Play),
-/* harmony export */   c: () => (/* binding */ createElement)
+/* harmony export */   b: () => (/* binding */ Volume2),
+/* harmony export */   c: () => (/* binding */ createElement),
+/* harmony export */   d: () => (/* binding */ Volume1)
 /* harmony export */ });
 const defaultAttributes = {
   xmlns: "http://www.w3.org/2000/svg",
@@ -26506,6 +27338,8 @@ const createIcons = ({
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   DtpcButton: () => (/* reexport safe */ _stencil_generated_components__WEBPACK_IMPORTED_MODULE_0__.DtpcButton),
+/* harmony export */   DtpcMuteButton: () => (/* reexport safe */ _stencil_generated_components__WEBPACK_IMPORTED_MODULE_0__.DtpcMuteButton),
 /* harmony export */   DtpcPlayButton: () => (/* reexport safe */ _stencil_generated_components__WEBPACK_IMPORTED_MODULE_0__.DtpcPlayButton),
 /* harmony export */   DtpcPlayer: () => (/* reexport safe */ _stencil_generated_components__WEBPACK_IMPORTED_MODULE_0__.DtpcPlayer),
 /* harmony export */   DtpcProgressBar: () => (/* reexport safe */ _stencil_generated_components__WEBPACK_IMPORTED_MODULE_0__.DtpcProgressBar),
@@ -26514,7 +27348,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   DtpcTimeDisplay: () => (/* reexport safe */ _stencil_generated_components__WEBPACK_IMPORTED_MODULE_0__.DtpcTimeDisplay),
 /* harmony export */   DtpcTimeDuration: () => (/* reexport safe */ _stencil_generated_components__WEBPACK_IMPORTED_MODULE_0__.DtpcTimeDuration),
 /* harmony export */   IconPause: () => (/* reexport safe */ _stencil_generated_components__WEBPACK_IMPORTED_MODULE_0__.IconPause),
-/* harmony export */   IconPlay: () => (/* reexport safe */ _stencil_generated_components__WEBPACK_IMPORTED_MODULE_0__.IconPlay)
+/* harmony export */   IconPlay: () => (/* reexport safe */ _stencil_generated_components__WEBPACK_IMPORTED_MODULE_0__.IconPlay),
+/* harmony export */   IconVolume: () => (/* reexport safe */ _stencil_generated_components__WEBPACK_IMPORTED_MODULE_0__.IconVolume)
 /* harmony export */ });
 /* harmony import */ var _stencil_generated_components__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./stencil-generated/components */ "./src/components/stencil-generated/components.ts");
 
@@ -26530,6 +27365,8 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   DtpcButton: () => (/* binding */ DtpcButton),
+/* harmony export */   DtpcMuteButton: () => (/* binding */ DtpcMuteButton),
 /* harmony export */   DtpcPlayButton: () => (/* binding */ DtpcPlayButton),
 /* harmony export */   DtpcPlayer: () => (/* binding */ DtpcPlayer),
 /* harmony export */   DtpcProgressBar: () => (/* binding */ DtpcProgressBar),
@@ -26538,20 +27375,24 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   DtpcTimeDisplay: () => (/* binding */ DtpcTimeDisplay),
 /* harmony export */   DtpcTimeDuration: () => (/* binding */ DtpcTimeDuration),
 /* harmony export */   IconPause: () => (/* binding */ IconPause),
-/* harmony export */   IconPlay: () => (/* binding */ IconPlay)
+/* harmony export */   IconPlay: () => (/* binding */ IconPlay),
+/* harmony export */   IconVolume: () => (/* binding */ IconVolume)
 /* harmony export */ });
 /* harmony import */ var _stencil_react_output_target_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @stencil/react-output-target/runtime */ "../node_modules/@stencil/react-output-target/dist/react.js");
-/* harmony import */ var dovetail_podcasts_player_web_components_dist_components_dtpc_play_button_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! dovetail-podcasts-player-web-components/dist/components/dtpc-play-button.js */ "../web-components/dist/components/dtpc-play-button.js");
-/* harmony import */ var dovetail_podcasts_player_web_components_dist_components_dtpc_player_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! dovetail-podcasts-player-web-components/dist/components/dtpc-player.js */ "../web-components/dist/components/dtpc-player.js");
-/* harmony import */ var dovetail_podcasts_player_web_components_dist_components_dtpc_progress_bar_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! dovetail-podcasts-player-web-components/dist/components/dtpc-progress-bar.js */ "../web-components/dist/components/dtpc-progress-bar.js");
-/* harmony import */ var dovetail_podcasts_player_web_components_dist_components_dtpc_slider_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! dovetail-podcasts-player-web-components/dist/components/dtpc-slider.js */ "../web-components/dist/components/dtpc-slider.js");
-/* harmony import */ var dovetail_podcasts_player_web_components_dist_components_dtpc_time_current_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! dovetail-podcasts-player-web-components/dist/components/dtpc-time-current.js */ "../web-components/dist/components/dtpc-time-current.js");
-/* harmony import */ var dovetail_podcasts_player_web_components_dist_components_dtpc_time_display_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! dovetail-podcasts-player-web-components/dist/components/dtpc-time-display.js */ "../web-components/dist/components/dtpc-time-display.js");
-/* harmony import */ var dovetail_podcasts_player_web_components_dist_components_dtpc_time_duration_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! dovetail-podcasts-player-web-components/dist/components/dtpc-time-duration.js */ "../web-components/dist/components/dtpc-time-duration.js");
-/* harmony import */ var dovetail_podcasts_player_web_components_dist_components_icon_pause_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! dovetail-podcasts-player-web-components/dist/components/icon-pause.js */ "../web-components/dist/components/icon-pause.js");
-/* harmony import */ var dovetail_podcasts_player_web_components_dist_components_icon_play_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! dovetail-podcasts-player-web-components/dist/components/icon-play.js */ "../web-components/dist/components/icon-play.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_10__);
+/* harmony import */ var dovetail_podcasts_player_web_components_dist_components_dtpc_button_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! dovetail-podcasts-player-web-components/dist/components/dtpc-button.js */ "../web-components/dist/components/dtpc-button.js");
+/* harmony import */ var dovetail_podcasts_player_web_components_dist_components_dtpc_mute_button_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! dovetail-podcasts-player-web-components/dist/components/dtpc-mute-button.js */ "../web-components/dist/components/dtpc-mute-button.js");
+/* harmony import */ var dovetail_podcasts_player_web_components_dist_components_dtpc_play_button_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! dovetail-podcasts-player-web-components/dist/components/dtpc-play-button.js */ "../web-components/dist/components/dtpc-play-button.js");
+/* harmony import */ var dovetail_podcasts_player_web_components_dist_components_dtpc_player_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! dovetail-podcasts-player-web-components/dist/components/dtpc-player.js */ "../web-components/dist/components/dtpc-player.js");
+/* harmony import */ var dovetail_podcasts_player_web_components_dist_components_dtpc_progress_bar_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! dovetail-podcasts-player-web-components/dist/components/dtpc-progress-bar.js */ "../web-components/dist/components/dtpc-progress-bar.js");
+/* harmony import */ var dovetail_podcasts_player_web_components_dist_components_dtpc_slider_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! dovetail-podcasts-player-web-components/dist/components/dtpc-slider.js */ "../web-components/dist/components/dtpc-slider.js");
+/* harmony import */ var dovetail_podcasts_player_web_components_dist_components_dtpc_time_current_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! dovetail-podcasts-player-web-components/dist/components/dtpc-time-current.js */ "../web-components/dist/components/dtpc-time-current.js");
+/* harmony import */ var dovetail_podcasts_player_web_components_dist_components_dtpc_time_display_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! dovetail-podcasts-player-web-components/dist/components/dtpc-time-display.js */ "../web-components/dist/components/dtpc-time-display.js");
+/* harmony import */ var dovetail_podcasts_player_web_components_dist_components_dtpc_time_duration_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! dovetail-podcasts-player-web-components/dist/components/dtpc-time-duration.js */ "../web-components/dist/components/dtpc-time-duration.js");
+/* harmony import */ var dovetail_podcasts_player_web_components_dist_components_icon_pause_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! dovetail-podcasts-player-web-components/dist/components/icon-pause.js */ "../web-components/dist/components/icon-pause.js");
+/* harmony import */ var dovetail_podcasts_player_web_components_dist_components_icon_play_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! dovetail-podcasts-player-web-components/dist/components/icon-play.js */ "../web-components/dist/components/icon-play.js");
+/* harmony import */ var dovetail_podcasts_player_web_components_dist_components_icon_volume_js__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! dovetail-podcasts-player-web-components/dist/components/icon-volume.js */ "../web-components/dist/components/icon-volume.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_13__);
 'use client';
 
 
@@ -26565,79 +27406,106 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-const DtpcPlayButton = (0,_stencil_react_output_target_runtime__WEBPACK_IMPORTED_MODULE_0__.createComponent)({
-  tagName: 'dtpc-play-button',
-  elementClass: dovetail_podcasts_player_web_components_dist_components_dtpc_play_button_js__WEBPACK_IMPORTED_MODULE_1__.DtpcPlayButton,
-  react: (react__WEBPACK_IMPORTED_MODULE_10___default()),
+
+
+
+const DtpcButton = (0,_stencil_react_output_target_runtime__WEBPACK_IMPORTED_MODULE_0__.createComponent)({
+  tagName: 'dtpc-button',
+  elementClass: dovetail_podcasts_player_web_components_dist_components_dtpc_button_js__WEBPACK_IMPORTED_MODULE_1__.DtpcButton,
+  react: (react__WEBPACK_IMPORTED_MODULE_13___default()),
+  events: {},
+  defineCustomElement: dovetail_podcasts_player_web_components_dist_components_dtpc_button_js__WEBPACK_IMPORTED_MODULE_1__.defineCustomElement
+});
+const DtpcMuteButton = (0,_stencil_react_output_target_runtime__WEBPACK_IMPORTED_MODULE_0__.createComponent)({
+  tagName: 'dtpc-mute-button',
+  elementClass: dovetail_podcasts_player_web_components_dist_components_dtpc_mute_button_js__WEBPACK_IMPORTED_MODULE_2__.DtpcMuteButton,
+  react: (react__WEBPACK_IMPORTED_MODULE_13___default()),
   events: {
     onDtpcControlInit: 'dtpc-control-init'
   },
-  defineCustomElement: dovetail_podcasts_player_web_components_dist_components_dtpc_play_button_js__WEBPACK_IMPORTED_MODULE_1__.defineCustomElement
+  defineCustomElement: dovetail_podcasts_player_web_components_dist_components_dtpc_mute_button_js__WEBPACK_IMPORTED_MODULE_2__.defineCustomElement
+});
+const DtpcPlayButton = (0,_stencil_react_output_target_runtime__WEBPACK_IMPORTED_MODULE_0__.createComponent)({
+  tagName: 'dtpc-play-button',
+  elementClass: dovetail_podcasts_player_web_components_dist_components_dtpc_play_button_js__WEBPACK_IMPORTED_MODULE_3__.DtpcPlayButton,
+  react: (react__WEBPACK_IMPORTED_MODULE_13___default()),
+  events: {
+    onDtpcControlInit: 'dtpc-control-init',
+    onAudioTogglePaused: 'audio-toggle-paused'
+  },
+  defineCustomElement: dovetail_podcasts_player_web_components_dist_components_dtpc_play_button_js__WEBPACK_IMPORTED_MODULE_3__.defineCustomElement
 });
 const DtpcPlayer = (0,_stencil_react_output_target_runtime__WEBPACK_IMPORTED_MODULE_0__.createComponent)({
   tagName: 'dtpc-player',
-  elementClass: dovetail_podcasts_player_web_components_dist_components_dtpc_player_js__WEBPACK_IMPORTED_MODULE_2__.DtpcPlayer,
-  react: (react__WEBPACK_IMPORTED_MODULE_10___default()),
+  elementClass: dovetail_podcasts_player_web_components_dist_components_dtpc_player_js__WEBPACK_IMPORTED_MODULE_4__.DtpcPlayer,
+  react: (react__WEBPACK_IMPORTED_MODULE_13___default()),
   events: {},
-  defineCustomElement: dovetail_podcasts_player_web_components_dist_components_dtpc_player_js__WEBPACK_IMPORTED_MODULE_2__.defineCustomElement
+  defineCustomElement: dovetail_podcasts_player_web_components_dist_components_dtpc_player_js__WEBPACK_IMPORTED_MODULE_4__.defineCustomElement
 });
 const DtpcProgressBar = (0,_stencil_react_output_target_runtime__WEBPACK_IMPORTED_MODULE_0__.createComponent)({
   tagName: 'dtpc-progress-bar',
-  elementClass: dovetail_podcasts_player_web_components_dist_components_dtpc_progress_bar_js__WEBPACK_IMPORTED_MODULE_3__.DtpcProgressBar,
-  react: (react__WEBPACK_IMPORTED_MODULE_10___default()),
+  elementClass: dovetail_podcasts_player_web_components_dist_components_dtpc_progress_bar_js__WEBPACK_IMPORTED_MODULE_5__.DtpcProgressBar,
+  react: (react__WEBPACK_IMPORTED_MODULE_13___default()),
   events: {
     onDtpcControlInit: 'dtpc-control-init'
   },
-  defineCustomElement: dovetail_podcasts_player_web_components_dist_components_dtpc_progress_bar_js__WEBPACK_IMPORTED_MODULE_3__.defineCustomElement
+  defineCustomElement: dovetail_podcasts_player_web_components_dist_components_dtpc_progress_bar_js__WEBPACK_IMPORTED_MODULE_5__.defineCustomElement
 });
 const DtpcSlider = (0,_stencil_react_output_target_runtime__WEBPACK_IMPORTED_MODULE_0__.createComponent)({
   tagName: 'dtpc-slider',
-  elementClass: dovetail_podcasts_player_web_components_dist_components_dtpc_slider_js__WEBPACK_IMPORTED_MODULE_4__.DtpcSlider,
-  react: (react__WEBPACK_IMPORTED_MODULE_10___default()),
+  elementClass: dovetail_podcasts_player_web_components_dist_components_dtpc_slider_js__WEBPACK_IMPORTED_MODULE_6__.DtpcSlider,
+  react: (react__WEBPACK_IMPORTED_MODULE_13___default()),
   events: {
     onSliderChange: 'slider-change',
     onSliderInput: 'slider-input'
   },
-  defineCustomElement: dovetail_podcasts_player_web_components_dist_components_dtpc_slider_js__WEBPACK_IMPORTED_MODULE_4__.defineCustomElement
+  defineCustomElement: dovetail_podcasts_player_web_components_dist_components_dtpc_slider_js__WEBPACK_IMPORTED_MODULE_6__.defineCustomElement
 });
 const DtpcTimeCurrent = (0,_stencil_react_output_target_runtime__WEBPACK_IMPORTED_MODULE_0__.createComponent)({
   tagName: 'dtpc-time-current',
-  elementClass: dovetail_podcasts_player_web_components_dist_components_dtpc_time_current_js__WEBPACK_IMPORTED_MODULE_5__.DtpcTimeCurrent,
-  react: (react__WEBPACK_IMPORTED_MODULE_10___default()),
+  elementClass: dovetail_podcasts_player_web_components_dist_components_dtpc_time_current_js__WEBPACK_IMPORTED_MODULE_7__.DtpcTimeCurrent,
+  react: (react__WEBPACK_IMPORTED_MODULE_13___default()),
   events: {
     onDtpcControlInit: 'dtpc-control-init'
   },
-  defineCustomElement: dovetail_podcasts_player_web_components_dist_components_dtpc_time_current_js__WEBPACK_IMPORTED_MODULE_5__.defineCustomElement
+  defineCustomElement: dovetail_podcasts_player_web_components_dist_components_dtpc_time_current_js__WEBPACK_IMPORTED_MODULE_7__.defineCustomElement
 });
 const DtpcTimeDisplay = (0,_stencil_react_output_target_runtime__WEBPACK_IMPORTED_MODULE_0__.createComponent)({
   tagName: 'dtpc-time-display',
-  elementClass: dovetail_podcasts_player_web_components_dist_components_dtpc_time_display_js__WEBPACK_IMPORTED_MODULE_6__.DtpcTimeDisplay,
-  react: (react__WEBPACK_IMPORTED_MODULE_10___default()),
+  elementClass: dovetail_podcasts_player_web_components_dist_components_dtpc_time_display_js__WEBPACK_IMPORTED_MODULE_8__.DtpcTimeDisplay,
+  react: (react__WEBPACK_IMPORTED_MODULE_13___default()),
   events: {},
-  defineCustomElement: dovetail_podcasts_player_web_components_dist_components_dtpc_time_display_js__WEBPACK_IMPORTED_MODULE_6__.defineCustomElement
+  defineCustomElement: dovetail_podcasts_player_web_components_dist_components_dtpc_time_display_js__WEBPACK_IMPORTED_MODULE_8__.defineCustomElement
 });
 const DtpcTimeDuration = (0,_stencil_react_output_target_runtime__WEBPACK_IMPORTED_MODULE_0__.createComponent)({
   tagName: 'dtpc-time-duration',
-  elementClass: dovetail_podcasts_player_web_components_dist_components_dtpc_time_duration_js__WEBPACK_IMPORTED_MODULE_7__.DtpcTimeDuration,
-  react: (react__WEBPACK_IMPORTED_MODULE_10___default()),
+  elementClass: dovetail_podcasts_player_web_components_dist_components_dtpc_time_duration_js__WEBPACK_IMPORTED_MODULE_9__.DtpcTimeDuration,
+  react: (react__WEBPACK_IMPORTED_MODULE_13___default()),
   events: {
     onDtpcControlInit: 'dtpc-control-init'
   },
-  defineCustomElement: dovetail_podcasts_player_web_components_dist_components_dtpc_time_duration_js__WEBPACK_IMPORTED_MODULE_7__.defineCustomElement
+  defineCustomElement: dovetail_podcasts_player_web_components_dist_components_dtpc_time_duration_js__WEBPACK_IMPORTED_MODULE_9__.defineCustomElement
 });
 const IconPause = (0,_stencil_react_output_target_runtime__WEBPACK_IMPORTED_MODULE_0__.createComponent)({
   tagName: 'icon-pause',
-  elementClass: dovetail_podcasts_player_web_components_dist_components_icon_pause_js__WEBPACK_IMPORTED_MODULE_8__.IconPause,
-  react: (react__WEBPACK_IMPORTED_MODULE_10___default()),
+  elementClass: dovetail_podcasts_player_web_components_dist_components_icon_pause_js__WEBPACK_IMPORTED_MODULE_10__.IconPause,
+  react: (react__WEBPACK_IMPORTED_MODULE_13___default()),
   events: {},
-  defineCustomElement: dovetail_podcasts_player_web_components_dist_components_icon_pause_js__WEBPACK_IMPORTED_MODULE_8__.defineCustomElement
+  defineCustomElement: dovetail_podcasts_player_web_components_dist_components_icon_pause_js__WEBPACK_IMPORTED_MODULE_10__.defineCustomElement
 });
 const IconPlay = (0,_stencil_react_output_target_runtime__WEBPACK_IMPORTED_MODULE_0__.createComponent)({
   tagName: 'icon-play',
-  elementClass: dovetail_podcasts_player_web_components_dist_components_icon_play_js__WEBPACK_IMPORTED_MODULE_9__.IconPlay,
-  react: (react__WEBPACK_IMPORTED_MODULE_10___default()),
+  elementClass: dovetail_podcasts_player_web_components_dist_components_icon_play_js__WEBPACK_IMPORTED_MODULE_11__.IconPlay,
+  react: (react__WEBPACK_IMPORTED_MODULE_13___default()),
   events: {},
-  defineCustomElement: dovetail_podcasts_player_web_components_dist_components_icon_play_js__WEBPACK_IMPORTED_MODULE_9__.defineCustomElement
+  defineCustomElement: dovetail_podcasts_player_web_components_dist_components_icon_play_js__WEBPACK_IMPORTED_MODULE_11__.defineCustomElement
+});
+const IconVolume = (0,_stencil_react_output_target_runtime__WEBPACK_IMPORTED_MODULE_0__.createComponent)({
+  tagName: 'icon-volume',
+  elementClass: dovetail_podcasts_player_web_components_dist_components_icon_volume_js__WEBPACK_IMPORTED_MODULE_12__.IconVolume,
+  react: (react__WEBPACK_IMPORTED_MODULE_13___default()),
+  events: {},
+  defineCustomElement: dovetail_podcasts_player_web_components_dist_components_icon_volume_js__WEBPACK_IMPORTED_MODULE_12__.defineCustomElement
 });
 
 /***/ }),
@@ -26649,7 +27517,7 @@ const IconPlay = (0,_stencil_react_output_target_runtime__WEBPACK_IMPORTED_MODUL
 /***/ ((module) => {
 
 "use strict";
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"dovetail-podcasts/play-button","version":"0.1.0","title":"Dovetail Podcasts Player Play Button","category":"media","icon":"controls-play","description":"Play button for Dovetail Podcasts Player.","ancestor":["dovetail-podcasts/player"],"example":{},"supports":{"html":false,"color":{"background":true,"text":true},"spacing":{"margin":false,"padding":true}},"textdomain":"dovetail-podcasts","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","render":"file:./render.php","viewScript":"file:./view.js","attributes":{"icon-style":{"type":"string","enum":["outline","solid"],"default":"outline"}}}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"dovetail-podcasts/play-button","version":"0.1.0","title":"Dovetail Podcasts Player Play Button","category":"media","icon":"controls-play","description":"Play button for Dovetail Podcasts Player.","ancestor":["dovetail-podcasts/player"],"example":{},"supports":{"html":false,"color":{"background":true,"text":true},"spacing":{"margin":false,"padding":true}},"textdomain":"dovetail-podcasts","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","render":"file:./render.php","viewScript":"file:./view.js","attributes":{}}');
 
 /***/ }),
 

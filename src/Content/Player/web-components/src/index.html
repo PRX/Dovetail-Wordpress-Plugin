@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0" />
     <title>Stencil Component Starter</title>
 
+    <link rel="stylesheet" href="/build/dovetail-podcasts-player-web-components.css" />
+
     <style>
       :root {
         font-family: Avenir, Montserrat, Corbel, 'URW Gothic', source-sans-pro, sans-serif;
@@ -31,6 +33,23 @@
 
         & > * {
           margin: 0;
+        }
+      }
+
+      .component-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+      }
+
+      .component-card {
+        display: grid;
+        align-content: start;
+        place-items: center;
+
+        &.grow {
+          flex-grow: 1;
+          justify-items: stretch;
         }
       }
 
@@ -83,6 +102,7 @@
           <dtpc-time-current></dtpc-time-current>
           <dtpc-progress-bar duration="1300.166531"></dtpc-progress-bar>
           <dtpc-time-duration duration="1300.166531"></dtpc-time-duration>
+          <dtpc-mute-button></dtpc-mute-button>
         </dtpc-player>
       </div>
     </section>
@@ -103,11 +123,11 @@
     <section class="player-layout">
       <h3>Slider</h3>
       <div class="content">
-        <h4>Horizontal</h4>
-        <dtpc-slider default-value="40" min="0" max="100" step="1"></dtpc-slider>
+          <h4>Horizontal</h4>
+          <dtpc-slider default-value="40" min="0" max="100" step="1"></dtpc-slider>
 
-        <h4>Vertical</h4>
-        <dtpc-slider default-value="40" min="0" max="100" step="1" orient="vertical"></dtpc-slider>
+          <h4>Vertical</h4>
+          <dtpc-slider default-value="40" min="0" max="100" step="1" orient="vertical"></dtpc-slider>
       </div>
     </section>
 
@@ -116,7 +136,6 @@
       <thead>
           <th></th>
           <th>Outline</th>
-          <th>Solid</th>
       </thead>
       <tbody>
         <tr>
@@ -124,17 +143,20 @@
           <td>
             <icon-play></icon-play>
           </td>
-          <td>
-            <icon-play fill="currentColor" stroke="none"></icon-play>
-          </td>
         </tr>
         <tr>
           <td>Pause</td>
           <td>
             <icon-pause></icon-pause>
           </td>
+        </tr>
+        <tr>
+          <td>Volume</td>
           <td>
-            <icon-pause fill="currentColor" stroke="none"></icon-pause>
+            <icon-volume muted></icon-volume>
+            <icon-volume level="0"></icon-volume>
+            <icon-volume level="0.25"></icon-volume>
+            <icon-volume></icon-volume>
           </td>
         </tr>
       </tbody>

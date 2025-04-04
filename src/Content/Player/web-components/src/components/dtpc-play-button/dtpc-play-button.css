@@ -1,106 +1,38 @@
 :host {
-  --_dtpc-play-button--size: var(--dtpc-play-button--size, 1.5rem);
-  --_dtpc-play-button--padding: var(--dtpc-play-button--padding, 0.325rem);
-  --_dtpc-play-button--foreground: var(--dtpc-play-button--foreground, var(--_dtpc-player--foreground, currentColor));
-  --_dtpc-play-button--foreground--hover: var(--dtpc-play-button--foreground--hover, var(--_dtpc-player--surface));
-  --_dtpc-play-button--foreground--playing: var(--dtpc-play-button--foreground--playing, var(--_dtpc-play-button--foreground));
-  --_dtpc-play-button--surface: var(--_dtpc-play-button--surface, var(--_dtpc-player--surface));
-  --_dtpc-play-button--surface--hover: var(--dtpc-play-button--surface--hover, var(--_dtpc-player--foreground));
-  --_dtpc-play-button--surface--playing: var(--dtpc-play-button--surface--playing, var(--_dtpc-player--surface));
-  --_dtpc-play-button--surface-opacity: var(--dtpc-play-button--surface-opacity, 0);
-  --_dtpc-play-button--surface-opacity--hover: var(--dtpc-play-button--surface-opacity--hover, 100%);
-  --_dtpc-play-button--surface-opacity--playing: var(--dtpc-play-button--surface-opacity--playing, 0);
-  --_dtpc-play-button--border-color: var(--dtpc-play-button--border-color, transparent);
-  --_dtpc-play-button--border-color--hover: var(--dtpc-play-button--border-color--hover, var(--_dtpc-play-button--foreground));
-  --_dtpc-play-button--border-color--playing: var(--dtpc-play-button--border-color--playing, var(--_dtpc-play-button--border-color--hover));
-  --_dtpc-play-button--border-radius: var(--dtpc-play-button--border-radius, 100vw);
-  --_dtpc-play-button--border-radius--hover: var(--dtpc-play-button--border-radius--hover, var(--_dtpc-play-button--border-radius));
-  --_dtpc-play-button--border-radius--playing: var(--dtpc-play-button--border-radius--playing, var(--_dtpc-play-button--border-radius--hover));
-  --_dtpc-play-button--border-width: var(--dtpc-play-button--border-width, 0.125rem);
-  --_dtpc-play-button--border-width--hover: var(--dtpc-play-button--border-width--hover, var(--_dtpc-play-button--border-width));
-  --_dtpc-play-button--border-width--playing: var(--dtpc-play-button--border-width--playing, var(--_dtpc-play-button--border-width--hover));
-  --_dtpc-play-button--focus-ring-color: var(--dtpc-play-button--focus-ring-color, var(--_dtpc-player--highlight));
-  --_dtpc-play-button--focus-ring-offset: var(--dtpc-play-button--focus-ring-offset, 0.125rem);
-  --_dtpc-play-button--focus-ring-width: var(--dtpc-play-button--focus-ring-width, 2px);
+  --dtpc-button--size: var(--dtpc-play-button--size, 2rem);
+  --dtpc-button--padding: var(--dtpc-play-button--padding, 0.5rem);
+  --dtpc-button--foreground: var(--dtpc-play-button--foreground);
+  --dtpc-button--foreground--hover: var(--dtpc-play-button--foreground--hover, Canvas);
+  --dtpc-button--foreground--active: var(--dtpc-play-button--foreground--playing);
+  --dtpc-button--surface: var(--dtpc-play-button--surface);
+  --dtpc-button--surface--hover: var(--dtpc-play-button--surface--hover, CanvasText);
+  --dtpc-button--surface--active: var(--dtpc-play-button--surface--playing);
+  --dtpc-button--surface-opacity: var(--dtpc-play-button--surface-opacity);
+  --dtpc-button--surface-opacity--hover: var(--dtpc-play-button--surface-opacity--hover, 100%);
+  --dtpc-button--surface-opacity--active: var(--dtpc-play-button--surface-opacity--playing, 0);
+  --dtpc-button--border-color: var(--dtpc-play-button--border-color, transparent);
+  --dtpc-button--border-color--hover: var(--dtpc-play-button--border-color--hover, transparent);
+  --dtpc-button--border-color--active: var(--dtpc-play-button--border-color--playing, CanvasText);
+  --dtpc-button--border-radius: var(--dtpc-play-button--border-radius);
+  --dtpc-button--border-radius--hover: var(--dtpc-play-button--border-radius--hover);
+  --dtpc-button--border-radius--active: var(--dtpc-play-button--border-radius--playing);
+  --dtpc-button--border-width: var(--dtpc-play-button--border-width, 0.125);
+  --dtpc-button--border-width--hover: var(--dtpc-play-button--border-width--hover, 0.125);
+  --dtpc-button--border-width--active: var(--dtpc-play-button--border-width--playing, 0.125);
+  --dtpc-button--focus-ring-color: var(--dtpc-play-button--focus-ring-color);
+  --dtpc-button--focus-ring-offset: var(--dtpc-play-button--focus-ring-offset);
+  --dtpc-button--focus-ring-width: var(--dtpc-play-button--focus-ring-width);
 }
 
-button {
-  --_size: var(--_dtpc-play-button--size);
-  --_padding: var(--_dtpc-play-button--padding);
-  --_foreground: var(--_dtpc-play-button--foreground);
-  --_surface: var(--_dtpc-play-button--surface);
-  --_surface-opacity: var(--_dtpc-play-button--surface-opacity);
-  --_border-color: var(--_dtpc-play-button--border-color);
-  --_border-radius: var(--_dtpc-play-button--border-radius);
-  --_border-width: var(--_dtpc-play-button--border-width);
-  --_focus-ring-color: var(--_dtpc-play-button--focus-ring-color);
-  --_focus-ring-offset: var(--_dtpc-play-button--focus-ring-offset);
-  --_focus-ring-width: var(--_dtpc-play-button--focus-ring-width);
-
-  all: unset;
-
-  transition-property: background-color, border-color, border-width, border-radius, color;
-  transition-duration: 200ms;
-  transition-timing-function: ease;
-
-  box-sizing: content-box;
-  display: grid;
-  place-items: center;
-  justify-content: stretch;
-  aspect-ratio: 1;
-  width: var(--_size);
-
-  padding: var(--_padding);
-
-  border-style: solid;
-  border-color: var(--_border-color);
-  border-width: var(--_border-width);
-  border-radius: var(--_border-radius);
-
-  background-color: color-mix(in oklch, var(--_surface) var(--_surface-opacity), transparent);
-
-  cursor: pointer;
-  user-select: none;
+:host([data-status='playing']) {
+  --dtpc-button--foreground: var(--dtpc-button--foreground--active);
+  --dtpc-button--surface: var(--dtpc-button--surface--active);
+  --dtpc-button--surface-opacity: var(--dtpc-button--surface-opacity--active);
+  --dtpc-button--border-color: var(--dtpc-button--border-color--active);
+  --dtpc-button--border-width: var(--dtpc-button--border-width--active);
+  --dtpc-button--border-radius: var(--dtpc-button--border-radius--active);
 
   &:hover {
-    --_dtpc-play-button--foreground: var(--_dtpc-play-button--foreground--hover);
-    --_dtpc-play-button--surface: var(--_dtpc-play-button--surface--hover);
-    --_dtpc-play-button--surface-opacity: var(--_dtpc-play-button--surface-opacity--hover);
-    --_dtpc-play-button--border-color: var(--_dtpc-play-button--border-color--hover);
-    --_dtpc-play-button--border-width: var(--_dtpc-play-button--border-width--hover);
-    --_dtpc-play-button--border-radius: var(--_dtpc-play-button--border-radius--hover);
-  }
-
-  &:where([data-status='playing']) {
-    --_dtpc-play-button--foreground: var(--_dtpc-play-button--foreground--playing);
-    --_dtpc-play-button--surface: var(--_dtpc-play-button--surface--playing);
-    --_dtpc-play-button--surface-opacity: var(--_dtpc-play-button--surface-opacity--playing);
-    --_dtpc-play-button--border-color: var(--_dtpc-play-button--border-color--playing);
-    --_dtpc-play-button--border-width: var(--_dtpc-play-button--border-width--playing);
-    --_dtpc-play-button--border-radius: var(--_dtpc-play-button--border-radius--playing);
-
-    &:hover {
-      --_dtpc-play-button--surface-opacity: var(--_dtpc-play-button--surface-opacity--hover);
-    }
-  }
-
-  &:focus-visible {
-    outline-style: solid;
-    outline-offset: var(--_focus-ring-offset);
-    outline-color: var(--_focus-ring-color);
-    outline-width: var(--_focus-ring-width);
-  }
-}
-
-.lucide-icon {
-  display: grid;
-  place-items: center;
-  width: 100%;
-
-  color: var(--_foreground);
-
-  svg {
-    width: 100%;
-    height: auto;
+    --dtpc-button--surface-opacity: var(--dtpc-button--surface-opacity--hover);
   }
 }

@@ -2,7 +2,11 @@ import { createStore, ObservableMap } from '@stencil/store';
 
 export type PlayerState = {
   audioElm: HTMLAudioElement,
+  currentTime: number,
+  duration: number,
+  muted: boolean,
   playing: boolean,
+  volume: number,
   seekTime: number,
 }
 
@@ -17,7 +21,11 @@ class playerStateFactory {
 
     const newStore = createStore<PlayerState>({
       audioElm,
-      playing: false,
+      currentTime: audioElm.currentTime,
+      duration: audioElm.duration,
+      muted: audioElm.muted,
+      playing: !audioElm.paused,
+      volume: audioElm.volume,
       seekTime: null,
     });
 

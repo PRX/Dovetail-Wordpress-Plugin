@@ -8,6 +8,26 @@
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 var map = {
+	"./dtpc-button.entry.js": [
+		"../web-components/dist/dovetail-podcasts-player-web-components/dtpc-button.entry.js",
+		9,
+		"web-components_dist_dovetail-podcasts-player-web-components_dtpc-button_entry_js"
+	],
+	"./dtpc-button.entry.js.map": [
+		"../web-components/dist/dovetail-podcasts-player-web-components/dtpc-button.entry.js.map",
+		7,
+		"web-components_dist_dovetail-podcasts-player-web-components_dtpc-button_entry_js_map"
+	],
+	"./dtpc-mute-button.entry.js": [
+		"../web-components/dist/dovetail-podcasts-player-web-components/dtpc-mute-button.entry.js",
+		9,
+		"web-components_dist_dovetail-podcasts-player-web-components_dtpc-mute-button_entry_js"
+	],
+	"./dtpc-mute-button.entry.js.map": [
+		"../web-components/dist/dovetail-podcasts-player-web-components/dtpc-mute-button.entry.js.map",
+		7,
+		"web-components_dist_dovetail-podcasts-player-web-components_dtpc-mute-button_entry_js_map"
+	],
 	"./dtpc-play-button.entry.js": [
 		"../web-components/dist/dovetail-podcasts-player-web-components/dtpc-play-button.entry.js",
 		9,
@@ -97,6 +117,16 @@ var map = {
 		"../web-components/dist/dovetail-podcasts-player-web-components/icon-play.entry.js.map",
 		7,
 		"web-components_dist_dovetail-podcasts-player-web-components_icon-play_entry_js_map"
+	],
+	"./icon-volume.entry.js": [
+		"../web-components/dist/dovetail-podcasts-player-web-components/icon-volume.entry.js",
+		9,
+		"web-components_dist_dovetail-podcasts-player-web-components_icon-volume_entry_js"
+	],
+	"./icon-volume.entry.js.map": [
+		"../web-components/dist/dovetail-podcasts-player-web-components/icon-volume.entry.js.map",
+		7,
+		"web-components_dist_dovetail-podcasts-player-web-components_icon-volume_entry_js_map"
 	]
 };
 function webpackAsyncContext(req) {
@@ -144,27 +174,27 @@ const globalScripts = () => {};
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   setNonce: () => (/* reexport safe */ _index_C336hbsD_js__WEBPACK_IMPORTED_MODULE_0__.s)
+/* harmony export */   setNonce: () => (/* reexport safe */ _index_ngapiRTG_js__WEBPACK_IMPORTED_MODULE_0__.s)
 /* harmony export */ });
-/* harmony import */ var _index_C336hbsD_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index-C336hbsD.js */ "../web-components/dist/dovetail-podcasts-player-web-components/index-C336hbsD.js");
+/* harmony import */ var _index_ngapiRTG_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index-ngapiRTG.js */ "../web-components/dist/dovetail-podcasts-player-web-components/index-ngapiRTG.js");
 /* harmony import */ var _app_globals_DQuL1Twl_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./app-globals-DQuL1Twl.js */ "../web-components/dist/dovetail-podcasts-player-web-components/app-globals-DQuL1Twl.js");
 
 
 
 var patchBrowser = () => {
-  if (_index_C336hbsD_js__WEBPACK_IMPORTED_MODULE_0__.B.isDev && !_index_C336hbsD_js__WEBPACK_IMPORTED_MODULE_0__.B.isTesting) {
-    (0,_index_C336hbsD_js__WEBPACK_IMPORTED_MODULE_0__.c)("Running in development mode.");
+  if (_index_ngapiRTG_js__WEBPACK_IMPORTED_MODULE_0__.B.isDev && !_index_ngapiRTG_js__WEBPACK_IMPORTED_MODULE_0__.B.isTesting) {
+    (0,_index_ngapiRTG_js__WEBPACK_IMPORTED_MODULE_0__.c)("Running in development mode.");
   }
-  if (_index_C336hbsD_js__WEBPACK_IMPORTED_MODULE_0__.B.cloneNodeFix) {
-    patchCloneNodeFix(_index_C336hbsD_js__WEBPACK_IMPORTED_MODULE_0__.H.prototype);
+  if (_index_ngapiRTG_js__WEBPACK_IMPORTED_MODULE_0__.B.cloneNodeFix) {
+    patchCloneNodeFix(_index_ngapiRTG_js__WEBPACK_IMPORTED_MODULE_0__.H.prototype);
   }
-  const scriptElm = _index_C336hbsD_js__WEBPACK_IMPORTED_MODULE_0__.B.scriptDataOpts ? _index_C336hbsD_js__WEBPACK_IMPORTED_MODULE_0__.w.document && Array.from(_index_C336hbsD_js__WEBPACK_IMPORTED_MODULE_0__.w.document.querySelectorAll("script")).find(s => new RegExp(`/${_index_C336hbsD_js__WEBPACK_IMPORTED_MODULE_0__.N}(\\.esm)?\\.js($|\\?|#)`).test(s.src) || s.getAttribute("data-stencil-namespace") === _index_C336hbsD_js__WEBPACK_IMPORTED_MODULE_0__.N) : null;
+  const scriptElm = _index_ngapiRTG_js__WEBPACK_IMPORTED_MODULE_0__.B.scriptDataOpts ? _index_ngapiRTG_js__WEBPACK_IMPORTED_MODULE_0__.w.document && Array.from(_index_ngapiRTG_js__WEBPACK_IMPORTED_MODULE_0__.w.document.querySelectorAll("script")).find(s => new RegExp(`/${_index_ngapiRTG_js__WEBPACK_IMPORTED_MODULE_0__.N}(\\.esm)?\\.js($|\\?|#)`).test(s.src) || s.getAttribute("data-stencil-namespace") === _index_ngapiRTG_js__WEBPACK_IMPORTED_MODULE_0__.N) : null;
   const importMeta = "file:///Users/rick/Projects/PRX/dt-plugin-demo-wordpress/wordpress/wp-content/plugins/dovetail-podcasts/src/Content/Player/web-components/dist/dovetail-podcasts-player-web-components/dovetail-podcasts-player-web-components.esm.js";
-  const opts = _index_C336hbsD_js__WEBPACK_IMPORTED_MODULE_0__.B.scriptDataOpts ? (scriptElm || {})["data-opts"] || {} : {};
+  const opts = _index_ngapiRTG_js__WEBPACK_IMPORTED_MODULE_0__.B.scriptDataOpts ? (scriptElm || {})["data-opts"] || {} : {};
   if (importMeta !== "") {
     opts.resourcesUrl = new URL(".", importMeta).href;
   }
-  return (0,_index_C336hbsD_js__WEBPACK_IMPORTED_MODULE_0__.p)(opts);
+  return (0,_index_ngapiRTG_js__WEBPACK_IMPORTED_MODULE_0__.p)(opts);
 };
 var patchCloneNodeFix = HTMLElementPrototype => {
   const nativeCloneNodeFn = HTMLElementPrototype.cloneNode;
@@ -186,11 +216,15 @@ var patchCloneNodeFix = HTMLElementPrototype => {
 };
 patchBrowser().then(async options => {
   await (0,_app_globals_DQuL1Twl_js__WEBPACK_IMPORTED_MODULE_1__.g)();
-  return (0,_index_C336hbsD_js__WEBPACK_IMPORTED_MODULE_0__.b)([["dtpc-play-button", [[1, "dtpc-play-button", {
-    "iconStyle": [1, "icon-style"],
-    "playing": [32]
-  }]]], ["dtpc-time-display", [[1, "dtpc-time-display", {
+  return (0,_index_ngapiRTG_js__WEBPACK_IMPORTED_MODULE_0__.b)([["dtpc-play-button", [[1, "dtpc-play-button", null, [[0, "click", "handleClick"]]]]], ["dtpc-mute-button", [[1, "dtpc-mute-button", null, [[0, "click", "handleClick"]]]]], ["dtpc-time-display", [[1, "dtpc-time-display", {
     "duration": [2]
+  }]]], ["dtpc-progress-bar", [[1, "dtpc-progress-bar", {
+    "duration": [2],
+    "audioDuration": [32]
+  }, [[0, "slider-input", "handleInput"], [0, "slider-change", "handleChange"]]]]], ["dtpc-player", [[1, "dtpc-player", {
+    "src": [1]
+  }, [[0, "audio-toggle-paused", "handleTogglePaused"], [0, "dtpc-control-init", "handleControlInit"]], {
+    "src": ["watchSrcHandler"]
   }]]], ["dtpc-slider", [[1, "dtpc-slider", {
     "disabled": [4],
     "defaultValue": [2, "default-value"],
@@ -202,18 +236,7 @@ patchBrowser().then(async options => {
     "currentValue": [32]
   }, null, {
     "value": ["handleValueChange"]
-  }]]], ["dtpc-progress-bar", [[1, "dtpc-progress-bar", {
-    "duration": [2],
-    "audioDuration": [32],
-    "currentTime": [32],
-    "seekTime": [32]
-  }, [[0, "slider-input", "handleInput"], [0, "slider-change", "handleChange"]]]]], ["dtpc-player", [[1, "dtpc-player", {
-    "src": [1]
-  }, [[0, "dtpc-control-init", "handleControlInit"]], {
-    "src": ["watchSrcHandler"]
-  }]]], ["dtpc-time-current", [[1, "dtpc-time-current", {
-    "currentTime": [32]
-  }]]], ["dtpc-time-duration", [[1, "dtpc-time-duration", {
+  }]]], ["dtpc-time-current", [[1, "dtpc-time-current"]]], ["dtpc-time-duration", [[1, "dtpc-time-duration", {
     "duration": [2],
     "audioDuration": [32]
   }]]], ["icon-pause", [[0, "icon-pause", {
@@ -378,14 +401,97 @@ patchBrowser().then(async options => {
     "writingMode": [8, "writing-mode"],
     "x": [8],
     "y": [8]
-  }]]]], options);
+  }]]], ["icon-volume", [[0, "icon-volume", {
+    "level": [2],
+    "muted": [4],
+    "alignmentBaseline": [8, "alignment-baseline"],
+    "baselineShift": [8, "baseline-shift"],
+    "clipPath": [8, "clip-path"],
+    "clipRule": [8, "clip-rule"],
+    "color": [8],
+    "colorInterpolation": [8, "color-interpolation"],
+    "colorInterpolationFilters": [8, "color-interpolation-filters"],
+    "colorRendering": [8, "color-rendering"],
+    "cursor": [8],
+    "cx": [8],
+    "cy": [8],
+    "d": [8],
+    "direction": [8],
+    "display": [8],
+    "dominantBaseline": [8, "dominant-baseline"],
+    "fill": [8],
+    "fillOpacity": [8, "fill-opacity"],
+    "fillRule": [8, "fill-rule"],
+    "filter": [8],
+    "floodColor": [8, "flood-color"],
+    "floodOpacity": [8, "flood-opacity"],
+    "font": [8],
+    "fontFamily": [8, "font-family"],
+    "fontKerning": [8, "font-kerning"],
+    "fontSize": [8, "font-size"],
+    "fontSizeAdjust": [8, "font-size-adjust"],
+    "fontStretch": [8, "font-stretch"],
+    "fontStyle": [8, "font-style"],
+    "fontVariant": [8, "font-variant"],
+    "fontWeight": [8, "font-weight"],
+    "height": [8],
+    "imageRendering": [8, "image-rendering"],
+    "isolation": [8],
+    "letterSpacing": [8, "letter-spacing"],
+    "lightingColor": [8, "lighting-color"],
+    "marker": [8],
+    "markerEnd": [8, "marker-end"],
+    "markerMid": [8, "marker-mid"],
+    "markerStart": [8, "marker-start"],
+    "mask": [8],
+    "maskClip": [8, "mask-clip"],
+    "maskComposite": [8, "mask-composite"],
+    "maskImage": [8, "mask-image"],
+    "maskMode": [8, "mask-mode"],
+    "maskOrigin": [8, "mask-origin"],
+    "maskPosition": [8, "mask-position"],
+    "maskRepeat": [8, "mask-repeat"],
+    "maskSize": [8, "mask-size"],
+    "maskType": [8, "mask-type"],
+    "opacity": [8],
+    "overflow": [8],
+    "pointerEvents": [8, "pointer-events"],
+    "r": [8],
+    "rx": [8],
+    "ry": [8],
+    "shapeRendering": [8, "shape-rendering"],
+    "stopColor": [8, "stop-color"],
+    "stopOpacity": [8, "stop-opacity"],
+    "stroke": [8],
+    "strokeDasharray": [8, "stroke-dasharray"],
+    "strokeDashoffset": [8, "stroke-dashoffset"],
+    "strokeLinecap": [8, "stroke-linecap"],
+    "strokeLinejoin": [8, "stroke-linejoin"],
+    "strokeMiterlimit": [8, "stroke-miterlimit"],
+    "strokeOpacity": [8, "stroke-opacity"],
+    "strokeWidth": [8, "stroke-width"],
+    "textAnchor": [8, "text-anchor"],
+    "textDecoration": [8, "text-decoration"],
+    "textOrientation": [8, "text-orientation"],
+    "textRendering": [8, "text-rendering"],
+    "transform": [8],
+    "transformBox": [8, "transform-box"],
+    "transformOrigin": [8, "transform-origin"],
+    "unicodeBidi": [8, "unicode-bidi"],
+    "visibility": [8],
+    "width": [8],
+    "wordSpacing": [8, "word-spacing"],
+    "writingMode": [8, "writing-mode"],
+    "x": [8],
+    "y": [8]
+  }]]], ["dtpc-button", [[4, "dtpc-button", null, [[0, "keydown", "handleKeyDown"]]]]]], options);
 });
 
 /***/ }),
 
-/***/ "../web-components/dist/dovetail-podcasts-player-web-components/index-C336hbsD.js":
+/***/ "../web-components/dist/dovetail-podcasts-player-web-components/index-ngapiRTG.js":
 /*!****************************************************************************************!*\
-  !*** ../web-components/dist/dovetail-podcasts-player-web-components/index-C336hbsD.js ***!
+  !*** ../web-components/dist/dovetail-podcasts-player-web-components/index-ngapiRTG.js ***!
   \****************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -399,9 +505,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   b: () => (/* binding */ bootstrapLazy),
 /* harmony export */   c: () => (/* binding */ consoleDevInfo),
 /* harmony export */   d: () => (/* binding */ Host),
-/* harmony export */   e: () => (/* binding */ getRenderingRef),
+/* harmony export */   e: () => (/* binding */ getElement),
 /* harmony export */   f: () => (/* binding */ forceUpdate),
-/* harmony export */   g: () => (/* binding */ getElement),
+/* harmony export */   g: () => (/* binding */ getRenderingRef),
 /* harmony export */   h: () => (/* binding */ h),
 /* harmony export */   p: () => (/* binding */ promiseResolve),
 /* harmony export */   r: () => (/* binding */ registerInstance),
@@ -464,7 +570,7 @@ const BUILD = {
   shadowDom: true,
   slot: true,
   slotChildNodesFix: false,
-  slotRelocation: false,
+  slotRelocation: true,
   state: true,
   style: true,
   svg: false,
@@ -4284,7 +4390,7 @@ var insertChildVNodeAnnotations = (doc, vnodeChild, cmpData, hostId, depth, inde
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames based on template
-/******/ 			return "" + chunkId + ".js?ver=" + {"web-components_dist_dovetail-podcasts-player-web-components_dtpc-play-button_entry_js":"84d170d77190ac0c3972","web-components_dist_dovetail-podcasts-player-web-components_dtpc-play-button_entry_js_map":"5bbb991af4940ebf23f8","web-components_dist_dovetail-podcasts-player-web-components_dtpc-player_entry_js":"4456beff62cf5379efff","web-components_dist_dovetail-podcasts-player-web-components_dtpc-player_entry_js_map":"f808ae8e2a96676f835b","web-components_dist_dovetail-podcasts-player-web-components_dtpc-progress-bar_entry_js":"3b2b34cb009c3cbc7651","web-components_dist_dovetail-podcasts-player-web-components_dtpc-progress-bar_entry_js_map":"dc81bd14c01dc3a49103","web-components_dist_dovetail-podcasts-player-web-components_dtpc-slider_entry_js":"b913779478da87f79833","web-components_dist_dovetail-podcasts-player-web-components_dtpc-slider_entry_js_map":"37c86d8ecec16bea3104","web-components_dist_dovetail-podcasts-player-web-components_dtpc-time-current_entry_js":"f264513f3e67d9ed4bc7","web-components_dist_dovetail-podcasts-player-web-components_dtpc-time-current_entry_js_map":"bb8c5aa33ef54c554d89","web-components_dist_dovetail-podcasts-player-web-components_dtpc-time-display_entry_js":"13b12aa30d4ec5ff70ec","web-components_dist_dovetail-podcasts-player-web-components_dtpc-time-display_entry_js_map":"aaf1fd52803e76911572","web-components_dist_dovetail-podcasts-player-web-components_dtpc-time-duration_entry_js":"6973efbbeecbf0fc1149","web-components_dist_dovetail-podcasts-player-web-components_dtpc-time-duration_entry_js_map":"08bc2ca21ade90159f20","web-components_dist_dovetail-podcasts-player-web-components_icon-pause_entry_js":"be212443091cfe3d422e","web-components_dist_dovetail-podcasts-player-web-components_icon-pause_entry_js_map":"4e0d650c87cc3bfcc0db","web-components_dist_dovetail-podcasts-player-web-components_icon-play_entry_js":"e13c7e0308d92c019fe4","web-components_dist_dovetail-podcasts-player-web-components_icon-play_entry_js_map":"d19c163be96ee039b5d6"}[chunkId] + "";
+/******/ 			return "" + chunkId + ".js?ver=" + {"web-components_dist_dovetail-podcasts-player-web-components_dtpc-button_entry_js":"ff8c34782c6ced027a29","web-components_dist_dovetail-podcasts-player-web-components_dtpc-button_entry_js_map":"7b1ce57ffe4ae8ca8e0c","web-components_dist_dovetail-podcasts-player-web-components_dtpc-mute-button_entry_js":"e623368eb5cd81897977","web-components_dist_dovetail-podcasts-player-web-components_dtpc-mute-button_entry_js_map":"bae221e93d07410db333","web-components_dist_dovetail-podcasts-player-web-components_dtpc-play-button_entry_js":"61bce122ac6fe61bfdb2","web-components_dist_dovetail-podcasts-player-web-components_dtpc-play-button_entry_js_map":"5bbb991af4940ebf23f8","web-components_dist_dovetail-podcasts-player-web-components_dtpc-player_entry_js":"35316722465723208c1a","web-components_dist_dovetail-podcasts-player-web-components_dtpc-player_entry_js_map":"f808ae8e2a96676f835b","web-components_dist_dovetail-podcasts-player-web-components_dtpc-progress-bar_entry_js":"c304e5ef3359a5b047db","web-components_dist_dovetail-podcasts-player-web-components_dtpc-progress-bar_entry_js_map":"dc81bd14c01dc3a49103","web-components_dist_dovetail-podcasts-player-web-components_dtpc-slider_entry_js":"1975865bd45ef56a8efe","web-components_dist_dovetail-podcasts-player-web-components_dtpc-slider_entry_js_map":"37c86d8ecec16bea3104","web-components_dist_dovetail-podcasts-player-web-components_dtpc-time-current_entry_js":"747b34181e30ee8d47cf","web-components_dist_dovetail-podcasts-player-web-components_dtpc-time-current_entry_js_map":"bb8c5aa33ef54c554d89","web-components_dist_dovetail-podcasts-player-web-components_dtpc-time-display_entry_js":"76e71612f0b7bc2af392","web-components_dist_dovetail-podcasts-player-web-components_dtpc-time-display_entry_js_map":"aaf1fd52803e76911572","web-components_dist_dovetail-podcasts-player-web-components_dtpc-time-duration_entry_js":"0e3cdd82329432ba269d","web-components_dist_dovetail-podcasts-player-web-components_dtpc-time-duration_entry_js_map":"08bc2ca21ade90159f20","web-components_dist_dovetail-podcasts-player-web-components_icon-pause_entry_js":"6c57d09ec5dc32c9a59e","web-components_dist_dovetail-podcasts-player-web-components_icon-pause_entry_js_map":"4e0d650c87cc3bfcc0db","web-components_dist_dovetail-podcasts-player-web-components_icon-play_entry_js":"a0af248718b123c83a04","web-components_dist_dovetail-podcasts-player-web-components_icon-play_entry_js_map":"d19c163be96ee039b5d6","web-components_dist_dovetail-podcasts-player-web-components_icon-volume_entry_js":"e2e0a8e4ac57a6f2660d","web-components_dist_dovetail-podcasts-player-web-components_icon-volume_entry_js_map":"b14f4121e898b0efcde6"}[chunkId] + "";
 /******/ 		};
 /******/ 	})();
 /******/ 	

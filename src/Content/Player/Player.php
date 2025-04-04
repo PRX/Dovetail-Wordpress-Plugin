@@ -252,7 +252,39 @@ class Player {
 	}
 
 	/**
-	 * Render Dovetail podcast player block.
+	 * Render Dovetail podcast mute button block.
+	 *
+	 * @param array<string,string> $atts Block attributes.
+	 * @param string               $content Block content.
+	 * @param \WP_Block            $block Block instance object.
+	 * @return string
+	 */
+	public function render_mute_button_block( $atts, string $content, \WP_Block $block ) {
+		error_log( __FUNCTION__ );
+		error_log( print_r( $atts, true ) );
+
+		if ( ! is_array( $atts ) ) {
+			$atts = [];
+		}
+
+		$atts = shortcode_atts(
+			$this->get_block_attributes_defaults( 'mute-button' ),
+			$atts
+		);
+
+		$wrapper_attributes = get_block_wrapper_attributes( $atts );
+
+		return implode(
+			'',
+			[
+				sprintf( '<dtpc-mute-button %1$s>', $wrapper_attributes ),
+				'</dtpc-mute-button>',
+			]
+		);
+	}
+
+	/**
+	 * Render Dovetail podcast play button block.
 	 *
 	 * @param array<string,string> $atts Block attributes.
 	 * @param string               $content Block content.
@@ -512,7 +544,9 @@ class Player {
 				[
 					'blockName' => 'dovetail-podcasts/time-display',
 				],
-				// TODO: Add volume slider.
+				[
+					'blockName' => 'dovetail-podcasts/mute-button',
+				],
 			];
 		}
 
@@ -653,12 +687,8 @@ class Player {
 				],
 				$allowed_atts
 			),
-			'dtpc-play-button'   => array_merge(
-				[
-					'icon-style' => [],
-				],
-				$allowed_atts
-			),
+			'dtpc-mute-button'   => $allowed_atts,
+			'dtpc-play-button'   => $allowed_atts,
 			'dtpc-progress-bar'  => array_merge(
 				[
 					'duration' => [],

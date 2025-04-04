@@ -35,9 +35,8 @@
   --_track--border-offset: var(--_dtpc-slider--track--border-offset);
   --_track--gutter: calc(var(--_scrubber--size) / 2);
 
-  flex-grow: 1;
   isolation: isolate;
-  display: grid;
+  display: inline-grid;
   align-items: center;
   grid-template-columns: [range-start] var(--_track--gutter) [track-start] 1fr [track-end] var(--_track--gutter) [range-end];
   grid-template-rows: [range-start] [track-start] var(--_track--height) [track-end] [range-end];

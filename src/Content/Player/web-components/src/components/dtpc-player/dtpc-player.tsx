@@ -17,11 +17,48 @@ export class DtpcPlayer {
   @Prop() src: string;
 
   connectedCallback() {
-    this.state = playerState.createStore(this.src).state;
+    const { state, onChange } = playerState.createStore(this.src);
+    const { audioElm } = state;
+    let previousSeekTime: number = state.seekTime;
+
+    this.state = state;
+
+    onChange('seekTime', (seekTime) => {
+      if (previousSeekTime !== null && seekTime === null) {
+        audioElm.currentTime = previousSeekTime;
+        state.currentTime = previousSeekTime;
+      }
+      previousSeekTime = seekTime;
+    });
+    onChange('muted', (muted) => audioElm.muted = muted);
+    onChange('volume', (volume) => audioElm.volume = volume);
+
+    state.audioElm.addEventListener('loadedmetadata', (e: Event) => {
+      state.currentTime = (e.target as HTMLAudioElement).currentTime;
+      state.duration = (e.target as HTMLAudioElement).duration;
+    });
+    state.audioElm.addEventListener('timeupdate', (e: Event) => state.currentTime = (e.target as HTMLAudioElement).currentTime);
+    state.audioElm.addEventListener('play', () => state.playing = true);
+    state.audioElm.addEventListener('pause', () => state.playing = false);
   }
 
   disconnectedCallback() {
     this.state.audioElm.pause();
+  }
+
+  @Listen('audio-toggle-paused')
+  handleTogglePaused() {
+    if (this.state.audioElm.paused) {
+      this.state.audioElm.play()
+        .then(() => {
+          // Setup media session.
+        })
+        .catch((e) => {
+          console.error(e);
+        })
+    } else {
+      this.state.audioElm.pause();
+    }
   }
 
   @Listen('dtpc-control-init')

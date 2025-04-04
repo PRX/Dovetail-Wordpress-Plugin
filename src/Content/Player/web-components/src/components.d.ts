@@ -6,8 +6,11 @@
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
+    interface DtpcButton {
+    }
+    interface DtpcMuteButton {
+    }
     interface DtpcPlayButton {
-        "iconStyle": string;
     }
     interface DtpcPlayer {
         /**
@@ -199,6 +202,94 @@ export namespace Components {
         "x": any;
         "y": any;
     }
+    interface IconVolume {
+        "alignmentBaseline": any;
+        "baselineShift": any;
+        "clipPath": any;
+        "clipRule": any;
+        "color": any;
+        "colorInterpolation": any;
+        "colorInterpolationFilters": any;
+        "colorRendering": any;
+        "cursor": any;
+        "cx": any;
+        "cy": any;
+        "d": any;
+        "direction": any;
+        "display": any;
+        "dominantBaseline": any;
+        "fill": any;
+        "fillOpacity": any;
+        "fillRule": any;
+        "filter": any;
+        "floodColor": any;
+        "floodOpacity": any;
+        "font": any;
+        "fontFamily": any;
+        "fontKerning": any;
+        "fontSize": any;
+        "fontSizeAdjust": any;
+        "fontStretch": any;
+        "fontStyle": any;
+        "fontVariant": any;
+        "fontWeight": any;
+        "height": any;
+        "imageRendering": any;
+        "isolation": any;
+        "letterSpacing": any;
+        "level": number;
+        "lightingColor": any;
+        "marker": any;
+        "markerEnd": any;
+        "markerMid": any;
+        "markerStart": any;
+        "mask": any;
+        "maskClip": any;
+        "maskComposite": any;
+        "maskImage": any;
+        "maskMode": any;
+        "maskOrigin": any;
+        "maskPosition": any;
+        "maskRepeat": any;
+        "maskSize": any;
+        "maskType": any;
+        "muted": boolean;
+        "opacity": any;
+        "overflow": any;
+        "pointerEvents": any;
+        "r": any;
+        "rx": any;
+        "ry": any;
+        "shapeRendering": any;
+        "stopColor": any;
+        "stopOpacity": any;
+        "stroke": any;
+        "strokeDasharray": any;
+        "strokeDashoffset": any;
+        "strokeLinecap": any;
+        "strokeLinejoin": any;
+        "strokeMiterlimit": any;
+        "strokeOpacity": any;
+        "strokeWidth": any;
+        "textAnchor": any;
+        "textDecoration": any;
+        "textOrientation": any;
+        "textRendering": any;
+        "transform": any;
+        "transformBox": any;
+        "transformOrigin": any;
+        "unicodeBidi": any;
+        "visibility": any;
+        "width": any;
+        "wordSpacing": any;
+        "writingMode": any;
+        "x": any;
+        "y": any;
+    }
+}
+export interface DtpcMuteButtonCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLDtpcMuteButtonElement;
 }
 export interface DtpcPlayButtonCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -221,8 +312,32 @@ export interface DtpcTimeDurationCustomEvent<T> extends CustomEvent<T> {
     target: HTMLDtpcTimeDurationElement;
 }
 declare global {
+    interface HTMLDtpcButtonElement extends Components.DtpcButton, HTMLStencilElement {
+    }
+    var HTMLDtpcButtonElement: {
+        prototype: HTMLDtpcButtonElement;
+        new (): HTMLDtpcButtonElement;
+    };
+    interface HTMLDtpcMuteButtonElementEventMap {
+        "dtpc-control-init": any;
+    }
+    interface HTMLDtpcMuteButtonElement extends Components.DtpcMuteButton, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLDtpcMuteButtonElementEventMap>(type: K, listener: (this: HTMLDtpcMuteButtonElement, ev: DtpcMuteButtonCustomEvent<HTMLDtpcMuteButtonElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLDtpcMuteButtonElementEventMap>(type: K, listener: (this: HTMLDtpcMuteButtonElement, ev: DtpcMuteButtonCustomEvent<HTMLDtpcMuteButtonElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLDtpcMuteButtonElement: {
+        prototype: HTMLDtpcMuteButtonElement;
+        new (): HTMLDtpcMuteButtonElement;
+    };
     interface HTMLDtpcPlayButtonElementEventMap {
         "dtpc-control-init": any;
+        "audio-toggle-paused": any;
     }
     interface HTMLDtpcPlayButtonElement extends Components.DtpcPlayButton, HTMLStencilElement {
         addEventListener<K extends keyof HTMLDtpcPlayButtonElementEventMap>(type: K, listener: (this: HTMLDtpcPlayButtonElement, ev: DtpcPlayButtonCustomEvent<HTMLDtpcPlayButtonElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
@@ -331,7 +446,15 @@ declare global {
         prototype: HTMLIconPlayElement;
         new (): HTMLIconPlayElement;
     };
+    interface HTMLIconVolumeElement extends Components.IconVolume, HTMLStencilElement {
+    }
+    var HTMLIconVolumeElement: {
+        prototype: HTMLIconVolumeElement;
+        new (): HTMLIconVolumeElement;
+    };
     interface HTMLElementTagNameMap {
+        "dtpc-button": HTMLDtpcButtonElement;
+        "dtpc-mute-button": HTMLDtpcMuteButtonElement;
         "dtpc-play-button": HTMLDtpcPlayButtonElement;
         "dtpc-player": HTMLDtpcPlayerElement;
         "dtpc-progress-bar": HTMLDtpcProgressBarElement;
@@ -341,11 +464,17 @@ declare global {
         "dtpc-time-duration": HTMLDtpcTimeDurationElement;
         "icon-pause": HTMLIconPauseElement;
         "icon-play": HTMLIconPlayElement;
+        "icon-volume": HTMLIconVolumeElement;
     }
 }
 declare namespace LocalJSX {
+    interface DtpcButton {
+    }
+    interface DtpcMuteButton {
+        "onDtpc-control-init"?: (event: DtpcMuteButtonCustomEvent<any>) => void;
+    }
     interface DtpcPlayButton {
-        "iconStyle"?: string;
+        "onAudio-toggle-paused"?: (event: DtpcPlayButtonCustomEvent<any>) => void;
         "onDtpc-control-init"?: (event: DtpcPlayButtonCustomEvent<any>) => void;
     }
     interface DtpcPlayer {
@@ -543,7 +672,93 @@ declare namespace LocalJSX {
         "x"?: any;
         "y"?: any;
     }
+    interface IconVolume {
+        "alignmentBaseline"?: any;
+        "baselineShift"?: any;
+        "clipPath"?: any;
+        "clipRule"?: any;
+        "color"?: any;
+        "colorInterpolation"?: any;
+        "colorInterpolationFilters"?: any;
+        "colorRendering"?: any;
+        "cursor"?: any;
+        "cx"?: any;
+        "cy"?: any;
+        "d"?: any;
+        "direction"?: any;
+        "display"?: any;
+        "dominantBaseline"?: any;
+        "fill"?: any;
+        "fillOpacity"?: any;
+        "fillRule"?: any;
+        "filter"?: any;
+        "floodColor"?: any;
+        "floodOpacity"?: any;
+        "font"?: any;
+        "fontFamily"?: any;
+        "fontKerning"?: any;
+        "fontSize"?: any;
+        "fontSizeAdjust"?: any;
+        "fontStretch"?: any;
+        "fontStyle"?: any;
+        "fontVariant"?: any;
+        "fontWeight"?: any;
+        "height"?: any;
+        "imageRendering"?: any;
+        "isolation"?: any;
+        "letterSpacing"?: any;
+        "level"?: number;
+        "lightingColor"?: any;
+        "marker"?: any;
+        "markerEnd"?: any;
+        "markerMid"?: any;
+        "markerStart"?: any;
+        "mask"?: any;
+        "maskClip"?: any;
+        "maskComposite"?: any;
+        "maskImage"?: any;
+        "maskMode"?: any;
+        "maskOrigin"?: any;
+        "maskPosition"?: any;
+        "maskRepeat"?: any;
+        "maskSize"?: any;
+        "maskType"?: any;
+        "muted"?: boolean;
+        "opacity"?: any;
+        "overflow"?: any;
+        "pointerEvents"?: any;
+        "r"?: any;
+        "rx"?: any;
+        "ry"?: any;
+        "shapeRendering"?: any;
+        "stopColor"?: any;
+        "stopOpacity"?: any;
+        "stroke"?: any;
+        "strokeDasharray"?: any;
+        "strokeDashoffset"?: any;
+        "strokeLinecap"?: any;
+        "strokeLinejoin"?: any;
+        "strokeMiterlimit"?: any;
+        "strokeOpacity"?: any;
+        "strokeWidth"?: any;
+        "textAnchor"?: any;
+        "textDecoration"?: any;
+        "textOrientation"?: any;
+        "textRendering"?: any;
+        "transform"?: any;
+        "transformBox"?: any;
+        "transformOrigin"?: any;
+        "unicodeBidi"?: any;
+        "visibility"?: any;
+        "width"?: any;
+        "wordSpacing"?: any;
+        "writingMode"?: any;
+        "x"?: any;
+        "y"?: any;
+    }
     interface IntrinsicElements {
+        "dtpc-button": DtpcButton;
+        "dtpc-mute-button": DtpcMuteButton;
         "dtpc-play-button": DtpcPlayButton;
         "dtpc-player": DtpcPlayer;
         "dtpc-progress-bar": DtpcProgressBar;
@@ -553,12 +768,15 @@ declare namespace LocalJSX {
         "dtpc-time-duration": DtpcTimeDuration;
         "icon-pause": IconPause;
         "icon-play": IconPlay;
+        "icon-volume": IconVolume;
     }
 }
 export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
+            "dtpc-button": LocalJSX.DtpcButton & JSXBase.HTMLAttributes<HTMLDtpcButtonElement>;
+            "dtpc-mute-button": LocalJSX.DtpcMuteButton & JSXBase.HTMLAttributes<HTMLDtpcMuteButtonElement>;
             "dtpc-play-button": LocalJSX.DtpcPlayButton & JSXBase.HTMLAttributes<HTMLDtpcPlayButtonElement>;
             "dtpc-player": LocalJSX.DtpcPlayer & JSXBase.HTMLAttributes<HTMLDtpcPlayerElement>;
             "dtpc-progress-bar": LocalJSX.DtpcProgressBar & JSXBase.HTMLAttributes<HTMLDtpcProgressBarElement>;
@@ -568,6 +786,7 @@ declare module "@stencil/core" {
             "dtpc-time-duration": LocalJSX.DtpcTimeDuration & JSXBase.HTMLAttributes<HTMLDtpcTimeDurationElement>;
             "icon-pause": LocalJSX.IconPause & JSXBase.HTMLAttributes<HTMLIconPauseElement>;
             "icon-play": LocalJSX.IconPlay & JSXBase.HTMLAttributes<HTMLIconPlayElement>;
+            "icon-volume": LocalJSX.IconVolume & JSXBase.HTMLAttributes<HTMLIconVolumeElement>;
         }
     }
 }

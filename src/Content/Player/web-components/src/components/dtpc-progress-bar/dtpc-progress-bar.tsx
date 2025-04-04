@@ -1,6 +1,6 @@
 import { Component, Event as StencilEvent, EventEmitter, Prop, h, State, Listen } from '@stencil/core';
 import type { PlayerState } from "@/store/player";
-import { SliderChangeEvent, SliderInputEvent } from '@/components/dtpc-slider/dtpc-slider';
+import { SliderInputEvent } from '@/components/dtpc-slider/dtpc-slider';
 
 @Component({
   tag: 'dtpc-progress-bar',
@@ -15,10 +15,6 @@ export class DtpcProgressBar {
 
   @State() audioDuration: number = this.duration;
 
-  @State() currentTime: number = 0;
-
-  @State() seekTime: number;
-
   @StencilEvent({
     eventName: 'dtpc-control-init',
     bubbles: true,
@@ -32,47 +28,28 @@ export class DtpcProgressBar {
 
     this.initControl.emit((state: PlayerState) => {
       self.state = state;
-      self.audioDuration = state.audioElm.duration || this.duration;
+      self.audioDuration = state.duration || this.duration;
     });
-  }
-
-  componentDidLoad() {
-    const self = this;
-
-    this.state.audioElm.addEventListener('loadedmetadata', (e: Event) => { self.handleLoadedMetaData(e); });
-    this.state.audioElm.addEventListener('timeupdate', (e: Event) => { self.handleTimeUpdate(e); });
-
-  }
-
-  handleLoadedMetaData(event: Event) {
-    this.currentTime = (event.target as HTMLAudioElement).currentTime;
-    this.audioDuration = (event.target as HTMLAudioElement).duration;
-  }
-
-  handleTimeUpdate(event: Event) {
-    this.currentTime = (event.target as HTMLAudioElement).currentTime;
   }
 
   @Listen('slider-input')
   handleInput(event: SliderInputEvent) {
     this.state.seekTime = event.detail;
-    this.seekTime = event.detail;
   }
 
   @Listen('slider-change')
-  handleChange(event: SliderChangeEvent) {
-    this.currentTime = event.detail;
-    this.seekTime = null;
-    this.state.audioElm.currentTime = this.currentTime;
-    this.state.seekTime = this.seekTime;
+  handleChange() {
+    this.state.seekTime = null;
   }
 
   render() {
-    const time = this.seekTime !== null ? this.seekTime : this.currentTime;
+    const { seekTime, currentTime, duration } = this.state;
+    const time = seekTime !== null ? seekTime : currentTime;
+    const max = duration || this.audioDuration;
 
     return (
-      <div class="wrapper" aria-label="Seek slider" aria-valuemin="0" aria-valuemax={this.audioDuration} aria-valuenow={time}>
-        <dtpc-slider tabindex={0} disabled={!this.audioDuration} defaultValue={0} min={0} max={this.audioDuration} step={1} value={time}></dtpc-slider>
+      <div class="wrapper" aria-label="Seek slider" aria-valuemin="0" aria-valuemax={max} aria-valuenow={time}>
+        <dtpc-slider tabindex={0} disabled={!max} defaultValue={0} min={0} max={max} step={1} value={time}></dtpc-slider>
       </div>
     );
   }

@@ -9,6 +9,8 @@
 
 import type { EventName, StencilReactComponent } from '@stencil/react-output-target/runtime';
 import { createComponent } from '@stencil/react-output-target/runtime';
+import { DtpcButton as DtpcButtonElement, defineCustomElement as defineDtpcButton } from "dovetail-podcasts-player-web-components/dist/components/dtpc-button.js";
+import { DtpcMuteButton as DtpcMuteButtonElement, defineCustomElement as defineDtpcMuteButton } from "dovetail-podcasts-player-web-components/dist/components/dtpc-mute-button.js";
 import { DtpcPlayButton as DtpcPlayButtonElement, defineCustomElement as defineDtpcPlayButton } from "dovetail-podcasts-player-web-components/dist/components/dtpc-play-button.js";
 import { DtpcPlayer as DtpcPlayerElement, defineCustomElement as defineDtpcPlayer } from "dovetail-podcasts-player-web-components/dist/components/dtpc-player.js";
 import { DtpcProgressBar as DtpcProgressBarElement, defineCustomElement as defineDtpcProgressBar } from "dovetail-podcasts-player-web-components/dist/components/dtpc-progress-bar.js";
@@ -18,16 +20,45 @@ import { DtpcTimeDisplay as DtpcTimeDisplayElement, defineCustomElement as defin
 import { DtpcTimeDuration as DtpcTimeDurationElement, defineCustomElement as defineDtpcTimeDuration } from "dovetail-podcasts-player-web-components/dist/components/dtpc-time-duration.js";
 import { IconPause as IconPauseElement, defineCustomElement as defineIconPause } from "dovetail-podcasts-player-web-components/dist/components/icon-pause.js";
 import { IconPlay as IconPlayElement, defineCustomElement as defineIconPlay } from "dovetail-podcasts-player-web-components/dist/components/icon-play.js";
+import { IconVolume as IconVolumeElement, defineCustomElement as defineIconVolume } from "dovetail-podcasts-player-web-components/dist/components/icon-volume.js";
 import React from 'react';
 
-type DtpcPlayButtonEvents = { onDtpcControlInit: EventName<CustomEvent<any>> };
+type DtpcButtonEvents = NonNullable<unknown>;
+
+export const DtpcButton: StencilReactComponent<DtpcButtonElement, DtpcButtonEvents> = /*@__PURE__*/ createComponent<DtpcButtonElement, DtpcButtonEvents>({
+    tagName: 'dtpc-button',
+    elementClass: DtpcButtonElement,
+    // @ts-ignore - React type of Stencil Output Target may differ from the React version used in the Nuxt.js project, this can be ignored.
+    react: React,
+    events: {} as DtpcButtonEvents,
+    defineCustomElement: defineDtpcButton
+});
+
+type DtpcMuteButtonEvents = { onDtpcControlInit: EventName<CustomEvent<any>> };
+
+export const DtpcMuteButton: StencilReactComponent<DtpcMuteButtonElement, DtpcMuteButtonEvents> = /*@__PURE__*/ createComponent<DtpcMuteButtonElement, DtpcMuteButtonEvents>({
+    tagName: 'dtpc-mute-button',
+    elementClass: DtpcMuteButtonElement,
+    // @ts-ignore - React type of Stencil Output Target may differ from the React version used in the Nuxt.js project, this can be ignored.
+    react: React,
+    events: { onDtpcControlInit: 'dtpc-control-init' } as DtpcMuteButtonEvents,
+    defineCustomElement: defineDtpcMuteButton
+});
+
+type DtpcPlayButtonEvents = {
+    onDtpcControlInit: EventName<CustomEvent<any>>,
+    onAudioTogglePaused: EventName<CustomEvent<any>>
+};
 
 export const DtpcPlayButton: StencilReactComponent<DtpcPlayButtonElement, DtpcPlayButtonEvents> = /*@__PURE__*/ createComponent<DtpcPlayButtonElement, DtpcPlayButtonEvents>({
     tagName: 'dtpc-play-button',
     elementClass: DtpcPlayButtonElement,
     // @ts-ignore - React type of Stencil Output Target may differ from the React version used in the Nuxt.js project, this can be ignored.
     react: React,
-    events: { onDtpcControlInit: 'dtpc-control-init' } as DtpcPlayButtonEvents,
+    events: {
+        onDtpcControlInit: 'dtpc-control-init',
+        onAudioTogglePaused: 'audio-toggle-paused'
+    } as DtpcPlayButtonEvents,
     defineCustomElement: defineDtpcPlayButton
 });
 
@@ -123,4 +154,15 @@ export const IconPlay: StencilReactComponent<IconPlayElement, IconPlayEvents> = 
     react: React,
     events: {} as IconPlayEvents,
     defineCustomElement: defineIconPlay
+});
+
+type IconVolumeEvents = NonNullable<unknown>;
+
+export const IconVolume: StencilReactComponent<IconVolumeElement, IconVolumeEvents> = /*@__PURE__*/ createComponent<IconVolumeElement, IconVolumeEvents>({
+    tagName: 'icon-volume',
+    elementClass: IconVolumeElement,
+    // @ts-ignore - React type of Stencil Output Target may differ from the React version used in the Nuxt.js project, this can be ignored.
+    react: React,
+    events: {} as IconVolumeEvents,
+    defineCustomElement: defineIconVolume
 });

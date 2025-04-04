@@ -28,14 +28,5 @@
 	"style": "file:./style-index.css",
 	"render": "file:./render.php",
 	"viewScript": "file:./view.js",
-	"attributes": {
-		"icon-style": {
-			"type": "string",
-			"enum": [
-				"outline",
-				"solid"
-			],
-			"default": "outline"
-		}
-	}
+	"attributes": {}
 }
