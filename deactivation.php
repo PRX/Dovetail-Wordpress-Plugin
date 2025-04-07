@@ -22,7 +22,9 @@ function dovetail_podcasts_deactivation_callback() {
 	do_action( 'dovetail_podcasts_deactivate' );
 
 	// TODO: Flush any caches.
+	delete_option( 'dovetail_podcasts_key' );
 	delete_option( 'dovetail_podcasts_settings-authentication' );
+	delete_transient( 'dovetail_podcasts_access_token' );
 }
 
 /**
@@ -60,6 +62,8 @@ function delete_dovetail_podcasts_data() {
 	delete_option( 'dovetail_podcasts_key' );
 	delete_option( 'dovetail_podcasts_settings-authentication' );
 	delete_option( 'dovetail_podcasts_settings-general' );
+
+	delete_transient( 'dovetail_podcasts_access_token' );
 
 	do_action( 'dovetail_podcasts_delete_data' );
 }

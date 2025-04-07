@@ -55,6 +55,10 @@ class PostMetaBox {
 
 		$this->post_types = $this->settings_api->get_option( 'post_types', 'general' );
 
+		if ( ! is_array( $this->post_types ) ) {
+			$this->post_types = [];
+		}
+
 		foreach ( $this->post_types as $post_type ) {
 			add_action( "rest_prepare_{$post_type}", [ $this, 'rest_prepare' ], 999, 3 );
 		}
