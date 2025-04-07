@@ -2,6 +2,9 @@ global.Audio = jest.fn().mockImplementation(() => ({
   addEventListener: jest.fn(),
   pause: jest.fn(),
   play: jest.fn(() => Promise.resolve()),
+  paused: true,
+  muted: false,
+  volume: 0.8,
 }));
 
 global.console = {

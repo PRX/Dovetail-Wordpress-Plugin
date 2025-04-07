@@ -30,10 +30,7 @@ export class DtpcMuteButton {
 
   @Listen('click')
   handleClick() {
-    if (!this.state?.audioElm) return;
-
-    this.state.audioElm.muted = !this.state.audioElm.muted;
-    this.state.muted = this.state.audioElm.muted;
+    this.state.muted = !this.state.muted;
   }
 
   render() {
@@ -48,7 +45,7 @@ export class DtpcMuteButton {
     return (
       <Host>
         <dtpc-button {...buttonAttributes}>
-          <icon-volume muted={muted} level={volume}></icon-volume>
+          <icon-volume muted={muted} volume={volume}></icon-volume>
         </dtpc-button>
       </Host>
     );

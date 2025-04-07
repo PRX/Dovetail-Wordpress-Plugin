@@ -11,7 +11,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   dtpc_player: () => (/* binding */ DtpcPlayer)
 /* harmony export */ });
-/* harmony import */ var _index_ngapiRTG_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index-ngapiRTG.js */ "../web-components/dist/dovetail-podcasts-player-web-components/index-ngapiRTG.js");
+/* harmony import */ var _index_DjC7PCMK_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index-DjC7PCMK.js */ "../web-components/dist/dovetail-podcasts-player-web-components/index-DjC7PCMK.js");
 
 const appendToMap = (map, propName, value) => {
   const items = map.get(propName);
@@ -40,14 +40,14 @@ const cleanupElements = debounce(map => {
   }
 }, 2000);
 const stencilSubscription = () => {
-  if (typeof _index_ngapiRTG_js__WEBPACK_IMPORTED_MODULE_0__.g !== 'function') {
+  if (typeof _index_DjC7PCMK_js__WEBPACK_IMPORTED_MODULE_0__.g !== 'function') {
     return {};
   }
   const elmsToUpdate = new Map();
   return {
     dispose: () => elmsToUpdate.clear(),
     get: propName => {
-      const elm = (0,_index_ngapiRTG_js__WEBPACK_IMPORTED_MODULE_0__.g)();
+      const elm = (0,_index_DjC7PCMK_js__WEBPACK_IMPORTED_MODULE_0__.g)();
       if (elm) {
         appendToMap(elmsToUpdate, propName, elm);
       }
@@ -55,12 +55,12 @@ const stencilSubscription = () => {
     set: propName => {
       const elements = elmsToUpdate.get(propName);
       if (elements) {
-        elmsToUpdate.set(propName, elements.filter(_index_ngapiRTG_js__WEBPACK_IMPORTED_MODULE_0__.f));
+        elmsToUpdate.set(propName, elements.filter(_index_DjC7PCMK_js__WEBPACK_IMPORTED_MODULE_0__.f));
       }
       cleanupElements(elmsToUpdate);
     },
     reset: () => {
-      elmsToUpdate.forEach(elms => elms.forEach(_index_ngapiRTG_js__WEBPACK_IMPORTED_MODULE_0__.f));
+      elmsToUpdate.forEach(elms => elms.forEach(_index_DjC7PCMK_js__WEBPACK_IMPORTED_MODULE_0__.f));
       cleanupElements(elmsToUpdate);
     }
   };
@@ -193,6 +193,7 @@ class playerStateFactory {
     const audioElm = new Audio();
     audioElm.preload = 'none';
     audioElm.src = src;
+    audioElm.volume = 0.8;
     const newStore = createStore({
       audioElm,
       currentTime: audioElm.currentTime,
@@ -207,7 +208,7 @@ class playerStateFactory {
   }
 }
 const factory = new playerStateFactory();
-const dtpcPlayerCss = ":host {\n  --_dtpc-player--foreground: var(--dtpc-player--primary-base, CanvasText);\n  --_dtpc-player--highlight: var(--dtpc-player--highlight, LinkText);\n  --_dtpc-player--surface: var(--dtpc-player--surface, Canvas);\n  --_dtpc-player--surface-opacity: var(--dtpc-player--bg-opacity, 0);\n  --_dtpc-player--surface-blur: var(--dtpc-player--bg-blur, 0);\n  --_dtpc-player--padding: var(--dtpc-player--padding, 0);\n  --_dtpc-player--padding-inline: var(--dtpc-player--padding-inline, var(--_dtpc-player--padding));\n  --_dtpc-player--padding-block: var(--dtpc-player--padding-block, var(--_dtpc-player--padding));\n  --_dtpc-player--spacing: var(--dtpc-player--spacing, 0.5rem);\n\n  /* Time */\n  --_dtpc-player--time--color: var(--dtpc-player--time--font-size, var(--_dtpc-player--foreground));\n  --_dtpc-player--time--font-size: var(--dtpc-player--time--font-size, 0.875rem);\n  --_dtpc-player--time--font-family: var(--dtpc-player--time--font-family, ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, 'DejaVu Sans Mono', monospace);\n  --_dtpc-player--time--font-weight: var(--dtpc-player--time--font-weight, inherit);\n}\n\n.wrapper {\n  display: grid;\n\n  & > * {\n    grid-column: 1 / -1;\n    grid-row: 1 / -1;\n  }\n}\n\n.main {\n  --_spacing: var(--_dtpc-player--spacing);\n  --_padding-inline: var(--_dtpc-player--padding-inline);\n  --_padding-block: var(--_dtpc-player--padding-block);\n\n  display: flex;\n  align-items: center;\n  gap: var(--_spacing);\n\n  padding-inline: var(--_padding-inline);\n  padding-block: var(--_padding-block);\n}\n";
+const dtpcPlayerCss = ":host {\n  --_dtpc-player--foreground: var(--dtpc-player--foreground, CanvasText);\n  --_dtpc-player--highlight: var(--dtpc-player--highlight, LinkText);\n  --_dtpc-player--surface: var(--dtpc-player--surface, Canvas);\n  --_dtpc-player--surface-opacity: var(--dtpc-player--bg-opacity, 0);\n  --_dtpc-player--surface-blur: var(--dtpc-player--bg-blur, 0);\n  --_dtpc-player--padding: var(--dtpc-player--padding, 0);\n  --_dtpc-player--padding-inline: var(--dtpc-player--padding-inline, var(--_dtpc-player--padding));\n  --_dtpc-player--padding-block: var(--dtpc-player--padding-block, var(--_dtpc-player--padding));\n  --_dtpc-player--spacing: var(--dtpc-player--spacing, 0.5rem);\n\n  /* Time */\n  --_dtpc-player--time--color: var(--dtpc-player--time--font-size, var(--_dtpc-player--foreground));\n  --_dtpc-player--time--font-size: var(--dtpc-player--time--font-size, 0.875rem);\n  --_dtpc-player--time--font-family: var(--dtpc-player--time--font-family, ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, 'DejaVu Sans Mono', monospace);\n  --_dtpc-player--time--font-weight: var(--dtpc-player--time--font-weight, inherit);\n}\n\n.wrapper {\n  display: grid;\n\n  & > * {\n    grid-column: 1 / -1;\n    grid-row: 1 / -1;\n  }\n}\n\n.main {\n  --_spacing: var(--_dtpc-player--spacing);\n  --_padding-inline: var(--_dtpc-player--padding-inline);\n  --_padding-block: var(--_dtpc-player--padding-block);\n\n  display: flex;\n  align-items: center;\n  gap: var(--_spacing);\n\n  padding-inline: var(--_padding-inline);\n  padding-block: var(--_padding-block);\n}\n";
 const DtpcPlayer = class {
   constructor(hostRef) {
     Object.defineProperty(this, "state", {
@@ -222,7 +223,19 @@ const DtpcPlayer = class {
       writable: true,
       value: void 0
     });
-    (0,_index_ngapiRTG_js__WEBPACK_IMPORTED_MODULE_0__.r)(this, hostRef);
+    Object.defineProperty(this, "duration", {
+      enumerable: true,
+      configurable: true,
+      writable: true,
+      value: 0
+    });
+    Object.defineProperty(this, "audioDuration", {
+      enumerable: true,
+      configurable: true,
+      writable: true,
+      value: this.duration
+    });
+    (0,_index_DjC7PCMK_js__WEBPACK_IMPORTED_MODULE_0__.r)(this, hostRef);
   }
   connectedCallback() {
     const {
@@ -233,7 +246,9 @@ const DtpcPlayer = class {
       audioElm
     } = state;
     let previousSeekTime = state.seekTime;
+    this.audioDuration = this.duration;
     this.state = state;
+    state.duration = this.audioDuration;
     onChange('seekTime', seekTime => {
       if (previousSeekTime !== null && seekTime === null) {
         audioElm.currentTime = previousSeekTime;
@@ -276,19 +291,19 @@ const DtpcPlayer = class {
     this.state.audioElm.src = newSrc;
   }
   render() {
-    return (0,_index_ngapiRTG_js__WEBPACK_IMPORTED_MODULE_0__.h)(_index_ngapiRTG_js__WEBPACK_IMPORTED_MODULE_0__.d, {
-      key: 'cde20f2883fe586d3efdd23855aeebb0e43708f1'
-    }, (0,_index_ngapiRTG_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", {
-      key: 'a8a7b3a09b121b47e758029e85168271f04b8281',
+    return (0,_index_DjC7PCMK_js__WEBPACK_IMPORTED_MODULE_0__.h)(_index_DjC7PCMK_js__WEBPACK_IMPORTED_MODULE_0__.d, {
+      key: '9418451f204b2349cc27758716a085bfd8ede364'
+    }, (0,_index_DjC7PCMK_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", {
+      key: 'e38c38f166ca83ea738a03721804e23527cb2a2a',
       class: "wrapper"
-    }, (0,_index_ngapiRTG_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", {
-      key: '35c7813fd534645b0a378746bc4463efc9ff1337',
+    }, (0,_index_DjC7PCMK_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", {
+      key: 'e1fadfdebf7dba6b6a15fa1d7e1689d114e067ae',
       part: "backdrop"
-    }), (0,_index_ngapiRTG_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", {
-      key: '8ae893040d00c900ceb20e867fc7a427b737ea6f',
+    }), (0,_index_DjC7PCMK_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", {
+      key: '30afd10f8dd61f515e250697026190da73c46e8f',
       class: "main"
-    }, (0,_index_ngapiRTG_js__WEBPACK_IMPORTED_MODULE_0__.h)("slot", {
-      key: '9228924b317f820cdfea83668283135bc640a933'
+    }, (0,_index_DjC7PCMK_js__WEBPACK_IMPORTED_MODULE_0__.h)("slot", {
+      key: '8b500e39691ead695867040475031de1b51a5537'
     }))));
   }
   static get watchers() {
@@ -303,4 +318,4 @@ DtpcPlayer.style = dtpcPlayerCss;
 /***/ })
 
 }]);
-//# sourceMappingURL=web-components_dist_dovetail-podcasts-player-web-components_dtpc-player_entry_js.js.map?ver=35316722465723208c1a
+//# sourceMappingURL=web-components_dist_dovetail-podcasts-player-web-components_dtpc-player_entry_js.js.map?ver=1ba94b6f9bf2b6ea1d05

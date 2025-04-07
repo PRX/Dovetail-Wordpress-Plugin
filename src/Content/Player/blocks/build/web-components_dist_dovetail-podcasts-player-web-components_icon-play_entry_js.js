@@ -11,12 +11,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   icon_play: () => (/* binding */ IconPlay)
 /* harmony export */ });
-/* harmony import */ var _index_ngapiRTG_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index-ngapiRTG.js */ "../web-components/dist/dovetail-podcasts-player-web-components/index-ngapiRTG.js");
+/* harmony import */ var _index_DjC7PCMK_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index-DjC7PCMK.js */ "../web-components/dist/dovetail-podcasts-player-web-components/index-DjC7PCMK.js");
 /* harmony import */ var _lucide_Tggp1j09_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./lucide-Tggp1j09.js */ "../web-components/dist/dovetail-podcasts-player-web-components/lucide-Tggp1j09.js");
 /* harmony import */ var _index_BprZZpRs_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./index-BprZZpRs.js */ "../web-components/dist/dovetail-podcasts-player-web-components/index-BprZZpRs.js");
 
 
 
+const iconCss = ".lucide-icon {\n  display: inline-grid;\n  place-items: center;\n  aspect-ratio: 1;\n\n  svg {\n    width: 100%;\n    height: auto;\n  }\n}\n";
 const IconPlay = class {
   constructor(hostRef) {
     Object.defineProperty(this, "alignmentBaseline", {
@@ -499,16 +500,16 @@ const IconPlay = class {
       writable: true,
       value: void 0
     });
-    (0,_index_ngapiRTG_js__WEBPACK_IMPORTED_MODULE_0__.r)(this, hostRef);
+    (0,_index_DjC7PCMK_js__WEBPACK_IMPORTED_MODULE_0__.r)(this, hostRef);
   }
   get el() {
-    return (0,_index_ngapiRTG_js__WEBPACK_IMPORTED_MODULE_0__.e)(this);
+    return (0,_index_DjC7PCMK_js__WEBPACK_IMPORTED_MODULE_0__.e)(this);
   }
   render() {
     const inner = (0,_lucide_Tggp1j09_js__WEBPACK_IMPORTED_MODULE_1__.c)(_lucide_Tggp1j09_js__WEBPACK_IMPORTED_MODULE_1__.a);
     Object.entries(Object.assign({}, (0,_index_BprZZpRs_js__WEBPACK_IMPORTED_MODULE_2__.a)(this.el), this.getProps())).forEach(([name, value]) => inner.setAttribute(name, value));
-    return (0,_index_ngapiRTG_js__WEBPACK_IMPORTED_MODULE_0__.h)(_index_ngapiRTG_js__WEBPACK_IMPORTED_MODULE_0__.d, {
-      key: '849adc95f74ae9680edda63099a79eef613a44ef',
+    return (0,_index_DjC7PCMK_js__WEBPACK_IMPORTED_MODULE_0__.h)(_index_DjC7PCMK_js__WEBPACK_IMPORTED_MODULE_0__.d, {
+      key: '06b02e3b078345ac5e695be9eece4b7165954c23',
       innerHTML: inner.outerHTML,
       class: "lucide-icon"
     });
@@ -523,6 +524,7 @@ const IconPlay = class {
     }, {});
   }
 };
+IconPlay.style = iconCss;
 
 
 /***/ }),
@@ -19530,4 +19532,4 @@ const createIcons = ({
 /***/ })
 
 }]);
-//# sourceMappingURL=web-components_dist_dovetail-podcasts-player-web-components_icon-play_entry_js.js.map?ver=a0af248718b123c83a04
+//# sourceMappingURL=web-components_dist_dovetail-podcasts-player-web-components_icon-play_entry_js.js.map?ver=b211574010eaf1e57a55

@@ -15,12 +15,5 @@
   --dtpc-slider--focus-ring-offset: var(--dtpc-progress-bar--focus-ring-offset, 0.125rem);
   --dtpc-slider--focus-ring-width: var(--dtpc-progress-bar--focus-ring-width, 2px);
 
-  display: contents;
-}
-
-.wrapper {
   flex-grow: 1;
-
-  display: grid;
-  align-items: center;
 }

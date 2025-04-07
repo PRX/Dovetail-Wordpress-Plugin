@@ -338,11 +338,12 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-const dtpcButtonCss = ":host {\n  --_dtpc-button--size: var(--dtpc-button--size, 1.5rem);\n  --_dtpc-button--padding: var(--dtpc-button--padding, 0.325rem);\n  --_dtpc-button--foreground: var(--dtpc-button--foreground, CanvasText);\n  --_dtpc-button--foreground--hover: var(--dtpc-button--foreground--hover, CanvasText);\n  --_dtpc-button--foreground--active: var(--dtpc-button--foreground--active, CanvasText);\n  --_dtpc-button--surface: var(--_dtpc-button--surface, CanvasText);\n  --_dtpc-button--surface--hover: var(--dtpc-button--surface--hover, CanvasText);\n  --_dtpc-button--surface--active: var(--dtpc-button--surface--active, CanvasText);\n  --_dtpc-button--surface-opacity: var(--dtpc-button--surface-opacity, 0);\n  --_dtpc-button--surface-opacity--hover: var(--dtpc-button--surface-opacity--hover, 20%);\n  --_dtpc-button--surface-opacity--active: var(--dtpc-button--surface-opacity--active, 10%);\n  --_dtpc-button--border-color: var(--dtpc-button--border-color, transparent);\n  --_dtpc-button--border-color--hover: var(--dtpc-button--border-color--hover, transparent);\n  --_dtpc-button--border-color--active: var(--dtpc-button--border-color--active, transparent);\n  --_dtpc-button--border-radius: var(--dtpc-button--border-radius, 100vw);\n  --_dtpc-button--border-radius--hover: var(--dtpc-button--border-radius--hover, 100vw);\n  --_dtpc-button--border-radius--active: var(--dtpc-button--border-radius--active, 100vw);\n  --_dtpc-button--border-width: var(--dtpc-button--border-width, 0);\n  --_dtpc-button--border-width--hover: var(--dtpc-button--border-width--hover, 0);\n  --_dtpc-button--border-width--active: var(--dtpc-button--border-width--active, 0);\n  --_dtpc-button--focus-ring-color: var(--dtpc-button--focus-ring-color, LinkText);\n  --_dtpc-button--focus-ring-offset: var(--dtpc-button--focus-ring-offset, 0.125rem);\n  --_dtpc-button--focus-ring-width: var(--dtpc-button--focus-ring-width, 2px);\n}\n\n:host {\n  --_size: var(--_dtpc-button--size);\n  --_padding: var(--_dtpc-button--padding);\n  --_foreground: var(--_dtpc-button--foreground);\n  --_surface: var(--_dtpc-button--surface);\n  --_surface-opacity: var(--_dtpc-button--surface-opacity);\n  --_border-color: var(--_dtpc-button--border-color);\n  --_border-radius: var(--_dtpc-button--border-radius);\n  --_border-width: var(--_dtpc-button--border-width);\n  --_focus-ring-color: var(--_dtpc-button--focus-ring-color);\n  --_focus-ring-offset: var(--_dtpc-button--focus-ring-offset);\n  --_focus-ring-width: var(--_dtpc-button--focus-ring-width);\n\n  all: unset;\n\n  transition-property: background-color, border-color, border-width, border-radius, color;\n  transition-duration: 200ms;\n  transition-timing-function: ease;\n\n  box-sizing: content-box;\n  display: inline-grid;\n  place-items: stretch;\n  justify-content: stretch;\n  aspect-ratio: 1;\n  width: var(--_size);\n\n  padding: var(--_padding);\n\n  border-style: solid;\n  border-color: var(--_border-color);\n  border-width: var(--_border-width);\n  border-radius: var(--_border-radius);\n\n  background-color: color-mix(in oklch, var(--_surface) var(--_surface-opacity), transparent);\n\n  color: var(--_foreground);\n\n  cursor: pointer;\n  user-select: none;\n}\n\n:host(:hover) {\n  --_foreground: var(--_dtpc-button--foreground--hover);\n  --_surface: var(--_dtpc-button--surface--hover);\n  --_surface-opacity: var(--_dtpc-button--surface-opacity--hover);\n  --_border-color: var(--_dtpc-button--border-color--hover);\n  --_border-width: var(--_dtpc-button--border-width--hover);\n  --_border-radius: var(--_dtpc-button--border-radius--hover);\n}\n\n:host(:active) {\n  --_foreground: var(--_dtpc-button--foreground--active);\n  --_surface: var(--_dtpc-button--surface--active);\n  --_surface-opacity: var(--_dtpc-button--surface-opacity--active);\n  --_border-color: var(--_dtpc-button--border-color--active);\n  --_border-width: var(--_dtpc-button--border-width--active);\n  --_border-radius: var(--_dtpc-button--border-radius--active);\n}\n\n:host(:focus-visible) {\n  outline-style: solid;\n  outline-offset: var(--_focus-ring-offset);\n  outline-color: var(--_focus-ring-color);\n  outline-width: var(--_focus-ring-width);\n}\n\n.lucide-icon {\n  display: grid;\n  place-items: center;\n  aspect-ratio: 1;\n  width: 100%;\n\n  svg {\n    width: 100%;\n    height: auto;\n  }\n}\n";
+const dtpcButtonCss = ":host{--_dtpc-button--size:var(--dtpc-button--size, 1.5rem);--_dtpc-button--padding:var(--dtpc-button--padding, 0.325rem);--_dtpc-button--foreground:var(--dtpc-button--foreground, var(--_dtpc-player--foreground));--_dtpc-button--foreground--hover:var(--dtpc-button--foreground--hover, var(--_dtpc-player--foreground));--_dtpc-button--foreground--active:var(--dtpc-button--foreground--active, var(--_dtpc-player--foreground));--_dtpc-button--surface:var(--_dtpc-button--surface, var(--_dtpc-player--foreground));--_dtpc-button--surface--hover:var(--dtpc-button--surface--hover, var(--_dtpc-player--foreground));--_dtpc-button--surface--active:var(--dtpc-button--surface--active, var(--_dtpc-player--foreground));--_dtpc-button--surface-opacity:var(--dtpc-button--surface-opacity, 0);--_dtpc-button--surface-opacity--hover:var(--dtpc-button--surface-opacity--hover, 20%);--_dtpc-button--surface-opacity--active:var(--dtpc-button--surface-opacity--active, 10%);--_dtpc-button--border-color:var(--dtpc-button--border-color, transparent);--_dtpc-button--border-color--hover:var(--dtpc-button--border-color--hover, transparent);--_dtpc-button--border-color--active:var(--dtpc-button--border-color--active, transparent);--_dtpc-button--border-radius:var(--dtpc-button--border-radius, 100vw);--_dtpc-button--border-radius--hover:var(--dtpc-button--border-radius--hover, 100vw);--_dtpc-button--border-radius--active:var(--dtpc-button--border-radius--active, 100vw);--_dtpc-button--border-width:var(--dtpc-button--border-width, 0);--_dtpc-button--border-width--hover:var(--dtpc-button--border-width--hover, 0);--_dtpc-button--border-width--active:var(--dtpc-button--border-width--active, 0);--_dtpc-button--focus-ring-color:var(--dtpc-button--focus-ring-color, var(--_dtpc-player--highlight));--_dtpc-button--focus-ring-offset:var(--dtpc-button--focus-ring-offset, 0.125rem);--_dtpc-button--focus-ring-width:var(--dtpc-button--focus-ring-width, 2px)}:host{transition-property:background-color, border-color, border-width, border-radius, color;transition-duration:200ms;transition-timing-function:ease;box-sizing:content-box;display:inline-grid;place-items:stretch;justify-content:stretch;aspect-ratio:1;width:var(--_dtpc-button--size);padding:var(--_dtpc-button--padding);border-style:solid;border-color:var(--_dtpc-button--border-color);border-width:var(--_dtpc-button--border-width);border-radius:var(--_dtpc-button--border-radius);background-color:color-mix(in oklch, var(--_dtpc-button--surface) var(--_dtpc-button--surface-opacity), transparent);color:var(--_dtpc-button--foreground);cursor:pointer;user-select:none}:host(:hover){--_dtpc-button--foreground:var(--_dtpc-button--foreground--hover);--_dtpc-button--surface:var(--_dtpc-button--surface--hover);--_dtpc-button--surface-opacity:var(--_dtpc-button--surface-opacity--hover);--_dtpc-button--border-color:var(--_dtpc-button--border-color--hover);--_dtpc-button--border-width:var(--_dtpc-button--border-width--hover);--_dtpc-button--border-radius:var(--_dtpc-button--border-radius--hover)}:host(:active){--_dtpc-button--foreground:var(--_dtpc-button--foreground--active);--_dtpc-button--surface:var(--_dtpc-button--surface--active);--_dtpc-button--surface-opacity:var(--_dtpc-button--surface-opacity--active);--_dtpc-button--border-color:var(--_dtpc-button--border-color--active);--_dtpc-button--border-width:var(--_dtpc-button--border-width--active);--_dtpc-button--border-radius:var(--_dtpc-button--border-radius--active)}:host(:focus-visible){outline-style:solid;outline-offset:var(--_dtpc-button--focus-ring-offset);outline-color:var(--_dtpc-button--focus-ring-color);outline-width:var(--_dtpc-button--focus-ring-width)}";
 const DtpcButton = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.p)(class DtpcButton extends _index2_js__WEBPACK_IMPORTED_MODULE_0__.H {
   constructor() {
     super();
     this.__registerHost();
+    this.__attachShadow();
   }
   get el() {
     return this;
@@ -350,24 +351,25 @@ const DtpcButton = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.p)(class DtpcButto
   handleKeyDown(ev) {
     console.log(ev);
     if (ev.code === 'Space') {
+      ev.preventDefault();
       this.el.click();
     }
   }
   render() {
     const buttonAttributes = (0,_index4_js__WEBPACK_IMPORTED_MODULE_2__.a)(this.el);
     return (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)(_index2_js__WEBPACK_IMPORTED_MODULE_0__.d, {
-      key: '82ae4a6d9191c435e24ff27127b600625e59ca48',
+      key: 'c0214de80f82d9065a2b31b9f04db5cca14b797b',
       role: "button",
       tabindex: "0",
       ...buttonAttributes
     }, (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)("slot", {
-      key: '2f60e169d1c1763d7b27a611e25eb4828667a509'
+      key: 'e3df54b537f25ff99ae7199211ea5417567fe2b1'
     }));
   }
   static get style() {
     return dtpcButtonCss;
   }
-}, [4, "dtpc-button", undefined, [[0, "keydown", "handleKeyDown"]]]);
+}, [1, "dtpc-button", undefined, [[0, "keydown", "handleKeyDown"]]]);
 function defineCustomElement() {
   if (typeof customElements === "undefined") {
     return;
@@ -408,7 +410,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-const dtpcMuteButtonCss = ":host{--dtpc-button--size:var(--dtpc-play-button--size);--dtpc-button--padding:var(--dtpc-play-button--padding);--dtpc-button--foreground:var(--dtpc-play-button--foreground);--dtpc-button--foreground--hover:var(--dtpc-play-button--foreground--hover);--dtpc-button--foreground--active:var(--dtpc-play-button--foreground--playing);--dtpc-button--surface:var(--dtpc-play-button--surface);--dtpc-button--surface--hover:var(--dtpc-play-button--surface--hover);--dtpc-button--surface--active:var(--dtpc-play-button--surface--playing);--dtpc-button--surface-opacity:var(--dtpc-play-button--surface-opacity);--dtpc-button--surface-opacity--hover:var(--dtpc-play-button--surface-opacity--hover);--dtpc-button--surface-opacity--active:var(--dtpc-play-button--surface-opacity--playing);--dtpc-button--border-color:var(--dtpc-play-button--border-color);--dtpc-button--border-color--hover:var(--dtpc-play-button--border-color--hover);--dtpc-button--border-color--active:var(--dtpc-play-button--border-color--playing);--dtpc-button--border-radius:var(--dtpc-play-button--border-radius);--dtpc-button--border-radius--hover:var(--dtpc-play-button--border-radius--hover);--dtpc-button--border-radius--active:var(--dtpc-play-button--border-radius--playing);--dtpc-button--border-width:var(--dtpc-play-button--border-width);--dtpc-button--border-width--hover:var(--dtpc-play-button--border-width--hover);--dtpc-button--border-width--active:var(--dtpc-play-button--border-width--playing);--dtpc-button--focus-ring-color:var(--dtpc-play-button--focus-ring-color);--dtpc-button--focus-ring-offset:var(--dtpc-play-button--focus-ring-offset);--dtpc-button--focus-ring-width:var(--dtpc-play-button--focus-ring-width)}";
+const dtpcMuteButtonCss = ":host{--dtpc-button--size:var(--dtpc-mute-button--size);--dtpc-button--padding:var(--dtpc-mute-button--padding);--dtpc-button--foreground:var(--dtpc-mute-button--foreground);--dtpc-button--foreground--hover:var(--dtpc-mute-button--foreground--hover);--dtpc-button--foreground--active:var(--dtpc-mute-button--foreground--playing);--dtpc-button--surface:var(--dtpc-mute-button--surface);--dtpc-button--surface--hover:var(--dtpc-mute-button--surface--hover);--dtpc-button--surface--active:var(--dtpc-mute-button--surface--playing);--dtpc-button--surface-opacity:var(--dtpc-mute-button--surface-opacity);--dtpc-button--surface-opacity--hover:var(--dtpc-mute-button--surface-opacity--hover);--dtpc-button--surface-opacity--active:var(--dtpc-mute-button--surface-opacity--playing);--dtpc-button--border-color:var(--dtpc-mute-button--border-color);--dtpc-button--border-color--hover:var(--dtpc-mute-button--border-color--hover);--dtpc-button--border-color--active:var(--dtpc-mute-button--border-color--playing);--dtpc-button--border-radius:var(--dtpc-mute-button--border-radius);--dtpc-button--border-radius--hover:var(--dtpc-mute-button--border-radius--hover);--dtpc-button--border-radius--active:var(--dtpc-mute-button--border-radius--playing);--dtpc-button--border-width:var(--dtpc-mute-button--border-width);--dtpc-button--border-width--hover:var(--dtpc-mute-button--border-width--hover);--dtpc-button--border-width--active:var(--dtpc-mute-button--border-width--playing);--dtpc-button--focus-ring-color:var(--dtpc-mute-button--focus-ring-color);--dtpc-button--focus-ring-offset:var(--dtpc-mute-button--focus-ring-offset);--dtpc-button--focus-ring-width:var(--dtpc-mute-button--focus-ring-width)}";
 const DtpcMuteButton$1 = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.p)(class DtpcMuteButton extends _index2_js__WEBPACK_IMPORTED_MODULE_0__.H {
   constructor() {
     super();
@@ -433,9 +435,7 @@ const DtpcMuteButton$1 = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.p)(class Dtp
     this.initControl.emit(state => self.state = state);
   }
   handleClick() {
-    if (!this.state?.audioElm) return;
-    this.state.audioElm.muted = !this.state.audioElm.muted;
-    this.state.muted = this.state.audioElm.muted;
+    this.state.muted = !this.state.muted;
   }
   render() {
     const {
@@ -447,14 +447,14 @@ const DtpcMuteButton$1 = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.p)(class Dtp
       title: label
     };
     return (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)(_index2_js__WEBPACK_IMPORTED_MODULE_0__.d, {
-      key: '016ccdcaea411dbc9a5f1075beabbe03e7ab3a7f'
+      key: 'a8efd8bdd55a3e821b62176075003323deae633c'
     }, (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)("dtpc-button", {
-      key: 'f109969c26c4c879bd542fc3ee5b9293efa3142e',
+      key: 'e62a6d55080c12a30ab58c3b65eed816f3a13f37',
       ...buttonAttributes
     }, (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)("icon-volume", {
-      key: '71b1a1b71ce15a6093cc1a5c5546e7f21a2a25c6',
+      key: '6de5a70d0e7c670a38ca705e9aa507ecffa53c77',
       muted: muted,
-      level: volume
+      volume: volume
     })));
   }
   static get style() {
@@ -515,7 +515,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-const dtpcPlayButtonCss = ":host {\n  --dtpc-button--size: var(--dtpc-play-button--size, 2rem);\n  --dtpc-button--padding: var(--dtpc-play-button--padding, 0.5rem);\n  --dtpc-button--foreground: var(--dtpc-play-button--foreground);\n  --dtpc-button--foreground--hover: var(--dtpc-play-button--foreground--hover, Canvas);\n  --dtpc-button--foreground--active: var(--dtpc-play-button--foreground--playing);\n  --dtpc-button--surface: var(--dtpc-play-button--surface);\n  --dtpc-button--surface--hover: var(--dtpc-play-button--surface--hover, CanvasText);\n  --dtpc-button--surface--active: var(--dtpc-play-button--surface--playing);\n  --dtpc-button--surface-opacity: var(--dtpc-play-button--surface-opacity);\n  --dtpc-button--surface-opacity--hover: var(--dtpc-play-button--surface-opacity--hover, 100%);\n  --dtpc-button--surface-opacity--active: var(--dtpc-play-button--surface-opacity--playing, 0);\n  --dtpc-button--border-color: var(--dtpc-play-button--border-color, transparent);\n  --dtpc-button--border-color--hover: var(--dtpc-play-button--border-color--hover, transparent);\n  --dtpc-button--border-color--active: var(--dtpc-play-button--border-color--playing, CanvasText);\n  --dtpc-button--border-radius: var(--dtpc-play-button--border-radius);\n  --dtpc-button--border-radius--hover: var(--dtpc-play-button--border-radius--hover);\n  --dtpc-button--border-radius--active: var(--dtpc-play-button--border-radius--playing);\n  --dtpc-button--border-width: var(--dtpc-play-button--border-width, 0.125);\n  --dtpc-button--border-width--hover: var(--dtpc-play-button--border-width--hover, 0.125);\n  --dtpc-button--border-width--active: var(--dtpc-play-button--border-width--playing, 0.125);\n  --dtpc-button--focus-ring-color: var(--dtpc-play-button--focus-ring-color);\n  --dtpc-button--focus-ring-offset: var(--dtpc-play-button--focus-ring-offset);\n  --dtpc-button--focus-ring-width: var(--dtpc-play-button--focus-ring-width);\n}\n\n:host([data-status='playing']) {\n  --dtpc-button--foreground: var(--dtpc-button--foreground--active);\n  --dtpc-button--surface: var(--dtpc-button--surface--active);\n  --dtpc-button--surface-opacity: var(--dtpc-button--surface-opacity--active);\n  --dtpc-button--border-color: var(--dtpc-button--border-color--active);\n  --dtpc-button--border-width: var(--dtpc-button--border-width--active);\n  --dtpc-button--border-radius: var(--dtpc-button--border-radius--active);\n\n  &:hover {\n    --dtpc-button--surface-opacity: var(--dtpc-button--surface-opacity--hover);\n  }\n}\n";
+const dtpcPlayButtonCss = ":host {\n  --dtpc-button--size: var(--dtpc-play-button--size, 2rem);\n  --dtpc-button--padding: var(--dtpc-play-button--padding, 0.5rem);\n  --dtpc-button--foreground: var(--dtpc-play-button--foreground);\n  --dtpc-button--foreground--hover: var(--dtpc-play-button--foreground--hover, var(--_dtpc-player--surface));\n  --dtpc-button--foreground--active: var(--dtpc-play-button--foreground--playing);\n  --dtpc-button--surface: var(--dtpc-play-button--surface);\n  --dtpc-button--surface--hover: var(--dtpc-play-button--surface--hover, var(--_dtpc-player--foreground));\n  --dtpc-button--surface--active: var(--dtpc-play-button--surface--playing);\n  --dtpc-button--surface-opacity: var(--dtpc-play-button--surface-opacity);\n  --dtpc-button--surface-opacity--hover: var(--dtpc-play-button--surface-opacity--hover, 100%);\n  --dtpc-button--surface-opacity--active: var(--dtpc-play-button--surface-opacity--playing, 0);\n  --dtpc-button--border-color: var(--dtpc-play-button--border-color, transparent);\n  --dtpc-button--border-color--hover: var(--dtpc-play-button--border-color--hover, transparent);\n  --dtpc-button--border-color--active: var(--dtpc-play-button--border-color--playing, var(--_dtpc-player--foreground));\n  --dtpc-button--border-radius: var(--dtpc-play-button--border-radius);\n  --dtpc-button--border-radius--hover: var(--dtpc-play-button--border-radius--hover);\n  --dtpc-button--border-radius--active: var(--dtpc-play-button--border-radius--playing);\n  --dtpc-button--border-width: var(--dtpc-play-button--border-width, 0.125);\n  --dtpc-button--border-width--hover: var(--dtpc-play-button--border-width--hover, 0.125);\n  --dtpc-button--border-width--active: var(--dtpc-play-button--border-width--playing, 0.125);\n  --dtpc-button--focus-ring-color: var(--dtpc-play-button--focus-ring-color);\n  --dtpc-button--focus-ring-offset: var(--dtpc-play-button--focus-ring-offset);\n  --dtpc-button--focus-ring-width: var(--dtpc-play-button--focus-ring-width);\n}\n\n:host([data-status='playing']) {\n  --dtpc-button--foreground: var(--dtpc-button--foreground--active);\n  --dtpc-button--surface: var(--dtpc-button--surface--active);\n  --dtpc-button--surface-opacity: var(--dtpc-button--surface-opacity--active);\n  --dtpc-button--border-color: var(--dtpc-button--border-color--active);\n  --dtpc-button--border-width: var(--dtpc-button--border-width--active);\n  --dtpc-button--border-radius: var(--dtpc-button--border-radius--active);\n\n  &:hover {\n    --dtpc-button--surface-opacity: var(--dtpc-button--surface-opacity--hover);\n  }\n}\n";
 const DtpcPlayButton$1 = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.p)(class DtpcPlayButton extends _index2_js__WEBPACK_IMPORTED_MODULE_0__.H {
   constructor() {
     super();
@@ -559,10 +559,10 @@ const DtpcPlayButton$1 = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.p)(class Dtp
       title: label
     };
     return (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)(_index2_js__WEBPACK_IMPORTED_MODULE_0__.d, {
-      key: 'e2cab90940539931b2bd43e2705efabd5525afc2',
+      key: '06e758827b0c348c9dc7352742d24482b5c35760',
       "data-status": playing ? 'playing' : 'paused'
     }, (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)("dtpc-button", {
-      key: 'd65f82e16cabbfa0072830f7c175080ceb02cd51',
+      key: '43f8b4df8d104e706cfdf656f946db1bd3910949',
       ...buttonAttributes
     }, playing ? (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)("icon-pause", null) : (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)("icon-play", null)));
   }
@@ -801,6 +801,7 @@ class playerStateFactory {
     const audioElm = new Audio();
     audioElm.preload = 'none';
     audioElm.src = src;
+    audioElm.volume = 0.8;
     const newStore = createStore({
       audioElm,
       currentTime: audioElm.currentTime,
@@ -815,7 +816,7 @@ class playerStateFactory {
   }
 }
 const factory = new playerStateFactory();
-const dtpcPlayerCss = ":host {\n  --_dtpc-player--foreground: var(--dtpc-player--primary-base, CanvasText);\n  --_dtpc-player--highlight: var(--dtpc-player--highlight, LinkText);\n  --_dtpc-player--surface: var(--dtpc-player--surface, Canvas);\n  --_dtpc-player--surface-opacity: var(--dtpc-player--bg-opacity, 0);\n  --_dtpc-player--surface-blur: var(--dtpc-player--bg-blur, 0);\n  --_dtpc-player--padding: var(--dtpc-player--padding, 0);\n  --_dtpc-player--padding-inline: var(--dtpc-player--padding-inline, var(--_dtpc-player--padding));\n  --_dtpc-player--padding-block: var(--dtpc-player--padding-block, var(--_dtpc-player--padding));\n  --_dtpc-player--spacing: var(--dtpc-player--spacing, 0.5rem);\n\n  /* Time */\n  --_dtpc-player--time--color: var(--dtpc-player--time--font-size, var(--_dtpc-player--foreground));\n  --_dtpc-player--time--font-size: var(--dtpc-player--time--font-size, 0.875rem);\n  --_dtpc-player--time--font-family: var(--dtpc-player--time--font-family, ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, 'DejaVu Sans Mono', monospace);\n  --_dtpc-player--time--font-weight: var(--dtpc-player--time--font-weight, inherit);\n}\n\n.wrapper {\n  display: grid;\n\n  & > * {\n    grid-column: 1 / -1;\n    grid-row: 1 / -1;\n  }\n}\n\n.main {\n  --_spacing: var(--_dtpc-player--spacing);\n  --_padding-inline: var(--_dtpc-player--padding-inline);\n  --_padding-block: var(--_dtpc-player--padding-block);\n\n  display: flex;\n  align-items: center;\n  gap: var(--_spacing);\n\n  padding-inline: var(--_padding-inline);\n  padding-block: var(--_padding-block);\n}\n";
+const dtpcPlayerCss = ":host {\n  --_dtpc-player--foreground: var(--dtpc-player--foreground, CanvasText);\n  --_dtpc-player--highlight: var(--dtpc-player--highlight, LinkText);\n  --_dtpc-player--surface: var(--dtpc-player--surface, Canvas);\n  --_dtpc-player--surface-opacity: var(--dtpc-player--bg-opacity, 0);\n  --_dtpc-player--surface-blur: var(--dtpc-player--bg-blur, 0);\n  --_dtpc-player--padding: var(--dtpc-player--padding, 0);\n  --_dtpc-player--padding-inline: var(--dtpc-player--padding-inline, var(--_dtpc-player--padding));\n  --_dtpc-player--padding-block: var(--dtpc-player--padding-block, var(--_dtpc-player--padding));\n  --_dtpc-player--spacing: var(--dtpc-player--spacing, 0.5rem);\n\n  /* Time */\n  --_dtpc-player--time--color: var(--dtpc-player--time--font-size, var(--_dtpc-player--foreground));\n  --_dtpc-player--time--font-size: var(--dtpc-player--time--font-size, 0.875rem);\n  --_dtpc-player--time--font-family: var(--dtpc-player--time--font-family, ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, 'DejaVu Sans Mono', monospace);\n  --_dtpc-player--time--font-weight: var(--dtpc-player--time--font-weight, inherit);\n}\n\n.wrapper {\n  display: grid;\n\n  & > * {\n    grid-column: 1 / -1;\n    grid-row: 1 / -1;\n  }\n}\n\n.main {\n  --_spacing: var(--_dtpc-player--spacing);\n  --_padding-inline: var(--_dtpc-player--padding-inline);\n  --_padding-block: var(--_dtpc-player--padding-block);\n\n  display: flex;\n  align-items: center;\n  gap: var(--_spacing);\n\n  padding-inline: var(--_padding-inline);\n  padding-block: var(--_padding-block);\n}\n";
 const DtpcPlayer$1 = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.p)(class DtpcPlayer extends _index2_js__WEBPACK_IMPORTED_MODULE_0__.H {
   constructor() {
     super();
@@ -831,6 +832,18 @@ const DtpcPlayer$1 = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.p)(class DtpcPla
       writable: true,
       value: void 0
     });
+    Object.defineProperty(this, "duration", {
+      enumerable: true,
+      configurable: true,
+      writable: true,
+      value: 0
+    });
+    Object.defineProperty(this, "audioDuration", {
+      enumerable: true,
+      configurable: true,
+      writable: true,
+      value: this.duration
+    });
     this.__registerHost();
     this.__attachShadow();
   }
@@ -843,7 +856,9 @@ const DtpcPlayer$1 = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.p)(class DtpcPla
       audioElm
     } = state;
     let previousSeekTime = state.seekTime;
+    this.audioDuration = this.duration;
     this.state = state;
+    state.duration = this.audioDuration;
     onChange('seekTime', seekTime => {
       if (previousSeekTime !== null && seekTime === null) {
         audioElm.currentTime = previousSeekTime;
@@ -887,18 +902,18 @@ const DtpcPlayer$1 = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.p)(class DtpcPla
   }
   render() {
     return (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)(_index2_js__WEBPACK_IMPORTED_MODULE_0__.d, {
-      key: 'cde20f2883fe586d3efdd23855aeebb0e43708f1'
+      key: '9418451f204b2349cc27758716a085bfd8ede364'
     }, (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", {
-      key: 'a8a7b3a09b121b47e758029e85168271f04b8281',
+      key: 'e38c38f166ca83ea738a03721804e23527cb2a2a',
       class: "wrapper"
     }, (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", {
-      key: '35c7813fd534645b0a378746bc4463efc9ff1337',
+      key: 'e1fadfdebf7dba6b6a15fa1d7e1689d114e067ae',
       part: "backdrop"
     }), (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", {
-      key: '8ae893040d00c900ceb20e867fc7a427b737ea6f',
+      key: '30afd10f8dd61f515e250697026190da73c46e8f',
       class: "main"
     }, (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)("slot", {
-      key: '9228924b317f820cdfea83668283135bc640a933'
+      key: '8b500e39691ead695867040475031de1b51a5537'
     }))));
   }
   static get watchers() {
@@ -910,7 +925,9 @@ const DtpcPlayer$1 = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.p)(class DtpcPla
     return dtpcPlayerCss;
   }
 }, [1, "dtpc-player", {
-  "src": [1]
+  "src": [1],
+  "duration": [2],
+  "audioDuration": [32]
 }, [[0, "audio-toggle-paused", "handleTogglePaused"], [0, "dtpc-control-init", "handleControlInit"]], {
   "src": ["watchSrcHandler"]
 }]);
@@ -949,10 +966,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   defineCustomElement: () => (/* binding */ defineCustomElement)
 /* harmony export */ });
 /* harmony import */ var _index2_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index2.js */ "../web-components/dist/components/index2.js");
-/* harmony import */ var _dtpc_slider2_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./dtpc-slider2.js */ "../web-components/dist/components/dtpc-slider2.js");
+/* harmony import */ var _index5_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./index5.js */ "../web-components/dist/components/index5.js");
+/* harmony import */ var _index3_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./index3.js */ "../web-components/dist/components/index3.js");
+/* harmony import */ var _dtpc_slider2_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./dtpc-slider2.js */ "../web-components/dist/components/dtpc-slider2.js");
 
 
-const dtpcProgressBarCss = ":host{--dtpc-slider--scrubber--color:var(--dtpc-progress-bar--scrubber--color, var(--_dtpc-player--surface, white));--dtpc-slider--scrubber--size:var(--dtpc-progress-bar--scrubber--size, 1.25rem);--dtpc-slider--scrubber--border-color:var(--dtpc-progress-bar--scrubber--border-color, var(--_dtpc-player--foreground, currentColor));--dtpc-slider--scrubber--border-width:var(--dtpc-progress-bar--scrubber--border-width, 0.125rem);--dtpc-slider--scrubber--border-radius:var(--dtpc-progress-bar--scrubber--border-radius, 100vw);--dtpc-slider--progress--color:var(--dtpc-progress-bar--progress--color, var(--_dtpc-player--foreground, currentColor));--dtpc-slider--track--color:var(--dtpc-progress-bar--track--color, var(--_dtpc-player--surface, transparent));--dtpc-slider--track--height:var(--dtpc-progress-bar--track--height, 0.5rem);--dtpc-slider--track--radius:var(--dtpc-progress-bar--track--radius, 100vw);--dtpc-slider--track--border-color:var(--dtpc-progress-bar--track--border-color, var(--_dtpc-player--foreground, currentColor));--dtpc-slider--track--border-width:var(--dtpc-progress-bar--track--border-width, 0.125rem);--dtpc-slider--track--border-offset:var(--dtpc-progress-bar--track--border-offset, 0.125rem);--dtpc-slider--focus-ring-color:var(--dtpc-progress-bar--focus-ring-color, var(--_dtpc-player--highlight));--dtpc-slider--focus-ring-offset:var(--dtpc-progress-bar--focus-ring-offset, 0.125rem);--dtpc-slider--focus-ring-width:var(--dtpc-progress-bar--focus-ring-width, 2px);display:contents}.wrapper{flex-grow:1;display:grid;align-items:center}";
+
+
+const dtpcProgressBarCss = ":host{--dtpc-slider--scrubber--color:var(--dtpc-progress-bar--scrubber--color, var(--_dtpc-player--surface, white));--dtpc-slider--scrubber--size:var(--dtpc-progress-bar--scrubber--size, 1.25rem);--dtpc-slider--scrubber--border-color:var(--dtpc-progress-bar--scrubber--border-color, var(--_dtpc-player--foreground, currentColor));--dtpc-slider--scrubber--border-width:var(--dtpc-progress-bar--scrubber--border-width, 0.125rem);--dtpc-slider--scrubber--border-radius:var(--dtpc-progress-bar--scrubber--border-radius, 100vw);--dtpc-slider--progress--color:var(--dtpc-progress-bar--progress--color, var(--_dtpc-player--foreground, currentColor));--dtpc-slider--track--color:var(--dtpc-progress-bar--track--color, var(--_dtpc-player--surface, transparent));--dtpc-slider--track--height:var(--dtpc-progress-bar--track--height, 0.5rem);--dtpc-slider--track--radius:var(--dtpc-progress-bar--track--radius, 100vw);--dtpc-slider--track--border-color:var(--dtpc-progress-bar--track--border-color, var(--_dtpc-player--foreground, currentColor));--dtpc-slider--track--border-width:var(--dtpc-progress-bar--track--border-width, 0.125rem);--dtpc-slider--track--border-offset:var(--dtpc-progress-bar--track--border-offset, 0.125rem);--dtpc-slider--focus-ring-color:var(--dtpc-progress-bar--focus-ring-color, var(--_dtpc-player--highlight));--dtpc-slider--focus-ring-offset:var(--dtpc-progress-bar--focus-ring-offset, 0.125rem);--dtpc-slider--focus-ring-width:var(--dtpc-progress-bar--focus-ring-width, 2px);flex-grow:1}";
 const DtpcProgressBar$1 = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.p)(class DtpcProgressBar extends _index2_js__WEBPACK_IMPORTED_MODULE_0__.H {
   constructor() {
     super();
@@ -989,7 +1010,7 @@ const DtpcProgressBar$1 = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.p)(class Dt
     this.audioDuration = this.duration;
     this.initControl.emit(state => {
       self.state = state;
-      self.audioDuration = state.duration || this.duration;
+      self.audioDuration = state.duration || self.audioDuration;
     });
   }
   handleInput(event) {
@@ -1005,16 +1026,20 @@ const DtpcProgressBar$1 = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.p)(class Dt
       duration
     } = this.state;
     const time = seekTime !== null ? seekTime : currentTime;
+    const [timeSeconds, timeMinutes, timeHours] = (0,_index3_js__WEBPACK_IMPORTED_MODULE_2__.c)((0,_index3_js__WEBPACK_IMPORTED_MODULE_2__.f)(time));
+    const [durationSeconds, durationMinutes, durationHours] = (0,_index3_js__WEBPACK_IMPORTED_MODULE_2__.c)((0,_index3_js__WEBPACK_IMPORTED_MODULE_2__.f)(duration));
     const max = duration || this.audioDuration;
-    return (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", {
-      key: '07ddbf91e448facc8e77a33813da327e78ca82dd',
-      class: "wrapper",
-      "aria-label": "Seek slider",
+    const ariaLabel = (0,_index5_js__WEBPACK_IMPORTED_MODULE_1__._)('Seek slider', 'dovetail-podcasts');
+    const ariaValueText = (0,_index5_js__WEBPACK_IMPORTED_MODULE_1__._)([...(timeHours && timeHours === 1 ? [(0,_index5_js__WEBPACK_IMPORTED_MODULE_1__._)(`1 Hour`, 'dovetail-podcasts')] : []), ...(timeHours && timeHours > 1 ? [(0,_index5_js__WEBPACK_IMPORTED_MODULE_1__._)(`${timeHours} Hours`, 'dovetail-podcasts')] : []), ...(timeMinutes === 1 ? [(0,_index5_js__WEBPACK_IMPORTED_MODULE_1__._)(`1 Minute`, 'dovetail-podcasts')] : []), ...(timeMinutes !== 1 ? [(0,_index5_js__WEBPACK_IMPORTED_MODULE_1__._)(`${timeMinutes || 0} Minutes`, 'dovetail-podcasts')] : []), ...(timeSeconds === 1 ? [(0,_index5_js__WEBPACK_IMPORTED_MODULE_1__._)(`1 Second`, 'dovetail-podcasts')] : []), ...(timeSeconds !== 1 ? [(0,_index5_js__WEBPACK_IMPORTED_MODULE_1__._)(`${timeSeconds || 0} Seconds`, 'dovetail-podcasts')] : []), (0,_index5_js__WEBPACK_IMPORTED_MODULE_1__._)('of', 'dovetail-podcasts'), ...(durationHours && durationHours === 1 ? [(0,_index5_js__WEBPACK_IMPORTED_MODULE_1__._)(`1 Hour`, 'dovetail-podcasts')] : []), ...(durationHours && durationHours > 1 ? [(0,_index5_js__WEBPACK_IMPORTED_MODULE_1__._)(`${durationHours} Hours`, 'dovetail-podcasts')] : []), ...(durationMinutes === 1 ? [(0,_index5_js__WEBPACK_IMPORTED_MODULE_1__._)(`1 Minute`, 'dovetail-podcasts')] : []), ...(durationMinutes !== 1 ? [(0,_index5_js__WEBPACK_IMPORTED_MODULE_1__._)(`${durationMinutes || 0} Minutes`, 'dovetail-podcasts')] : []), ...(durationSeconds === 1 ? [(0,_index5_js__WEBPACK_IMPORTED_MODULE_1__._)(`1 Second`, 'dovetail-podcasts')] : []), ...(durationSeconds !== 1 ? [(0,_index5_js__WEBPACK_IMPORTED_MODULE_1__._)(`${durationSeconds || 0} Seconds`, 'dovetail-podcasts')] : [])].join(' '), 'dovetail-podcasts');
+    return (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)(_index2_js__WEBPACK_IMPORTED_MODULE_0__.d, {
+      key: 'd8853b2aaa7aa7bf99aef8b33fadf8c3874bb9a9',
+      "aria-label": ariaLabel,
       "aria-valuemin": "0",
       "aria-valuemax": max,
-      "aria-valuenow": time
+      "aria-valuenow": time,
+      "aria-valuetext": ariaValueText
     }, (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)("dtpc-slider", {
-      key: '80763f72c2ae423c35e733a06224cc7f3a752e5e',
+      key: 'f5cc261119cf7bb687f4a82563d85b2016549042',
       tabindex: 0,
       disabled: !max,
       defaultValue: 0,
@@ -1045,7 +1070,7 @@ function defineCustomElement$1() {
         break;
       case "dtpc-slider":
         if (!customElements.get(tagName)) {
-          (0,_dtpc_slider2_js__WEBPACK_IMPORTED_MODULE_1__.d)();
+          (0,_dtpc_slider2_js__WEBPACK_IMPORTED_MODULE_3__.d)();
         }
         break;
     }
@@ -1092,7 +1117,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _index2_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index2.js */ "../web-components/dist/components/index2.js");
 
-const dtpcSliderCss = ":host {\n  --_dtpc-slider--scrubber--color: var(--dtpc-slider--scrubber--color, currentColor);\n  --_dtpc-slider--scrubber--size: var(--dtpc-slider--scrubber--size, 1.25rem);\n  --_dtpc-slider--scrubber--border-color: var(--dtpc-slider--scrubber--border-color, transparent);\n  --_dtpc-slider--scrubber--border-width: var(--dtpc-slider--scrubber--border-width, 0);\n  --_dtpc-slider--scrubber--border-radius: var(--dtpc-slider--scrubber--border-radius, 100vw);\n  --_dtpc-slider--progress--color: var(--dtpc-slider--progress--color, currentColor);\n  --_dtpc-slider--track--color: var(--dtpc-slider--track--color, color-mix(in oklch, currentColor 20%, transparent));\n  --_dtpc-slider--track--height: var(--dtpc-slider--track--height, 0.25rem);\n  --_dtpc-slider--track--radius: var(--dtpc-slider--track--radius, 100vw);\n  --_dtpc-slider--track--border-color: var(--dtpc-slider--track--border-color, transparent);\n  --_dtpc-slider--track--border-width: var(--dtpc-slider--track--border-width, 0);\n  --_dtpc-slider--track--border-offset: var(--dtpc-slider--track--border-offset, 0);\n  --_dtpc-slider--focus-ring-color: var(--dtpc-slider--focus-ring-color, var(--_dtpc-player--highlight));\n  --_dtpc-slider--focus-ring-offset: var(--dtpc-slider--focus-ring-offset, 0.125rem);\n  --_dtpc-slider--focus-ring-width: var(--dtpc-slider--focus-ring-width, 2px);\n\n  display: contents;\n}\n\n.track {\n  --_scrubber--color: var(--_dtpc-slider--scrubber--color);\n  --_scrubber--size: var(--_dtpc-slider--scrubber--size);\n  --_scrubber--border-color: var(--_dtpc-slider--scrubber--border-color);\n  --_scrubber--border-width: var(--_dtpc-slider--scrubber--border-width);\n  --_scrubber--border-radius: var(--_dtpc-slider--scrubber--border-radius);\n  --_scrubber--focus-ring-color: var(--_dtpc-slider--focus-ring-color);\n  --_scrubber--focus-ring-offset: var(--_dtpc-slider--focus-ring-offset);\n  --_scrubber--focus-ring-width: var(--_dtpc-slider--focus-ring-width);\n  --_track--color: var(--_dtpc-slider--track--color);\n  --_track--height: var(--_dtpc-slider--track--height);\n  --_track--radius: var(--_dtpc-slider--track--radius);\n  --_track--border-color: var(--_dtpc-slider--track--border-color);\n  --_track--border-width: var(--_dtpc-slider--track--border-width);\n  --_track--border-offset: var(--_dtpc-slider--track--border-offset);\n  --_track--gutter: calc(var(--_scrubber--size) / 2);\n\n  isolation: isolate;\n  display: inline-grid;\n  align-items: center;\n  grid-template-columns: [range-start] var(--_track--gutter) [track-start] 1fr [track-end] var(--_track--gutter) [range-end];\n  grid-template-rows: [range-start] [track-start] var(--_track--height) [track-end] [range-end];\n\n  &::before {\n    content: '';\n\n    grid-area: track;\n    grid-row: 1;\n    place-self: stretch;\n\n    outline-style: solid;\n    outline-color: var(--_track--border-color);\n    outline-width: var(--_track--border-width);\n    outline-offset: var(--_track--border-offset);\n\n    border-radius: var(--_track--radius);\n\n    background-color: var(--_track--color);\n  }\n\n  &:has(input[orient='vertical']) {\n    writing-mode: vertical-lr;\n    direction: rtl;\n    height: 100px;\n\n    margin-block: calc(var(--_scrubber--size) / 2);\n  }\n}\n\n.progress {\n  --_progress--color: var(--_dtpc-slider--progress--color);\n  --_length: calc(var(--progress, 0) * (100% - var(--_track--gutter) * 2));\n\n  grid-area: range;\n  grid-row: 1;\n  place-self: stretch;\n\n  display: grid;\n  grid-template-columns: var(--_track--gutter) minmax(var(--_track--height), var(--_length)) 1fr var(--_track--gutter);\n\n  &:not([data-show]) {\n    visibility: hidden;\n  }\n\n  &::before {\n    content: '';\n    grid-column: 2;\n\n    border-radius: var(--_track--radius);\n\n    background-color: var(--_progress--color);\n  }\n}\n\n.range {\n  grid-area: range;\n  grid-row: 1;\n\n  display: grid;\n  grid-template-columns: calc(var(--progress, 0) * (100% - var(--_scrubber--size))) [thumb-start] var(--_scrubber--size) [thumb-end];\n  grid-template-rows: [thumb-start] var(--_track--height) [thumb-end];\n  align-items: center;\n  justify-items: center;\n\n  min-width: var(--_track--height);\n}\n\n.scrubber {\n  grid-area: thumb;\n  display: grid;\n  aspect-ratio: 1;\n  width: var(--_scrubber--size);\n\n  &::after {\n    content: '';\n\n    transition-property: scale, opacity;\n    transition-duration: 200ms;\n    transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);\n\n    display: block;\n    scale: 0;\n    opacity: 0;\n\n    border-style: solid;\n    border-color: var(--_scrubber--border-color);\n    border-width: var(--_scrubber--border-width);\n    border-radius: var(--_scrubber--border-radius);\n\n    background-color: var(--_scrubber--color);\n  }\n\n  .track:has(input:not(:disabled)):where(:hover, :focus-within) & {\n    &::after {\n      scale: 1;\n      opacity: 1;\n    }\n  }\n\n  .track:has(input:focus-visible) & {\n    &::after {\n      outline-style: solid;\n      outline-offset: var(--_scrubber--focus-ring-offset);\n      outline-color: var(--_scrubber--focus-ring-color);\n      outline-width: var(--_scrubber--focus-ring-width);\n    }\n  }\n}\n\ninput {\n  grid-area: range;\n  grid-row: 1;\n\n  appearance: none;\n  background-color: transparent;\n  outline: 0;\n  border: 0;\n  margin: 0;\n  padding: 0;\n  opacity: 0;\n\n  block-size: var(--_track--height);\n\n  &[orient='vertical'] {\n    writing-mode: vertical-lr;\n    direction: rtl;\n    vertical-align: bottom;\n  }\n\n  /* Chrome */\n  @media screen and (-webkit-min-device-pixel-ratio: 0) {\n    &::-webkit-slider-runnable-track {\n      appearance: none;\n      position: relative;\n      block-size: var(--_track--height);\n    }\n    &::-webkit-slider-thumb {\n      appearance: none;\n      position: relative;\n      display: block;\n      top: 50%;\n      left: 0;\n      translate: 0 -50%;\n      aspect-ratio: 1;\n      width: var(--_scrubber--size);\n      height: auto;\n      cursor: ew-resize;\n    }\n\n    &[orient='vertical'] {\n      &::-webkit-slider-thumb {\n        left: 50%;\n        top: 0;\n        translate: -50% 0;\n        cursor: ns-resize;\n      }\n    }\n\n    &:disabled {\n      &::-webkit-slider-thumb {\n        cursor: default;\n      }\n    }\n  }\n}\n";
+const dtpcSliderCss = ":host {\n  --_dtpc-slider--scrubber--color: var(--dtpc-slider--scrubber--color, var(--_dtpc-player--foreground, CanvasText));\n  --_dtpc-slider--scrubber--size: var(--dtpc-slider--scrubber--size, 1.25rem);\n  --_dtpc-slider--scrubber--border-color: var(--dtpc-slider--scrubber--border-color, transparent);\n  --_dtpc-slider--scrubber--border-width: var(--dtpc-slider--scrubber--border-width, 0);\n  --_dtpc-slider--scrubber--border-radius: var(--dtpc-slider--scrubber--border-radius, 100vw);\n  --_dtpc-slider--scrubber--focus-ring-color: var(--dtpc-slider--focus-ring-color, var(--_dtpc-player--highlight, LinkText));\n  --_dtpc-slider--scrubber--focus-ring-offset: var(--dtpc-slider--focus-ring-offset, 0.125rem);\n  --_dtpc-slider--scrubber--focus-ring-width: var(--dtpc-slider--focus-ring-width, 0.125rem);\n  --_dtpc-slider--progress--color: var(--dtpc-slider--progress--color, var(--_dtpc-player--foreground, CanvasText));\n  --_dtpc-slider--track--color: var(--dtpc-slider--track--color, color-mix(in oklch, var(--_dtpc-slider--progress--color) 20%, transparent));\n  --_dtpc-slider--track--height: var(--dtpc-slider--track--height, 0.25rem);\n  --_dtpc-slider--track--radius: var(--dtpc-slider--track--radius, 100vw);\n  --_dtpc-slider--track--border-color: var(--dtpc-slider--track--border-color, transparent);\n  --_dtpc-slider--track--border-width: var(--dtpc-slider--track--border-width, 0);\n  --_dtpc-slider--track--border-offset: var(--dtpc-slider--track--border-offset, 0);\n\n  display: contents;\n}\n\n.track {\n  --_dtpc-slider--track--gutter: calc(var(--_dtpc-slider--scrubber--size) / 2);\n\n  isolation: isolate;\n  display: grid;\n  align-items: center;\n  grid-template-columns: [range-start] var(--_dtpc-slider--track--gutter) [track-start] 1fr [track-end] var(--_dtpc-slider--track--gutter) [range-end];\n  grid-template-rows: [range-start] [track-start] var(--_dtpc-slider--track--height) [track-end] [range-end];\n\n  &::before {\n    content: '';\n\n    grid-area: track;\n    grid-row: 1;\n    place-self: stretch;\n\n    outline-style: solid;\n    outline-color: var(--_dtpc-slider--track--border-color);\n    outline-width: var(--_dtpc-slider--track--border-width);\n    outline-offset: var(--_dtpc-slider--track--border-offset);\n\n    border-radius: var(--_dtpc-slider--track--radius);\n\n    background-color: var(--_dtpc-slider--track--color);\n  }\n\n  &:has(input[orient='vertical']) {\n    writing-mode: vertical-lr;\n    direction: rtl;\n    height: 100px;\n\n    margin-block: calc(var(--_dtpc-slider--scrubber--size) / 2);\n  }\n}\n\n.progress {\n  --_progress--color: var(--_dtpc-slider--progress--color);\n  --_length: calc(var(--progress, 0) * (100% - var(--_dtpc-slider--track--gutter) * 2));\n\n  grid-area: range;\n  grid-row: 1;\n  place-self: stretch;\n\n  display: grid;\n  grid-template-columns: var(--_dtpc-slider--track--gutter) minmax(var(--_dtpc-slider--track--height), var(--_length)) 1fr var(--_dtpc-slider--track--gutter);\n\n  &:not([data-show]) {\n    visibility: hidden;\n  }\n\n  &::before {\n    content: '';\n    grid-column: 2;\n\n    border-radius: var(--_dtpc-slider--track--radius);\n\n    background-color: var(--_dtpc-slider--progress--color);\n  }\n}\n\n.range {\n  grid-area: range;\n  grid-row: 1;\n\n  display: grid;\n  grid-template-columns: calc(var(--progress, 0) * (100% - var(--_dtpc-slider--scrubber--size))) [thumb-start] var(--_dtpc-slider--scrubber--size) [thumb-end];\n  grid-template-rows: [thumb-start] var(--_dtpc-slider--track--height) [thumb-end];\n  align-items: center;\n  justify-items: center;\n\n  min-width: var(--_dtpc-slider--track--height);\n}\n\n.scrubber {\n  grid-area: thumb;\n  display: grid;\n  aspect-ratio: 1;\n  width: var(--_dtpc-slider--scrubber--size);\n\n  &::after {\n    content: '';\n\n    transition-property: scale, opacity;\n    transition-duration: 200ms;\n    transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);\n\n    display: block;\n    scale: 0;\n    opacity: 0;\n\n    border-style: solid;\n    border-color: var(--_dtpc-slider--scrubber--border-color);\n    border-width: var(--_dtpc-slider--scrubber--border-width);\n    border-radius: var(--_dtpc-slider--scrubber--border-radius);\n\n    background-color: var(--_dtpc-slider--scrubber--color);\n  }\n\n  .track:has(input:not(:disabled)):where(:hover, :focus-within) & {\n    &::after {\n      scale: 1;\n      opacity: 1;\n    }\n  }\n\n  .track:has(input:focus-visible) & {\n    &::after {\n      outline-style: solid;\n      outline-offset: var(--_dtpc-slider--scrubber--focus-ring-offset);\n      outline-color: var(--_dtpc-slider--scrubber--focus-ring-color);\n      outline-width: var(--_dtpc-slider--scrubber--focus-ring-width);\n    }\n  }\n}\n\ninput {\n  grid-area: range;\n  grid-row: 1;\n\n  appearance: none;\n  background-color: transparent;\n  outline: 0;\n  border: 0;\n  margin: 0;\n  padding: 0;\n  opacity: 0;\n\n  block-size: var(--_dtpc-slider--track--height);\n\n  &[orient='vertical'] {\n    writing-mode: vertical-lr;\n    direction: rtl;\n    vertical-align: bottom;\n  }\n\n  /* Chrome */\n  @media screen and (-webkit-min-device-pixel-ratio: 0) {\n    &::-webkit-slider-runnable-track {\n      appearance: none;\n      position: relative;\n      block-size: var(--_dtpc-slider--track--height);\n    }\n    &::-webkit-slider-thumb {\n      appearance: none;\n      position: relative;\n      display: block;\n      top: 50%;\n      left: 0;\n      translate: 0 -50%;\n      aspect-ratio: 1;\n      width: var(--_dtpc-slider--scrubber--size);\n      height: auto;\n      cursor: ew-resize;\n    }\n\n    &[orient='vertical'] {\n      &::-webkit-slider-thumb {\n        left: 50%;\n        top: 0;\n        translate: -50% 0;\n        cursor: ns-resize;\n      }\n    }\n\n    &:disabled {\n      &::-webkit-slider-thumb {\n        cursor: default;\n      }\n    }\n  }\n}\n";
 const DtpcSlider = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.p)(class DtpcSlider extends _index2_js__WEBPACK_IMPORTED_MODULE_0__.H {
   constructor() {
     super();
@@ -1201,23 +1226,23 @@ const DtpcSlider = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.p)(class DtpcSlide
       onInput: e => this.handleInput(e)
     };
     return (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", {
-      key: '1533f7a24e27e4bf45e2efd4ac5f47d163442449',
+      key: 'bb0fc5836d30d9c7761c05ea27cf1b73424aac62',
       class: "track",
       style: {
         '--progress': `${progress}`
       }
     }, (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", {
-      key: '32588e48cf547c191a6bd9a0e0f58f5613b74553',
+      key: 'b103713967683c13b406b932b40dc9f55af63636',
       class: "progress",
       "data-show": !!max
     }), (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", {
-      key: 'eaee545cdce52ae0a5535ad6daea2c9a1f3281af',
+      key: '35343b5e08b2a34e53629ba161d40e95e0142228',
       class: "range"
     }, (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", {
-      key: '21fb9e15068a8f8a084201b78e68f69c73c78265',
+      key: '0edcf7ba3d9a67a92bf55e10930421558b9497d3',
       class: "scrubber"
     })), (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)("input", {
-      key: '336158225b83f5a1dc9997c484648548b14fb7a6',
+      key: 'dbab00885c6a5ced7a9a7e44a7e25c77124b6bdb',
       type: 'range',
       ...inputAttributes,
       value: this.currentValue
@@ -1299,7 +1324,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _index3_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./index3.js */ "../web-components/dist/components/index3.js");
 
 
-const dtpcTimeCurrentCss = ":host{--_dtpc-time-current--color:var(--dtpc-time-current--color, var(--_dtpc-player--time--color, currentColor));--_dtpc-time-current--font-family:var(--dtpc-time-current--font-family, var(--_dtpc-player--time--font-family, inherit));--_dtpc-time-current--font-size:var(--dtpc-time-current--font-size, var(--_dtpc-player--time--font-size, inherit));--_dtpc-time-current--font-weight:var(--dtpc-time-current--font-weight, var(--_dtpc-player--time--font-weight, inherit));color:var(--_dtpc-time-current--color);font-family:var(--_dtpc-time-current--font-family);font-size:var(--_dtpc-time-current--font-size);font-weight:var(--_dtpc-time-current--font-weight)}";
+const dtpcTimeCurrentCss = ":host{--_dtpc-time-current--color:var(--dtpc-time-current--color, var(--_dtpc-player--time--color));--_dtpc-time-current--font-family:var(--dtpc-time-current--font-family, var(--_dtpc-player--time--font-family));--_dtpc-time-current--font-size:var(--dtpc-time-current--font-size, var(--_dtpc-player--time--font-size));--_dtpc-time-current--font-weight:var(--dtpc-time-current--font-weight, var(--_dtpc-player--time--font-weight));color:var(--_dtpc-time-current--color);font-family:var(--_dtpc-time-current--font-family);font-size:var(--_dtpc-time-current--font-size);font-weight:var(--_dtpc-time-current--font-weight)}";
 const DtpcTimeCurrent = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.p)(class DtpcTimeCurrent extends _index2_js__WEBPACK_IMPORTED_MODULE_0__.H {
   constructor() {
     super();
@@ -1331,7 +1356,7 @@ const DtpcTimeCurrent = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.p)(class Dtpc
     const time = seekTime !== null ? seekTime : currentTime;
     const displayTime = (0,_index3_js__WEBPACK_IMPORTED_MODULE_1__.f)(time);
     return (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)(_index2_js__WEBPACK_IMPORTED_MODULE_0__.d, {
-      key: 'ebaea779f625855ef285e03d7fd170de92d78971'
+      key: '059dd85c2e6a323e554536ff074e6d7896484994'
     }, displayTime);
   }
   static get style() {
@@ -1391,17 +1416,17 @@ const DtpcTimeDisplay$1 = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.p)(class Dt
   }
   render() {
     return (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)(_index2_js__WEBPACK_IMPORTED_MODULE_0__.d, {
-      key: 'ed890b1d9b0c60125658ea61857e5b9cc9acbd93'
+      key: '1151a09917785ef95517d3f531c8d99958dfab48'
     }, (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", {
-      key: '2db4f3f5401ed0a07b8ef9f512069bfb7d7f80c5',
+      key: '18edebcd534ebd140829b184aa22a14bf2834f5f',
       class: "wrapper"
     }, (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)("dtpc-time-current", {
-      key: '642a525e02fc18ad6006b17a8aa5ff271b326720'
+      key: '473f3c712bf1d2881cd5c028d0f8201c02a28dbc'
     }), (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)("span", {
-      key: '76c5450ef4a952a5327b16e332dcdf58b0f485c5',
+      key: '03a7d647bafdf55c9f1282841b4fe739ee8dcc80',
       class: "separator"
     }, "/"), (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)("dtpc-time-duration", {
-      key: '2ca8cdd64ef706e58d665292893110f532434a2b',
+      key: '6c789eb18d1e3472cbadef493a782b487f5729af',
       duration: this.duration
     })));
   }
@@ -1479,7 +1504,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _index3_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./index3.js */ "../web-components/dist/components/index3.js");
 
 
-const dtpcTimeDurationCss = ":host{--_dtpc-time-duration--color:var(--dtpc-time-duration--color, var(--_dtpc-player--time--color, currentColor));--_dtpc-time-duration--font-family:var(--dtpc-time-duration--font-family, var(--_dtpc-player--time--font-family, inherit));--_dtpc-time-duration--font-size:var(--dtpc-time-duration--font-size, var(--_dtpc-player--time--font-size, inherit));--_dtpc-time-duration--font-weight:var(--dtpc-time-duration--font-weight, var(--_dtpc-player--time--font-weight, inherit));color:var(--_dtpc-time-duration--color);font-family:var(--_dtpc-time-duration--font-family);font-size:var(--_dtpc-time-duration--font-size);font-weight:var(--_dtpc-time-duration--font-weight)}";
+const dtpcTimeDurationCss = ":host{--_dtpc-time-duration--color:var(--dtpc-time-duration--color, var(--_dtpc-player--time--color));--_dtpc-time-duration--font-family:var(--dtpc-time-duration--font-family, var(--_dtpc-player--time--font-family));--_dtpc-time-duration--font-size:var(--dtpc-time-duration--font-size, var(--_dtpc-player--time--font-size));--_dtpc-time-duration--font-weight:var(--dtpc-time-duration--font-weight, var(--_dtpc-player--time--font-weight));color:var(--_dtpc-time-duration--color);font-family:var(--_dtpc-time-duration--font-family);font-size:var(--_dtpc-time-duration--font-size);font-weight:var(--_dtpc-time-duration--font-weight)}";
 const DtpcTimeDuration = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.p)(class DtpcTimeDuration extends _index2_js__WEBPACK_IMPORTED_MODULE_0__.H {
   constructor() {
     super();
@@ -1525,7 +1550,7 @@ const DtpcTimeDuration = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.p)(class Dtp
     } = this.state;
     const displayDuration = (0,_index3_js__WEBPACK_IMPORTED_MODULE_1__.f)(duration || this.audioDuration);
     return (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)(_index2_js__WEBPACK_IMPORTED_MODULE_0__.d, {
-      key: '28f945fa94afb1d800e8b4ad734b62c51b521ae2'
+      key: '8aefe12549f34ebd5710c43c050bfa0ad403a20a'
     }, displayDuration);
   }
   static get style() {
@@ -1551,6 +1576,123 @@ function defineCustomElement() {
   });
 }
 defineCustomElement(DtpcTimeDuration);
+
+
+/***/ }),
+
+/***/ "../web-components/dist/components/dtpc-volume-slider.js":
+/*!***************************************************************!*\
+  !*** ../web-components/dist/components/dtpc-volume-slider.js ***!
+  \***************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   DtpcVolumeSlider: () => (/* binding */ DtpcVolumeSlider),
+/* harmony export */   defineCustomElement: () => (/* binding */ defineCustomElement)
+/* harmony export */ });
+/* harmony import */ var _index2_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index2.js */ "../web-components/dist/components/index2.js");
+/* harmony import */ var _index5_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./index5.js */ "../web-components/dist/components/index5.js");
+/* harmony import */ var _dtpc_slider2_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./dtpc-slider2.js */ "../web-components/dist/components/dtpc-slider2.js");
+
+
+
+const dtpcVolumeSliderCss = ":host{display:block}";
+const DtpcVolumeSlider$1 = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.p)(class DtpcVolumeSlider extends _index2_js__WEBPACK_IMPORTED_MODULE_0__.H {
+  constructor() {
+    super();
+    Object.defineProperty(this, "state", {
+      enumerable: true,
+      configurable: true,
+      writable: true,
+      value: void 0
+    });
+    Object.defineProperty(this, "orient", {
+      enumerable: true,
+      configurable: true,
+      writable: true,
+      value: void 0
+    });
+    Object.defineProperty(this, "volume", {
+      enumerable: true,
+      configurable: true,
+      writable: true,
+      value: 0.8
+    });
+    Object.defineProperty(this, "initControl", {
+      enumerable: true,
+      configurable: true,
+      writable: true,
+      value: void 0
+    });
+    this.__registerHost();
+    this.__attachShadow();
+    this.initControl = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.c)(this, "dtpc-control-init", 7);
+  }
+  componentWillLoad() {
+    const self = this;
+    this.initControl.emit(state => {
+      self.state = state;
+      state.volume = self.volume;
+    });
+  }
+  handleInput(event) {
+    this.state.volume = event.detail;
+  }
+  render() {
+    const {
+      volume
+    } = this.state;
+    const ariaLabel = (0,_index5_js__WEBPACK_IMPORTED_MODULE_1__._)('Volume slider', 'dovetail-podcasts');
+    const ariaValueText = (0,_index5_js__WEBPACK_IMPORTED_MODULE_1__._)(`${volume * 100}% volume`, 'dovetail-podcasts');
+    return (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)(_index2_js__WEBPACK_IMPORTED_MODULE_0__.d, {
+      key: 'bc5b3726c0e882e560ed46944c72e631987679ae',
+      "aria-label": ariaLabel,
+      "aria-valuemin": "0",
+      "aria-valuemax": "1",
+      "aria-valuenow": volume,
+      "aria-valuetext": ariaValueText
+    }, (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)("dtpc-slider", {
+      key: 'c3201b8f397ff2b670061a82d42278eac42aaefe',
+      defaultValue: volume,
+      min: 0,
+      max: 1,
+      step: 0.01,
+      value: volume,
+      orient: this.orient
+    }));
+  }
+  static get style() {
+    return dtpcVolumeSliderCss;
+  }
+}, [1, "dtpc-volume-slider", {
+  "orient": [1],
+  "volume": [2]
+}, [[0, "slider-input", "handleInput"]]]);
+function defineCustomElement$1() {
+  if (typeof customElements === "undefined") {
+    return;
+  }
+  const components = ["dtpc-volume-slider", "dtpc-slider"];
+  components.forEach(tagName => {
+    switch (tagName) {
+      case "dtpc-volume-slider":
+        if (!customElements.get(tagName)) {
+          customElements.define(tagName, DtpcVolumeSlider$1);
+        }
+        break;
+      case "dtpc-slider":
+        if (!customElements.get(tagName)) {
+          (0,_dtpc_slider2_js__WEBPACK_IMPORTED_MODULE_2__.d)();
+        }
+        break;
+    }
+  });
+}
+defineCustomElement$1(DtpcVolumeSlider$1);
+const DtpcVolumeSlider = DtpcVolumeSlider$1;
+const defineCustomElement = defineCustomElement$1;
 
 
 /***/ }),
@@ -1593,6 +1735,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+const iconCss = ".lucide-icon {\n  display: inline-grid;\n  place-items: center;\n  aspect-ratio: 1;\n\n  svg {\n    width: 100%;\n    height: auto;\n  }\n}\n";
 const IconPause = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.p)(class IconPause extends _index2_js__WEBPACK_IMPORTED_MODULE_0__.H {
   constructor() {
     super();
@@ -2085,7 +2228,7 @@ const IconPause = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.p)(class IconPause 
     const inner = (0,_lucide_js__WEBPACK_IMPORTED_MODULE_1__.c)(_lucide_js__WEBPACK_IMPORTED_MODULE_1__.P);
     Object.entries(Object.assign({}, (0,_index4_js__WEBPACK_IMPORTED_MODULE_2__.a)(this.el), this.getProps())).forEach(([name, value]) => inner.setAttribute(name, value));
     return (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)(_index2_js__WEBPACK_IMPORTED_MODULE_0__.d, {
-      key: '5e70bc287e91dd28a4515e8dd437392257b7da03',
+      key: '4051d51f8862753660c10f1f491eb1dbf6a1dc09',
       innerHTML: inner.outerHTML,
       class: "lucide-icon"
     });
@@ -2098,6 +2241,9 @@ const IconPause = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.p)(class IconPause 
       }
       return acc;
     }, {});
+  }
+  static get style() {
+    return iconCss;
   }
 }, [0, "icon-pause", {
   "alignmentBaseline": [8, "alignment-baseline"],
@@ -2239,6 +2385,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+const iconCss = ".lucide-icon {\n  display: inline-grid;\n  place-items: center;\n  aspect-ratio: 1;\n\n  svg {\n    width: 100%;\n    height: auto;\n  }\n}\n";
 const IconPlay = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.p)(class IconPlay extends _index2_js__WEBPACK_IMPORTED_MODULE_0__.H {
   constructor() {
     super();
@@ -2731,7 +2878,7 @@ const IconPlay = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.p)(class IconPlay ex
     const inner = (0,_lucide_js__WEBPACK_IMPORTED_MODULE_1__.c)(_lucide_js__WEBPACK_IMPORTED_MODULE_1__.a);
     Object.entries(Object.assign({}, (0,_index4_js__WEBPACK_IMPORTED_MODULE_2__.a)(this.el), this.getProps())).forEach(([name, value]) => inner.setAttribute(name, value));
     return (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)(_index2_js__WEBPACK_IMPORTED_MODULE_0__.d, {
-      key: '849adc95f74ae9680edda63099a79eef613a44ef',
+      key: '06b02e3b078345ac5e695be9eece4b7165954c23',
       innerHTML: inner.outerHTML,
       class: "lucide-icon"
     });
@@ -2744,6 +2891,9 @@ const IconPlay = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.p)(class IconPlay ex
       }
       return acc;
     }, {});
+  }
+  static get style() {
+    return iconCss;
   }
 }, [0, "icon-play", {
   "alignmentBaseline": [8, "alignment-baseline"],
@@ -2885,10 +3035,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+const iconCss = ".lucide-icon {\n  display: inline-grid;\n  place-items: center;\n  aspect-ratio: 1;\n\n  svg {\n    width: 100%;\n    height: auto;\n  }\n}\n";
 const IconVolume = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.p)(class IconVolume extends _index2_js__WEBPACK_IMPORTED_MODULE_0__.H {
   constructor() {
     super();
-    Object.defineProperty(this, "level", {
+    Object.defineProperty(this, "volume", {
       enumerable: true,
       configurable: true,
       writable: true,
@@ -3386,11 +3537,11 @@ const IconVolume = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.p)(class IconVolum
     return this;
   }
   render() {
-    const icon = this.muted || !this.level ? _lucide_js__WEBPACK_IMPORTED_MODULE_1__.V : this.level >= 0.5 && _lucide_js__WEBPACK_IMPORTED_MODULE_1__.b || _lucide_js__WEBPACK_IMPORTED_MODULE_1__.d;
+    const icon = this.muted || !this.volume ? _lucide_js__WEBPACK_IMPORTED_MODULE_1__.V : this.volume >= 0.5 && _lucide_js__WEBPACK_IMPORTED_MODULE_1__.b || _lucide_js__WEBPACK_IMPORTED_MODULE_1__.d;
     const inner = (0,_lucide_js__WEBPACK_IMPORTED_MODULE_1__.c)(icon);
     Object.entries(Object.assign({}, (0,_index4_js__WEBPACK_IMPORTED_MODULE_2__.a)(this.el), this.getProps())).forEach(([name, value]) => inner.setAttribute(name, value));
     return (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)(_index2_js__WEBPACK_IMPORTED_MODULE_0__.d, {
-      key: 'f969b9ae3ece6f501b76d07ec892160f0a3eb400',
+      key: 'a5b4a011a228e50ca80e12fb25b7ffd20bd33ae6',
       innerHTML: inner.outerHTML,
       class: "lucide-icon"
     });
@@ -3404,8 +3555,11 @@ const IconVolume = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.p)(class IconVolum
       return acc;
     }, {});
   }
+  static get style() {
+    return iconCss;
+  }
 }, [0, "icon-volume", {
-  "level": [2],
+  "volume": [2, "level"],
   "muted": [4],
   "alignmentBaseline": [8, "alignment-baseline"],
   "baselineShift": [8, "baseline-shift"],
@@ -3584,7 +3738,7 @@ const BUILD = {
   shadowDom: true,
   slot: true,
   slotChildNodesFix: false,
-  slotRelocation: true,
+  slotRelocation: false,
   state: true,
   style: true,
   svg: false,
@@ -7322,11 +7476,15 @@ var insertChildVNodeAnnotations = (doc, vnodeChild, cmpData, hostId, depth, inde
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   c: () => (/* binding */ cn),
+/* harmony export */   a: () => (/* binding */ convertStringToInteger),
+/* harmony export */   b: () => (/* binding */ cn),
+/* harmony export */   c: () => (/* binding */ convertDurationStringToIntegerArray),
 /* harmony export */   f: () => (/* binding */ formatDuration)
 /* harmony export */ });
 /* harmony import */ var _index4_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index4.js */ "../web-components/dist/components/index4.js");
 
+const convertStringToInteger = str => parseInt(str, 10) || 0;
+const convertDurationStringToIntegerArray = duration => duration?.split(':').map(v => convertStringToInteger(v)).reduce((a, c) => [c, ...a], []) || [0];
 function r(e) {
   var t,
     f,
@@ -27347,6 +27505,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   DtpcTimeCurrent: () => (/* reexport safe */ _stencil_generated_components__WEBPACK_IMPORTED_MODULE_0__.DtpcTimeCurrent),
 /* harmony export */   DtpcTimeDisplay: () => (/* reexport safe */ _stencil_generated_components__WEBPACK_IMPORTED_MODULE_0__.DtpcTimeDisplay),
 /* harmony export */   DtpcTimeDuration: () => (/* reexport safe */ _stencil_generated_components__WEBPACK_IMPORTED_MODULE_0__.DtpcTimeDuration),
+/* harmony export */   DtpcVolumeSlider: () => (/* reexport safe */ _stencil_generated_components__WEBPACK_IMPORTED_MODULE_0__.DtpcVolumeSlider),
 /* harmony export */   IconPause: () => (/* reexport safe */ _stencil_generated_components__WEBPACK_IMPORTED_MODULE_0__.IconPause),
 /* harmony export */   IconPlay: () => (/* reexport safe */ _stencil_generated_components__WEBPACK_IMPORTED_MODULE_0__.IconPlay),
 /* harmony export */   IconVolume: () => (/* reexport safe */ _stencil_generated_components__WEBPACK_IMPORTED_MODULE_0__.IconVolume)
@@ -27374,6 +27533,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   DtpcTimeCurrent: () => (/* binding */ DtpcTimeCurrent),
 /* harmony export */   DtpcTimeDisplay: () => (/* binding */ DtpcTimeDisplay),
 /* harmony export */   DtpcTimeDuration: () => (/* binding */ DtpcTimeDuration),
+/* harmony export */   DtpcVolumeSlider: () => (/* binding */ DtpcVolumeSlider),
 /* harmony export */   IconPause: () => (/* binding */ IconPause),
 /* harmony export */   IconPlay: () => (/* binding */ IconPlay),
 /* harmony export */   IconVolume: () => (/* binding */ IconVolume)
@@ -27388,12 +27548,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var dovetail_podcasts_player_web_components_dist_components_dtpc_time_current_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! dovetail-podcasts-player-web-components/dist/components/dtpc-time-current.js */ "../web-components/dist/components/dtpc-time-current.js");
 /* harmony import */ var dovetail_podcasts_player_web_components_dist_components_dtpc_time_display_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! dovetail-podcasts-player-web-components/dist/components/dtpc-time-display.js */ "../web-components/dist/components/dtpc-time-display.js");
 /* harmony import */ var dovetail_podcasts_player_web_components_dist_components_dtpc_time_duration_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! dovetail-podcasts-player-web-components/dist/components/dtpc-time-duration.js */ "../web-components/dist/components/dtpc-time-duration.js");
-/* harmony import */ var dovetail_podcasts_player_web_components_dist_components_icon_pause_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! dovetail-podcasts-player-web-components/dist/components/icon-pause.js */ "../web-components/dist/components/icon-pause.js");
-/* harmony import */ var dovetail_podcasts_player_web_components_dist_components_icon_play_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! dovetail-podcasts-player-web-components/dist/components/icon-play.js */ "../web-components/dist/components/icon-play.js");
-/* harmony import */ var dovetail_podcasts_player_web_components_dist_components_icon_volume_js__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! dovetail-podcasts-player-web-components/dist/components/icon-volume.js */ "../web-components/dist/components/icon-volume.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_13__);
+/* harmony import */ var dovetail_podcasts_player_web_components_dist_components_dtpc_volume_slider_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! dovetail-podcasts-player-web-components/dist/components/dtpc-volume-slider.js */ "../web-components/dist/components/dtpc-volume-slider.js");
+/* harmony import */ var dovetail_podcasts_player_web_components_dist_components_icon_pause_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! dovetail-podcasts-player-web-components/dist/components/icon-pause.js */ "../web-components/dist/components/icon-pause.js");
+/* harmony import */ var dovetail_podcasts_player_web_components_dist_components_icon_play_js__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! dovetail-podcasts-player-web-components/dist/components/icon-play.js */ "../web-components/dist/components/icon-play.js");
+/* harmony import */ var dovetail_podcasts_player_web_components_dist_components_icon_volume_js__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! dovetail-podcasts-player-web-components/dist/components/icon-volume.js */ "../web-components/dist/components/icon-volume.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_14__);
 'use client';
+
 
 
 
@@ -27412,14 +27574,14 @@ __webpack_require__.r(__webpack_exports__);
 const DtpcButton = (0,_stencil_react_output_target_runtime__WEBPACK_IMPORTED_MODULE_0__.createComponent)({
   tagName: 'dtpc-button',
   elementClass: dovetail_podcasts_player_web_components_dist_components_dtpc_button_js__WEBPACK_IMPORTED_MODULE_1__.DtpcButton,
-  react: (react__WEBPACK_IMPORTED_MODULE_13___default()),
+  react: (react__WEBPACK_IMPORTED_MODULE_14___default()),
   events: {},
   defineCustomElement: dovetail_podcasts_player_web_components_dist_components_dtpc_button_js__WEBPACK_IMPORTED_MODULE_1__.defineCustomElement
 });
 const DtpcMuteButton = (0,_stencil_react_output_target_runtime__WEBPACK_IMPORTED_MODULE_0__.createComponent)({
   tagName: 'dtpc-mute-button',
   elementClass: dovetail_podcasts_player_web_components_dist_components_dtpc_mute_button_js__WEBPACK_IMPORTED_MODULE_2__.DtpcMuteButton,
-  react: (react__WEBPACK_IMPORTED_MODULE_13___default()),
+  react: (react__WEBPACK_IMPORTED_MODULE_14___default()),
   events: {
     onDtpcControlInit: 'dtpc-control-init'
   },
@@ -27428,7 +27590,7 @@ const DtpcMuteButton = (0,_stencil_react_output_target_runtime__WEBPACK_IMPORTED
 const DtpcPlayButton = (0,_stencil_react_output_target_runtime__WEBPACK_IMPORTED_MODULE_0__.createComponent)({
   tagName: 'dtpc-play-button',
   elementClass: dovetail_podcasts_player_web_components_dist_components_dtpc_play_button_js__WEBPACK_IMPORTED_MODULE_3__.DtpcPlayButton,
-  react: (react__WEBPACK_IMPORTED_MODULE_13___default()),
+  react: (react__WEBPACK_IMPORTED_MODULE_14___default()),
   events: {
     onDtpcControlInit: 'dtpc-control-init',
     onAudioTogglePaused: 'audio-toggle-paused'
@@ -27438,14 +27600,14 @@ const DtpcPlayButton = (0,_stencil_react_output_target_runtime__WEBPACK_IMPORTED
 const DtpcPlayer = (0,_stencil_react_output_target_runtime__WEBPACK_IMPORTED_MODULE_0__.createComponent)({
   tagName: 'dtpc-player',
   elementClass: dovetail_podcasts_player_web_components_dist_components_dtpc_player_js__WEBPACK_IMPORTED_MODULE_4__.DtpcPlayer,
-  react: (react__WEBPACK_IMPORTED_MODULE_13___default()),
+  react: (react__WEBPACK_IMPORTED_MODULE_14___default()),
   events: {},
   defineCustomElement: dovetail_podcasts_player_web_components_dist_components_dtpc_player_js__WEBPACK_IMPORTED_MODULE_4__.defineCustomElement
 });
 const DtpcProgressBar = (0,_stencil_react_output_target_runtime__WEBPACK_IMPORTED_MODULE_0__.createComponent)({
   tagName: 'dtpc-progress-bar',
   elementClass: dovetail_podcasts_player_web_components_dist_components_dtpc_progress_bar_js__WEBPACK_IMPORTED_MODULE_5__.DtpcProgressBar,
-  react: (react__WEBPACK_IMPORTED_MODULE_13___default()),
+  react: (react__WEBPACK_IMPORTED_MODULE_14___default()),
   events: {
     onDtpcControlInit: 'dtpc-control-init'
   },
@@ -27454,7 +27616,7 @@ const DtpcProgressBar = (0,_stencil_react_output_target_runtime__WEBPACK_IMPORTE
 const DtpcSlider = (0,_stencil_react_output_target_runtime__WEBPACK_IMPORTED_MODULE_0__.createComponent)({
   tagName: 'dtpc-slider',
   elementClass: dovetail_podcasts_player_web_components_dist_components_dtpc_slider_js__WEBPACK_IMPORTED_MODULE_6__.DtpcSlider,
-  react: (react__WEBPACK_IMPORTED_MODULE_13___default()),
+  react: (react__WEBPACK_IMPORTED_MODULE_14___default()),
   events: {
     onSliderChange: 'slider-change',
     onSliderInput: 'slider-input'
@@ -27464,7 +27626,7 @@ const DtpcSlider = (0,_stencil_react_output_target_runtime__WEBPACK_IMPORTED_MOD
 const DtpcTimeCurrent = (0,_stencil_react_output_target_runtime__WEBPACK_IMPORTED_MODULE_0__.createComponent)({
   tagName: 'dtpc-time-current',
   elementClass: dovetail_podcasts_player_web_components_dist_components_dtpc_time_current_js__WEBPACK_IMPORTED_MODULE_7__.DtpcTimeCurrent,
-  react: (react__WEBPACK_IMPORTED_MODULE_13___default()),
+  react: (react__WEBPACK_IMPORTED_MODULE_14___default()),
   events: {
     onDtpcControlInit: 'dtpc-control-init'
   },
@@ -27473,39 +27635,48 @@ const DtpcTimeCurrent = (0,_stencil_react_output_target_runtime__WEBPACK_IMPORTE
 const DtpcTimeDisplay = (0,_stencil_react_output_target_runtime__WEBPACK_IMPORTED_MODULE_0__.createComponent)({
   tagName: 'dtpc-time-display',
   elementClass: dovetail_podcasts_player_web_components_dist_components_dtpc_time_display_js__WEBPACK_IMPORTED_MODULE_8__.DtpcTimeDisplay,
-  react: (react__WEBPACK_IMPORTED_MODULE_13___default()),
+  react: (react__WEBPACK_IMPORTED_MODULE_14___default()),
   events: {},
   defineCustomElement: dovetail_podcasts_player_web_components_dist_components_dtpc_time_display_js__WEBPACK_IMPORTED_MODULE_8__.defineCustomElement
 });
 const DtpcTimeDuration = (0,_stencil_react_output_target_runtime__WEBPACK_IMPORTED_MODULE_0__.createComponent)({
   tagName: 'dtpc-time-duration',
   elementClass: dovetail_podcasts_player_web_components_dist_components_dtpc_time_duration_js__WEBPACK_IMPORTED_MODULE_9__.DtpcTimeDuration,
-  react: (react__WEBPACK_IMPORTED_MODULE_13___default()),
+  react: (react__WEBPACK_IMPORTED_MODULE_14___default()),
   events: {
     onDtpcControlInit: 'dtpc-control-init'
   },
   defineCustomElement: dovetail_podcasts_player_web_components_dist_components_dtpc_time_duration_js__WEBPACK_IMPORTED_MODULE_9__.defineCustomElement
 });
+const DtpcVolumeSlider = (0,_stencil_react_output_target_runtime__WEBPACK_IMPORTED_MODULE_0__.createComponent)({
+  tagName: 'dtpc-volume-slider',
+  elementClass: dovetail_podcasts_player_web_components_dist_components_dtpc_volume_slider_js__WEBPACK_IMPORTED_MODULE_10__.DtpcVolumeSlider,
+  react: (react__WEBPACK_IMPORTED_MODULE_14___default()),
+  events: {
+    onDtpcControlInit: 'dtpc-control-init'
+  },
+  defineCustomElement: dovetail_podcasts_player_web_components_dist_components_dtpc_volume_slider_js__WEBPACK_IMPORTED_MODULE_10__.defineCustomElement
+});
 const IconPause = (0,_stencil_react_output_target_runtime__WEBPACK_IMPORTED_MODULE_0__.createComponent)({
   tagName: 'icon-pause',
-  elementClass: dovetail_podcasts_player_web_components_dist_components_icon_pause_js__WEBPACK_IMPORTED_MODULE_10__.IconPause,
-  react: (react__WEBPACK_IMPORTED_MODULE_13___default()),
+  elementClass: dovetail_podcasts_player_web_components_dist_components_icon_pause_js__WEBPACK_IMPORTED_MODULE_11__.IconPause,
+  react: (react__WEBPACK_IMPORTED_MODULE_14___default()),
   events: {},
-  defineCustomElement: dovetail_podcasts_player_web_components_dist_components_icon_pause_js__WEBPACK_IMPORTED_MODULE_10__.defineCustomElement
+  defineCustomElement: dovetail_podcasts_player_web_components_dist_components_icon_pause_js__WEBPACK_IMPORTED_MODULE_11__.defineCustomElement
 });
 const IconPlay = (0,_stencil_react_output_target_runtime__WEBPACK_IMPORTED_MODULE_0__.createComponent)({
   tagName: 'icon-play',
-  elementClass: dovetail_podcasts_player_web_components_dist_components_icon_play_js__WEBPACK_IMPORTED_MODULE_11__.IconPlay,
-  react: (react__WEBPACK_IMPORTED_MODULE_13___default()),
+  elementClass: dovetail_podcasts_player_web_components_dist_components_icon_play_js__WEBPACK_IMPORTED_MODULE_12__.IconPlay,
+  react: (react__WEBPACK_IMPORTED_MODULE_14___default()),
   events: {},
-  defineCustomElement: dovetail_podcasts_player_web_components_dist_components_icon_play_js__WEBPACK_IMPORTED_MODULE_11__.defineCustomElement
+  defineCustomElement: dovetail_podcasts_player_web_components_dist_components_icon_play_js__WEBPACK_IMPORTED_MODULE_12__.defineCustomElement
 });
 const IconVolume = (0,_stencil_react_output_target_runtime__WEBPACK_IMPORTED_MODULE_0__.createComponent)({
   tagName: 'icon-volume',
-  elementClass: dovetail_podcasts_player_web_components_dist_components_icon_volume_js__WEBPACK_IMPORTED_MODULE_12__.IconVolume,
-  react: (react__WEBPACK_IMPORTED_MODULE_13___default()),
+  elementClass: dovetail_podcasts_player_web_components_dist_components_icon_volume_js__WEBPACK_IMPORTED_MODULE_13__.IconVolume,
+  react: (react__WEBPACK_IMPORTED_MODULE_14___default()),
   events: {},
-  defineCustomElement: dovetail_podcasts_player_web_components_dist_components_icon_volume_js__WEBPACK_IMPORTED_MODULE_12__.defineCustomElement
+  defineCustomElement: dovetail_podcasts_player_web_components_dist_components_icon_volume_js__WEBPACK_IMPORTED_MODULE_13__.defineCustomElement
 });
 
 /***/ }),

@@ -18,6 +18,7 @@ class playerStateFactory {
 
     audioElm.preload = 'none';
     audioElm.src = src;
+    audioElm.volume = 0.8;
 
     const newStore = createStore<PlayerState>({
       audioElm,

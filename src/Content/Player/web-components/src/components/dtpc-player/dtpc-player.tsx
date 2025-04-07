@@ -1,4 +1,4 @@
-import { Component, Host, Listen, Prop, Watch, h } from '@stencil/core';
+import { Component, Host, Listen, Prop, Watch, h, State } from '@stencil/core';
 import { playerState } from '@/store';
 import type { PlayerState } from '@/store/player';
 
@@ -16,12 +16,19 @@ export class DtpcPlayer {
    */
   @Prop() src: string;
 
+  @Prop() duration: number = 0;
+
+  @State() audioDuration: number = this.duration;
+
   connectedCallback() {
     const { state, onChange } = playerState.createStore(this.src);
     const { audioElm } = state;
     let previousSeekTime: number = state.seekTime;
 
+    this.audioDuration = this.duration;
     this.state = state;
+
+    state.duration = this.audioDuration;
 
     onChange('seekTime', (seekTime) => {
       if (previousSeekTime !== null && seekTime === null) {

@@ -10,7 +10,9 @@ describe('dtpc-mute-button', () => {
     expect(page.root).toEqualHtml(`
       <dtpc-mute-button>
         <mock:shadow-root>
-          <slot></slot>
+          <dtpc-button title="Mute">
+            <icon-volume></icon-volume>
+          </dtpc-button>
         </mock:shadow-root>
       </dtpc-mute-button>
     `);

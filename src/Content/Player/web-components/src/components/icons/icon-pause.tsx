@@ -3,7 +3,8 @@ import { Pause as LucidePause, createElement } from 'lucide';
 import { attributesToObject } from '@/lib/utils/dom';
 
 @Component({
-  tag: 'icon-pause'
+  tag: 'icon-pause',
+  styleUrl: 'icon.css'
 })
 export class IconPause {
   @Element() el: any;

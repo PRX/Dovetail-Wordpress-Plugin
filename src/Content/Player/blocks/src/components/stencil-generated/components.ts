@@ -18,6 +18,7 @@ import { DtpcSlider as DtpcSliderElement, defineCustomElement as defineDtpcSlide
 import { DtpcTimeCurrent as DtpcTimeCurrentElement, defineCustomElement as defineDtpcTimeCurrent } from "dovetail-podcasts-player-web-components/dist/components/dtpc-time-current.js";
 import { DtpcTimeDisplay as DtpcTimeDisplayElement, defineCustomElement as defineDtpcTimeDisplay } from "dovetail-podcasts-player-web-components/dist/components/dtpc-time-display.js";
 import { DtpcTimeDuration as DtpcTimeDurationElement, defineCustomElement as defineDtpcTimeDuration } from "dovetail-podcasts-player-web-components/dist/components/dtpc-time-duration.js";
+import { DtpcVolumeSlider as DtpcVolumeSliderElement, defineCustomElement as defineDtpcVolumeSlider } from "dovetail-podcasts-player-web-components/dist/components/dtpc-volume-slider.js";
 import { IconPause as IconPauseElement, defineCustomElement as defineIconPause } from "dovetail-podcasts-player-web-components/dist/components/icon-pause.js";
 import { IconPlay as IconPlayElement, defineCustomElement as defineIconPlay } from "dovetail-podcasts-player-web-components/dist/components/icon-play.js";
 import { IconVolume as IconVolumeElement, defineCustomElement as defineIconVolume } from "dovetail-podcasts-player-web-components/dist/components/icon-volume.js";
@@ -132,6 +133,17 @@ export const DtpcTimeDuration: StencilReactComponent<DtpcTimeDurationElement, Dt
     react: React,
     events: { onDtpcControlInit: 'dtpc-control-init' } as DtpcTimeDurationEvents,
     defineCustomElement: defineDtpcTimeDuration
+});
+
+type DtpcVolumeSliderEvents = { onDtpcControlInit: EventName<CustomEvent<any>> };
+
+export const DtpcVolumeSlider: StencilReactComponent<DtpcVolumeSliderElement, DtpcVolumeSliderEvents> = /*@__PURE__*/ createComponent<DtpcVolumeSliderElement, DtpcVolumeSliderEvents>({
+    tagName: 'dtpc-volume-slider',
+    elementClass: DtpcVolumeSliderElement,
+    // @ts-ignore - React type of Stencil Output Target may differ from the React version used in the Nuxt.js project, this can be ignored.
+    react: React,
+    events: { onDtpcControlInit: 'dtpc-control-init' } as DtpcVolumeSliderEvents,
+    defineCustomElement: defineDtpcVolumeSlider
 });
 
 type IconPauseEvents = NonNullable<unknown>;

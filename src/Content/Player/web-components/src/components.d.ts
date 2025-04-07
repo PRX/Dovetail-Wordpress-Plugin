@@ -13,6 +13,7 @@ export namespace Components {
     interface DtpcPlayButton {
     }
     interface DtpcPlayer {
+        "duration": number;
         /**
           * Audio source URL.
          */
@@ -37,6 +38,10 @@ export namespace Components {
     }
     interface DtpcTimeDuration {
         "duration": number;
+    }
+    interface DtpcVolumeSlider {
+        "orient": 'vertical' | 'horizontal';
+        "volume": number;
     }
     interface IconPause {
         "alignmentBaseline": any;
@@ -237,7 +242,6 @@ export namespace Components {
         "imageRendering": any;
         "isolation": any;
         "letterSpacing": any;
-        "level": number;
         "lightingColor": any;
         "marker": any;
         "markerEnd": any;
@@ -280,6 +284,7 @@ export namespace Components {
         "transformOrigin": any;
         "unicodeBidi": any;
         "visibility": any;
+        "volume": number;
         "width": any;
         "wordSpacing": any;
         "writingMode": any;
@@ -310,6 +315,10 @@ export interface DtpcTimeCurrentCustomEvent<T> extends CustomEvent<T> {
 export interface DtpcTimeDurationCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLDtpcTimeDurationElement;
+}
+export interface DtpcVolumeSliderCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLDtpcVolumeSliderElement;
 }
 declare global {
     interface HTMLDtpcButtonElement extends Components.DtpcButton, HTMLStencilElement {
@@ -434,6 +443,23 @@ declare global {
         prototype: HTMLDtpcTimeDurationElement;
         new (): HTMLDtpcTimeDurationElement;
     };
+    interface HTMLDtpcVolumeSliderElementEventMap {
+        "dtpc-control-init": any;
+    }
+    interface HTMLDtpcVolumeSliderElement extends Components.DtpcVolumeSlider, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLDtpcVolumeSliderElementEventMap>(type: K, listener: (this: HTMLDtpcVolumeSliderElement, ev: DtpcVolumeSliderCustomEvent<HTMLDtpcVolumeSliderElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLDtpcVolumeSliderElementEventMap>(type: K, listener: (this: HTMLDtpcVolumeSliderElement, ev: DtpcVolumeSliderCustomEvent<HTMLDtpcVolumeSliderElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLDtpcVolumeSliderElement: {
+        prototype: HTMLDtpcVolumeSliderElement;
+        new (): HTMLDtpcVolumeSliderElement;
+    };
     interface HTMLIconPauseElement extends Components.IconPause, HTMLStencilElement {
     }
     var HTMLIconPauseElement: {
@@ -462,6 +488,7 @@ declare global {
         "dtpc-time-current": HTMLDtpcTimeCurrentElement;
         "dtpc-time-display": HTMLDtpcTimeDisplayElement;
         "dtpc-time-duration": HTMLDtpcTimeDurationElement;
+        "dtpc-volume-slider": HTMLDtpcVolumeSliderElement;
         "icon-pause": HTMLIconPauseElement;
         "icon-play": HTMLIconPlayElement;
         "icon-volume": HTMLIconVolumeElement;
@@ -478,6 +505,7 @@ declare namespace LocalJSX {
         "onDtpc-control-init"?: (event: DtpcPlayButtonCustomEvent<any>) => void;
     }
     interface DtpcPlayer {
+        "duration"?: number;
         /**
           * Audio source URL.
          */
@@ -507,6 +535,11 @@ declare namespace LocalJSX {
     interface DtpcTimeDuration {
         "duration"?: number;
         "onDtpc-control-init"?: (event: DtpcTimeDurationCustomEvent<any>) => void;
+    }
+    interface DtpcVolumeSlider {
+        "onDtpc-control-init"?: (event: DtpcVolumeSliderCustomEvent<any>) => void;
+        "orient"?: 'vertical' | 'horizontal';
+        "volume"?: number;
     }
     interface IconPause {
         "alignmentBaseline"?: any;
@@ -707,7 +740,6 @@ declare namespace LocalJSX {
         "imageRendering"?: any;
         "isolation"?: any;
         "letterSpacing"?: any;
-        "level"?: number;
         "lightingColor"?: any;
         "marker"?: any;
         "markerEnd"?: any;
@@ -750,6 +782,7 @@ declare namespace LocalJSX {
         "transformOrigin"?: any;
         "unicodeBidi"?: any;
         "visibility"?: any;
+        "volume"?: number;
         "width"?: any;
         "wordSpacing"?: any;
         "writingMode"?: any;
@@ -766,6 +799,7 @@ declare namespace LocalJSX {
         "dtpc-time-current": DtpcTimeCurrent;
         "dtpc-time-display": DtpcTimeDisplay;
         "dtpc-time-duration": DtpcTimeDuration;
+        "dtpc-volume-slider": DtpcVolumeSlider;
         "icon-pause": IconPause;
         "icon-play": IconPlay;
         "icon-volume": IconVolume;
@@ -784,6 +818,7 @@ declare module "@stencil/core" {
             "dtpc-time-current": LocalJSX.DtpcTimeCurrent & JSXBase.HTMLAttributes<HTMLDtpcTimeCurrentElement>;
             "dtpc-time-display": LocalJSX.DtpcTimeDisplay & JSXBase.HTMLAttributes<HTMLDtpcTimeDisplayElement>;
             "dtpc-time-duration": LocalJSX.DtpcTimeDuration & JSXBase.HTMLAttributes<HTMLDtpcTimeDurationElement>;
+            "dtpc-volume-slider": LocalJSX.DtpcVolumeSlider & JSXBase.HTMLAttributes<HTMLDtpcVolumeSliderElement>;
             "icon-pause": LocalJSX.IconPause & JSXBase.HTMLAttributes<HTMLIconPauseElement>;
             "icon-play": LocalJSX.IconPlay & JSXBase.HTMLAttributes<HTMLIconPlayElement>;
             "icon-volume": LocalJSX.IconVolume & JSXBase.HTMLAttributes<HTMLIconVolumeElement>;

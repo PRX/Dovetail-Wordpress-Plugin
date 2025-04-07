@@ -232,7 +232,8 @@ class Player {
 
 		$wrapper_attributes = get_block_wrapper_attributes(
 			[
-				'src' => $audio_src,
+				'src'      => $audio_src,
+				'duration' => $atts['duration'],
 			]
 		);
 
@@ -444,6 +445,38 @@ class Player {
 	}
 
 	/**
+	 * Render Dovetail Podcast player volume slider block.
+	 *
+	 * @param array<string,string> $atts Block attributes.
+	 * @param string               $content Block content.
+	 * @param \WP_Block            $block Block instance object.
+	 * @return string
+	 */
+	public function render_volume_slider_block( $atts, string $content, \WP_Block $block ) {
+		error_log( __FUNCTION__ );
+		error_log( print_r( $atts, true ) );
+
+		if ( ! is_array( $atts ) ) {
+			$atts = [];
+		}
+
+		$atts = shortcode_atts(
+			$this->get_block_attributes_defaults( 'volume-slider' ),
+			$atts
+		);
+
+		$wrapper_attributes = get_block_wrapper_attributes( $atts );
+
+		return implode(
+			'',
+			[
+				sprintf( '<dtpc-volume-slider %1$s>', $wrapper_attributes ),
+				'</dtpc-volume-slider>',
+			]
+		);
+	}
+
+	/**
 	 * Render block shortcode.
 	 *
 	 * @param array<string,string> $atts Shortcode attributes.
@@ -454,8 +487,6 @@ class Player {
 	public function render_block_shortcode( array $atts, string $content, string $shortcode_tag ) {
 
 		$block_type = preg_replace( '~^' . DTPODCASTS_SHORTCODE_PREFIX . '~', '', $shortcode_tag );
-
-		error_log( $block_type );
 
 		return render_block(
 			[
@@ -683,7 +714,8 @@ class Player {
 			'div'                => $allowed_atts,
 			'dtpc-player'        => array_merge(
 				[
-					'src' => [],
+					'duration' => [],
+					'src'      => [],
 				],
 				$allowed_atts
 			),
@@ -705,6 +737,12 @@ class Player {
 			'dtpc-time-duration' => array_merge(
 				[
 					'duration' => [],
+				],
+				$allowed_atts
+			),
+			'dtpc-volume-slider' => array_merge(
+				[
+					'volume' => [],
 				],
 				$allowed_atts
 			),

@@ -11,11 +11,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   dtpc_mute_button: () => (/* binding */ DtpcMuteButton)
 /* harmony export */ });
-/* harmony import */ var _index_ngapiRTG_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index-ngapiRTG.js */ "../web-components/dist/dovetail-podcasts-player-web-components/index-ngapiRTG.js");
+/* harmony import */ var _index_DjC7PCMK_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index-DjC7PCMK.js */ "../web-components/dist/dovetail-podcasts-player-web-components/index-DjC7PCMK.js");
 /* harmony import */ var _index_DTzhvg_p_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./index-DTzhvg-p.js */ "../web-components/dist/dovetail-podcasts-player-web-components/index-DTzhvg-p.js");
 
 
-const dtpcMuteButtonCss = ":host{--dtpc-button--size:var(--dtpc-play-button--size);--dtpc-button--padding:var(--dtpc-play-button--padding);--dtpc-button--foreground:var(--dtpc-play-button--foreground);--dtpc-button--foreground--hover:var(--dtpc-play-button--foreground--hover);--dtpc-button--foreground--active:var(--dtpc-play-button--foreground--playing);--dtpc-button--surface:var(--dtpc-play-button--surface);--dtpc-button--surface--hover:var(--dtpc-play-button--surface--hover);--dtpc-button--surface--active:var(--dtpc-play-button--surface--playing);--dtpc-button--surface-opacity:var(--dtpc-play-button--surface-opacity);--dtpc-button--surface-opacity--hover:var(--dtpc-play-button--surface-opacity--hover);--dtpc-button--surface-opacity--active:var(--dtpc-play-button--surface-opacity--playing);--dtpc-button--border-color:var(--dtpc-play-button--border-color);--dtpc-button--border-color--hover:var(--dtpc-play-button--border-color--hover);--dtpc-button--border-color--active:var(--dtpc-play-button--border-color--playing);--dtpc-button--border-radius:var(--dtpc-play-button--border-radius);--dtpc-button--border-radius--hover:var(--dtpc-play-button--border-radius--hover);--dtpc-button--border-radius--active:var(--dtpc-play-button--border-radius--playing);--dtpc-button--border-width:var(--dtpc-play-button--border-width);--dtpc-button--border-width--hover:var(--dtpc-play-button--border-width--hover);--dtpc-button--border-width--active:var(--dtpc-play-button--border-width--playing);--dtpc-button--focus-ring-color:var(--dtpc-play-button--focus-ring-color);--dtpc-button--focus-ring-offset:var(--dtpc-play-button--focus-ring-offset);--dtpc-button--focus-ring-width:var(--dtpc-play-button--focus-ring-width)}";
+const dtpcMuteButtonCss = ":host{--dtpc-button--size:var(--dtpc-mute-button--size);--dtpc-button--padding:var(--dtpc-mute-button--padding);--dtpc-button--foreground:var(--dtpc-mute-button--foreground);--dtpc-button--foreground--hover:var(--dtpc-mute-button--foreground--hover);--dtpc-button--foreground--active:var(--dtpc-mute-button--foreground--playing);--dtpc-button--surface:var(--dtpc-mute-button--surface);--dtpc-button--surface--hover:var(--dtpc-mute-button--surface--hover);--dtpc-button--surface--active:var(--dtpc-mute-button--surface--playing);--dtpc-button--surface-opacity:var(--dtpc-mute-button--surface-opacity);--dtpc-button--surface-opacity--hover:var(--dtpc-mute-button--surface-opacity--hover);--dtpc-button--surface-opacity--active:var(--dtpc-mute-button--surface-opacity--playing);--dtpc-button--border-color:var(--dtpc-mute-button--border-color);--dtpc-button--border-color--hover:var(--dtpc-mute-button--border-color--hover);--dtpc-button--border-color--active:var(--dtpc-mute-button--border-color--playing);--dtpc-button--border-radius:var(--dtpc-mute-button--border-radius);--dtpc-button--border-radius--hover:var(--dtpc-mute-button--border-radius--hover);--dtpc-button--border-radius--active:var(--dtpc-mute-button--border-radius--playing);--dtpc-button--border-width:var(--dtpc-mute-button--border-width);--dtpc-button--border-width--hover:var(--dtpc-mute-button--border-width--hover);--dtpc-button--border-width--active:var(--dtpc-mute-button--border-width--playing);--dtpc-button--focus-ring-color:var(--dtpc-mute-button--focus-ring-color);--dtpc-button--focus-ring-offset:var(--dtpc-mute-button--focus-ring-offset);--dtpc-button--focus-ring-width:var(--dtpc-mute-button--focus-ring-width)}";
 const DtpcMuteButton = class {
   constructor(hostRef) {
     Object.defineProperty(this, "state", {
@@ -30,17 +30,15 @@ const DtpcMuteButton = class {
       writable: true,
       value: void 0
     });
-    (0,_index_ngapiRTG_js__WEBPACK_IMPORTED_MODULE_0__.r)(this, hostRef);
-    this.initControl = (0,_index_ngapiRTG_js__WEBPACK_IMPORTED_MODULE_0__.a)(this, "dtpc-control-init", 7);
+    (0,_index_DjC7PCMK_js__WEBPACK_IMPORTED_MODULE_0__.r)(this, hostRef);
+    this.initControl = (0,_index_DjC7PCMK_js__WEBPACK_IMPORTED_MODULE_0__.a)(this, "dtpc-control-init", 7);
   }
   componentWillLoad() {
     const self = this;
     this.initControl.emit(state => self.state = state);
   }
   handleClick() {
-    if (!this.state?.audioElm) return;
-    this.state.audioElm.muted = !this.state.audioElm.muted;
-    this.state.muted = this.state.audioElm.muted;
+    this.state.muted = !this.state.muted;
   }
   render() {
     const {
@@ -51,15 +49,15 @@ const DtpcMuteButton = class {
     const buttonAttributes = {
       title: label
     };
-    return (0,_index_ngapiRTG_js__WEBPACK_IMPORTED_MODULE_0__.h)(_index_ngapiRTG_js__WEBPACK_IMPORTED_MODULE_0__.d, {
-      key: '016ccdcaea411dbc9a5f1075beabbe03e7ab3a7f'
-    }, (0,_index_ngapiRTG_js__WEBPACK_IMPORTED_MODULE_0__.h)("dtpc-button", {
-      key: 'f109969c26c4c879bd542fc3ee5b9293efa3142e',
+    return (0,_index_DjC7PCMK_js__WEBPACK_IMPORTED_MODULE_0__.h)(_index_DjC7PCMK_js__WEBPACK_IMPORTED_MODULE_0__.d, {
+      key: 'a8efd8bdd55a3e821b62176075003323deae633c'
+    }, (0,_index_DjC7PCMK_js__WEBPACK_IMPORTED_MODULE_0__.h)("dtpc-button", {
+      key: 'e62a6d55080c12a30ab58c3b65eed816f3a13f37',
       ...buttonAttributes
-    }, (0,_index_ngapiRTG_js__WEBPACK_IMPORTED_MODULE_0__.h)("icon-volume", {
-      key: '71b1a1b71ce15a6093cc1a5c5546e7f21a2a25c6',
+    }, (0,_index_DjC7PCMK_js__WEBPACK_IMPORTED_MODULE_0__.h)("icon-volume", {
+      key: '6de5a70d0e7c670a38ca705e9aa507ecffa53c77',
       muted: muted,
-      level: volume
+      volume: volume
     })));
   }
 };
@@ -1031,4 +1029,4 @@ const hasTranslation = i18n.hasTranslation.bind(i18n);
 /***/ })
 
 }]);
-//# sourceMappingURL=web-components_dist_dovetail-podcasts-player-web-components_dtpc-mute-button_entry_js.js.map?ver=e623368eb5cd81897977
+//# sourceMappingURL=web-components_dist_dovetail-podcasts-player-web-components_dtpc-mute-button_entry_js.js.map?ver=0e75f5162d43a50b4f5a

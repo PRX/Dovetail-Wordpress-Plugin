@@ -4,7 +4,7 @@ import { Component, Element, Host, h, Listen } from '@stencil/core';
 @Component({
   tag: 'dtpc-button',
   styleUrl: 'dtpc-button.css',
-  shadow: false
+  shadow: true
 })
 export class DtpcButton {
 
@@ -15,6 +15,7 @@ export class DtpcButton {
     console.log(ev);
 
     if (ev.code === 'Space'){
+      ev.preventDefault();
       this.el.click();
     }
   }

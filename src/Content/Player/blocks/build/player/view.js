@@ -98,6 +98,16 @@ var map = {
 		7,
 		"web-components_dist_dovetail-podcasts-player-web-components_dtpc-time-duration_entry_js_map"
 	],
+	"./dtpc-volume-slider.entry.js": [
+		"../web-components/dist/dovetail-podcasts-player-web-components/dtpc-volume-slider.entry.js",
+		9,
+		"web-components_dist_dovetail-podcasts-player-web-components_dtpc-volume-slider_entry_js"
+	],
+	"./dtpc-volume-slider.entry.js.map": [
+		"../web-components/dist/dovetail-podcasts-player-web-components/dtpc-volume-slider.entry.js.map",
+		7,
+		"web-components_dist_dovetail-podcasts-player-web-components_dtpc-volume-slider_entry_js_map"
+	],
 	"./icon-pause.entry.js": [
 		"../web-components/dist/dovetail-podcasts-player-web-components/icon-pause.entry.js",
 		9,
@@ -174,27 +184,27 @@ const globalScripts = () => {};
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   setNonce: () => (/* reexport safe */ _index_ngapiRTG_js__WEBPACK_IMPORTED_MODULE_0__.s)
+/* harmony export */   setNonce: () => (/* reexport safe */ _index_DjC7PCMK_js__WEBPACK_IMPORTED_MODULE_0__.s)
 /* harmony export */ });
-/* harmony import */ var _index_ngapiRTG_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index-ngapiRTG.js */ "../web-components/dist/dovetail-podcasts-player-web-components/index-ngapiRTG.js");
+/* harmony import */ var _index_DjC7PCMK_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index-DjC7PCMK.js */ "../web-components/dist/dovetail-podcasts-player-web-components/index-DjC7PCMK.js");
 /* harmony import */ var _app_globals_DQuL1Twl_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./app-globals-DQuL1Twl.js */ "../web-components/dist/dovetail-podcasts-player-web-components/app-globals-DQuL1Twl.js");
 
 
 
 var patchBrowser = () => {
-  if (_index_ngapiRTG_js__WEBPACK_IMPORTED_MODULE_0__.B.isDev && !_index_ngapiRTG_js__WEBPACK_IMPORTED_MODULE_0__.B.isTesting) {
-    (0,_index_ngapiRTG_js__WEBPACK_IMPORTED_MODULE_0__.c)("Running in development mode.");
+  if (_index_DjC7PCMK_js__WEBPACK_IMPORTED_MODULE_0__.B.isDev && !_index_DjC7PCMK_js__WEBPACK_IMPORTED_MODULE_0__.B.isTesting) {
+    (0,_index_DjC7PCMK_js__WEBPACK_IMPORTED_MODULE_0__.c)("Running in development mode.");
   }
-  if (_index_ngapiRTG_js__WEBPACK_IMPORTED_MODULE_0__.B.cloneNodeFix) {
-    patchCloneNodeFix(_index_ngapiRTG_js__WEBPACK_IMPORTED_MODULE_0__.H.prototype);
+  if (_index_DjC7PCMK_js__WEBPACK_IMPORTED_MODULE_0__.B.cloneNodeFix) {
+    patchCloneNodeFix(_index_DjC7PCMK_js__WEBPACK_IMPORTED_MODULE_0__.H.prototype);
   }
-  const scriptElm = _index_ngapiRTG_js__WEBPACK_IMPORTED_MODULE_0__.B.scriptDataOpts ? _index_ngapiRTG_js__WEBPACK_IMPORTED_MODULE_0__.w.document && Array.from(_index_ngapiRTG_js__WEBPACK_IMPORTED_MODULE_0__.w.document.querySelectorAll("script")).find(s => new RegExp(`/${_index_ngapiRTG_js__WEBPACK_IMPORTED_MODULE_0__.N}(\\.esm)?\\.js($|\\?|#)`).test(s.src) || s.getAttribute("data-stencil-namespace") === _index_ngapiRTG_js__WEBPACK_IMPORTED_MODULE_0__.N) : null;
+  const scriptElm = _index_DjC7PCMK_js__WEBPACK_IMPORTED_MODULE_0__.B.scriptDataOpts ? _index_DjC7PCMK_js__WEBPACK_IMPORTED_MODULE_0__.w.document && Array.from(_index_DjC7PCMK_js__WEBPACK_IMPORTED_MODULE_0__.w.document.querySelectorAll("script")).find(s => new RegExp(`/${_index_DjC7PCMK_js__WEBPACK_IMPORTED_MODULE_0__.N}(\\.esm)?\\.js($|\\?|#)`).test(s.src) || s.getAttribute("data-stencil-namespace") === _index_DjC7PCMK_js__WEBPACK_IMPORTED_MODULE_0__.N) : null;
   const importMeta = "file:///Users/rick/Projects/PRX/dt-plugin-demo-wordpress/wordpress/wp-content/plugins/dovetail-podcasts/src/Content/Player/web-components/dist/dovetail-podcasts-player-web-components/dovetail-podcasts-player-web-components.esm.js";
-  const opts = _index_ngapiRTG_js__WEBPACK_IMPORTED_MODULE_0__.B.scriptDataOpts ? (scriptElm || {})["data-opts"] || {} : {};
+  const opts = _index_DjC7PCMK_js__WEBPACK_IMPORTED_MODULE_0__.B.scriptDataOpts ? (scriptElm || {})["data-opts"] || {} : {};
   if (importMeta !== "") {
     opts.resourcesUrl = new URL(".", importMeta).href;
   }
-  return (0,_index_ngapiRTG_js__WEBPACK_IMPORTED_MODULE_0__.p)(opts);
+  return (0,_index_DjC7PCMK_js__WEBPACK_IMPORTED_MODULE_0__.p)(opts);
 };
 var patchCloneNodeFix = HTMLElementPrototype => {
   const nativeCloneNodeFn = HTMLElementPrototype.cloneNode;
@@ -216,26 +226,20 @@ var patchCloneNodeFix = HTMLElementPrototype => {
 };
 patchBrowser().then(async options => {
   await (0,_app_globals_DQuL1Twl_js__WEBPACK_IMPORTED_MODULE_1__.g)();
-  return (0,_index_ngapiRTG_js__WEBPACK_IMPORTED_MODULE_0__.b)([["dtpc-play-button", [[1, "dtpc-play-button", null, [[0, "click", "handleClick"]]]]], ["dtpc-mute-button", [[1, "dtpc-mute-button", null, [[0, "click", "handleClick"]]]]], ["dtpc-time-display", [[1, "dtpc-time-display", {
+  return (0,_index_DjC7PCMK_js__WEBPACK_IMPORTED_MODULE_0__.b)([["dtpc-play-button", [[1, "dtpc-play-button", null, [[0, "click", "handleClick"]]]]], ["dtpc-mute-button", [[1, "dtpc-mute-button", null, [[0, "click", "handleClick"]]]]], ["dtpc-time-display", [[1, "dtpc-time-display", {
     "duration": [2]
   }]]], ["dtpc-progress-bar", [[1, "dtpc-progress-bar", {
     "duration": [2],
     "audioDuration": [32]
-  }, [[0, "slider-input", "handleInput"], [0, "slider-change", "handleChange"]]]]], ["dtpc-player", [[1, "dtpc-player", {
-    "src": [1]
+  }, [[0, "slider-input", "handleInput"], [0, "slider-change", "handleChange"]]]]], ["dtpc-volume-slider", [[1, "dtpc-volume-slider", {
+    "orient": [1],
+    "volume": [2]
+  }, [[0, "slider-input", "handleInput"]]]]], ["dtpc-player", [[1, "dtpc-player", {
+    "src": [1],
+    "duration": [2],
+    "audioDuration": [32]
   }, [[0, "audio-toggle-paused", "handleTogglePaused"], [0, "dtpc-control-init", "handleControlInit"]], {
     "src": ["watchSrcHandler"]
-  }]]], ["dtpc-slider", [[1, "dtpc-slider", {
-    "disabled": [4],
-    "defaultValue": [2, "default-value"],
-    "value": [2],
-    "min": [2],
-    "max": [2],
-    "step": [2],
-    "orient": [1],
-    "currentValue": [32]
-  }, null, {
-    "value": ["handleValueChange"]
   }]]], ["dtpc-time-current", [[1, "dtpc-time-current"]]], ["dtpc-time-duration", [[1, "dtpc-time-duration", {
     "duration": [2],
     "audioDuration": [32]
@@ -402,7 +406,7 @@ patchBrowser().then(async options => {
     "x": [8],
     "y": [8]
   }]]], ["icon-volume", [[0, "icon-volume", {
-    "level": [2],
+    "volume": [2, "level"],
     "muted": [4],
     "alignmentBaseline": [8, "alignment-baseline"],
     "baselineShift": [8, "baseline-shift"],
@@ -484,14 +488,25 @@ patchBrowser().then(async options => {
     "writingMode": [8, "writing-mode"],
     "x": [8],
     "y": [8]
-  }]]], ["dtpc-button", [[4, "dtpc-button", null, [[0, "keydown", "handleKeyDown"]]]]]], options);
+  }]]], ["dtpc-button", [[1, "dtpc-button", null, [[0, "keydown", "handleKeyDown"]]]]], ["dtpc-slider", [[1, "dtpc-slider", {
+    "disabled": [4],
+    "defaultValue": [2, "default-value"],
+    "value": [2],
+    "min": [2],
+    "max": [2],
+    "step": [2],
+    "orient": [1],
+    "currentValue": [32]
+  }, null, {
+    "value": ["handleValueChange"]
+  }]]]], options);
 });
 
 /***/ }),
 
-/***/ "../web-components/dist/dovetail-podcasts-player-web-components/index-ngapiRTG.js":
+/***/ "../web-components/dist/dovetail-podcasts-player-web-components/index-DjC7PCMK.js":
 /*!****************************************************************************************!*\
-  !*** ../web-components/dist/dovetail-podcasts-player-web-components/index-ngapiRTG.js ***!
+  !*** ../web-components/dist/dovetail-podcasts-player-web-components/index-DjC7PCMK.js ***!
   \****************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -570,7 +585,7 @@ const BUILD = {
   shadowDom: true,
   slot: true,
   slotChildNodesFix: false,
-  slotRelocation: true,
+  slotRelocation: false,
   state: true,
   style: true,
   svg: false,
@@ -4390,7 +4405,7 @@ var insertChildVNodeAnnotations = (doc, vnodeChild, cmpData, hostId, depth, inde
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames based on template
-/******/ 			return "" + chunkId + ".js?ver=" + {"web-components_dist_dovetail-podcasts-player-web-components_dtpc-button_entry_js":"ff8c34782c6ced027a29","web-components_dist_dovetail-podcasts-player-web-components_dtpc-button_entry_js_map":"7b1ce57ffe4ae8ca8e0c","web-components_dist_dovetail-podcasts-player-web-components_dtpc-mute-button_entry_js":"e623368eb5cd81897977","web-components_dist_dovetail-podcasts-player-web-components_dtpc-mute-button_entry_js_map":"bae221e93d07410db333","web-components_dist_dovetail-podcasts-player-web-components_dtpc-play-button_entry_js":"61bce122ac6fe61bfdb2","web-components_dist_dovetail-podcasts-player-web-components_dtpc-play-button_entry_js_map":"5bbb991af4940ebf23f8","web-components_dist_dovetail-podcasts-player-web-components_dtpc-player_entry_js":"35316722465723208c1a","web-components_dist_dovetail-podcasts-player-web-components_dtpc-player_entry_js_map":"f808ae8e2a96676f835b","web-components_dist_dovetail-podcasts-player-web-components_dtpc-progress-bar_entry_js":"c304e5ef3359a5b047db","web-components_dist_dovetail-podcasts-player-web-components_dtpc-progress-bar_entry_js_map":"dc81bd14c01dc3a49103","web-components_dist_dovetail-podcasts-player-web-components_dtpc-slider_entry_js":"1975865bd45ef56a8efe","web-components_dist_dovetail-podcasts-player-web-components_dtpc-slider_entry_js_map":"37c86d8ecec16bea3104","web-components_dist_dovetail-podcasts-player-web-components_dtpc-time-current_entry_js":"747b34181e30ee8d47cf","web-components_dist_dovetail-podcasts-player-web-components_dtpc-time-current_entry_js_map":"bb8c5aa33ef54c554d89","web-components_dist_dovetail-podcasts-player-web-components_dtpc-time-display_entry_js":"76e71612f0b7bc2af392","web-components_dist_dovetail-podcasts-player-web-components_dtpc-time-display_entry_js_map":"aaf1fd52803e76911572","web-components_dist_dovetail-podcasts-player-web-components_dtpc-time-duration_entry_js":"0e3cdd82329432ba269d","web-components_dist_dovetail-podcasts-player-web-components_dtpc-time-duration_entry_js_map":"08bc2ca21ade90159f20","web-components_dist_dovetail-podcasts-player-web-components_icon-pause_entry_js":"6c57d09ec5dc32c9a59e","web-components_dist_dovetail-podcasts-player-web-components_icon-pause_entry_js_map":"4e0d650c87cc3bfcc0db","web-components_dist_dovetail-podcasts-player-web-components_icon-play_entry_js":"a0af248718b123c83a04","web-components_dist_dovetail-podcasts-player-web-components_icon-play_entry_js_map":"d19c163be96ee039b5d6","web-components_dist_dovetail-podcasts-player-web-components_icon-volume_entry_js":"e2e0a8e4ac57a6f2660d","web-components_dist_dovetail-podcasts-player-web-components_icon-volume_entry_js_map":"b14f4121e898b0efcde6"}[chunkId] + "";
+/******/ 			return "" + chunkId + ".js?ver=" + {"web-components_dist_dovetail-podcasts-player-web-components_dtpc-button_entry_js":"00b81ccf7ddd0aa523c1","web-components_dist_dovetail-podcasts-player-web-components_dtpc-button_entry_js_map":"7b1ce57ffe4ae8ca8e0c","web-components_dist_dovetail-podcasts-player-web-components_dtpc-mute-button_entry_js":"0e75f5162d43a50b4f5a","web-components_dist_dovetail-podcasts-player-web-components_dtpc-mute-button_entry_js_map":"bae221e93d07410db333","web-components_dist_dovetail-podcasts-player-web-components_dtpc-play-button_entry_js":"ba4bf3430a1adddb3a99","web-components_dist_dovetail-podcasts-player-web-components_dtpc-play-button_entry_js_map":"5bbb991af4940ebf23f8","web-components_dist_dovetail-podcasts-player-web-components_dtpc-player_entry_js":"1ba94b6f9bf2b6ea1d05","web-components_dist_dovetail-podcasts-player-web-components_dtpc-player_entry_js_map":"f808ae8e2a96676f835b","web-components_dist_dovetail-podcasts-player-web-components_dtpc-progress-bar_entry_js":"43c9cce711ef672b45f4","web-components_dist_dovetail-podcasts-player-web-components_dtpc-progress-bar_entry_js_map":"dc81bd14c01dc3a49103","web-components_dist_dovetail-podcasts-player-web-components_dtpc-slider_entry_js":"8de7ab95a452cc76b846","web-components_dist_dovetail-podcasts-player-web-components_dtpc-slider_entry_js_map":"37c86d8ecec16bea3104","web-components_dist_dovetail-podcasts-player-web-components_dtpc-time-current_entry_js":"1f8e41ed59aa957ddf76","web-components_dist_dovetail-podcasts-player-web-components_dtpc-time-current_entry_js_map":"bb8c5aa33ef54c554d89","web-components_dist_dovetail-podcasts-player-web-components_dtpc-time-display_entry_js":"c566db1c7c44f6f998d8","web-components_dist_dovetail-podcasts-player-web-components_dtpc-time-display_entry_js_map":"aaf1fd52803e76911572","web-components_dist_dovetail-podcasts-player-web-components_dtpc-time-duration_entry_js":"e98124f42e0665ad2241","web-components_dist_dovetail-podcasts-player-web-components_dtpc-time-duration_entry_js_map":"08bc2ca21ade90159f20","web-components_dist_dovetail-podcasts-player-web-components_dtpc-volume-slider_entry_js":"bb14e7d8b3708501513f","web-components_dist_dovetail-podcasts-player-web-components_dtpc-volume-slider_entry_js_map":"4d0952b5d6e673ba2da9","web-components_dist_dovetail-podcasts-player-web-components_icon-pause_entry_js":"876ef156bf7dae3570c7","web-components_dist_dovetail-podcasts-player-web-components_icon-pause_entry_js_map":"4e0d650c87cc3bfcc0db","web-components_dist_dovetail-podcasts-player-web-components_icon-play_entry_js":"b211574010eaf1e57a55","web-components_dist_dovetail-podcasts-player-web-components_icon-play_entry_js_map":"d19c163be96ee039b5d6","web-components_dist_dovetail-podcasts-player-web-components_icon-volume_entry_js":"0c6a6493b398b3d6c8d6","web-components_dist_dovetail-podcasts-player-web-components_icon-volume_entry_js_map":"b14f4121e898b0efcde6"}[chunkId] + "";
 /******/ 		};
 /******/ 	})();
 /******/ 	

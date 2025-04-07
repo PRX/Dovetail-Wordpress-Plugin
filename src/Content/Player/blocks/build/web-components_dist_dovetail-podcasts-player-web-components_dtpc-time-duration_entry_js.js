@@ -11,13 +11,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   dtpc_time_duration: () => (/* binding */ DtpcTimeDuration)
 /* harmony export */ });
-/* harmony import */ var _index_ngapiRTG_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index-ngapiRTG.js */ "../web-components/dist/dovetail-podcasts-player-web-components/index-ngapiRTG.js");
-/* harmony import */ var _index_9eVOQZ3j_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./index-9eVOQZ3j.js */ "../web-components/dist/dovetail-podcasts-player-web-components/index-9eVOQZ3j.js");
+/* harmony import */ var _index_DjC7PCMK_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index-DjC7PCMK.js */ "../web-components/dist/dovetail-podcasts-player-web-components/index-DjC7PCMK.js");
+/* harmony import */ var _index_B4aL0lTS_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./index-B4aL0lTS.js */ "../web-components/dist/dovetail-podcasts-player-web-components/index-B4aL0lTS.js");
 /* harmony import */ var _index_BprZZpRs_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./index-BprZZpRs.js */ "../web-components/dist/dovetail-podcasts-player-web-components/index-BprZZpRs.js");
 
 
 
-const dtpcTimeDurationCss = ":host{--_dtpc-time-duration--color:var(--dtpc-time-duration--color, var(--_dtpc-player--time--color, currentColor));--_dtpc-time-duration--font-family:var(--dtpc-time-duration--font-family, var(--_dtpc-player--time--font-family, inherit));--_dtpc-time-duration--font-size:var(--dtpc-time-duration--font-size, var(--_dtpc-player--time--font-size, inherit));--_dtpc-time-duration--font-weight:var(--dtpc-time-duration--font-weight, var(--_dtpc-player--time--font-weight, inherit));color:var(--_dtpc-time-duration--color);font-family:var(--_dtpc-time-duration--font-family);font-size:var(--_dtpc-time-duration--font-size);font-weight:var(--_dtpc-time-duration--font-weight)}";
+const dtpcTimeDurationCss = ":host{--_dtpc-time-duration--color:var(--dtpc-time-duration--color, var(--_dtpc-player--time--color));--_dtpc-time-duration--font-family:var(--dtpc-time-duration--font-family, var(--_dtpc-player--time--font-family));--_dtpc-time-duration--font-size:var(--dtpc-time-duration--font-size, var(--_dtpc-player--time--font-size));--_dtpc-time-duration--font-weight:var(--dtpc-time-duration--font-weight, var(--_dtpc-player--time--font-weight));color:var(--_dtpc-time-duration--color);font-family:var(--_dtpc-time-duration--font-family);font-size:var(--_dtpc-time-duration--font-size);font-weight:var(--_dtpc-time-duration--font-weight)}";
 const DtpcTimeDuration = class {
   constructor(hostRef) {
     Object.defineProperty(this, "state", {
@@ -44,8 +44,8 @@ const DtpcTimeDuration = class {
       writable: true,
       value: void 0
     });
-    (0,_index_ngapiRTG_js__WEBPACK_IMPORTED_MODULE_0__.r)(this, hostRef);
-    this.initControl = (0,_index_ngapiRTG_js__WEBPACK_IMPORTED_MODULE_0__.a)(this, "dtpc-control-init", 7);
+    (0,_index_DjC7PCMK_js__WEBPACK_IMPORTED_MODULE_0__.r)(this, hostRef);
+    this.initControl = (0,_index_DjC7PCMK_js__WEBPACK_IMPORTED_MODULE_0__.a)(this, "dtpc-control-init", 7);
   }
   componentWillLoad() {
     const self = this;
@@ -59,9 +59,9 @@ const DtpcTimeDuration = class {
     const {
       duration
     } = this.state;
-    const displayDuration = (0,_index_9eVOQZ3j_js__WEBPACK_IMPORTED_MODULE_1__.f)(duration || this.audioDuration);
-    return (0,_index_ngapiRTG_js__WEBPACK_IMPORTED_MODULE_0__.h)(_index_ngapiRTG_js__WEBPACK_IMPORTED_MODULE_0__.d, {
-      key: '28f945fa94afb1d800e8b4ad734b62c51b521ae2'
+    const displayDuration = (0,_index_B4aL0lTS_js__WEBPACK_IMPORTED_MODULE_1__.f)(duration || this.audioDuration);
+    return (0,_index_DjC7PCMK_js__WEBPACK_IMPORTED_MODULE_0__.h)(_index_DjC7PCMK_js__WEBPACK_IMPORTED_MODULE_0__.d, {
+      key: '8aefe12549f34ebd5710c43c050bfa0ad403a20a'
     }, displayDuration);
   }
 };
@@ -70,19 +70,23 @@ DtpcTimeDuration.style = dtpcTimeDurationCss;
 
 /***/ }),
 
-/***/ "../web-components/dist/dovetail-podcasts-player-web-components/index-9eVOQZ3j.js":
+/***/ "../web-components/dist/dovetail-podcasts-player-web-components/index-B4aL0lTS.js":
 /*!****************************************************************************************!*\
-  !*** ../web-components/dist/dovetail-podcasts-player-web-components/index-9eVOQZ3j.js ***!
+  !*** ../web-components/dist/dovetail-podcasts-player-web-components/index-B4aL0lTS.js ***!
   \****************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   c: () => (/* binding */ cn),
+/* harmony export */   a: () => (/* binding */ convertStringToInteger),
+/* harmony export */   b: () => (/* binding */ cn),
+/* harmony export */   c: () => (/* binding */ convertDurationStringToIntegerArray),
 /* harmony export */   f: () => (/* binding */ formatDuration)
 /* harmony export */ });
 /* harmony import */ var _index_BprZZpRs_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index-BprZZpRs.js */ "../web-components/dist/dovetail-podcasts-player-web-components/index-BprZZpRs.js");
 
+const convertStringToInteger = str => parseInt(str, 10) || 0;
+const convertDurationStringToIntegerArray = duration => duration?.split(':').map(v => convertStringToInteger(v)).reduce((a, c) => [c, ...a], []) || [0];
 function r(e) {
   var t,
     f,
@@ -140,4 +144,4 @@ function attributesToObject(el) {
 /***/ })
 
 }]);
-//# sourceMappingURL=web-components_dist_dovetail-podcasts-player-web-components_dtpc-time-duration_entry_js.js.map?ver=0e3cdd82329432ba269d
+//# sourceMappingURL=web-components_dist_dovetail-podcasts-player-web-components_dtpc-time-duration_entry_js.js.map?ver=e98124f42e0665ad2241

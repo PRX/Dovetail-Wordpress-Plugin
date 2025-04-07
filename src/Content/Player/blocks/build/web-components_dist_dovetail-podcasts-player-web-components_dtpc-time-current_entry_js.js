@@ -11,13 +11,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   dtpc_time_current: () => (/* binding */ DtpcTimeCurrent)
 /* harmony export */ });
-/* harmony import */ var _index_ngapiRTG_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index-ngapiRTG.js */ "../web-components/dist/dovetail-podcasts-player-web-components/index-ngapiRTG.js");
-/* harmony import */ var _index_9eVOQZ3j_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./index-9eVOQZ3j.js */ "../web-components/dist/dovetail-podcasts-player-web-components/index-9eVOQZ3j.js");
+/* harmony import */ var _index_DjC7PCMK_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index-DjC7PCMK.js */ "../web-components/dist/dovetail-podcasts-player-web-components/index-DjC7PCMK.js");
+/* harmony import */ var _index_B4aL0lTS_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./index-B4aL0lTS.js */ "../web-components/dist/dovetail-podcasts-player-web-components/index-B4aL0lTS.js");
 /* harmony import */ var _index_BprZZpRs_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./index-BprZZpRs.js */ "../web-components/dist/dovetail-podcasts-player-web-components/index-BprZZpRs.js");
 
 
 
-const dtpcTimeCurrentCss = ":host{--_dtpc-time-current--color:var(--dtpc-time-current--color, var(--_dtpc-player--time--color, currentColor));--_dtpc-time-current--font-family:var(--dtpc-time-current--font-family, var(--_dtpc-player--time--font-family, inherit));--_dtpc-time-current--font-size:var(--dtpc-time-current--font-size, var(--_dtpc-player--time--font-size, inherit));--_dtpc-time-current--font-weight:var(--dtpc-time-current--font-weight, var(--_dtpc-player--time--font-weight, inherit));color:var(--_dtpc-time-current--color);font-family:var(--_dtpc-time-current--font-family);font-size:var(--_dtpc-time-current--font-size);font-weight:var(--_dtpc-time-current--font-weight)}";
+const dtpcTimeCurrentCss = ":host{--_dtpc-time-current--color:var(--dtpc-time-current--color, var(--_dtpc-player--time--color));--_dtpc-time-current--font-family:var(--dtpc-time-current--font-family, var(--_dtpc-player--time--font-family));--_dtpc-time-current--font-size:var(--dtpc-time-current--font-size, var(--_dtpc-player--time--font-size));--_dtpc-time-current--font-weight:var(--dtpc-time-current--font-weight, var(--_dtpc-player--time--font-weight));color:var(--_dtpc-time-current--color);font-family:var(--_dtpc-time-current--font-family);font-size:var(--_dtpc-time-current--font-size);font-weight:var(--_dtpc-time-current--font-weight)}";
 const DtpcTimeCurrent = class {
   constructor(hostRef) {
     Object.defineProperty(this, "state", {
@@ -32,8 +32,8 @@ const DtpcTimeCurrent = class {
       writable: true,
       value: void 0
     });
-    (0,_index_ngapiRTG_js__WEBPACK_IMPORTED_MODULE_0__.r)(this, hostRef);
-    this.initControl = (0,_index_ngapiRTG_js__WEBPACK_IMPORTED_MODULE_0__.a)(this, "dtpc-control-init", 7);
+    (0,_index_DjC7PCMK_js__WEBPACK_IMPORTED_MODULE_0__.r)(this, hostRef);
+    this.initControl = (0,_index_DjC7PCMK_js__WEBPACK_IMPORTED_MODULE_0__.a)(this, "dtpc-control-init", 7);
   }
   componentWillLoad() {
     const self = this;
@@ -45,9 +45,9 @@ const DtpcTimeCurrent = class {
       currentTime
     } = this.state;
     const time = seekTime !== null ? seekTime : currentTime;
-    const displayTime = (0,_index_9eVOQZ3j_js__WEBPACK_IMPORTED_MODULE_1__.f)(time);
-    return (0,_index_ngapiRTG_js__WEBPACK_IMPORTED_MODULE_0__.h)(_index_ngapiRTG_js__WEBPACK_IMPORTED_MODULE_0__.d, {
-      key: 'ebaea779f625855ef285e03d7fd170de92d78971'
+    const displayTime = (0,_index_B4aL0lTS_js__WEBPACK_IMPORTED_MODULE_1__.f)(time);
+    return (0,_index_DjC7PCMK_js__WEBPACK_IMPORTED_MODULE_0__.h)(_index_DjC7PCMK_js__WEBPACK_IMPORTED_MODULE_0__.d, {
+      key: '059dd85c2e6a323e554536ff074e6d7896484994'
     }, displayTime);
   }
 };
@@ -56,19 +56,23 @@ DtpcTimeCurrent.style = dtpcTimeCurrentCss;
 
 /***/ }),
 
-/***/ "../web-components/dist/dovetail-podcasts-player-web-components/index-9eVOQZ3j.js":
+/***/ "../web-components/dist/dovetail-podcasts-player-web-components/index-B4aL0lTS.js":
 /*!****************************************************************************************!*\
-  !*** ../web-components/dist/dovetail-podcasts-player-web-components/index-9eVOQZ3j.js ***!
+  !*** ../web-components/dist/dovetail-podcasts-player-web-components/index-B4aL0lTS.js ***!
   \****************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   c: () => (/* binding */ cn),
+/* harmony export */   a: () => (/* binding */ convertStringToInteger),
+/* harmony export */   b: () => (/* binding */ cn),
+/* harmony export */   c: () => (/* binding */ convertDurationStringToIntegerArray),
 /* harmony export */   f: () => (/* binding */ formatDuration)
 /* harmony export */ });
 /* harmony import */ var _index_BprZZpRs_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index-BprZZpRs.js */ "../web-components/dist/dovetail-podcasts-player-web-components/index-BprZZpRs.js");
 
+const convertStringToInteger = str => parseInt(str, 10) || 0;
+const convertDurationStringToIntegerArray = duration => duration?.split(':').map(v => convertStringToInteger(v)).reduce((a, c) => [c, ...a], []) || [0];
 function r(e) {
   var t,
     f,
@@ -126,4 +130,4 @@ function attributesToObject(el) {
 /***/ })
 
 }]);
-//# sourceMappingURL=web-components_dist_dovetail-podcasts-player-web-components_dtpc-time-current_entry_js.js.map?ver=747b34181e30ee8d47cf
+//# sourceMappingURL=web-components_dist_dovetail-podcasts-player-web-components_dtpc-time-current_entry_js.js.map?ver=1f8e41ed59aa957ddf76

@@ -11,11 +11,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   dtpc_play_button: () => (/* binding */ DtpcPlayButton)
 /* harmony export */ });
-/* harmony import */ var _index_ngapiRTG_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index-ngapiRTG.js */ "../web-components/dist/dovetail-podcasts-player-web-components/index-ngapiRTG.js");
+/* harmony import */ var _index_DjC7PCMK_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index-DjC7PCMK.js */ "../web-components/dist/dovetail-podcasts-player-web-components/index-DjC7PCMK.js");
 /* harmony import */ var _index_DTzhvg_p_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./index-DTzhvg-p.js */ "../web-components/dist/dovetail-podcasts-player-web-components/index-DTzhvg-p.js");
 
 
-const dtpcPlayButtonCss = ":host {\n  --dtpc-button--size: var(--dtpc-play-button--size, 2rem);\n  --dtpc-button--padding: var(--dtpc-play-button--padding, 0.5rem);\n  --dtpc-button--foreground: var(--dtpc-play-button--foreground);\n  --dtpc-button--foreground--hover: var(--dtpc-play-button--foreground--hover, Canvas);\n  --dtpc-button--foreground--active: var(--dtpc-play-button--foreground--playing);\n  --dtpc-button--surface: var(--dtpc-play-button--surface);\n  --dtpc-button--surface--hover: var(--dtpc-play-button--surface--hover, CanvasText);\n  --dtpc-button--surface--active: var(--dtpc-play-button--surface--playing);\n  --dtpc-button--surface-opacity: var(--dtpc-play-button--surface-opacity);\n  --dtpc-button--surface-opacity--hover: var(--dtpc-play-button--surface-opacity--hover, 100%);\n  --dtpc-button--surface-opacity--active: var(--dtpc-play-button--surface-opacity--playing, 0);\n  --dtpc-button--border-color: var(--dtpc-play-button--border-color, transparent);\n  --dtpc-button--border-color--hover: var(--dtpc-play-button--border-color--hover, transparent);\n  --dtpc-button--border-color--active: var(--dtpc-play-button--border-color--playing, CanvasText);\n  --dtpc-button--border-radius: var(--dtpc-play-button--border-radius);\n  --dtpc-button--border-radius--hover: var(--dtpc-play-button--border-radius--hover);\n  --dtpc-button--border-radius--active: var(--dtpc-play-button--border-radius--playing);\n  --dtpc-button--border-width: var(--dtpc-play-button--border-width, 0.125);\n  --dtpc-button--border-width--hover: var(--dtpc-play-button--border-width--hover, 0.125);\n  --dtpc-button--border-width--active: var(--dtpc-play-button--border-width--playing, 0.125);\n  --dtpc-button--focus-ring-color: var(--dtpc-play-button--focus-ring-color);\n  --dtpc-button--focus-ring-offset: var(--dtpc-play-button--focus-ring-offset);\n  --dtpc-button--focus-ring-width: var(--dtpc-play-button--focus-ring-width);\n}\n\n:host([data-status='playing']) {\n  --dtpc-button--foreground: var(--dtpc-button--foreground--active);\n  --dtpc-button--surface: var(--dtpc-button--surface--active);\n  --dtpc-button--surface-opacity: var(--dtpc-button--surface-opacity--active);\n  --dtpc-button--border-color: var(--dtpc-button--border-color--active);\n  --dtpc-button--border-width: var(--dtpc-button--border-width--active);\n  --dtpc-button--border-radius: var(--dtpc-button--border-radius--active);\n\n  &:hover {\n    --dtpc-button--surface-opacity: var(--dtpc-button--surface-opacity--hover);\n  }\n}\n";
+const dtpcPlayButtonCss = ":host {\n  --dtpc-button--size: var(--dtpc-play-button--size, 2rem);\n  --dtpc-button--padding: var(--dtpc-play-button--padding, 0.5rem);\n  --dtpc-button--foreground: var(--dtpc-play-button--foreground);\n  --dtpc-button--foreground--hover: var(--dtpc-play-button--foreground--hover, var(--_dtpc-player--surface));\n  --dtpc-button--foreground--active: var(--dtpc-play-button--foreground--playing);\n  --dtpc-button--surface: var(--dtpc-play-button--surface);\n  --dtpc-button--surface--hover: var(--dtpc-play-button--surface--hover, var(--_dtpc-player--foreground));\n  --dtpc-button--surface--active: var(--dtpc-play-button--surface--playing);\n  --dtpc-button--surface-opacity: var(--dtpc-play-button--surface-opacity);\n  --dtpc-button--surface-opacity--hover: var(--dtpc-play-button--surface-opacity--hover, 100%);\n  --dtpc-button--surface-opacity--active: var(--dtpc-play-button--surface-opacity--playing, 0);\n  --dtpc-button--border-color: var(--dtpc-play-button--border-color, transparent);\n  --dtpc-button--border-color--hover: var(--dtpc-play-button--border-color--hover, transparent);\n  --dtpc-button--border-color--active: var(--dtpc-play-button--border-color--playing, var(--_dtpc-player--foreground));\n  --dtpc-button--border-radius: var(--dtpc-play-button--border-radius);\n  --dtpc-button--border-radius--hover: var(--dtpc-play-button--border-radius--hover);\n  --dtpc-button--border-radius--active: var(--dtpc-play-button--border-radius--playing);\n  --dtpc-button--border-width: var(--dtpc-play-button--border-width, 0.125);\n  --dtpc-button--border-width--hover: var(--dtpc-play-button--border-width--hover, 0.125);\n  --dtpc-button--border-width--active: var(--dtpc-play-button--border-width--playing, 0.125);\n  --dtpc-button--focus-ring-color: var(--dtpc-play-button--focus-ring-color);\n  --dtpc-button--focus-ring-offset: var(--dtpc-play-button--focus-ring-offset);\n  --dtpc-button--focus-ring-width: var(--dtpc-play-button--focus-ring-width);\n}\n\n:host([data-status='playing']) {\n  --dtpc-button--foreground: var(--dtpc-button--foreground--active);\n  --dtpc-button--surface: var(--dtpc-button--surface--active);\n  --dtpc-button--surface-opacity: var(--dtpc-button--surface-opacity--active);\n  --dtpc-button--border-color: var(--dtpc-button--border-color--active);\n  --dtpc-button--border-width: var(--dtpc-button--border-width--active);\n  --dtpc-button--border-radius: var(--dtpc-button--border-radius--active);\n\n  &:hover {\n    --dtpc-button--surface-opacity: var(--dtpc-button--surface-opacity--hover);\n  }\n}\n";
 const DtpcPlayButton = class {
   constructor(hostRef) {
     Object.defineProperty(this, "state", {
@@ -36,9 +36,9 @@ const DtpcPlayButton = class {
       writable: true,
       value: void 0
     });
-    (0,_index_ngapiRTG_js__WEBPACK_IMPORTED_MODULE_0__.r)(this, hostRef);
-    this.initControl = (0,_index_ngapiRTG_js__WEBPACK_IMPORTED_MODULE_0__.a)(this, "dtpc-control-init", 7);
-    this.togglePaused = (0,_index_ngapiRTG_js__WEBPACK_IMPORTED_MODULE_0__.a)(this, "audio-toggle-paused", 7);
+    (0,_index_DjC7PCMK_js__WEBPACK_IMPORTED_MODULE_0__.r)(this, hostRef);
+    this.initControl = (0,_index_DjC7PCMK_js__WEBPACK_IMPORTED_MODULE_0__.a)(this, "dtpc-control-init", 7);
+    this.togglePaused = (0,_index_DjC7PCMK_js__WEBPACK_IMPORTED_MODULE_0__.a)(this, "audio-toggle-paused", 7);
   }
   componentWillLoad() {
     const self = this;
@@ -56,13 +56,13 @@ const DtpcPlayButton = class {
       type: 'button',
       title: label
     };
-    return (0,_index_ngapiRTG_js__WEBPACK_IMPORTED_MODULE_0__.h)(_index_ngapiRTG_js__WEBPACK_IMPORTED_MODULE_0__.d, {
-      key: 'e2cab90940539931b2bd43e2705efabd5525afc2',
+    return (0,_index_DjC7PCMK_js__WEBPACK_IMPORTED_MODULE_0__.h)(_index_DjC7PCMK_js__WEBPACK_IMPORTED_MODULE_0__.d, {
+      key: '06e758827b0c348c9dc7352742d24482b5c35760',
       "data-status": playing ? 'playing' : 'paused'
-    }, (0,_index_ngapiRTG_js__WEBPACK_IMPORTED_MODULE_0__.h)("dtpc-button", {
-      key: 'd65f82e16cabbfa0072830f7c175080ceb02cd51',
+    }, (0,_index_DjC7PCMK_js__WEBPACK_IMPORTED_MODULE_0__.h)("dtpc-button", {
+      key: '43f8b4df8d104e706cfdf656f946db1bd3910949',
       ...buttonAttributes
-    }, playing ? (0,_index_ngapiRTG_js__WEBPACK_IMPORTED_MODULE_0__.h)("icon-pause", null) : (0,_index_ngapiRTG_js__WEBPACK_IMPORTED_MODULE_0__.h)("icon-play", null)));
+    }, playing ? (0,_index_DjC7PCMK_js__WEBPACK_IMPORTED_MODULE_0__.h)("icon-pause", null) : (0,_index_DjC7PCMK_js__WEBPACK_IMPORTED_MODULE_0__.h)("icon-play", null)));
   }
 };
 DtpcPlayButton.style = dtpcPlayButtonCss;
@@ -1033,4 +1033,4 @@ const hasTranslation = i18n.hasTranslation.bind(i18n);
 /***/ })
 
 }]);
-//# sourceMappingURL=web-components_dist_dovetail-podcasts-player-web-components_dtpc-play-button_entry_js.js.map?ver=61bce122ac6fe61bfdb2
+//# sourceMappingURL=web-components_dist_dovetail-podcasts-player-web-components_dtpc-play-button_entry_js.js.map?ver=ba4bf3430a1adddb3a99

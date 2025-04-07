@@ -73,42 +73,6 @@ return array(
 			
 		)
 	),
-	'play-button copy' => array(
-		'$schema' => 'https://schemas.wp.org/trunk/block.json',
-		'apiVersion' => 3,
-		'name' => 'dovetail-podcasts/play-button',
-		'version' => '0.1.0',
-		'title' => 'Dovetail Podcasts Player Play Button',
-		'category' => 'media',
-		'icon' => 'controls-play',
-		'description' => 'Play button for Dovetail Podcasts Player.',
-		'ancestor' => array(
-			'dovetail-podcasts/player'
-		),
-		'example' => array(
-			
-		),
-		'supports' => array(
-			'html' => false,
-			'color' => array(
-				'background' => true,
-				'text' => true
-			),
-			'spacing' => array(
-				'margin' => false,
-				'padding' => true
-			)
-		),
-		'textdomain' => 'dovetail-podcasts',
-		'editorScript' => 'file:./index.js',
-		'editorStyle' => 'file:./index.css',
-		'style' => 'file:./style-index.css',
-		'render' => 'file:./render.php',
-		'viewScript' => 'file:./view.js',
-		'attributes' => array(
-			
-		)
-	),
 	'player' => array(
 		'$schema' => 'https://schemas.wp.org/trunk/block.json',
 		'apiVersion' => 3,
@@ -307,6 +271,37 @@ return array(
 			'duration' => array(
 				'type' => 'number',
 				'default' => 0
+			)
+		)
+	),
+	'volume-slider' => array(
+		'$schema' => 'https://schemas.wp.org/trunk/block.json',
+		'apiVersion' => 3,
+		'name' => 'dovetail-podcasts/volume-slider',
+		'version' => '0.1.0',
+		'title' => 'Dovetail Podcasts Player Volume Slider',
+		'category' => 'media',
+		'icon' => 'minus',
+		'description' => 'Volume slider for Dovetail Podcasts Player.',
+		'ancestor' => array(
+			'dovetail-podcasts/player'
+		),
+		'example' => array(
+			
+		),
+		'supports' => array(
+			'html' => false
+		),
+		'textdomain' => 'dovetail-podcasts',
+		'editorScript' => 'file:./index.js',
+		'editorStyle' => 'file:./index.css',
+		'style' => 'file:./style-index.css',
+		'render' => 'file:./render.php',
+		'viewScript' => 'file:./view.js',
+		'attributes' => array(
+			'volume' => array(
+				'type' => 'number',
+				'default' => 0.5
 			)
 		)
 	)

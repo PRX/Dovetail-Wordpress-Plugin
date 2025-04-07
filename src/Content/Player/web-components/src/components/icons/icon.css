@@ -1,0 +1,10 @@
+.lucide-icon {
+  display: inline-grid;
+  place-items: center;
+  aspect-ratio: 1;
+
+  svg {
+    width: 100%;
+    height: auto;
+  }
+}

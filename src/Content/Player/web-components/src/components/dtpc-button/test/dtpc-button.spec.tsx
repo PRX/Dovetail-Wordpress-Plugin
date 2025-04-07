@@ -5,13 +5,11 @@ describe('dtpc-button', () => {
   it('renders', async () => {
     const page = await newSpecPage({
       components: [DtpcButton],
-      html: `<dtpc-button></dtpc-button>`,
+      html: `<dtpc-button>Click</dtpc-button>`,
     });
     expect(page.root).toEqualHtml(`
-      <dtpc-button>
-        <mock:shadow-root>
-          <slot></slot>
-        </mock:shadow-root>
+      <dtpc-button role="button" tabindex="0">
+        Click
       </dtpc-button>
     `);
   });

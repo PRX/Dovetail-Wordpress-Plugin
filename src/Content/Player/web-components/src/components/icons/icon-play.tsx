@@ -3,7 +3,8 @@ import { Play as LucidePlay, createElement } from 'lucide';
 import { attributesToObject } from '@/lib/utils/dom';
 
 @Component({
-  tag: 'icon-play'
+  tag: 'icon-play',
+  styleUrl: 'icon.css'
 })
 export class IconPlay {
   @Element() el: any;

@@ -8,12 +8,13 @@ import {
 import { attributesToObject } from '@/lib/utils/dom';
 
 @Component({
-  tag: 'icon-volume'
+  tag: 'icon-volume',
+  styleUrl: 'icon.css'
 })
 export class IconVolume {
   @Element() el: any;
 
-  @Prop({ attribute: 'level' }) level: number = 0.8;
+  @Prop({ attribute: 'level' }) volume: number = 0.8;
   @Prop({ attribute: 'muted' }) muted: boolean = false;
 
   @Prop({ attribute: 'alignment-baseline' }) alignmentBaseline: any;
@@ -98,8 +99,8 @@ export class IconVolume {
   @Prop({ attribute: 'y' }) y: any;
 
   render() {
-    const icon = this.muted || !this.level ? LucideVolumeOff : (
-      (this.level >= 0.5 && LucideVolumeHigh) || LucideVolumeMid
+    const icon = this.muted || !this.volume ? LucideVolumeOff : (
+      (this.volume >= 0.5 && LucideVolumeHigh) || LucideVolumeMid
     )
     const inner = createElement(icon);
     Object.entries(Object.assign({},attributesToObject(this.el), this.getProps())).forEach(([name,value]) => inner.setAttribute(name, value as string) );

@@ -11,7 +11,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   dtpc_time_display: () => (/* binding */ DtpcTimeDisplay)
 /* harmony export */ });
-/* harmony import */ var _index_ngapiRTG_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index-ngapiRTG.js */ "../web-components/dist/dovetail-podcasts-player-web-components/index-ngapiRTG.js");
+/* harmony import */ var _index_DjC7PCMK_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index-DjC7PCMK.js */ "../web-components/dist/dovetail-podcasts-player-web-components/index-DjC7PCMK.js");
 
 const dtpcTimeDisplayCss = ":host{--_dtpc-time-display--spacing:var(--dtpc-time-display--spacing, 0.25rem);color:var(--_dtpc-player--time--color, currentColor);font-family:var(--_dtpc-player--time--font-family, inherit);font-size:var(--_dtpc-player--time--font-size, inherit);font-weight:var(--_dtpc-player--time--font-weight, inherit)}.wrapper{--_spacing:var(--_dtpc-time-display--spacing);display:flex;align-items:baseline;gap:var(--_spacing)}";
 const DtpcTimeDisplay = class {
@@ -22,21 +22,21 @@ const DtpcTimeDisplay = class {
       writable: true,
       value: 0
     });
-    (0,_index_ngapiRTG_js__WEBPACK_IMPORTED_MODULE_0__.r)(this, hostRef);
+    (0,_index_DjC7PCMK_js__WEBPACK_IMPORTED_MODULE_0__.r)(this, hostRef);
   }
   render() {
-    return (0,_index_ngapiRTG_js__WEBPACK_IMPORTED_MODULE_0__.h)(_index_ngapiRTG_js__WEBPACK_IMPORTED_MODULE_0__.d, {
-      key: 'ed890b1d9b0c60125658ea61857e5b9cc9acbd93'
-    }, (0,_index_ngapiRTG_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", {
-      key: '2db4f3f5401ed0a07b8ef9f512069bfb7d7f80c5',
+    return (0,_index_DjC7PCMK_js__WEBPACK_IMPORTED_MODULE_0__.h)(_index_DjC7PCMK_js__WEBPACK_IMPORTED_MODULE_0__.d, {
+      key: '1151a09917785ef95517d3f531c8d99958dfab48'
+    }, (0,_index_DjC7PCMK_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", {
+      key: '18edebcd534ebd140829b184aa22a14bf2834f5f',
       class: "wrapper"
-    }, (0,_index_ngapiRTG_js__WEBPACK_IMPORTED_MODULE_0__.h)("dtpc-time-current", {
-      key: '642a525e02fc18ad6006b17a8aa5ff271b326720'
-    }), (0,_index_ngapiRTG_js__WEBPACK_IMPORTED_MODULE_0__.h)("span", {
-      key: '76c5450ef4a952a5327b16e332dcdf58b0f485c5',
+    }, (0,_index_DjC7PCMK_js__WEBPACK_IMPORTED_MODULE_0__.h)("dtpc-time-current", {
+      key: '473f3c712bf1d2881cd5c028d0f8201c02a28dbc'
+    }), (0,_index_DjC7PCMK_js__WEBPACK_IMPORTED_MODULE_0__.h)("span", {
+      key: '03a7d647bafdf55c9f1282841b4fe739ee8dcc80',
       class: "separator"
-    }, "/"), (0,_index_ngapiRTG_js__WEBPACK_IMPORTED_MODULE_0__.h)("dtpc-time-duration", {
-      key: '2ca8cdd64ef706e58d665292893110f532434a2b',
+    }, "/"), (0,_index_DjC7PCMK_js__WEBPACK_IMPORTED_MODULE_0__.h)("dtpc-time-duration", {
+      key: '6c789eb18d1e3472cbadef493a782b487f5729af',
       duration: this.duration
     })));
   }
@@ -47,4 +47,4 @@ DtpcTimeDisplay.style = dtpcTimeDisplayCss;
 /***/ })
 
 }]);
-//# sourceMappingURL=web-components_dist_dovetail-podcasts-player-web-components_dtpc-time-display_entry_js.js.map?ver=76e71612f0b7bc2af392
+//# sourceMappingURL=web-components_dist_dovetail-podcasts-player-web-components_dtpc-time-display_entry_js.js.map?ver=c566db1c7c44f6f998d8

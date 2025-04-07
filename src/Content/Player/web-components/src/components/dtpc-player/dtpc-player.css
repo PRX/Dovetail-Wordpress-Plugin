@@ -1,5 +1,5 @@
 :host {
-  --_dtpc-player--foreground: var(--dtpc-player--primary-base, CanvasText);
+  --_dtpc-player--foreground: var(--dtpc-player--foreground, CanvasText);
   --_dtpc-player--highlight: var(--dtpc-player--highlight, LinkText);
   --_dtpc-player--surface: var(--dtpc-player--surface, Canvas);
   --_dtpc-player--surface-opacity: var(--dtpc-player--bg-opacity, 0);
