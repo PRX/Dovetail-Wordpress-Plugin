@@ -2,13 +2,13 @@
   --dtpc-button--size: var(--dtpc-play-button--size, 2rem);
   --dtpc-button--padding: var(--dtpc-play-button--padding, 0.5rem);
   --dtpc-button--foreground: var(--dtpc-play-button--foreground);
-  --dtpc-button--foreground--hover: var(--dtpc-play-button--foreground--hover, var(--_dtpc-player--surface));
+  --dtpc-button--foreground--hover: var(--dtpc-play-button--foreground--hover);
   --dtpc-button--foreground--active: var(--dtpc-play-button--foreground--playing);
   --dtpc-button--surface: var(--dtpc-play-button--surface);
-  --dtpc-button--surface--hover: var(--dtpc-play-button--surface--hover, var(--_dtpc-player--foreground));
+  --dtpc-button--surface--hover: var(--dtpc-play-button--surface--hover);
   --dtpc-button--surface--active: var(--dtpc-play-button--surface--playing);
   --dtpc-button--surface-opacity: var(--dtpc-play-button--surface-opacity);
-  --dtpc-button--surface-opacity--hover: var(--dtpc-play-button--surface-opacity--hover, 100%);
+  --dtpc-button--surface-opacity--hover: var(--dtpc-play-button--surface-opacity--hover);
   --dtpc-button--surface-opacity--active: var(--dtpc-play-button--surface-opacity--playing, 0);
   --dtpc-button--border-color: var(--dtpc-play-button--border-color, transparent);
   --dtpc-button--border-color--hover: var(--dtpc-play-button--border-color--hover, transparent);

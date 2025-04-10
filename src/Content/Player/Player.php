@@ -213,6 +213,7 @@ class Player {
 			$this->get_block_attributes_defaults( 'player' ),
 			$atts
 		);
+		error_log( print_r( $atts, true ) );
 
 		if ( empty( $atts['src'] ) ) {
 			// No src passed as an attribute.
@@ -228,13 +229,10 @@ class Player {
 			$atts['duration'] = $enclosure['duration'];
 		}
 
-		$audio_src = $this->prepare_player_src( $atts['src'] );
+		$atts['src'] = $this->prepare_player_src( $atts['src'] );
 
 		$wrapper_attributes = get_block_wrapper_attributes(
-			[
-				'src'      => $audio_src,
-				'duration' => $atts['duration'],
-			]
+			$atts
 		);
 
 		$inner_blocks_html = '';
@@ -673,10 +671,9 @@ class Player {
 	 * @return array<string,mixed>|null
 	 */
 	public function get_dovetail_enclosure( int $post_id = null ) {
-		global $post;
 
-		if ( ! $post_id && is_object( $post ) && ! empty( $post->ID ) ) {
-			$post_id = $post->ID;
+		if ( ! $post_id ) {
+			$post_id = get_the_ID();
 		}
 
 		$meta = get_post_meta( $post_id, DTPODCASTS_POST_META_KEY, true );
@@ -715,6 +712,7 @@ class Player {
 			'dtpc-player'        => array_merge(
 				[
 					'duration' => [],
+					'layout'   => [],
 					'src'      => [],
 				],
 				$allowed_atts

@@ -6,5 +6,27 @@
  *
  * Replace them with your own styles or remove the file completely.
  */
+dtpc-time-duration {
+  --_dtpc-time-duration--color: var(
+  	--dtpc-time-duration--color,
+  	var(--_dtpc-player--time--color)
+  );
+  --_dtpc-time-duration--font-family: var(
+  	--dtpc-time-duration--font-family,
+  	var(--_dtpc-player--time--font-family)
+  );
+  --_dtpc-time-duration--font-size: var(
+  	--dtpc-time-duration--font-size,
+  	var(--_dtpc-player--time--font-size)
+  );
+  --_dtpc-time-duration--font-weight: var(
+  	--dtpc-time-duration--font-weight,
+  	var(--_dtpc-player--time--font-weight)
+  );
+  color: var(--_dtpc-time-duration--color);
+  font-family: var(--_dtpc-time-duration--font-family);
+  font-size: var(--_dtpc-time-duration--font-size);
+  font-weight: var(--_dtpc-time-duration--font-weight);
+}
 
 /*# sourceMappingURL=index.css.map*/

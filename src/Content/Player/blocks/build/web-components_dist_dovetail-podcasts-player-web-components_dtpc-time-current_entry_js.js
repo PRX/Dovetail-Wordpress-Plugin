@@ -11,7 +11,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   dtpc_time_current: () => (/* binding */ DtpcTimeCurrent)
 /* harmony export */ });
-/* harmony import */ var _index_DjC7PCMK_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index-DjC7PCMK.js */ "../web-components/dist/dovetail-podcasts-player-web-components/index-DjC7PCMK.js");
+/* harmony import */ var _index_DqrFfVsn_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index-DqrFfVsn.js */ "../web-components/dist/dovetail-podcasts-player-web-components/index-DqrFfVsn.js");
 /* harmony import */ var _index_B4aL0lTS_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./index-B4aL0lTS.js */ "../web-components/dist/dovetail-podcasts-player-web-components/index-B4aL0lTS.js");
 /* harmony import */ var _index_BprZZpRs_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./index-BprZZpRs.js */ "../web-components/dist/dovetail-podcasts-player-web-components/index-BprZZpRs.js");
 
@@ -32,8 +32,8 @@ const DtpcTimeCurrent = class {
       writable: true,
       value: void 0
     });
-    (0,_index_DjC7PCMK_js__WEBPACK_IMPORTED_MODULE_0__.r)(this, hostRef);
-    this.initControl = (0,_index_DjC7PCMK_js__WEBPACK_IMPORTED_MODULE_0__.a)(this, "dtpc-control-init", 7);
+    (0,_index_DqrFfVsn_js__WEBPACK_IMPORTED_MODULE_0__.r)(this, hostRef);
+    this.initControl = (0,_index_DqrFfVsn_js__WEBPACK_IMPORTED_MODULE_0__.d)(this, "dtpc-control-init", 7);
   }
   componentWillLoad() {
     const self = this;
@@ -46,8 +46,8 @@ const DtpcTimeCurrent = class {
     } = this.state;
     const time = seekTime !== null ? seekTime : currentTime;
     const displayTime = (0,_index_B4aL0lTS_js__WEBPACK_IMPORTED_MODULE_1__.f)(time);
-    return (0,_index_DjC7PCMK_js__WEBPACK_IMPORTED_MODULE_0__.h)(_index_DjC7PCMK_js__WEBPACK_IMPORTED_MODULE_0__.d, {
-      key: '059dd85c2e6a323e554536ff074e6d7896484994'
+    return (0,_index_DqrFfVsn_js__WEBPACK_IMPORTED_MODULE_0__.h)(_index_DqrFfVsn_js__WEBPACK_IMPORTED_MODULE_0__.a, {
+      key: '389b1a271aa04fe847ee6a01d8f83c66325c3cd4'
     }, displayTime);
   }
 };
@@ -130,4 +130,4 @@ function attributesToObject(el) {
 /***/ })
 
 }]);
-//# sourceMappingURL=web-components_dist_dovetail-podcasts-player-web-components_dtpc-time-current_entry_js.js.map?ver=1f8e41ed59aa957ddf76
+//# sourceMappingURL=web-components_dist_dovetail-podcasts-player-web-components_dtpc-time-current_entry_js.js.map?ver=cc491206a5ffcf408ddd

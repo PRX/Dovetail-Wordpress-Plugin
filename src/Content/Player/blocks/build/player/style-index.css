@@ -12,7 +12,8 @@
   display: block;
   /* Override WP block focus style on child blocks. */
 }
-:where(.wp-site-blocks) .wp-block-dovetail-podcasts-player > :is(:focus) {
+:where(.wp-site-blocks) .wp-block-dovetail-podcasts-player:focus,
+:where(.wp-site-blocks) .wp-block-dovetail-podcasts-player :is(:focus) {
   outline: none;
 }
 

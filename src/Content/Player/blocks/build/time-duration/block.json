@@ -3,9 +3,9 @@
   "apiVersion": 3,
   "name": "dovetail-podcasts/time-duration",
   "version": "0.1.0",
-  "title": "Dovetail Podcasts Player Duration",
+  "title": "Dovetail Player - Duration",
   "category": "media",
-  "icon": "minus",
+  "icon": "clock",
   "description": "Display duration for Dovetail Podcasts Player.",
   "ancestor": [
     "dovetail-podcasts/player"

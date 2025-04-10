@@ -3,9 +3,9 @@
   "apiVersion": 3,
   "name": "dovetail-podcasts/mute-button",
   "version": "0.1.0",
-  "title": "Dovetail Podcasts Player Mute Button",
+  "title": "Dovetail Player - Mute Button",
   "category": "media",
-  "icon": "controls-play",
+  "icon": "controls-volumeoff",
   "description": "Mute button for Dovetail Podcasts Player.",
   "ancestor": [
     "dovetail-podcasts/player"

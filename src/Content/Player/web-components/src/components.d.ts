@@ -13,7 +13,14 @@ export namespace Components {
     interface DtpcPlayButton {
     }
     interface DtpcPlayer {
+        /**
+          * Preset audio source duration.
+         */
         "duration": number;
+        /**
+          * Predefined layouts. - 'flex': Adds `display: flex` to main container. - 'default': Renders player with basic controls. (Play button, progress bar, time display, volume controls) - TODO: More options to come.
+         */
+        "layout": 'flex' | 'default';
         /**
           * Audio source URL.
          */
@@ -505,7 +512,14 @@ declare namespace LocalJSX {
         "onDtpc-control-init"?: (event: DtpcPlayButtonCustomEvent<any>) => void;
     }
     interface DtpcPlayer {
+        /**
+          * Preset audio source duration.
+         */
         "duration"?: number;
+        /**
+          * Predefined layouts. - 'flex': Adds `display: flex` to main container. - 'default': Renders player with basic controls. (Play button, progress bar, time display, volume controls) - TODO: More options to come.
+         */
+        "layout"?: 'flex' | 'default';
         /**
           * Audio source URL.
          */

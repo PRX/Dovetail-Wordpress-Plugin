@@ -184,27 +184,27 @@ const globalScripts = () => {};
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   setNonce: () => (/* reexport safe */ _index_DjC7PCMK_js__WEBPACK_IMPORTED_MODULE_0__.s)
+/* harmony export */   setNonce: () => (/* reexport safe */ _index_DqrFfVsn_js__WEBPACK_IMPORTED_MODULE_0__.s)
 /* harmony export */ });
-/* harmony import */ var _index_DjC7PCMK_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index-DjC7PCMK.js */ "../web-components/dist/dovetail-podcasts-player-web-components/index-DjC7PCMK.js");
+/* harmony import */ var _index_DqrFfVsn_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index-DqrFfVsn.js */ "../web-components/dist/dovetail-podcasts-player-web-components/index-DqrFfVsn.js");
 /* harmony import */ var _app_globals_DQuL1Twl_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./app-globals-DQuL1Twl.js */ "../web-components/dist/dovetail-podcasts-player-web-components/app-globals-DQuL1Twl.js");
 
 
 
 var patchBrowser = () => {
-  if (_index_DjC7PCMK_js__WEBPACK_IMPORTED_MODULE_0__.B.isDev && !_index_DjC7PCMK_js__WEBPACK_IMPORTED_MODULE_0__.B.isTesting) {
-    (0,_index_DjC7PCMK_js__WEBPACK_IMPORTED_MODULE_0__.c)("Running in development mode.");
+  if (_index_DqrFfVsn_js__WEBPACK_IMPORTED_MODULE_0__.B.isDev && !_index_DqrFfVsn_js__WEBPACK_IMPORTED_MODULE_0__.B.isTesting) {
+    (0,_index_DqrFfVsn_js__WEBPACK_IMPORTED_MODULE_0__.c)("Running in development mode.");
   }
-  if (_index_DjC7PCMK_js__WEBPACK_IMPORTED_MODULE_0__.B.cloneNodeFix) {
-    patchCloneNodeFix(_index_DjC7PCMK_js__WEBPACK_IMPORTED_MODULE_0__.H.prototype);
+  if (_index_DqrFfVsn_js__WEBPACK_IMPORTED_MODULE_0__.B.cloneNodeFix) {
+    patchCloneNodeFix(_index_DqrFfVsn_js__WEBPACK_IMPORTED_MODULE_0__.H.prototype);
   }
-  const scriptElm = _index_DjC7PCMK_js__WEBPACK_IMPORTED_MODULE_0__.B.scriptDataOpts ? _index_DjC7PCMK_js__WEBPACK_IMPORTED_MODULE_0__.w.document && Array.from(_index_DjC7PCMK_js__WEBPACK_IMPORTED_MODULE_0__.w.document.querySelectorAll("script")).find(s => new RegExp(`/${_index_DjC7PCMK_js__WEBPACK_IMPORTED_MODULE_0__.N}(\\.esm)?\\.js($|\\?|#)`).test(s.src) || s.getAttribute("data-stencil-namespace") === _index_DjC7PCMK_js__WEBPACK_IMPORTED_MODULE_0__.N) : null;
+  const scriptElm = _index_DqrFfVsn_js__WEBPACK_IMPORTED_MODULE_0__.B.scriptDataOpts ? _index_DqrFfVsn_js__WEBPACK_IMPORTED_MODULE_0__.w.document && Array.from(_index_DqrFfVsn_js__WEBPACK_IMPORTED_MODULE_0__.w.document.querySelectorAll("script")).find(s => new RegExp(`/${_index_DqrFfVsn_js__WEBPACK_IMPORTED_MODULE_0__.N}(\\.esm)?\\.js($|\\?|#)`).test(s.src) || s.getAttribute("data-stencil-namespace") === _index_DqrFfVsn_js__WEBPACK_IMPORTED_MODULE_0__.N) : null;
   const importMeta = "file:///Users/rick/Projects/PRX/dt-plugin-demo-wordpress/wordpress/wp-content/plugins/dovetail-podcasts/src/Content/Player/web-components/dist/dovetail-podcasts-player-web-components/dovetail-podcasts-player-web-components.esm.js";
-  const opts = _index_DjC7PCMK_js__WEBPACK_IMPORTED_MODULE_0__.B.scriptDataOpts ? (scriptElm || {})["data-opts"] || {} : {};
+  const opts = _index_DqrFfVsn_js__WEBPACK_IMPORTED_MODULE_0__.B.scriptDataOpts ? (scriptElm || {})["data-opts"] || {} : {};
   if (importMeta !== "") {
     opts.resourcesUrl = new URL(".", importMeta).href;
   }
-  return (0,_index_DjC7PCMK_js__WEBPACK_IMPORTED_MODULE_0__.p)(opts);
+  return (0,_index_DqrFfVsn_js__WEBPACK_IMPORTED_MODULE_0__.p)(opts);
 };
 var patchCloneNodeFix = HTMLElementPrototype => {
   const nativeCloneNodeFn = HTMLElementPrototype.cloneNode;
@@ -226,21 +226,22 @@ var patchCloneNodeFix = HTMLElementPrototype => {
 };
 patchBrowser().then(async options => {
   await (0,_app_globals_DQuL1Twl_js__WEBPACK_IMPORTED_MODULE_1__.g)();
-  return (0,_index_DjC7PCMK_js__WEBPACK_IMPORTED_MODULE_0__.b)([["dtpc-play-button", [[1, "dtpc-play-button", null, [[0, "click", "handleClick"]]]]], ["dtpc-mute-button", [[1, "dtpc-mute-button", null, [[0, "click", "handleClick"]]]]], ["dtpc-time-display", [[1, "dtpc-time-display", {
-    "duration": [2]
-  }]]], ["dtpc-progress-bar", [[1, "dtpc-progress-bar", {
-    "duration": [2],
-    "audioDuration": [32]
-  }, [[0, "slider-input", "handleInput"], [0, "slider-change", "handleChange"]]]]], ["dtpc-volume-slider", [[1, "dtpc-volume-slider", {
-    "orient": [1],
-    "volume": [2]
-  }, [[0, "slider-input", "handleInput"]]]]], ["dtpc-player", [[1, "dtpc-player", {
+  return (0,_index_DqrFfVsn_js__WEBPACK_IMPORTED_MODULE_0__.b)([["dtpc-player", [[1, "dtpc-player", {
+    "layout": [1],
     "src": [1],
     "duration": [2],
     "audioDuration": [32]
   }, [[0, "audio-toggle-paused", "handleTogglePaused"], [0, "dtpc-control-init", "handleControlInit"]], {
     "src": ["watchSrcHandler"]
-  }]]], ["dtpc-time-current", [[1, "dtpc-time-current"]]], ["dtpc-time-duration", [[1, "dtpc-time-duration", {
+  }]]], ["dtpc-volume-slider", [[1, "dtpc-volume-slider", {
+    "orient": [1],
+    "volume": [2]
+  }, [[0, "slider-input", "handleInput"]]]]], ["dtpc-play-button", [[1, "dtpc-play-button", null, [[0, "click", "handleClick"]]]]], ["dtpc-mute-button", [[1, "dtpc-mute-button", null, [[0, "click", "handleClick"]]]]], ["dtpc-time-display", [[1, "dtpc-time-display", {
+    "duration": [2]
+  }]]], ["dtpc-progress-bar", [[1, "dtpc-progress-bar", {
+    "duration": [2],
+    "audioDuration": [32]
+  }, [[0, "slider-input", "handleInput"], [0, "slider-change", "handleChange"]]]]], ["dtpc-time-current", [[1, "dtpc-time-current"]]], ["dtpc-time-duration", [[1, "dtpc-time-duration", {
     "duration": [2],
     "audioDuration": [32]
   }]]], ["icon-pause", [[0, "icon-pause", {
@@ -504,9 +505,9 @@ patchBrowser().then(async options => {
 
 /***/ }),
 
-/***/ "../web-components/dist/dovetail-podcasts-player-web-components/index-DjC7PCMK.js":
+/***/ "../web-components/dist/dovetail-podcasts-player-web-components/index-DqrFfVsn.js":
 /*!****************************************************************************************!*\
-  !*** ../web-components/dist/dovetail-podcasts-player-web-components/index-DjC7PCMK.js ***!
+  !*** ../web-components/dist/dovetail-podcasts-player-web-components/index-DqrFfVsn.js ***!
   \****************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -514,12 +515,13 @@ patchBrowser().then(async options => {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   B: () => (/* binding */ BUILD),
+/* harmony export */   F: () => (/* binding */ Fragment),
 /* harmony export */   H: () => (/* binding */ H),
 /* harmony export */   N: () => (/* binding */ NAMESPACE),
-/* harmony export */   a: () => (/* binding */ createEvent),
+/* harmony export */   a: () => (/* binding */ Host),
 /* harmony export */   b: () => (/* binding */ bootstrapLazy),
 /* harmony export */   c: () => (/* binding */ consoleDevInfo),
-/* harmony export */   d: () => (/* binding */ Host),
+/* harmony export */   d: () => (/* binding */ createEvent),
 /* harmony export */   e: () => (/* binding */ getElement),
 /* harmony export */   f: () => (/* binding */ forceUpdate),
 /* harmony export */   g: () => (/* binding */ getRenderingRef),
@@ -553,7 +555,7 @@ const BUILD = {
   hostListenerTargetParent: false,
   hostListenerTargetWindow: false,
   hotModuleReplacement: false,
-  hydrateClientSide: false,
+  hydrateClientSide: true,
   hydrateServerSide: false,
   hydratedAttribute: false,
   hydratedClass: true,
@@ -594,7 +596,7 @@ const BUILD = {
   updatable: true,
   vdomAttribute: true,
   vdomClass: true,
-  vdomFunctional: false,
+  vdomFunctional: true,
   vdomKey: true,
   vdomListener: true,
   vdomPropOrAttr: true,
@@ -4405,7 +4407,7 @@ var insertChildVNodeAnnotations = (doc, vnodeChild, cmpData, hostId, depth, inde
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames based on template
-/******/ 			return "" + chunkId + ".js?ver=" + {"web-components_dist_dovetail-podcasts-player-web-components_dtpc-button_entry_js":"00b81ccf7ddd0aa523c1","web-components_dist_dovetail-podcasts-player-web-components_dtpc-button_entry_js_map":"7b1ce57ffe4ae8ca8e0c","web-components_dist_dovetail-podcasts-player-web-components_dtpc-mute-button_entry_js":"0e75f5162d43a50b4f5a","web-components_dist_dovetail-podcasts-player-web-components_dtpc-mute-button_entry_js_map":"bae221e93d07410db333","web-components_dist_dovetail-podcasts-player-web-components_dtpc-play-button_entry_js":"ba4bf3430a1adddb3a99","web-components_dist_dovetail-podcasts-player-web-components_dtpc-play-button_entry_js_map":"5bbb991af4940ebf23f8","web-components_dist_dovetail-podcasts-player-web-components_dtpc-player_entry_js":"1ba94b6f9bf2b6ea1d05","web-components_dist_dovetail-podcasts-player-web-components_dtpc-player_entry_js_map":"f808ae8e2a96676f835b","web-components_dist_dovetail-podcasts-player-web-components_dtpc-progress-bar_entry_js":"43c9cce711ef672b45f4","web-components_dist_dovetail-podcasts-player-web-components_dtpc-progress-bar_entry_js_map":"dc81bd14c01dc3a49103","web-components_dist_dovetail-podcasts-player-web-components_dtpc-slider_entry_js":"8de7ab95a452cc76b846","web-components_dist_dovetail-podcasts-player-web-components_dtpc-slider_entry_js_map":"37c86d8ecec16bea3104","web-components_dist_dovetail-podcasts-player-web-components_dtpc-time-current_entry_js":"1f8e41ed59aa957ddf76","web-components_dist_dovetail-podcasts-player-web-components_dtpc-time-current_entry_js_map":"bb8c5aa33ef54c554d89","web-components_dist_dovetail-podcasts-player-web-components_dtpc-time-display_entry_js":"c566db1c7c44f6f998d8","web-components_dist_dovetail-podcasts-player-web-components_dtpc-time-display_entry_js_map":"aaf1fd52803e76911572","web-components_dist_dovetail-podcasts-player-web-components_dtpc-time-duration_entry_js":"e98124f42e0665ad2241","web-components_dist_dovetail-podcasts-player-web-components_dtpc-time-duration_entry_js_map":"08bc2ca21ade90159f20","web-components_dist_dovetail-podcasts-player-web-components_dtpc-volume-slider_entry_js":"bb14e7d8b3708501513f","web-components_dist_dovetail-podcasts-player-web-components_dtpc-volume-slider_entry_js_map":"4d0952b5d6e673ba2da9","web-components_dist_dovetail-podcasts-player-web-components_icon-pause_entry_js":"876ef156bf7dae3570c7","web-components_dist_dovetail-podcasts-player-web-components_icon-pause_entry_js_map":"4e0d650c87cc3bfcc0db","web-components_dist_dovetail-podcasts-player-web-components_icon-play_entry_js":"b211574010eaf1e57a55","web-components_dist_dovetail-podcasts-player-web-components_icon-play_entry_js_map":"d19c163be96ee039b5d6","web-components_dist_dovetail-podcasts-player-web-components_icon-volume_entry_js":"0c6a6493b398b3d6c8d6","web-components_dist_dovetail-podcasts-player-web-components_icon-volume_entry_js_map":"b14f4121e898b0efcde6"}[chunkId] + "";
+/******/ 			return "" + chunkId + ".js?ver=" + {"web-components_dist_dovetail-podcasts-player-web-components_dtpc-button_entry_js":"3f6af8915f7e868c2509","web-components_dist_dovetail-podcasts-player-web-components_dtpc-button_entry_js_map":"7b1ce57ffe4ae8ca8e0c","web-components_dist_dovetail-podcasts-player-web-components_dtpc-mute-button_entry_js":"492b60748d28badea5ce","web-components_dist_dovetail-podcasts-player-web-components_dtpc-mute-button_entry_js_map":"bae221e93d07410db333","web-components_dist_dovetail-podcasts-player-web-components_dtpc-play-button_entry_js":"48be97e95f5fe818c760","web-components_dist_dovetail-podcasts-player-web-components_dtpc-play-button_entry_js_map":"5bbb991af4940ebf23f8","web-components_dist_dovetail-podcasts-player-web-components_dtpc-player_entry_js":"ccdd257f9a04a8364742","web-components_dist_dovetail-podcasts-player-web-components_dtpc-player_entry_js_map":"f808ae8e2a96676f835b","web-components_dist_dovetail-podcasts-player-web-components_dtpc-progress-bar_entry_js":"c06a960d65b18fe505f5","web-components_dist_dovetail-podcasts-player-web-components_dtpc-progress-bar_entry_js_map":"dc81bd14c01dc3a49103","web-components_dist_dovetail-podcasts-player-web-components_dtpc-slider_entry_js":"c790c7094847cefc3988","web-components_dist_dovetail-podcasts-player-web-components_dtpc-slider_entry_js_map":"37c86d8ecec16bea3104","web-components_dist_dovetail-podcasts-player-web-components_dtpc-time-current_entry_js":"cc491206a5ffcf408ddd","web-components_dist_dovetail-podcasts-player-web-components_dtpc-time-current_entry_js_map":"bb8c5aa33ef54c554d89","web-components_dist_dovetail-podcasts-player-web-components_dtpc-time-display_entry_js":"fae3c75c2c7274e0eed8","web-components_dist_dovetail-podcasts-player-web-components_dtpc-time-display_entry_js_map":"aaf1fd52803e76911572","web-components_dist_dovetail-podcasts-player-web-components_dtpc-time-duration_entry_js":"c730f13c56f82418f6d2","web-components_dist_dovetail-podcasts-player-web-components_dtpc-time-duration_entry_js_map":"08bc2ca21ade90159f20","web-components_dist_dovetail-podcasts-player-web-components_dtpc-volume-slider_entry_js":"63f85a095ec78bf8bf89","web-components_dist_dovetail-podcasts-player-web-components_dtpc-volume-slider_entry_js_map":"4d0952b5d6e673ba2da9","web-components_dist_dovetail-podcasts-player-web-components_icon-pause_entry_js":"d0d65c8ace2b5ba1e820","web-components_dist_dovetail-podcasts-player-web-components_icon-pause_entry_js_map":"4e0d650c87cc3bfcc0db","web-components_dist_dovetail-podcasts-player-web-components_icon-play_entry_js":"87fec96bc3aa3c61a921","web-components_dist_dovetail-podcasts-player-web-components_icon-play_entry_js_map":"d19c163be96ee039b5d6","web-components_dist_dovetail-podcasts-player-web-components_icon-volume_entry_js":"d76d285821e371231207","web-components_dist_dovetail-podcasts-player-web-components_icon-volume_entry_js_map":"b14f4121e898b0efcde6"}[chunkId] + "";
 /******/ 		};
 /******/ 	})();
 /******/ 	

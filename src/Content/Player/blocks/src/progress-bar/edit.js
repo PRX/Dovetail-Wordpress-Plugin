@@ -31,7 +31,7 @@ import "./editor.scss";
  */
 
 import { cn } from "@/utils";
-import { DtpcProgressBar } from "@/components";
+import { DtpcProgressBar, DtpcSlider } from "@/components";
 
 export default function Edit(props) {
 	const { attributes } = props;
@@ -44,8 +44,15 @@ export default function Edit(props) {
 	console.log("progress bar: attributes", attributes);
 
 	return (
-		<span {...blockProps}>
-			<DtpcProgressBar></DtpcProgressBar>
-		</span>
+		<DtpcProgressBar {...blockProps}>
+			<DtpcSlider>
+				<div className="track">
+					<div className="progress"></div>
+					<div className="range">
+						<span className="scrubber"></span>
+					</div>
+				</div>
+			</DtpcSlider>
+		</DtpcProgressBar>
 	);
 }

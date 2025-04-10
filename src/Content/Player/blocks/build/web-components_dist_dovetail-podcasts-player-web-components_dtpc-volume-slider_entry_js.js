@@ -11,7 +11,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   dtpc_volume_slider: () => (/* binding */ DtpcVolumeSlider)
 /* harmony export */ });
-/* harmony import */ var _index_DjC7PCMK_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index-DjC7PCMK.js */ "../web-components/dist/dovetail-podcasts-player-web-components/index-DjC7PCMK.js");
+/* harmony import */ var _index_DqrFfVsn_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index-DqrFfVsn.js */ "../web-components/dist/dovetail-podcasts-player-web-components/index-DqrFfVsn.js");
 /* harmony import */ var _index_DTzhvg_p_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./index-DTzhvg-p.js */ "../web-components/dist/dovetail-podcasts-player-web-components/index-DTzhvg-p.js");
 
 
@@ -42,8 +42,8 @@ const DtpcVolumeSlider = class {
       writable: true,
       value: void 0
     });
-    (0,_index_DjC7PCMK_js__WEBPACK_IMPORTED_MODULE_0__.r)(this, hostRef);
-    this.initControl = (0,_index_DjC7PCMK_js__WEBPACK_IMPORTED_MODULE_0__.a)(this, "dtpc-control-init", 7);
+    (0,_index_DqrFfVsn_js__WEBPACK_IMPORTED_MODULE_0__.r)(this, hostRef);
+    this.initControl = (0,_index_DqrFfVsn_js__WEBPACK_IMPORTED_MODULE_0__.d)(this, "dtpc-control-init", 7);
   }
   componentWillLoad() {
     const self = this;
@@ -61,15 +61,15 @@ const DtpcVolumeSlider = class {
     } = this.state;
     const ariaLabel = (0,_index_DTzhvg_p_js__WEBPACK_IMPORTED_MODULE_1__._)('Volume slider', 'dovetail-podcasts');
     const ariaValueText = (0,_index_DTzhvg_p_js__WEBPACK_IMPORTED_MODULE_1__._)(`${volume * 100}% volume`, 'dovetail-podcasts');
-    return (0,_index_DjC7PCMK_js__WEBPACK_IMPORTED_MODULE_0__.h)(_index_DjC7PCMK_js__WEBPACK_IMPORTED_MODULE_0__.d, {
-      key: 'bc5b3726c0e882e560ed46944c72e631987679ae',
+    return (0,_index_DqrFfVsn_js__WEBPACK_IMPORTED_MODULE_0__.h)(_index_DqrFfVsn_js__WEBPACK_IMPORTED_MODULE_0__.a, {
+      key: '0801e1df6dfa913e29f1282db0f5f842b03d981d',
       "aria-label": ariaLabel,
       "aria-valuemin": "0",
       "aria-valuemax": "1",
       "aria-valuenow": volume,
       "aria-valuetext": ariaValueText
-    }, (0,_index_DjC7PCMK_js__WEBPACK_IMPORTED_MODULE_0__.h)("dtpc-slider", {
-      key: 'c3201b8f397ff2b670061a82d42278eac42aaefe',
+    }, (0,_index_DqrFfVsn_js__WEBPACK_IMPORTED_MODULE_0__.h)("dtpc-slider", {
+      key: '1a2d08a1ec114c180c70ea3e96acf4044ce8dab3',
       defaultValue: volume,
       min: 0,
       max: 1,
@@ -1047,4 +1047,4 @@ const hasTranslation = i18n.hasTranslation.bind(i18n);
 /***/ })
 
 }]);
-//# sourceMappingURL=web-components_dist_dovetail-podcasts-player-web-components_dtpc-volume-slider_entry_js.js.map?ver=bb14e7d8b3708501513f
+//# sourceMappingURL=web-components_dist_dovetail-podcasts-player-web-components_dtpc-volume-slider_entry_js.js.map?ver=63f85a095ec78bf8bf89

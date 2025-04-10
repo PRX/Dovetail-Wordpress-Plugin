@@ -4,5 +4,13 @@
  * Replace them with your own styles or remove the file completely.
  */
 
-.wp-block-dovetail-podcasts-mute-button {
+dtpc--mute-button {
+	--dtpc-button--size: var(--dtpc-mute-button--size);
+	--dtpc-button--padding: var(--dtpc-mute-button--padding);
+	--dtpc-button--foreground: var(--dtpc-mute-button--foreground);
+	--dtpc-button--surface: var(--dtpc-mute-button--surface);
+	--dtpc-button--surface-opacity: var(--dtpc-mute-button--surface-opacity);
+	--dtpc-button--border-color: var(--dtpc-mute-button--border-color);
+	--dtpc-button--border-radius: var(--dtpc-mute-button--border-radius);
+	--dtpc-button--border-width: var(--dtpc-mute-button--border-width);
 }

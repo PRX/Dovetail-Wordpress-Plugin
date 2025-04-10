@@ -3,7 +3,7 @@
 	"apiVersion": 3,
 	"name": "dovetail-podcasts/play-button",
 	"version": "0.1.0",
-	"title": "Dovetail Podcasts Player Play Button",
+	"title": "Dovetail Player - Play Button",
 	"category": "media",
 	"icon": "controls-play",
 	"description": "Play button for Dovetail Podcasts Player.",
@@ -14,12 +14,8 @@
 	"supports": {
 		"html": false,
 		"color": {
-			"background": true,
+			"background": false,
 			"text": true
-		},
-		"spacing": {
-			"margin": false,
-			"padding": true
 		}
 	},
 	"textdomain": "dovetail-podcasts",

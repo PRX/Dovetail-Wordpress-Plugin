@@ -20,7 +20,6 @@ import "./style.scss";
 import Edit from "./edit";
 import Save from "./save";
 import metadata from "./block.json";
-import "dovetail-podcasts-player-web-components/components/dtpc-player";
 
 /**
  * Every block starts by registering a new block type definition.
@@ -63,51 +62,15 @@ registerBlockType(metadata.name, {
 			attributes: {
 				backgroundColor: "transparent",
 			},
-			innerBlocks: [
-				[
-					"dovetail-podcasts/play-button",
-					{
-						style: {
-							color: {
-								background: "var:preset|color|contrast",
-								text: "var:preset|color|base",
-							},
-							spacing: {
-								padding: {
-									top: "var:preset|spacing|20",
-									bottom: "var:preset|spacing|20",
-									left: "var:preset|spacing|20",
-									right: "var:preset|spacing|20",
-								},
-							},
-						},
-					},
-				],
-			],
+			innerBlocks: [["dovetail-podcasts/play-button"]],
 			example: {
 				innerBlocks: [
 					{
 						name: "dovetail-podcasts/play-button",
-						attributes: {
-							style: {
-								color: {
-									background: "var:preset|color|contrast",
-									text: "var:preset|color|base",
-								},
-								spacing: {
-									padding: {
-										top: "var:preset|spacing|20",
-										bottom: "var:preset|spacing|20",
-										left: "var:preset|spacing|20",
-										right: "var:preset|spacing|20",
-									},
-								},
-							},
-						},
 					},
 				],
 			},
-			isDefault: true,
+			isDefault: false,
 		},
 	],
 });

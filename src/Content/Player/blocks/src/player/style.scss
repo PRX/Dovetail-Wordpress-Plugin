@@ -11,7 +11,8 @@
 
 	/* Override WP block focus style on child blocks. */
 	:where(.wp-site-blocks) & {
-		& > :is(:focus) {
+		&:focus,
+		:is(:focus) {
 			outline: none;
 		}
 	}

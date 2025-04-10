@@ -54,7 +54,6 @@
 }
 
 .progress {
-  --_progress--color: var(--_dtpc-slider--progress--color);
   --_length: calc(var(--progress, 0) * (100% - var(--_dtpc-slider--track--gutter) * 2));
 
   grid-area: range;

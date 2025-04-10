@@ -6,9 +6,9 @@ return array(
 		'apiVersion' => 3,
 		'name' => 'dovetail-podcasts/mute-button',
 		'version' => '0.1.0',
-		'title' => 'Dovetail Podcasts Player Mute Button',
+		'title' => 'Dovetail Player - Mute Button',
 		'category' => 'media',
-		'icon' => 'controls-play',
+		'icon' => 'controls-volumeoff',
 		'description' => 'Mute button for Dovetail Podcasts Player.',
 		'ancestor' => array(
 			'dovetail-podcasts/player'
@@ -42,7 +42,7 @@ return array(
 		'apiVersion' => 3,
 		'name' => 'dovetail-podcasts/play-button',
 		'version' => '0.1.0',
-		'title' => 'Dovetail Podcasts Player Play Button',
+		'title' => 'Dovetail Player - Play Button',
 		'category' => 'media',
 		'icon' => 'controls-play',
 		'description' => 'Play button for Dovetail Podcasts Player.',
@@ -55,12 +55,8 @@ return array(
 		'supports' => array(
 			'html' => false,
 			'color' => array(
-				'background' => true,
+				'background' => false,
 				'text' => true
-			),
-			'spacing' => array(
-				'margin' => false,
-				'padding' => true
 			)
 		),
 		'textdomain' => 'dovetail-podcasts',
@@ -78,34 +74,15 @@ return array(
 		'apiVersion' => 3,
 		'name' => 'dovetail-podcasts/player',
 		'version' => '0.1.0',
-		'title' => 'Dovetail Podcasts Player',
+		'title' => 'Dovetail Player',
 		'category' => 'media',
 		'icon' => 'controls-play',
 		'description' => 'Customizable player for podcast episodes.',
-		'allowedBlocks' => array(
-			'dovetail-podcasts/play-button'
-		),
 		'example' => array(
 			
 		),
 		'supports' => array(
-			'html' => false,
-			'background' => array(
-				'backgroundImage' => true,
-				'backgroundSize' => true
-			),
-			'color' => array(
-				'text' => true,
-				'link' => false,
-				'background' => true,
-				'gradients' => true,
-				'enableContrastChecker' => true
-			),
-			'spacing' => array(
-				'margin' => true,
-				'padding' => true,
-				'blockGap' => true
-			)
+			'html' => false
 		),
 		'textdomain' => 'dovetail-podcasts',
 		'editorScript' => 'file:./index.js',
@@ -125,6 +102,13 @@ return array(
 			),
 			'duration' => array(
 				'type' => 'number'
+			),
+			'layout' => array(
+				'type' => 'string',
+				'enum' => array(
+					'flex',
+					'default'
+				)
 			)
 		)
 	),
@@ -133,7 +117,7 @@ return array(
 		'apiVersion' => 3,
 		'name' => 'dovetail-podcasts/progress-bar',
 		'version' => '0.1.0',
-		'title' => 'Dovetail Podcasts Player Progress Bar',
+		'title' => 'Dovetail Player - Progress Bar',
 		'category' => 'media',
 		'icon' => 'minus',
 		'description' => 'Progress bar for Dovetail Podcasts Player.',
@@ -147,10 +131,6 @@ return array(
 			'html' => false,
 			'color' => array(
 				'text' => true
-			),
-			'spacing' => array(
-				'margin' => false,
-				'padding' => true
 			)
 		),
 		'textdomain' => 'dovetail-podcasts',
@@ -171,9 +151,9 @@ return array(
 		'apiVersion' => 3,
 		'name' => 'dovetail-podcasts/time-current',
 		'version' => '0.1.0',
-		'title' => 'Dovetail Podcasts Player Current Time',
+		'title' => 'Dovetail Player - Current Time',
 		'category' => 'media',
-		'icon' => 'minus',
+		'icon' => 'clock',
 		'description' => 'Display current time for Dovetail Podcasts Player.',
 		'ancestor' => array(
 			'dovetail-podcasts/player'
@@ -205,9 +185,9 @@ return array(
 		'apiVersion' => 3,
 		'name' => 'dovetail-podcasts/time-display',
 		'version' => '0.1.0',
-		'title' => 'Dovetail Podcasts Player Time Display',
+		'title' => 'Dovetail Player - Time Display',
 		'category' => 'media',
-		'icon' => 'minus',
+		'icon' => 'clock',
 		'description' => 'Display current time and duration for Dovetail Podcasts Player.',
 		'ancestor' => array(
 			'dovetail-podcasts/player'
@@ -242,9 +222,9 @@ return array(
 		'apiVersion' => 3,
 		'name' => 'dovetail-podcasts/time-duration',
 		'version' => '0.1.0',
-		'title' => 'Dovetail Podcasts Player Duration',
+		'title' => 'Dovetail Player - Duration',
 		'category' => 'media',
-		'icon' => 'minus',
+		'icon' => 'clock',
 		'description' => 'Display duration for Dovetail Podcasts Player.',
 		'ancestor' => array(
 			'dovetail-podcasts/player'
@@ -279,9 +259,9 @@ return array(
 		'apiVersion' => 3,
 		'name' => 'dovetail-podcasts/volume-slider',
 		'version' => '0.1.0',
-		'title' => 'Dovetail Podcasts Player Volume Slider',
+		'title' => 'Dovetail Player - Volume Slider',
 		'category' => 'media',
-		'icon' => 'minus',
+		'icon' => 'controls-volumeon',
 		'description' => 'Volume slider for Dovetail Podcasts Player.',
 		'ancestor' => array(
 			'dovetail-podcasts/player'

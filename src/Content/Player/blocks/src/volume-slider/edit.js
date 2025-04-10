@@ -31,7 +31,7 @@ import "./editor.scss";
  */
 
 import { cn } from "@/utils";
-import { DtpcVolumeSlider } from "@/components";
+import { DtpcVolumeSlider, DtpcSlider } from "@/components";
 
 export default function Edit(props) {
 	const { attributes } = props;
@@ -41,11 +41,18 @@ export default function Edit(props) {
 		className: cn({}, className),
 	};
 
-	console.log("time duration: attributes", attributes);
+	console.log("volume slider: attributes", attributes);
 
 	return (
-		<span {...blockProps}>
-			<DtpcVolumeSlider></DtpcVolumeSlider>
-		</span>
+		<DtpcVolumeSlider {...blockProps}>
+			<DtpcSlider>
+				<div className="track">
+					<div className="progress"></div>
+					<div className="range">
+						<span className="scrubber"></span>
+					</div>
+				</div>
+			</DtpcSlider>
+		</DtpcVolumeSlider>
 	);
 }

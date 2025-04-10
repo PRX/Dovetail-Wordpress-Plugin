@@ -3,32 +3,13 @@
   "apiVersion": 3,
   "name": "dovetail-podcasts/player",
   "version": "0.1.0",
-  "title": "Dovetail Podcasts Player",
+  "title": "Dovetail Player",
   "category": "media",
   "icon": "controls-play",
   "description": "Customizable player for podcast episodes.",
-  "allowedBlocks": [
-    "dovetail-podcasts/play-button"
-  ],
   "example": {},
   "supports": {
-    "html": false,
-    "background": {
-      "backgroundImage": true,
-      "backgroundSize": true
-    },
-    "color": {
-      "text": true,
-      "link": false,
-      "background": true,
-      "gradients": true,
-      "enableContrastChecker": true
-    },
-    "spacing": {
-      "margin": true,
-      "padding": true,
-      "blockGap": true
-    }
+    "html": false
   },
   "textdomain": "dovetail-podcasts",
   "editorScript": "file:./index.js",
@@ -48,6 +29,13 @@
     },
     "duration": {
       "type": "number"
+    },
+    "layout": {
+      "type": "string",
+      "enum": [
+        "flex",
+        "default"
+      ]
     }
   }
 }

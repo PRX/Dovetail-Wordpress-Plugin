@@ -3,9 +3,9 @@
 	"apiVersion": 3,
 	"name": "dovetail-podcasts/time-current",
 	"version": "0.1.0",
-	"title": "Dovetail Podcasts Player Current Time",
+	"title": "Dovetail Player - Current Time",
 	"category": "media",
-	"icon": "minus",
+	"icon": "clock",
 	"description": "Display current time for Dovetail Podcasts Player.",
 	"ancestor": [
 		"dovetail-podcasts/player"

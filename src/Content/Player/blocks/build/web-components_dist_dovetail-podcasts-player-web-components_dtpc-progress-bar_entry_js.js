@@ -11,7 +11,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   dtpc_progress_bar: () => (/* binding */ DtpcProgressBar)
 /* harmony export */ });
-/* harmony import */ var _index_DjC7PCMK_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index-DjC7PCMK.js */ "../web-components/dist/dovetail-podcasts-player-web-components/index-DjC7PCMK.js");
+/* harmony import */ var _index_DqrFfVsn_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index-DqrFfVsn.js */ "../web-components/dist/dovetail-podcasts-player-web-components/index-DqrFfVsn.js");
 /* harmony import */ var _index_DTzhvg_p_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./index-DTzhvg-p.js */ "../web-components/dist/dovetail-podcasts-player-web-components/index-DTzhvg-p.js");
 /* harmony import */ var _index_B4aL0lTS_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./index-B4aL0lTS.js */ "../web-components/dist/dovetail-podcasts-player-web-components/index-B4aL0lTS.js");
 /* harmony import */ var _index_BprZZpRs_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./index-BprZZpRs.js */ "../web-components/dist/dovetail-podcasts-player-web-components/index-BprZZpRs.js");
@@ -19,7 +19,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-const dtpcProgressBarCss = ":host{--dtpc-slider--scrubber--color:var(--dtpc-progress-bar--scrubber--color, var(--_dtpc-player--surface, white));--dtpc-slider--scrubber--size:var(--dtpc-progress-bar--scrubber--size, 1.25rem);--dtpc-slider--scrubber--border-color:var(--dtpc-progress-bar--scrubber--border-color, var(--_dtpc-player--foreground, currentColor));--dtpc-slider--scrubber--border-width:var(--dtpc-progress-bar--scrubber--border-width, 0.125rem);--dtpc-slider--scrubber--border-radius:var(--dtpc-progress-bar--scrubber--border-radius, 100vw);--dtpc-slider--progress--color:var(--dtpc-progress-bar--progress--color, var(--_dtpc-player--foreground, currentColor));--dtpc-slider--track--color:var(--dtpc-progress-bar--track--color, var(--_dtpc-player--surface, transparent));--dtpc-slider--track--height:var(--dtpc-progress-bar--track--height, 0.5rem);--dtpc-slider--track--radius:var(--dtpc-progress-bar--track--radius, 100vw);--dtpc-slider--track--border-color:var(--dtpc-progress-bar--track--border-color, var(--_dtpc-player--foreground, currentColor));--dtpc-slider--track--border-width:var(--dtpc-progress-bar--track--border-width, 0.125rem);--dtpc-slider--track--border-offset:var(--dtpc-progress-bar--track--border-offset, 0.125rem);--dtpc-slider--focus-ring-color:var(--dtpc-progress-bar--focus-ring-color, var(--_dtpc-player--highlight));--dtpc-slider--focus-ring-offset:var(--dtpc-progress-bar--focus-ring-offset, 0.125rem);--dtpc-slider--focus-ring-width:var(--dtpc-progress-bar--focus-ring-width, 2px);flex-grow:1}";
+const dtpcProgressBarCss = ":host{--dtpc-slider--scrubber--color:var(--dtpc-progress-bar--scrubber--color, var(--_dtpc-player--foreground, currentColor));--dtpc-slider--scrubber--size:var(--dtpc-progress-bar--scrubber--size, 1.25rem);--dtpc-slider--scrubber--border-color:var(--dtpc-progress-bar--scrubber--border-color, var(--_dtpc-player--foreground, currentColor));--dtpc-slider--scrubber--border-width:var(--dtpc-progress-bar--scrubber--border-width, 0.125rem);--dtpc-slider--scrubber--border-radius:var(--dtpc-progress-bar--scrubber--border-radius, 100vw);--dtpc-slider--progress--color:var(--dtpc-progress-bar--progress--color, var(--_dtpc-player--foreground, currentColor));--dtpc-slider--track--color:var(--dtpc-progress-bar--track--color, transparent);--dtpc-slider--track--height:var(--dtpc-progress-bar--track--height, 0.5rem);--dtpc-slider--track--radius:var(--dtpc-progress-bar--track--radius, 100vw);--dtpc-slider--track--border-color:var(--dtpc-progress-bar--track--border-color, var(--_dtpc-player--foreground, currentColor));--dtpc-slider--track--border-width:var(--dtpc-progress-bar--track--border-width, 0.125rem);--dtpc-slider--track--border-offset:var(--dtpc-progress-bar--track--border-offset, 0.125rem);--dtpc-slider--focus-ring-color:var(--dtpc-progress-bar--focus-ring-color, var(--_dtpc-player--highlight));--dtpc-slider--focus-ring-offset:var(--dtpc-progress-bar--focus-ring-offset, 0.125rem);--dtpc-slider--focus-ring-width:var(--dtpc-progress-bar--focus-ring-width, 2px);flex-grow:1}";
 const DtpcProgressBar = class {
   constructor(hostRef) {
     Object.defineProperty(this, "state", {
@@ -46,8 +46,8 @@ const DtpcProgressBar = class {
       writable: true,
       value: void 0
     });
-    (0,_index_DjC7PCMK_js__WEBPACK_IMPORTED_MODULE_0__.r)(this, hostRef);
-    this.initControl = (0,_index_DjC7PCMK_js__WEBPACK_IMPORTED_MODULE_0__.a)(this, "dtpc-control-init", 7);
+    (0,_index_DqrFfVsn_js__WEBPACK_IMPORTED_MODULE_0__.r)(this, hostRef);
+    this.initControl = (0,_index_DqrFfVsn_js__WEBPACK_IMPORTED_MODULE_0__.d)(this, "dtpc-control-init", 7);
   }
   componentWillLoad() {
     const self = this;
@@ -75,15 +75,15 @@ const DtpcProgressBar = class {
     const max = duration || this.audioDuration;
     const ariaLabel = (0,_index_DTzhvg_p_js__WEBPACK_IMPORTED_MODULE_1__._)('Seek slider', 'dovetail-podcasts');
     const ariaValueText = (0,_index_DTzhvg_p_js__WEBPACK_IMPORTED_MODULE_1__._)([...(timeHours && timeHours === 1 ? [(0,_index_DTzhvg_p_js__WEBPACK_IMPORTED_MODULE_1__._)(`1 Hour`, 'dovetail-podcasts')] : []), ...(timeHours && timeHours > 1 ? [(0,_index_DTzhvg_p_js__WEBPACK_IMPORTED_MODULE_1__._)(`${timeHours} Hours`, 'dovetail-podcasts')] : []), ...(timeMinutes === 1 ? [(0,_index_DTzhvg_p_js__WEBPACK_IMPORTED_MODULE_1__._)(`1 Minute`, 'dovetail-podcasts')] : []), ...(timeMinutes !== 1 ? [(0,_index_DTzhvg_p_js__WEBPACK_IMPORTED_MODULE_1__._)(`${timeMinutes || 0} Minutes`, 'dovetail-podcasts')] : []), ...(timeSeconds === 1 ? [(0,_index_DTzhvg_p_js__WEBPACK_IMPORTED_MODULE_1__._)(`1 Second`, 'dovetail-podcasts')] : []), ...(timeSeconds !== 1 ? [(0,_index_DTzhvg_p_js__WEBPACK_IMPORTED_MODULE_1__._)(`${timeSeconds || 0} Seconds`, 'dovetail-podcasts')] : []), (0,_index_DTzhvg_p_js__WEBPACK_IMPORTED_MODULE_1__._)('of', 'dovetail-podcasts'), ...(durationHours && durationHours === 1 ? [(0,_index_DTzhvg_p_js__WEBPACK_IMPORTED_MODULE_1__._)(`1 Hour`, 'dovetail-podcasts')] : []), ...(durationHours && durationHours > 1 ? [(0,_index_DTzhvg_p_js__WEBPACK_IMPORTED_MODULE_1__._)(`${durationHours} Hours`, 'dovetail-podcasts')] : []), ...(durationMinutes === 1 ? [(0,_index_DTzhvg_p_js__WEBPACK_IMPORTED_MODULE_1__._)(`1 Minute`, 'dovetail-podcasts')] : []), ...(durationMinutes !== 1 ? [(0,_index_DTzhvg_p_js__WEBPACK_IMPORTED_MODULE_1__._)(`${durationMinutes || 0} Minutes`, 'dovetail-podcasts')] : []), ...(durationSeconds === 1 ? [(0,_index_DTzhvg_p_js__WEBPACK_IMPORTED_MODULE_1__._)(`1 Second`, 'dovetail-podcasts')] : []), ...(durationSeconds !== 1 ? [(0,_index_DTzhvg_p_js__WEBPACK_IMPORTED_MODULE_1__._)(`${durationSeconds || 0} Seconds`, 'dovetail-podcasts')] : [])].join(' '), 'dovetail-podcasts');
-    return (0,_index_DjC7PCMK_js__WEBPACK_IMPORTED_MODULE_0__.h)(_index_DjC7PCMK_js__WEBPACK_IMPORTED_MODULE_0__.d, {
-      key: 'd8853b2aaa7aa7bf99aef8b33fadf8c3874bb9a9',
+    return (0,_index_DqrFfVsn_js__WEBPACK_IMPORTED_MODULE_0__.h)(_index_DqrFfVsn_js__WEBPACK_IMPORTED_MODULE_0__.a, {
+      key: 'c1bced352cfde151ee23c49480e75cf1bd6153a8',
       "aria-label": ariaLabel,
       "aria-valuemin": "0",
       "aria-valuemax": max,
       "aria-valuenow": time,
       "aria-valuetext": ariaValueText
-    }, (0,_index_DjC7PCMK_js__WEBPACK_IMPORTED_MODULE_0__.h)("dtpc-slider", {
-      key: 'f5cc261119cf7bb687f4a82563d85b2016549042',
+    }, (0,_index_DqrFfVsn_js__WEBPACK_IMPORTED_MODULE_0__.h)("dtpc-slider", {
+      key: '08626f2fff15de31652a154650c8b930eed5a4d6',
       tabindex: 0,
       disabled: !max,
       defaultValue: 0,
@@ -1135,4 +1135,4 @@ const hasTranslation = i18n.hasTranslation.bind(i18n);
 /***/ })
 
 }]);
-//# sourceMappingURL=web-components_dist_dovetail-podcasts-player-web-components_dtpc-progress-bar_entry_js.js.map?ver=43c9cce711ef672b45f4
+//# sourceMappingURL=web-components_dist_dovetail-podcasts-player-web-components_dtpc-progress-bar_entry_js.js.map?ver=c06a960d65b18fe505f5

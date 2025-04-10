@@ -11,7 +11,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   icon_pause: () => (/* binding */ IconPause)
 /* harmony export */ });
-/* harmony import */ var _index_DjC7PCMK_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index-DjC7PCMK.js */ "../web-components/dist/dovetail-podcasts-player-web-components/index-DjC7PCMK.js");
+/* harmony import */ var _index_DqrFfVsn_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index-DqrFfVsn.js */ "../web-components/dist/dovetail-podcasts-player-web-components/index-DqrFfVsn.js");
 /* harmony import */ var _lucide_Tggp1j09_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./lucide-Tggp1j09.js */ "../web-components/dist/dovetail-podcasts-player-web-components/lucide-Tggp1j09.js");
 /* harmony import */ var _index_BprZZpRs_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./index-BprZZpRs.js */ "../web-components/dist/dovetail-podcasts-player-web-components/index-BprZZpRs.js");
 
@@ -500,16 +500,16 @@ const IconPause = class {
       writable: true,
       value: void 0
     });
-    (0,_index_DjC7PCMK_js__WEBPACK_IMPORTED_MODULE_0__.r)(this, hostRef);
+    (0,_index_DqrFfVsn_js__WEBPACK_IMPORTED_MODULE_0__.r)(this, hostRef);
   }
   get el() {
-    return (0,_index_DjC7PCMK_js__WEBPACK_IMPORTED_MODULE_0__.e)(this);
+    return (0,_index_DqrFfVsn_js__WEBPACK_IMPORTED_MODULE_0__.e)(this);
   }
   render() {
     const inner = (0,_lucide_Tggp1j09_js__WEBPACK_IMPORTED_MODULE_1__.c)(_lucide_Tggp1j09_js__WEBPACK_IMPORTED_MODULE_1__.P);
     Object.entries(Object.assign({}, (0,_index_BprZZpRs_js__WEBPACK_IMPORTED_MODULE_2__.a)(this.el), this.getProps())).forEach(([name, value]) => inner.setAttribute(name, value));
-    return (0,_index_DjC7PCMK_js__WEBPACK_IMPORTED_MODULE_0__.h)(_index_DjC7PCMK_js__WEBPACK_IMPORTED_MODULE_0__.d, {
-      key: '4051d51f8862753660c10f1f491eb1dbf6a1dc09',
+    return (0,_index_DqrFfVsn_js__WEBPACK_IMPORTED_MODULE_0__.h)(_index_DqrFfVsn_js__WEBPACK_IMPORTED_MODULE_0__.a, {
+      key: '8664347913cb8c79d3ea550245f12758496b5088',
       innerHTML: inner.outerHTML,
       class: "lucide-icon"
     });
@@ -19532,4 +19532,4 @@ const createIcons = ({
 /***/ })
 
 }]);
-//# sourceMappingURL=web-components_dist_dovetail-podcasts-player-web-components_icon-pause_entry_js.js.map?ver=876ef156bf7dae3570c7
+//# sourceMappingURL=web-components_dist_dovetail-podcasts-player-web-components_icon-pause_entry_js.js.map?ver=d0d65c8ace2b5ba1e820

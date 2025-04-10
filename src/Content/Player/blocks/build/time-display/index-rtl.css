@@ -6,3 +6,15 @@
  *
  * Replace them with your own styles or remove the file completely.
  */
+.wp-block-dovetail-podcasts-time-display {
+  --_dtpc-time-display--spacing: var(--dtpc-time-display--spacing, 0.25rem);
+  color: var(--_dtpc-player--time--color, currentColor);
+  font-family: var(--_dtpc-player--time--font-family, inherit);
+  font-size: var(--_dtpc-player--time--font-size, inherit);
+  font-weight: var(--_dtpc-player--time--font-weight, inherit);
+}
+.wp-block-dovetail-podcasts-time-display .wrapper {
+  display: flex;
+  align-items: baseline;
+  gap: var(--_dtpc-time-display--spacing);
+}

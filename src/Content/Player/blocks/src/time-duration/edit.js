@@ -43,9 +43,5 @@ export default function Edit(props) {
 
 	console.log("time duration: attributes", attributes);
 
-	return (
-		<span {...blockProps}>
-			<DtpcTimeDuration></DtpcTimeDuration>
-		</span>
-	);
+	return <DtpcTimeDuration {...blockProps}>10:00</DtpcTimeDuration>;
 }

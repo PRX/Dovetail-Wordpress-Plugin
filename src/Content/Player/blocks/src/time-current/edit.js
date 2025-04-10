@@ -43,9 +43,5 @@ export default function Edit(props) {
 
 	console.log("time current: attributes", attributes);
 
-	return (
-		<span {...blockProps}>
-			<DtpcTimeCurrent></DtpcTimeCurrent>
-		</span>
-	);
+	return <DtpcTimeCurrent {...blockProps}>03:00</DtpcTimeCurrent>;
 }

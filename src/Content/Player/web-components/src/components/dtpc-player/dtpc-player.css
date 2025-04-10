@@ -1,7 +1,7 @@
 :host {
-  --_dtpc-player--foreground: var(--dtpc-player--foreground, CanvasText);
+  --_dtpc-player--foreground: var(--dtpc-player--foreground, currentColor);
   --_dtpc-player--highlight: var(--dtpc-player--highlight, LinkText);
-  --_dtpc-player--surface: var(--dtpc-player--surface, Canvas);
+  --_dtpc-player--surface: var(--dtpc-player--surface, white);
   --_dtpc-player--surface-opacity: var(--dtpc-player--bg-opacity, 0);
   --_dtpc-player--surface-blur: var(--dtpc-player--bg-blur, 0);
   --_dtpc-player--padding: var(--dtpc-player--padding, 0);
@@ -25,15 +25,13 @@
   }
 }
 
-.main {
-  --_spacing: var(--_dtpc-player--spacing);
-  --_padding-inline: var(--_dtpc-player--padding-inline);
-  --_padding-block: var(--_dtpc-player--padding-block);
+:host(:where([layout='flex'], [layout='default'])) {
+  .main {
+    display: flex;
+    align-items: center;
+    gap: var(--_dtpc-player--spacing);
 
-  display: flex;
-  align-items: center;
-  gap: var(--_spacing);
-
-  padding-inline: var(--_padding-inline);
-  padding-block: var(--_padding-block);
+    padding-inline: var(--_dtpc-player--padding-inline);
+    padding-block: var(--_dtpc-player--padding-block);
+  }
 }

@@ -3,9 +3,9 @@
 	"apiVersion": 3,
 	"name": "dovetail-podcasts/volume-slider",
 	"version": "0.1.0",
-	"title": "Dovetail Podcasts Player Volume Slider",
+	"title": "Dovetail Player - Volume Slider",
 	"category": "media",
-	"icon": "minus",
+	"icon": "controls-volumeon",
 	"description": "Volume slider for Dovetail Podcasts Player.",
 	"ancestor": [
 		"dovetail-podcasts/player"

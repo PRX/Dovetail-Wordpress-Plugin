@@ -40,8 +40,8 @@ export default function Save(props) {
 	console.log("player.save: props", props);
 
 	return (
-		<div {...blockProps} src={audioSrc}>
+		<>
 			<InnerBlocks.Content />
-		</div>
+		</>
 	);
 }

@@ -31,7 +31,11 @@ import "./editor.scss";
  */
 
 import { cn } from "@/utils";
-import { DtpcTimeDisplay } from "@/components";
+import {
+	DtpcTimeCurrent,
+	DtpcTimeDisplay,
+	DtpcTimeDuration,
+} from "@/components";
 
 export default function Edit(props) {
 	const { attributes } = props;
@@ -44,8 +48,12 @@ export default function Edit(props) {
 	console.log("time display: attributes", attributes);
 
 	return (
-		<span {...blockProps}>
-			<DtpcTimeDisplay></DtpcTimeDisplay>
-		</span>
+		<DtpcTimeDisplay {...blockProps}>
+			<div className="wrapper">
+				<DtpcTimeCurrent>03:00</DtpcTimeCurrent>
+				<span class="separator">/</span>
+				<DtpcTimeDuration>10:00</DtpcTimeDuration>
+			</div>
+		</DtpcTimeDisplay>
 	);
 }

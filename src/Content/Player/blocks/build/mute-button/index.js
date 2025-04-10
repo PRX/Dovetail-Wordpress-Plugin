@@ -278,6 +278,237 @@ function r(e){var t,f,n="";if("string"==typeof e||"number"==typeof e)n+=e;else i
 
 /***/ }),
 
+/***/ "../node_modules/lucide-react/dist/esm/Icon.js":
+/*!*****************************************************!*\
+  !*** ../node_modules/lucide-react/dist/esm/Icon.js ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ Icon)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _defaultAttributes_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./defaultAttributes.js */ "../node_modules/lucide-react/dist/esm/defaultAttributes.js");
+/* harmony import */ var _shared_src_utils_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./shared/src/utils.js */ "../node_modules/lucide-react/dist/esm/shared/src/utils.js");
+/**
+ * @license lucide-react v0.484.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+
+
+
+
+
+const Icon = (0,react__WEBPACK_IMPORTED_MODULE_0__.forwardRef)(
+  ({
+    color = "currentColor",
+    size = 24,
+    strokeWidth = 2,
+    absoluteStrokeWidth,
+    className = "",
+    children,
+    iconNode,
+    ...rest
+  }, ref) => {
+    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(
+      "svg",
+      {
+        ref,
+        ..._defaultAttributes_js__WEBPACK_IMPORTED_MODULE_1__["default"],
+        width: size,
+        height: size,
+        stroke: color,
+        strokeWidth: absoluteStrokeWidth ? Number(strokeWidth) * 24 / Number(size) : strokeWidth,
+        className: (0,_shared_src_utils_js__WEBPACK_IMPORTED_MODULE_2__.mergeClasses)("lucide", className),
+        ...rest
+      },
+      [
+        ...iconNode.map(([tag, attrs]) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(tag, attrs)),
+        ...Array.isArray(children) ? children : [children]
+      ]
+    );
+  }
+);
+
+
+//# sourceMappingURL=Icon.js.map
+
+
+/***/ }),
+
+/***/ "../node_modules/lucide-react/dist/esm/createLucideIcon.js":
+/*!*****************************************************************!*\
+  !*** ../node_modules/lucide-react/dist/esm/createLucideIcon.js ***!
+  \*****************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ createLucideIcon)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _shared_src_utils_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./shared/src/utils.js */ "../node_modules/lucide-react/dist/esm/shared/src/utils.js");
+/* harmony import */ var _Icon_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Icon.js */ "../node_modules/lucide-react/dist/esm/Icon.js");
+/**
+ * @license lucide-react v0.484.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+
+
+
+
+
+const createLucideIcon = (iconName, iconNode) => {
+  const Component = (0,react__WEBPACK_IMPORTED_MODULE_0__.forwardRef)(
+    ({ className, ...props }, ref) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Icon_js__WEBPACK_IMPORTED_MODULE_1__["default"], {
+      ref,
+      iconNode,
+      className: (0,_shared_src_utils_js__WEBPACK_IMPORTED_MODULE_2__.mergeClasses)(
+        `lucide-${(0,_shared_src_utils_js__WEBPACK_IMPORTED_MODULE_2__.toKebabCase)((0,_shared_src_utils_js__WEBPACK_IMPORTED_MODULE_2__.toPascalCase)(iconName))}`,
+        `lucide-${iconName}`,
+        className
+      ),
+      ...props
+    })
+  );
+  Component.displayName = (0,_shared_src_utils_js__WEBPACK_IMPORTED_MODULE_2__.toPascalCase)(iconName);
+  return Component;
+};
+
+
+//# sourceMappingURL=createLucideIcon.js.map
+
+
+/***/ }),
+
+/***/ "../node_modules/lucide-react/dist/esm/defaultAttributes.js":
+/*!******************************************************************!*\
+  !*** ../node_modules/lucide-react/dist/esm/defaultAttributes.js ***!
+  \******************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ defaultAttributes)
+/* harmony export */ });
+/**
+ * @license lucide-react v0.484.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+
+var defaultAttributes = {
+  xmlns: "http://www.w3.org/2000/svg",
+  width: 24,
+  height: 24,
+  viewBox: "0 0 24 24",
+  fill: "none",
+  stroke: "currentColor",
+  strokeWidth: 2,
+  strokeLinecap: "round",
+  strokeLinejoin: "round"
+};
+
+
+//# sourceMappingURL=defaultAttributes.js.map
+
+
+/***/ }),
+
+/***/ "../node_modules/lucide-react/dist/esm/icons/volume-off.js":
+/*!*****************************************************************!*\
+  !*** ../node_modules/lucide-react/dist/esm/icons/volume-off.js ***!
+  \*****************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   __iconNode: () => (/* binding */ __iconNode),
+/* harmony export */   "default": () => (/* binding */ VolumeOff)
+/* harmony export */ });
+/* harmony import */ var _createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../createLucideIcon.js */ "../node_modules/lucide-react/dist/esm/createLucideIcon.js");
+/**
+ * @license lucide-react v0.484.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+
+
+
+const __iconNode = [
+  ["path", { d: "M16 9a5 5 0 0 1 .95 2.293", key: "1fgyg8" }],
+  ["path", { d: "M19.364 5.636a9 9 0 0 1 1.889 9.96", key: "l3zxae" }],
+  ["path", { d: "m2 2 20 20", key: "1ooewy" }],
+  [
+    "path",
+    {
+      d: "m7 7-.587.587A1.4 1.4 0 0 1 5.416 8H3a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2.416a1.4 1.4 0 0 1 .997.413l3.383 3.384A.705.705 0 0 0 11 19.298V11",
+      key: "1gbwow"
+    }
+  ],
+  ["path", { d: "M9.828 4.172A.686.686 0 0 1 11 4.657v.686", key: "s2je0y" }]
+];
+const VolumeOff = (0,_createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__["default"])("volume-off", __iconNode);
+
+
+//# sourceMappingURL=volume-off.js.map
+
+
+/***/ }),
+
+/***/ "../node_modules/lucide-react/dist/esm/shared/src/utils.js":
+/*!*****************************************************************!*\
+  !*** ../node_modules/lucide-react/dist/esm/shared/src/utils.js ***!
+  \*****************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   mergeClasses: () => (/* binding */ mergeClasses),
+/* harmony export */   toCamelCase: () => (/* binding */ toCamelCase),
+/* harmony export */   toKebabCase: () => (/* binding */ toKebabCase),
+/* harmony export */   toPascalCase: () => (/* binding */ toPascalCase)
+/* harmony export */ });
+/**
+ * @license lucide-react v0.484.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+
+const toKebabCase = (string) => string.replace(/([a-z0-9])([A-Z])/g, "$1-$2").toLowerCase();
+const toCamelCase = (string) => string.replace(
+  /^([A-Z])|[\s-_]+(\w)/g,
+  (match, p1, p2) => p2 ? p2.toUpperCase() : p1.toLowerCase()
+);
+const toPascalCase = (string) => {
+  const camelCase = toCamelCase(string);
+  return camelCase.charAt(0).toUpperCase() + camelCase.slice(1);
+};
+const mergeClasses = (...classes) => classes.filter((className, index, array) => {
+  return Boolean(className) && className.trim() !== "" && array.indexOf(className) === index;
+}).join(" ").trim();
+
+
+//# sourceMappingURL=utils.js.map
+
+
+/***/ }),
+
 /***/ "../web-components/dist/components lazy recursive ^\\.\\/.*\\.entry\\.js.*$":
 /*!**************************************************************************************!*\
   !*** ../web-components/dist/components/ lazy ^\.\/.*\.entry\.js.*$ namespace object ***!
@@ -358,12 +589,12 @@ const DtpcButton = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.p)(class DtpcButto
   render() {
     const buttonAttributes = (0,_index4_js__WEBPACK_IMPORTED_MODULE_2__.a)(this.el);
     return (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)(_index2_js__WEBPACK_IMPORTED_MODULE_0__.d, {
-      key: 'c0214de80f82d9065a2b31b9f04db5cca14b797b',
+      key: '784a83a8135597834f9a9ca4af9d393a98360f6d',
       role: "button",
       tabindex: "0",
       ...buttonAttributes
     }, (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)("slot", {
-      key: 'e3df54b537f25ff99ae7199211ea5417567fe2b1'
+      key: '88c03ed1588f43470a3286bbbc5fb5730690cc0d'
     }));
   }
   static get style() {
@@ -385,7 +616,6 @@ function defineCustomElement() {
     }
   });
 }
-defineCustomElement(DtpcButton);
 
 
 /***/ }),
@@ -402,6 +632,26 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   DtpcMuteButton: () => (/* binding */ DtpcMuteButton),
 /* harmony export */   defineCustomElement: () => (/* binding */ defineCustomElement)
 /* harmony export */ });
+/* harmony import */ var _dtpc_mute_button2_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./dtpc-mute-button2.js */ "../web-components/dist/components/dtpc-mute-button2.js");
+
+const DtpcMuteButton = _dtpc_mute_button2_js__WEBPACK_IMPORTED_MODULE_0__.D;
+const defineCustomElement = _dtpc_mute_button2_js__WEBPACK_IMPORTED_MODULE_0__.d;
+
+
+/***/ }),
+
+/***/ "../web-components/dist/components/dtpc-mute-button2.js":
+/*!**************************************************************!*\
+  !*** ../web-components/dist/components/dtpc-mute-button2.js ***!
+  \**************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   D: () => (/* binding */ DtpcMuteButton),
+/* harmony export */   d: () => (/* binding */ defineCustomElement)
+/* harmony export */ });
 /* harmony import */ var _index2_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index2.js */ "../web-components/dist/components/index2.js");
 /* harmony import */ var _index5_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./index5.js */ "../web-components/dist/components/index5.js");
 /* harmony import */ var _dtpc_button2_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./dtpc-button2.js */ "../web-components/dist/components/dtpc-button2.js");
@@ -411,7 +661,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 const dtpcMuteButtonCss = ":host{--dtpc-button--size:var(--dtpc-mute-button--size);--dtpc-button--padding:var(--dtpc-mute-button--padding);--dtpc-button--foreground:var(--dtpc-mute-button--foreground);--dtpc-button--foreground--hover:var(--dtpc-mute-button--foreground--hover);--dtpc-button--foreground--active:var(--dtpc-mute-button--foreground--playing);--dtpc-button--surface:var(--dtpc-mute-button--surface);--dtpc-button--surface--hover:var(--dtpc-mute-button--surface--hover);--dtpc-button--surface--active:var(--dtpc-mute-button--surface--playing);--dtpc-button--surface-opacity:var(--dtpc-mute-button--surface-opacity);--dtpc-button--surface-opacity--hover:var(--dtpc-mute-button--surface-opacity--hover);--dtpc-button--surface-opacity--active:var(--dtpc-mute-button--surface-opacity--playing);--dtpc-button--border-color:var(--dtpc-mute-button--border-color);--dtpc-button--border-color--hover:var(--dtpc-mute-button--border-color--hover);--dtpc-button--border-color--active:var(--dtpc-mute-button--border-color--playing);--dtpc-button--border-radius:var(--dtpc-mute-button--border-radius);--dtpc-button--border-radius--hover:var(--dtpc-mute-button--border-radius--hover);--dtpc-button--border-radius--active:var(--dtpc-mute-button--border-radius--playing);--dtpc-button--border-width:var(--dtpc-mute-button--border-width);--dtpc-button--border-width--hover:var(--dtpc-mute-button--border-width--hover);--dtpc-button--border-width--active:var(--dtpc-mute-button--border-width--playing);--dtpc-button--focus-ring-color:var(--dtpc-mute-button--focus-ring-color);--dtpc-button--focus-ring-offset:var(--dtpc-mute-button--focus-ring-offset);--dtpc-button--focus-ring-width:var(--dtpc-mute-button--focus-ring-width)}";
-const DtpcMuteButton$1 = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.p)(class DtpcMuteButton extends _index2_js__WEBPACK_IMPORTED_MODULE_0__.H {
+const DtpcMuteButton = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.p)(class DtpcMuteButton extends _index2_js__WEBPACK_IMPORTED_MODULE_0__.H {
   constructor() {
     super();
     Object.defineProperty(this, "state", {
@@ -428,7 +678,7 @@ const DtpcMuteButton$1 = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.p)(class Dtp
     });
     this.__registerHost();
     this.__attachShadow();
-    this.initControl = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.c)(this, "dtpc-control-init", 7);
+    this.initControl = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.e)(this, "dtpc-control-init", 7);
   }
   componentWillLoad() {
     const self = this;
@@ -447,12 +697,12 @@ const DtpcMuteButton$1 = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.p)(class Dtp
       title: label
     };
     return (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)(_index2_js__WEBPACK_IMPORTED_MODULE_0__.d, {
-      key: 'a8efd8bdd55a3e821b62176075003323deae633c'
+      key: 'd895721db124a0806cd7787999821f360cb0e6a8'
     }, (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)("dtpc-button", {
-      key: 'e62a6d55080c12a30ab58c3b65eed816f3a13f37',
+      key: '7b055901726b7e7f9b2ad5a035409e52082c177a',
       ...buttonAttributes
     }, (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)("icon-volume", {
-      key: '6de5a70d0e7c670a38ca705e9aa507ecffa53c77',
+      key: 'd22d41e513544716507db81fd17964df461e97eb',
       muted: muted,
       volume: volume
     })));
@@ -461,7 +711,7 @@ const DtpcMuteButton$1 = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.p)(class Dtp
     return dtpcMuteButtonCss;
   }
 }, [1, "dtpc-mute-button", undefined, [[0, "click", "handleClick"]]]);
-function defineCustomElement$1() {
+function defineCustomElement() {
   if (typeof customElements === "undefined") {
     return;
   }
@@ -470,7 +720,7 @@ function defineCustomElement$1() {
     switch (tagName) {
       case "dtpc-mute-button":
         if (!customElements.get(tagName)) {
-          customElements.define(tagName, DtpcMuteButton$1);
+          customElements.define(tagName, DtpcMuteButton);
         }
         break;
       case "dtpc-button":
@@ -486,9 +736,6 @@ function defineCustomElement$1() {
     }
   });
 }
-defineCustomElement$1(DtpcMuteButton$1);
-const DtpcMuteButton = DtpcMuteButton$1;
-const defineCustomElement = defineCustomElement$1;
 
 
 /***/ }),
@@ -505,6 +752,26 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   DtpcPlayButton: () => (/* binding */ DtpcPlayButton),
 /* harmony export */   defineCustomElement: () => (/* binding */ defineCustomElement)
 /* harmony export */ });
+/* harmony import */ var _dtpc_play_button2_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./dtpc-play-button2.js */ "../web-components/dist/components/dtpc-play-button2.js");
+
+const DtpcPlayButton = _dtpc_play_button2_js__WEBPACK_IMPORTED_MODULE_0__.D;
+const defineCustomElement = _dtpc_play_button2_js__WEBPACK_IMPORTED_MODULE_0__.d;
+
+
+/***/ }),
+
+/***/ "../web-components/dist/components/dtpc-play-button2.js":
+/*!**************************************************************!*\
+  !*** ../web-components/dist/components/dtpc-play-button2.js ***!
+  \**************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   D: () => (/* binding */ DtpcPlayButton),
+/* harmony export */   d: () => (/* binding */ defineCustomElement)
+/* harmony export */ });
 /* harmony import */ var _index2_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index2.js */ "../web-components/dist/components/index2.js");
 /* harmony import */ var _index5_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./index5.js */ "../web-components/dist/components/index5.js");
 /* harmony import */ var _dtpc_button2_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./dtpc-button2.js */ "../web-components/dist/components/dtpc-button2.js");
@@ -515,8 +782,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-const dtpcPlayButtonCss = ":host {\n  --dtpc-button--size: var(--dtpc-play-button--size, 2rem);\n  --dtpc-button--padding: var(--dtpc-play-button--padding, 0.5rem);\n  --dtpc-button--foreground: var(--dtpc-play-button--foreground);\n  --dtpc-button--foreground--hover: var(--dtpc-play-button--foreground--hover, var(--_dtpc-player--surface));\n  --dtpc-button--foreground--active: var(--dtpc-play-button--foreground--playing);\n  --dtpc-button--surface: var(--dtpc-play-button--surface);\n  --dtpc-button--surface--hover: var(--dtpc-play-button--surface--hover, var(--_dtpc-player--foreground));\n  --dtpc-button--surface--active: var(--dtpc-play-button--surface--playing);\n  --dtpc-button--surface-opacity: var(--dtpc-play-button--surface-opacity);\n  --dtpc-button--surface-opacity--hover: var(--dtpc-play-button--surface-opacity--hover, 100%);\n  --dtpc-button--surface-opacity--active: var(--dtpc-play-button--surface-opacity--playing, 0);\n  --dtpc-button--border-color: var(--dtpc-play-button--border-color, transparent);\n  --dtpc-button--border-color--hover: var(--dtpc-play-button--border-color--hover, transparent);\n  --dtpc-button--border-color--active: var(--dtpc-play-button--border-color--playing, var(--_dtpc-player--foreground));\n  --dtpc-button--border-radius: var(--dtpc-play-button--border-radius);\n  --dtpc-button--border-radius--hover: var(--dtpc-play-button--border-radius--hover);\n  --dtpc-button--border-radius--active: var(--dtpc-play-button--border-radius--playing);\n  --dtpc-button--border-width: var(--dtpc-play-button--border-width, 0.125);\n  --dtpc-button--border-width--hover: var(--dtpc-play-button--border-width--hover, 0.125);\n  --dtpc-button--border-width--active: var(--dtpc-play-button--border-width--playing, 0.125);\n  --dtpc-button--focus-ring-color: var(--dtpc-play-button--focus-ring-color);\n  --dtpc-button--focus-ring-offset: var(--dtpc-play-button--focus-ring-offset);\n  --dtpc-button--focus-ring-width: var(--dtpc-play-button--focus-ring-width);\n}\n\n:host([data-status='playing']) {\n  --dtpc-button--foreground: var(--dtpc-button--foreground--active);\n  --dtpc-button--surface: var(--dtpc-button--surface--active);\n  --dtpc-button--surface-opacity: var(--dtpc-button--surface-opacity--active);\n  --dtpc-button--border-color: var(--dtpc-button--border-color--active);\n  --dtpc-button--border-width: var(--dtpc-button--border-width--active);\n  --dtpc-button--border-radius: var(--dtpc-button--border-radius--active);\n\n  &:hover {\n    --dtpc-button--surface-opacity: var(--dtpc-button--surface-opacity--hover);\n  }\n}\n";
-const DtpcPlayButton$1 = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.p)(class DtpcPlayButton extends _index2_js__WEBPACK_IMPORTED_MODULE_0__.H {
+const dtpcPlayButtonCss = ":host {\n  --dtpc-button--size: var(--dtpc-play-button--size, 2rem);\n  --dtpc-button--padding: var(--dtpc-play-button--padding, 0.5rem);\n  --dtpc-button--foreground: var(--dtpc-play-button--foreground);\n  --dtpc-button--foreground--hover: var(--dtpc-play-button--foreground--hover);\n  --dtpc-button--foreground--active: var(--dtpc-play-button--foreground--playing);\n  --dtpc-button--surface: var(--dtpc-play-button--surface);\n  --dtpc-button--surface--hover: var(--dtpc-play-button--surface--hover);\n  --dtpc-button--surface--active: var(--dtpc-play-button--surface--playing);\n  --dtpc-button--surface-opacity: var(--dtpc-play-button--surface-opacity);\n  --dtpc-button--surface-opacity--hover: var(--dtpc-play-button--surface-opacity--hover);\n  --dtpc-button--surface-opacity--active: var(--dtpc-play-button--surface-opacity--playing, 0);\n  --dtpc-button--border-color: var(--dtpc-play-button--border-color, transparent);\n  --dtpc-button--border-color--hover: var(--dtpc-play-button--border-color--hover, transparent);\n  --dtpc-button--border-color--active: var(--dtpc-play-button--border-color--playing, var(--_dtpc-player--foreground));\n  --dtpc-button--border-radius: var(--dtpc-play-button--border-radius);\n  --dtpc-button--border-radius--hover: var(--dtpc-play-button--border-radius--hover);\n  --dtpc-button--border-radius--active: var(--dtpc-play-button--border-radius--playing);\n  --dtpc-button--border-width: var(--dtpc-play-button--border-width, 0.125);\n  --dtpc-button--border-width--hover: var(--dtpc-play-button--border-width--hover, 0.125);\n  --dtpc-button--border-width--active: var(--dtpc-play-button--border-width--playing, 0.125);\n  --dtpc-button--focus-ring-color: var(--dtpc-play-button--focus-ring-color);\n  --dtpc-button--focus-ring-offset: var(--dtpc-play-button--focus-ring-offset);\n  --dtpc-button--focus-ring-width: var(--dtpc-play-button--focus-ring-width);\n}\n\n:host([data-status='playing']) {\n  --dtpc-button--foreground: var(--dtpc-button--foreground--active);\n  --dtpc-button--surface: var(--dtpc-button--surface--active);\n  --dtpc-button--surface-opacity: var(--dtpc-button--surface-opacity--active);\n  --dtpc-button--border-color: var(--dtpc-button--border-color--active);\n  --dtpc-button--border-width: var(--dtpc-button--border-width--active);\n  --dtpc-button--border-radius: var(--dtpc-button--border-radius--active);\n\n  &:hover {\n    --dtpc-button--surface-opacity: var(--dtpc-button--surface-opacity--hover);\n  }\n}\n";
+const DtpcPlayButton = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.p)(class DtpcPlayButton extends _index2_js__WEBPACK_IMPORTED_MODULE_0__.H {
   constructor() {
     super();
     Object.defineProperty(this, "state", {
@@ -539,8 +806,8 @@ const DtpcPlayButton$1 = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.p)(class Dtp
     });
     this.__registerHost();
     this.__attachShadow();
-    this.initControl = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.c)(this, "dtpc-control-init", 7);
-    this.togglePaused = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.c)(this, "audio-toggle-paused", 7);
+    this.initControl = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.e)(this, "dtpc-control-init", 7);
+    this.togglePaused = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.e)(this, "audio-toggle-paused", 7);
   }
   componentWillLoad() {
     const self = this;
@@ -559,10 +826,10 @@ const DtpcPlayButton$1 = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.p)(class Dtp
       title: label
     };
     return (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)(_index2_js__WEBPACK_IMPORTED_MODULE_0__.d, {
-      key: '06e758827b0c348c9dc7352742d24482b5c35760',
+      key: '488f8cdc585cda9105a21d93494e46eb6cc799b6',
       "data-status": playing ? 'playing' : 'paused'
     }, (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)("dtpc-button", {
-      key: '43f8b4df8d104e706cfdf656f946db1bd3910949',
+      key: 'c0ec4fe2a33797c339c4b21272549cfcbfde0cfd',
       ...buttonAttributes
     }, playing ? (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)("icon-pause", null) : (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)("icon-play", null)));
   }
@@ -570,7 +837,7 @@ const DtpcPlayButton$1 = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.p)(class Dtp
     return dtpcPlayButtonCss;
   }
 }, [1, "dtpc-play-button", undefined, [[0, "click", "handleClick"]]]);
-function defineCustomElement$1() {
+function defineCustomElement() {
   if (typeof customElements === "undefined") {
     return;
   }
@@ -579,7 +846,7 @@ function defineCustomElement$1() {
     switch (tagName) {
       case "dtpc-play-button":
         if (!customElements.get(tagName)) {
-          customElements.define(tagName, DtpcPlayButton$1);
+          customElements.define(tagName, DtpcPlayButton);
         }
         break;
       case "dtpc-button":
@@ -600,9 +867,6 @@ function defineCustomElement$1() {
     }
   });
 }
-defineCustomElement$1(DtpcPlayButton$1);
-const DtpcPlayButton = DtpcPlayButton$1;
-const defineCustomElement = defineCustomElement$1;
 
 
 /***/ }),
@@ -620,6 +884,28 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   defineCustomElement: () => (/* binding */ defineCustomElement)
 /* harmony export */ });
 /* harmony import */ var _index2_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index2.js */ "../web-components/dist/components/index2.js");
+/* harmony import */ var _dtpc_button2_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./dtpc-button2.js */ "../web-components/dist/components/dtpc-button2.js");
+/* harmony import */ var _dtpc_mute_button2_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./dtpc-mute-button2.js */ "../web-components/dist/components/dtpc-mute-button2.js");
+/* harmony import */ var _dtpc_play_button2_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./dtpc-play-button2.js */ "../web-components/dist/components/dtpc-play-button2.js");
+/* harmony import */ var _dtpc_progress_bar2_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./dtpc-progress-bar2.js */ "../web-components/dist/components/dtpc-progress-bar2.js");
+/* harmony import */ var _dtpc_slider2_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./dtpc-slider2.js */ "../web-components/dist/components/dtpc-slider2.js");
+/* harmony import */ var _dtpc_time_current2_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./dtpc-time-current2.js */ "../web-components/dist/components/dtpc-time-current2.js");
+/* harmony import */ var _dtpc_time_display2_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./dtpc-time-display2.js */ "../web-components/dist/components/dtpc-time-display2.js");
+/* harmony import */ var _dtpc_time_duration2_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./dtpc-time-duration2.js */ "../web-components/dist/components/dtpc-time-duration2.js");
+/* harmony import */ var _icon_pause2_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./icon-pause2.js */ "../web-components/dist/components/icon-pause2.js");
+/* harmony import */ var _icon_play2_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./icon-play2.js */ "../web-components/dist/components/icon-play2.js");
+/* harmony import */ var _icon_volume2_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./icon-volume2.js */ "../web-components/dist/components/icon-volume2.js");
+
+
+
+
+
+
+
+
+
+
+
 
 const appendToMap = (map, propName, value) => {
   const items = map.get(propName);
@@ -648,14 +934,14 @@ const cleanupElements = debounce(map => {
   }
 }, 2000);
 const stencilSubscription = () => {
-  if (typeof _index2_js__WEBPACK_IMPORTED_MODULE_0__.e !== 'function') {
+  if (typeof _index2_js__WEBPACK_IMPORTED_MODULE_0__.c !== 'function') {
     return {};
   }
   const elmsToUpdate = new Map();
   return {
     dispose: () => elmsToUpdate.clear(),
     get: propName => {
-      const elm = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.e)();
+      const elm = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.c)();
       if (elm) {
         appendToMap(elmsToUpdate, propName, elm);
       }
@@ -816,11 +1102,17 @@ class playerStateFactory {
   }
 }
 const factory = new playerStateFactory();
-const dtpcPlayerCss = ":host {\n  --_dtpc-player--foreground: var(--dtpc-player--foreground, CanvasText);\n  --_dtpc-player--highlight: var(--dtpc-player--highlight, LinkText);\n  --_dtpc-player--surface: var(--dtpc-player--surface, Canvas);\n  --_dtpc-player--surface-opacity: var(--dtpc-player--bg-opacity, 0);\n  --_dtpc-player--surface-blur: var(--dtpc-player--bg-blur, 0);\n  --_dtpc-player--padding: var(--dtpc-player--padding, 0);\n  --_dtpc-player--padding-inline: var(--dtpc-player--padding-inline, var(--_dtpc-player--padding));\n  --_dtpc-player--padding-block: var(--dtpc-player--padding-block, var(--_dtpc-player--padding));\n  --_dtpc-player--spacing: var(--dtpc-player--spacing, 0.5rem);\n\n  /* Time */\n  --_dtpc-player--time--color: var(--dtpc-player--time--font-size, var(--_dtpc-player--foreground));\n  --_dtpc-player--time--font-size: var(--dtpc-player--time--font-size, 0.875rem);\n  --_dtpc-player--time--font-family: var(--dtpc-player--time--font-family, ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, 'DejaVu Sans Mono', monospace);\n  --_dtpc-player--time--font-weight: var(--dtpc-player--time--font-weight, inherit);\n}\n\n.wrapper {\n  display: grid;\n\n  & > * {\n    grid-column: 1 / -1;\n    grid-row: 1 / -1;\n  }\n}\n\n.main {\n  --_spacing: var(--_dtpc-player--spacing);\n  --_padding-inline: var(--_dtpc-player--padding-inline);\n  --_padding-block: var(--_dtpc-player--padding-block);\n\n  display: flex;\n  align-items: center;\n  gap: var(--_spacing);\n\n  padding-inline: var(--_padding-inline);\n  padding-block: var(--_padding-block);\n}\n";
+const dtpcPlayerCss = ":host {\n  --_dtpc-player--foreground: var(--dtpc-player--foreground, currentColor);\n  --_dtpc-player--highlight: var(--dtpc-player--highlight, LinkText);\n  --_dtpc-player--surface: var(--dtpc-player--surface, white);\n  --_dtpc-player--surface-opacity: var(--dtpc-player--bg-opacity, 0);\n  --_dtpc-player--surface-blur: var(--dtpc-player--bg-blur, 0);\n  --_dtpc-player--padding: var(--dtpc-player--padding, 0);\n  --_dtpc-player--padding-inline: var(--dtpc-player--padding-inline, var(--_dtpc-player--padding));\n  --_dtpc-player--padding-block: var(--dtpc-player--padding-block, var(--_dtpc-player--padding));\n  --_dtpc-player--spacing: var(--dtpc-player--spacing, 0.5rem);\n\n  /* Time */\n  --_dtpc-player--time--color: var(--dtpc-player--time--font-size, var(--_dtpc-player--foreground));\n  --_dtpc-player--time--font-size: var(--dtpc-player--time--font-size, 0.875rem);\n  --_dtpc-player--time--font-family: var(--dtpc-player--time--font-family, ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, 'DejaVu Sans Mono', monospace);\n  --_dtpc-player--time--font-weight: var(--dtpc-player--time--font-weight, inherit);\n}\n\n.wrapper {\n  display: grid;\n\n  & > * {\n    grid-column: 1 / -1;\n    grid-row: 1 / -1;\n  }\n}\n\n:host(:where([layout='flex'], [layout='default'])) {\n  .main {\n    display: flex;\n    align-items: center;\n    gap: var(--_dtpc-player--spacing);\n\n    padding-inline: var(--_dtpc-player--padding-inline);\n    padding-block: var(--_dtpc-player--padding-block);\n  }\n}\n";
 const DtpcPlayer$1 = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.p)(class DtpcPlayer extends _index2_js__WEBPACK_IMPORTED_MODULE_0__.H {
   constructor() {
     super();
     Object.defineProperty(this, "state", {
+      enumerable: true,
+      configurable: true,
+      writable: true,
+      value: void 0
+    });
+    Object.defineProperty(this, "layout", {
       enumerable: true,
       configurable: true,
       writable: true,
@@ -901,20 +1193,31 @@ const DtpcPlayer$1 = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.p)(class DtpcPla
     this.state.audioElm.src = newSrc;
   }
   render() {
+    console.log(this.layout);
     return (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)(_index2_js__WEBPACK_IMPORTED_MODULE_0__.d, {
-      key: '9418451f204b2349cc27758716a085bfd8ede364'
+      key: 'd42a0d64839b4f167c8b3cd8569c4e3e6305ada7'
     }, (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", {
-      key: 'e38c38f166ca83ea738a03721804e23527cb2a2a',
+      key: '40653b8db674bdec38a18904f5e8a46e51459a04',
       class: "wrapper"
     }, (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", {
-      key: 'e1fadfdebf7dba6b6a15fa1d7e1689d114e067ae',
+      key: 'a0a1f79f80faceafcab81478e4a7524d2380b36b',
       part: "backdrop"
     }), (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", {
-      key: '30afd10f8dd61f515e250697026190da73c46e8f',
+      key: 'a6b641293c457aaa2c117b645ed92fe17c6dc38e',
       class: "main"
-    }, (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)("slot", {
-      key: '8b500e39691ead695867040475031de1b51a5537'
-    }))));
+    }, (!this.layout || this.layout === 'flex') && (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)("slot", {
+      key: '924228ccf20072b3b9d0dd1cecb60669eaa59bfe'
+    }), this.layout === 'default' && (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)(_index2_js__WEBPACK_IMPORTED_MODULE_0__.F, {
+      key: 'b442836d7f1e5e8f1091da5cbd2aaf798dd6fc77'
+    }, (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)("dtpc-play-button", {
+      key: '2c4eaf35853407309e13f1fb5017767787894463'
+    }), (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)("dtpc-progress-bar", {
+      key: '6b3ec14a5c576a8b1701d2e77af1235fea480bb3'
+    }), (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)("dtpc-time-display", {
+      key: '582bb90419e6f05cd214ea48011ebd2e74a1e29a'
+    }), (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)("dtpc-mute-button", {
+      key: 'e0babced41658adcf69fea04d61f1a153635d380'
+    })))));
   }
   static get watchers() {
     return {
@@ -925,6 +1228,7 @@ const DtpcPlayer$1 = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.p)(class DtpcPla
     return dtpcPlayerCss;
   }
 }, [1, "dtpc-player", {
+  "layout": [1],
   "src": [1],
   "duration": [2],
   "audioDuration": [32]
@@ -935,7 +1239,7 @@ function defineCustomElement$1() {
   if (typeof customElements === "undefined") {
     return;
   }
-  const components = ["dtpc-player"];
+  const components = ["dtpc-player", "dtpc-button", "dtpc-mute-button", "dtpc-play-button", "dtpc-progress-bar", "dtpc-slider", "dtpc-time-current", "dtpc-time-display", "dtpc-time-duration", "icon-pause", "icon-play", "icon-volume"];
   components.forEach(tagName => {
     switch (tagName) {
       case "dtpc-player":
@@ -943,10 +1247,64 @@ function defineCustomElement$1() {
           customElements.define(tagName, DtpcPlayer$1);
         }
         break;
+      case "dtpc-button":
+        if (!customElements.get(tagName)) {
+          (0,_dtpc_button2_js__WEBPACK_IMPORTED_MODULE_1__.d)();
+        }
+        break;
+      case "dtpc-mute-button":
+        if (!customElements.get(tagName)) {
+          (0,_dtpc_mute_button2_js__WEBPACK_IMPORTED_MODULE_2__.d)();
+        }
+        break;
+      case "dtpc-play-button":
+        if (!customElements.get(tagName)) {
+          (0,_dtpc_play_button2_js__WEBPACK_IMPORTED_MODULE_3__.d)();
+        }
+        break;
+      case "dtpc-progress-bar":
+        if (!customElements.get(tagName)) {
+          (0,_dtpc_progress_bar2_js__WEBPACK_IMPORTED_MODULE_4__.d)();
+        }
+        break;
+      case "dtpc-slider":
+        if (!customElements.get(tagName)) {
+          (0,_dtpc_slider2_js__WEBPACK_IMPORTED_MODULE_5__.d)();
+        }
+        break;
+      case "dtpc-time-current":
+        if (!customElements.get(tagName)) {
+          (0,_dtpc_time_current2_js__WEBPACK_IMPORTED_MODULE_6__.d)();
+        }
+        break;
+      case "dtpc-time-display":
+        if (!customElements.get(tagName)) {
+          (0,_dtpc_time_display2_js__WEBPACK_IMPORTED_MODULE_7__.d)();
+        }
+        break;
+      case "dtpc-time-duration":
+        if (!customElements.get(tagName)) {
+          (0,_dtpc_time_duration2_js__WEBPACK_IMPORTED_MODULE_8__.d)();
+        }
+        break;
+      case "icon-pause":
+        if (!customElements.get(tagName)) {
+          (0,_icon_pause2_js__WEBPACK_IMPORTED_MODULE_9__.d)();
+        }
+        break;
+      case "icon-play":
+        if (!customElements.get(tagName)) {
+          (0,_icon_play2_js__WEBPACK_IMPORTED_MODULE_10__.d)();
+        }
+        break;
+      case "icon-volume":
+        if (!customElements.get(tagName)) {
+          (0,_icon_volume2_js__WEBPACK_IMPORTED_MODULE_11__.d)();
+        }
+        break;
     }
   });
 }
-defineCustomElement$1(DtpcPlayer$1);
 const DtpcPlayer = DtpcPlayer$1;
 const defineCustomElement = defineCustomElement$1;
 
@@ -965,6 +1323,26 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   DtpcProgressBar: () => (/* binding */ DtpcProgressBar),
 /* harmony export */   defineCustomElement: () => (/* binding */ defineCustomElement)
 /* harmony export */ });
+/* harmony import */ var _dtpc_progress_bar2_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./dtpc-progress-bar2.js */ "../web-components/dist/components/dtpc-progress-bar2.js");
+
+const DtpcProgressBar = _dtpc_progress_bar2_js__WEBPACK_IMPORTED_MODULE_0__.D;
+const defineCustomElement = _dtpc_progress_bar2_js__WEBPACK_IMPORTED_MODULE_0__.d;
+
+
+/***/ }),
+
+/***/ "../web-components/dist/components/dtpc-progress-bar2.js":
+/*!***************************************************************!*\
+  !*** ../web-components/dist/components/dtpc-progress-bar2.js ***!
+  \***************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   D: () => (/* binding */ DtpcProgressBar),
+/* harmony export */   d: () => (/* binding */ defineCustomElement)
+/* harmony export */ });
 /* harmony import */ var _index2_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index2.js */ "../web-components/dist/components/index2.js");
 /* harmony import */ var _index5_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./index5.js */ "../web-components/dist/components/index5.js");
 /* harmony import */ var _index3_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./index3.js */ "../web-components/dist/components/index3.js");
@@ -973,8 +1351,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-const dtpcProgressBarCss = ":host{--dtpc-slider--scrubber--color:var(--dtpc-progress-bar--scrubber--color, var(--_dtpc-player--surface, white));--dtpc-slider--scrubber--size:var(--dtpc-progress-bar--scrubber--size, 1.25rem);--dtpc-slider--scrubber--border-color:var(--dtpc-progress-bar--scrubber--border-color, var(--_dtpc-player--foreground, currentColor));--dtpc-slider--scrubber--border-width:var(--dtpc-progress-bar--scrubber--border-width, 0.125rem);--dtpc-slider--scrubber--border-radius:var(--dtpc-progress-bar--scrubber--border-radius, 100vw);--dtpc-slider--progress--color:var(--dtpc-progress-bar--progress--color, var(--_dtpc-player--foreground, currentColor));--dtpc-slider--track--color:var(--dtpc-progress-bar--track--color, var(--_dtpc-player--surface, transparent));--dtpc-slider--track--height:var(--dtpc-progress-bar--track--height, 0.5rem);--dtpc-slider--track--radius:var(--dtpc-progress-bar--track--radius, 100vw);--dtpc-slider--track--border-color:var(--dtpc-progress-bar--track--border-color, var(--_dtpc-player--foreground, currentColor));--dtpc-slider--track--border-width:var(--dtpc-progress-bar--track--border-width, 0.125rem);--dtpc-slider--track--border-offset:var(--dtpc-progress-bar--track--border-offset, 0.125rem);--dtpc-slider--focus-ring-color:var(--dtpc-progress-bar--focus-ring-color, var(--_dtpc-player--highlight));--dtpc-slider--focus-ring-offset:var(--dtpc-progress-bar--focus-ring-offset, 0.125rem);--dtpc-slider--focus-ring-width:var(--dtpc-progress-bar--focus-ring-width, 2px);flex-grow:1}";
-const DtpcProgressBar$1 = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.p)(class DtpcProgressBar extends _index2_js__WEBPACK_IMPORTED_MODULE_0__.H {
+const dtpcProgressBarCss = ":host{--dtpc-slider--scrubber--color:var(--dtpc-progress-bar--scrubber--color, var(--_dtpc-player--foreground, currentColor));--dtpc-slider--scrubber--size:var(--dtpc-progress-bar--scrubber--size, 1.25rem);--dtpc-slider--scrubber--border-color:var(--dtpc-progress-bar--scrubber--border-color, var(--_dtpc-player--foreground, currentColor));--dtpc-slider--scrubber--border-width:var(--dtpc-progress-bar--scrubber--border-width, 0.125rem);--dtpc-slider--scrubber--border-radius:var(--dtpc-progress-bar--scrubber--border-radius, 100vw);--dtpc-slider--progress--color:var(--dtpc-progress-bar--progress--color, var(--_dtpc-player--foreground, currentColor));--dtpc-slider--track--color:var(--dtpc-progress-bar--track--color, transparent);--dtpc-slider--track--height:var(--dtpc-progress-bar--track--height, 0.5rem);--dtpc-slider--track--radius:var(--dtpc-progress-bar--track--radius, 100vw);--dtpc-slider--track--border-color:var(--dtpc-progress-bar--track--border-color, var(--_dtpc-player--foreground, currentColor));--dtpc-slider--track--border-width:var(--dtpc-progress-bar--track--border-width, 0.125rem);--dtpc-slider--track--border-offset:var(--dtpc-progress-bar--track--border-offset, 0.125rem);--dtpc-slider--focus-ring-color:var(--dtpc-progress-bar--focus-ring-color, var(--_dtpc-player--highlight));--dtpc-slider--focus-ring-offset:var(--dtpc-progress-bar--focus-ring-offset, 0.125rem);--dtpc-slider--focus-ring-width:var(--dtpc-progress-bar--focus-ring-width, 2px);flex-grow:1}";
+const DtpcProgressBar = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.p)(class DtpcProgressBar extends _index2_js__WEBPACK_IMPORTED_MODULE_0__.H {
   constructor() {
     super();
     Object.defineProperty(this, "state", {
@@ -1003,7 +1381,7 @@ const DtpcProgressBar$1 = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.p)(class Dt
     });
     this.__registerHost();
     this.__attachShadow();
-    this.initControl = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.c)(this, "dtpc-control-init", 7);
+    this.initControl = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.e)(this, "dtpc-control-init", 7);
   }
   componentWillLoad() {
     const self = this;
@@ -1032,14 +1410,14 @@ const DtpcProgressBar$1 = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.p)(class Dt
     const ariaLabel = (0,_index5_js__WEBPACK_IMPORTED_MODULE_1__._)('Seek slider', 'dovetail-podcasts');
     const ariaValueText = (0,_index5_js__WEBPACK_IMPORTED_MODULE_1__._)([...(timeHours && timeHours === 1 ? [(0,_index5_js__WEBPACK_IMPORTED_MODULE_1__._)(`1 Hour`, 'dovetail-podcasts')] : []), ...(timeHours && timeHours > 1 ? [(0,_index5_js__WEBPACK_IMPORTED_MODULE_1__._)(`${timeHours} Hours`, 'dovetail-podcasts')] : []), ...(timeMinutes === 1 ? [(0,_index5_js__WEBPACK_IMPORTED_MODULE_1__._)(`1 Minute`, 'dovetail-podcasts')] : []), ...(timeMinutes !== 1 ? [(0,_index5_js__WEBPACK_IMPORTED_MODULE_1__._)(`${timeMinutes || 0} Minutes`, 'dovetail-podcasts')] : []), ...(timeSeconds === 1 ? [(0,_index5_js__WEBPACK_IMPORTED_MODULE_1__._)(`1 Second`, 'dovetail-podcasts')] : []), ...(timeSeconds !== 1 ? [(0,_index5_js__WEBPACK_IMPORTED_MODULE_1__._)(`${timeSeconds || 0} Seconds`, 'dovetail-podcasts')] : []), (0,_index5_js__WEBPACK_IMPORTED_MODULE_1__._)('of', 'dovetail-podcasts'), ...(durationHours && durationHours === 1 ? [(0,_index5_js__WEBPACK_IMPORTED_MODULE_1__._)(`1 Hour`, 'dovetail-podcasts')] : []), ...(durationHours && durationHours > 1 ? [(0,_index5_js__WEBPACK_IMPORTED_MODULE_1__._)(`${durationHours} Hours`, 'dovetail-podcasts')] : []), ...(durationMinutes === 1 ? [(0,_index5_js__WEBPACK_IMPORTED_MODULE_1__._)(`1 Minute`, 'dovetail-podcasts')] : []), ...(durationMinutes !== 1 ? [(0,_index5_js__WEBPACK_IMPORTED_MODULE_1__._)(`${durationMinutes || 0} Minutes`, 'dovetail-podcasts')] : []), ...(durationSeconds === 1 ? [(0,_index5_js__WEBPACK_IMPORTED_MODULE_1__._)(`1 Second`, 'dovetail-podcasts')] : []), ...(durationSeconds !== 1 ? [(0,_index5_js__WEBPACK_IMPORTED_MODULE_1__._)(`${durationSeconds || 0} Seconds`, 'dovetail-podcasts')] : [])].join(' '), 'dovetail-podcasts');
     return (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)(_index2_js__WEBPACK_IMPORTED_MODULE_0__.d, {
-      key: 'd8853b2aaa7aa7bf99aef8b33fadf8c3874bb9a9',
+      key: 'c1bced352cfde151ee23c49480e75cf1bd6153a8',
       "aria-label": ariaLabel,
       "aria-valuemin": "0",
       "aria-valuemax": max,
       "aria-valuenow": time,
       "aria-valuetext": ariaValueText
     }, (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)("dtpc-slider", {
-      key: 'f5cc261119cf7bb687f4a82563d85b2016549042',
+      key: '08626f2fff15de31652a154650c8b930eed5a4d6',
       tabindex: 0,
       disabled: !max,
       defaultValue: 0,
@@ -1056,7 +1434,7 @@ const DtpcProgressBar$1 = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.p)(class Dt
   "duration": [2],
   "audioDuration": [32]
 }, [[0, "slider-input", "handleInput"], [0, "slider-change", "handleChange"]]]);
-function defineCustomElement$1() {
+function defineCustomElement() {
   if (typeof customElements === "undefined") {
     return;
   }
@@ -1065,7 +1443,7 @@ function defineCustomElement$1() {
     switch (tagName) {
       case "dtpc-progress-bar":
         if (!customElements.get(tagName)) {
-          customElements.define(tagName, DtpcProgressBar$1);
+          customElements.define(tagName, DtpcProgressBar);
         }
         break;
       case "dtpc-slider":
@@ -1076,9 +1454,6 @@ function defineCustomElement$1() {
     }
   });
 }
-defineCustomElement$1(DtpcProgressBar$1);
-const DtpcProgressBar = DtpcProgressBar$1;
-const defineCustomElement = defineCustomElement$1;
 
 
 /***/ }),
@@ -1117,7 +1492,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _index2_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index2.js */ "../web-components/dist/components/index2.js");
 
-const dtpcSliderCss = ":host {\n  --_dtpc-slider--scrubber--color: var(--dtpc-slider--scrubber--color, var(--_dtpc-player--foreground, CanvasText));\n  --_dtpc-slider--scrubber--size: var(--dtpc-slider--scrubber--size, 1.25rem);\n  --_dtpc-slider--scrubber--border-color: var(--dtpc-slider--scrubber--border-color, transparent);\n  --_dtpc-slider--scrubber--border-width: var(--dtpc-slider--scrubber--border-width, 0);\n  --_dtpc-slider--scrubber--border-radius: var(--dtpc-slider--scrubber--border-radius, 100vw);\n  --_dtpc-slider--scrubber--focus-ring-color: var(--dtpc-slider--focus-ring-color, var(--_dtpc-player--highlight, LinkText));\n  --_dtpc-slider--scrubber--focus-ring-offset: var(--dtpc-slider--focus-ring-offset, 0.125rem);\n  --_dtpc-slider--scrubber--focus-ring-width: var(--dtpc-slider--focus-ring-width, 0.125rem);\n  --_dtpc-slider--progress--color: var(--dtpc-slider--progress--color, var(--_dtpc-player--foreground, CanvasText));\n  --_dtpc-slider--track--color: var(--dtpc-slider--track--color, color-mix(in oklch, var(--_dtpc-slider--progress--color) 20%, transparent));\n  --_dtpc-slider--track--height: var(--dtpc-slider--track--height, 0.25rem);\n  --_dtpc-slider--track--radius: var(--dtpc-slider--track--radius, 100vw);\n  --_dtpc-slider--track--border-color: var(--dtpc-slider--track--border-color, transparent);\n  --_dtpc-slider--track--border-width: var(--dtpc-slider--track--border-width, 0);\n  --_dtpc-slider--track--border-offset: var(--dtpc-slider--track--border-offset, 0);\n\n  display: contents;\n}\n\n.track {\n  --_dtpc-slider--track--gutter: calc(var(--_dtpc-slider--scrubber--size) / 2);\n\n  isolation: isolate;\n  display: grid;\n  align-items: center;\n  grid-template-columns: [range-start] var(--_dtpc-slider--track--gutter) [track-start] 1fr [track-end] var(--_dtpc-slider--track--gutter) [range-end];\n  grid-template-rows: [range-start] [track-start] var(--_dtpc-slider--track--height) [track-end] [range-end];\n\n  &::before {\n    content: '';\n\n    grid-area: track;\n    grid-row: 1;\n    place-self: stretch;\n\n    outline-style: solid;\n    outline-color: var(--_dtpc-slider--track--border-color);\n    outline-width: var(--_dtpc-slider--track--border-width);\n    outline-offset: var(--_dtpc-slider--track--border-offset);\n\n    border-radius: var(--_dtpc-slider--track--radius);\n\n    background-color: var(--_dtpc-slider--track--color);\n  }\n\n  &:has(input[orient='vertical']) {\n    writing-mode: vertical-lr;\n    direction: rtl;\n    height: 100px;\n\n    margin-block: calc(var(--_dtpc-slider--scrubber--size) / 2);\n  }\n}\n\n.progress {\n  --_progress--color: var(--_dtpc-slider--progress--color);\n  --_length: calc(var(--progress, 0) * (100% - var(--_dtpc-slider--track--gutter) * 2));\n\n  grid-area: range;\n  grid-row: 1;\n  place-self: stretch;\n\n  display: grid;\n  grid-template-columns: var(--_dtpc-slider--track--gutter) minmax(var(--_dtpc-slider--track--height), var(--_length)) 1fr var(--_dtpc-slider--track--gutter);\n\n  &:not([data-show]) {\n    visibility: hidden;\n  }\n\n  &::before {\n    content: '';\n    grid-column: 2;\n\n    border-radius: var(--_dtpc-slider--track--radius);\n\n    background-color: var(--_dtpc-slider--progress--color);\n  }\n}\n\n.range {\n  grid-area: range;\n  grid-row: 1;\n\n  display: grid;\n  grid-template-columns: calc(var(--progress, 0) * (100% - var(--_dtpc-slider--scrubber--size))) [thumb-start] var(--_dtpc-slider--scrubber--size) [thumb-end];\n  grid-template-rows: [thumb-start] var(--_dtpc-slider--track--height) [thumb-end];\n  align-items: center;\n  justify-items: center;\n\n  min-width: var(--_dtpc-slider--track--height);\n}\n\n.scrubber {\n  grid-area: thumb;\n  display: grid;\n  aspect-ratio: 1;\n  width: var(--_dtpc-slider--scrubber--size);\n\n  &::after {\n    content: '';\n\n    transition-property: scale, opacity;\n    transition-duration: 200ms;\n    transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);\n\n    display: block;\n    scale: 0;\n    opacity: 0;\n\n    border-style: solid;\n    border-color: var(--_dtpc-slider--scrubber--border-color);\n    border-width: var(--_dtpc-slider--scrubber--border-width);\n    border-radius: var(--_dtpc-slider--scrubber--border-radius);\n\n    background-color: var(--_dtpc-slider--scrubber--color);\n  }\n\n  .track:has(input:not(:disabled)):where(:hover, :focus-within) & {\n    &::after {\n      scale: 1;\n      opacity: 1;\n    }\n  }\n\n  .track:has(input:focus-visible) & {\n    &::after {\n      outline-style: solid;\n      outline-offset: var(--_dtpc-slider--scrubber--focus-ring-offset);\n      outline-color: var(--_dtpc-slider--scrubber--focus-ring-color);\n      outline-width: var(--_dtpc-slider--scrubber--focus-ring-width);\n    }\n  }\n}\n\ninput {\n  grid-area: range;\n  grid-row: 1;\n\n  appearance: none;\n  background-color: transparent;\n  outline: 0;\n  border: 0;\n  margin: 0;\n  padding: 0;\n  opacity: 0;\n\n  block-size: var(--_dtpc-slider--track--height);\n\n  &[orient='vertical'] {\n    writing-mode: vertical-lr;\n    direction: rtl;\n    vertical-align: bottom;\n  }\n\n  /* Chrome */\n  @media screen and (-webkit-min-device-pixel-ratio: 0) {\n    &::-webkit-slider-runnable-track {\n      appearance: none;\n      position: relative;\n      block-size: var(--_dtpc-slider--track--height);\n    }\n    &::-webkit-slider-thumb {\n      appearance: none;\n      position: relative;\n      display: block;\n      top: 50%;\n      left: 0;\n      translate: 0 -50%;\n      aspect-ratio: 1;\n      width: var(--_dtpc-slider--scrubber--size);\n      height: auto;\n      cursor: ew-resize;\n    }\n\n    &[orient='vertical'] {\n      &::-webkit-slider-thumb {\n        left: 50%;\n        top: 0;\n        translate: -50% 0;\n        cursor: ns-resize;\n      }\n    }\n\n    &:disabled {\n      &::-webkit-slider-thumb {\n        cursor: default;\n      }\n    }\n  }\n}\n";
+const dtpcSliderCss = ":host {\n  --_dtpc-slider--scrubber--color: var(--dtpc-slider--scrubber--color, var(--_dtpc-player--foreground, CanvasText));\n  --_dtpc-slider--scrubber--size: var(--dtpc-slider--scrubber--size, 1.25rem);\n  --_dtpc-slider--scrubber--border-color: var(--dtpc-slider--scrubber--border-color, transparent);\n  --_dtpc-slider--scrubber--border-width: var(--dtpc-slider--scrubber--border-width, 0);\n  --_dtpc-slider--scrubber--border-radius: var(--dtpc-slider--scrubber--border-radius, 100vw);\n  --_dtpc-slider--scrubber--focus-ring-color: var(--dtpc-slider--focus-ring-color, var(--_dtpc-player--highlight, LinkText));\n  --_dtpc-slider--scrubber--focus-ring-offset: var(--dtpc-slider--focus-ring-offset, 0.125rem);\n  --_dtpc-slider--scrubber--focus-ring-width: var(--dtpc-slider--focus-ring-width, 0.125rem);\n  --_dtpc-slider--progress--color: var(--dtpc-slider--progress--color, var(--_dtpc-player--foreground, CanvasText));\n  --_dtpc-slider--track--color: var(--dtpc-slider--track--color, color-mix(in oklch, var(--_dtpc-slider--progress--color) 20%, transparent));\n  --_dtpc-slider--track--height: var(--dtpc-slider--track--height, 0.25rem);\n  --_dtpc-slider--track--radius: var(--dtpc-slider--track--radius, 100vw);\n  --_dtpc-slider--track--border-color: var(--dtpc-slider--track--border-color, transparent);\n  --_dtpc-slider--track--border-width: var(--dtpc-slider--track--border-width, 0);\n  --_dtpc-slider--track--border-offset: var(--dtpc-slider--track--border-offset, 0);\n\n  display: contents;\n}\n\n.track {\n  --_dtpc-slider--track--gutter: calc(var(--_dtpc-slider--scrubber--size) / 2);\n\n  isolation: isolate;\n  display: grid;\n  align-items: center;\n  grid-template-columns: [range-start] var(--_dtpc-slider--track--gutter) [track-start] 1fr [track-end] var(--_dtpc-slider--track--gutter) [range-end];\n  grid-template-rows: [range-start] [track-start] var(--_dtpc-slider--track--height) [track-end] [range-end];\n\n  &::before {\n    content: '';\n\n    grid-area: track;\n    grid-row: 1;\n    place-self: stretch;\n\n    outline-style: solid;\n    outline-color: var(--_dtpc-slider--track--border-color);\n    outline-width: var(--_dtpc-slider--track--border-width);\n    outline-offset: var(--_dtpc-slider--track--border-offset);\n\n    border-radius: var(--_dtpc-slider--track--radius);\n\n    background-color: var(--_dtpc-slider--track--color);\n  }\n\n  &:has(input[orient='vertical']) {\n    writing-mode: vertical-lr;\n    direction: rtl;\n    height: 100px;\n\n    margin-block: calc(var(--_dtpc-slider--scrubber--size) / 2);\n  }\n}\n\n.progress {\n  --_length: calc(var(--progress, 0) * (100% - var(--_dtpc-slider--track--gutter) * 2));\n\n  grid-area: range;\n  grid-row: 1;\n  place-self: stretch;\n\n  display: grid;\n  grid-template-columns: var(--_dtpc-slider--track--gutter) minmax(var(--_dtpc-slider--track--height), var(--_length)) 1fr var(--_dtpc-slider--track--gutter);\n\n  &:not([data-show]) {\n    visibility: hidden;\n  }\n\n  &::before {\n    content: '';\n    grid-column: 2;\n\n    border-radius: var(--_dtpc-slider--track--radius);\n\n    background-color: var(--_dtpc-slider--progress--color);\n  }\n}\n\n.range {\n  grid-area: range;\n  grid-row: 1;\n\n  display: grid;\n  grid-template-columns: calc(var(--progress, 0) * (100% - var(--_dtpc-slider--scrubber--size))) [thumb-start] var(--_dtpc-slider--scrubber--size) [thumb-end];\n  grid-template-rows: [thumb-start] var(--_dtpc-slider--track--height) [thumb-end];\n  align-items: center;\n  justify-items: center;\n\n  min-width: var(--_dtpc-slider--track--height);\n}\n\n.scrubber {\n  grid-area: thumb;\n  display: grid;\n  aspect-ratio: 1;\n  width: var(--_dtpc-slider--scrubber--size);\n\n  &::after {\n    content: '';\n\n    transition-property: scale, opacity;\n    transition-duration: 200ms;\n    transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);\n\n    display: block;\n    scale: 0;\n    opacity: 0;\n\n    border-style: solid;\n    border-color: var(--_dtpc-slider--scrubber--border-color);\n    border-width: var(--_dtpc-slider--scrubber--border-width);\n    border-radius: var(--_dtpc-slider--scrubber--border-radius);\n\n    background-color: var(--_dtpc-slider--scrubber--color);\n  }\n\n  .track:has(input:not(:disabled)):where(:hover, :focus-within) & {\n    &::after {\n      scale: 1;\n      opacity: 1;\n    }\n  }\n\n  .track:has(input:focus-visible) & {\n    &::after {\n      outline-style: solid;\n      outline-offset: var(--_dtpc-slider--scrubber--focus-ring-offset);\n      outline-color: var(--_dtpc-slider--scrubber--focus-ring-color);\n      outline-width: var(--_dtpc-slider--scrubber--focus-ring-width);\n    }\n  }\n}\n\ninput {\n  grid-area: range;\n  grid-row: 1;\n\n  appearance: none;\n  background-color: transparent;\n  outline: 0;\n  border: 0;\n  margin: 0;\n  padding: 0;\n  opacity: 0;\n\n  block-size: var(--_dtpc-slider--track--height);\n\n  &[orient='vertical'] {\n    writing-mode: vertical-lr;\n    direction: rtl;\n    vertical-align: bottom;\n  }\n\n  /* Chrome */\n  @media screen and (-webkit-min-device-pixel-ratio: 0) {\n    &::-webkit-slider-runnable-track {\n      appearance: none;\n      position: relative;\n      block-size: var(--_dtpc-slider--track--height);\n    }\n    &::-webkit-slider-thumb {\n      appearance: none;\n      position: relative;\n      display: block;\n      top: 50%;\n      left: 0;\n      translate: 0 -50%;\n      aspect-ratio: 1;\n      width: var(--_dtpc-slider--scrubber--size);\n      height: auto;\n      cursor: ew-resize;\n    }\n\n    &[orient='vertical'] {\n      &::-webkit-slider-thumb {\n        left: 50%;\n        top: 0;\n        translate: -50% 0;\n        cursor: ns-resize;\n      }\n    }\n\n    &:disabled {\n      &::-webkit-slider-thumb {\n        cursor: default;\n      }\n    }\n  }\n}\n";
 const DtpcSlider = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.p)(class DtpcSlider extends _index2_js__WEBPACK_IMPORTED_MODULE_0__.H {
   constructor() {
     super();
@@ -1183,8 +1558,8 @@ const DtpcSlider = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.p)(class DtpcSlide
     });
     this.__registerHost();
     this.__attachShadow();
-    this.sliderChange = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.c)(this, "slider-change", 7);
-    this.sliderInput = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.c)(this, "slider-input", 7);
+    this.sliderChange = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.e)(this, "slider-change", 7);
+    this.sliderInput = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.e)(this, "slider-input", 7);
   }
   get el() {
     return this;
@@ -1226,23 +1601,23 @@ const DtpcSlider = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.p)(class DtpcSlide
       onInput: e => this.handleInput(e)
     };
     return (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", {
-      key: 'bb0fc5836d30d9c7761c05ea27cf1b73424aac62',
+      key: '5120007f9f8f78fa2bf45fb2c0102374247294d5',
       class: "track",
       style: {
         '--progress': `${progress}`
       }
     }, (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", {
-      key: 'b103713967683c13b406b932b40dc9f55af63636',
+      key: 'ba383942ee3da06c31dad0f1575050393259968b',
       class: "progress",
       "data-show": !!max
     }), (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", {
-      key: '35343b5e08b2a34e53629ba161d40e95e0142228',
+      key: 'cc86529d8277ca1de7b48171c39ecc9720303c04',
       class: "range"
     }, (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", {
-      key: '0edcf7ba3d9a67a92bf55e10930421558b9497d3',
+      key: '237a4da1c47e993e6f1a688afd90b3c258a6bdca',
       class: "scrubber"
     })), (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)("input", {
-      key: 'dbab00885c6a5ced7a9a7e44a7e25c77124b6bdb',
+      key: '6a5e09d9d537f0ce0f3f6bb55d0f221e6e2e7ee9',
       type: 'range',
       ...inputAttributes,
       value: this.currentValue
@@ -1283,7 +1658,6 @@ function defineCustomElement() {
     }
   });
 }
-defineCustomElement(DtpcSlider);
 
 
 /***/ }),
@@ -1342,7 +1716,7 @@ const DtpcTimeCurrent = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.p)(class Dtpc
     });
     this.__registerHost();
     this.__attachShadow();
-    this.initControl = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.c)(this, "dtpc-control-init", 7);
+    this.initControl = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.e)(this, "dtpc-control-init", 7);
   }
   componentWillLoad() {
     const self = this;
@@ -1356,7 +1730,7 @@ const DtpcTimeCurrent = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.p)(class Dtpc
     const time = seekTime !== null ? seekTime : currentTime;
     const displayTime = (0,_index3_js__WEBPACK_IMPORTED_MODULE_1__.f)(time);
     return (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)(_index2_js__WEBPACK_IMPORTED_MODULE_0__.d, {
-      key: '059dd85c2e6a323e554536ff074e6d7896484994'
+      key: '389b1a271aa04fe847ee6a01d8f83c66325c3cd4'
     }, displayTime);
   }
   static get style() {
@@ -1378,7 +1752,6 @@ function defineCustomElement() {
     }
   });
 }
-defineCustomElement(DtpcTimeCurrent);
 
 
 /***/ }),
@@ -1395,6 +1768,26 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   DtpcTimeDisplay: () => (/* binding */ DtpcTimeDisplay),
 /* harmony export */   defineCustomElement: () => (/* binding */ defineCustomElement)
 /* harmony export */ });
+/* harmony import */ var _dtpc_time_display2_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./dtpc-time-display2.js */ "../web-components/dist/components/dtpc-time-display2.js");
+
+const DtpcTimeDisplay = _dtpc_time_display2_js__WEBPACK_IMPORTED_MODULE_0__.D;
+const defineCustomElement = _dtpc_time_display2_js__WEBPACK_IMPORTED_MODULE_0__.d;
+
+
+/***/ }),
+
+/***/ "../web-components/dist/components/dtpc-time-display2.js":
+/*!***************************************************************!*\
+  !*** ../web-components/dist/components/dtpc-time-display2.js ***!
+  \***************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   D: () => (/* binding */ DtpcTimeDisplay),
+/* harmony export */   d: () => (/* binding */ defineCustomElement)
+/* harmony export */ });
 /* harmony import */ var _index2_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index2.js */ "../web-components/dist/components/index2.js");
 /* harmony import */ var _dtpc_time_current2_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./dtpc-time-current2.js */ "../web-components/dist/components/dtpc-time-current2.js");
 /* harmony import */ var _dtpc_time_duration2_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./dtpc-time-duration2.js */ "../web-components/dist/components/dtpc-time-duration2.js");
@@ -1402,7 +1795,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 const dtpcTimeDisplayCss = ":host{--_dtpc-time-display--spacing:var(--dtpc-time-display--spacing, 0.25rem);color:var(--_dtpc-player--time--color, currentColor);font-family:var(--_dtpc-player--time--font-family, inherit);font-size:var(--_dtpc-player--time--font-size, inherit);font-weight:var(--_dtpc-player--time--font-weight, inherit)}.wrapper{--_spacing:var(--_dtpc-time-display--spacing);display:flex;align-items:baseline;gap:var(--_spacing)}";
-const DtpcTimeDisplay$1 = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.p)(class DtpcTimeDisplay extends _index2_js__WEBPACK_IMPORTED_MODULE_0__.H {
+const DtpcTimeDisplay = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.p)(class DtpcTimeDisplay extends _index2_js__WEBPACK_IMPORTED_MODULE_0__.H {
   constructor() {
     super();
     Object.defineProperty(this, "duration", {
@@ -1416,17 +1809,17 @@ const DtpcTimeDisplay$1 = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.p)(class Dt
   }
   render() {
     return (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)(_index2_js__WEBPACK_IMPORTED_MODULE_0__.d, {
-      key: '1151a09917785ef95517d3f531c8d99958dfab48'
+      key: '15cafbb9aba871bb1dcc48196c36c17ee44e9251'
     }, (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", {
-      key: '18edebcd534ebd140829b184aa22a14bf2834f5f',
+      key: 'c6369448aa9f48cc5edacf91e9410952b412a239',
       class: "wrapper"
     }, (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)("dtpc-time-current", {
-      key: '473f3c712bf1d2881cd5c028d0f8201c02a28dbc'
+      key: '8d351a5c4a204b2e5760d76272432774dc51f0a5'
     }), (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)("span", {
-      key: '03a7d647bafdf55c9f1282841b4fe739ee8dcc80',
+      key: '19e2d6bc610e623b4a328b1179956827ff0ffec6',
       class: "separator"
     }, "/"), (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)("dtpc-time-duration", {
-      key: '6c789eb18d1e3472cbadef493a782b487f5729af',
+      key: '7f511c00293a32664f67f532f1f388720804912e',
       duration: this.duration
     })));
   }
@@ -1436,7 +1829,7 @@ const DtpcTimeDisplay$1 = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.p)(class Dt
 }, [1, "dtpc-time-display", {
   "duration": [2]
 }]);
-function defineCustomElement$1() {
+function defineCustomElement() {
   if (typeof customElements === "undefined") {
     return;
   }
@@ -1445,7 +1838,7 @@ function defineCustomElement$1() {
     switch (tagName) {
       case "dtpc-time-display":
         if (!customElements.get(tagName)) {
-          customElements.define(tagName, DtpcTimeDisplay$1);
+          customElements.define(tagName, DtpcTimeDisplay);
         }
         break;
       case "dtpc-time-current":
@@ -1461,9 +1854,6 @@ function defineCustomElement$1() {
     }
   });
 }
-defineCustomElement$1(DtpcTimeDisplay$1);
-const DtpcTimeDisplay = DtpcTimeDisplay$1;
-const defineCustomElement = defineCustomElement$1;
 
 
 /***/ }),
@@ -1534,7 +1924,7 @@ const DtpcTimeDuration = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.p)(class Dtp
     });
     this.__registerHost();
     this.__attachShadow();
-    this.initControl = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.c)(this, "dtpc-control-init", 7);
+    this.initControl = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.e)(this, "dtpc-control-init", 7);
   }
   componentWillLoad() {
     const self = this;
@@ -1550,7 +1940,7 @@ const DtpcTimeDuration = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.p)(class Dtp
     } = this.state;
     const displayDuration = (0,_index3_js__WEBPACK_IMPORTED_MODULE_1__.f)(duration || this.audioDuration);
     return (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)(_index2_js__WEBPACK_IMPORTED_MODULE_0__.d, {
-      key: '8aefe12549f34ebd5710c43c050bfa0ad403a20a'
+      key: '56312a9840264cfe9f6df5746bc0c724b7a4b30a'
     }, displayDuration);
   }
   static get style() {
@@ -1575,7 +1965,6 @@ function defineCustomElement() {
     }
   });
 }
-defineCustomElement(DtpcTimeDuration);
 
 
 /***/ }),
@@ -1628,7 +2017,7 @@ const DtpcVolumeSlider$1 = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.p)(class D
     });
     this.__registerHost();
     this.__attachShadow();
-    this.initControl = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.c)(this, "dtpc-control-init", 7);
+    this.initControl = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.e)(this, "dtpc-control-init", 7);
   }
   componentWillLoad() {
     const self = this;
@@ -1647,14 +2036,14 @@ const DtpcVolumeSlider$1 = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.p)(class D
     const ariaLabel = (0,_index5_js__WEBPACK_IMPORTED_MODULE_1__._)('Volume slider', 'dovetail-podcasts');
     const ariaValueText = (0,_index5_js__WEBPACK_IMPORTED_MODULE_1__._)(`${volume * 100}% volume`, 'dovetail-podcasts');
     return (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)(_index2_js__WEBPACK_IMPORTED_MODULE_0__.d, {
-      key: 'bc5b3726c0e882e560ed46944c72e631987679ae',
+      key: '0801e1df6dfa913e29f1282db0f5f842b03d981d',
       "aria-label": ariaLabel,
       "aria-valuemin": "0",
       "aria-valuemax": "1",
       "aria-valuenow": volume,
       "aria-valuetext": ariaValueText
     }, (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)("dtpc-slider", {
-      key: 'c3201b8f397ff2b670061a82d42278eac42aaefe',
+      key: '1a2d08a1ec114c180c70ea3e96acf4044ce8dab3',
       defaultValue: volume,
       min: 0,
       max: 1,
@@ -1690,7 +2079,6 @@ function defineCustomElement$1() {
     }
   });
 }
-defineCustomElement$1(DtpcVolumeSlider$1);
 const DtpcVolumeSlider = DtpcVolumeSlider$1;
 const defineCustomElement = defineCustomElement$1;
 
@@ -2228,7 +2616,7 @@ const IconPause = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.p)(class IconPause 
     const inner = (0,_lucide_js__WEBPACK_IMPORTED_MODULE_1__.c)(_lucide_js__WEBPACK_IMPORTED_MODULE_1__.P);
     Object.entries(Object.assign({}, (0,_index4_js__WEBPACK_IMPORTED_MODULE_2__.a)(this.el), this.getProps())).forEach(([name, value]) => inner.setAttribute(name, value));
     return (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)(_index2_js__WEBPACK_IMPORTED_MODULE_0__.d, {
-      key: '4051d51f8862753660c10f1f491eb1dbf6a1dc09',
+      key: '8664347913cb8c79d3ea550245f12758496b5088',
       innerHTML: inner.outerHTML,
       class: "lucide-icon"
     });
@@ -2342,7 +2730,6 @@ function defineCustomElement() {
     }
   });
 }
-defineCustomElement(IconPause);
 
 
 /***/ }),
@@ -2878,7 +3265,7 @@ const IconPlay = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.p)(class IconPlay ex
     const inner = (0,_lucide_js__WEBPACK_IMPORTED_MODULE_1__.c)(_lucide_js__WEBPACK_IMPORTED_MODULE_1__.a);
     Object.entries(Object.assign({}, (0,_index4_js__WEBPACK_IMPORTED_MODULE_2__.a)(this.el), this.getProps())).forEach(([name, value]) => inner.setAttribute(name, value));
     return (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)(_index2_js__WEBPACK_IMPORTED_MODULE_0__.d, {
-      key: '06b02e3b078345ac5e695be9eece4b7165954c23',
+      key: '89827a25f3c80f405b0f066264641741713ce84c',
       innerHTML: inner.outerHTML,
       class: "lucide-icon"
     });
@@ -2992,7 +3379,6 @@ function defineCustomElement() {
     }
   });
 }
-defineCustomElement(IconPlay);
 
 
 /***/ }),
@@ -3541,7 +3927,7 @@ const IconVolume = (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.p)(class IconVolum
     const inner = (0,_lucide_js__WEBPACK_IMPORTED_MODULE_1__.c)(icon);
     Object.entries(Object.assign({}, (0,_index4_js__WEBPACK_IMPORTED_MODULE_2__.a)(this.el), this.getProps())).forEach(([name, value]) => inner.setAttribute(name, value));
     return (0,_index2_js__WEBPACK_IMPORTED_MODULE_0__.h)(_index2_js__WEBPACK_IMPORTED_MODULE_0__.d, {
-      key: 'a5b4a011a228e50ca80e12fb25b7ffd20bd33ae6',
+      key: 'c4882ae68ab52cc879cf413e57a36c0f5ca73973',
       innerHTML: inner.outerHTML,
       class: "lucide-icon"
     });
@@ -3657,7 +4043,6 @@ function defineCustomElement() {
     }
   });
 }
-defineCustomElement(IconVolume);
 
 
 /***/ }),
@@ -3671,12 +4056,13 @@ defineCustomElement(IconVolume);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   F: () => (/* binding */ Fragment),
 /* harmony export */   H: () => (/* binding */ H),
 /* harmony export */   a: () => (/* binding */ setNonce),
 /* harmony export */   b: () => (/* binding */ setPlatformOptions),
-/* harmony export */   c: () => (/* binding */ createEvent),
+/* harmony export */   c: () => (/* binding */ getRenderingRef),
 /* harmony export */   d: () => (/* binding */ Host),
-/* harmony export */   e: () => (/* binding */ getRenderingRef),
+/* harmony export */   e: () => (/* binding */ createEvent),
 /* harmony export */   f: () => (/* binding */ forceUpdate),
 /* harmony export */   g: () => (/* binding */ getAssetPath),
 /* harmony export */   h: () => (/* binding */ h),
@@ -3707,7 +4093,7 @@ const BUILD = {
   hostListenerTargetParent: false,
   hostListenerTargetWindow: false,
   hotModuleReplacement: false,
-  hydrateClientSide: false,
+  hydrateClientSide: true,
   hydrateServerSide: false,
   hydratedAttribute: false,
   hydratedClass: true,
@@ -3746,7 +4132,7 @@ const BUILD = {
   updatable: true,
   vdomAttribute: true,
   vdomClass: true,
-  vdomFunctional: false,
+  vdomFunctional: true,
   vdomKey: true,
   vdomListener: true,
   vdomPropOrAttr: true,
@@ -27688,7 +28074,7 @@ const IconVolume = (0,_stencil_react_output_target_runtime__WEBPACK_IMPORTED_MOD
 /***/ ((module) => {
 
 "use strict";
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"dovetail-podcasts/mute-button","version":"0.1.0","title":"Dovetail Podcasts Player Mute Button","category":"media","icon":"controls-play","description":"Mute button for Dovetail Podcasts Player.","ancestor":["dovetail-podcasts/player"],"example":{},"supports":{"html":false,"color":{"background":true,"text":true},"spacing":{"margin":false,"padding":true}},"textdomain":"dovetail-podcasts","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","render":"file:./render.php","viewScript":"file:./view.js","attributes":{}}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"dovetail-podcasts/mute-button","version":"0.1.0","title":"Dovetail Player - Mute Button","category":"media","icon":"controls-volumeoff","description":"Mute button for Dovetail Podcasts Player.","ancestor":["dovetail-podcasts/player"],"example":{},"supports":{"html":false,"color":{"background":true,"text":true},"spacing":{"margin":false,"padding":true}},"textdomain":"dovetail-podcasts","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","render":"file:./render.php","viewScript":"file:./view.js","attributes":{}}');
 
 /***/ }),
 
@@ -27712,6 +28098,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _editor_scss__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./editor.scss */ "./src/mute-button/editor.scss");
 /* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/utils */ "./src/utils/index.ts");
 /* harmony import */ var _components__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/components */ "./src/components/index.ts");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! lucide-react */ "../node_modules/lucide-react/dist/esm/icons/volume-off.js");
+
 
 
 
@@ -27731,9 +28119,11 @@ function Edit(props) {
     className: (0,_utils__WEBPACK_IMPORTED_MODULE_4__.cn)({}, className)
   };
   console.log("play button: attributes", attributes);
-  return (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", {
+  return (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components__WEBPACK_IMPORTED_MODULE_5__.DtpcMuteButton, {
     ...blockProps,
-    children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components__WEBPACK_IMPORTED_MODULE_5__.IconVolume, {})
+    children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components__WEBPACK_IMPORTED_MODULE_5__.DtpcButton, {
+      children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(lucide_react__WEBPACK_IMPORTED_MODULE_6__["default"], {})
+    })
   });
 }
 
@@ -27760,20 +28150,33 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/blocks */ "@wordpress/blocks");
-/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./style.scss */ "./src/mute-button/style.scss");
-/* harmony import */ var _edit__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./edit */ "./src/mute-button/edit.js");
-/* harmony import */ var _save__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./save */ "./src/mute-button/save.js");
-/* harmony import */ var _block_json__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./block.json */ "./src/mute-button/block.json");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/blocks */ "@wordpress/blocks");
+/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./style.scss */ "./src/mute-button/style.scss");
+/* harmony import */ var _edit__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./edit */ "./src/mute-button/edit.js");
+/* harmony import */ var _save__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./save */ "./src/mute-button/save.js");
+/* harmony import */ var _block_json__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./block.json */ "./src/mute-button/block.json");
 
 
 
 
 
-(0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__.registerBlockType)(_block_json__WEBPACK_IMPORTED_MODULE_4__.name, {
-  edit: _edit__WEBPACK_IMPORTED_MODULE_2__["default"],
-  save: _save__WEBPACK_IMPORTED_MODULE_3__["default"]
+
+(0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_1__.registerBlockType)(_block_json__WEBPACK_IMPORTED_MODULE_5__.name, {
+  icon: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    height: "24px",
+    viewBox: "0 -960 960 960",
+    width: "24px",
+    fill: "currentColor",
+    children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
+      d: "M792-56 671-177q-25 16-53 27.5T560-131v-82q14-5 27.5-10t25.5-12L480-368v208L280-360H120v-240h128L56-792l56-56 736 736-56 56Zm-8-232-58-58q17-31 25.5-65t8.5-70q0-94-55-168T560-749v-82q124 28 202 125.5T840-481q0 53-14.5 102T784-288ZM650-422l-90-90v-130q47 22 73.5 66t26.5 96q0 15-2.5 29.5T650-422ZM480-592 376-696l104-104v208Zm-80 238v-94l-72-72H200v80h114l86 86Zm-36-130Z"
+    })
+  }),
+  edit: _edit__WEBPACK_IMPORTED_MODULE_3__["default"],
+  save: _save__WEBPACK_IMPORTED_MODULE_4__["default"]
 });
 
 /***/ }),
@@ -27789,22 +28192,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ Save)
 /* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
-/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _components__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/components */ "./src/components/index.ts");
-
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/components */ "./src/components/index.ts");
 
 
 
 function Save() {
-  const blockProps = _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.useBlockProps.save();
-  return (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", {
-    ...blockProps
-  });
+  const blockProps = _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps.save();
+  return null;
 }
 
 /***/ }),

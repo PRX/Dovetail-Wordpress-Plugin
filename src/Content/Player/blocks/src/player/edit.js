@@ -22,7 +22,6 @@ import { InnerBlocks, useBlockProps } from "@wordpress/block-editor";
 import "./editor.scss";
 import { useSelect } from "@wordpress/data";
 import { DtpcPlayer } from "@/components";
-import "dovetail-podcasts-player-web-components";
 
 /**
  * The edit function describes the structure of your block in the context of the
@@ -54,7 +53,9 @@ export default function Edit(props) {
 
 	return (
 		<DtpcPlayer {...blockProps} src={audioSrc}>
-			<InnerBlocks />
+			<div className="main">
+				<InnerBlocks />
+			</div>
 		</DtpcPlayer>
 	);
 }

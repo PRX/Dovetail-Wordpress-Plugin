@@ -31,7 +31,8 @@ import "./editor.scss";
  */
 
 import { cn } from "@/utils";
-import { IconVolume } from "@/components";
+import { DtpcButton, DtpcMuteButton, IconVolume } from "@/components";
+import { VolumeOffIcon } from "lucide-react";
 
 export default function Edit(props) {
 	const { attributes } = props;
@@ -44,8 +45,10 @@ export default function Edit(props) {
 	console.log("play button: attributes", attributes);
 
 	return (
-		<span {...blockProps}>
-			<IconVolume></IconVolume>
-		</span>
+		<DtpcMuteButton {...blockProps}>
+			<DtpcButton>
+				<VolumeOffIcon></VolumeOffIcon>
+			</DtpcButton>
+		</DtpcMuteButton>
 	);
 }

@@ -31,7 +31,8 @@ import "./editor.scss";
  */
 
 import { cn } from "@/utils";
-import { IconPlay } from "@/components";
+import { DtpcButton, DtpcPlayButton, IconPlay } from "@/components";
+import { PlayIcon } from "lucide-react";
 
 export default function Edit(props) {
 	const { attributes } = props;
@@ -44,8 +45,10 @@ export default function Edit(props) {
 	console.log("play button: attributes", attributes);
 
 	return (
-		<span {...blockProps}>
-			<IconPlay></IconPlay>
-		</span>
+		<DtpcPlayButton {...blockProps}>
+			<DtpcButton>
+				<PlayIcon />
+			</DtpcButton>
+		</DtpcPlayButton>
 	);
 }

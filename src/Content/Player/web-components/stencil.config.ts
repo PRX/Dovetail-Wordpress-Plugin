@@ -17,8 +17,7 @@ export const config: Config = {
     },
     {
       type: 'dist-custom-elements',
-      customElementsExportBehavior: 'auto-define-custom-elements',
-      externalRuntime: false,
+      externalRuntime: false
     },
     {
       type: 'docs-readme',
@@ -26,7 +25,7 @@ export const config: Config = {
     {
       type: 'www',
       serviceWorker: null, // disable service workers
-    },
+    }
   ],
   plugins: [
     postcss()

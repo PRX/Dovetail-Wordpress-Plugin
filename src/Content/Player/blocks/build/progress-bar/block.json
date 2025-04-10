@@ -3,7 +3,7 @@
   "apiVersion": 3,
   "name": "dovetail-podcasts/progress-bar",
   "version": "0.1.0",
-  "title": "Dovetail Podcasts Player Progress Bar",
+  "title": "Dovetail Player - Progress Bar",
   "category": "media",
   "icon": "minus",
   "description": "Progress bar for Dovetail Podcasts Player.",
@@ -15,10 +15,6 @@
     "html": false,
     "color": {
       "text": true
-    },
-    "spacing": {
-      "margin": false,
-      "padding": true
     }
   },
   "textdomain": "dovetail-podcasts",

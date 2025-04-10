@@ -25,5 +25,5 @@ import { DtpcProgressBar } from "@/components";
 export default function Save() {
 	const blockProps = useBlockProps.save();
 
-	return <span {...blockProps}></span>;
+	return null;
 }

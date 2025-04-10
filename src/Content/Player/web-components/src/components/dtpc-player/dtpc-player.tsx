@@ -1,4 +1,4 @@
-import { Component, Host, Listen, Prop, Watch, h, State } from '@stencil/core';
+import { Component, Host, Listen, Prop, Watch, h, State, Fragment } from '@stencil/core';
 import { playerState } from '@/store';
 import type { PlayerState } from '@/store/player';
 
@@ -12,12 +12,26 @@ export class DtpcPlayer {
   state: PlayerState;
 
   /**
+   * Predefined layouts.
+   * - 'flex': Adds `display: flex` to main container.
+   * - 'default': Renders player with basic controls. (Play button, progress bar, time display, volume controls)
+   * - TODO: More options to come.
+   */
+  @Prop() layout: 'flex' | 'default';
+
+  /**
    * Audio source URL.
    */
   @Prop() src: string;
 
+  /**
+   * Preset audio source duration.
+   */
   @Prop() duration: number = 0;
 
+  /**
+   * Actual audio source duration, after metadata is loaded.
+   */
   @State() audioDuration: number = this.duration;
 
   connectedCallback() {
@@ -85,12 +99,23 @@ export class DtpcPlayer {
   }
 
   render() {
+    console.log(this.layout);
     return (
       <Host>
         <div class="wrapper">
           <div part="backdrop"></div>
           <div class="main">
-            <slot />
+            {(!this.layout || this.layout === 'flex') && (
+              <slot />
+            )}
+            {this.layout === 'default' && (
+              <Fragment>
+                <dtpc-play-button></dtpc-play-button>
+                <dtpc-progress-bar></dtpc-progress-bar>
+                <dtpc-time-display></dtpc-time-display>
+                <dtpc-mute-button></dtpc-mute-button>
+              </Fragment>
+            )}
           </div>
         </div>
       </Host>

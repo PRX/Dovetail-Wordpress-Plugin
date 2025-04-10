@@ -11,7 +11,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   dtpc_button: () => (/* binding */ DtpcButton)
 /* harmony export */ });
-/* harmony import */ var _index_DjC7PCMK_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index-DjC7PCMK.js */ "../web-components/dist/dovetail-podcasts-player-web-components/index-DjC7PCMK.js");
+/* harmony import */ var _index_DqrFfVsn_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index-DqrFfVsn.js */ "../web-components/dist/dovetail-podcasts-player-web-components/index-DqrFfVsn.js");
 /* harmony import */ var _index_B4aL0lTS_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./index-B4aL0lTS.js */ "../web-components/dist/dovetail-podcasts-player-web-components/index-B4aL0lTS.js");
 /* harmony import */ var _index_BprZZpRs_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./index-BprZZpRs.js */ "../web-components/dist/dovetail-podcasts-player-web-components/index-BprZZpRs.js");
 
@@ -20,10 +20,10 @@ __webpack_require__.r(__webpack_exports__);
 const dtpcButtonCss = ":host{--_dtpc-button--size:var(--dtpc-button--size, 1.5rem);--_dtpc-button--padding:var(--dtpc-button--padding, 0.325rem);--_dtpc-button--foreground:var(--dtpc-button--foreground, var(--_dtpc-player--foreground));--_dtpc-button--foreground--hover:var(--dtpc-button--foreground--hover, var(--_dtpc-player--foreground));--_dtpc-button--foreground--active:var(--dtpc-button--foreground--active, var(--_dtpc-player--foreground));--_dtpc-button--surface:var(--_dtpc-button--surface, var(--_dtpc-player--foreground));--_dtpc-button--surface--hover:var(--dtpc-button--surface--hover, var(--_dtpc-player--foreground));--_dtpc-button--surface--active:var(--dtpc-button--surface--active, var(--_dtpc-player--foreground));--_dtpc-button--surface-opacity:var(--dtpc-button--surface-opacity, 0);--_dtpc-button--surface-opacity--hover:var(--dtpc-button--surface-opacity--hover, 20%);--_dtpc-button--surface-opacity--active:var(--dtpc-button--surface-opacity--active, 10%);--_dtpc-button--border-color:var(--dtpc-button--border-color, transparent);--_dtpc-button--border-color--hover:var(--dtpc-button--border-color--hover, transparent);--_dtpc-button--border-color--active:var(--dtpc-button--border-color--active, transparent);--_dtpc-button--border-radius:var(--dtpc-button--border-radius, 100vw);--_dtpc-button--border-radius--hover:var(--dtpc-button--border-radius--hover, 100vw);--_dtpc-button--border-radius--active:var(--dtpc-button--border-radius--active, 100vw);--_dtpc-button--border-width:var(--dtpc-button--border-width, 0);--_dtpc-button--border-width--hover:var(--dtpc-button--border-width--hover, 0);--_dtpc-button--border-width--active:var(--dtpc-button--border-width--active, 0);--_dtpc-button--focus-ring-color:var(--dtpc-button--focus-ring-color, var(--_dtpc-player--highlight));--_dtpc-button--focus-ring-offset:var(--dtpc-button--focus-ring-offset, 0.125rem);--_dtpc-button--focus-ring-width:var(--dtpc-button--focus-ring-width, 2px)}:host{transition-property:background-color, border-color, border-width, border-radius, color;transition-duration:200ms;transition-timing-function:ease;box-sizing:content-box;display:inline-grid;place-items:stretch;justify-content:stretch;aspect-ratio:1;width:var(--_dtpc-button--size);padding:var(--_dtpc-button--padding);border-style:solid;border-color:var(--_dtpc-button--border-color);border-width:var(--_dtpc-button--border-width);border-radius:var(--_dtpc-button--border-radius);background-color:color-mix(in oklch, var(--_dtpc-button--surface) var(--_dtpc-button--surface-opacity), transparent);color:var(--_dtpc-button--foreground);cursor:pointer;user-select:none}:host(:hover){--_dtpc-button--foreground:var(--_dtpc-button--foreground--hover);--_dtpc-button--surface:var(--_dtpc-button--surface--hover);--_dtpc-button--surface-opacity:var(--_dtpc-button--surface-opacity--hover);--_dtpc-button--border-color:var(--_dtpc-button--border-color--hover);--_dtpc-button--border-width:var(--_dtpc-button--border-width--hover);--_dtpc-button--border-radius:var(--_dtpc-button--border-radius--hover)}:host(:active){--_dtpc-button--foreground:var(--_dtpc-button--foreground--active);--_dtpc-button--surface:var(--_dtpc-button--surface--active);--_dtpc-button--surface-opacity:var(--_dtpc-button--surface-opacity--active);--_dtpc-button--border-color:var(--_dtpc-button--border-color--active);--_dtpc-button--border-width:var(--_dtpc-button--border-width--active);--_dtpc-button--border-radius:var(--_dtpc-button--border-radius--active)}:host(:focus-visible){outline-style:solid;outline-offset:var(--_dtpc-button--focus-ring-offset);outline-color:var(--_dtpc-button--focus-ring-color);outline-width:var(--_dtpc-button--focus-ring-width)}";
 const DtpcButton = class {
   constructor(hostRef) {
-    (0,_index_DjC7PCMK_js__WEBPACK_IMPORTED_MODULE_0__.r)(this, hostRef);
+    (0,_index_DqrFfVsn_js__WEBPACK_IMPORTED_MODULE_0__.r)(this, hostRef);
   }
   get el() {
-    return (0,_index_DjC7PCMK_js__WEBPACK_IMPORTED_MODULE_0__.e)(this);
+    return (0,_index_DqrFfVsn_js__WEBPACK_IMPORTED_MODULE_0__.e)(this);
   }
   handleKeyDown(ev) {
     console.log(ev);
@@ -34,13 +34,13 @@ const DtpcButton = class {
   }
   render() {
     const buttonAttributes = (0,_index_BprZZpRs_js__WEBPACK_IMPORTED_MODULE_2__.a)(this.el);
-    return (0,_index_DjC7PCMK_js__WEBPACK_IMPORTED_MODULE_0__.h)(_index_DjC7PCMK_js__WEBPACK_IMPORTED_MODULE_0__.d, {
-      key: 'c0214de80f82d9065a2b31b9f04db5cca14b797b',
+    return (0,_index_DqrFfVsn_js__WEBPACK_IMPORTED_MODULE_0__.h)(_index_DqrFfVsn_js__WEBPACK_IMPORTED_MODULE_0__.a, {
+      key: '784a83a8135597834f9a9ca4af9d393a98360f6d',
       role: "button",
       tabindex: "0",
       ...buttonAttributes
-    }, (0,_index_DjC7PCMK_js__WEBPACK_IMPORTED_MODULE_0__.h)("slot", {
-      key: 'e3df54b537f25ff99ae7199211ea5417567fe2b1'
+    }, (0,_index_DqrFfVsn_js__WEBPACK_IMPORTED_MODULE_0__.h)("slot", {
+      key: '88c03ed1588f43470a3286bbbc5fb5730690cc0d'
     }));
   }
 };
@@ -123,4 +123,4 @@ function attributesToObject(el) {
 /***/ })
 
 }]);
-//# sourceMappingURL=web-components_dist_dovetail-podcasts-player-web-components_dtpc-button_entry_js.js.map?ver=00b81ccf7ddd0aa523c1
+//# sourceMappingURL=web-components_dist_dovetail-podcasts-player-web-components_dtpc-button_entry_js.js.map?ver=3f6af8915f7e868c2509
