@@ -1135,4 +1135,4 @@ const hasTranslation = i18n.hasTranslation.bind(i18n);
 /***/ })
 
 }]);
-//# sourceMappingURL=web-components_dist_dovetail-podcasts-player-web-components_dtpc-progress-bar_entry_js.js.map?ver=c06a960d65b18fe505f5
+//# sourceMappingURL=web-components_dist_dovetail-podcasts-player-web-components_dtpc-progress-bar_entry_js.js.map?ver=f483adec29cb0b7ff2a8

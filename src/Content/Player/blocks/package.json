@@ -25,6 +25,7 @@
 	},
 	"devDependencies": {
 		"@types/react": "^18.0.0",
+		"@wordpress/icons": "^10.21.0",
 		"@wordpress/scripts": "^30.13.0",
 		"ignore-loader": "^0.1.2",
 		"lucide-react": "^0.484.0",

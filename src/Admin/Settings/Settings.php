@@ -48,6 +48,7 @@ class Settings {
 		add_action( 'admin_menu', [ $this, 'add_options_page' ] );
 		add_action( 'init', [ $this, 'register_settings' ] );
 		add_action( 'admin_init', [ $this, 'initialize_settings_page' ] );
+		add_action( 'rest_api_init', [ $this, 'rest_api_init' ] );
 	}
 
 	/**
@@ -85,7 +86,6 @@ class Settings {
 	 * @return void
 	 */
 	public function register_settings() {
-
 		$have_valid_credentials = $this->dovetail_api->has_valid_client_credentials();
 
 		if ( ! $have_valid_credentials ) {
@@ -118,8 +118,9 @@ class Settings {
 			$this->settings_api->register_section(
 				'general',
 				[
-					'title'    => __( 'Dovetail Podcasts Settings', 'dovetail-podcasts' ),
-					'callback' => [ $this, 'render_user_profile' ],
+					'title'        => __( 'Dovetail Podcasts Settings', 'dovetail-podcasts' ),
+					'callback'     => [ $this, 'render_user_profile' ],
+					'show_in_rest' => true,
 				]
 			);
 
@@ -151,6 +152,15 @@ class Settings {
 						'type'    => 'multicheck',
 						'options' => $post_types_options,
 						'default' => [ 'post' => 'post' ],
+						'schema'  => [
+							'type'                 => 'object',
+							'additionalProperties' => [
+								'type' => 'string',
+							],
+							'title'                => 'Dovetail Podcasts Post Types',
+							'description'          => 'Post types that can be Dovetail podcast episodes.',
+							'default'              => [ 'post' => 'post' ],
+						],
 					],
 					[
 						'name'    => 'delete_media_after_publish',
@@ -210,6 +220,12 @@ class Settings {
 						),
 						'type'    => 'checkbox',
 						'default' => false,
+						'schema'  => [
+							'type'        => 'string',
+							'title'       => 'Delete Media After Publish',
+							'description' => 'Media used as podcast audio will be deleted after post is published when true.',
+							'default'     => 'off',
+						],
 					],
 				]
 			);
@@ -223,7 +239,7 @@ class Settings {
 				]
 			);
 
-			// TODO: Add section for removing API credentials.
+			// Add section for removing API credentials.
 			$this->settings_api->register_section(
 				'manage',
 				[
@@ -249,6 +265,15 @@ class Settings {
 				]
 			);
 		}
+	}
+
+	/**
+	 * Rest API init callback.
+	 *
+	 * @return void
+	 */
+	public function rest_api_init() {
+		$this->settings_api->register_settings();
 	}
 
 	/**

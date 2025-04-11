@@ -335,4 +335,4 @@ DtpcPlayer.style = dtpcPlayerCss;
 /***/ })
 
 }]);
-//# sourceMappingURL=web-components_dist_dovetail-podcasts-player-web-components_dtpc-player_entry_js.js.map?ver=ccdd257f9a04a8364742
+//# sourceMappingURL=web-components_dist_dovetail-podcasts-player-web-components_dtpc-player_entry_js.js.map?ver=d93bc4d6124175b4067b

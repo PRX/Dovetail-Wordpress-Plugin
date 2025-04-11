@@ -27875,7 +27875,8 @@ __webpack_require__.r(__webpack_exports__);
 
 function Edit(props) {
   const {
-    attributes
+    attributes,
+    context
   } = props;
   const {
     className,
@@ -27885,10 +27886,11 @@ function Edit(props) {
     ...rest,
     className: (0,_utils__WEBPACK_IMPORTED_MODULE_4__.cn)({}, className)
   };
+  const currentTime = (context["dovetail-podcasts/duration"] || 600) * 0.3;
   console.log("time current: attributes", attributes);
   return (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components__WEBPACK_IMPORTED_MODULE_5__.DtpcTimeCurrent, {
     ...blockProps,
-    children: "03:00"
+    children: (0,_utils__WEBPACK_IMPORTED_MODULE_4__.formatDuration)(currentTime)
   });
 }
 
@@ -27927,6 +27929,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 (0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__.registerBlockType)(_block_json__WEBPACK_IMPORTED_MODULE_4__.name, {
+  usesContext: ["dovetail-podcasts/duration"],
   edit: _edit__WEBPACK_IMPORTED_MODULE_2__["default"],
   save: _save__WEBPACK_IMPORTED_MODULE_3__["default"]
 });

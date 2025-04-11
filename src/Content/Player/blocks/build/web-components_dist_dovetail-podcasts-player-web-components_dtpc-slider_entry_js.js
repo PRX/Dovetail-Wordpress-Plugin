@@ -154,4 +154,4 @@ DtpcSlider.style = dtpcSliderCss;
 /***/ })
 
 }]);
-//# sourceMappingURL=web-components_dist_dovetail-podcasts-player-web-components_dtpc-slider_entry_js.js.map?ver=c790c7094847cefc3988
+//# sourceMappingURL=web-components_dist_dovetail-podcasts-player-web-components_dtpc-slider_entry_js.js.map?ver=7464cd1e7dfff916a679

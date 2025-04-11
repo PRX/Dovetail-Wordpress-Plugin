@@ -270,9 +270,51 @@ class SettingsApi {
 		}
 
 		// Creates our settings in the options table.
+		$this->register_settings();
+	}
+
+	/**
+	 * Create settings for registered sections.
+	 *
+	 * @return void
+	 */
+	public function register_settings() {
 		foreach ( $this->settings_sections as $id => $section ) {
-			$id = DTPODCASTS_SETTINGS_SECTION_PREFIX . $id;
-			register_setting( $id, $id, [ $this, 'sanitize_options' ] );
+			if ( ! isset( $this->settings_fields[ $id ] ) ) {
+				continue;
+			}
+
+			$fields      = $this->settings_fields[ $id ];
+			$prefixed_id = DTPODCASTS_SETTINGS_SECTION_PREFIX . $id;
+			$args        = [
+				'type'              => 'object',
+				'sanitize_callback' => [ $this, 'sanitize_options' ],
+			];
+
+			if ( isset( $section['show_in_rest'] ) ) {
+				$show_in_rest = [];
+				$schema       = [
+					'type'       => 'object',
+					'properties' => [],
+				];
+
+				foreach ( $fields as $option ) {
+					$name        = $option['name'];
+					$schema_type = isset( $option['schema'] ) ? $option['schema'] : [ 'type' => 'string' ];
+
+					$schema['properties'][ $name ] = $schema_type;
+				}
+
+				$show_in_rest['schema'] = $schema;
+
+				$args['show_in_rest'] = $show_in_rest;
+			}
+
+			register_setting(
+				$prefixed_id,
+				$prefixed_id,
+				$args
+			);
 		}
 	}
 

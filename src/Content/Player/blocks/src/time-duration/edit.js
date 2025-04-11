@@ -30,18 +30,24 @@ import "./editor.scss";
  * @return {Element} Element to render.
  */
 
-import { cn } from "@/utils";
+import { cn, formatDuration } from "@/utils";
 import { DtpcTimeDuration } from "@/components";
 
 export default function Edit(props) {
-	const { attributes } = props;
+	const { attributes, context } = props;
 	const { className, ...rest } = useBlockProps();
 	const blockProps = {
 		...rest,
 		className: cn({}, className),
 	};
+	const duration = context["dovetail-podcasts/duration"] || "10:00";
 
 	console.log("time duration: attributes", attributes);
+	console.log("time duration: context", context);
 
-	return <DtpcTimeDuration {...blockProps}>10:00</DtpcTimeDuration>;
+	return (
+		<DtpcTimeDuration {...blockProps}>
+			{formatDuration(duration)}
+		</DtpcTimeDuration>
+	);
 }

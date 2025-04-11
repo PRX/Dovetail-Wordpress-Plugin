@@ -213,7 +213,13 @@ class Player {
 			$this->get_block_attributes_defaults( 'player' ),
 			$atts
 		);
-		error_log( print_r( $atts, true ) );
+
+		if ( isset( $atts['post_id'] ) && empty( $atts['src'] ) ) {
+			// Block editor will add post enclosure URL as the src.
+			// We need to unset that so the updated dovetail enclosure URL
+			// will be used.
+			unset( $atts['src'] );
+		}
 
 		if ( empty( $atts['src'] ) ) {
 			// No src passed as an attribute.

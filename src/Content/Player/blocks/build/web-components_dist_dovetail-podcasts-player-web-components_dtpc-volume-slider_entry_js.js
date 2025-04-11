@@ -1047,4 +1047,4 @@ const hasTranslation = i18n.hasTranslation.bind(i18n);
 /***/ })
 
 }]);
-//# sourceMappingURL=web-components_dist_dovetail-podcasts-player-web-components_dtpc-volume-slider_entry_js.js.map?ver=63f85a095ec78bf8bf89
+//# sourceMappingURL=web-components_dist_dovetail-podcasts-player-web-components_dtpc-volume-slider_entry_js.js.map?ver=36ed989bd8a95b320e7c
