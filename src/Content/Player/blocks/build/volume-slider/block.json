@@ -1,14 +1,14 @@
 {
   "$schema": "https://schemas.wp.org/trunk/block.json",
   "apiVersion": 3,
-  "name": "dovetail-podcasts/volume-slider",
+  "name": "dovetail-podcasts-player/volume-slider",
   "version": "0.1.0",
   "title": "Dovetail Player - Volume Slider",
   "category": "media",
   "icon": "controls-volumeon",
   "description": "Volume slider for Dovetail Podcasts Player.",
   "ancestor": [
-    "dovetail-podcasts/player"
+    "dovetail-podcasts-player/player"
   ],
   "example": {},
   "supports": {

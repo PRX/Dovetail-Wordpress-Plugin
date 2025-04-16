@@ -43,6 +43,7 @@ import apiFetch from "@wordpress/api-fetch";
 import { useEntityProp, useEntityRecord } from "@wordpress/core-data";
 import { DtpcPlayer } from "@/components";
 import { useMemo, useState, useEffect } from "react";
+import { PrxLogo } from "@/components/icons/prx-logo";
 
 /**
  * The edit function describes the structure of your block in the context of the
@@ -203,7 +204,18 @@ export default function Edit(props) {
 				</ToolbarGroup>
 			</BlockControls>
 			<div className="main">
-				<InnerBlocks />
+				<InnerBlocks
+					placeholder={
+						<Placeholder
+							icon={<PrxLogo size={20} />}
+							label={__("Dovetail Podcasts Player", "dovetail-podcasts")}
+							instructions={__(
+								"Build out your player by adding Dovetail Player components. Row and Stack blocks can be used to layout the components, or any other blocks you want in your player.",
+								"dovetail-podcasts",
+							)}
+						></Placeholder>
+					}
+				/>
 			</div>
 		</DtpcPlayer>
 	);

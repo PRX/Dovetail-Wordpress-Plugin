@@ -27942,7 +27942,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ ((module) => {
 
 "use strict";
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"dovetail-podcasts/volume-slider","version":"0.1.0","title":"Dovetail Player - Volume Slider","category":"media","icon":"controls-volumeon","description":"Volume slider for Dovetail Podcasts Player.","ancestor":["dovetail-podcasts/player"],"example":{},"supports":{"html":false},"textdomain":"dovetail-podcasts","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","render":"file:./render.php","viewScript":"file:./view.js","attributes":{"volume":{"type":"number","default":0.5}}}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"dovetail-podcasts-player/volume-slider","version":"0.1.0","title":"Dovetail Player - Volume Slider","category":"media","icon":"controls-volumeon","description":"Volume slider for Dovetail Podcasts Player.","ancestor":["dovetail-podcasts-player/player"],"example":{},"supports":{"html":false},"textdomain":"dovetail-podcasts","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","render":"file:./render.php","viewScript":"file:./view.js","attributes":{"volume":{"type":"number","default":0.5}}}');
 
 /***/ }),
 

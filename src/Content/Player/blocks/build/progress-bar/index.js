@@ -27843,7 +27843,7 @@ const IconVolume = (0,_stencil_react_output_target_runtime__WEBPACK_IMPORTED_MOD
 /***/ ((module) => {
 
 "use strict";
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"dovetail-podcasts/progress-bar","version":"0.1.0","title":"Dovetail Player - Progress Bar","category":"media","icon":"minus","description":"Progress bar for Dovetail Podcasts Player.","ancestor":["dovetail-podcasts/player"],"example":{},"supports":{"html":false,"color":{"text":true}},"textdomain":"dovetail-podcasts","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","render":"file:./render.php","viewScript":"file:./view.js","attributes":{"duration":{"type":"number","default":0}}}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"dovetail-podcasts-player/progress-bar","version":"0.1.0","title":"Dovetail Player - Progress Bar","category":"media","icon":"minus","description":"Progress bar for Dovetail Podcasts Player.","ancestor":["dovetail-podcasts-player/player"],"example":{},"supports":{"html":false,"color":{"text":true}},"textdomain":"dovetail-podcasts","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","render":"file:./render.php","viewScript":"file:./view.js","attributes":{"duration":{"type":"number","default":0}}}');
 
 /***/ }),
 

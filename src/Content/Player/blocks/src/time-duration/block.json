@@ -1,14 +1,14 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 3,
-	"name": "dovetail-podcasts/time-duration",
+	"name": "dovetail-podcasts-player/time-duration",
 	"version": "0.1.0",
 	"title": "Dovetail Player - Duration",
 	"category": "media",
 	"icon": "clock",
 	"description": "Display duration for Dovetail Podcasts Player.",
 	"ancestor": [
-		"dovetail-podcasts/player"
+		"dovetail-podcasts-player/player"
 	],
 	"example": {},
 	"supports": {

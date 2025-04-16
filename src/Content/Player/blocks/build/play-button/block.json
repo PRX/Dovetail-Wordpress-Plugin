@@ -1,14 +1,14 @@
 {
   "$schema": "https://schemas.wp.org/trunk/block.json",
   "apiVersion": 3,
-  "name": "dovetail-podcasts/play-button",
+  "name": "dovetail-podcasts-player/play-button",
   "version": "0.1.0",
   "title": "Dovetail Player - Play Button",
   "category": "media",
   "icon": "controls-play",
   "description": "Play button for Dovetail Podcasts Player.",
   "ancestor": [
-    "dovetail-podcasts/player"
+    "dovetail-podcasts-player/player"
   ],
   "example": {},
   "supports": {

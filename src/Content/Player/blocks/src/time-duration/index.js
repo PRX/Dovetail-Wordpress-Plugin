@@ -27,7 +27,7 @@ import metadata from "./block.json";
  * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-registration/
  */
 registerBlockType(metadata.name, {
-	usesContext: ["dovetail-podcasts/duration"],
+	usesContext: ["dovetail-podcasts-player/duration"],
 
 	/**
 	 * @see ./edit.js

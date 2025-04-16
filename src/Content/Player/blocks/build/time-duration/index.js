@@ -27843,7 +27843,7 @@ const IconVolume = (0,_stencil_react_output_target_runtime__WEBPACK_IMPORTED_MOD
 /***/ ((module) => {
 
 "use strict";
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"dovetail-podcasts/time-duration","version":"0.1.0","title":"Dovetail Player - Duration","category":"media","icon":"clock","description":"Display duration for Dovetail Podcasts Player.","ancestor":["dovetail-podcasts/player"],"example":{},"supports":{"html":false,"color":{"text":true},"typography":{"fontSize":true}},"textdomain":"dovetail-podcasts","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","render":"file:./render.php","viewScript":"file:./view.js","attributes":{"duration":{"type":"number","default":0}}}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"dovetail-podcasts-player/time-duration","version":"0.1.0","title":"Dovetail Player - Duration","category":"media","icon":"clock","description":"Display duration for Dovetail Podcasts Player.","ancestor":["dovetail-podcasts-player/player"],"example":{},"supports":{"html":false,"color":{"text":true},"typography":{"fontSize":true}},"textdomain":"dovetail-podcasts","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","render":"file:./render.php","viewScript":"file:./view.js","attributes":{"duration":{"type":"number","default":0}}}');
 
 /***/ }),
 
@@ -27930,7 +27930,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 (0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__.registerBlockType)(_block_json__WEBPACK_IMPORTED_MODULE_4__.name, {
-  usesContext: ["dovetail-podcasts/duration"],
+  usesContext: ["dovetail-podcasts-player/duration"],
   edit: _edit__WEBPACK_IMPORTED_MODULE_2__["default"],
   save: _save__WEBPACK_IMPORTED_MODULE_3__["default"]
 });

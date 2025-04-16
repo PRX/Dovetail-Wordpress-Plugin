@@ -27855,6 +27855,55 @@ const createIcons = ({
 
 /***/ }),
 
+/***/ "./src/components/icons/prx-logo/index.js":
+/*!************************************************!*\
+  !*** ./src/components/icons/prx-logo/index.js ***!
+  \************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   PrxLogo: () => (/* reexport safe */ _prx_logo__WEBPACK_IMPORTED_MODULE_0__.PrxLogo)
+/* harmony export */ });
+/* harmony import */ var _prx_logo__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./prx-logo */ "./src/components/icons/prx-logo/prx-logo.js");
+
+
+/***/ }),
+
+/***/ "./src/components/icons/prx-logo/prx-logo.js":
+/*!***************************************************!*\
+  !*** ./src/components/icons/prx-logo/prx-logo.js ***!
+  \***************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   PrxLogo: () => (/* binding */ PrxLogo)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__);
+
+function PrxLogo(props) {
+  const {
+    size = 121
+  } = props;
+  return (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("svg", {
+    width: size,
+    height: size,
+    viewBox: "0 0 121 121",
+    fill: "none",
+    xmlns: "http://www.w3.org/2000/svg",
+    children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
+      d: "M91.0268 60.4631L119.767 31.7232C120.233 31.257 120.496 30.6234 120.496 29.9637C120.496 29.304 120.233 28.6704 119.767 28.2042L92.7864 1.22389C92.3201 0.757069 91.6865 0.494574 91.0268 0.494574C90.3672 0.494574 89.7336 0.757069 89.2673 1.22389L60.5275 29.9637L60.4644 29.9007L31.7246 1.16371C31.2584 0.69689 30.6248 0.434395 29.9651 0.434395C29.3054 0.434395 28.6718 0.69689 28.2056 1.16371L1.22529 28.144C0.758467 28.6103 0.495972 29.2439 0.495972 29.9035C0.495972 30.5632 0.758467 31.1968 1.22529 31.6631L30.0253 60.4631L1.22529 89.2631C0.758467 89.7293 0.495972 90.3629 0.495972 91.0226C0.495972 91.6823 0.758467 92.3158 1.22529 92.7821L28.2056 119.757C28.6718 120.223 29.3054 120.486 29.9651 120.486C30.6248 120.486 31.2584 120.223 31.7246 119.757L52.0537 99.4276C52.0537 99.4276 52.7099 86.9562 38.0664 68.507L60.5218 90.9595L89.2673 119.702C89.7336 120.169 90.3672 120.432 91.0268 120.432C91.6865 120.432 92.3201 120.169 92.7864 119.702L119.767 92.7219C120.233 92.2557 120.496 91.6221 120.496 90.9624C120.496 90.3027 120.233 89.6691 119.767 89.2029L91.0268 60.4631Z",
+      fill: "currentColor"
+    })
+  });
+}
+
+/***/ }),
+
 /***/ "./src/components/index.ts":
 /*!*********************************!*\
   !*** ./src/components/index.ts ***!
@@ -28056,7 +28105,7 @@ const IconVolume = (0,_stencil_react_output_target_runtime__WEBPACK_IMPORTED_MOD
 /***/ ((module) => {
 
 "use strict";
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"dovetail-podcasts/player","version":"0.1.0","title":"Dovetail Player","category":"media","icon":"controls-play","description":"Customizable player for podcast episodes.","example":{},"supports":{"html":false},"textdomain":"dovetail-podcasts","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","render":"file:./render.php","viewScript":"file:./view.js","attributes":{"post_id":{"type":"integer"},"post_type":{"type":"string"},"src":{"type":"string"},"duration":{"type":"number"},"layout":{"type":"string","enum":["flex","default"]}}}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"dovetail-podcasts-player/player","version":"0.1.0","title":"Dovetail Player","category":"media","icon":"controls-play","description":"Customizable player for podcast episodes.","example":{},"supports":{"html":false},"textdomain":"dovetail-podcasts","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","render":"file:./render.php","viewScript":"file:./view.js","attributes":{"post_id":{"type":"integer"},"post_type":{"type":"string"},"src":{"type":"string"},"duration":{"type":"number"},"layout":{"type":"string","enum":["flex","default"]}}}');
 
 /***/ }),
 
@@ -28079,7 +28128,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! lucide-react */ "../node_modules/lucide-react/dist/esm/icons/file-audio.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! lucide-react */ "../node_modules/lucide-react/dist/esm/icons/file-audio.js");
 /* harmony import */ var _editor_scss__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./editor.scss */ "./src/player/editor.scss");
 /* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @wordpress/api-fetch */ "@wordpress/api-fetch");
 /* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_5__);
@@ -28088,6 +28137,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @/components */ "./src/components/index.ts");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var _components_icons_prx_logo__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @/components/icons/prx-logo */ "./src/components/icons/prx-logo/index.js");
+
 
 
 
@@ -28216,7 +28267,7 @@ function Edit(props) {
         children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ToolbarButton, {
           label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Set Player Audio", "dovetail-podcasts"),
           showTooltip: true,
-          icon: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(lucide_react__WEBPACK_IMPORTED_MODULE_9__["default"], {
+          icon: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(lucide_react__WEBPACK_IMPORTED_MODULE_10__["default"], {
             style: {
               fill: "none"
             }
@@ -28241,7 +28292,15 @@ function Edit(props) {
       })
     }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
       className: "main",
-      children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.InnerBlocks, {})
+      children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.InnerBlocks, {
+        placeholder: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Placeholder, {
+          icon: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components_icons_prx_logo__WEBPACK_IMPORTED_MODULE_9__.PrxLogo, {
+            size: 20
+          }),
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Dovetail Podcasts Player", "dovetail-podcasts"),
+          instructions: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Build out your player by adding Dovetail Player components. Row and Stack blocks can be used to layout the components, or any other blocks you want in your player.", "dovetail-podcasts")
+        })
+      })
     })]
   });
 }
@@ -28277,30 +28336,26 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _edit__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./edit */ "./src/player/edit.js");
 /* harmony import */ var _save__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./save */ "./src/player/save.js");
 /* harmony import */ var _block_json__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./block.json */ "./src/player/block.json");
+/* harmony import */ var _components_icons_prx_logo__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @/components/icons/prx-logo */ "./src/components/icons/prx-logo/index.js");
 
 
 
 
 
 
+
+registerBlockCollection("dovetail-podcasts-player", {
+  icon: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components_icons_prx_logo__WEBPACK_IMPORTED_MODULE_6__.PrxLogo, {}),
+  title: "Dovetail Podcasts Player"
+});
 (0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_1__.registerBlockType)(_block_json__WEBPACK_IMPORTED_MODULE_5__.name, {
   providesContext: {
-    "dovetail-podcasts/duration": "duration"
+    "dovetail-podcasts-player/duration": "duration"
   },
   usesContext: ["postId", "postType"],
   edit: _edit__WEBPACK_IMPORTED_MODULE_3__["default"],
   save: _save__WEBPACK_IMPORTED_MODULE_4__["default"],
-  icon: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("svg", {
-    width: "121",
-    height: "121",
-    viewBox: "0 0 121 121",
-    fill: "none",
-    xmlns: "http://www.w3.org/2000/svg",
-    children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
-      d: "M91.0268 60.4631L119.767 31.7232C120.233 31.257 120.496 30.6234 120.496 29.9637C120.496 29.304 120.233 28.6704 119.767 28.2042L92.7864 1.22389C92.3201 0.757069 91.6865 0.494574 91.0268 0.494574C90.3672 0.494574 89.7336 0.757069 89.2673 1.22389L60.5275 29.9637L60.4644 29.9007L31.7246 1.16371C31.2584 0.69689 30.6248 0.434395 29.9651 0.434395C29.3054 0.434395 28.6718 0.69689 28.2056 1.16371L1.22529 28.144C0.758467 28.6103 0.495972 29.2439 0.495972 29.9035C0.495972 30.5632 0.758467 31.1968 1.22529 31.6631L30.0253 60.4631L1.22529 89.2631C0.758467 89.7293 0.495972 90.3629 0.495972 91.0226C0.495972 91.6823 0.758467 92.3158 1.22529 92.7821L28.2056 119.757C28.6718 120.223 29.3054 120.486 29.9651 120.486C30.6248 120.486 31.2584 120.223 31.7246 119.757L52.0537 99.4276C52.0537 99.4276 52.7099 86.9562 38.0664 68.507L60.5218 90.9595L89.2673 119.702C89.7336 120.169 90.3672 120.432 91.0268 120.432C91.6865 120.432 92.3201 120.169 92.7864 119.702L119.767 92.7219C120.233 92.2557 120.496 91.6221 120.496 90.9624C120.496 90.3027 120.233 89.6691 119.767 89.2029L91.0268 60.4631Z",
-      fill: "currentColor"
-    })
-  }),
+  icon: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components_icons_prx_logo__WEBPACK_IMPORTED_MODULE_6__.PrxLogo, {}),
   variations: [{
     name: "dovetail-podcasts-player--button",
     title: "Dovetail One-Button Player",

@@ -28074,7 +28074,7 @@ const IconVolume = (0,_stencil_react_output_target_runtime__WEBPACK_IMPORTED_MOD
 /***/ ((module) => {
 
 "use strict";
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"dovetail-podcasts/mute-button","version":"0.1.0","title":"Dovetail Player - Mute Button","category":"media","icon":"controls-volumeoff","description":"Mute button for Dovetail Podcasts Player.","ancestor":["dovetail-podcasts/player"],"example":{},"supports":{"html":false,"color":{"background":true,"text":true},"spacing":{"margin":false,"padding":true}},"textdomain":"dovetail-podcasts","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","render":"file:./render.php","viewScript":"file:./view.js","attributes":{}}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"dovetail-podcasts-player/mute-button","version":"0.1.0","title":"Dovetail Player - Mute Button","category":"media","icon":"controls-volumeoff","description":"Mute button for Dovetail Podcasts Player.","ancestor":["dovetail-podcasts-player/player"],"example":{},"supports":{"html":false,"color":{"background":true,"text":true},"spacing":{"margin":false,"padding":true}},"textdomain":"dovetail-podcasts","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","render":"file:./render.php","viewScript":"file:./view.js","attributes":{}}');
 
 /***/ }),
 
