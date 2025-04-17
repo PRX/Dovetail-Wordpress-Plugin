@@ -641,6 +641,8 @@ class Player {
 		$post = get_post( $post_id );
 		$meta = get_post_meta( $post_id, DTPODCASTS_POST_META_KEY, true );
 
+		// TODO: If meta data is missing, check Dovetail for the episode using post guid.
+
 		/**
 		 * Return Dovetail enclosure data when:
 		 * - Dovetail Enclosure data exists.

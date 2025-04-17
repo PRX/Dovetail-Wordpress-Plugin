@@ -181,6 +181,7 @@ class PostMetaBox {
 				// Remove media id and url, and update post metadata.
 				unset( $meta['enclosure']['mediaId'] );
 				unset( $meta['enclosure']['url'] );
+				unset( $meta['enclosure']['duration'] );
 				update_post_meta( $post->ID, DTPODCASTS_POST_META_KEY, $meta );
 			} elseif ( 'trash' === $media->post_status ) {
 				// Episode was trashed, probably by `delete_offloaded_media` method.
@@ -188,6 +189,7 @@ class PostMetaBox {
 				// This will keep frontend from trying to fetch media details.
 				unset( $meta['enclosure']['mediaId'] );
 				unset( $meta['enclosure']['url'] );
+				unset( $meta['enclosure']['duration'] );
 			}
 		}
 
@@ -212,6 +214,8 @@ class PostMetaBox {
 						// Media's original URL should be trusted to be to an existing file.
 						// It may be a Dovetail URL depending on what processing has been done to it.
 						$meta['enclosure']['url'] = $e['media'][0]['originalUrl'];
+						// Media's duration should be the original duration of the uploaded file.
+						$meta['enclosure']['duration'] = $e['media'][0]['duration'];
 						// Enclosure's href should still contain the original filename.
 						$meta['enclosure']['filename'] = basename( $e['_links']['enclosure']['href'] );
 
@@ -219,7 +223,8 @@ class PostMetaBox {
 						$media_id = $this->get_attachment_id( $e['_links']['enclosure']['href'] );
 						if ( $media_id > 0 ) {
 							$meta['enclosure']['mediaId'] = $media_id;
-							$meta['enclosure']['url']     = wp_get_attachment_url( $media_id );
+							// Update enclosure URL in case them media original URL was altered during processing.
+							$meta['enclosure']['url'] = wp_get_attachment_url( $media_id );
 						}
 
 						break;

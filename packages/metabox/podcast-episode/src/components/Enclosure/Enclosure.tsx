@@ -86,6 +86,7 @@ export function Enclosure({ onChange}: EnclosureProps) {
     duration: dovetail.enclosure?.duration || media?.media_details?.length as number || duration || 0
   });
   const [uploadProgress, setUploadProgress] = useState(0);
+  const [seekTime, setSeekTime] = useState<number>();
   const [playing, setPlaying] = useState(false);
   const [audioCurrentTime, setAudioCurrentTime] = useState(0);
   const [editingRemoteUrl, setEditingRemoteUrl] = useState(false);
@@ -250,7 +251,7 @@ export function Enclosure({ onChange}: EnclosureProps) {
   }
 
   function handleAudioTimeUpdate() {
-    setAudioCurrentTime(audioRef.current.currentTime)
+    setAudioCurrentTime(audioRef.current.currentTime);
   }
 
   function handleEditFileClick() {
@@ -615,11 +616,18 @@ export function Enclosure({ onChange}: EnclosureProps) {
                       audioRef.current.currentTime = 0;
                     }}
                   ><SkipBackIcon /></Button>
-                  <Slider min={0} max={audioInfo.duration} step={0.1} value={[audioCurrentTime]} onValueChange={(v) => {
-                    audioRef.current.currentTime = v[0];
-                  }} />
+                  <Slider min={0} max={audioInfo.duration} step={0.1} value={[seekTime || audioCurrentTime]}
+                    onValueChange={(v) => {
+                      setSeekTime(v[0]);
+                    }}
+                    onValueCommit={(v) => {
+                      setSeekTime(null);
+                      setAudioCurrentTime(v[0]);
+                      audioRef.current.currentTime = v[0];
+                    }}
+                  />
                   <span className='flex items-center gap-1 h-[1em] font-mono'>
-                    <span>{formatDuration(audioCurrentTime)}</span>
+                    <span>{formatDuration(seekTime || audioCurrentTime)}</span>
                     <Separator orientation='vertical' />
                     <span className='text-gray-300'>{formatDuration(audioInfo.duration)}</span>
                   </span>
