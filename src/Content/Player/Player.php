@@ -108,68 +108,6 @@ class Player {
 	}
 
 	/**
-	 * Add player to content.
-	 *
-	 * @param string $content Content to add player to.
-	 * @return string
-	 */
-	public function the_content( string $content ) {
-		global $post;
-
-		// Do NOT add player when...
-		$exclude_player =
-			! ( in_the_loop() && is_main_query() ) ||
-			// In a feed.
-			is_feed() ||
-			// There is no post object or id.
-			empty( $post->ID ) || ! is_object( $post ) ||
-			// The post is password protected and password is not valid.
-			( function_exists( 'post_password_required' ) && post_password_required( $post ) );
-
-		$pattern = get_shortcode_regex( [ DTPODCASTS_SHORTCODE_PREFIX . 'player' ] );
-		preg_match_all( "/{$pattern}/", $content, $matches, PREG_SET_ORDER );
-
-		if ( ! empty( $matches ) ) {
-			$exclude_values = [
-				"post_id=\"{$post->ID}\"",
-			];
-			$enclosure      = $this->get_dovetail_enclosure( $post->ID );
-
-			if ( ! empty( $enclosure ) ) {
-				// Do not match querystring.
-				// Do not match closing quotation mark to allow for haystack values with a querystring to match.
-				$exclude_values[] = 'src="' . preg_replace( '~\?.+$~', '', $enclosure['href'] );
-			}
-
-			$exclude_player = array_reduce(
-				$matches,
-				static function ( $a, $m ) {
-					return $a || array_reduce(
-						$exclude_values,
-						static function ( $c, $v ) {
-							return $c || stripos( $m[3], $v );
-						},
-						$a
-					);
-				},
-				$exclude_player
-			);
-		}
-
-		if ( $exclude_player ) {
-			return $content;
-		}
-
-		$player_html = $this->get_player_html( $post->ID );
-
-		if ( is_singular() ) {
-			return $player_html . $content;
-		}
-
-		return $content . $player_html;
-	}
-
-	/**
 	 * Render Dovetail enclosure href shortcode.
 	 *
 	 * @param array<string,string> $atts Shortcode attributes.
@@ -187,13 +125,13 @@ class Player {
 			$atts
 		);
 
-		$enclosure = $this->get_dovetail_enclosure( $atts['post_id'] );
-		if ( empty( $enclosure ) ) {
+		$ctx_atts = $this->get_attributes_from_post_context( $atts['post_id'] );
+		if ( empty( $ctx_atts ) ) {
 			// No meta data on post, so nothing to render.
 			return '';
 		}
 
-		return $this->prepare_player_src( $enclosure['href'] );
+		return $this->prepare_player_src( $ctx_atts['src'] );
 	}
 
 	/**
@@ -209,12 +147,14 @@ class Player {
 		error_log( print_r( $atts, true ) );
 		error_log( $content );
 
+		$default_atts = $this->get_block_attributes_defaults( 'player' );
+
 		if ( ! is_array( $atts ) ) {
 			$atts = [];
 		}
 
 		$atts = shortcode_atts(
-			$this->get_block_attributes_defaults( 'player' ),
+			$default_atts,
 			$atts
 		);
 
@@ -228,15 +168,18 @@ class Player {
 		if ( empty( $atts['src'] ) ) {
 			// No src passed as an attribute.
 			// Try to get one from the post meta data.
-			$enclosure = $this->get_dovetail_enclosure( $atts['post_id'] );
+			$ctx_atts = $this->get_attributes_from_post_context( $atts['post_id'] );
 
-			if ( empty( $enclosure ) ) {
+			if ( empty( $ctx_atts ) ) {
 				// No meta data on post, so nothing to render.
 				return '';
 			}
-			// Use enclosure href and continue.
-			$atts['src']      = $enclosure['href'];
-			$atts['duration'] = $enclosure['duration'];
+
+			// Use post context attributes.
+			$atts = shortcode_atts(
+				$default_atts,
+				$ctx_atts
+			);
 		}
 
 		$atts['src'] = $this->prepare_player_src( $atts['src'] );
@@ -513,24 +456,28 @@ class Player {
 	 */
 	public function render_player_shortcode( array $atts, string $content = null ) {
 
+		$default_atts = $this->get_block_attributes_defaults( 'player' );
+
 		if ( ! is_array( $atts ) ) {
 			$atts = [];
 		}
 
 		$atts = shortcode_atts(
-			$this->get_block_attributes_defaults( 'player' ),
+			$default_atts,
 			$atts
 		);
 
 		if ( empty( $atts['src'] ) ) {
 			// No src passed as an attribute.
 			// Try to get one from the post meta data.
-			$enclosure = $this->get_dovetail_enclosure( $atts['post_id'] );
+			$ctx_atts = $this->get_attributes_from_post_context( $atts['post_id'] );
 
-			if ( ! empty( $enclosure ) ) {
+			if ( ! empty( $ctx_atts ) ) {
 				// Use enclosure href and continue.
-				$atts['src']      = $enclosure['href'];
-				$atts['duration'] = $enclosure['duration'];
+				$atts = shortcode_atts(
+					$default_atts,
+					$ctx_atts
+				);
 			}
 		}
 
@@ -681,31 +628,47 @@ class Player {
 	 * Get the Dovetail enclosure data for a podcast episode post, defaulting to global post.
 	 *
 	 * @param int $post_id Podcast episode post id.
-	 * @return array<string,mixed>|null
+	 * @return array<string,mixed>
 	 */
-	public function get_dovetail_enclosure( int $post_id = null ) {
+	public function get_attributes_from_post_context( int $post_id = null ) {
+
+		$atts = [];
 
 		if ( ! $post_id ) {
 			$post_id = get_the_ID();
 		}
 
+		$post = get_post( $post_id );
 		$meta = get_post_meta( $post_id, DTPODCASTS_POST_META_KEY, true );
 
 		/**
-		 * Return enclosure data when:
-		 * - Enclosure data exists.
+		 * Return Dovetail enclosure data when:
+		 * - Dovetail Enclosure data exists.
 		 * - Audio has been processed
 		 *   - `size` is > 0. Initial enclosure processing will have an href, but the URL will not return audio.
 		 */
 		if (
-			! empty( $meta ) && isset( $meta['dovetail']['enclosure'] ) &&
+			'publish' === $post->post_status &&
+			! empty( $meta ) &&
+			isset( $meta['dovetail']['enclosure'] ) && ! empty( $meta['dovetail']['enclosure'] ) &&
 			$meta['dovetail']['enclosure']['size'] > 0
 		) {
 			// TODO: Get latest prefix from podcast and construct fresh href.
-			return $meta['dovetail']['enclosure'];
+			$atts['src']      = $meta['dovetail']['enclosure']['href'];
+			$atts['duration'] = $meta['dovetail']['enclosure']['duration'];
 		}
 
-		return null;
+		/**
+		 * Return enclosure data when.
+		 * - Post is not published.
+		 * - Episode meta data has enclosure.
+		 */
+		if ( 'publish' !== $post->post_status && isset( $meta['enclosure'] ) && ! empty( $meta['enclosure'] ) ) {
+			$atts['src']      = $meta['enclosure']['url'];
+			$atts['duration'] = $meta['enclosure']['url'];
+		}
+
+		return $atts;
 	}
 
 	/**

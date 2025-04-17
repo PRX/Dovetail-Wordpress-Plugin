@@ -46,6 +46,27 @@ function getEnclosureStatus(episode: EpisodeData): EnclosureStatus {
   return 'no-audio';
 }
 
+async function getAudioDuration(url: string) {
+  return new Promise<number>((resolve, reject) => {
+
+    if (!url?.trim()) {
+      reject(new ErrorEvent('Empty URL'));
+    }
+
+    const audio = new Audio();
+
+    audio.addEventListener('loadedmetadata', () => {
+      resolve(audio.duration);
+    });
+
+    audio.addEventListener('error', (error) => {
+      reject(error);
+    });
+
+    audio.src = url;
+  });
+}
+
 export function Enclosure({ onChange}: EnclosureProps) {
   const { audioFormats, postStatus } = window.appLocalizer;
   const { state, options } = useContext(PostMetaboxContext);
@@ -124,7 +145,7 @@ export function Enclosure({ onChange}: EnclosureProps) {
     setPlaying(false);
   }, []);
 
-  const commitRemoteUrlChange = useCallback(() => {
+  const commitRemoteUrlChange = useCallback(async () => {
     const urlInput = urlInputRef.current;
 
     if (!urlInput) return;
@@ -139,29 +160,51 @@ export function Enclosure({ onChange}: EnclosureProps) {
     // - URL is empty and was using media
     // - URL is empty and is published in Dovetail
     // - Invalid input
-    if (!valid || (!newRemoteUrl.length && (wasUsingMedia || isPublishedToDovetail))) {
+    if (!valid || (!newRemoteUrl && (wasUsingMedia || isPublishedToDovetail))) {
       setEditingRemoteUrl(false);
       return
     };
 
-    const newEnclosure = {
-      url: newRemoteUrl || null,
-      filename: newRemoteUrl.split('/').pop() || null,
-      dateUpdated: hasUrlChanged ? new Date() : initialEpisode.current?.enclosure?.dateUpdated || null
-    };
-    doOnChange(newEnclosure);
+    await getAudioDuration(newRemoteUrl)
+      .then((duration) => {
+        const newEnclosure = {
+          url: newRemoteUrl,
+          filename: newRemoteUrl.split('?')[0].split('/').pop(),
+          dateUpdated: hasUrlChanged ? new Date() : initialEpisode.current?.enclosure?.dateUpdated || null,
+          duration
+        } as EpisodeEnclosure;
 
-    setRemoteUrl(newEnclosure.url);
-    setStatus(newEnclosure.url ? 'audio-ready' : 'no-audio');
-    setEditingRemoteUrl(false);
+        doOnChange(newEnclosure);
+
+        setRemoteUrl(null);
+        setStatus('audio-ready');
+        setEditingRemoteUrl(false);
+      })
+      .catch((error: ErrorEvent) => {
+        if (!newRemoteUrl) {
+          const newEnclosure = {
+            url: null,
+            filename: null,
+            dateUpdated: initialEpisode.current?.enclosure?.dateUpdated || null,
+            duration: null
+          } as EpisodeEnclosure;
+
+          doOnChange(newEnclosure);
+        }
+
+        setRemoteUrl(null);
+        setStatus('no-audio');
+        setEditingRemoteUrl(false);
+      });
   }, [onChange, remoteUrl, dovetail?.id])
 
   const handleRemoteUrlChange = useCallback((evt: ChangeEvent<HTMLInputElement>) => {
-    const newRemoteUrl = evt.target.value.trim();
+    const { validity, value } = evt.target;
+    const newRemoteUrl = value.trim();
 
     if (!initialEpisode.current?.enclosure?.url && newRemoteUrl) {
       commitRemoteUrlChange();
-    } else {
+    } else if (validity.valid) {
       setRemoteUrl(newRemoteUrl);
     }
   }, [commitRemoteUrlChange, setRemoteUrl])
@@ -269,7 +312,8 @@ export function Enclosure({ onChange}: EnclosureProps) {
       mediaId: data.id,
       url: data.source_url,
       filename: data.source_url.split('/').pop(),
-      dateUpdated: new Date()
+      dateUpdated: new Date(),
+      duration: data.media_details.length as number
     })
     setAttachedMedia((currentAttachedMedia) => {
       const newAttachedMedia = new Map(currentAttachedMedia);

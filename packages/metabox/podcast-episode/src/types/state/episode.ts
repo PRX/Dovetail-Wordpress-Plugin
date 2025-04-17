@@ -19,6 +19,11 @@ export type EpisodeEnclosure = {
   url: string,
 
   /**
+   * Duration (or length) of audio file.
+   */
+  duration: number,
+
+  /**
    * Filename of the file URL.
    * Storing this separately so a filename can be shown consistently after publishing to
    * Dovetail. The `mediaId` and `url` can be removed after publishing, and audio playback
