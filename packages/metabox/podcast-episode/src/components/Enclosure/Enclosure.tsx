@@ -72,7 +72,7 @@ export function Enclosure({ onChange}: EnclosureProps) {
   const { state, options } = useContext(PostMetaboxContext);
   const { episode, podcast } = state || {};
   const { enclosure, dovetail } = episode || {};
-  const { mediaId, url, filename: audioSrcFilename } = enclosure || {};
+  const { mediaId, url, duration, filename: audioSrcFilename } = enclosure || {};
   const regexAudioUrlPattern = `^https?:\\/\\/.+\\/[\\w\\.\\-%]+\\.(${audioFormats.join('|')})$`;
   const initialEpisode = useRef<EpisodeData>(episode);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -83,7 +83,7 @@ export function Enclosure({ onChange}: EnclosureProps) {
   const [media, setMedia] = useState<WP_REST_API_Attachment>(attachedMedia.get(`${mediaId}`));
   const [remoteUrl, setRemoteUrl] = useState(!mediaId ? url : null);
   const [audioInfo, setAudioInfo] = useState<AudioInfo>({
-    duration: dovetail.enclosure?.duration || media?.media_details?.length as number || 0
+    duration: dovetail.enclosure?.duration || media?.media_details?.length as number || duration || 0
   });
   const [uploadProgress, setUploadProgress] = useState(0);
   const [playing, setPlaying] = useState(false);
@@ -142,7 +142,6 @@ export function Enclosure({ onChange}: EnclosureProps) {
     setAudioInfo({
       duration: audioRef.current.duration
     });
-    setPlaying(false);
   }, []);
 
   const commitRemoteUrlChange = useCallback(async () => {
@@ -166,16 +165,19 @@ export function Enclosure({ onChange}: EnclosureProps) {
     };
 
     await getAudioDuration(newRemoteUrl)
-      .then((duration) => {
+      .then((audioDuration) => {
         const newEnclosure = {
           url: newRemoteUrl,
           filename: newRemoteUrl.split('?')[0].split('/').pop(),
           dateUpdated: hasUrlChanged ? new Date() : initialEpisode.current?.enclosure?.dateUpdated || null,
-          duration
+          duration: audioDuration
         } as EpisodeEnclosure;
 
         doOnChange(newEnclosure);
 
+        setAudioInfo({
+          duration: audioDuration
+        });
         setRemoteUrl(null);
         setStatus('audio-ready');
         setEditingRemoteUrl(false);
@@ -192,6 +194,9 @@ export function Enclosure({ onChange}: EnclosureProps) {
           doOnChange(newEnclosure);
         }
 
+        setAudioInfo({
+          duration: null
+        });
         setRemoteUrl(null);
         setStatus('no-audio');
         setEditingRemoteUrl(false);
@@ -308,20 +313,23 @@ export function Enclosure({ onChange}: EnclosureProps) {
   }
 
   function handleUploadComplete(data: WP_REST_API_Attachment) {
+    const mediaDuration = data.media_details.length as number;
     doOnChange({
       mediaId: data.id,
       url: data.source_url,
       filename: data.source_url.split('/').pop(),
       dateUpdated: new Date(),
-      duration: data.media_details.length as number
+      duration: mediaDuration
     })
     setAttachedMedia((currentAttachedMedia) => {
       const newAttachedMedia = new Map(currentAttachedMedia);
       newAttachedMedia.set(`${data.id}`, data);
       return newAttachedMedia;
     })
-    console.log('handleUploadComplete', data);
     setMedia(data);
+    setAudioInfo({
+      duration: mediaDuration
+    });
     setStatus('audio-ready');
   }
 
