@@ -26,9 +26,5 @@
   "workspaces": [
     "packages/blocks/player/blocks",
     "packages/blocks/player/web-components"
-  ],
-  "devDependencies": {
-    "@wordpress/scripts": "^30.15.0",
-    "webpack-remove-empty-scripts": "^1.0.4"
-  }
+  ]
 }
