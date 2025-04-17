@@ -147,6 +147,10 @@ class Settings {
 
 			$offload_plugins = $this->get_installed_offload_plugins();
 
+			$post_types = $this->settings_api->get_option( 'post_types', 'general' );
+
+			error_log( print_r( $post_types, true ) );
+
 			$this->settings_api->register_fields(
 				'general',
 				[
@@ -156,6 +160,7 @@ class Settings {
 						'desc'    => __( 'Select which post types to publish as podcast episodes in Dovetail.', 'dovetail-podcasts' ),
 						'type'    => 'multicheck',
 						'options' => $post_types_options,
+						'value'   => $post_types,
 						'default' => [ 'post' => 'post' ],
 						'schema'  => [
 							'type'                 => 'object',
@@ -314,7 +319,7 @@ class Settings {
 		}
 
 		$post_types = $this->settings_api->get_option( 'post_types', 'general' );
-		if ( ! $post_types || ! is_array( $post_types ) || empty( $post_types ) ) {
+		if ( $this->dovetail_api->has_client_credentials && ( ! $post_types || ! is_array( $post_types ) || empty( $post_types ) ) ) {
 			add_settings_error( DTPODCASTS_SETTINGS_SECTION_PREFIX . 'general', 'missing-post-types', 'Select at least one <em>Podcast Post Type</em>.', 'error' );
 		}
 	}

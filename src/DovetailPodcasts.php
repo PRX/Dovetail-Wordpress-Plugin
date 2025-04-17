@@ -167,19 +167,19 @@ final class DovetailPodcasts {
 	 * @return void
 	 */
 	public function upgrade() {
-		$version = get_option( 'dovetail-podcasts-version', null );
+		$version = get_option( 'dovetail_podcasts_version', null );
 
 		// If the version is not set, this is a fresh install, not an update.
 		// set the version and return.
 		if ( ! $version ) {
-			update_option( 'dovetail-podcasts-version', DTPODCASTS_VERSION );
+			update_option( 'dovetail_podcasts_version', DTPODCASTS_VERSION );
 			return;
 		}
 
 		// If the version is less than the current version, run the update routine.
 		if ( version_compare( $version, DTPODCASTS_VERSION, '<' ) ) {
 			$this->run_update_routines( $version );
-			update_option( 'dovetail-podcasts-version', DTPODCASTS_VERSION );
+			update_option( 'dovetail_podcasts_version', DTPODCASTS_VERSION );
 		}
 	}
 

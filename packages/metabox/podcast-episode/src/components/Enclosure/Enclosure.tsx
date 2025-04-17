@@ -276,6 +276,7 @@ export function Enclosure({ onChange}: EnclosureProps) {
       newAttachedMedia.set(`${data.id}`, data);
       return newAttachedMedia;
     })
+    console.log('handleUploadComplete', data);
     setMedia(data);
     setStatus('audio-ready');
   }

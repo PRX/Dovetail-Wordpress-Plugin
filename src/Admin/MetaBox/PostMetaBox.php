@@ -53,7 +53,7 @@ class PostMetaBox {
 		$this->settings_api = new SettingsApi();
 		$this->dovetail_api = new DovetailApi();
 
-		$this->post_types = $this->settings_api->get_option( 'post_types', 'general' );
+		$this->post_types = $this->settings_api->get_option( 'post_types', 'general', [ 'post' => 'post' ] );
 
 		if ( ! is_array( $this->post_types ) ) {
 			$this->post_types = [];
@@ -788,7 +788,7 @@ class PostMetaBox {
 	 * @return bool
 	 */
 	private function is_podcast_episode_post_type( string $post_type ) {
-		$post_types = $this->settings_api->get_option( 'post_types', 'general' );
+		$post_types = $this->settings_api->get_option( 'post_types', 'general', [ 'post' => 'post' ] );
 		$post_types = is_array( $post_types ) ? $post_types : [];
 
 		if ( in_array( $post_type, $post_types, true ) ) {

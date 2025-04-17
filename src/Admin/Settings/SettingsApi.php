@@ -59,7 +59,10 @@ class SettingsApi {
 	 */
 	public function __construct( array $args = null ) {
 		$key_ascii = get_option( 'dovetail_podcasts_key' );
-		$this->key = Key::loadFromAsciiSafeString( $key_ascii );
+
+		if ( ! empty($key_ascii) ) {
+			$this->key = Key::loadFromAsciiSafeString( $key_ascii );
+		}
 
 		if ( is_array( $args ) && isset( $args['page_slugs'] ) ) {
 			$this->page_slugs = is_array( $args['page_slugs'] ) ? $args['page_slugs'] : [ $args['page_slugs'] ];
