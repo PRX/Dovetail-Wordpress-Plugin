@@ -8,12 +8,23 @@
       "src/DovetailPodcasts.php"
     ]
   },
+  "autoload-dev": {
+    "psr-4": {
+      "DovetailPodcasts\\PHPCS\\": "phpcs/DovetailPodcasts/PHPCS/"
+    }
+  },
+  "require": {
+    "php": "^7.4 || ^8.0",
+    "defuse/php-encryption": "^2.4"
+  },
   "require-dev": {
-    "squizlabs/php_codesniffer": "*",
     "dealerdirect/phpcodesniffer-composer-installer": "^0.7.2",
-    "wp-coding-standards/wpcs": "^3.0",
-    "phpcompatibility/phpcompatibility-wp": "*",
-    "slevomat/coding-standard": "*"
+    "phpcompatibility/php-compatibility": "dev-develop as 9.9.9",
+    "phpcompatibility/phpcompatibility-wp": "^2.1",
+    "szepeviktor/phpstan-wordpress": "~2.0.1",
+    "composer/semver": "^3.0",
+    "automattic/vipwpcs": "^3.0",
+    "slevomat/coding-standard": "^8.17"
   },
   "config": {
     "optimize-autoloader": true,
@@ -21,7 +32,15 @@
       "dealerdirect/phpcodesniffer-composer-installer": true
     }
   },
-  "require": {
-    "defuse/php-encryption": "^2.4"
+  "scripts": {
+    "build-plugin": [
+      "composer install --no-dev && composer run-script zip && composer install"
+    ],
+    "zip": [
+      "mkdir -p plugin-build/dovetail-podcasts",
+      "rsync -rc --exclude-from=.distignore --exclude=plugin-build . plugin-build/dovetail-podcasts/ --delete --delete-excluded -v",
+      "cd plugin-build ; zip -r dovetail-podcasts.zip dovetail-podcasts",
+      "rm -rf plugin-build/dovetail-podcasts/"
+    ]
   }
 }

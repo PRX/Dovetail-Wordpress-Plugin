@@ -49,8 +49,8 @@ class Player {
 	 */
 	private function player_block() {
 
-		$build_dir            = __DIR__ . '/blocks/build';
-		$blocks_manifest_path = __DIR__ . '/blocks/blocks-manifest.php';
+		$build_dir            = DTPODCASTS_PLUGIN_DIR . 'build/blocks/player';
+		$blocks_manifest_path = $build_dir . '/blocks-manifest.php';
 		$manifest_data        = require $blocks_manifest_path;
 
 		// Register blocks.
@@ -143,11 +143,15 @@ class Player {
 
 			$exclude_player = array_reduce(
 				$matches,
-				static fn( $a, $m ) => $a || array_reduce(
-					$exclude_values,
-					static fn( $c, $v ) => $c || stripos( $m[3], $v ),
-					$a
-				),
+				static function ( $a, $m ) {
+					return $a || array_reduce(
+						$exclude_values,
+						static function ( $c, $v ) {
+							return $c || stripos( $m[3], $v );
+						},
+						$a
+					);
+				},
 				$exclude_player
 			);
 		}
@@ -625,14 +629,17 @@ class Player {
 	 */
 	public function get_block_attributes_defaults( string $block_type ) {
 		// Get registered player blocks.
-		$blocks_manifest_path = __DIR__ . '/blocks/blocks-manifest.php';
+		$blocks_manifest_path = DTPODCASTS_PLUGIN_DIR . 'build/blocks/player/blocks-manifest.php';
 		$manifest_data        = require $blocks_manifest_path;
 
-		$default_atts = isset( $manifest_data[ $block_type ]['attributes'] ) ?
-		array_map( static fn( $attr ) => isset( $attr['default'] ) ? $attr['default'] : null, $manifest_data[ $block_type ]['attributes'] ) :
+		return isset( $manifest_data[ $block_type ]['attributes'] ) ?
+		array_map(
+			static function ( $attr ) {
+				return isset( $attr['default'] ) ? $attr['default'] : null;
+			},
+			$manifest_data[ $block_type ]['attributes']
+		) :
 		[];
-
-		return $default_atts;
 	}
 
 	/**

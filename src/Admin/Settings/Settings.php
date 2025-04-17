@@ -138,7 +138,12 @@ class Settings {
 			foreach ( $post_types_by_supports as $name ) {
 				$post_types[ $name ] = get_post_type_object( $name );
 			}
-			$post_types_options = array_map( static fn( $pt ) => $pt->label, $post_types );
+			$post_types_options = array_map(
+				static function ( $pt ) {
+					return $pt->label;
+				},
+				$post_types
+			);
 
 			$offload_plugins = $this->get_installed_offload_plugins();
 
@@ -176,19 +181,23 @@ class Settings {
 										implode(
 											'',
 											array_map(
-												static fn( $p ) => (
+												static function ( $p ) {
+													return (
 													'<dt>' . esc_html( $p['details']['Title'] ) . '</dt>' .
 													'<dd>' . esc_html( $p['details']['Description'] ) . '</dd>' .
 													'<dd><ul class="keywords">' . implode(
 														'',
 														array_map(
-															static fn( $v ) => (
-															'<li>' . esc_html( $v ) . '</li>'
-															),
+															static function ( $v ) {
+																return (
+																'<li>' . esc_html( $v ) . '</li>'
+																);
+															},
 															$p['keywords']
 														)
 													) . '</ul></dd>'
-												),
+													);
+												},
 												$offload_plugins['active']
 											)
 										)
@@ -198,19 +207,23 @@ class Settings {
 										implode(
 											'',
 											array_map(
-												static fn( $p ) => (
+												static function ( $p ) {
+													return (
 													'<dt>' . esc_html( $p['details']['Title'] ) . '</dt>' .
 													'<dd>' . esc_html( $p['details']['Description'] ) . '</dd>' .
 													'<dd><ul class="keywords">' . implode(
 														'',
 														array_map(
-															static fn( $v ) => (
-															'<li>' . esc_html( $v ) . '</li>'
-															),
+															static function ( $v ) {
+																return (
+																'<li>' . esc_html( $v ) . '</li>'
+																);
+															},
 															$p['keywords']
 														)
 													) . '</ul></dd>'
-												),
+													);
+												},
 												$offload_plugins['disabled']
 											)
 										)
@@ -452,7 +465,11 @@ class Settings {
 			'{patterns}',
 			implode(
 				'|',
-				array_map( static fn( $v ) => "({$v})", $keywords )
+				array_map(
+					static function ( $v ) {
+						return "({$v})"; },
+					$keywords
+				)
 			),
 			'~{patterns}~im'
 		);

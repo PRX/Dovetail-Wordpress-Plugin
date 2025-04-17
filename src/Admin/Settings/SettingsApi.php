@@ -110,9 +110,9 @@ class SettingsApi {
 			return;
 		}
 
-		wp_enqueue_style( DTPODCASTS_SETTINGS_SECTION_PREFIX, DTPODCASTS_PLUGIN_URL . 'styles/admin-settings.css', [ 'wp-color-picker' ], DTPODCASTS_VERSION );
+		wp_enqueue_style( DTPODCASTS_SETTINGS_SECTION_PREFIX, DTPODCASTS_PLUGIN_URL . 'build/admin/settings/admin-settings.css', [ 'wp-color-picker' ], DTPODCASTS_VERSION );
 		wp_enqueue_media();
-		wp_enqueue_script( DTPODCASTS_SETTINGS_SECTION_PREFIX, DTPODCASTS_PLUGIN_URL . 'scripts/admin-settings.js', [ 'wp-color-picker', 'jquery' ], DTPODCASTS_VERSION, [ 'strategy' => 'defer' ] );
+		wp_enqueue_script( DTPODCASTS_SETTINGS_SECTION_PREFIX, DTPODCASTS_PLUGIN_URL . 'build/admin/settings/admin-settings.js', [ 'wp-color-picker', 'jquery' ], DTPODCASTS_VERSION, [ 'strategy' => 'defer' ] );
 
 		// Action to enqueue scripts on the Dovetail Podcasts Settings page.
 		do_action( 'dovetail_podcasts_settings_enqueue_scripts' );

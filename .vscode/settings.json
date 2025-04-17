@@ -1,11 +1,15 @@
 {
   "cSpell.words": [
     "ABSPATH",
+    "atts",
     "blockembed",
     "dashicons",
     "dataparse",
     "DOCROOT",
+    "dtpc",
+    "DTPODCASTS",
     "httponly",
+    "kses",
     "nocookie",
     "pagename",
     "postname",
@@ -34,7 +38,7 @@
   "phpcs.executablePath": "./vendor/bin/phpcs",
   "phpcs.standard": "WordPress",
   "phpSniffer.autoDetect": true,
-  "phpSniffer.standard": "WordPress",
+  "phpSniffer.standard": "",
   "editorconfig.generateAuto": false,
   "editor.formatOnSave": true,
   "[php]": {
@@ -54,5 +58,6 @@
   "[javascriptreact]": {
     "editor.defaultFormatter": "dbaeumer.vscode-eslint"
   },
-  "typescript.preferences.importModuleSpecifier": "non-relative"
+  "typescript.preferences.importModuleSpecifier": "non-relative",
+  "search.useIgnoreFiles": false
 }

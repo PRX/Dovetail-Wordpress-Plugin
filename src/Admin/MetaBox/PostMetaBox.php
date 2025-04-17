@@ -134,7 +134,7 @@ class PostMetaBox {
 		$options = $this->get_post_meta_box_options();
 
 		wp_enqueue_media();
-		wp_enqueue_script( DTPODCASTS_SETTINGS_SECTION_PREFIX, DTPODCASTS_PLUGIN_URL . 'scripts/podcast-episode-metabox.js', [ 'jquery' ], DTPODCASTS_VERSION, [ 'strategy' => 'defer' ] );
+		wp_enqueue_script( DTPODCASTS_SETTINGS_SECTION_PREFIX, DTPODCASTS_PLUGIN_URL . 'build/admin/metabox/podcast-episode-metabox.js', [ 'jquery' ], DTPODCASTS_VERSION, [ 'strategy' => 'defer' ] );
 
 		wp_localize_script(
 			DTPODCASTS_SETTINGS_SECTION_PREFIX,
@@ -321,15 +321,17 @@ class PostMetaBox {
 
 		list( $podcasts_api ) = $this->dovetail_api->get_podcasts();
 		$podcasts             = $podcasts_api && is_array( $podcasts_api ) ? array_map(
-			static fn( $p ) => [
-				'enclosureTemplate' => $p['enclosureTemplate'],
-				'id'                => $p['id'],
-				'title'             => $p['title'],
-				'explicit'          => $p['explicit'],
-				'itunesImage'       => isset( $p['itunesImage'] ) ? $p['itunesImage'] : null,
-				'feedImage'         => isset( $p['feedImage'] ) ? $p['feedImage'] : null,
-				'author'            => isset( $p['author'] ) ? $p['author'] : null,
-			],
+			static function ( $p ) {
+				return [
+					'enclosureTemplate' => $p['enclosureTemplate'],
+					'id'                => $p['id'],
+					'title'             => $p['title'],
+					'explicit'          => $p['explicit'],
+					'itunesImage'       => isset( $p['itunesImage'] ) ? $p['itunesImage'] : null,
+					'feedImage'         => isset( $p['feedImage'] ) ? $p['feedImage'] : null,
+					'author'            => isset( $p['author'] ) ? $p['author'] : null,
+				];
+			},
 			$podcasts_api['_embedded']['prx:items']
 		) : null;
 

@@ -1,0 +1,40 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "baseUrl": ".",
+    "outDir": "./dist/",
+    "noImplicitAny": true,
+    "module": "es6",
+    "target": "es6",
+    "moduleResolution": "node",
+    "typeRoots": [
+      "src/types/*",
+      "src/types/**/*",
+      "../../../node_modules/@types",
+      "../../../node_modules/wp-types/index.ts",
+			"../../../types/**/*"
+    ],
+    "lib": [
+      "dom",
+      "dom.iterable"
+    ],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": false,
+    "forceConsistentCasingInFileNames": true,
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "react-jsx",
+    "paths": {
+      "@/*": ["./src/*"],
+      "@_types/*": ["../../../types/*"]
+    },
+    "incremental": true
+  },
+  "include": [
+    "src/**/*",
+		"../../../types/**/*"
+  ],
+  "exclude": ["node_modules"]
+}

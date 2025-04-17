@@ -1,1 +1,0 @@
-{"version":3,"file":"play-button/view.js","mappings":";;;;AAAAA,OAAO,CAACC,GAAG,CAAC,+BAA+B,CAAC,C","sources":["webpack://dovetail-podcasts-player-blocks/./src/play-button/view.js"],"sourcesContent":["console.log(\"dovetail-podcasts-play-button\");\n"],"names":["console","log"],"sourceRoot":""}

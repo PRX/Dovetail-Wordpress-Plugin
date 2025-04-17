@@ -1,0 +1,34 @@
+{
+  "name": "dovetail-podcasts",
+  "version": "0.0.0",
+  "description": "Javascript packages for Dovetail Podcasts Wordpress plugin.",
+  "author": "PRX",
+  "license": "GPL-3.0-or-later",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "build:player": "npm run build --workspace=packages/blocks/player/web-components --workspace=packages/blocks/player/blocks",
+    "build:metabox": "npm --prefix ./packages/metabox/podcast-episode run build",
+    "build": "npm run build:metabox && npm run build:player",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "postinstall": "npm --prefix ./packages/metabox/podcast-episode install --legacy-peer-deps"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PRX/Dovetail-Wordpress-Plugin.git"
+  },
+  "bugs": {
+    "url": "https://github.com/PRX/Dovetail-Wordpress-Plugin/issues"
+  },
+  "homepage": "https://github.com/PRX/Dovetail-Wordpress-Plugin#readme",
+  "workspaces": [
+    "packages/blocks/player/blocks",
+    "packages/blocks/player/web-components"
+  ],
+  "devDependencies": {
+    "@wordpress/scripts": "^30.15.0",
+    "webpack-remove-empty-scripts": "^1.0.4"
+  }
+}
