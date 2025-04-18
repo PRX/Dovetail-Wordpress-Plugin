@@ -41,7 +41,9 @@ jobs:
           composer-options: "--no-progress"
 
       - name: Make cache.json file
-        run: touch ./tests/_output/cache.json
+        run: |
+          mkdir -p -m 777 ./tests/_output
+          touch ./tests/_output/cache.json
 
       - name: Run PHPCS
         run: composer run-script check-cs
