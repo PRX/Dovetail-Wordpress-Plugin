@@ -59,6 +59,9 @@
 
 	<!-- Load WordPress Coding standards -->
 	<rule ref="WordPress">
+		<!-- Should probably be added back. -->
+		<exclude name="WordPress.DB.SlowDBQuery.slow_db_query_meta_query"/>
+
 		<!-- Definitely should not be added back -->
 		<exclude name="Universal.Arrays.DisallowShortArraySyntax.Found"/>
 		<exclude name="Universal.Operators.DisallowShortTernary.Found"/>
