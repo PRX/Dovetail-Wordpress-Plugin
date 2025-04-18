@@ -491,7 +491,7 @@ class Player {
 			// Only render player block shortcodes in the content.
 
 			// Get registered player blocks.
-			$blocks_manifest_path = __DIR__ . '/blocks/blocks-manifest.php';
+			$blocks_manifest_path = DTPODCASTS_PLUGIN_DIR . 'build/blocks/player/blocks-manifest.php';
 			$manifest_data        = require $blocks_manifest_path;
 
 			// Generate the short code tags of the blocks.
