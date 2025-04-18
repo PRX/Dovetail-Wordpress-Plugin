@@ -10,6 +10,7 @@
 /documentation
 /docs
 /img
+/phpcs
 /phpstan
 /tests
 /docker
@@ -19,7 +20,7 @@
 /packages
 /artifacts
 /.changeset
-; /scripts
+/scripts
 /types
 /ui
 .cursor

@@ -12,7 +12,6 @@
 	},
 	"scripts": {
 		"build": "npm run build:wp-scripts",
-		"build:blocks-manifest": "wp-scripts build-blocks-manifest --output=./blocks-manifest.php",
 		"build:wp-scripts": "wp-scripts build --webpack-copy-php --blocks-manifest",
 		"build:tsc": "tsc -p . --outDir ./dist",
 		"format": "wp-scripts format",
@@ -20,7 +19,7 @@
 		"lint:js": "wp-scripts lint-js",
 		"packages-update": "wp-scripts packages-update",
 		"plugin-zip": "wp-scripts plugin-zip",
-		"start": "npm run build:blocks-manifest && wp-scripts start --webpack-copy-php",
+		"start": "wp-scripts start --webpack-copy-php --blocks-manifest",
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
 	"devDependencies": {

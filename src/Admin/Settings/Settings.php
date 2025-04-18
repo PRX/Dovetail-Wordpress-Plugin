@@ -149,8 +149,6 @@ class Settings {
 
 			$post_types = $this->settings_api->get_option( 'post_types', 'general' );
 
-			error_log( print_r( $post_types, true ) );
-
 			$this->settings_api->register_fields(
 				'general',
 				[

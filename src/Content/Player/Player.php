@@ -441,7 +441,7 @@ class Player {
 
 		return render_block(
 			[
-				'blockName' => "dovetail-podcasts/{$block_type}",
+				'blockName' => "dovetail-podcasts-player/{$block_type}",
 				'attrs'     => $atts,
 			]
 		);
@@ -476,13 +476,16 @@ class Player {
 				// Use enclosure href and continue.
 				$atts = shortcode_atts(
 					$default_atts,
-					$ctx_atts
+					array_merge(
+						$atts,
+						$ctx_atts
+					)
 				);
 			}
 		}
 
 		$block = [
-			'blockName'   => 'dovetail-podcasts/player',
+			'blockName'   => 'dovetail-podcasts-player/player',
 			'attrs'       => $atts,
 			'innerBlocks' => [],
 		];
@@ -522,16 +525,16 @@ class Player {
 			// Make sure there are default controls when the shortcode has no content.
 			$block['innerBlocks'] = [
 				[
-					'blockName' => 'dovetail-podcasts/play-button',
+					'blockName' => 'dovetail-podcasts-player/play-button',
 				],
 				[
-					'blockName' => 'dovetail-podcasts/progress-bar',
+					'blockName' => 'dovetail-podcasts-player/progress-bar',
 				],
 				[
-					'blockName' => 'dovetail-podcasts/time-display',
+					'blockName' => 'dovetail-podcasts-player/time-display',
 				],
 				[
-					'blockName' => 'dovetail-podcasts/mute-button',
+					'blockName' => 'dovetail-podcasts-player/mute-button',
 				],
 			];
 		}

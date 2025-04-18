@@ -102,7 +102,7 @@ export default function Edit(props) {
 	}, [post_id, src, isResolving, record]);
 	const suggestionsQuery = {
 		type: "post",
-		subtype: Object.values(post_types),
+		subtype: Object.values(post_types || { post: "post" }),
 	};
 
 	console.log("player.edit: blockProps", blockProps);

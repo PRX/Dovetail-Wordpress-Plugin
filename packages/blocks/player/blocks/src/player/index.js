@@ -33,6 +33,8 @@ registerBlockCollection("dovetail-podcasts-player", {
  * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-registration/
  */
 registerBlockType(metadata.name, {
+	icon: <PrxLogo />,
+
 	providesContext: {
 		"dovetail-podcasts-player/duration": "duration",
 	},
@@ -48,26 +50,4 @@ registerBlockType(metadata.name, {
 	 * @see ./save.js
 	 */
 	save: Save,
-
-	icon: <PrxLogo />,
-
-	variations: [
-		{
-			name: "dovetail-podcasts-player--button",
-			title: "Dovetail One-Button Player",
-			description: "Just the play button.",
-			attributes: {
-				backgroundColor: "transparent",
-			},
-			innerBlocks: [["dovetail-podcasts/play-button"]],
-			example: {
-				innerBlocks: [
-					{
-						name: "dovetail-podcasts/play-button",
-					},
-				],
-			},
-			isDefault: false,
-		},
-	],
 });
