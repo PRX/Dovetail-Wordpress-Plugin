@@ -34,6 +34,7 @@ final class DovetailPodcasts {
 			self::$instance->includes();
 			self::$instance->actions();
 			self::$instance->filters();
+			self::$instance->upgrade();
 		}
 
 		/**
@@ -158,5 +159,77 @@ final class DovetailPodcasts {
 	public function init_player() {
 		$player = new Player();
 		$player->init();
+	}
+
+	/**
+	 * Upgrade routine
+	 *
+	 * @return void
+	 */
+	public function upgrade() {
+		$version = get_option( 'dovetail_podcasts_version', null );
+
+		// If the version is not set, this is a fresh install, not an update.
+		// set the version and return.
+		if ( ! $version ) {
+			update_option( 'dovetail_podcasts_version', DTPODCASTS_VERSION );
+			return;
+		}
+
+		// If the version is less than the current version, run the update routine.
+		if ( version_compare( $version, DTPODCASTS_VERSION, '<' ) ) {
+			$this->run_update_routines( $version );
+			update_option( 'dovetail_podcasts_version', DTPODCASTS_VERSION );
+		}
+	}
+
+	/**
+	 * Executes update routines based on the previously stored version.
+	 *
+	 * This triggers an action that passes the previous version and new version and allows for specific actions or
+	 * modifications needed to bring installations up-to-date with the current plugin version.
+	 *
+	 * Each update routine (callback that hooks into "graphql_do_update_routine") should handle backward compatibility as gracefully as possible.
+	 *
+	 * @since next-version
+	 * @param string|null $stored_version The version number currently stored in the database.
+	 *                                    Null if no version has been previously stored.
+	 */
+	public function run_update_routines( string $stored_version = null ): void {
+
+		// bail if the stored version is empty, or the DTPODCASTS_VERSION constant is not set.
+		if ( ! defined( 'DTPODCASTS_VERSION' ) || ! $stored_version ) {
+			return;
+		}
+
+		// If the stored version is less than the current version, run the upgrade routine.
+		if ( version_compare( $stored_version, DTPODCASTS_VERSION, '<' ) ) {
+
+			// Clear the extensions cache.
+			$this->clear_extensions_cache();
+
+			/**
+			 * Fires the update routine.
+			 *
+			 * @param string $stored_version The version number currently stored in the database.
+			 * @param string $new_version    The version number of the current plugin.
+			 */
+			do_action( 'dovetail_podcasts_do_update_routine', $stored_version, DTPODCASTS_VERSION );
+		}
+	}
+
+	/**
+	 * Clear all caches in the "dovetail_podcasts_extensions" cache group.
+	 *
+	 * @return void
+	 */
+	public function clear_extensions_cache() {
+		global $wp_object_cache;
+
+		if ( isset( $wp_object_cache->cache['dovetail_podcasts_extensions'] ) ) {
+			foreach ( $wp_object_cache->cache['dovetail_podcasts_extensions'] as $key => $value ) {
+				wp_cache_delete( $key, 'dovetail_podcasts_extensions' );
+			}
+		}
 	}
 }

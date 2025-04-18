@@ -49,8 +49,8 @@ class Player {
 	 */
 	private function player_block() {
 
-		$build_dir            = __DIR__ . '/blocks/build';
-		$blocks_manifest_path = __DIR__ . '/blocks/blocks-manifest.php';
+		$build_dir            = DTPODCASTS_PLUGIN_DIR . 'build/blocks/player';
+		$blocks_manifest_path = $build_dir . '/blocks-manifest.php';
 		$manifest_data        = require $blocks_manifest_path;
 
 		// Register blocks.
@@ -78,91 +78,10 @@ class Player {
 	}
 
 	/**
-	 * TODO: Remove this method. Probably won't be hooking any blocks.
-	 * Hooked block types hook to insert player block.
-	 *
-	 * @param string[]                                        $hooked_blocks The list of hooked block types.
-	 * @param string                                          $position The relative position of the hooked blocks. Can be one of 'before', 'after', 'first_child', or 'last_child'.
-	 * @param string                                          $anchor_block The anchor block type.
-	 * @param \WP_Block_Template|\WP_Post|array<string,mixed> $context The block template, template part, wp_navigation post type, or pattern that the anchor block belongs to.
-	 * @return string[]
-	 */
-	public function hooked_block_types( $hooked_blocks, $position, $anchor_block, $context ) {
-		if ( $context instanceof WP_Block_Template ) {
-			if (
-				'core/post-title' === $anchor_block &&
-				'single' === $context->slug
-			) {
-				error_log( print_r( $context, true ) );
-			}
-		}
-
-		return $hooked_blocks;
-	}
-
-	/**
 	 * Setup shortcodes.
 	 */
 	private function shortcodes(): void {
 		add_shortcode( DTPODCASTS_SHORTCODE_PREFIX . 'enclosure-href', [ $this, 'render_enclosure_href_shortcode' ] );
-	}
-
-	/**
-	 * Add player to content.
-	 *
-	 * @param string $content Content to add player to.
-	 * @return string
-	 */
-	public function the_content( string $content ) {
-		global $post;
-
-		// Do NOT add player when...
-		$exclude_player =
-			! ( in_the_loop() && is_main_query() ) ||
-			// In a feed.
-			is_feed() ||
-			// There is no post object or id.
-			empty( $post->ID ) || ! is_object( $post ) ||
-			// The post is password protected and password is not valid.
-			( function_exists( 'post_password_required' ) && post_password_required( $post ) );
-
-		$pattern = get_shortcode_regex( [ DTPODCASTS_SHORTCODE_PREFIX . 'player' ] );
-		preg_match_all( "/{$pattern}/", $content, $matches, PREG_SET_ORDER );
-
-		if ( ! empty( $matches ) ) {
-			$exclude_values = [
-				"post_id=\"{$post->ID}\"",
-			];
-			$enclosure      = $this->get_dovetail_enclosure( $post->ID );
-
-			if ( ! empty( $enclosure ) ) {
-				// Do not match querystring.
-				// Do not match closing quotation mark to allow for haystack values with a querystring to match.
-				$exclude_values[] = 'src="' . preg_replace( '~\?.+$~', '', $enclosure['href'] );
-			}
-
-			$exclude_player = array_reduce(
-				$matches,
-				static fn( $a, $m ) => $a || array_reduce(
-					$exclude_values,
-					static fn( $c, $v ) => $c || stripos( $m[3], $v ),
-					$a
-				),
-				$exclude_player
-			);
-		}
-
-		if ( $exclude_player ) {
-			return $content;
-		}
-
-		$player_html = $this->get_player_html( $post->ID );
-
-		if ( is_singular() ) {
-			return $player_html . $content;
-		}
-
-		return $content . $player_html;
 	}
 
 	/**
@@ -183,13 +102,13 @@ class Player {
 			$atts
 		);
 
-		$enclosure = $this->get_dovetail_enclosure( $atts['post_id'] );
-		if ( empty( $enclosure ) ) {
+		$ctx_atts = $this->get_attributes_from_post_context( $atts['post_id'] );
+		if ( empty( $ctx_atts ) ) {
 			// No meta data on post, so nothing to render.
 			return '';
 		}
 
-		return $this->prepare_player_src( $enclosure['href'] );
+		return $this->prepare_player_src( $ctx_atts['src'] );
 	}
 
 	/**
@@ -201,16 +120,15 @@ class Player {
 	 * @return string
 	 */
 	public function render_player_block( $atts, string $content, \WP_Block $block ) {
-		error_log( __FUNCTION__ );
-		error_log( print_r( $atts, true ) );
-		error_log( $content );
+
+		$default_atts = $this->get_block_attributes_defaults( 'player' );
 
 		if ( ! is_array( $atts ) ) {
 			$atts = [];
 		}
 
 		$atts = shortcode_atts(
-			$this->get_block_attributes_defaults( 'player' ),
+			$default_atts,
 			$atts
 		);
 
@@ -224,15 +142,18 @@ class Player {
 		if ( empty( $atts['src'] ) ) {
 			// No src passed as an attribute.
 			// Try to get one from the post meta data.
-			$enclosure = $this->get_dovetail_enclosure( $atts['post_id'] );
+			$ctx_atts = $this->get_attributes_from_post_context( $atts['post_id'] );
 
-			if ( empty( $enclosure ) ) {
+			if ( empty( $ctx_atts ) ) {
 				// No meta data on post, so nothing to render.
 				return '';
 			}
-			// Use enclosure href and continue.
-			$atts['src']      = $enclosure['href'];
-			$atts['duration'] = $enclosure['duration'];
+
+			// Use post context attributes.
+			$atts = shortcode_atts(
+				$default_atts,
+				$ctx_atts
+			);
 		}
 
 		$atts['src'] = $this->prepare_player_src( $atts['src'] );
@@ -260,13 +181,9 @@ class Player {
 	 * Render Dovetail podcast mute button block.
 	 *
 	 * @param array<string,string> $atts Block attributes.
-	 * @param string               $content Block content.
-	 * @param \WP_Block            $block Block instance object.
 	 * @return string
 	 */
-	public function render_mute_button_block( $atts, string $content, \WP_Block $block ) {
-		error_log( __FUNCTION__ );
-		error_log( print_r( $atts, true ) );
+	public function render_mute_button_block( $atts ) {
 
 		if ( ! is_array( $atts ) ) {
 			$atts = [];
@@ -292,13 +209,9 @@ class Player {
 	 * Render Dovetail podcast play button block.
 	 *
 	 * @param array<string,string> $atts Block attributes.
-	 * @param string               $content Block content.
-	 * @param \WP_Block            $block Block instance object.
 	 * @return string
 	 */
-	public function render_play_button_block( $atts, string $content, \WP_Block $block ) {
-		error_log( __FUNCTION__ );
-		error_log( print_r( $atts, true ) );
+	public function render_play_button_block( $atts ) {
 
 		if ( ! is_array( $atts ) ) {
 			$atts = [];
@@ -324,13 +237,9 @@ class Player {
 	 * Render Dovetail Podcast player progress bar block.
 	 *
 	 * @param array<string,string> $atts Block attributes.
-	 * @param string               $content Block content.
-	 * @param \WP_Block            $block Block instance object.
 	 * @return string
 	 */
-	public function render_progress_bar_block( $atts, string $content, \WP_Block $block ) {
-		error_log( __FUNCTION__ );
-		error_log( print_r( $atts, true ) );
+	public function render_progress_bar_block( $atts ) {
 
 		if ( ! is_array( $atts ) ) {
 			$atts = [];
@@ -356,13 +265,9 @@ class Player {
 	 * Render Dovetail Podcast player time current block.
 	 *
 	 * @param array<string,string> $atts Block attributes.
-	 * @param string               $content Block content.
-	 * @param \WP_Block            $block Block instance object.
 	 * @return string
 	 */
-	public function render_time_current_block( $atts, string $content, \WP_Block $block ) {
-		error_log( __FUNCTION__ );
-		error_log( print_r( $atts, true ) );
+	public function render_time_current_block( $atts ) {
 
 		if ( ! is_array( $atts ) ) {
 			$atts = [];
@@ -388,13 +293,9 @@ class Player {
 	 * Render Dovetail Podcast player time display block.
 	 *
 	 * @param array<string,string> $atts Block attributes.
-	 * @param string               $content Block content.
-	 * @param \WP_Block            $block Block instance object.
 	 * @return string
 	 */
-	public function render_time_display_block( $atts, string $content, \WP_Block $block ) {
-		error_log( __FUNCTION__ );
-		error_log( print_r( $atts, true ) );
+	public function render_time_display_block( $atts ) {
 
 		if ( ! is_array( $atts ) ) {
 			$atts = [];
@@ -420,13 +321,9 @@ class Player {
 	 * Render Dovetail Podcast player time duration block.
 	 *
 	 * @param array<string,string> $atts Block attributes.
-	 * @param string               $content Block content.
-	 * @param \WP_Block            $block Block instance object.
 	 * @return string
 	 */
-	public function render_time_duration_block( $atts, string $content, \WP_Block $block ) {
-		error_log( __FUNCTION__ );
-		error_log( print_r( $atts, true ) );
+	public function render_time_duration_block( $atts ) {
 
 		if ( ! is_array( $atts ) ) {
 			$atts = [];
@@ -452,13 +349,9 @@ class Player {
 	 * Render Dovetail Podcast player volume slider block.
 	 *
 	 * @param array<string,string> $atts Block attributes.
-	 * @param string               $content Block content.
-	 * @param \WP_Block            $block Block instance object.
 	 * @return string
 	 */
-	public function render_volume_slider_block( $atts, string $content, \WP_Block $block ) {
-		error_log( __FUNCTION__ );
-		error_log( print_r( $atts, true ) );
+	public function render_volume_slider_block( $atts ) {
 
 		if ( ! is_array( $atts ) ) {
 			$atts = [];
@@ -494,7 +387,7 @@ class Player {
 
 		return render_block(
 			[
-				'blockName' => "dovetail-podcasts/{$block_type}",
+				'blockName' => "dovetail-podcasts-player/{$block_type}",
 				'attrs'     => $atts,
 			]
 		);
@@ -509,29 +402,36 @@ class Player {
 	 */
 	public function render_player_shortcode( array $atts, string $content = null ) {
 
+		$default_atts = $this->get_block_attributes_defaults( 'player' );
+
 		if ( ! is_array( $atts ) ) {
 			$atts = [];
 		}
 
 		$atts = shortcode_atts(
-			$this->get_block_attributes_defaults( 'player' ),
+			$default_atts,
 			$atts
 		);
 
 		if ( empty( $atts['src'] ) ) {
 			// No src passed as an attribute.
 			// Try to get one from the post meta data.
-			$enclosure = $this->get_dovetail_enclosure( $atts['post_id'] );
+			$ctx_atts = $this->get_attributes_from_post_context( $atts['post_id'] );
 
-			if ( ! empty( $enclosure ) ) {
+			if ( ! empty( $ctx_atts ) ) {
 				// Use enclosure href and continue.
-				$atts['src']      = $enclosure['href'];
-				$atts['duration'] = $enclosure['duration'];
+				$atts = shortcode_atts(
+					$default_atts,
+					array_merge(
+						$atts,
+						$ctx_atts
+					)
+				);
 			}
 		}
 
 		$block = [
-			'blockName'   => 'dovetail-podcasts/player',
+			'blockName'   => 'dovetail-podcasts-player/player',
 			'attrs'       => $atts,
 			'innerBlocks' => [],
 		];
@@ -540,7 +440,7 @@ class Player {
 			// Only render player block shortcodes in the content.
 
 			// Get registered player blocks.
-			$blocks_manifest_path = __DIR__ . '/blocks/blocks-manifest.php';
+			$blocks_manifest_path = DTPODCASTS_PLUGIN_DIR . 'build/blocks/player/blocks-manifest.php';
 			$manifest_data        = require $blocks_manifest_path;
 
 			// Generate the short code tags of the blocks.
@@ -560,7 +460,7 @@ class Player {
 				$block_type             = preg_replace( '~^' . DTPODCASTS_SHORTCODE_PREFIX . '~', '', $match[2] );
 				$default_atts           = $this->get_block_attributes_defaults( $block_type );
 				$block['innerBlocks'][] = [
-					'blockName' => "dovetail-podcasts/{$block_type}",
+					'blockName' => "dovetail-podcasts-player/{$block_type}",
 					'attrs'     => shortcode_atts(
 						$default_atts,
 						array_merge( shortcode_parse_atts( $match[3] ), $atts )
@@ -571,16 +471,16 @@ class Player {
 			// Make sure there are default controls when the shortcode has no content.
 			$block['innerBlocks'] = [
 				[
-					'blockName' => 'dovetail-podcasts/play-button',
+					'blockName' => 'dovetail-podcasts-player/play-button',
 				],
 				[
-					'blockName' => 'dovetail-podcasts/progress-bar',
+					'blockName' => 'dovetail-podcasts-player/progress-bar',
 				],
 				[
-					'blockName' => 'dovetail-podcasts/time-display',
+					'blockName' => 'dovetail-podcasts-player/time-display',
 				],
 				[
-					'blockName' => 'dovetail-podcasts/mute-button',
+					'blockName' => 'dovetail-podcasts-player/mute-button',
 				],
 			];
 		}
@@ -625,14 +525,17 @@ class Player {
 	 */
 	public function get_block_attributes_defaults( string $block_type ) {
 		// Get registered player blocks.
-		$blocks_manifest_path = __DIR__ . '/blocks/blocks-manifest.php';
+		$blocks_manifest_path = DTPODCASTS_PLUGIN_DIR . 'build/blocks/player/blocks-manifest.php';
 		$manifest_data        = require $blocks_manifest_path;
 
-		$default_atts = isset( $manifest_data[ $block_type ]['attributes'] ) ?
-		array_map( static fn( $attr ) => isset( $attr['default'] ) ? $attr['default'] : null, $manifest_data[ $block_type ]['attributes'] ) :
+		return isset( $manifest_data[ $block_type ]['attributes'] ) ?
+		array_map(
+			static function ( $attr ) {
+				return isset( $attr['default'] ) ? $attr['default'] : null;
+			},
+			$manifest_data[ $block_type ]['attributes']
+		) :
 		[];
-
-		return $default_atts;
 	}
 
 	/**
@@ -674,31 +577,49 @@ class Player {
 	 * Get the Dovetail enclosure data for a podcast episode post, defaulting to global post.
 	 *
 	 * @param int $post_id Podcast episode post id.
-	 * @return array<string,mixed>|null
+	 * @return array<string,mixed>
 	 */
-	public function get_dovetail_enclosure( int $post_id = null ) {
+	public function get_attributes_from_post_context( int $post_id = null ) {
+
+		$atts = [];
 
 		if ( ! $post_id ) {
 			$post_id = get_the_ID();
 		}
 
+		$post = get_post( $post_id );
 		$meta = get_post_meta( $post_id, DTPODCASTS_POST_META_KEY, true );
 
+		// TODO: If meta data is missing, check Dovetail for the episode using post guid.
+
 		/**
-		 * Return enclosure data when:
-		 * - Enclosure data exists.
+		 * Return Dovetail enclosure data when:
+		 * - Dovetail Enclosure data exists.
 		 * - Audio has been processed
 		 *   - `size` is > 0. Initial enclosure processing will have an href, but the URL will not return audio.
 		 */
 		if (
-			! empty( $meta ) && isset( $meta['dovetail']['enclosure'] ) &&
+			'publish' === $post->post_status &&
+			! empty( $meta ) &&
+			isset( $meta['dovetail']['enclosure'] ) && ! empty( $meta['dovetail']['enclosure'] ) &&
 			$meta['dovetail']['enclosure']['size'] > 0
 		) {
 			// TODO: Get latest prefix from podcast and construct fresh href.
-			return $meta['dovetail']['enclosure'];
+			$atts['src']      = $meta['dovetail']['enclosure']['href'];
+			$atts['duration'] = $meta['dovetail']['enclosure']['duration'];
 		}
 
-		return null;
+		/**
+		 * Return enclosure data when.
+		 * - Post is not published.
+		 * - Episode meta data has enclosure.
+		 */
+		if ( 'publish' !== $post->post_status && isset( $meta['enclosure'] ) && ! empty( $meta['enclosure'] ) ) {
+			$atts['src']      = $meta['enclosure']['url'];
+			$atts['duration'] = $meta['enclosure']['url'];
+		}
+
+		return $atts;
 	}
 
 	/**

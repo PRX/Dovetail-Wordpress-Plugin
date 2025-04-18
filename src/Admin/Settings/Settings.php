@@ -138,9 +138,16 @@ class Settings {
 			foreach ( $post_types_by_supports as $name ) {
 				$post_types[ $name ] = get_post_type_object( $name );
 			}
-			$post_types_options = array_map( static fn( $pt ) => $pt->label, $post_types );
+			$post_types_options = array_map(
+				static function ( $pt ) {
+					return $pt->label;
+				},
+				$post_types
+			);
 
 			$offload_plugins = $this->get_installed_offload_plugins();
+
+			$post_types = $this->settings_api->get_option( 'post_types', 'general' );
 
 			$this->settings_api->register_fields(
 				'general',
@@ -151,6 +158,7 @@ class Settings {
 						'desc'    => __( 'Select which post types to publish as podcast episodes in Dovetail.', 'dovetail-podcasts' ),
 						'type'    => 'multicheck',
 						'options' => $post_types_options,
+						'value'   => $post_types,
 						'default' => [ 'post' => 'post' ],
 						'schema'  => [
 							'type'                 => 'object',
@@ -176,19 +184,23 @@ class Settings {
 										implode(
 											'',
 											array_map(
-												static fn( $p ) => (
+												static function ( $p ) {
+													return (
 													'<dt>' . esc_html( $p['details']['Title'] ) . '</dt>' .
 													'<dd>' . esc_html( $p['details']['Description'] ) . '</dd>' .
 													'<dd><ul class="keywords">' . implode(
 														'',
 														array_map(
-															static fn( $v ) => (
-															'<li>' . esc_html( $v ) . '</li>'
-															),
+															static function ( $v ) {
+																return (
+																'<li>' . esc_html( $v ) . '</li>'
+																);
+															},
 															$p['keywords']
 														)
 													) . '</ul></dd>'
-												),
+													);
+												},
 												$offload_plugins['active']
 											)
 										)
@@ -198,19 +210,23 @@ class Settings {
 										implode(
 											'',
 											array_map(
-												static fn( $p ) => (
+												static function ( $p ) {
+													return (
 													'<dt>' . esc_html( $p['details']['Title'] ) . '</dt>' .
 													'<dd>' . esc_html( $p['details']['Description'] ) . '</dd>' .
 													'<dd><ul class="keywords">' . implode(
 														'',
 														array_map(
-															static fn( $v ) => (
-															'<li>' . esc_html( $v ) . '</li>'
-															),
+															static function ( $v ) {
+																return (
+																'<li>' . esc_html( $v ) . '</li>'
+																);
+															},
 															$p['keywords']
 														)
 													) . '</ul></dd>'
-												),
+													);
+												},
 												$offload_plugins['disabled']
 											)
 										)
@@ -301,7 +317,7 @@ class Settings {
 		}
 
 		$post_types = $this->settings_api->get_option( 'post_types', 'general' );
-		if ( ! $post_types || ! is_array( $post_types ) || empty( $post_types ) ) {
+		if ( $this->dovetail_api->has_client_credentials && ( ! $post_types || ! is_array( $post_types ) || empty( $post_types ) ) ) {
 			add_settings_error( DTPODCASTS_SETTINGS_SECTION_PREFIX . 'general', 'missing-post-types', 'Select at least one <em>Podcast Post Type</em>.', 'error' );
 		}
 	}
@@ -452,7 +468,11 @@ class Settings {
 			'{patterns}',
 			implode(
 				'|',
-				array_map( static fn( $v ) => "({$v})", $keywords )
+				array_map(
+					static function ( $v ) {
+						return "({$v})"; },
+					$keywords
+				)
 			),
 			'~{patterns}~im'
 		);
