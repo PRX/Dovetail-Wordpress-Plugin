@@ -143,9 +143,9 @@ class Player {
 	 * @return string
 	 */
 	public function render_player_block( $atts, string $content, \WP_Block $block ) {
-		error_log( __FUNCTION__ );
-		error_log( print_r( $atts, true ) );
-		error_log( $content );
+		// error_log( __FUNCTION__ );
+		// error_log( print_r( $atts, true ) );
+		// error_log( $content );
 
 		$default_atts = $this->get_block_attributes_defaults( 'player' );
 
@@ -212,8 +212,8 @@ class Player {
 	 * @return string
 	 */
 	public function render_mute_button_block( $atts, string $content, \WP_Block $block ) {
-		error_log( __FUNCTION__ );
-		error_log( print_r( $atts, true ) );
+		// error_log( __FUNCTION__ );
+		// error_log( print_r( $atts, true ) );
 
 		if ( ! is_array( $atts ) ) {
 			$atts = [];
@@ -244,8 +244,8 @@ class Player {
 	 * @return string
 	 */
 	public function render_play_button_block( $atts, string $content, \WP_Block $block ) {
-		error_log( __FUNCTION__ );
-		error_log( print_r( $atts, true ) );
+		// error_log( __FUNCTION__ );
+		// error_log( print_r( $atts, true ) );
 
 		if ( ! is_array( $atts ) ) {
 			$atts = [];
@@ -276,8 +276,8 @@ class Player {
 	 * @return string
 	 */
 	public function render_progress_bar_block( $atts, string $content, \WP_Block $block ) {
-		error_log( __FUNCTION__ );
-		error_log( print_r( $atts, true ) );
+		// error_log( __FUNCTION__ );
+		// error_log( print_r( $atts, true ) );
 
 		if ( ! is_array( $atts ) ) {
 			$atts = [];
@@ -308,8 +308,8 @@ class Player {
 	 * @return string
 	 */
 	public function render_time_current_block( $atts, string $content, \WP_Block $block ) {
-		error_log( __FUNCTION__ );
-		error_log( print_r( $atts, true ) );
+		// error_log( __FUNCTION__ );
+		// error_log( print_r( $atts, true ) );
 
 		if ( ! is_array( $atts ) ) {
 			$atts = [];
@@ -340,8 +340,8 @@ class Player {
 	 * @return string
 	 */
 	public function render_time_display_block( $atts, string $content, \WP_Block $block ) {
-		error_log( __FUNCTION__ );
-		error_log( print_r( $atts, true ) );
+		// error_log( __FUNCTION__ );
+		// error_log( print_r( $atts, true ) );
 
 		if ( ! is_array( $atts ) ) {
 			$atts = [];
@@ -372,8 +372,8 @@ class Player {
 	 * @return string
 	 */
 	public function render_time_duration_block( $atts, string $content, \WP_Block $block ) {
-		error_log( __FUNCTION__ );
-		error_log( print_r( $atts, true ) );
+		// error_log( __FUNCTION__ );
+		// error_log( print_r( $atts, true ) );
 
 		if ( ! is_array( $atts ) ) {
 			$atts = [];
@@ -404,8 +404,8 @@ class Player {
 	 * @return string
 	 */
 	public function render_volume_slider_block( $atts, string $content, \WP_Block $block ) {
-		error_log( __FUNCTION__ );
-		error_log( print_r( $atts, true ) );
+		// error_log( __FUNCTION__ );
+		// error_log( print_r( $atts, true ) );
 
 		if ( ! is_array( $atts ) ) {
 			$atts = [];
@@ -514,7 +514,7 @@ class Player {
 				$block_type             = preg_replace( '~^' . DTPODCASTS_SHORTCODE_PREFIX . '~', '', $match[2] );
 				$default_atts           = $this->get_block_attributes_defaults( $block_type );
 				$block['innerBlocks'][] = [
-					'blockName' => "dovetail-podcasts/{$block_type}",
+					'blockName' => "dovetail-podcasts-player/{$block_type}",
 					'attrs'     => shortcode_atts(
 						$default_atts,
 						array_merge( shortcode_parse_atts( $match[3] ), $atts )
