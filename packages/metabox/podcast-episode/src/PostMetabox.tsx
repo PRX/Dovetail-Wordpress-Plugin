@@ -1,7 +1,7 @@
 import { dovetailEpisodeTypes, type DovetailEpisode, type DovetailEpisodeType, type DovetailPodcast } from '../../../../types/api';
 import { type PostMetaboxAction, POST_META_BOX_KEY, type PostMetaboxOptions, type PostMetaboxState } from '@/types/state/postMetabox';
 import type { EpisodeData, EpisodeEnclosure } from '@/types/state/episode';
-import React, { ChangeEvent, useEffect, useReducer, useState } from 'react';
+import React, { ChangeEvent, CSSProperties, useEffect, useReducer, useState } from 'react';
 import axios from 'axios';
 import { PodcastIcon, DiamondPlusIcon, EllipsisVerticalIcon, ReplaceIcon, ChevronDownIcon, TrashIcon, AlertCircleIcon, Undo2Icon, EraserIcon } from 'lucide-react';
 import { useShowHide } from '@/hooks/use-show-hide';
@@ -339,6 +339,18 @@ function PostMetabox({ field, episode: _episode, options }: PostMetaboxProps) {
     return isProcessing;
   }, 2000, [dovetail?.id, dovetail?.enclosure?.status]);
 
+  if (!podcasts?.length) {
+    return (
+      <Alert style={{ '--icon-size': '1.75rem' } as CSSProperties}>
+        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M400-420q-41.92 0-70.96-29.04Q300-478.08 300-520v-240q0-41.92 29.04-70.96Q358.08-860 400-860q41.92 0 70.96 29.04Q500-801.92 500-760v240q0 41.92-29.04 70.96Q441.92-420 400-420Zm0-60q17 0 28.5-11.5T440-520v-240q0-17-11.5-28.5T400-800q-17 0-28.5 11.5T360-760v240q0 17 11.5 28.5T400-480Zm30 350h-60v-131.85q-99-11.31-164.5-84.92Q140-420.39 140-520h60q0 83 58.5 141.5T400-320q8.31 0 15.31-.62 7-.61 14.69-1.84V-130Zm234.61-38.46q8 0 13.62-5.62 5.61-5.61 5.61-13.61 0-8-5.61-13.62-5.62-5.61-13.62-5.61-8 0-13.61 5.61-5.62 5.62-5.62 13.62 0 8 5.62 13.61 5.61 5.62 13.61 5.62Zm-17.69-78.46h35.39v-144.62h-35.39v144.62ZM664.61-100q-74.92 0-127.46-52.54-52.53-52.54-52.53-127.46 0-74.92 52.53-127.46Q589.69-460 664.61-460q74.93 0 127.46 52.54 52.54 52.54 52.54 127.46 0 74.92-52.54 127.46Q739.54-100 664.61-100ZM400-640Z"/></svg>
+        <AlertTitle className='text-xl'>Could not find any podcasts.</AlertTitle>
+        <AlertDescription  className='text-md'>
+          <div>Make sure to setup Client Application credentials in <a className='font-semibold' href="/wp-admin/admin.php?page=dovetail-podcasts-settings">Dovetail Podcast Settings</a>.</div>
+        </AlertDescription>
+      </Alert>
+    )
+  }
+
   return (
     <PostMetaboxContext.Provider value={{ state, options }}>
       <div className='mt-[12px] @container/main relative' {...(isUiLocked && { inert: true })}>
@@ -353,7 +365,7 @@ function PostMetabox({ field, episode: _episode, options }: PostMetaboxProps) {
             <>
             <input type='hidden' name={`${field}_DELETE`} value='DELETE' />
             {!initialEpisodeData?.dovetail?.id ? (
-              <Alert>
+              <Alert style={{ '--icon-size': '1.75rem' } as CSSProperties}>
                 <EraserIcon className='size-4' />
                 <AlertTitle>Podcast Episode Will Be Removed...</AlertTitle>
                 <AlertDescription className='max-w-[80ch]'>
@@ -363,7 +375,7 @@ function PostMetabox({ field, episode: _episode, options }: PostMetaboxProps) {
                 </AlertDescription>
               </Alert>
             ) : (
-              <Alert variant='destructive'>
+              <Alert variant='destructive' style={{ '--icon-size': '1.75rem' } as CSSProperties}>
                 <AlertCircleIcon className='size-4' />
                 <AlertTitle>Dovetail Episode Will Be Deleted...</AlertTitle>
                 <AlertDescription className='max-w-[80ch]'>
