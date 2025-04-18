@@ -36,9 +36,9 @@ on:
         required: false
         type: string
         default: ""
-  schedule:
-    # Run on the 1st and 15th of each month
-    # - cron: "0 0 1,15 * *"
+  # schedule:
+  #   # Run on the 1st and 15th of each month
+  #   cron: "0 0 1,15 * *"
 
 jobs:
   prepare-release:
@@ -518,14 +518,14 @@ jobs:
           npm ci
           npm run build
 
-      - name: WordPress Plugin Deploy
-        uses: 10up/action-wordpress-plugin-deploy@stable
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
-          SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
-          SLUG: wp-graphql
-          VERSION: ${{ steps.get_tag.outputs.tag }}
+      # - name: WordPress Plugin Deploy
+      #   uses: 10up/action-wordpress-plugin-deploy@stable
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #     SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
+      #     SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
+      #     SLUG: dovetail-podcasts
+      #     VERSION: ${{ steps.get_tag.outputs.tag }}
 
       - name: Create artifact directory
         run: |
@@ -538,8 +538,8 @@ jobs:
       - name: Upload artifact to workflow
         uses: actions/upload-artifact@v4
         with:
-          name: wp-graphql
-          path: plugin-build/wp-graphql.zip
+          name: dovetail-podcasts
+          path: plugin-build/dovetail-podcasts.zip
 
       - name: Upload artifact to release
         # Only upload to release if we're not doing a manual deploy
@@ -547,6 +547,6 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ steps.get_tag.outputs.tag }}
-          files: plugin-build/wp-graphql.zip
+          files: plugin-build/dovetail-podcasts.zip
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

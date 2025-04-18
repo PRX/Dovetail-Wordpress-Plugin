@@ -53,6 +53,16 @@
       "rsync -rc --exclude-from=.distignore --exclude=plugin-build . plugin-build/dovetail-podcasts/ --delete --delete-excluded -v",
       "cd plugin-build ; zip -r dovetail-podcasts.zip dovetail-podcasts",
       "rm -rf plugin-build/dovetail-podcasts/"
+    ],
+    "lint": "vendor/bin/phpcs",
+    "phpcs-i": [
+      "php ./vendor/bin/phpcs -i"
+    ],
+    "check-cs": [
+      "php ./vendor/bin/phpcs"
+    ],
+    "fix-cs": [
+      "PHPCS_VERBOSE=1 php -d error_reporting=E_ALL -d display_errors=1 ./vendor/bin/phpcbf"
     ]
   }
 }
