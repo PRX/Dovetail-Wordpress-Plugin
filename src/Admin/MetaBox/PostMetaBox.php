@@ -53,7 +53,7 @@ class PostMetaBox {
 		$this->settings_api = new SettingsApi();
 		$this->dovetail_api = new DovetailApi();
 
-		$this->post_types = $this->settings_api->get_option( 'post_types', 'general' );
+		$this->post_types = $this->settings_api->get_option( 'post_types', 'general', [ 'post' => 'post' ] );
 
 		if ( ! is_array( $this->post_types ) ) {
 			$this->post_types = [];
@@ -134,7 +134,7 @@ class PostMetaBox {
 		$options = $this->get_post_meta_box_options();
 
 		wp_enqueue_media();
-		wp_enqueue_script( DTPODCASTS_SETTINGS_SECTION_PREFIX, DTPODCASTS_PLUGIN_URL . 'scripts/podcast-episode-metabox.js', [ 'jquery' ], DTPODCASTS_VERSION, [ 'strategy' => 'defer' ] );
+		wp_enqueue_script( DTPODCASTS_SETTINGS_SECTION_PREFIX, DTPODCASTS_PLUGIN_URL . 'build/admin/metabox/podcast-episode-metabox.js', [ 'jquery' ], DTPODCASTS_VERSION, [ 'strategy' => 'defer' ] );
 
 		wp_localize_script(
 			DTPODCASTS_SETTINGS_SECTION_PREFIX,
@@ -181,6 +181,7 @@ class PostMetaBox {
 				// Remove media id and url, and update post metadata.
 				unset( $meta['enclosure']['mediaId'] );
 				unset( $meta['enclosure']['url'] );
+				unset( $meta['enclosure']['duration'] );
 				update_post_meta( $post->ID, DTPODCASTS_POST_META_KEY, $meta );
 			} elseif ( 'trash' === $media->post_status ) {
 				// Episode was trashed, probably by `delete_offloaded_media` method.
@@ -188,6 +189,7 @@ class PostMetaBox {
 				// This will keep frontend from trying to fetch media details.
 				unset( $meta['enclosure']['mediaId'] );
 				unset( $meta['enclosure']['url'] );
+				unset( $meta['enclosure']['duration'] );
 			}
 		}
 
@@ -212,6 +214,8 @@ class PostMetaBox {
 						// Media's original URL should be trusted to be to an existing file.
 						// It may be a Dovetail URL depending on what processing has been done to it.
 						$meta['enclosure']['url'] = $e['media'][0]['originalUrl'];
+						// Media's duration should be the original duration of the uploaded file.
+						$meta['enclosure']['duration'] = $e['media'][0]['duration'];
 						// Enclosure's href should still contain the original filename.
 						$meta['enclosure']['filename'] = basename( $e['_links']['enclosure']['href'] );
 
@@ -219,7 +223,8 @@ class PostMetaBox {
 						$media_id = $this->get_attachment_id( $e['_links']['enclosure']['href'] );
 						if ( $media_id > 0 ) {
 							$meta['enclosure']['mediaId'] = $media_id;
-							$meta['enclosure']['url']     = wp_get_attachment_url( $media_id );
+							// Update enclosure URL in case them media original URL was altered during processing.
+							$meta['enclosure']['url'] = wp_get_attachment_url( $media_id );
 						}
 
 						break;
@@ -321,15 +326,17 @@ class PostMetaBox {
 
 		list( $podcasts_api ) = $this->dovetail_api->get_podcasts();
 		$podcasts             = $podcasts_api && is_array( $podcasts_api ) ? array_map(
-			static fn( $p ) => [
-				'enclosureTemplate' => $p['enclosureTemplate'],
-				'id'                => $p['id'],
-				'title'             => $p['title'],
-				'explicit'          => $p['explicit'],
-				'itunesImage'       => isset( $p['itunesImage'] ) ? $p['itunesImage'] : null,
-				'feedImage'         => isset( $p['feedImage'] ) ? $p['feedImage'] : null,
-				'author'            => isset( $p['author'] ) ? $p['author'] : null,
-			],
+			static function ( $p ) {
+				return [
+					'enclosureTemplate' => $p['enclosureTemplate'],
+					'id'                => $p['id'],
+					'title'             => $p['title'],
+					'explicit'          => $p['explicit'],
+					'itunesImage'       => isset( $p['itunesImage'] ) ? $p['itunesImage'] : null,
+					'feedImage'         => isset( $p['feedImage'] ) ? $p['feedImage'] : null,
+					'author'            => isset( $p['author'] ) ? $p['author'] : null,
+				];
+			},
 			$podcasts_api['_embedded']['prx:items']
 		) : null;
 
@@ -786,7 +793,7 @@ class PostMetaBox {
 	 * @return bool
 	 */
 	private function is_podcast_episode_post_type( string $post_type ) {
-		$post_types = $this->settings_api->get_option( 'post_types', 'general' );
+		$post_types = $this->settings_api->get_option( 'post_types', 'general', [ 'post' => 'post' ] );
 		$post_types = is_array( $post_types ) ? $post_types : [];
 
 		if ( in_array( $post_type, $post_types, true ) ) {

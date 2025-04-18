@@ -39,3 +39,12 @@ vendor
 # Node Dependencies #
 #####################
 node_modules
+
+
+# PHPCS cached files. #
+#######################
+/tests/_output/*.json
+
+# Temp Build Directories #
+#####################
+plugin-build
