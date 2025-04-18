@@ -317,8 +317,8 @@ jobs:
           # Create a new PR from develop to master
           RESPONSE=$(curl -X POST \
             -H "Authorization: token ${{ secrets.REPO_PAT }}" \
-            -H "Accept: application/vnd.github.v3+json" \
-            -H "Content-Type: application/json" \
+            -H "Accept: application/vnd.github+json" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
             "https://api.github.com/repos/${{ github.repository }}/pulls" \
             -d "$PAYLOAD")
 
