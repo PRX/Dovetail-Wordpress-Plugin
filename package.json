@@ -36,5 +36,13 @@
   "workspaces": [
     "packages/blocks/player/blocks",
     "packages/blocks/player/web-components"
-  ]
+  ],
+  "devDependencies": {
+    "archiver": "^7.0.1",
+    "chalk": "^5.4.1",
+    "dotenv": "^16.5.0",
+    "fs-extra": "^11.3.0",
+    "glob": "^11.0.1",
+    "yargs": "^17.7.2"
+  }
 }
