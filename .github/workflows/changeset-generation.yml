@@ -306,7 +306,7 @@ jobs:
           PAYLOAD=$(jq -n \
             --arg title "release: next version 📦" \
             --arg head "develop" \
-            --arg base "master" \
+            --arg base "main" \
             --arg body "$PR_BODY" \
             '{title: $title, head: $head, base: $base, body: $body}')
 
