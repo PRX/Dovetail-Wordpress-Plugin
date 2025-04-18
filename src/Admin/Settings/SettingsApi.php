@@ -60,7 +60,7 @@ class SettingsApi {
 	public function __construct( array $args = null ) {
 		$key_ascii = get_option( 'dovetail_podcasts_key' );
 
-		if ( ! empty($key_ascii) ) {
+		if ( ! empty( $key_ascii ) ) {
 			$this->key = Key::loadFromAsciiSafeString( $key_ascii );
 		}
 

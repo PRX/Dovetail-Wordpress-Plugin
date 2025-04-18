@@ -78,29 +78,6 @@ class Player {
 	}
 
 	/**
-	 * TODO: Remove this method. Probably won't be hooking any blocks.
-	 * Hooked block types hook to insert player block.
-	 *
-	 * @param string[]                                        $hooked_blocks The list of hooked block types.
-	 * @param string                                          $position The relative position of the hooked blocks. Can be one of 'before', 'after', 'first_child', or 'last_child'.
-	 * @param string                                          $anchor_block The anchor block type.
-	 * @param \WP_Block_Template|\WP_Post|array<string,mixed> $context The block template, template part, wp_navigation post type, or pattern that the anchor block belongs to.
-	 * @return string[]
-	 */
-	public function hooked_block_types( $hooked_blocks, $position, $anchor_block, $context ) {
-		if ( $context instanceof WP_Block_Template ) {
-			if (
-				'core/post-title' === $anchor_block &&
-				'single' === $context->slug
-			) {
-				error_log( print_r( $context, true ) );
-			}
-		}
-
-		return $hooked_blocks;
-	}
-
-	/**
 	 * Setup shortcodes.
 	 */
 	private function shortcodes(): void {
@@ -143,9 +120,6 @@ class Player {
 	 * @return string
 	 */
 	public function render_player_block( $atts, string $content, \WP_Block $block ) {
-		// error_log( __FUNCTION__ );
-		// error_log( print_r( $atts, true ) );
-		// error_log( $content );
 
 		$default_atts = $this->get_block_attributes_defaults( 'player' );
 
@@ -207,13 +181,9 @@ class Player {
 	 * Render Dovetail podcast mute button block.
 	 *
 	 * @param array<string,string> $atts Block attributes.
-	 * @param string               $content Block content.
-	 * @param \WP_Block            $block Block instance object.
 	 * @return string
 	 */
-	public function render_mute_button_block( $atts, string $content, \WP_Block $block ) {
-		// error_log( __FUNCTION__ );
-		// error_log( print_r( $atts, true ) );
+	public function render_mute_button_block( $atts ) {
 
 		if ( ! is_array( $atts ) ) {
 			$atts = [];
@@ -239,13 +209,9 @@ class Player {
 	 * Render Dovetail podcast play button block.
 	 *
 	 * @param array<string,string> $atts Block attributes.
-	 * @param string               $content Block content.
-	 * @param \WP_Block            $block Block instance object.
 	 * @return string
 	 */
-	public function render_play_button_block( $atts, string $content, \WP_Block $block ) {
-		// error_log( __FUNCTION__ );
-		// error_log( print_r( $atts, true ) );
+	public function render_play_button_block( $atts ) {
 
 		if ( ! is_array( $atts ) ) {
 			$atts = [];
@@ -271,13 +237,9 @@ class Player {
 	 * Render Dovetail Podcast player progress bar block.
 	 *
 	 * @param array<string,string> $atts Block attributes.
-	 * @param string               $content Block content.
-	 * @param \WP_Block            $block Block instance object.
 	 * @return string
 	 */
-	public function render_progress_bar_block( $atts, string $content, \WP_Block $block ) {
-		// error_log( __FUNCTION__ );
-		// error_log( print_r( $atts, true ) );
+	public function render_progress_bar_block( $atts ) {
 
 		if ( ! is_array( $atts ) ) {
 			$atts = [];
@@ -303,13 +265,9 @@ class Player {
 	 * Render Dovetail Podcast player time current block.
 	 *
 	 * @param array<string,string> $atts Block attributes.
-	 * @param string               $content Block content.
-	 * @param \WP_Block            $block Block instance object.
 	 * @return string
 	 */
-	public function render_time_current_block( $atts, string $content, \WP_Block $block ) {
-		// error_log( __FUNCTION__ );
-		// error_log( print_r( $atts, true ) );
+	public function render_time_current_block( $atts ) {
 
 		if ( ! is_array( $atts ) ) {
 			$atts = [];
@@ -335,13 +293,9 @@ class Player {
 	 * Render Dovetail Podcast player time display block.
 	 *
 	 * @param array<string,string> $atts Block attributes.
-	 * @param string               $content Block content.
-	 * @param \WP_Block            $block Block instance object.
 	 * @return string
 	 */
-	public function render_time_display_block( $atts, string $content, \WP_Block $block ) {
-		// error_log( __FUNCTION__ );
-		// error_log( print_r( $atts, true ) );
+	public function render_time_display_block( $atts ) {
 
 		if ( ! is_array( $atts ) ) {
 			$atts = [];
@@ -367,13 +321,9 @@ class Player {
 	 * Render Dovetail Podcast player time duration block.
 	 *
 	 * @param array<string,string> $atts Block attributes.
-	 * @param string               $content Block content.
-	 * @param \WP_Block            $block Block instance object.
 	 * @return string
 	 */
-	public function render_time_duration_block( $atts, string $content, \WP_Block $block ) {
-		// error_log( __FUNCTION__ );
-		// error_log( print_r( $atts, true ) );
+	public function render_time_duration_block( $atts ) {
 
 		if ( ! is_array( $atts ) ) {
 			$atts = [];
@@ -399,13 +349,9 @@ class Player {
 	 * Render Dovetail Podcast player volume slider block.
 	 *
 	 * @param array<string,string> $atts Block attributes.
-	 * @param string               $content Block content.
-	 * @param \WP_Block            $block Block instance object.
 	 * @return string
 	 */
-	public function render_volume_slider_block( $atts, string $content, \WP_Block $block ) {
-		// error_log( __FUNCTION__ );
-		// error_log( print_r( $atts, true ) );
+	public function render_volume_slider_block( $atts ) {
 
 		if ( ! is_array( $atts ) ) {
 			$atts = [];
