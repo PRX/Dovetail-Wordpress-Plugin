@@ -23,52 +23,51 @@
  *   4. Explicit --breaking=true flag
  */
 
-const fs = require('fs-extra');
-const path = require('path');
-const yargs = require('yargs/yargs');
-const { hideBin } = require('yargs/helpers');
-const { getEnvVar } = require('./utils/env');
-const chalk = require('chalk');
-const yaml = require('js-yaml');
+const fs = require("fs-extra");
+const path = require("path");
+const yargs = require("yargs/yargs");
+const { hideBin } = require("yargs/helpers");
+const { getEnvVar } = require("./utils/env");
+const chalk = require("chalk");
+const yaml = require("js-yaml");
 
 // Get GitHub token from environment variables
 // This will work with both GitHub Actions (GITHUB_TOKEN) and local .env file
-const githubToken = getEnvVar('GITHUB_TOKEN', '');
+const githubToken = getEnvVar("GITHUB_TOKEN", "");
 
 // Parse command line arguments
 const argv = yargs(hideBin(process.argv))
-  .option('pr', {
-    type: 'number',
-    description: 'PR number',
-    demandOption: true
+  .option("pr", {
+    type: "number",
+    description: "PR number",
+    demandOption: true,
   })
-  .option('title', {
-    type: 'string',
-    description: 'PR title',
-    demandOption: true
+  .option("title", {
+    type: "string",
+    description: "PR title",
+    demandOption: true,
   })
-  .option('author', {
-    type: 'string',
-    description: 'PR author',
-    demandOption: true
+  .option("author", {
+    type: "string",
+    description: "PR author",
+    demandOption: true,
   })
-  .option('body', {
-    type: 'string',
-    description: 'PR description',
-    default: ''
+  .option("body", {
+    type: "string",
+    description: "PR description",
+    default: "",
   })
-  .option('breaking', {
-    type: 'boolean',
-    description: 'Whether the PR indicates a breaking change',
-    default: false
+  .option("breaking", {
+    type: "boolean",
+    description: "Whether the PR indicates a breaking change",
+    default: false,
   })
-  .option('branchRef', {
-    type: 'string',
-    description: 'Branch reference',
-    default: process.env.GITHUB_REF_NAME
+  .option("branchRef", {
+    type: "string",
+    description: "Branch reference",
+    default: process.env.GITHUB_REF_NAME,
   })
-  .help()
-  .argv;
+  .help().argv;
 
 /**
  * Extract change type from PR title (feat, fix, etc.)
@@ -78,8 +77,10 @@ const argv = yargs(hideBin(process.argv))
  */
 function extractChangeType(title) {
   // Updated regex to handle optional ! for breaking changes
-  const match = title.match(/^(feat|fix|docs|style|refactor|perf|test|build|ci|chore|revert)(!)?:/);
-  return match ? match[1] : 'other';
+  const match = title.match(
+    /^(feat|fix|docs|style|refactor|perf|test|build|ci|chore|revert)(!)?:/,
+  );
+  return match ? match[1] : "other";
 }
 
 /**
@@ -91,12 +92,12 @@ function extractChangeType(title) {
  */
 function isBreakingChange(title, body) {
   // Check for explicit breaking flag in command line args
-  if (argv.breaking === true || argv.breaking === 'true') {
+  if (argv.breaking === true || argv.breaking === "true") {
     return true;
   }
 
   // Check for conventional commit breaking change indicator (!)
-  if (title.includes('!:')) {
+  if (title.includes("!:")) {
     return true;
   }
 
@@ -107,7 +108,7 @@ function isBreakingChange(title, body) {
   }
 
   // Check for "BREAKING CHANGE:" or "BREAKING-CHANGE:" in body
-  if (body.includes('BREAKING CHANGE:') || body.includes('BREAKING-CHANGE:')) {
+  if (body.includes("BREAKING CHANGE:") || body.includes("BREAKING-CHANGE:")) {
     return true;
   }
 
@@ -121,8 +122,8 @@ function isBreakingChange(title, body) {
  * @returns {string|null} Milestone name or null if no milestone
  */
 const getMilestoneName = (branchRef) => {
-  if (branchRef && branchRef.startsWith('milestone/')) {
-    return branchRef.replace('milestone/', '');
+  if (branchRef && branchRef.startsWith("milestone/")) {
+    return branchRef.replace("milestone/", "");
   }
   return null;
 };
@@ -130,15 +131,9 @@ const getMilestoneName = (branchRef) => {
 /**
  * Generate a changeset file
  */
-const generateChangeset = async ({
-  pr,
-  title,
-  author,
-  body,
-  branchRef
-}) => {
+const generateChangeset = async ({ pr, title, author, body, branchRef }) => {
   // Create .changesets directory if it doesn't exist
-  const changesetDir = path.join(process.cwd(), '.changesets');
+  const changesetDir = path.join(process.cwd(), ".changesets");
   await fs.ensureDir(changesetDir);
 
   // Extract PR information
@@ -147,8 +142,8 @@ const generateChangeset = async ({
   const milestone = getMilestoneName(branchRef);
 
   // Sanitize the inputs to handle special characters
-  const sanitizedTitle = title.replace(/`/g, '\\`');
-  const sanitizedBody = body.replace(/`/g, '\\`');
+  const sanitizedTitle = title.replace(/\\/g, "\\\\").replace(/`/g, "\\`");
+  const sanitizedBody = body.replace(/\\/g, "\\\\").replace(/`/g, "\\`");
 
   const changesetData = {
     title: sanitizedTitle,
@@ -163,12 +158,13 @@ const generateChangeset = async ({
   const yamlContent = Object.entries(changesetData)
     .map(([key, value]) => {
       // For string values that contain special characters, wrap in quotes
-      const formattedValue = typeof value === 'string' ?
-        `"${value.replace(/"/g, '\\"')}"` :
-        value;
+      const formattedValue =
+        typeof value === "string"
+          ? `"${value.replace(/\\/g, "\\\\").replace(/"/g, '\\"')}"`
+          : value;
       return `${key}: ${formattedValue}`;
     })
-    .join('\n');
+    .join("\n");
 
   const content = `---
 ${yamlContent}
@@ -178,17 +174,17 @@ ${sanitizedBody || sanitizedTitle}
 `;
 
   // Generate unique filename with timestamp and PR number
-  const timestamp = new Date().toISOString().replace(/[:.]/g, '').split('T')[0];
+  const timestamp = new Date().toISOString().replace(/[:.]/g, "").split("T")[0];
   const filename = path.join(changesetDir, `${timestamp}-pr-${pr}.md`);
 
   // Write changeset file
-  await fs.promises.writeFile(filename, content, 'utf8');
+  await fs.promises.writeFile(filename, content, "utf8");
   console.log(`Changeset created: ${filename}`);
   return filename;
 };
 
 // Run the script
-generateChangeset(argv).catch(err => {
-  console.error('Error generating changeset:', err);
+generateChangeset(argv).catch((err) => {
+  console.error("Error generating changeset:", err);
   process.exit(1);
 });

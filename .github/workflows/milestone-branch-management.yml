@@ -34,14 +34,18 @@ jobs:
     steps:
       - name: Debug Event
         if: github.event_name == 'pull_request_target'
+        env:
+          BASE_REF: ${{ github.event.pull_request.base.ref }}
+          HEAD_REF: ${{ github.event.pull_request.head.ref }}
+          PR_TITLE: ${{ github.event.pull_request.title }}
         run: |
           echo "Event name: ${{ github.event_name }}"
           echo "Action: ${{ github.event.action }}"
           echo "PR merged: ${{ github.event.pull_request.merged }}"
-          echo "Base ref: ${{ github.event.pull_request.base.ref }}"
-          echo "Head ref: ${{ github.event.pull_request.head.ref }}"
+          echo "Base ref: $BASE_REF"
+          echo "Head ref: $HEAD_REF"
           echo "PR number: ${{ github.event.pull_request.number }}"
-          echo "PR title: ${{ github.event.pull_request.title }}"
+          echo "PR title: $PR_TITLE"
 
   generate-changeset:
     permissions:
