@@ -46,6 +46,9 @@ export namespace Components {
     interface DtpcTimeDuration {
         "duration": number;
     }
+    interface DtpcVolumeControls {
+        "volume": number;
+    }
     interface DtpcVolumeSlider {
         "orient": 'vertical' | 'horizontal';
         "volume": number;
@@ -450,6 +453,12 @@ declare global {
         prototype: HTMLDtpcTimeDurationElement;
         new (): HTMLDtpcTimeDurationElement;
     };
+    interface HTMLDtpcVolumeControlsElement extends Components.DtpcVolumeControls, HTMLStencilElement {
+    }
+    var HTMLDtpcVolumeControlsElement: {
+        prototype: HTMLDtpcVolumeControlsElement;
+        new (): HTMLDtpcVolumeControlsElement;
+    };
     interface HTMLDtpcVolumeSliderElementEventMap {
         "dtpc-control-init": any;
     }
@@ -495,6 +504,7 @@ declare global {
         "dtpc-time-current": HTMLDtpcTimeCurrentElement;
         "dtpc-time-display": HTMLDtpcTimeDisplayElement;
         "dtpc-time-duration": HTMLDtpcTimeDurationElement;
+        "dtpc-volume-controls": HTMLDtpcVolumeControlsElement;
         "dtpc-volume-slider": HTMLDtpcVolumeSliderElement;
         "icon-pause": HTMLIconPauseElement;
         "icon-play": HTMLIconPlayElement;
@@ -549,6 +559,9 @@ declare namespace LocalJSX {
     interface DtpcTimeDuration {
         "duration"?: number;
         "onDtpc-control-init"?: (event: DtpcTimeDurationCustomEvent<any>) => void;
+    }
+    interface DtpcVolumeControls {
+        "volume"?: number;
     }
     interface DtpcVolumeSlider {
         "onDtpc-control-init"?: (event: DtpcVolumeSliderCustomEvent<any>) => void;
@@ -813,6 +826,7 @@ declare namespace LocalJSX {
         "dtpc-time-current": DtpcTimeCurrent;
         "dtpc-time-display": DtpcTimeDisplay;
         "dtpc-time-duration": DtpcTimeDuration;
+        "dtpc-volume-controls": DtpcVolumeControls;
         "dtpc-volume-slider": DtpcVolumeSlider;
         "icon-pause": IconPause;
         "icon-play": IconPlay;
@@ -832,6 +846,7 @@ declare module "@stencil/core" {
             "dtpc-time-current": LocalJSX.DtpcTimeCurrent & JSXBase.HTMLAttributes<HTMLDtpcTimeCurrentElement>;
             "dtpc-time-display": LocalJSX.DtpcTimeDisplay & JSXBase.HTMLAttributes<HTMLDtpcTimeDisplayElement>;
             "dtpc-time-duration": LocalJSX.DtpcTimeDuration & JSXBase.HTMLAttributes<HTMLDtpcTimeDurationElement>;
+            "dtpc-volume-controls": LocalJSX.DtpcVolumeControls & JSXBase.HTMLAttributes<HTMLDtpcVolumeControlsElement>;
             "dtpc-volume-slider": LocalJSX.DtpcVolumeSlider & JSXBase.HTMLAttributes<HTMLDtpcVolumeSliderElement>;
             "icon-pause": LocalJSX.IconPause & JSXBase.HTMLAttributes<HTMLIconPauseElement>;
             "icon-play": LocalJSX.IconPlay & JSXBase.HTMLAttributes<HTMLIconPlayElement>;

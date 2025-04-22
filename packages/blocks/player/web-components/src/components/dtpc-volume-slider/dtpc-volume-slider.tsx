@@ -49,7 +49,9 @@ export class DtpcVolumeSlider {
 
     return (
       <Host aria-label={ariaLabel} aria-valuemin="0" aria-valuemax="1" aria-valuenow={volume} aria-valuetext={ariaValueText}>
-        <dtpc-slider defaultValue={volume} min={0} max={1} step={0.01} value={volume} orient={this.orient}></dtpc-slider>
+        <div class="wrapper">
+          <dtpc-slider defaultValue={volume} min={0} max={1} step={0.01} value={volume} orient={this.orient}></dtpc-slider>
+        </div>
       </Host>
     );
   }

@@ -39,8 +39,26 @@ function TooltipContent({
   children,
   ...props
 }: React.ComponentProps<typeof TooltipPrimitive.Content>) {
+	const [container, setContainer] = React.useState(null);
+
+  React.useEffect(() => {
+    const divId = 'dtpc-tooltips';
+    let tooltipsDiv = document.getElementById(divId);
+
+    if (!tooltipsDiv) {
+      tooltipsDiv = document.createElement('div');
+
+      tooltipsDiv.id = divId;
+      tooltipsDiv.classList.add('dtpc-tw');
+
+      document.querySelector('body').appendChild(tooltipsDiv);
+    }
+
+    setContainer(tooltipsDiv);
+  }, [])
+
   return (
-    <TooltipPrimitive.Portal>
+    <TooltipPrimitive.Portal container={container}>
       <TooltipPrimitive.Content
         data-slot="tooltip-content"
         sideOffset={sideOffset}

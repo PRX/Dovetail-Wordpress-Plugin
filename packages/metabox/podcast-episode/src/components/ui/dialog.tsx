@@ -49,8 +49,26 @@ function DialogContent({
   children,
   ...props
 }: React.ComponentProps<typeof DialogPrimitive.Content>) {
+  const [container, setContainer] = React.useState(null);
+
+  React.useEffect(() => {
+    const divId = 'dtpc-dialogs';
+    let tooltipsDiv = document.getElementById(divId);
+
+    if (!tooltipsDiv) {
+      tooltipsDiv = document.createElement('div');
+
+      tooltipsDiv.id = divId;
+      tooltipsDiv.classList.add('dtpc-tw');
+
+      document.querySelector('body').appendChild(tooltipsDiv);
+    }
+
+    setContainer(() => tooltipsDiv);
+  }, [])
+
   return (
-    <DialogPortal data-slot="dialog-portal">
+    <DialogPortal data-slot="dialog-portal" container={container}>
       <DialogOverlay />
       <DialogPrimitive.Content
         data-slot="dialog-content"

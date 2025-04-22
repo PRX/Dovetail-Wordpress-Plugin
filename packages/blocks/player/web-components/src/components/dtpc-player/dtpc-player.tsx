@@ -113,7 +113,7 @@ export class DtpcPlayer {
                 <dtpc-play-button></dtpc-play-button>
                 <dtpc-progress-bar></dtpc-progress-bar>
                 <dtpc-time-display></dtpc-time-display>
-                <dtpc-mute-button></dtpc-mute-button>
+                <dtpc-volume-controls></dtpc-volume-controls>
               </Fragment>
             )}
           </div>
