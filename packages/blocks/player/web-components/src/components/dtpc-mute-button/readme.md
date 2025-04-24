@@ -16,7 +16,7 @@
 
 ### Used by
 
- - [dtpc-player](../dtpc-player)
+ - [dtpc-volume-controls](../dtpc-volume-controls)
 
 ### Depends on
 
@@ -28,7 +28,7 @@
 graph TD;
   dtpc-mute-button --> dtpc-button
   dtpc-mute-button --> icon-volume
-  dtpc-player --> dtpc-mute-button
+  dtpc-volume-controls --> dtpc-mute-button
   style dtpc-mute-button fill:#f9f,stroke:#333,stroke-width:4px
 ```
 

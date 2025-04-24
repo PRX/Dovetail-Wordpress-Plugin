@@ -408,11 +408,16 @@ class PostMetaBox {
 	 */
 	public function render_meta_box() {
 		?>
+		<style>
+				.grid {
+					padding: 0;
+				}
+		</style>
 		<input type="hidden"
 			name="<?php echo esc_attr( DTPODCASTS_POST_META_KEY . '_nonce' ); ?>"
 			value="<?php echo esc_attr( wp_create_nonce( self::APP_CONTAINER_ID ) ); ?>"
 		/>
-		<div id="<?php echo esc_attr( self::APP_CONTAINER_ID ); ?>" class="tailwind">
+		<div id="<?php echo esc_attr( self::APP_CONTAINER_ID ); ?>" class="dtpc-tw">
 			<div style="margin-block-start: 12px; min-height: 2.5rem"></div>
 		</div>
 		<?php

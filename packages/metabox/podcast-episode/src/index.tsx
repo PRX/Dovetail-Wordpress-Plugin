@@ -11,6 +11,20 @@ const episodeData = JSON.parse(episodeMetaDataJson) as EpisodeData;
 const postMetaboxOptions = JSON.parse(postMetaboxOptionsJson) as PostMetaboxOptions;
 const { attachedMedia } = postMetaboxOptions || {};
 let episode = episodeData;
+const portalDivs = ['dtpc-dialogs', 'dtpc-dropdowns', 'dtpc-tooltips'];
+
+portalDivs.forEach((divId) => {
+  let portalDiv = document.getElementById(divId);
+
+  if (!portalDiv) {
+    portalDiv = document.createElement('div');
+
+    portalDiv.id = divId;
+    portalDiv.classList.add('dtpc-tw');
+
+    document.querySelector('body').appendChild(portalDiv);
+  }
+})
 
 if (typeof attachedMedia === 'object' && attachedMedia !== null ) {
   postMetaboxOptions.attachedMedia = new Map(Object.entries(attachedMedia));

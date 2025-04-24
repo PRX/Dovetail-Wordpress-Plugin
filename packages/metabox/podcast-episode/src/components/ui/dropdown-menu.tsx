@@ -34,8 +34,26 @@ function DropdownMenuContent({
   sideOffset = 4,
   ...props
 }: React.ComponentProps<typeof DropdownMenuPrimitive.Content>) {
+  const [container, setContainer] = React.useState(null);
+
+  React.useEffect(() => {
+    const divId = 'dtpc-dropdowns';
+    let tooltipsDiv = document.getElementById(divId);
+
+    if (!tooltipsDiv) {
+      tooltipsDiv = document.createElement('div');
+
+      tooltipsDiv.id = divId;
+      tooltipsDiv.classList.add('dtpc-tw');
+
+      document.querySelector('body').appendChild(tooltipsDiv);
+    }
+
+    setContainer(tooltipsDiv);
+  }, [])
+
   return (
-    <DropdownMenuPrimitive.Portal>
+    <DropdownMenuPrimitive.Portal container={container}>
       <DropdownMenuPrimitive.Content
         data-slot="dropdown-menu-content"
         sideOffset={sideOffset}

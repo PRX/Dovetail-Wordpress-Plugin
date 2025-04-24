@@ -348,6 +348,11 @@ export function Enclosure({ onChange}: EnclosureProps) {
       'loadedmetadata',
       handleAudioLoadedMetadata
     );
+
+    return () => {
+      audioRef.current.pause();
+      audioRef.current = null;
+    }
   }, [])
 
   useEffect(() => {

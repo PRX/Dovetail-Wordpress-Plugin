@@ -7,6 +7,7 @@
   --dtpc-button--surface: var(--dtpc-play-button--surface);
   --dtpc-button--surface--hover: var(--dtpc-play-button--surface--hover);
   --dtpc-button--surface--active: var(--dtpc-play-button--surface--playing);
+  --dtpc-button--surface-blur: var(--dtpc-play-button--surface-blur);
   --dtpc-button--surface-opacity: var(--dtpc-play-button--surface-opacity);
   --dtpc-button--surface-opacity--hover: var(--dtpc-play-button--surface-opacity--hover);
   --dtpc-button--surface-opacity--active: var(--dtpc-play-button--surface-opacity--playing, 0);

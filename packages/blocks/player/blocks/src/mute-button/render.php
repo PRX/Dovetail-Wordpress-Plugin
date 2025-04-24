@@ -9,4 +9,4 @@
 
 $player = new \DovetailPodcasts\Content\Player\Player();
 
-echo wp_kses( $player->render_mute_button_block( $attributes, $content, $block ), $player->get_allowed_wp_kses_html() );
+echo wp_kses( $player->render_block( $attributes, $content, $block ), $player->get_allowed_wp_kses_html() );

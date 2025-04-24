@@ -1,0 +1,50 @@
+:host {
+  --_dtpc-volume-controls--spacing: var(--dtpc-volume-controls--spacing, 0.25rem);
+
+  --dtpc-volume-slider--padding-inline: 0.5rem;
+  --dtpc-volume-slider--surface: color-mix(in oklch, currentColor 20%, transparent);
+
+  color: var(--_dtpc-player--time--color, currentColor);
+  font-family: var(--_dtpc-player--time--font-family, inherit);
+  font-size: var(--_dtpc-player--time--font-size, inherit);
+  font-weight: var(--_dtpc-player--time--font-weight, inherit);
+}
+
+.wrapper {
+  --_spacing: var(--_dtpc-volume-controls--spacing);
+  --_button-size: var(--dtpc-mute-button--size, var(--dtpc-button--size, 1.5rem));
+  --_button-padding: var(--dtpc-mute-button--padding, var(--dtpc-button--padding, 0.325rem));
+
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  gap: var(--_spacing);
+  height: calc(var(--_button-size) + var(--_button-padding) * 2);
+}
+
+dtpc-volume-slider {
+  transition-property: opacity, translate;
+  transition-duration: 200ms;
+  transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+  position: relative;
+  visibility: hidden;
+  translate: 0 1rem;
+  pointer-events: none;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    top: 100%;
+    bottom: auto;
+    height: var(--_spacing);
+  }
+
+  :where(:hover, :focus-within) > &,
+  &:where(:hover, :focus-within) {
+    visibility: visible;
+    translate: 0 0;
+    pointer-events: all;
+  }
+}

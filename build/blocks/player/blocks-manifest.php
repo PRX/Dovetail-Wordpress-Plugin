@@ -254,6 +254,37 @@ return array(
 			)
 		)
 	),
+	'volume-controls' => array(
+		'$schema' => 'https://schemas.wp.org/trunk/block.json',
+		'apiVersion' => 3,
+		'name' => 'dovetail-podcasts-player/volume-controls',
+		'version' => '0.1.0',
+		'title' => 'Dovetail Player - volume-controls',
+		'category' => 'media',
+		'icon' => 'controls-volumeon',
+		'description' => 'Mute button with Volume slider on hover for Dovetail Podcasts Player.',
+		'ancestor' => array(
+			'dovetail-podcasts-player/player'
+		),
+		'example' => array(
+			
+		),
+		'supports' => array(
+			'html' => false
+		),
+		'textdomain' => 'dovetail-podcasts',
+		'editorScript' => 'file:./index.js',
+		'editorStyle' => 'file:./index.css',
+		'style' => 'file:./style-index.css',
+		'render' => 'file:./render.php',
+		'viewScript' => 'file:./view.js',
+		'attributes' => array(
+			'volume' => array(
+				'type' => 'number',
+				'default' => 0.5
+			)
+		)
+	),
 	'volume-slider' => array(
 		'$schema' => 'https://schemas.wp.org/trunk/block.json',
 		'apiVersion' => 3,
