@@ -2,17 +2,19 @@
 
 <!-- Auto Generated Below -->
 
+
 ## Properties
 
 | Property | Attribute | Description | Type     | Default |
 | -------- | --------- | ----------- | -------- | ------- |
 | `volume` | `volume`  |             | `number` | `0.8`   |
 
+
 ## Dependencies
 
 ### Used by
 
-- [dtpc-player](../dtpc-player)
+ - [dtpc-player](../dtpc-player)
 
 ### Depends on
 
@@ -20,7 +22,6 @@
 - [dtpc-volume-slider](../dtpc-volume-slider)
 
 ### Graph
-
 ```mermaid
 graph TD;
   dtpc-volume-controls --> dtpc-mute-button
@@ -32,6 +33,6 @@ graph TD;
   style dtpc-volume-controls fill:#f9f,stroke:#333,stroke-width:4px
 ```
 
----
+----------------------------------------------
 
-_Built with [StencilJS](https://stenciljs.com/)_
+*Built with [StencilJS](https://stenciljs.com/)*

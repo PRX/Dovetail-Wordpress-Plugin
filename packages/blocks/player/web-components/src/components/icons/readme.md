@@ -1,6 +1,4 @@
-# icon-volume
-
-
+# Icons
 
 <!-- Auto Generated Below -->
 
