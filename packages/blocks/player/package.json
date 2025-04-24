@@ -1,0 +1,21 @@
+{
+  "name": "dovetail-podcasts-player",
+  "version": "1.0.0",
+  "description": "Web components and Wordpress blocks for Dovetail podcast episode player.",
+  "main": "index.js",
+  "scripts": {
+    "build:web-components": "npm run build --workspace=web-components",
+    "build": "npm run build --workspace=web-components --workspace=blocks",
+    "test": "npm run test --workspace=web-components --workspace=blocks"
+  },
+  "author": "PRX",
+  "license": "GPL-3.0-or-later",
+  "workspaces": [
+    "blocks",
+    "web-components"
+  ],
+  "devDependencies": {
+    "@types/node": "^22.13.13",
+    "typescript": "^5.8.2"
+  }
+}
