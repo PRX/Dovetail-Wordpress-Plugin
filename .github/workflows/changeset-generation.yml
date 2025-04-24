@@ -199,16 +199,16 @@ jobs:
         id: check_pr
         run: |
           # Debug info
-          echo "Checking for PRs from develop to master..."
+          echo "Checking for PRs from develop to main..."
           echo "Repository: ${{ github.repository }}"
           echo "Owner: ${{ github.repository_owner }}"
 
-          # Check if there's already a PR from develop to master
+          # Check if there's already a PR from develop to main
           # Note: Removed the owner prefix from head as it's already in the repo context
           PR_LIST=$(curl -s --max-time 30 \
             -H "Authorization: token ${{ secrets.REPO_PAT }}" \
             -H "Accept: application/vnd.github.v3+json" \
-            "https://api.github.com/repos/${{ github.repository }}/pulls?state=open&head=develop&base=master")
+            "https://api.github.com/repos/${{ github.repository }}/pulls?state=open&head=develop&base=main")
 
           # Debug the response
           echo "API Response:"
@@ -314,7 +314,7 @@ jobs:
           echo "API Payload:"
           echo "$PAYLOAD" | jq '.'
 
-          # Create a new PR from develop to master
+          # Create a new PR from develop to main
           RESPONSE=$(curl -X POST \
             -H "Authorization: token ${{ secrets.REPO_PAT }}" \
             -H "Accept: application/vnd.github+json" \
