@@ -7,88 +7,36 @@
 [![WordPress Coding Standards](https://github.com/PRX/Dovetail-Wordpress-Plugin/workflows/WordPress%20Coding%20Standards/badge.svg)](https://github.com/PRX/Dovetail-Wordpress-Plugin/actions?query=workflow%3A%22WordPress+Coding+Standards%22)
 [![CodeQL](https://github.com/PRX/Dovetail-Wordpress-Plugin/workflows/CodeQL/badge.svg)](https://github.com/PRX/Dovetail-Wordpress-Plugin/actions?query=workflow%3A%22CodeQL%22)
 
-> 🚧 **WORK IN PROGRESS...**
+Dovetail Podcasts plugin connects your Wordpress site to Dovetail Podcasts.
 
-Dovetail Podcasts ...
+## 🌟 Key Features
 
-Publish your posts as podcast episodes to the Dovetail podcasting platform. Listen to your podcast episodes with the provided customizable player that can be added to any of your front-end templates.
+- **Turn your Posts into Dovetail podcast episodes.** You can even use your own custom post type.
+- **Highly customizable player.** Easily add players to your frontend templates and make it fit your site perfectly.
 
 ## 🚀 Get Started
 
 1. [Sign up for a Dovetail account](https://id.prx.org).
-2. Request creation of a Client Application for your site.
+2. [Request creation of a Client Application](mailto:help@prx.org?subject=Request%20For%20%Wordpress%20Plugin%20Client%20Application) for your Wordpress site. Please include the following information in your request:
+
+- Email for the user the application should created for.
+- URL of the Wordpress site using the plugin.
+- If you require a staging application for your sites staging and development environments, include user email and staging site URL in your request.
+
 3. [Install Dovetail Podcasts](./docs/installation.md): `wp plugin install dovetail-podcasts --activate`
-4. [Connect Wordpress to Dovetail](./docs/setup-auth.md) using your Client Application credentials.
+4. [Connect Wordpress to Dovetail](./docs/settings-client-application.md) using your Client Application credentials.
+5. [Configure Dovetail Podcasts settings.](./docs/settings-general.md)
 
-[TODO: Move sections below to `/docs`.]
+## 📖 **Documentation**
 
-## Installation
+- [Install Dovetail Podcasts](./docs/installation.md)
+- [Connect Dovetail Podcasts](./docs/settings-client-application.md)
+- [Configure Dovetail Podcasts](./docs/settings-general.md)
+- [Add Dovetail Podcasts Player](./docs/player.md)
 
-(COMING SOON) Install via Wordpress admin by going to **Plugins > Add New Plugin** and searching for 'Dovetail Podcasts', or run:
-
-```bash
-wp plugin install dovetail-podcasts --activate
-```
-
-Installation can also be done manually by downloading the [latest release](https://github.com/PRX/Dovetail-Wordpress-Plugin/releases) file and extracting it into `wp-content/plugins`, then run:
-
-```bash
-wp plugin activate dovetail-podcasts
-```
-
-Once activated, look for the **Dovetail** link in the main admin menu.
-
-### Connect To Dovetail
-
-To connect the plugin to Dovetail, got to **Dovetail** settings and provide your Client Application key and secret, which can be found by logging into your [Dovetail account](https://id.prx.tech/). Go to the **Client Applications** tab and select which application you want to use. Use the Key and Secret values to connect Wordpress plugin to Dovetail. Once connected, you should be presented with a confirmation, your user information, and a list of podcasts you have access to.
-
-> Do not see the **Client Applications** tab? Contact PRX Support to request an application be setup for you. If your site has a staging or development environment, also request a staging application be created, so your testing doesn't affect your actual podcast episodes and feeds.
-
-### Configure Settings
-
-Once Dovetail connection is complete, let's get things configured for your site.
-
-#### Podcasts Post Types
-
-By default, Dovetail Podcasts will treat Posts as podcast episodes, and provide a post editor meta box to add episode information to the post. All available post types that are compatible with the meta box will be listed. If the post type you use for podcast episodes is not listed, makes ure it is configured to support custom fields.
-
-#### Delete Uploaded Media After Publishing
-
-Dovetail Podcasts will use your Wordpress Media Library to upload audio files to the server and connect those files with the post. Dovetail will retrieve the audio file from your server, process it for distribution, and then host the audio URL used in your feeds. This behavior is similar what media offloading plugin do to store media files in cloud storage, such as AWS S3 or Google Cloud.
-
-Enable this option if you would like to reduce storage costs for your site hosting and do not use a media offloading plugin. When podcast episode posts are published, the audio in your media library will be deleted.
-
-#### Manage Client Application
-
-In the case where you need to change what Client Application you use to connect to Dovetail, the first thing that needs to be done is to remove the existing connection. Enter "DELETE" then click **Save** to remove the current Client Application's key and secret. All other settings will be kept.
-
-> Deactivating the Dovetail Podcasts plugin will also remove the Client Application's key and secret. All other other settings will remain until the plugin is deleted via the **Plugins** admin.
-
-## Create Podcast Episode
-
-Steps to add podcast episode data to a post...
-
-### Create/Update Post
-
-### Publishing
-
-#### Scheduled Publishing
-
-### Remove Podcast Episode
-
-#### Delete Post
-
-#### Remove Podcast Episode Data From Post
-
-## Play Podcast Episode On Your Site
-
-Steps to add player to frontend templates...
-
-### Block Editor
-
-### Shortcodes
-
----
+> ## 🫶 Thank You For Choosing Dovetail
+>
+> We look forward to aiding you on your podcasting adventure! If you need any assistance setting up Dovetail Podcasts on your Wordpress site, feel free to contact [our amazing support team](mailto:help@prx.org?subject=Help%20With%20Dovetai%20Podcasts%20Wordpress%20Plugin). Submit any bugs you find to our [Github Issues](https://github.com/PRX/Dovetail-Wordpress-Plugin/issues).
 
 ## Development
 
