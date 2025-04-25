@@ -1,4 +1,4 @@
-## Working With Podcast Episode Posts
+# Publish Podcast Episodes With Posts
 
 Steps to add podcast episode data to a post...
 
