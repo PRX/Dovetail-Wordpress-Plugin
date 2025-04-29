@@ -427,9 +427,6 @@ class PostMetaBox {
 					}
 				}
 			}
-			.grid {
-				padding: 0;
-			}
 		</style>
 		<input type="hidden"
 			name="<?php echo esc_attr( DTPODCASTS_POST_META_KEY . '_nonce' ); ?>"
