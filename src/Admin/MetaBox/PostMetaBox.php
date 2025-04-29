@@ -63,7 +63,7 @@ class PostMetaBox {
 			add_action( "rest_prepare_{$post_type}", [ $this, 'rest_prepare' ], 999, 3 );
 		}
 
-		add_action( 'add_meta_boxes', [ $this, 'initialize_meta_box' ], 999, 2 );
+		add_action( 'add_meta_boxes', [ $this, 'initialize_meta_box' ], 9, 2 );
 		add_action( 'save_post', [ $this, 'save_post' ], 999, 2 );
 		add_action( 'trashed_post', [ $this, 'trashed_post' ], 999 );
 		add_action( 'before_delete_post', [ $this, 'before_delete_post' ], 999, 2 );
