@@ -1,15 +1,24 @@
 # Installation
 
-(COMING SOON) Install via Wordpress admin by going to **Plugins > Add New Plugin** and searching for 'Dovetail Podcasts', or run:
+> Installation from WP.org is coming soon. For now, please install manually.
+
+<!--
+## Install from WP.org
+
+(COMING SOON) Install via Wordpress admin by going to **Plugins > Add Plugin** and searching for 'Dovetail Podcasts', or run:
 
 ```bash
 wp plugin install dovetail-podcasts --activate
 ```
+-->
 
-Installation can also be done manually by downloading the [latest release](https://github.com/PRX/Dovetail-Wordpress-Plugin/releases) file and extracting it into `wp-content/plugins`, then run:
+## Manual Installation
 
-```bash
-wp plugin activate dovetail-podcasts
-```
+1. Downloading the [latest release](https://github.com/PRX/Dovetail-Wordpress-Plugin/releases).
+2. Log into your Wordpress admin, and go to **Plugins > Add Plugin**.
+3. Click the **Upload Plugin** button.
+4. Click the **Choose File** input, then select the release .zip file you downloaded.
+5. Click **Install Now** to upload the .zip file to your site.
+6. When prompted, activate the plugin.
 
-Once activated, look for the **Dovetail** link in the main admin menu.
+Look for the **Dovetail** link in the main admin menu. Click it to [setup Dovetail Podcasts](./settings-client-application.md).
