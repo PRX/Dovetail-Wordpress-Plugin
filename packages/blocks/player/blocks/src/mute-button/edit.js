@@ -45,7 +45,7 @@ export default function Edit(props) {
 	return (
 		<DtpcMuteButton {...blockProps}>
 			<DtpcButton>
-				<VolumeOffIcon></VolumeOffIcon>
+				<VolumeOffIcon />
 			</DtpcButton>
 		</DtpcMuteButton>
 	);

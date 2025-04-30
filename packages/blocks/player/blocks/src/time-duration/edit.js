@@ -40,8 +40,9 @@ export default function Edit(props) {
 		...rest,
 		className: cn({}, className),
 	};
-	const duration = context["dovetail-podcasts/duration"] || "10:00";
+	const duration = context?.["dovetail-podcasts-player/duration"] || "10:00";
 
+	console.log("time duration: props", props);
 	console.log("time duration: attributes", attributes);
 	console.log("time duration: context", context);
 

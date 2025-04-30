@@ -31,7 +31,8 @@ import "./editor.scss";
  */
 
 import { cn } from "@/utils";
-import { DtpcVolumeSlider, DtpcSlider } from "@/components";
+import { DtpcVolumeControls, DtpcButton, DtpcMuteButton } from "@/components";
+import { Volume2Icon } from "lucide-react";
 
 export default function Edit(props) {
 	const { attributes } = props;
@@ -41,18 +42,15 @@ export default function Edit(props) {
 		className: cn({}, className),
 	};
 
-	console.log("volume slider: attributes", attributes);
+	console.log("volume controls: attributes", attributes);
 
 	return (
-		<DtpcVolumeSlider {...blockProps}>
-			<DtpcSlider>
-				<div className="track">
-					<div className="progress"></div>
-					<div className="range">
-						<span className="scrubber"></span>
-					</div>
-				</div>
-			</DtpcSlider>
-		</DtpcVolumeSlider>
+		<DtpcVolumeControls {...blockProps}>
+			<DtpcMuteButton>
+				<DtpcButton>
+					<Volume2Icon />
+				</DtpcButton>
+			</DtpcMuteButton>
+		</DtpcVolumeControls>
 	);
 }
