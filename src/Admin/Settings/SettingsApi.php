@@ -813,7 +813,9 @@ class SettingsApi {
 		<script>
 			jQuery(document).ready(function ($) {
 				// Initiate Color Picker.
-				$('.wp-color-picker-field').wpColorPicker();
+				$('.wp-color-picker-field').wpColorPicker({
+					palettes: false
+				});
 
 				// Switches option sections.
 				const $groups = $('.group');

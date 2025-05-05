@@ -1,39 +1,51 @@
 :host {
+  --_dtpc-play-button--foreground--playing: var(--dtpc-play-button--foreground--playing, var(--dtpc-play-button--foreground, var(--_dtpc-player--foreground)));
+  --_dtpc-play-button--surface--playing: var(--dtpc-play-button--surface--playing, var(--dtpc-play-button--surface));
+  --_dtpc-play-button--border-color--playing: var(--dtpc-play-button--border-color--playing, var(--_dtpc-play-button--foreground--playing));
+  --_dtpc-play-button--border-thickness--playing: var(--dtpc-play-button--border-thickness--playing, var(--dtpc-play-button--border-thickness, 0.125rem));
+  --_dtpc-play-button--border-radius--playing: var(--dtpc-play-button--border-radius--playing, var(--dtpc-play-button--border-radius));
+
   --dtpc-button--size: var(--dtpc-play-button--size, 2rem);
   --dtpc-button--padding: var(--dtpc-play-button--padding, 0.5rem);
   --dtpc-button--foreground: var(--dtpc-play-button--foreground);
   --dtpc-button--foreground--hover: var(--dtpc-play-button--foreground--hover);
-  --dtpc-button--foreground--active: var(--dtpc-play-button--foreground--playing);
+  --dtpc-button--foreground--active: var(--dtpc-play-button--foreground--active);
   --dtpc-button--surface: var(--dtpc-play-button--surface);
   --dtpc-button--surface--hover: var(--dtpc-play-button--surface--hover);
-  --dtpc-button--surface--active: var(--dtpc-play-button--surface--playing);
+  --dtpc-button--surface--active: var(--dtpc-play-button--surface--active);
   --dtpc-button--surface-blur: var(--dtpc-play-button--surface-blur);
-  --dtpc-button--surface-opacity: var(--dtpc-play-button--surface-opacity);
-  --dtpc-button--surface-opacity--hover: var(--dtpc-play-button--surface-opacity--hover);
-  --dtpc-button--surface-opacity--active: var(--dtpc-play-button--surface-opacity--playing, 0);
-  --dtpc-button--border-color: var(--dtpc-play-button--border-color, transparent);
-  --dtpc-button--border-color--hover: var(--dtpc-play-button--border-color--hover, transparent);
-  --dtpc-button--border-color--active: var(--dtpc-play-button--border-color--playing, var(--_dtpc-player--foreground));
+  --dtpc-button--border-color: var(--dtpc-play-button--border-color);
+  --dtpc-button--border-color--hover: var(--dtpc-play-button--border-color--hover);
+  --dtpc-button--border-color--active: var(--dtpc-play-button--border-color--active, var(--dtpc-button--foreground, currentColor));
   --dtpc-button--border-radius: var(--dtpc-play-button--border-radius);
   --dtpc-button--border-radius--hover: var(--dtpc-play-button--border-radius--hover);
-  --dtpc-button--border-radius--active: var(--dtpc-play-button--border-radius--playing);
-  --dtpc-button--border-width: var(--dtpc-play-button--border-width, 0.125);
-  --dtpc-button--border-width--hover: var(--dtpc-play-button--border-width--hover, 0.125);
-  --dtpc-button--border-width--active: var(--dtpc-play-button--border-width--playing, 0.125);
+  --dtpc-button--border-radius--active: var(--dtpc-play-button--border-radius--active);
+  --dtpc-button--border-thickness: var(--dtpc-play-button--border-thickness, 0.125rem);
+  --dtpc-button--border-thickness--hover: var(--dtpc-play-button--border-thickness--hover, var(--dtpc-play-button--border-thickness, 0.125rem));
+  --dtpc-button--border-thickness--active: var(--dtpc-play-button--border-thickness--active, var(--dtpc-play-button--border-thickness, 0.125rem));
   --dtpc-button--focus-ring-color: var(--dtpc-play-button--focus-ring-color);
   --dtpc-button--focus-ring-offset: var(--dtpc-play-button--focus-ring-offset);
-  --dtpc-button--focus-ring-width: var(--dtpc-play-button--focus-ring-width);
+  --dtpc-button--focus-ring-thickness: var(--dtpc-play-button--focus-ring-thickness);
 }
 
 :host([data-status='playing']) {
-  --dtpc-button--foreground: var(--dtpc-button--foreground--active);
-  --dtpc-button--surface: var(--dtpc-button--surface--active);
-  --dtpc-button--surface-opacity: var(--dtpc-button--surface-opacity--active);
-  --dtpc-button--border-color: var(--dtpc-button--border-color--active);
-  --dtpc-button--border-width: var(--dtpc-button--border-width--active);
-  --dtpc-button--border-radius: var(--dtpc-button--border-radius--active);
-
-  &:hover {
-    --dtpc-button--surface-opacity: var(--dtpc-button--surface-opacity--hover);
-  }
+  --dtpc-button--foreground: var(--_dtpc-play-button--foreground--playing);
+  --dtpc-button--surface: var(--_dtpc-play-button--surface--playing);
+  --dtpc-button--border-color: var(--_dtpc-play-button--border-color--playing);
+  --dtpc-button--border-thickness: var(--_dtpc-play-button--border-thickness--playing);
+  --dtpc-button--border-radius: var(--_dtpc-play-button--border-radius--playing);
+}
+:host([data-status='playing']:hover) {
+  --dtpc-button--foreground--hover: var(--dtpc-play-button--foreground--playing--hover, var(--dtpc-play-button--foreground--hover));
+  --dtpc-button--surface--hover: var(--dtpc-play-button--surface--playing--hover, var(--dtpc-play-button--surface--hover));
+  --dtpc-button--border-color--hover: var(--dtpc-play-button--border-color--playing--hover, var(--_dtpc-play-button--border-color--playing));
+  --dtpc-button--border-thickness--hover: var(--dtpc-play-button--border-thickness--playing--hover, var(--_dtpc-play-button--border-thickness--playing));
+  --dtpc-button--border-radius--hover: var(--dtpc-play-button--border-radius--playing--hover, var(--_dtpc-play-button--border-radius--playing));
+}
+:host([data-status='playing']:active) {
+  --dtpc-button--foreground--active: var(--dtpc-play-button--foreground--playing--active, var(--dtpc-play-button--foreground--active));
+  --dtpc-button--surface--active: var(--dtpc-play-button--surface--playing--active, var(--dtpc-play-button--surface--active));
+  --dtpc-button--border-color--active: var(--dtpc-play-button--border-color--playing--active, var(--_dtpc-play-button--border-color--playing));
+  --dtpc-button--border-thickness--active: var(--dtpc-play-button--border-thickness--playing--active, var(--_dtpc-play-button--border-thickness--playing));
+  --dtpc-button--border-radius--active: var(--dtpc-play-button--border-radius--playing--active, var(--_dtpc-play-button--border-radius--playing));
 }

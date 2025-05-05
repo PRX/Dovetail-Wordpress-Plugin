@@ -100,7 +100,30 @@
         <dtpc-player
           layout="default"
           src="https://dts.podtrac.com/redirect.mp3/dovetail.prxu.org/_/93/0af0c559-ce0d-472e-b406-1f029ca8b157/SongExploder267_GreenDay_1.mp3"
+          duration="1300.166531"></dtpc-player>
+      </div>
+    </section>
+
+    <section class="player-layout">
+      <h3>Default w/ Backdrop</h3>
+      <div class="content">
+        <dtpc-player
+          layout="default"
+          backdrop
+          src="https://dts.podtrac.com/redirect.mp3/dovetail.prxu.org/_/93/0af0c559-ce0d-472e-b406-1f029ca8b157/SongExploder267_GreenDay_1.mp3"
+          duration="1300.166531"></dtpc-player>
+      </div>
+    </section>
+
+    <section class="player-layout">
+      <h3>Default w/ Radial Gradient Backdrop</h3>
+      <div class="content">
+        <dtpc-player
+          layout="default"
+          src="https://dts.podtrac.com/redirect.mp3/dovetail.prxu.org/_/93/0af0c559-ce0d-472e-b406-1f029ca8b157/SongExploder267_GreenDay_1.mp3"
           duration="1300.166531"
+          backdrop
+          style="--dtpc-player--surface-image: radial-gradient(circle at 2.15rem 50%, hsl(0 0% 100% / 0.5) 2.125rem, hsl(0 0% 100% / 0.1) 60%, transparent); --dtpc-player--surface: transparent; --dtpc-player--border-radius: 100vw 0.5rem 0.5rem 100vw; --dtpc-play-button--surface: #000; --dtpc-play-button--surface-opacity: 60%; --dtpc-play-button--surface-opacity--hover: 80%; --dtpc-play-button--surface-opacity--active: 80%;"
         ></dtpc-player>
       </div>
     </section>
@@ -114,8 +137,28 @@
           duration="1300.166531"
         >
           <dtpc-play-button></dtpc-play-button>
+          <dtpc-time-current></dtpc-time-current>
           <dtpc-progress-bar></dtpc-progress-bar>
-          <dtpc-time-display></dtpc-time-display>
+          <dtpc-time-duration></dtpc-time-duration>
+          <dtpc-volume-controls></dtpc-volume-controls>
+        </dtpc-player>
+      </div>
+    </section>
+
+    <section class="player-layout">
+      <h3>Flex w/ Blurred Image Backdrop</h3>
+      <div class="content">
+        <dtpc-player
+          layout="flex"
+          src="https://dts.podtrac.com/redirect.mp3/dovetail.prxu.org/_/93/0af0c559-ce0d-472e-b406-1f029ca8b157/SongExploder267_GreenDay_1.mp3"
+          duration="1300.166531"
+          backdrop
+          style="--dtpc-player--surface-image: url('http://media-pri-dev.s3.amazonaws.com/wp-content/uploads/2025/02/28004911/SongExploder233_RickAstley_Portrait-1.jpg'); --dtpc-player--surface: hsla(0, 80%, 50%, 0.6); --dtpc-player--surface-opacity: 33.333%; --dtpc-player--surface-blur: 16px;"
+        >
+          <dtpc-play-button></dtpc-play-button>
+          <dtpc-time-current></dtpc-time-current>
+          <dtpc-progress-bar></dtpc-progress-bar>
+          <dtpc-time-duration></dtpc-time-duration>
           <dtpc-volume-controls></dtpc-volume-controls>
         </dtpc-player>
       </div>

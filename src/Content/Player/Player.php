@@ -449,7 +449,7 @@ class Player {
 		 */
 		if ( 'publish' !== $post->post_status && isset( $meta['enclosure'] ) && ! empty( $meta['enclosure'] ) ) {
 			$atts['src']      = $meta['enclosure']['url'];
-			$atts['duration'] = $meta['enclosure']['url'];
+			$atts['duration'] = $meta['enclosure']['duration'];
 		}
 
 		return $atts;

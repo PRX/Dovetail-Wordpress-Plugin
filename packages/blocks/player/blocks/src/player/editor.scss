@@ -121,7 +121,10 @@ dtpc-slider {
 		--dtpc-slider--track--color,
 		color-mix(in oklch, var(--_dtpc-slider--progress--color) 20%, transparent)
 	);
-	--_dtpc-slider--track--height: var(--dtpc-slider--track--height, 0.25rem);
+	--_dtpc-slider--track--thickness: var(
+		--dtpc-slider--track--thickness,
+		0.25rem
+	);
 	--_dtpc-slider--track--radius: var(--dtpc-slider--track--radius, 100vw);
 	--_dtpc-slider--track--border-color: var(
 		--dtpc-slider--track--border-color,
@@ -154,7 +157,7 @@ dtpc-slider {
 			[track-start] 1fr [track-end] var(--_dtpc-slider--track--gutter)
 			[range-end];
 		grid-template-rows:
-			[range-start] [track-start] var(--_dtpc-slider--track--height)
+			[range-start] [track-start] var(--_dtpc-slider--track--thickness)
 			[track-end] [range-end];
 
 		&::before {
@@ -196,7 +199,7 @@ dtpc-slider {
 		display: grid;
 		grid-template-columns:
 			var(--_dtpc-slider--track--gutter) minmax(
-				var(--_dtpc-slider--track--height),
+				var(--_dtpc-slider--track--thickness),
 				var(--_length)
 			)
 			1fr var(--_dtpc-slider--track--gutter);
@@ -219,11 +222,11 @@ dtpc-slider {
 		grid-template-columns:
 			calc(var(--progress, 0) * (100% - var(--_dtpc-slider--scrubber--size)))
 			[thumb-start] var(--_dtpc-slider--scrubber--size) [thumb-end];
-		grid-template-rows: [thumb-start] var(--_dtpc-slider--track--height) [thumb-end];
+		grid-template-rows: [thumb-start] var(--_dtpc-slider--track--thickness) [thumb-end];
 		align-items: center;
 		justify-items: center;
 
-		min-width: var(--_dtpc-slider--track--height);
+		min-width: var(--_dtpc-slider--track--thickness);
 	}
 
 	.scrubber {
