@@ -33,7 +33,7 @@ Dovetail Podcasts plugin connects your Wordpress site to Dovetail Podcasts.
 - [Connect Dovetail Podcasts](./docs/settings-client-application.md)
 - [Configure Dovetail Podcasts](./docs/settings-general.md)
 - [Add Dovetail Podcasts Player](./docs/player.md)
-- [Publish Podcast Episodes](./podcast-episodes.md)
+- [Publish Podcast Episodes](./docs/podcast-episodes.md)
 
 > ## 🫶 Thank You For Choosing Dovetail
 >
