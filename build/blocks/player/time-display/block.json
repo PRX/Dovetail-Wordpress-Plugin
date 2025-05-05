@@ -12,13 +12,7 @@
   ],
   "example": {},
   "supports": {
-    "html": false,
-    "color": {
-      "text": true
-    },
-    "typography": {
-      "fontSize": true
-    }
+    "html": false
   },
   "textdomain": "dovetail-podcasts",
   "editorScript": "file:./index.js",

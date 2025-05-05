@@ -40,9 +40,12 @@ export default function Edit(props) {
 		...rest,
 		className: cn({}, className),
 	};
-	const currentTime = (context["dovetail-podcasts/duration"] || 600) * 0.3;
+	const currentTime =
+		(context?.["dovetail-podcasts-player/duration"] || 600) * 0.3;
 
+	console.log("time current: props", props);
 	console.log("time current: attributes", attributes);
+	console.log("time current: context", context);
 
 	return (
 		<DtpcTimeCurrent {...blockProps}>

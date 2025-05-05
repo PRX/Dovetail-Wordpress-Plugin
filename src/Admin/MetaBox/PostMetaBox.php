@@ -63,7 +63,7 @@ class PostMetaBox {
 			add_action( "rest_prepare_{$post_type}", [ $this, 'rest_prepare' ], 999, 3 );
 		}
 
-		add_action( 'add_meta_boxes', [ $this, 'initialize_meta_box' ], 999, 2 );
+		add_action( 'add_meta_boxes', [ $this, 'initialize_meta_box' ], 9, 2 );
 		add_action( 'save_post', [ $this, 'save_post' ], 999, 2 );
 		add_action( 'trashed_post', [ $this, 'trashed_post' ], 999 );
 		add_action( 'before_delete_post', [ $this, 'before_delete_post' ], 999, 2 );
@@ -390,7 +390,7 @@ class PostMetaBox {
 
 		add_meta_box(
 			'dovetail-podcasts-episode',
-			'<span class="dtpc-postbox-title"><span class="dtpc-icon-bg-logo" style="aspect-ratio: 1; background-size: contain; background-image: url(' . DT_LOGO_DATA_SVG . ');"></span> Podcast Episode</span>',
+			'Dovetail Podcasts Episode',
 			[ $this, 'render_meta_box' ],
 			$this->post_types,
 			'normal',
@@ -409,9 +409,24 @@ class PostMetaBox {
 	public function render_meta_box() {
 		?>
 		<style>
-				.grid {
-					padding: 0;
+			.postbox:is(#dovetail-podcasts-episode) {
+				.postbox-header {
+					h2 {
+						display: grid;
+						grid-template-columns: 1.25em 1fr;
+						align-items: center;
+						gap: calc(var(--spacing) * 2);
+						line-height: 1;
+
+						&::before {
+							content: '';
+							aspect-ratio: 1;
+							background-size: contain;
+							background-image: url('<?php echo esc_attr( DT_LOGO_DATA_SVG ); ?>');
+						}
+					}
 				}
+			}
 		</style>
 		<input type="hidden"
 			name="<?php echo esc_attr( DTPODCASTS_POST_META_KEY . '_nonce' ); ?>"

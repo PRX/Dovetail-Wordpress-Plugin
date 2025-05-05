@@ -42,12 +42,10 @@ export default function Edit(props) {
 		className: cn({}, className),
 	};
 
-	console.log("play button: attributes", attributes);
-
 	return (
 		<DtpcMuteButton {...blockProps}>
 			<DtpcButton>
-				<VolumeOffIcon></VolumeOffIcon>
+				<VolumeOffIcon />
 			</DtpcButton>
 		</DtpcMuteButton>
 	);

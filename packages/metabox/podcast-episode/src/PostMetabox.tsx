@@ -163,7 +163,7 @@ function postMetaboxStateReducer(state: PostMetaboxState, action: PostMetaboxAct
 function PodcastThumbnail({ podcast }: { podcast: DovetailPodcast } ) {
   const { itunesImage, feedImage } = podcast;
   const image = feedImage || itunesImage;
-  return image ? <img className='w-full h-auto aspect-square object-cover' src={image.href} /> : <PodcastIcon className='size-full h-auto aspect-square' />
+  return image ? <img className='w-full h-auto aspect-square object-cover rounded-xs' src={image.href} /> : <PodcastIcon className='size-full h-auto aspect-square' />
 }
 
 function PodcastsMenu({ podcasts, onSelect }: {podcasts: DovetailPodcast[], onSelect(podcast: DovetailPodcast): void}) {
@@ -176,9 +176,9 @@ function PodcastsMenu({ podcasts, onSelect }: {podcasts: DovetailPodcast[], onSe
 
   return (
     <DialogContent className='grid grid-rows-[min-content_1fr]'>
-      <DialogHeader>
-        <DialogTitle>Select A Podcast</DialogTitle>
-        <DialogDescription>
+      <DialogHeader className='grid gap-4'>
+        <DialogTitle className='m-0'>Select A Podcast</DialogTitle>
+        <DialogDescription className='m-0'>
           <Input type='text' placeholder='Filter Podcasts...' onChange={handleChange} />
         </DialogDescription>
       </DialogHeader>

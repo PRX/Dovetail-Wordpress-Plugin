@@ -48,7 +48,7 @@ function DialogContent({
   className,
   children,
   ...props
-}: React.ComponentProps<typeof DialogPrimitive.Content>) {
+}: React.ComponentProps<typeof DialogPrimitive.Content & { hideClose?: boolean }>) {
   const [container, setContainer] = React.useState(null);
 
   React.useEffect(() => {
@@ -73,14 +73,14 @@ function DialogContent({
       <DialogPrimitive.Content
         data-slot="dialog-content"
         className={cn(
-          "bg-white data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 fixed top-[50%] left-[50%] z-9999 grid w-full max-w-[calc(100vw-2rem)] max-h-[calc(60vh)] translate-x-[-50%] translate-y-[-50%] gap-4 rounded-lg border border-slate-200 p-6 shadow-lg duration-200 sm:max-w-lg dark:bg-slate-950 dark:border-slate-800",
+          "bg-white data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 fixed top-[50%] left-[50%] z-9999 grid w-full max-w-[calc(100vw-2rem)] max-h-[calc(60vh)] translate-x-[-50%] translate-y-[-50%] gap-4 rounded-lg border border-slate-200 p-4 shadow-lg duration-200 sm:max-w-lg dark:bg-slate-950 dark:border-slate-800",
           className
         )}
         {...props}
       >
         {children}
         <DialogPrimitive.Close className="ring-offset-white focus:ring-slate-950 data-[state=open]:bg-slate-100 data-[state=open]:text-slate-500 absolute top-4 right-4 rounded-xs opacity-70 transition-opacity hover:opacity-100 focus:ring-2 focus:ring-offset-2 focus:outline-hidden disabled:pointer-events-none [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 dark:ring-offset-slate-950 dark:focus:ring-slate-300 dark:data-[state=open]:bg-slate-800 dark:data-[state=open]:text-slate-400">
-          <XIcon />
+          <XIcon className="size-5" />
           <span className="sr-only">Close</span>
         </DialogPrimitive.Close>
       </DialogPrimitive.Content>
@@ -119,7 +119,7 @@ function DialogTitle({
     <DialogPrimitive.Title
       data-slot="dialog-title"
       className={cn(
-        "text-lg leading-none font-semibold tracking-tight",
+        "text-xl leading-none font-semibold tracking-tight",
         className
       )}
       {...props}

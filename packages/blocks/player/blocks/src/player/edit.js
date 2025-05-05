@@ -25,11 +25,12 @@ import {
 	ToolbarGroup,
 	ToolbarButton,
 	CardFooter,
-	Notice,
+	Flex,
+	FlexItem,
+	FlexBlock,
 	__experimentalText as Text,
 } from "@wordpress/components";
-import { link as LinkIcon } from "@wordpress/icons";
-import { FileAudio } from "lucide-react";
+import { FileAudio2Icon } from "lucide-react";
 
 /**
  * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
@@ -42,6 +43,10 @@ import "./editor.scss";
 import apiFetch from "@wordpress/api-fetch";
 import { useEntityProp, useEntityRecord } from "@wordpress/core-data";
 import { DtpcPlayer } from "@/components";
+import DtpcPlayButton from "../play-button/edit";
+import DtpcProgressBar from "../progress-bar/edit";
+import DtpcTimeDisplay from "../time-display/edit";
+import DtpcVolumeControls from "../volume-controls/edit";
 import { useMemo, useState, useEffect } from "react";
 import { PrxLogo } from "@/components/icons/prx-logo";
 
@@ -175,7 +180,7 @@ export default function Edit(props) {
 					<ToolbarButton
 						label={__("Set Player Audio", "dovetail-podcasts")}
 						showTooltip
-						icon={<FileAudio style={{ fill: "none" }} />}
+						icon={<FileAudio2Icon style={{ fill: "none" }} />}
 						onClick={() => toggleLinkPopover()}
 						isActive={!!memoizedLinkValue}
 					/>
@@ -210,10 +215,25 @@ export default function Edit(props) {
 							icon={<PrxLogo size={20} />}
 							label={__("Dovetail Podcasts Player", "dovetail-podcasts")}
 							instructions={__(
-								"Build out your player by adding Dovetail Player components. Row and Stack blocks can be used to layout the components, or any other blocks you want in your player.",
+								"Build out your player by adding Dovetail Podcasts Player components. Row and Stack blocks can be used to layout the components, or any other blocks you want in your player.",
 								"dovetail-podcasts",
 							)}
-						></Placeholder>
+						>
+							<Flex align="center" expand>
+								<FlexItem>
+									<DtpcPlayButton />
+								</FlexItem>
+								<FlexBlock>
+									<DtpcProgressBar />
+								</FlexBlock>
+								<FlexItem>
+									<DtpcTimeDisplay />
+								</FlexItem>
+								<FlexItem>
+									<DtpcVolumeControls />
+								</FlexItem>
+							</Flex>
+						</Placeholder>
 					}
 				/>
 			</div>
