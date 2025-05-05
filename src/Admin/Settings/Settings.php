@@ -34,7 +34,7 @@ class Settings {
 	 *
 	 * @var \DovetailPodcasts\Dovetail\DovetailApi
 	 */
-	public $api;
+	public $dovetail_api;
 
 	/**
 	 * Initialize settings.
