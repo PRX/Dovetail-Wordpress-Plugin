@@ -862,8 +862,6 @@ class SettingsApi {
 	public function show_forms() {
 		global $wp_settings_fields;
 
-		error_log( print_r( array_keys( $wp_settings_fields['dovetail_podcasts_settings-player']['player-styles'] ), true ) );
-
 		$nav_sections = $this->get_navigation_sections();
 		?>
 		<div class="metabox-holder">
