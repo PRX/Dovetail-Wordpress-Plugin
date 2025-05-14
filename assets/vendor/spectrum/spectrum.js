@@ -297,8 +297,18 @@
                 var appendTo;
                 if (opts.appendTo === "parent") {
                     appendTo = boundElement.parent();
-                } else if (typeof opts.appendTo === "string" && !opts.appendTo.trim().startsWith("<")) {
-                    appendTo = $(opts.appendTo);
+                } else if (typeof opts.appendTo === "string") {
+                    try {
+                        // Ensure opts.appendTo is a valid CSS selector and does not start with "<"
+                        if (!opts.appendTo.trim().startsWith("<") && $(opts.appendTo).length > 0) {
+                            appendTo = $(opts.appendTo);
+                        } else {
+                            throw new Error("Invalid appendTo selector");
+                        }
+                    } catch (e) {
+                        console.warn("Invalid appendTo option. Falling back to 'body'.", e);
+                        appendTo = $("body");
+                    }
                 } else if (opts.appendTo instanceof HTMLElement || opts.appendTo instanceof jQuery) {
                     appendTo = $(opts.appendTo);
                 } else {
