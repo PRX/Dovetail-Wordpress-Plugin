@@ -14,6 +14,10 @@ export namespace Components {
     }
     interface DtpcPlayer {
         /**
+          * Add backdrop to player. Backdrop can be used to add background color and image, and background filter blur effect.
+         */
+        "backdrop": boolean;
+        /**
           * Preset audio source duration.
          */
         "duration": number;
@@ -522,6 +526,10 @@ declare namespace LocalJSX {
         "onDtpc-control-init"?: (event: DtpcPlayButtonCustomEvent<any>) => void;
     }
     interface DtpcPlayer {
+        /**
+          * Add backdrop to player. Backdrop can be used to add background color and image, and background filter blur effect.
+         */
+        "backdrop"?: boolean;
         /**
           * Preset audio source duration.
          */

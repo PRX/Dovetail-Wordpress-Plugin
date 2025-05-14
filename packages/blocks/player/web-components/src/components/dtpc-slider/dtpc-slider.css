@@ -1,18 +1,18 @@
 :host {
-  --_dtpc-slider--scrubber--color: var(--dtpc-slider--scrubber--color, var(--_dtpc-player--foreground, CanvasText));
+  --_dtpc-slider--scrubber--color: var(--dtpc-slider--scrubber--color, var(--_dtpc-player--foreground, currentColor));
   --_dtpc-slider--scrubber--size: var(--dtpc-slider--scrubber--size, 1.25rem);
   --_dtpc-slider--scrubber--border-color: var(--dtpc-slider--scrubber--border-color, transparent);
-  --_dtpc-slider--scrubber--border-width: var(--dtpc-slider--scrubber--border-width, 0);
+  --_dtpc-slider--scrubber--border-thickness: var(--dtpc-slider--scrubber--border-thickness, 0);
   --_dtpc-slider--scrubber--border-radius: var(--dtpc-slider--scrubber--border-radius, 100vw);
   --_dtpc-slider--scrubber--focus-ring-color: var(--dtpc-slider--focus-ring-color, var(--_dtpc-player--highlight, LinkText));
   --_dtpc-slider--scrubber--focus-ring-offset: var(--dtpc-slider--focus-ring-offset, 0.125rem);
-  --_dtpc-slider--scrubber--focus-ring-width: var(--dtpc-slider--focus-ring-width, 0.125rem);
-  --_dtpc-slider--progress--color: var(--dtpc-slider--progress--color, var(--_dtpc-player--foreground, CanvasText));
+  --_dtpc-slider--scrubber--focus-ring-thickness: var(--dtpc-slider--focus-ring-thickness, 0.125rem);
+  --_dtpc-slider--progress--color: var(--dtpc-slider--progress--color, var(--_dtpc-player--foreground, currentColor));
   --_dtpc-slider--track--color: var(--dtpc-slider--track--color, color-mix(in oklch, var(--_dtpc-slider--progress--color) 20%, transparent));
-  --_dtpc-slider--track--height: var(--dtpc-slider--track--height, 0.25rem);
+  --_dtpc-slider--track--thickness: var(--dtpc-slider--track--thickness, 0.25rem);
   --_dtpc-slider--track--radius: var(--dtpc-slider--track--radius, 100vw);
   --_dtpc-slider--track--border-color: var(--dtpc-slider--track--border-color, transparent);
-  --_dtpc-slider--track--border-width: var(--dtpc-slider--track--border-width, 0);
+  --_dtpc-slider--track--border-thickness: var(--dtpc-slider--track--border-thickness, 0);
   --_dtpc-slider--track--border-offset: var(--dtpc-slider--track--border-offset, 0);
 
   display: contents;
@@ -25,7 +25,7 @@
   display: grid;
   align-items: center;
   grid-template-columns: [range-start] var(--_dtpc-slider--track--gutter) [track-start] 1fr [track-end] var(--_dtpc-slider--track--gutter) [range-end];
-  grid-template-rows: [range-start] [track-start] var(--_dtpc-slider--track--height) [track-end] [range-end];
+  grid-template-rows: [range-start] [track-start] var(--_dtpc-slider--track--thickness) [track-end] [range-end];
 
   &::before {
     content: '';
@@ -36,7 +36,7 @@
 
     outline-style: solid;
     outline-color: var(--_dtpc-slider--track--border-color);
-    outline-width: var(--_dtpc-slider--track--border-width);
+    outline-width: var(--_dtpc-slider--track--border-thickness);
     outline-offset: var(--_dtpc-slider--track--border-offset);
 
     border-radius: var(--_dtpc-slider--track--radius);
@@ -61,7 +61,7 @@
   place-self: stretch;
 
   display: grid;
-  grid-template-columns: var(--_dtpc-slider--track--gutter) minmax(var(--_dtpc-slider--track--height), var(--_length)) 1fr var(--_dtpc-slider--track--gutter);
+  grid-template-columns: var(--_dtpc-slider--track--gutter) minmax(var(--_dtpc-slider--track--thickness), var(--_length)) 1fr var(--_dtpc-slider--track--gutter);
 
   &:not([data-show]) {
     visibility: hidden;
@@ -83,11 +83,11 @@
 
   display: grid;
   grid-template-columns: calc(var(--progress, 0) * (100% - var(--_dtpc-slider--scrubber--size))) [thumb-start] var(--_dtpc-slider--scrubber--size) [thumb-end];
-  grid-template-rows: [thumb-start] var(--_dtpc-slider--track--height) [thumb-end];
+  grid-template-rows: [thumb-start] var(--_dtpc-slider--track--thickness) [thumb-end];
   align-items: center;
   justify-items: center;
 
-  min-width: var(--_dtpc-slider--track--height);
+  min-width: var(--_dtpc-slider--track--thickness);
 }
 
 .scrubber {
@@ -109,7 +109,7 @@
 
     border-style: solid;
     border-color: var(--_dtpc-slider--scrubber--border-color);
-    border-width: var(--_dtpc-slider--scrubber--border-width);
+    border-width: var(--_dtpc-slider--scrubber--border-thickness);
     border-radius: var(--_dtpc-slider--scrubber--border-radius);
 
     background-color: var(--_dtpc-slider--scrubber--color);
@@ -127,7 +127,7 @@
       outline-style: solid;
       outline-offset: var(--_dtpc-slider--scrubber--focus-ring-offset);
       outline-color: var(--_dtpc-slider--scrubber--focus-ring-color);
-      outline-width: var(--_dtpc-slider--scrubber--focus-ring-width);
+      outline-width: var(--_dtpc-slider--scrubber--focus-ring-thickness);
     }
   }
 }
@@ -144,7 +144,7 @@ input {
   padding: 0;
   opacity: 0;
 
-  block-size: var(--_dtpc-slider--track--height);
+  block-size: var(--_dtpc-slider--track--thickness);
 
   &[orient='vertical'] {
     writing-mode: vertical-lr;
@@ -157,7 +157,7 @@ input {
     &::-webkit-slider-runnable-track {
       appearance: none;
       position: relative;
-      block-size: var(--_dtpc-slider--track--height);
+      block-size: var(--_dtpc-slider--track--thickness);
     }
     &::-webkit-slider-thumb {
       appearance: none;

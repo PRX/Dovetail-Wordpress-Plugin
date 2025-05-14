@@ -2,11 +2,11 @@
   --_dtpc-slider--border-color: var(--dtpc-slider--border-color, transparent);
   --_dtpc-slider--border-width: var(--dtpc-slider--border-width, 0);
   --_dtpc-slider--border-radius: var(--dtpc-slider--border-radius, 100vw);
-  --_dtpc-volume-slider--padding: var(--dtpc-volume-slider--padding, var(--dtpc-player--padding, 0));
-  --_dtpc-volume-slider--padding-inline: var(--dtpc-volume-slider--padding-inline, var(--dtpc-player--padding-inline, var(--_dtpc-volume-slider--padding)));
-  --_dtpc-volume-slider--padding-block: var(--dtpc-volume-slider--padding-block, var(--dtpc-player--padding-block, var(--_dtpc-volume-slider--padding)));
-  --_dtpc-volume-slider--surface: var(--dtpc-volume-slider--surface, var(--dtpc-player--surface, transparent));
-  --_dtpc-volume-slider--surface-blur: var(--dtpc-volume-slider--surface-blur, var(--dtpc-player--surface-blur, 8px));
+  --_dtpc-volume-slider--padding: var(--dtpc-volume-slider--padding, 0);
+  --_dtpc-volume-slider--padding-inline: var(--dtpc-volume-slider--padding-inline, var(--_dtpc-volume-slider--padding));
+  --_dtpc-volume-slider--padding-block: var(--dtpc-volume-slider--padding-block, var(--_dtpc-volume-slider--padding));
+  --_dtpc-volume-slider--surface: var(--dtpc-volume-slider--surface, transparent);
+  --_dtpc-volume-slider--surface-blur: var(--dtpc-volume-slider--surface-blur, 0);
 
   display: block;
 }

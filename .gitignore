@@ -34,7 +34,7 @@ Thumbs.db
 # Composer Vendor Files #
 #########################
 vendor
-!/wp-content/plugins/**/vendor
+!/assets/vendor
 
 # Node Dependencies #
 #####################
