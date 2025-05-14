@@ -294,7 +294,17 @@
             }
             else {
 
-                var appendTo = opts.appendTo === "parent" ? boundElement.parent() : $(opts.appendTo);
+                var appendTo;
+                if (opts.appendTo === "parent") {
+                    appendTo = boundElement.parent();
+                } else if (typeof opts.appendTo === "string" && !opts.appendTo.trim().startsWith("<")) {
+                    appendTo = $(opts.appendTo);
+                } else if (opts.appendTo instanceof HTMLElement || opts.appendTo instanceof jQuery) {
+                    appendTo = $(opts.appendTo);
+                } else {
+                    appendTo = $("body");
+                }
+
                 if (appendTo.length !== 1) {
                     appendTo = $("body");
                 }
