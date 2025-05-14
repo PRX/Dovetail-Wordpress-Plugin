@@ -239,6 +239,15 @@
             isEmpty = !initialColor,
             allowEmpty = opts.allowEmpty && !isInputTypeColor;
 
+        function isValidSelector(selector) {
+            try {
+                // Ensure the selector is valid and does not start with "<"
+                return typeof selector === "string" && !selector.trim().startsWith("<") && $(selector).length > 0;
+            } catch (e) {
+                return false;
+            }
+        }
+
         function applyOptions() {
 
             if (opts.showPaletteOnly) {
@@ -298,15 +307,10 @@
                 if (opts.appendTo === "parent") {
                     appendTo = boundElement.parent();
                 } else if (typeof opts.appendTo === "string") {
-                    try {
-                        // Ensure opts.appendTo is a valid CSS selector and does not start with "<"
-                        if (!opts.appendTo.trim().startsWith("<") && $(opts.appendTo).length > 0) {
-                            appendTo = $(opts.appendTo);
-                        } else {
-                            throw new Error("Invalid appendTo selector");
-                        }
-                    } catch (e) {
-                        console.warn("Invalid appendTo option. Falling back to 'body'.", e);
+                    if (isValidSelector(opts.appendTo)) {
+                        appendTo = $(opts.appendTo);
+                    } else {
+                        console.warn("Invalid appendTo option. Falling back to 'body'.");
                         appendTo = $("body");
                     }
                 } else if (opts.appendTo instanceof HTMLElement || opts.appendTo instanceof jQuery) {
