@@ -2,7 +2,7 @@
   --_dtpc-player--foreground: var(--dtpc-player--foreground, currentColor);
   --_dtpc-player--highlight: var(--dtpc-player--highlight, LinkText);
   --_dtpc-player--spacing: var(--dtpc-player--spacing, 0.5rem);
-  --_dtpc-player--surface: var(--dtpc-player--surface, color-mix(in oklch, currentColor 10%, transparent));
+  --_dtpc-player--surface: var(--dtpc-player--surface, color-mix(in oklch, var(--_dtpc-player--foreground) 10%, transparent));
   --_dtpc-player--surface-image: var(--dtpc-player--surface-image, none);
   --_dtpc-player--surface-image-position: var(--dtpc-player--surface-image-position, center center);
   --_dtpc-player--surface-image-size: var(--dtpc-player--surface-image-size, cover);
@@ -29,16 +29,25 @@
   }
 }
 
-[part='backdrop'] {
+slot[name='backdrop'] {
+  display: block;
   position: relative;
+  isolation: isolate;
   z-index: -1;
+  overflow: clip;
+
+  border-radius: var(--_dtpc-player--border-radius);
+
+  * {
+    position: absolute;
+    inset: 0;
+  }
 
   &::before {
     content: '';
     position: absolute;
     inset: 0;
-
-    border-radius: var(--_dtpc-player--border-radius);
+    z-index: -1;
 
     background-image: var(--_dtpc-player--surface-image);
     background-size: var(--_dtpc-player--surface-image-size);
@@ -49,9 +58,9 @@
     content: '';
     position: absolute;
     inset: -1px;
+    z-index: 1;
 
     border: solid 1px transparent;
-    border-radius: var(--_dtpc-player--border-radius);
 
     background-color: var(--_dtpc-player--surface);
     backdrop-filter: blur(var(--_dtpc-player--surface-blur));
@@ -64,7 +73,7 @@
     align-items: center;
     gap: var(--_dtpc-player--spacing);
 
-    [part='backdrop'] + & {
+    slot[name='backdrop'] + & {
       padding-inline: var(--_dtpc-player--padding-inline);
       padding-block: var(--_dtpc-player--padding-block);
     }

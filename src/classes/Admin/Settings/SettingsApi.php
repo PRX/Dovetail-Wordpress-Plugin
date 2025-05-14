@@ -38,6 +38,13 @@ class SettingsApi {
 	public $page_slugs;
 
 	/**
+	 * Settings pages section keys array.
+	 *
+	 * @var array<string,array<string,mixed>>
+	 */
+	protected $settings_pages = [];
+
+	/**
 	 * Settings sections array.
 	 *
 	 * @var array<string,array<string,mixed>>
@@ -113,9 +120,12 @@ class SettingsApi {
 			return;
 		}
 
-		wp_enqueue_style( DTPODCASTS_SETTINGS_SECTION_PREFIX, DTPODCASTS_PLUGIN_URL . 'build/admin/settings/admin-settings.css', [ 'wp-color-picker' ], DTPODCASTS_VERSION );
+		wp_enqueue_style( 'spectrum', DTPODCASTS_PLUGIN_URL . 'assets/vendor/spectrum/spectrum.css', [], 'v1.8.1' );
+		wp_enqueue_style( DTPODCASTS_SETTINGS_SECTION_PREFIX . '-settings', DTPODCASTS_PLUGIN_URL . 'assets/css/admin-settings.css', [ 'wp-color-picker' ], DTPODCASTS_VERSION );
 		wp_enqueue_media();
-		wp_enqueue_script( DTPODCASTS_SETTINGS_SECTION_PREFIX, DTPODCASTS_PLUGIN_URL . 'build/admin/settings/admin-settings.js', [ 'wp-color-picker', 'jquery' ], DTPODCASTS_VERSION, [ 'strategy' => 'defer' ] );
+		wp_enqueue_script( 'spectrum', DTPODCASTS_PLUGIN_URL . 'assets/vendor/spectrum/spectrum.js', [ 'jquery' ], 'v1.8.1', [ 'strategy' => 'defer' ] );
+		wp_enqueue_script( DTPODCASTS_SETTINGS_SECTION_PREFIX . '-settings', DTPODCASTS_PLUGIN_URL . 'assets/js/admin-settings.js', [ 'wp-color-picker', 'jquery' ], DTPODCASTS_VERSION, [ 'strategy' => 'defer' ] );
+		wp_enqueue_script( DTPODCASTS_SETTINGS_SECTION_PREFIX . '-player', DTPODCASTS_PLUGIN_URL . 'build/blocks/player/player/view.js', [], DTPODCASTS_VERSION, [ 'strategy' => 'defer' ] );
 
 		// Action to enqueue scripts on the Dovetail Podcasts Settings page.
 		do_action( 'dovetail_podcasts_settings_enqueue_scripts' );
@@ -130,7 +140,20 @@ class SettingsApi {
 	 * @return \DovetailPodcasts\Admin\Settings\SettingsApi
 	 */
 	public function register_section( string $slug, array $section ) {
-		$section['id']                    = $slug;
+		$section['id'] = $slug;
+
+		if ( ! isset( $section['parent'] ) ) {
+			$this->page_slugs[ $section['id'] ] = $section['id'];
+		} else {
+			// Wrap sub-section in <details> element.
+			$section['before_section'] = sprintf( '<details class="dovetail-section"><summary><h2>%1$s</h2></summary><div class="dovetail-forms">', $section['title'] );
+			$section['after_section']  = '</div></details>';
+
+			// Remove section title since we are adding in `before_section` HTML.
+			// Set to empty string since the property is required, but will not render if falsy.
+			$section['title'] = '';
+		}
+
 		$this->settings_sections[ $slug ] = $section;
 
 		return $this;
@@ -171,7 +194,7 @@ class SettingsApi {
 		$field_config = wp_parse_args( $field, $defaults );
 
 		// Get the field name before the filter is passed.
-		$field_name = $field_config['name'];
+		$field_name = $this->get_field_name( $field_config );
 
 		// Unset it, as we don't want it to be filterable.
 		unset( $field_config['name'] );
@@ -216,10 +239,14 @@ class SettingsApi {
 		$settings_sections = apply_filters( 'dovetail_podcasts_settings_sections', $this->settings_sections );
 
 		foreach ( $settings_sections as $id => $section ) {
-			$id = DTPODCASTS_SETTINGS_SECTION_PREFIX . $id;
+			$page_id = DTPODCASTS_SETTINGS_SECTION_PREFIX . $id;
 
-			if ( false === get_option( $id ) ) {
-				add_option( $id );
+			if ( isset( $section['parent'] ) ) {
+				$page_id = DTPODCASTS_SETTINGS_SECTION_PREFIX . $section['parent'];
+			}
+
+			if ( false === get_option( $page_id ) ) {
+				add_option( $page_id );
 			}
 
 			if ( isset( $section['desc'] ) && ! empty( $section['desc'] ) ) {
@@ -233,14 +260,21 @@ class SettingsApi {
 				$callback = null;
 			}
 
-			add_settings_section( $id, $section['title'], $callback, $id );
+			add_settings_section( $id, $section['title'], $callback, $page_id, $section );
 		}
 
 		// Register settings fields.
-		foreach ( $this->settings_fields as $section => $fields ) {
-			$section = DTPODCASTS_SETTINGS_SECTION_PREFIX . $section;
+		foreach ( $this->settings_fields as $section_id => $fields ) {
+			$page_id = DTPODCASTS_SETTINGS_SECTION_PREFIX . $section_id;
+
+			$section = $settings_sections[ $section_id ];
+
+			if ( isset( $section['parent'] ) ) {
+				$page_id = DTPODCASTS_SETTINGS_SECTION_PREFIX . $section['parent'];
+			}
+
 			foreach ( $fields as $option ) {
-				$name     = $option['name'];
+				$name     = $this->get_field_name( $option );
 				$type     = isset( $option['type'] ) ? $option['type'] : 'text';
 				$label    = isset( $option['label'] ) ? $option['label'] : '';
 				$callback = isset( $option['callback'] ) ? $option['callback'] : [
@@ -251,10 +285,10 @@ class SettingsApi {
 				$args = [
 					'id'                => $name,
 					'class'             => isset( $option['class'] ) ? $option['class'] : $name,
-					'label_for'         => "{$section}[{$name}]",
+					'label_for'         => "{$page_id}[{$name}]",
 					'desc'              => isset( $option['desc'] ) ? $option['desc'] : '',
 					'name'              => $label,
-					'section'           => $section,
+					'section'           => $page_id,
 					'size'              => isset( $option['size'] ) ? $option['size'] : null,
 					'options'           => isset( $option['options'] ) ? $option['options'] : '',
 					'std'               => isset( $option['default'] ) ? $option['default'] : '',
@@ -266,9 +300,13 @@ class SettingsApi {
 					'step'              => isset( $option['step'] ) ? $option['step'] : '',
 					'disabled'          => isset( $option['disabled'] ) ? (bool) $option['disabled'] : false,
 					'value'             => isset( $option['value'] ) ? $option['value'] : null,
+					'component'         => isset( $option['component'] ) ? $option['component'] : null,
+					'property'          => isset( $option['property'] ) ? $option['property'] : null,
+					'component_states'  => isset( $option['component_states'] ) ? $option['component_states'] : null,
+					'css_states'        => isset( $option['css_states'] ) ? $option['css_states'] : null,
 				];
 
-				add_settings_field( "{$section}[{$name}]", $label, $callback, $section, $section, $args );
+				add_settings_field( "{$page_id}[{$name}]", $label, $callback, $page_id, $section_id, $args );
 			}
 		}
 
@@ -289,7 +327,12 @@ class SettingsApi {
 
 			$fields      = $this->settings_fields[ $id ];
 			$prefixed_id = DTPODCASTS_SETTINGS_SECTION_PREFIX . $id;
-			$args        = [
+
+			if ( isset( $section['parent'] ) ) {
+				$prefixed_id = DTPODCASTS_SETTINGS_SECTION_PREFIX . $section['parent'];
+			}
+
+			$args = [
 				'type'              => 'object',
 				'sanitize_callback' => [ $this, 'sanitize_options' ],
 			];
@@ -332,13 +375,35 @@ class SettingsApi {
 	}
 
 	/**
+	 * Get field name.
+	 *
+	 * Normalizes construction of field names for component property fields.
+	 *
+	 * @param array<string,string> $args Settings field args.
+	 */
+	public function get_field_name( array $args ): string {
+
+		if ( isset( $args['component'] ) ) {
+			$name_parts = [ $args['component'] ];
+
+			if ( isset( $args['property'] ) ) {
+				$name_parts[] = $args['property'];
+			}
+
+			return implode( '--', $name_parts );
+		}
+
+		return isset( $args['name'] ) ? $args['name'] : '';
+	}
+
+	/**
 	 * Get field description for display.
 	 *
 	 * @param array<string,string> $args Settings field args.
 	 */
 	public function get_field_description( array $args ): string {
 		if ( ! empty( $args['desc'] ) ) {
-			$desc = sprintf( '<p class="description">%s</p>', $args['desc'] );
+			$desc = sprintf( '<div class="description">%s</div>', $args['desc'] );
 		} else {
 			$desc = '';
 		}
@@ -597,8 +662,9 @@ class SettingsApi {
 	public function callback_color( $args ) {
 		$value = esc_attr( $this->get_option( $args['id'], $args['section'], $args['std'] ) );
 		$size  = isset( $args['size'] ) && ! is_null( $args['size'] ) ? $args['size'] : 'regular';
+		$class = isset( $args['class'] ) && ! is_null( $args['class'] ) ? ' ' . $args['class'] : '';
 
-		$html  = sprintf( '<input type="text" class="%1$s-text wp-color-picker-field" id="%2$s[%3$s]" name="%2$s[%3$s]" value="%4$s" data-default-color="%5$s">', $size, $args['section'], $args['id'], $value, $args['std'] );
+		$html  = sprintf( '<input type="text" class="%1$s-text wp-color-picker-field%6$s" id="%2$s[%3$s]" name="%2$s[%3$s]" value="%4$s" data-default-color="%5$s">', $size, $args['section'], $args['id'], $value, $args['std'], $class );
 		$html .= $this->get_field_description( $args );
 
 		echo wp_kses( $html, self::get_allowed_wp_kses_html() );
@@ -727,11 +793,11 @@ class SettingsApi {
 	 *
 	 * @param string $option  Settings field name.
 	 * @param string $section The section name this field belongs to.
-	 * @param string $default_value Default text if it's not found.
+	 * @param mixed  $default_value Default text if it's not found.
 	 *
-	 * @return string
+	 * @return mixed
 	 */
-	public function get_option( $option, $section, $default_value = '' ) {
+	public static function get_option( $option, $section, $default_value = null ) {
 		$is_prefixed = strpos( $section, DTPODCASTS_SETTINGS_SECTION_PREFIX ) === 0;
 		$section     = $is_prefixed ? $section : DTPODCASTS_SETTINGS_SECTION_PREFIX . $section;
 		$options     = get_option( $section );
@@ -744,6 +810,23 @@ class SettingsApi {
 	}
 
 	/**
+	 * Get section configs for top navigation tabs.
+	 *
+	 * @return array<string,array<string,mixed>>
+	 */
+	public function get_navigation_sections() {
+		$nav_sections = [];
+
+		foreach ( $this->page_slugs as $page_id ) {
+			if ( isset( $this->settings_sections[ $page_id ] ) ) {
+				$nav_sections[ $page_id ] = $this->settings_sections[ $page_id ];
+			}
+		}
+
+		return $nav_sections;
+	}
+
+	/**
 	 * Shows all the settings section labels as tabs.
 	 *
 	 * @return void
@@ -751,14 +834,16 @@ class SettingsApi {
 	public function show_navigation() {
 		$html = '<nav class="nav-tab-wrapper">';
 
-		$count = count( $this->settings_sections );
+		$nav_sections = $this->get_navigation_sections();
+
+		$count = count( $nav_sections );
 
 		// Don't show the navigation if only one section exists.
 		if ( 1 === $count ) {
 			return;
 		}
 
-		foreach ( $this->settings_sections as $tab ) {
+		foreach ( $nav_sections as $tab ) {
 			$html .= sprintf( '<a href="#%1$s" class="nav-tab" id="%1$s-tab">%2$s</a>', DTPODCASTS_SETTINGS_SECTION_PREFIX . $tab['id'], $tab['title'] );
 		}
 
@@ -775,10 +860,15 @@ class SettingsApi {
 	 * @return void
 	 */
 	public function show_forms() {
+		global $wp_settings_fields;
+
+		error_log( print_r( array_keys( $wp_settings_fields['dovetail_podcasts_settings-player']['player-styles'] ), true ) );
+
+		$nav_sections = $this->get_navigation_sections();
 		?>
 		<div class="metabox-holder">
 			<?php
-			foreach ( $this->settings_sections as $id => $form ) {
+			foreach ( $nav_sections as $id => $form ) {
 				?>
 				<div id="<?php echo esc_attr( DTPODCASTS_SETTINGS_SECTION_PREFIX . $id ); ?>" class="group" style="display: none;">
 					<form method="post" action="options.php">
@@ -813,7 +903,7 @@ class SettingsApi {
 		<script>
 			jQuery(document).ready(function ($) {
 				// Initiate Color Picker.
-				$('.wp-color-picker-field').wpColorPicker({
+				$('.wp-color-picker-field:not(.dtpc-player-style)').wpColorPicker({
 					palettes: false
 				});
 
@@ -922,35 +1012,39 @@ class SettingsApi {
 	 */
 	public static function get_allowed_wp_kses_html() {
 		$allowed_atts = [
-			'align'      => [],
-			'class'      => [],
-			'type'       => [],
-			'id'         => [],
-			'dir'        => [],
-			'lang'       => [],
-			'style'      => [],
-			'xml:lang'   => [],
-			'src'        => [],
-			'alt'        => [],
-			'href'       => [],
-			'rel'        => [],
-			'rev'        => [],
-			'target'     => [],
-			'novalidate' => [],
-			'value'      => [],
-			'name'       => [],
-			'tabindex'   => [],
-			'action'     => [],
-			'method'     => [],
-			'for'        => [],
-			'width'      => [],
-			'height'     => [],
-			'data'       => [],
-			'title'      => [],
-			'checked'    => [],
-			'disabled'   => [],
-			'selected'   => [],
-			'open'       => [],
+			'align'                => [],
+			'class'                => [],
+			'type'                 => [],
+			'id'                   => [],
+			'dir'                  => [],
+			'lang'                 => [],
+			'style'                => [],
+			'xml:lang'             => [],
+			'src'                  => [],
+			'alt'                  => [],
+			'href'                 => [],
+			'rel'                  => [],
+			'rev'                  => [],
+			'target'               => [],
+			'novalidate'           => [],
+			'value'                => [],
+			'name'                 => [],
+			'tabindex'             => [],
+			'action'               => [],
+			'method'               => [],
+			'for'                  => [],
+			'width'                => [],
+			'height'               => [],
+			'data'                 => [],
+			'title'                => [],
+			'checked'              => [],
+			'disabled'             => [],
+			'selected'             => [],
+			'open'                 => [],
+			'data-component'       => [],
+			'data-property'        => [],
+			'data-component-state' => [],
+			'data-css-state'       => [],
 		];
 
 		return [

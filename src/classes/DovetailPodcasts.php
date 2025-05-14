@@ -2,7 +2,7 @@
 /**
  * The global DovetailPodcasts class.
  *
- * @package DovetailPodcasts
+ * @package Dovetail Podcasts
  */
 
 use DovetailPodcasts\Admin\Admin;
@@ -87,10 +87,6 @@ final class DovetailPodcasts {
 	 */
 	private function actions(): void {
 
-		// Initialize the plugin url constant.
-		// See: https://developer.wordpress.org/reference/functions/plugins_url/#more-information .
-		add_action( 'init', [ $this, 'setup_plugin_url' ] );
-
 		// Initialize Admin functionality.
 		add_action( 'after_setup_theme', [ $this, 'init_admin' ] );
 
@@ -119,18 +115,6 @@ final class DovetailPodcasts {
 					)
 				)
 			);
-		}
-	}
-
-	/**
-	 * Sets up the plugin url.
-	 *
-	 * @return void
-	 */
-	public function setup_plugin_url() {
-		// Plugin File URL.
-		if ( ! defined( 'DTPODCASTS_PLUGIN_URL' ) ) {
-			define( 'DTPODCASTS_PLUGIN_URL', plugin_dir_url( dirname( __DIR__ ) . '/dovetail-podcasts.php' ) );
 		}
 	}
 

@@ -17,6 +17,94 @@ p {
   font-size: inherit;
 }
 
+details.dovetail-section {
+  --_accent-color: var(--accent-color, var(--dtpc-secondary, currentColor));
+  --_accent-color-contrast: var(
+    --accent-color-contrast,
+    var(--dtpc-secondary-contrast, white)
+  );
+  --_details-padding: var(--details-padding, 0.5rem);
+
+  margin-block-start: 1rem;
+
+  border: 2px solid var(--_accent-color);
+  border-radius: 0.25rem;
+
+  summary {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    list-style: none;
+
+    padding: var(--_details-padding);
+
+    background-color: var(--_accent-color);
+
+    color: var(--_accent-color-contrast);
+    font-weight: 500;
+
+    cursor: pointer;
+
+    * {
+      color: inherit;
+    }
+
+    h2 {
+      margin: 0;
+    }
+
+    &::before {
+      /* Dashicons: Arrow Right */
+      content: "\f139";
+      display: inline-block;
+      font-family: "dashicons";
+      font-size: 1.75em;
+    }
+  }
+
+  .dovetail-forms {
+    display: grid;
+    gap: 0.5rem;
+    padding: var(--_details-padding);
+  }
+
+  .form-table {
+    width: auto;
+    margin: 0;
+  }
+
+  &.success {
+    --accent-color: var(--dtpc-success);
+    --accent-color-contrast: var(--dtpc-success-contrast);
+  }
+
+  &.info {
+    --accent-color: var(--dtpc-info);
+    --accent-color-contrast: var(--dtpc-info-contrast);
+  }
+
+  &.warn {
+    --accent-color: var(--dtpc-warn);
+    --accent-color-contrast: var(--dtpc-warn-contrast);
+  }
+
+  &.danger {
+    --accent-color: var(--dtpc-danger);
+    --accent-color-contrast: var(--dtpc-danger-contrast);
+  }
+
+  &[open] {
+    summary {
+      &::before {
+        /* Dashicons: Arrow Down */
+        content: "\f140";
+      }
+    }
+  }
+}
+
 .text-success {
   color: var(--dtpc-success);
 }
@@ -61,7 +149,7 @@ p {
     text-wrap: balance;
   }
 
-  details.plugins-info {
+  details {
     --_accent-color: var(--accent-color, var(--dtpc-secondary, currentColor));
     --_accent-color-contrast: var(
       --accent-color-contrast,
@@ -377,5 +465,115 @@ p {
 
   strong {
     font-size: 2em;
+  }
+}
+
+#dovetail-player-preview {
+  --_foreground: currentColor;
+  --_surface: transparent;
+
+  display: grid;
+  gap: 0.75rem;
+
+  padding: 0.5rem;
+
+  border-radius: 0.25rem;
+
+  color-scheme: light dark;
+
+  color: var(--_foreground);
+  background-color: var(--_surface);
+
+  box-shadow:
+    0 2px 4px 2px color-mix(in oklch, currentColor 30%, transparent),
+    0 8px 12px 0 color-mix(in oklch, currentColor 30%, transparent);
+
+  button {
+    appearance: none;
+
+    padding: 0.325em;
+
+    border: none;
+    border-radius: 100vw;
+
+    background-color: transparent;
+
+    color: var(--_foreground);
+    line-height: 0;
+
+    cursor: pointer;
+  }
+
+  .dtpc-toolbar {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    gap: 0.5rem;
+
+    > h3 {
+      flex-grow: 1;
+      margin: 0;
+      padding-inline-start: 0.5rem;
+      color: var(--_foreground);
+    }
+
+    > .dtpc-control-group {
+      background-color: color-mix(in oklch, currentColor 10%, transparent);
+      padding: 0.25rem;
+      border-radius: 100vw;
+    }
+  }
+
+  &:where([data-theme="dark"], [data-theme="light"]) {
+    --_foreground: CanvasText;
+    --_surface: Canvas;
+  }
+
+  &[data-theme="dark"] {
+    color-scheme: dark;
+  }
+
+  &[data-theme="light"] {
+    color-scheme: light;
+  }
+
+  &:has(dtpc-player[backdrop]) {
+    .dtpc-backdrop {
+      button {
+        [data-theme="auto"] & {
+          background-color: color-mix(
+            in oklch,
+            var(--_foreground) 40%,
+            transparent
+          );
+        }
+
+        :where([data-theme="light"], [data-theme="dark"]) & {
+          background-color: var(--_foreground);
+          color: var(--_surface);
+        }
+      }
+    }
+  }
+
+  .dtpc-color-mode {
+    display: flex;
+    gap: 0.25rem;
+
+    button {
+      [data-theme="auto"] &[data-theme-color="auto"] {
+        background-color: color-mix(
+          in oklch,
+          var(--_foreground) 40%,
+          transparent
+        );
+      }
+
+      [data-theme="dark"] &[data-theme-color="dark"],
+      [data-theme="light"] &[data-theme-color="light"] {
+        background-color: var(--_foreground);
+        color: var(--_surface);
+      }
+    }
   }
 }

@@ -15,13 +15,6 @@
 | `src`      | `src`      | Audio source URL.                                                                                                                                                                                               | `string`              | `undefined` |
 
 
-## Shadow Parts
-
-| Part         | Description |
-| ------------ | ----------- |
-| `"backdrop"` |             |
-
-
 ## Dependencies
 
 ### Depends on

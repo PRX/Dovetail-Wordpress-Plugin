@@ -53,7 +53,7 @@ class PostMetaBox {
 		$this->settings_api = new SettingsApi();
 		$this->dovetail_api = new DovetailApi();
 
-		$this->post_types = $this->settings_api->get_option( 'post_types', 'general', [ 'post' => 'post' ] );
+		$this->post_types = $this->settings_api->get_option( 'post_types', 'general' );
 
 		if ( ! is_array( $this->post_types ) ) {
 			$this->post_types = [];

@@ -46,9 +46,9 @@ class Settings {
 		$this->dovetail_api = new DovetailApi();
 
 		add_action( 'admin_menu', [ $this, 'add_options_page' ] );
-		add_action( 'init', [ $this, 'register_settings' ] );
-		add_action( 'admin_init', [ $this, 'initialize_settings_page' ] );
-		add_action( 'rest_api_init', [ $this, 'rest_api_init' ] );
+		add_action( 'init', [ $this, 'register_settings' ], 999 );
+		add_action( 'admin_init', [ $this, 'initialize_settings_page' ], 999 );
+		add_action( 'rest_api_init', [ $this, 'rest_api_init' ], 999 );
 	}
 
 	/**
@@ -90,39 +90,18 @@ class Settings {
 
 		if ( ! $have_valid_credentials ) {
 			// Dovetail authentication fields.
+			$authentication_settings = dtpc_config( 'settings/authentication' );
+
 			$this->settings_api->register_section(
-				'authentication',
-				[
-					'title' => __( 'Dovetail Client Application Setup', 'dovetail-podcasts' ),
-					'desc'  => __( 'Before you can start publishing posts as podcast episodes in Dovetail, we need to authenticate your Wordpress site as a Dovetail Client Application. Talk to your PRX Dovetail onboarding specialist to get your Client Application setup.', 'dovetail-podcasts' ),
-				]
+				$authentication_settings['id'],
+				$authentication_settings
 			);
 
 			$this->settings_api->register_fields(
-				'authentication',
-				[
-					[
-						'name'  => 'client_key',
-						'label' => __( 'Client Key', 'dovetail-podcasts' ),
-						'type'  => 'password',
-					],
-					[
-						'name'  => 'client_secret',
-						'label' => __( 'Client Secret', 'dovetail-podcasts' ),
-						'type'  => 'password',
-					],
-				]
+				$authentication_settings['id'],
+				$authentication_settings['fields']
 			);
 		} else {
-			// General settings.
-			$this->settings_api->register_section(
-				'general',
-				[
-					'title'        => __( 'Dovetail Podcasts Settings', 'dovetail-podcasts' ),
-					'callback'     => [ $this, 'render_user_profile' ],
-					'show_in_rest' => true,
-				]
-			);
 
 			// Get post types that support the features we need.
 			$post_types_by_supports = get_post_types_by_support(
@@ -149,136 +128,60 @@ class Settings {
 
 			$post_types = $this->settings_api->get_option( 'post_types', 'general' );
 
-			$this->settings_api->register_fields(
-				'general',
-				[
-					[
-						'name'    => 'post_types',
-						'label'   => __( 'Podcast Post Types', 'dovetail-podcasts' ),
-						'desc'    => __( 'Select which post types to publish as podcast episodes in Dovetail.', 'dovetail-podcasts' ),
-						'type'    => 'multicheck',
-						'options' => $post_types_options,
-						'value'   => $post_types,
-						'default' => [ 'post' => 'post' ],
-						'schema'  => [
-							'type'                 => 'object',
-							'additionalProperties' => [
-								'type' => 'string',
-							],
-							'title'                => 'Dovetail Podcasts Post Types',
-							'description'          => 'Post types that can be Dovetail podcast episodes.',
-							'default'              => [ 'post' => 'post' ],
-						],
-					],
-					[
-						'name'    => 'delete_media_after_publish',
-						'label'   => __( 'Delete Uploaded Media After Publishing', 'dovetail-podcasts' ),
-						'desc'    => '<p>' . esc_html__( "Uploaded audio will be added to the Media Library. When the podcast episode post is published, Dovetail will fetch the file from Wordpress to process for distribution. Dovetail will then host the audio URL's used in podcast feeds and any Dovetail Podcast Players used in this site.", 'dovetail-podcasts' ) . '</p>' .
-						'<p>' . esc_html__( 'Enable this if you do not want to keep the audio in the Media Library after it has been published to Dovetail. Only do this if storage on your Wordpress host is too limited or cost prohibitive for the amount of audio your podcasts produce.', 'dovetail-podcasts' ) . '</p>' . (
-							empty( $offload_plugins ) ? (
-								// TRANSLATORS: %1$s is a URL path to the admin plugin search page with query parameters for relevant plugins.
-								'<p>' . sprintf( __( 'We recommend installing a <a href="%1$s" target="_blank">Media Library offloading plugin</a> to address media storage issues.', 'dovetail-podcasts' ), '/wp-admin/plugin-install.php?s=aws%2520s3%2520offload%2520media%2520library&tab=search&type=term' ) . '</p>'
-							) : (
-								! empty( $offload_plugins['active'] ) ? (
-									'<details class="plugins-info success"><summary>' . esc_html__( 'Great work! It looks like your Media Library files are being offloaded to remote storage. You should NOT need to enable this option.', 'dovetail-podcasts' ) . '</summary><dl>' . (
-										implode(
-											'',
-											array_map(
-												static function ( $p ) {
-													return (
-													'<dt>' . esc_html( $p['details']['Title'] ) . '</dt>' .
-													'<dd>' . esc_html( $p['details']['Description'] ) . '</dd>' .
-													'<dd><ul class="keywords">' . implode(
-														'',
-														array_map(
-															static function ( $v ) {
-																return (
-																'<li>' . esc_html( $v ) . '</li>'
-																);
-															},
-															$p['keywords']
-														)
-													) . '</ul></dd>'
-													);
-												},
-												$offload_plugins['active']
-											)
-										)
-									) . '</dl></details>'
-								) : (
-									'<details class="plugins-info warn" open><summary>' . esc_html__( 'Do NOT enable this yet! It looks like you have plugins installed that could offload your Media Library files to remote storage. We recommend activating one of these plugins before choosing to delete published media.', 'dovetail-podcasts' ) . '</summary><dl>' . (
-										implode(
-											'',
-											array_map(
-												static function ( $p ) {
-													return (
-													'<dt>' . esc_html( $p['details']['Title'] ) . '</dt>' .
-													'<dd>' . esc_html( $p['details']['Description'] ) . '</dd>' .
-													'<dd><ul class="keywords">' . implode(
-														'',
-														array_map(
-															static function ( $v ) {
-																return (
-																'<li>' . esc_html( $v ) . '</li>'
-																);
-															},
-															$p['keywords']
-														)
-													) . '</ul></dd>'
-													);
-												},
-												$offload_plugins['disabled']
-											)
-										)
-									) . '</dl></details>'
-								)
-							)
-						),
-						'type'    => 'checkbox',
-						'default' => false,
-						'schema'  => [
-							'type'        => 'string',
-							'title'       => 'Delete Media After Publish',
-							'description' => 'Media used as podcast audio will be deleted after post is published when true.',
-							'default'     => 'off',
-						],
-					],
-				]
+			// General settings.
+			$section_callback = [ $this, 'render_user_profile' ];
+			$general_settings = dtpc_config( 'settings/general', compact( 'post_types_options', 'post_types', 'offload_plugins', 'section_callback' ) );
+
+			$this->settings_api->register_section(
+				$general_settings['id'],
+				$general_settings
 			);
 
-			// TODO: Add section for player customization fields.
+			$this->settings_api->register_fields(
+				$general_settings['id'],
+				$general_settings['fields']
+			);
+
+			// Player settings.
+			$section_callback = [ $this, 'render_player_preview' ];
+			$player_settings  = dtpc_config( 'settings/player', compact( 'section_callback' ) );
+
 			$this->settings_api->register_section(
-				'player',
-				[
-					'title'    => __( 'Customize Player', 'dovetail-podcasts' ),
-					'callback' => [ $this, 'render_player_preview' ],
-				]
+				$player_settings['id'],
+				$player_settings
+			);
+
+			$this->settings_api->register_fields(
+				$player_settings['id'],
+				$player_settings['fields']
+			);
+
+			// Player style settings.
+			$player_styles_settings = dtpc_config( 'settings/player-styles' );
+
+			// Make a subsection of player section page.
+			$player_styles_settings['parent'] = $player_settings['id'];
+
+			$this->settings_api->register_section(
+				$player_styles_settings['id'],
+				$player_styles_settings
+			);
+
+			$this->settings_api->register_fields(
+				$player_styles_settings['id'],
+				$player_styles_settings['fields']
 			);
 
 			// Add section for removing API credentials.
+			$manage_settings = dtpc_config( 'settings/manage' );
 			$this->settings_api->register_section(
-				'manage',
-				[
-					'title' => __( 'Manage Client Application', 'dovetail-podcasts' ),
-				]
+				$manage_settings['id'],
+				$manage_settings
 			);
 
 			$this->settings_api->register_fields(
-				'manage',
-				[
-					[
-						'name'              => 'delete_client_app_credentials',
-						'label'             => __( 'Delete Client App Credentials', 'dovetail-podcasts' ),
-						'desc'              => __( 'Enter <strong>DELETE</strong> to remove the current Client Application credentials. Only do this if a new Client Application needs to be used. Posts that were published to a podcasts not owned by the new Client Application user will no longer have updates synced to Dovetail.', 'dovetail-podcasts' ),
-						'type'              => 'text',
-						'sanitize_callback' => static function ( string $value ) {
-							if ( 'DELETE' === $value ) {
-								delete_option( DTPODCASTS_SETTINGS_SECTION_PREFIX . 'authentication' );
-								wp_cache_flush( 'access_token', DTPODCASTS_CACHE_GROUP );
-							}
-						},
-					],
-				]
+				$manage_settings['id'],
+				$manage_settings['fields']
 			);
 		}
 	}
@@ -392,10 +295,49 @@ class Settings {
 	 * @return void
 	 */
 	public function render_player_preview() {
+		$src = DTPODCASTS_PLUGIN_URL . 'assets/audio/Dovetail Podcasts Player Implementation Guide.m4a';
 		?>
-		<section id="dovetail-player-preview">
-			<audio controls></audio>
-		</section>
+			<svg style="display: none;" version="2.0">
+				<defs>
+					<symbol id="dark_mode" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M480-120q-150 0-255-105T120-480q0-150 105-255t255-105q14 0 27.5 1t26.5 3q-41 29-65.5 75.5T444-660q0 90 63 153t153 63q55 0 101-24.5t75-65.5q2 13 3 26.5t1 27.5q0 150-105 255T480-120Zm0-80q88 0 158-48.5T740-375q-20 5-40 8t-40 3q-123 0-209.5-86.5T364-660q0-20 3-40t8-40q-78 32-126.5 102T200-480q0 116 82 198t198 82Zm-10-270Z"/></symbol>
+
+					<symbol id="light_mode" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M480-360q50 0 85-35t35-85q0-50-35-85t-85-35q-50 0-85 35t-35 85q0 50 35 85t85 35Zm0 80q-83 0-141.5-58.5T280-480q0-83 58.5-141.5T480-680q83 0 141.5 58.5T680-480q0 83-58.5 141.5T480-280ZM200-440H40v-80h160v80Zm720 0H760v-80h160v80ZM440-760v-160h80v160h-80Zm0 720v-160h80v160h-80ZM256-650l-101-97 57-59 96 100-52 56Zm492 496-97-101 53-55 101 97-57 59Zm-98-550 97-101 59 57-100 96-56-52ZM154-212l101-97 55 53-97 101-59-57Zm326-268Z"/></symbol>
+
+					<symbol id="routine" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M396-396q-32-32-58.5-67T289-537q-5 14-6.5 28.5T281-480q0 83 58 141t141 58q14 0 28.5-2t28.5-6q-39-22-74-48.5T396-396Zm57-56q51 51 114 87.5T702-308q-40 51-98 79.5T481-200q-117 0-198.5-81.5T201-480q0-65 28.5-123t79.5-98q20 72 56.5 135T453-452Zm290 72q-20-5-39.5-11T665-405q8-18 11.5-36.5T680-480q0-83-58.5-141.5T480-680q-20 0-38.5 3.5T405-665q-8-19-13.5-38T381-742q24-9 49-13.5t51-4.5q117 0 198.5 81.5T761-480q0 26-4.5 51T743-380ZM440-840v-120h80v120h-80Zm0 840v-120h80V0h-80Zm323-706-57-57 85-84 57 56-85 85ZM169-113l-57-56 85-85 57 57-85 84Zm671-327v-80h120v80H840ZM0-440v-80h120v80H0Zm791 328-85-85 57-57 84 85-56 57ZM197-706l-84-85 56-57 85 85-57 57Zm199 310Z"/></symbol>
+
+					<symbol id="texture" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M176-120q-19-4-35.5-20.5T120-176l664-664q21 5 36 20.5t21 35.5L176-120Zm-56-252v-112l356-356h112L120-372Zm0-308v-80q0-33 23.5-56.5T200-840h80L120-680Zm560 560 160-160v80q0 33-23.5 56.5T760-120h-80Zm-308 0 468-468v112L484-120H372Z"/></symbol>
+				</defs>
+			</svg>
+		<aside id="dovetail-player-preview" data-theme="auto">
+			<div class="dtpc-toolbar">
+				<h3>Default Player Preview</h3>
+				<div class="dtpc-control-group dtpc-backdrop">
+					<button type="button" title="Toggle Player Backdrop">
+						<svg width="24" height="24" version="2.0">
+							<use href="#texture" />
+						</svg>
+					</button>
+				</div>
+				<div class="dtpc-control-group dtpc-color-mode">
+					<button type="button" data-theme-color="dark" title="Dark Theme Preview">
+						<svg width="24" height="24" version="2.0">
+							<use href="#dark_mode" />
+						</svg>
+					</button>
+					<button type="button" data-theme-color="auto" title="Default Preview">
+						<svg width="24" height="24" version="2.0">
+							<use href="#routine" />
+						</svg>
+					</button>
+					<button type="button" data-theme-color="light" title="Light Theme Preview">
+						<svg width="24" height="24" version="2.0">
+							<use href="#light_mode" />
+						</svg>
+					</button>
+				</div>
+			</div>
+			<dtpc-player src="<?php echo esc_attr( $src ); ?>" duration="342.95873" layout="default"></dtpc-player>
+		</aside>
 		<?php
 	}
 

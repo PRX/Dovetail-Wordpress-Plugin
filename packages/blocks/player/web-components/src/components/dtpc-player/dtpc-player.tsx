@@ -109,7 +109,7 @@ export class DtpcPlayer {
     return (
       <Host playing={playing}>
         <div class="wrapper">
-          {this.backdrop && <div part="backdrop"></div> }
+          {this.backdrop && <slot name="backdrop" /> }
           <div class="main">
             {(!this.layout || this.layout === 'flex') && (
               <slot />
