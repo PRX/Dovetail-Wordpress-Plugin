@@ -45,6 +45,7 @@ node_modules
 #######################
 /tests/_output/*.json
 
-# Temp Build Directories #
+# Build Directories #
 #####################
+build
 plugin-build
