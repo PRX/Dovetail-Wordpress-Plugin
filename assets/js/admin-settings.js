@@ -82,10 +82,10 @@ jQuery(document).ready(function ($) {
 
   function updatePlayerStylesCss() {
     const css = playerStyles.entries().reduce((a, [prop, value]) => {
-      return `${a}--dtpc-${prop}: ${value};`;
+      return `${a}\n\t--dtpc-${prop}: ${value};`;
     }, "");
 
-    $playerStyle.text(`:root{${css}}`);
+    $playerStyle.text(`\n:root {${css}\n}\n`);
   }
 
   $playerStyleInputs
@@ -117,6 +117,7 @@ jQuery(document).ready(function ($) {
       showPalette: true,
       palette: [],
       localStorageKey: "dtpc.player.palette",
+      maxSelectionSize: 121,
       change: (color) => {
         if (color) {
           playerStyles.set(prop, color.toHslString());

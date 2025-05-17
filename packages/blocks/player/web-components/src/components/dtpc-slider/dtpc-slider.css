@@ -1,19 +1,19 @@
 :host {
-  --_dtpc-slider--scrubber--color: var(--dtpc-slider--scrubber--color, var(--_dtpc-player--foreground, currentColor));
-  --_dtpc-slider--scrubber--size: var(--dtpc-slider--scrubber--size, 1.25rem);
-  --_dtpc-slider--scrubber--border-color: var(--dtpc-slider--scrubber--border-color, transparent);
-  --_dtpc-slider--scrubber--border-thickness: var(--dtpc-slider--scrubber--border-thickness, 0);
-  --_dtpc-slider--scrubber--border-radius: var(--dtpc-slider--scrubber--border-radius, 100vw);
-  --_dtpc-slider--scrubber--focus-ring-color: var(--dtpc-slider--focus-ring-color, var(--_dtpc-player--highlight, LinkText));
-  --_dtpc-slider--scrubber--focus-ring-offset: var(--dtpc-slider--focus-ring-offset, 0.125rem);
-  --_dtpc-slider--scrubber--focus-ring-thickness: var(--dtpc-slider--focus-ring-thickness, 0.125rem);
-  --_dtpc-slider--progress--color: var(--dtpc-slider--progress--color, var(--_dtpc-player--foreground, currentColor));
-  --_dtpc-slider--track--color: var(--dtpc-slider--track--color, color-mix(in oklch, var(--_dtpc-slider--progress--color) 20%, transparent));
-  --_dtpc-slider--track--thickness: var(--dtpc-slider--track--thickness, 0.25rem);
-  --_dtpc-slider--track--radius: var(--dtpc-slider--track--radius, 100vw);
-  --_dtpc-slider--track--border-color: var(--dtpc-slider--track--border-color, transparent);
-  --_dtpc-slider--track--border-thickness: var(--dtpc-slider--track--border-thickness, 0);
-  --_dtpc-slider--track--border-offset: var(--dtpc-slider--track--border-offset, 0);
+  --_dtpc-slider--scrubber--color: var(--__dtpc-slider--scrubber--color, var(--dtpc-slider--scrubber--color, var(--_dtpc-player--foreground, currentColor)));
+  --_dtpc-slider--scrubber--size: var(--__dtpc-slider--scrubber--size, var(--dtpc-slider--scrubber--size, 1.25rem));
+  --_dtpc-slider--scrubber--border-color: var(--__dtpc-slider--scrubber--border-color, var(--dtpc-slider--scrubber--border-color, transparent));
+  --_dtpc-slider--scrubber--border-thickness: var(--__dtpc-slider--scrubber--border-thickness, var(--dtpc-slider--scrubber--border-thickness, 0));
+  --_dtpc-slider--scrubber--border-radius: var(--__dtpc-slider--scrubber--border-radius, var(--dtpc-slider--scrubber--border-radius, 100vw));
+  --_dtpc-slider--scrubber--focus-ring-color: var(--__dtpc-slider--scrubber--focus-ring-color, var(--dtpc-slider--focus-ring-color, var(--_dtpc-player--highlight, LinkText)));
+  --_dtpc-slider--scrubber--focus-ring-offset: var(--__dtpc-slider--scrubber--focus-ring-offset, var(--dtpc-slider--focus-ring-offset, 0.125rem));
+  --_dtpc-slider--scrubber--focus-ring-thickness: var(--__dtpc-slider--scrubber--focus-ring-thickness, var(--dtpc-slider--focus-ring-thickness, 0.125rem));
+  --_dtpc-slider--progress--color: var(--__dtpc-slider--progress--color, var(--dtpc-slider--progress--color, var(--_dtpc-player--foreground, currentColor)));
+  --_dtpc-slider--track--color: var(--__dtpc-slider--track--color, var(--dtpc-slider--track--color, color-mix(in oklch, var(--_dtpc-slider--progress--color) 20%, transparent)));
+  --_dtpc-slider--track--thickness: var(--__dtpc-slider--track--thickness, var(--dtpc-slider--track--thickness, 0.25rem));
+  --_dtpc-slider--track--radius: var(--__dtpc-slider--track--radius, var(--dtpc-slider--track--radius, 100vw));
+  --_dtpc-slider--track--border-color: var(--__dtpc-slider--track--border-color, var(--dtpc-slider--track--border-color, transparent));
+  --_dtpc-slider--track--border-thickness: var(--__dtpc-slider--track--border-thickness, var(--dtpc-slider--track--border-thickness, 0));
+  --_dtpc-slider--track--border-offset: var(--__dtpc-slider--track--border-offset, var(--dtpc-slider--track--border-offset, 0));
 
   display: contents;
 }

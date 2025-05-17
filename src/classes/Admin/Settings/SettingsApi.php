@@ -274,13 +274,15 @@ class SettingsApi {
 			}
 
 			foreach ( $fields as $option ) {
-				$name     = $this->get_field_name( $option );
-				$type     = isset( $option['type'] ) ? $option['type'] : 'text';
-				$label    = isset( $option['label'] ) ? $option['label'] : '';
-				$callback = isset( $option['callback'] ) ? $option['callback'] : [
+				$name             = $this->get_field_name( $option );
+				$type             = isset( $option['type'] ) ? $option['type'] : 'text';
+				$label            = isset( $option['label'] ) ? $option['label'] : '';
+				$callback         = isset( $option['callback'] ) ? $option['callback'] : [
 					$this,
 					'callback_' . $type,
 				];
+				$component_states = isset( $option['component_states'] ) ? $option['component_states'] : null;
+				$css_states       = isset( $option['css_states'] ) ? $option['css_states'] : null;
 
 				$args = [
 					'id'                => $name,
@@ -301,12 +303,23 @@ class SettingsApi {
 					'disabled'          => isset( $option['disabled'] ) ? (bool) $option['disabled'] : false,
 					'value'             => isset( $option['value'] ) ? $option['value'] : null,
 					'component'         => isset( $option['component'] ) ? $option['component'] : null,
+					'part'              => isset( $option['part'] ) ? $option['part'] : null,
 					'property'          => isset( $option['property'] ) ? $option['property'] : null,
-					'component_states'  => isset( $option['component_states'] ) ? $option['component_states'] : null,
-					'css_states'        => isset( $option['css_states'] ) ? $option['css_states'] : null,
+					'component_states'  => $component_states,
+					'css_states'        => $css_states,
 				];
 
 				add_settings_field( "{$page_id}[{$name}]", $label, $callback, $page_id, $section_id, $args );
+
+				// Register state. These fields should not render or belong to a registered section.
+				// The callback of the main fields will be responsible for rendering the inputs.
+
+				if ( ! empty( $css_states ) ) {
+					foreach ( $css_states as $css_state_name => $css_state_config ) {
+						$name = implode( '--', [ $name, $css_state_name ] );
+						add_settings_field( "{$page_id}[{$name}]", $css_state_config['label'], '__return_null', $page_id, '__DTPC_HIDDEN__' );
+					}
+				}
 			}
 		}
 
@@ -383,10 +396,14 @@ class SettingsApi {
 	 */
 	public function get_field_name( array $args ): string {
 
-		if ( isset( $args['component'] ) ) {
+		if ( isset( $args['component'] ) && ! empty( $args['component'] ) ) {
 			$name_parts = [ $args['component'] ];
 
-			if ( isset( $args['property'] ) ) {
+			if ( isset( $args['part'] ) && ! empty( $args['part'] ) ) {
+				$name_parts[] = $args['part'];
+			}
+
+			if ( isset( $args['property'] ) && ! empty( $args['property'] ) ) {
 				$name_parts[] = $args['property'];
 			}
 
@@ -660,11 +677,51 @@ class SettingsApi {
 	 * @return void
 	 */
 	public function callback_color( $args ) {
-		$value = esc_attr( $this->get_option( $args['id'], $args['section'], $args['std'] ) );
+		$id    = $this->get_field_name( $args );
+		$value = esc_attr( $this->get_option( $id, $args['section'], $args['std'] ) );
 		$size  = isset( $args['size'] ) && ! is_null( $args['size'] ) ? $args['size'] : 'regular';
 		$class = isset( $args['class'] ) && ! is_null( $args['class'] ) ? ' ' . $args['class'] : '';
 
-		$html  = sprintf( '<input type="text" class="%1$s-text wp-color-picker-field%6$s" id="%2$s[%3$s]" name="%2$s[%3$s]" value="%4$s" data-default-color="%5$s">', $size, $args['section'], $args['id'], $value, $args['std'], $class );
+		$fieldset_template    = '<fieldset class="dtpc-color-set">%1$s</fieldset>';
+		$state_field_template = '<div class="dtpc-color-state"><label for="%1$s[%2$s]" title="%4$s">%3$s</label>%5$s</div>';
+		$input_template       = '<input type="text" class="%1$s-text wp-color-picker-field%6$s" id="%2$s[%3$s]" name="%2$s[%3$s]" value="%4$s" data-default-color="%5$s">';
+		$normal_state_label   = __( 'Normal', 'dovetail-podcasts' );
+		$normal_state_desc    = __( 'Normal color.', 'dovetail-podcasts' );
+
+		$html = sprintf( $input_template, $size, $args['section'], $id, $value, $args['std'], $class );
+
+		if ( is_array( $args['css_states'] ) ) {
+			$fieldset_html = sprintf( $state_field_template, $args['section'], $id, esc_attr( $normal_state_label ), esc_attr( $normal_state_desc ), $html );
+
+			foreach ( $args['css_states'] as $css_state_name => $css_state_config ) {
+				$css_state_id   = implode( '--', [ $id, $css_state_name ] );
+				$value          = esc_attr( $this->get_option( $css_state_id, $args['section'], $args['std'] ) );
+				$input_html     = sprintf( $input_template, $size, $args['section'], $css_state_id, $value, $args['std'], $class );
+				$fieldset_html .= sprintf( $state_field_template, $args['section'], $css_state_id, esc_attr( $css_state_config['label'] ), esc_attr( $css_state_config['desc'] ), $input_html );
+			}
+
+			$html = sprintf( $fieldset_template, $fieldset_html );
+		}
+
+		if ( is_array( $args['component_states'] ) ) {
+			foreach ( $args['component_states'] as $component_state_name => $component_state_config ) {
+				$fieldset_html      = sprintf( '<legend title="%2$s">%1$s</legend>', esc_attr( $component_state_config['label'] ), esc_attr( $component_state_config['desc'] ) );
+				$component_state_id = implode( '--', [ $id, $component_state_name ] );
+				$value              = esc_attr( $this->get_option( $component_state_id, $args['section'], $args['std'] ) );
+				$input_html         = sprintf( $input_template, $size, $args['section'], $component_state_id, $value, $args['std'], $class );
+				$fieldset_html     .= sprintf( $state_field_template, $args['section'], $component_state_id, esc_attr( $normal_state_label ), esc_attr( $normal_state_desc ), $input_html );
+
+				foreach ( $args['css_states'] as $css_state_name => $css_state_config ) {
+					$css_state_id   = implode( '--', [ $component_state_id, $css_state_name ] );
+					$value          = esc_attr( $this->get_option( $css_state_id, $args['section'], $args['std'] ) );
+					$input_html     = sprintf( $input_template, $size, $args['section'], $css_state_id, $value, $args['std'], $class );
+					$fieldset_html .= sprintf( $state_field_template, $args['section'], $css_state_id, esc_attr( $css_state_config['label'] ), esc_attr( $css_state_config['desc'] ), $input_html );
+				}
+
+				$html .= sprintf( $fieldset_template, $fieldset_html );
+			}
+		}
+
 		$html .= $this->get_field_description( $args );
 
 		echo wp_kses( $html, self::get_allowed_wp_kses_html() );
@@ -1040,6 +1097,7 @@ class SettingsApi {
 			'selected'             => [],
 			'open'                 => [],
 			'data-component'       => [],
+			'data-part'            => [],
 			'data-property'        => [],
 			'data-component-state' => [],
 			'data-css-state'       => [],
@@ -1047,6 +1105,8 @@ class SettingsApi {
 
 		return [
 			'form'     => $allowed_atts,
+			'fieldset' => $allowed_atts,
+			'legend'   => $allowed_atts,
 			'label'    => $allowed_atts,
 			'button'   => $allowed_atts,
 			'input'    => $allowed_atts,
@@ -1058,6 +1118,7 @@ class SettingsApi {
 			'style'    => $allowed_atts,
 			'strong'   => $allowed_atts,
 			'small'    => $allowed_atts,
+			'kbd'      => $allowed_atts,
 			'table'    => $allowed_atts,
 			'span'     => $allowed_atts,
 			'abbr'     => $allowed_atts,

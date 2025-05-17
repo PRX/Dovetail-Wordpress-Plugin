@@ -11,6 +11,7 @@
   --dtpc-danger-contrast: white;
   --dtpc-info: #75bbe1;
   --dtpc-info-contrast: black;
+  --dtpc-surface-subtle: color-mix(in oklch, CanvasText 10%, transparent);
 }
 
 p {
@@ -128,7 +129,7 @@ details.dovetail-section {
 
     padding: 1rem 1.5rem;
 
-    background-color: #fff;
+    background-color: Canvas;
 
     border-radius: 0.25rem;
 
@@ -251,6 +252,23 @@ details.dovetail-section {
         }
       }
     }
+  }
+
+  .sp-replacer {
+    border: none;
+    border-radius: 0.125rem;
+    background-color: var(--dtpc-surface-subtle);
+  }
+
+  .sp-preview {
+    margin: 0;
+    border-color: CanvasText;
+    border-width: 0.125rem;
+    border-radius: 0.125rem;
+  }
+
+  .sp-dd {
+    display: none;
   }
 
   @container metabox (width >= 782px) {
@@ -468,6 +486,42 @@ details.dovetail-section {
   }
 }
 
+.dovetail-settings-player-header {
+  position: sticky;
+  top: 50px;
+  z-index: 99999;
+  display: grid;
+  grid-template-columns: 1fr 10rem;
+  gap: 0.5rem;
+
+  margin-inline: -0.5rem;
+
+  > * {
+    border-radius: 0.25rem;
+
+    backdrop-filter: blur(16px);
+
+    box-shadow:
+      0 2px 4px 2px color-mix(in oklch, currentColor 30%, transparent),
+      0 8px 12px 0 color-mix(in oklch, currentColor 30%, transparent);
+  }
+}
+
+.dovetail-settings-player-menu {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.25rem;
+
+  padding: 0.5rem;
+
+  background-color: Canvas;
+
+  .submit {
+    display: contents;
+  }
+}
+
 #dovetail-player-preview {
   --_foreground: currentColor;
   --_surface: transparent;
@@ -477,16 +531,10 @@ details.dovetail-section {
 
   padding: 0.5rem;
 
-  border-radius: 0.25rem;
-
   color-scheme: light dark;
 
   color: var(--_foreground);
   background-color: var(--_surface);
-
-  box-shadow:
-    0 2px 4px 2px color-mix(in oklch, currentColor 30%, transparent),
-    0 8px 12px 0 color-mix(in oklch, currentColor 30%, transparent);
 
   button {
     appearance: none;
@@ -576,4 +624,87 @@ details.dovetail-section {
       }
     }
   }
+}
+
+.dtpc-color-set {
+  position: relative;
+  display: inline-flex;
+  gap: 0.5rem;
+
+  padding: 0.5rem;
+
+  border-radius: 0.125rem;
+
+  background-color: var(--dtpc-surface-subtle);
+
+  legend {
+    display: block;
+    padding: 0.125rem 0.25rem;
+
+    border-radius: 0.25rem;
+
+    background-color: Canvas;
+
+    color: CanvasText;
+    font-size: 0.6rem;
+    text-transform: uppercase;
+  }
+
+  &:has(+ &) {
+    margin-inline-end: 0.5rem;
+  }
+}
+
+.dtpc-color-state {
+  display: grid;
+  justify-items: center;
+
+  padding: 0.25rem;
+
+  border-radius: 0.125rem;
+
+  background-color: Canvas;
+
+  label {
+    font-size: 0.7rem;
+    font-weight: 700;
+  }
+
+  &:first-of-type {
+    width: 4.25rem;
+    aspect-ratio: 5 / 4;
+    justify-items: unset;
+
+    label {
+      position: absolute;
+      opacity: 0;
+      width: 0;
+      height: 0;
+      overflow: clip;
+    }
+
+    .sp-replacer {
+      display: grid;
+    }
+
+    .sp-preview {
+      display: grid;
+      width: auto;
+      height: auto;
+    }
+
+    .sp-preview-inner {
+      position: static;
+    }
+  }
+}
+
+/* Spectrum Global Styles */
+
+.sp-container {
+  border: none;
+  border-radius: 0.125px;
+  box-shadow:
+    0 2px 4px 2px color-mix(in oklch, currentColor 30%, transparent),
+    0 8px 12px 0 color-mix(in oklch, currentColor 30%, transparent);
 }

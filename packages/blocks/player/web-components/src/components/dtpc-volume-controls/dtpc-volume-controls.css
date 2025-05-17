@@ -2,8 +2,8 @@
   --_dtpc-volume-controls--spacing: var(--dtpc-volume-controls--spacing, 0.25rem);
 
   --dtpc-volume-slider--padding-inline: 0.5rem;
-  --dtpc-volume-slider--surface: var(--_dtpc-player--surface, color-mix(in oklch, currentColor 20%, transparent));
-  --dtpc-volume-slider--surface-blur: 8px;
+  --dtpc-volume-slider--surface: var(--dtpc-button--surface, color-mix(in oklch, var(--_dtpc-player--foreground) 20%, transparent));
+  --dtpc-volume-slider--surface-blur: 16px;
 
   color: var(--_dtpc-player--time--color, currentColor);
   font-family: var(--_dtpc-player--time--font-family, inherit);

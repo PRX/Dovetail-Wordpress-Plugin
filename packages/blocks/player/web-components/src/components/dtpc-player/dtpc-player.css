@@ -13,7 +13,7 @@
   --_dtpc-player--padding-block: var(--dtpc-player--padding-block, var(--_dtpc-player--padding));
 
   /* Time */
-  --_dtpc-player--time--color: var(--dtpc-player--time--font-size, var(--_dtpc-player--foreground));
+  --_dtpc-player--time--color: var(--dtpc-player--time--color, var(--_dtpc-player--foreground));
   --_dtpc-player--time--font-size: var(--dtpc-player--time--font-size, 0.875rem);
   --_dtpc-player--time--font-family: var(--dtpc-player--time--font-family, ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, 'DejaVu Sans Mono', monospace);
   --_dtpc-player--time--font-weight: var(--dtpc-player--time--font-weight, inherit);
