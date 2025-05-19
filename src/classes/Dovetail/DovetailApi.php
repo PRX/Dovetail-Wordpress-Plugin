@@ -319,6 +319,9 @@ class DovetailApi {
 	public function create_podcast_episode( string $id, array $data ) {
 		$api_url = "https://{$this->feeder_domain}/api/v1/authorization/podcasts/{$id}/episodes";
 
+		// Make sure episode is created with a sanitized guid.
+		$data['guid'] = $this->sanitize_guid( $data['guid'] );
+
 		// Strip props we don't want to risk overriding.
 		// Dovetail API should already protect from this, but things have been know to happen.
 		unset( $data['id'] );
@@ -338,7 +341,8 @@ class DovetailApi {
 	 * @return array<string,mixed>|false
 	 */
 	public function get_podcast_episode_by_guid( int $id, string $guid ) {
-		$guid    = rawurlencode( $guid );
+		// Query for episode using sanitized and url encoded guid.
+		$guid    = rawurlencode( $this->sanitize_guid( $guid ) );
 		$api_url = "https://{$this->feeder_domain}/api/v1/authorization/podcasts/{$id}/guids/{$guid}";
 
 		return $this->get( $api_url );
@@ -369,6 +373,17 @@ class DovetailApi {
 		} else {
 			return $this->update_episode( $id, $data );
 		}
+	}
+
+	/**
+	 * WordPress stores the guid as a html encoded string (`&` is stored as `&#038;`).
+	 * API behavior should mimic the Dovetail RSS importer, using the decoded string when working with GUIDs.
+	 *
+	 * @param string $guid Raw guid string from database.
+	 * @return string
+	 */
+	public function sanitize_guid( string $guid ) {
+		return html_entity_decode( $guid, ENT_QUOTES | ENT_XML1, 'UTF-8' );
 	}
 
 	/**
