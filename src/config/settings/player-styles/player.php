@@ -90,7 +90,7 @@ return [
 			'component' => 'button',
 			'property'  => 'focus-ring-color',
 			'label'     => __( 'Button Highlight Color', 'dovetail-podcasts' ),
-			'desc'      => '<p>' . __( 'Color of buttons\'s focus rings when using keyboard navigating using <kbd>Tab</kbd>.', 'dovetail-podcasts' ) . '</p>',
+			'desc'      => '<p>' . __( 'Color of buttons\' focus rings when keyboard navigating using <kbd>Tab</kbd>.', 'dovetail-podcasts' ) . '</p>',
 			'type'      => 'color',
 		],
 		[
@@ -120,7 +120,7 @@ return [
 			'part'      => 'track',
 			'property'  => 'color',
 			'label'     => __( 'Slider Track Color', 'dovetail-podcasts' ),
-			'desc'      => '<p>' . __( 'Color of sliders\' track bar. Defaults to <em>Foreground Color</em>. Defaults to a transparent shade of <em>Slider Progress Color</em>', 'dovetail-podcasts' ) . '</p>',
+			'desc'      => '<p>' . __( 'Color of sliders\' track bar. Defaults to a transparent shade of <em>Slider Progress Color</em>', 'dovetail-podcasts' ) . '</p>',
 			'type'      => 'color',
 		],
 	],

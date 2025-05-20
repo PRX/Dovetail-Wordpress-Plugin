@@ -6,7 +6,7 @@
   --_dtpc-player--surface-image: var(--dtpc-player--surface-image, none);
   --_dtpc-player--surface-image-position: var(--dtpc-player--surface-image-position, center center);
   --_dtpc-player--surface-image-size: var(--dtpc-player--surface-image-size, cover);
-  --_dtpc-player--surface-blur: var(--dtpc-player--surface-blur, 0);
+  --_dtpc-player--surface-blur: var(--dtpc-player--surface-blur);
   --_dtpc-player--border-radius: var(--dtpc-player--border-radius, 0.25rem);
   --_dtpc-player--padding: var(--dtpc-player--padding, 0.5rem);
   --_dtpc-player--padding-inline: var(--dtpc-player--padding-inline, var(--_dtpc-player--padding));

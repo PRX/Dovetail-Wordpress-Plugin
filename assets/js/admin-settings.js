@@ -132,5 +132,20 @@ jQuery(document).ready(function ($) {
     });
   });
 
+  // Restore Defaults button.
+  $("#restore_defaults").on("click", function (e) {
+    e.preventDefault();
+
+    $playerColorStyleInputs.each(function () {
+      $(this).spectrum("set", null);
+    });
+
+    $playerStyleInputs.val("");
+
+    playerStyles.clear();
+
+    updatePlayerStylesCss();
+  });
+
   updatePlayerStylesCss();
 });

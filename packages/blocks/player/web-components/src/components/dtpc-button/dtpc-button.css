@@ -4,7 +4,7 @@
   --_dtpc-button--foreground: var(--__dtpc-button--foreground, var(--dtpc-button--foreground, var(--_dtpc-player--foreground)));
   --_dtpc-button--foreground--hover: var(--__dtpc-button--foreground--hover, var(--dtpc-button--foreground--hover, var(--_dtpc-button--foreground)));
   --_dtpc-button--foreground--active: var(--__dtpc-button--foreground--active, var(--dtpc-button--foreground--active, var(--_dtpc-button--foreground)));
-  --_dtpc-button--surface: var(--__dtpc-button--surface, var(--dtpc-button--surface, color-mix(in oklch, var(--_dtpc-button--foreground) 0, transparent)));
+  --_dtpc-button--surface: var(--__dtpc-button--surface, var(--dtpc-button--surface, color-mix(in oklch, var(--_dtpc-button--foreground) 0%, transparent)));
   --_dtpc-button--surface--hover: var(
     --__dtpc-button--surface--hover,
     var(--dtpc-button--surface--hover, color-mix(in oklch, var(--_dtpc-button--foreground--hover) 20%, transparent))
@@ -13,7 +13,7 @@
     --__dtpc-button--surface--active,
     var(--dtpc-button--surface--active, color-mix(in oklch, var(--_dtpc-button--foreground--active) 10%, transparent))
   );
-  --_dtpc-button--surface-blur: var(--__dtpc-button--surface-blur, var(--dtpc-button--surface-blur, var(--dtpc-player--surface-blur, 8px)));
+  --_dtpc-button--surface-blur: var(--__dtpc-button--surface-blur, var(--dtpc-button--surface-blur, var(--_dtpc-player--surface-blur)));
   --_dtpc-button--border-color: var(--__dtpc-button--border-color, var(--dtpc-button--border-color, transparent));
   --_dtpc-button--border-color--hover: var(--__dtpc-button--border-color--hover, var(--dtpc-button--border-color--hover, var(--_dtpc-button--border-color)));
   --_dtpc-button--border-color--active: var(--__dtpc-button--border-color--active, var(--dtpc-button--border-color--active, var(--_dtpc-button--border-color)));

@@ -48,8 +48,6 @@
     writing-mode: vertical-lr;
     direction: rtl;
     height: 100px;
-
-    margin-block: calc(var(--_dtpc-slider--scrubber--size) / 2);
   }
 }
 

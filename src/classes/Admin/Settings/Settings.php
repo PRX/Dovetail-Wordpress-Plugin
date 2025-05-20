@@ -343,6 +343,10 @@ class Settings {
 			</aside>
 			<nav class="dovetail-settings-player-menu" title="Player Preview Menu">
 				<?php submit_button(); ?>
+				<div class="dovetail-divider"></div>
+				<button type="button" name="restore_defaults" id="restore_defaults" class="button button-secondary">
+					<?php echo esc_html__( 'Restore Defaults', 'dovetail-podcasts' ); ?>
+				</button>
 			</nav>
 		</div>
 		<?php
