@@ -42,6 +42,8 @@ jQuery(document).ready(function ($) {
       "dtpc.settings.player.preview.backdrop",
     );
 
+    console.log("showBackdrop", showBackdrop);
+
     if (showBackdrop) {
       $this.attr("backdrop", true);
     } else {
@@ -55,11 +57,11 @@ jQuery(document).ready(function ($) {
 
     if (!hasBackdrop) {
       $player.attr("backdrop", true);
+      localStorage.setItem("dtpc.settings.player.preview.backdrop", true);
     } else {
       $player.removeAttr("backdrop");
+      localStorage.removeItem("dtpc.settings.player.preview.backdrop");
     }
-
-    localStorage.setItem("dtpc.settings.player.preview.backdrop", !hasBackdrop);
   });
 
   // Player preview theme switcher.

@@ -47,7 +47,8 @@ class Settings {
 
 		add_action( 'admin_menu', [ $this, 'add_options_page' ] );
 		add_action( 'init', [ $this, 'register_settings' ], 999 );
-		add_action( 'admin_init', [ $this, 'initialize_settings_page' ], 999 );
+		add_action( 'admin_init', [ $this, 'initialize_settings_page' ], 998 );
+		add_action( 'admin_init', [ $this, 'generate_customized_player_style' ], 999 );
 		add_action( 'rest_api_init', [ $this, 'rest_api_init' ], 999 );
 	}
 
@@ -225,6 +226,85 @@ class Settings {
 		if ( $this->dovetail_api->has_client_credentials && ( ! $post_types || ! is_array( $post_types ) || empty( $post_types ) ) ) {
 			add_settings_error( DTPODCASTS_SETTINGS_SECTION_PREFIX . 'general', 'missing-post-types', 'Select at least one <em>Podcast Post Type</em>.', 'error' );
 		}
+	}
+
+	/**
+	 * Add update actions for player style options.
+	 *
+	 * @return void
+	 */
+	public function generate_customized_player_style() {
+		add_action(
+			sprintf( 'update_option_%1$s', DTPODCASTS_SETTINGS_SECTION_PREFIX . 'player' ),
+			function () {
+				$player_style_path = $this->get_player_style_path();
+
+				wp_mkdir_p( dirname( $player_style_path ) );
+
+				// Since we are putting the file in the uploads directory, it is safe to use file_put_contents.
+				// phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_file_put_contents
+				file_put_contents( $player_style_path, $this->generate_player_style_css() );
+
+				update_option( 'dovetail_player_style_version', wp_generate_password( 6, false ) );
+			},
+			10,
+			2
+		);
+	}
+
+	/**
+	 * Get player styles settings fields.
+	 *
+	 * @return array<int,array<string,mixed>>
+	 */
+	protected function get_player_styles_settings_fields() {
+		$return = [];
+
+		$player_styles = dtpc_config( 'settings/player-styles/index' );
+
+		foreach ( $player_styles as $player_styles_settings ) {
+			foreach ( $player_styles_settings['fields'] as $field ) {
+				$return[] = $field;
+			}
+		}
+
+		return $return;
+	}
+
+	/**
+	 * Get path to player styles css file location in upload directory.
+	 *
+	 * @return string
+	 */
+	public static function get_player_style_path() {
+		$upload_dir = wp_upload_dir()['basedir'];
+		return $upload_dir . '/dtpc/css/dtpc-player-style.css';
+	}
+
+	/**
+	 * Generate CSS for player styles.
+	 *
+	 * @return string
+	 */
+	protected function generate_player_style_css() {
+		$css = '';
+
+		$player_styles_settings_fields = $this->get_player_styles_settings_fields();
+
+		foreach ( $player_styles_settings_fields as $field ) {
+			$field_names = $this->settings_api->get_field_names( $field );
+
+			foreach ( $field_names as $field_name ) {
+				$css_prop = sprintf( '--dtpc-%1$s', $field_name );
+				$value    = $this->settings_api->get_option( $field_name, 'player' );
+
+				if ( ! empty( $value ) ) {
+					$css .= sprintf( '%1$s:%2$s;', $css_prop, $value );
+				}
+			}
+		}
+
+		return sprintf( ':root{%1$s}', $css );
 	}
 
 	/**

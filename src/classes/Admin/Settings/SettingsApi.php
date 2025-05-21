@@ -310,16 +310,6 @@ class SettingsApi {
 				];
 
 				add_settings_field( "{$page_id}[{$name}]", $label, $callback, $page_id, $section_id, $args );
-
-				// Register state. These fields should not render or belong to a registered section.
-				// The callback of the main fields will be responsible for rendering the inputs.
-
-				if ( ! empty( $css_states ) ) {
-					foreach ( $css_states as $css_state_name => $css_state_config ) {
-						$name = implode( '--', [ $name, $css_state_name ] );
-						add_settings_field( "{$page_id}[{$name}]", $css_state_config['label'], '__return_null', $page_id, '__DTPC_HIDDEN__' );
-					}
-				}
 			}
 		}
 
@@ -411,6 +401,39 @@ class SettingsApi {
 		}
 
 		return isset( $args['name'] ) ? $args['name'] : '';
+	}
+
+	/**
+	 * Get all field names for a field and its states.
+	 *
+	 * @param array<string,string> $args Settings field args.
+	 * @return array<int,string>
+	 */
+	public function get_field_names( array $args ) {
+		$id = $this->get_field_name( $args );
+
+		$field_names = [ $id ];
+
+		if ( isset( $args['css_states'] ) && is_array( $args['css_states'] ) ) {
+			foreach ( $args['css_states'] as $css_state_name => $css_state_config ) {
+				$field_names[] = implode( '--', [ $id, $css_state_name ] );
+			}
+		}
+
+		if ( isset( $args['component_states'] ) && is_array( $args['component_states'] ) ) {
+			foreach ( $args['component_states'] as $component_state_name => $component_state_config ) {
+				$component_state_id = implode( '--', [ $id, $component_state_name ] );
+				$field_names[]      = $component_state_id;
+
+				if ( isset( $args['css_states'] ) && is_array( $args['css_states'] ) ) {
+					foreach ( $args['css_states'] as $css_state_name => $css_state_config ) {
+						$field_names[] = implode( '--', [ $component_state_id, $css_state_name ] );
+					}
+				}
+			}
+		}
+
+		return $field_names;
 	}
 
 	/**

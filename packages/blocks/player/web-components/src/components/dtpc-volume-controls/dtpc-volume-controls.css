@@ -4,7 +4,7 @@
   --__dtpc-volume-slider--padding-inline: 0.75rem;
   --__dtpc-volume-slider--padding-block: 0.25rem;
   --__dtpc-volume-slider--surface: var(
-    --dtpc-volume-slider--surface,
+    --dtpc-volume-controls--slider--surface,
     var(--dtpc-button--surface, var(--dtpc-player--surface, color-mix(in oklch, var(--_dtpc-player--foreground) 20%, transparent)))
   );
   --__dtpc-volume-slider--surface-blur: none;

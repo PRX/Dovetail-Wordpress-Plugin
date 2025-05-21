@@ -90,7 +90,7 @@ final class DovetailPodcasts {
 		// Initialize Admin functionality.
 		add_action( 'after_setup_theme', [ $this, 'init_admin' ] );
 
-		// TODO: Initialize content functionality (player).
+		// Initialize content functionality (player).
 		add_action( 'init', [ $this, 'init_player' ], 999 );
 	}
 

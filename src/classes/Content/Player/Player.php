@@ -7,6 +7,8 @@
 
 namespace DovetailPodcasts\Content\Player;
 
+use DovetailPodcasts\Admin\Settings\SettingsApi;
+
 /**
  * Player class
  *
@@ -30,7 +32,8 @@ class Player {
 	 * Setup actions.
 	 */
 	private function actions(): void {
-		// Add action hooks here.
+		add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_player_styles' ] );
+		add_action( 'enqueue_block_assets', [ $this, 'enqueue_player_styles' ] );
 	}
 
 	/**
@@ -81,6 +84,27 @@ class Player {
 	 */
 	private function shortcodes(): void {
 		add_shortcode( DTPODCASTS_SHORTCODE_PREFIX . 'enclosure-href', [ $this, 'render_enclosure_href_shortcode' ] );
+	}
+
+	/**
+	 * Enqueue player styles css.
+	 *
+	 * @return void
+	 */
+	public function enqueue_player_styles() {
+		$is_player_customization_enabled = 'on' === SettingsApi::get_option( 'player_customization_enabled', 'player' );
+
+		if ( $is_player_customization_enabled && ! wp_style_is( 'dtpc-player-style', 'enqueued' ) ) {
+			$version = get_option( 'dovetail_player_style_version', time() );
+			$url     = wp_upload_dir()['baseurl'] . '/dtpc/css/dtpc-player-style.css';
+
+			wp_enqueue_style(
+				'dtpc-player-style',
+				esc_url( set_url_scheme( $url ) ),
+				[],
+				$version
+			);
+		}
 	}
 
 	/**
