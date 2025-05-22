@@ -17,7 +17,7 @@ Dovetail Podcasts plugin connects your Wordpress site to Dovetail Podcasts.
 ## 🚀 Get Started
 
 1. [Sign up for a Dovetail account](https://id.prx.org).
-2. [Request creation of a Client Application](mailto:help@prx.org?subject=Request%20For%20%Wordpress%20Plugin%20Client%20Application) for your Wordpress site. Please include the following information in your request:
+2. [Request creation of a Client Application](mailto:podcast-support@prx.org?subject=Request%20For%20%Wordpress%20Plugin%20Client%20Application) for your Wordpress site. Please include the following information in your request:
 
 - Email for the user the application should created for.
 - URL of the Wordpress site using the plugin.
@@ -37,4 +37,4 @@ Dovetail Podcasts plugin connects your Wordpress site to Dovetail Podcasts.
 
 > ## 🫶 Thank You For Choosing Dovetail
 >
-> We look forward to aiding you on your podcasting adventure! If you need any assistance setting up Dovetail Podcasts on your Wordpress site, feel free to contact [our amazing support team](mailto:help@prx.org?subject=Help%20With%20Dovetai%20Podcasts%20Wordpress%20Plugin). Submit any bugs you find to our [Github Issues](https://github.com/PRX/Dovetail-Wordpress-Plugin/issues).
+> We look forward to aiding you on your podcasting adventure! If you need any assistance setting up Dovetail Podcasts on your Wordpress site, feel free to contact [our amazing support team](mailto:podcast-support@prx.org?subject=Help%20With%20Dovetail%20Podcasts%20Wordpress%20Plugin). Submit any bugs you find to our [Github Issues](https://github.com/PRX/Dovetail-Wordpress-Plugin/issues).
