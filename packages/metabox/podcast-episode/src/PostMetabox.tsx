@@ -79,7 +79,11 @@ function postMetaboxStateReducer(state: PostMetaboxState, action: PostMetaboxAct
     case 'SET_PODCAST':
       return {
         ...state,
-        podcast: action.payload
+        podcast: action.payload,
+        episode: {
+          ...episode,
+          podcastId: action.payload.id
+        }
       }
 
     case 'SET_PODCAST_TO_DEFAULT':
@@ -111,9 +115,13 @@ function postMetaboxStateReducer(state: PostMetaboxState, action: PostMetaboxAct
           enclosure: action.payload,
           dovetail: {
             ...dovetail,
-            media: action.payload ? [
-              { href: action.payload.url }
-            ] : null
+            ...((!dovetail.id || dovetail.uncut) && action.payload ? {
+              uncut: { href: action.payload.url }
+            } : {
+              media: action.payload ? [
+                { href: action.payload.url }
+              ] : null
+            })
           }
         }
       }
@@ -129,9 +137,13 @@ function postMetaboxStateReducer(state: PostMetaboxState, action: PostMetaboxAct
           },
           dovetail: {
             ...dovetail,
-            media: [
-              { href: action.payload.url }
-            ]
+            ...(dovetail.uncut ? {
+              uncut: { href: action.payload.url }
+            } : {
+              media: [
+                { href: action.payload.url }
+              ]
+            })
           }
         }
       }
@@ -257,9 +269,6 @@ function PostMetabox({ field, episode: _episode, options }: PostMetaboxProps) {
   }
 
   function setEpisodePodcastId(data: DovetailPodcast) {
-    dispatch({ type: 'UPDATE_EPISODE', payload: {
-      podcastId: data.id
-    }});
     dispatch({ type: 'SET_PODCAST', payload: data});
   }
 

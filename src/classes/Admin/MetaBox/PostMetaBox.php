@@ -211,11 +211,19 @@ class PostMetaBox {
 						$meta['podcastId'] = $p['id'];
 						$meta['dovetail']  = $this->parse_episode_api_data( $e );
 
+						// Try to get media data from uncut prop first...
+						if ( isset( $e['uncut'] ) && ! empty( $e['uncut'] ) ) {
+							$media = $e['uncut'];
+						} else {
+							// ...fallback to first media item.
+							$media = $e['media'][0];
+						}
+
 						// Media's original URL should be trusted to be to an existing file.
 						// It may be a Dovetail URL depending on what processing has been done to it.
-						$meta['enclosure']['url'] = $e['media'][0]['originalUrl'];
+						$meta['enclosure']['url'] = $media['originalUrl'];
 						// Media's duration should be the original duration of the uploaded file.
-						$meta['enclosure']['duration'] = $e['media'][0]['duration'];
+						$meta['enclosure']['duration'] = $media['duration'];
 						// Enclosure's href should still contain the original filename.
 						$meta['enclosure']['filename'] = basename( $e['_links']['enclosure']['href'] );
 
@@ -223,7 +231,7 @@ class PostMetaBox {
 						$media_id = $this->get_attachment_id( $e['_links']['enclosure']['href'] );
 						if ( $media_id > 0 ) {
 							$meta['enclosure']['mediaId'] = $media_id;
-							// Update enclosure URL in case them media original URL was altered during processing.
+							// Update enclosure URL in case the media original URL was altered during processing.
 							$meta['enclosure']['url'] = wp_get_attachment_url( $media_id );
 						}
 
@@ -244,6 +252,7 @@ class PostMetaBox {
 				// Remove dovetail id, enclosure, and media meta data.
 				unset( $meta['dovetail']['id'] );
 				unset( $meta['dovetail']['enclosure'] );
+				unset( $meta['dovetail']['uncut'] );
 				unset( $meta['dovetail']['media'] );
 			}
 		}
@@ -266,7 +275,7 @@ class PostMetaBox {
 	 */
 	private function parse_episode_api_data( array $data ) {
 		if ( ! empty( $data ) ) {
-			return [
+			$parsed_data = [
 				'id'              => $data['id'],
 				'media'           => $data['media'],
 				'enclosure'       => $data['_links']['enclosure'],
@@ -282,6 +291,12 @@ class PostMetaBox {
 					'originalUrl' => $data['image']['originalUrl'],
 				] : null,
 			];
+
+			if ( isset( $data['uncut'] ) ) {
+				$parsed_data['uncut'] = $data['uncut'];
+			}
+
+			return $parsed_data;
 		}
 
 		return $data;
@@ -523,19 +538,43 @@ class PostMetaBox {
 			! empty( $meta['dovetail']['id'] )
 		) {
 			// Podcast has changed.
-			// We need to delete existing episode from that previous podcast.
-			$this->delete_episode( $meta['dovetail']['id'] );
+			// We need to delete existing episode from that previous podcast...
+
+			// ...but first, we need to keep track of the episode id.
+			$dovetail_id_to_delete = $meta['dovetail']['id'];
 
 			// New meta will still contain deleted episode id.
 			// Unset episode id so a new episode will be created in the current podcast.
 			unset( $new_meta['dovetail']['id'] );
 			// Reset media to enclosure url to ensure audio is reprocessed on new episode.
+			unset( $new_meta['dovetail']['uncut'] );
 			unset( $new_meta['dovetail']['media'] );
 			if ( isset( $new_meta['enclosure']['url'] ) ) {
-				$new_meta['dovetail']['media'] = [
-					[ 'href' => $new_meta['enclosure']['url'] ],
-				];
+				// Before we can make use of the enclosure URL, we need to see how media is stored on the Dovetail episode.
+				// Fetch current episode.
+				list( $response_data ) = $this->dovetail_api->get_episode( $dovetail_id_to_delete );
+
+				// When we still have Dovetail episode data...
+				if ( ! empty( $response_data ) ) {
+					$episode_data = $this->parse_episode_api_data( $response_data );
+
+					if ( isset( $episode_data['uncut'] ) ) {
+						// ...set uncut when it was used on the Dovetail episode.
+						$new_meta['dovetail']['uncut'] = [ 'href' => $new_meta['enclosure']['url'] ];
+					} else {
+						// ...set media when uncut was not used (imported or created prior to adding uncut to API.)
+						$new_meta['dovetail']['media'] = [
+							[ 'href' => $new_meta['enclosure']['url'] ],
+						];
+					}
+				} else {
+					// Episode is already gone. Use uncut prop on new episode.
+					$new_meta['dovetail']['uncut'] = [ 'href' => $new_meta['enclosure']['url'] ];
+				}
 			}
+
+			// Now we can delete the episode from Dovetail.
+			$this->delete_episode( $dovetail_id_to_delete );
 		}
 
 		if ( isset( $new_meta ) && is_array( $new_meta ) ) {
@@ -572,12 +611,17 @@ class PostMetaBox {
 			}
 		}
 
-		// Remove Dovetail media from metadata, since its existence is our flag that
-		// a new audio file was provided.
+		// Remove Dovetail uncut and media from metadata, since their existence is our flag that
+		// a new audio file was provided in future saves.
+		if ( isset( $meta['dovetail']['uncut'] ) ) {
+			unset( $meta['dovetail']['uncut'] );
+		}
+
 		if ( isset( $meta['dovetail']['media'] ) ) {
 			unset( $meta['dovetail']['media'] );
 		}
 
+		// Add/Update metadata.
 		if ( ! add_post_meta( $post_id, DTPODCASTS_POST_META_KEY, $meta, true ) ) {
 			update_post_meta( $post_id, DTPODCASTS_POST_META_KEY, $meta );
 		}
@@ -782,15 +826,26 @@ class PostMetaBox {
 				$data['categories'] = $categories;
 			}
 
+			// When episode...
 			if (
+				// ...isn't associated with a Dovetail episode,...
 				! isset( $meta['dovetail']['id'] ) &&
-				! isset( $meta['dovetail']['media'] ) &&
-				isset( $meta['enclosure']['url'] ) &&
-				! empty( $meta['enclosure']['url'] )
+				// ...and doesn't have media already set,...
+				! isset( $meta['dovetail']['uncut'] ) && ! isset( $meta['dovetail']['media'] ) &&
+				// ...and has an enclosure URL,...
+				isset( $meta['enclosure']['url'] ) && ! empty( $meta['enclosure']['url'] )
 			) {
-				$data['media'] = [
-					[ 'href' => $meta['enclosure']['url'] ],
-				];
+				// ...use the enclosure URL as the Dovetail uncut media source.
+				$data['uncut'] = [ 'href' => $meta['enclosure']['url'] ];
+			}
+
+			// If episode audio was modified at this point, uncut and media data will not have `originalUrl` props.
+			// Remove the props from the prepared data if `originalUrl` still exists.
+
+			if ( isset( $data['uncut'] ) && ( empty( $data['uncut'] ) || isset( $data['uncut']['originalUrl'] ) ) ) {
+				// Uncut media was not updated from initial load, or is empty.
+				// Remove uncut media before sending update. Must be undefined for Dovetail to apply media array changes.
+				unset( $data['uncut'] );
 			}
 
 			// TODO: Will have to update this if we ever support multiple audio segments.
