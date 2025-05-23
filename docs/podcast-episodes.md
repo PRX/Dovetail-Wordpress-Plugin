@@ -1,6 +1,6 @@
 # Publish Podcast Episodes With Posts
 
-Dovetail Podcasts will turn you posts into podcast episodes in Dovetail. Simple create and edit them as you would any other post. The post title, body, and feature image will be used as the podcast episode's title description, and thumbnail image. Any Wordpress categories or tags added to the post will be set as categories on the Dovetail episode.
+Dovetail Podcasts will turn you posts into podcast episodes in Dovetail. Simply create and edit them as you would any other post. The post title, body, and feature image will be used as the podcast episode's title description, and thumbnail image. Any Wordpress categories or tags added to the post will be set as categories on the episode in Dovetail.
 
 Syncing of changes to episode attributes is one-directional, from Wordpress to Dovetail. Changes in Dovetail will be overwritten by changes in Wordpress. Dovetail will have more episode attributes to edit than Wordpress. Those not editable in Wordpress will not be affected.
 
@@ -16,7 +16,7 @@ Click the **Add To Podcast** button and select a podcast from the dialog.
 
 Now you can add your audio, either by clicking the upload button or pasting in a URL. Fill in any additional episode information you need. When you are done, save your post.
 
-If you post is a draft, the episode will be created as a draft in Dovetail. The audio will then be retrieved by Dovetail and processed to prepare it to go into your distribution feeds.
+If your post is a draft, the episode will be created as a draft in Dovetail. The audio will then be retrieved by Dovetail and processed to prepare it to go into your distribution feeds.
 
 > Oops! Did you add the episode to the wrong podcast. As long as the episode has not been published, you can change the podcast by clicking the **Content Menu** button, and selecting **Change Podcast**.
 >
@@ -34,7 +34,7 @@ Set a future publish date on your post and publish it. The Dovetail episode will
 
 ### Remove Podcast Episode
 
-If you added the podcast episode to the wrong post or just want to remove the episode, clicking the **Content Menu** button, and selecting **Remove Podcast Episode**.
+If you added the podcast episode to the wrong post or just want to remove the episode, click the **Content Menu** button, and selecting **Remove Podcast Episode**.
 
 ![Context Menu](./images/post-meta-box--context-menu--published.png)
 

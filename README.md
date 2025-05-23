@@ -19,9 +19,9 @@ Dovetail Podcasts plugin connects your Wordpress site to Dovetail Podcasts.
 1. [Sign up for a Dovetail account](https://id.prx.org).
 2. [Request creation of a Client Application](mailto:podcast-support@prx.org?subject=Request%20For%20%Wordpress%20Plugin%20Client%20Application) for your Wordpress site. Please include the following information in your request:
 
-- Email for the user the application should created for.
+- Email of the user the application should be created for.
 - URL of the Wordpress site using the plugin.
-- If you require a staging application for your sites staging and development environments, include user email and staging site URL in your request.
+- If you require a staging application for your site's staging or development environments, include your staging site URL in your request, and [Sign up for a Dovetail Staging account](https://id.staging.prx.org).
 
 3. [Install Dovetail Podcasts](./docs/installation.md): `wp plugin install dovetail-podcasts --activate`
 4. [Connect Wordpress to Dovetail](./docs/settings-client-application.md) using your Client Application credentials.
