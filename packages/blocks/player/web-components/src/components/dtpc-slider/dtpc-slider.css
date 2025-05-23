@@ -19,7 +19,7 @@
 }
 
 .track {
-  --_dtpc-slider--track--gutter: calc(var(--_dtpc-slider--scrubber--size) / 2);
+  --_dtpc-slider--track--gutter: calc((var(--_dtpc-slider--scrubber--size) / 2) - var(--_dtpc-slider--track--border-offset) - var(--_dtpc-slider--track--border-thickness));
 
   isolation: isolate;
   display: grid;

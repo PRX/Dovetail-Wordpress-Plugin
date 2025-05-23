@@ -36,6 +36,9 @@
 				"flex",
 				"default"
 			]
+		},
+		"backdrop": {
+			"type": "boolean"
 		}
 	}
 }

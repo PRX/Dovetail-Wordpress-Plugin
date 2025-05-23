@@ -144,6 +144,8 @@ class Player {
 	 */
 	public function render_block( $atts, string $content, \WP_Block $block ) {
 
+		global $dtpc_player_show_controls;
+
 		list(, $block_type) = explode( '/', $block->name );
 
 		if ( ! is_array( $atts ) ) {
@@ -159,6 +161,10 @@ class Player {
 
 		if ( method_exists( $this, $callback ) ) {
 			return call_user_func_array( [ $this, $callback ], [ $atts, $content, $block ] );
+		}
+
+		if ( ! $dtpc_player_show_controls ) {
+			return '';
 		}
 
 		$wrapper_attributes = get_block_wrapper_attributes( $atts );
@@ -182,6 +188,10 @@ class Player {
 	 * @return string
 	 */
 	public function render_player_block( $atts, string $content, \WP_Block $block ) {
+
+		global $dtpc_player_show_controls;
+
+		$dtpc_player_show_controls = true;
 
 		$default_atts = $this->get_block_attributes_defaults( 'player' );
 
@@ -207,18 +217,19 @@ class Player {
 			$ctx_atts = $this->get_attributes_from_post_context( $atts['post_id'] );
 
 			if ( empty( $ctx_atts ) ) {
-				// No meta data on post, so nothing to render.
-				return '';
+				$dtpc_player_show_controls = false;
 			}
 
 			// Use post context attributes.
-			$atts = shortcode_atts(
-				$default_atts,
+			$atts = array_merge(
+				$atts,
 				$ctx_atts
 			);
 		}
 
-		$atts['src'] = $this->prepare_player_src( $atts['src'] );
+		if ( isset( $atts['src'] ) ) {
+			$atts['src'] = $this->prepare_player_src( $atts['src'] );
+		}
 
 		$inner_blocks_html = '';
 		foreach ( $block->inner_blocks as $inner_block ) {
@@ -227,6 +238,14 @@ class Player {
 
 		if ( empty( $inner_blocks_html ) ) {
 			$atts['layout'] = 'default';
+		} else {
+			unset( $atts['layout'] );
+		}
+
+		if ( $dtpc_player_show_controls && in_array( $atts['backdrop'], [ 1,'1',true,'true','on' ], true ) ) {
+			$atts['backdrop'] = 'true';
+		} else {
+			unset( $atts['backdrop'] );
 		}
 
 		$wrapper_attributes = get_block_wrapper_attributes(
@@ -489,15 +508,52 @@ class Player {
 			'class' => [],
 			'id'    => [],
 			'style' => [],
+			'title' => [],
 		];
 
 		return [
 			'div'                  => $allowed_atts,
+			'h1'                   => $allowed_atts,
+			'h2'                   => $allowed_atts,
+			'h3'                   => $allowed_atts,
+			'h4'                   => $allowed_atts,
+			'h5'                   => $allowed_atts,
+			'h6'                   => $allowed_atts,
+			'p'                    => $allowed_atts,
+			'span'                 => $allowed_atts,
+			'a'                    => array_merge(
+				[
+					'href'   => [],
+					'target' => [],
+				],
+				$allowed_atts
+			),
+			'figure'               => $allowed_atts,
+			'img'                  => array_merge(
+				[
+					'src'           => [],
+					'srcset'        => [],
+					'sizes'         => [],
+					'alt'           => [],
+					'width'         => [],
+					'height'        => [],
+					'decoding'      => [],
+					'fetchpriority' => [],
+				],
+				$allowed_atts
+			),
+			'time'                 => array_merge(
+				[
+					'datetime' => [],
+				],
+				$allowed_atts
+			),
 			'dtpc-player'          => array_merge(
 				[
 					'duration' => [],
 					'layout'   => [],
 					'src'      => [],
+					'backdrop' => [],
 				],
 				$allowed_atts
 			),

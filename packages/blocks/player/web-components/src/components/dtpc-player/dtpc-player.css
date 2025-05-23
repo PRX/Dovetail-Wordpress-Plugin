@@ -65,6 +65,11 @@ slot[name='backdrop'] {
     background-color: var(--_dtpc-player--surface);
     backdrop-filter: blur(var(--_dtpc-player--surface-blur));
   }
+
+  & + .main {
+    padding-inline: var(--_dtpc-player--padding-inline);
+    padding-block: var(--_dtpc-player--padding-block);
+  }
 }
 
 :host(:where([layout='flex'], [layout='default'])) {
@@ -72,10 +77,5 @@ slot[name='backdrop'] {
     display: flex;
     align-items: center;
     gap: var(--_dtpc-player--spacing);
-
-    slot[name='backdrop'] + & {
-      padding-inline: var(--_dtpc-player--padding-inline);
-      padding-block: var(--_dtpc-player--padding-block);
-    }
   }
 }

@@ -6,9 +6,30 @@
 
 dtpc-player {
 	--_dtpc-player--foreground: var(--dtpc-player--foreground, currentColor);
-	--_dtpc-player--surface: var(--dtpc-player--surface, white);
-	--_dtpc-player--surface-opacity: var(--dtpc-player--bg-opacity, 0);
+	--_dtpc-player--surface: var(
+		--dtpc-player--surface,
+		color-mix(in oklch, var(--_dtpc-player--foreground) 10%, transparent)
+	);
+	--_dtpc-player--surface-image: var(--dtpc-player--surface-image, none);
+	--_dtpc-player--surface-image-position: var(
+		--dtpc-player--surface-image-position,
+		center center
+	);
+	--_dtpc-player--surface-image-size: var(
+		--dtpc-player--surface-image-size,
+		cover
+	);
 	--_dtpc-player--surface-blur: var(--dtpc-player--bg-blur, 0);
+	--_dtpc-player--border-radius: var(--dtpc-player--border-radius, 0.25rem);
+	--_dtpc-player--padding: var(--dtpc-player--padding, 0.5rem);
+	--_dtpc-player--padding-inline: var(
+		--dtpc-player--padding-inline,
+		var(--_dtpc-player--padding)
+	);
+	--_dtpc-player--padding-block: var(
+		--dtpc-player--padding-block,
+		var(--_dtpc-player--padding)
+	);
 
 	/* Time */
 	--_dtpc-player--time--color: var(
@@ -35,6 +56,50 @@ dtpc-player {
 	);
 
 	min-height: 1rem;
+
+	.backdrop {
+		display: block;
+		position: absolute;
+		isolation: isolate;
+		inset: 0;
+		z-index: -1;
+		overflow: clip;
+
+		border-radius: var(--_dtpc-player--border-radius);
+
+		* {
+			position: absolute;
+			inset: 0;
+		}
+
+		&::before {
+			content: "";
+			position: absolute;
+			inset: 0;
+			z-index: -1;
+
+			background-image: var(--_dtpc-player--surface-image);
+			background-size: var(--_dtpc-player--surface-image-size);
+			background-position: var(--_dtpc-player--surface-image-position);
+		}
+
+		&::after {
+			content: "";
+			position: absolute;
+			inset: -1px;
+			z-index: 1;
+
+			border: solid 1px transparent;
+
+			background-color: var(--_dtpc-player--surface);
+			backdrop-filter: blur(var(--_dtpc-player--surface-blur));
+		}
+
+		& + .main {
+			padding-inline: var(--_dtpc-player--padding-inline);
+			padding-block: var(--_dtpc-player--padding-block);
+		}
+	}
 }
 
 dtpc-button {
