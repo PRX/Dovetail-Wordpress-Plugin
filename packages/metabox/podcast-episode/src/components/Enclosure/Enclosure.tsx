@@ -94,21 +94,11 @@ export function Enclosure({ onChange}: EnclosureProps) {
   const useOriginalUrl = hasUnsavedChanges || 'publish' !== postStatus || 'complete' !== dovetail?.enclosure?.status;
   const audioSrcUrl = useOriginalUrl ?
     // Try to use initial dovetail media's original URL in cases when offloaded media was deleted and url is missing.
-    remoteUrl || url || initialEpisode.current?.dovetail?.media?.[0]?.originalUrl :
+    remoteUrl || url || initialEpisode.current?.dovetail?.uncut?.originalUrl || initialEpisode.current?.dovetail?.media?.[0]?.originalUrl :
     // Construct a dovetail enclosure URL. We do not want use the href from the dovetail enclosure
     // since it will be prefixed with analytics prefixes, and audio played in the admin should not
     // affect those metrics.
-    [
-      podcast.enclosureTemplate.replace(/\{[^\}]+\}/g, ''),
-      podcast.id,
-      dovetail.id,
-      // Dovetail audio URL doesn't require a filename, so we will use the
-      // enclosure filename for consistency in what will be displayed, since
-      // depending on what actions are taken in Dovetail, the Dovetail enclosure href filename
-      // can change. Even the original source of the media for the enclosure can be
-      // altered to a Dovetail URL.
-      audioSrcFilename
-    ].join('/');
+    dovetail.uncut?.href || dovetail.media[0].href;
 
   // Store initial episode data.
   initialEpisode.current = initialEpisode.current || episode;

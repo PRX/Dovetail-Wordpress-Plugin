@@ -1,32 +1,42 @@
 :host {
-  --_dtpc-button--size: var(--dtpc-button--size, 1.5rem);
-  --_dtpc-button--padding: var(--dtpc-button--padding, 0.325rem);
-  --_dtpc-button--foreground: var(--dtpc-button--foreground, var(--_dtpc-player--foreground));
-  --_dtpc-button--foreground--hover: var(--dtpc-button--foreground--hover, var(--_dtpc-player--foreground));
-  --_dtpc-button--foreground--active: var(--dtpc-button--foreground--active, var(--_dtpc-player--foreground));
-  --_dtpc-button--surface: var(--_dtpc-button--surface, var(--_dtpc-player--foreground));
-  --_dtpc-button--surface--hover: var(--dtpc-button--surface--hover, var(--_dtpc-player--foreground));
-  --_dtpc-button--surface--active: var(--dtpc-button--surface--active, var(--_dtpc-player--foreground));
-  --_dtpc-button--surface-blur: var(--dtpc-button--surface-blur, var(--dtpc-player--surface-blur, 8px));
-  --_dtpc-button--surface-opacity: var(--dtpc-button--surface-opacity, 0);
-  --_dtpc-button--surface-opacity--hover: var(--dtpc-button--surface-opacity--hover, 20%);
-  --_dtpc-button--surface-opacity--active: var(--dtpc-button--surface-opacity--active, 10%);
-  --_dtpc-button--border-color: var(--dtpc-button--border-color, transparent);
-  --_dtpc-button--border-color--hover: var(--dtpc-button--border-color--hover, transparent);
-  --_dtpc-button--border-color--active: var(--dtpc-button--border-color--active, transparent);
-  --_dtpc-button--border-radius: var(--dtpc-button--border-radius, 100vw);
-  --_dtpc-button--border-radius--hover: var(--dtpc-button--border-radius--hover, 100vw);
-  --_dtpc-button--border-radius--active: var(--dtpc-button--border-radius--active, 100vw);
-  --_dtpc-button--border-width: var(--dtpc-button--border-width, 0);
-  --_dtpc-button--border-width--hover: var(--dtpc-button--border-width--hover, 0);
-  --_dtpc-button--border-width--active: var(--dtpc-button--border-width--active, 0);
-  --_dtpc-button--focus-ring-color: var(--dtpc-button--focus-ring-color, var(--_dtpc-player--highlight));
-  --_dtpc-button--focus-ring-offset: var(--dtpc-button--focus-ring-offset, 0.125rem);
-  --_dtpc-button--focus-ring-width: var(--dtpc-button--focus-ring-width, 2px);
+  --_dtpc-button--size: var(--__dtpc-button--size, var(--dtpc-button--size, 1.5rem));
+  --_dtpc-button--padding: var(--__dtpc-button--padding, var(--dtpc-button--padding, 0.325rem));
+  --_dtpc-button--foreground: var(--__dtpc-button--foreground, var(--dtpc-button--foreground, var(--_dtpc-player--foreground)));
+  --_dtpc-button--foreground--hover: var(--__dtpc-button--foreground--hover, var(--dtpc-button--foreground--hover, var(--_dtpc-button--foreground)));
+  --_dtpc-button--foreground--active: var(--__dtpc-button--foreground--active, var(--dtpc-button--foreground--active, var(--_dtpc-button--foreground)));
+  --_dtpc-button--surface: var(--__dtpc-button--surface, var(--dtpc-button--surface, color-mix(in oklch, var(--_dtpc-button--foreground) 0%, transparent)));
+  --_dtpc-button--surface--hover: var(
+    --__dtpc-button--surface--hover,
+    var(--dtpc-button--surface--hover, color-mix(in oklch, var(--_dtpc-button--foreground--hover) 20%, transparent))
+  );
+  --_dtpc-button--surface--active: var(
+    --__dtpc-button--surface--active,
+    var(--dtpc-button--surface--active, color-mix(in oklch, var(--_dtpc-button--foreground--active) 10%, transparent))
+  );
+  --_dtpc-button--surface-blur: var(--__dtpc-button--surface-blur, var(--dtpc-button--surface-blur, var(--_dtpc-player--surface-blur)));
+  --_dtpc-button--border-color: var(--__dtpc-button--border-color, var(--dtpc-button--border-color, transparent));
+  --_dtpc-button--border-color--hover: var(--__dtpc-button--border-color--hover, var(--dtpc-button--border-color--hover, var(--_dtpc-button--border-color)));
+  --_dtpc-button--border-color--active: var(--__dtpc-button--border-color--active, var(--dtpc-button--border-color--active, var(--_dtpc-button--border-color)));
+  --_dtpc-button--border-radius: var(--__dtpc-button--border-radius, var(--dtpc-button--border-radius, 100vw));
+  --_dtpc-button--border-radius--hover: var(--__dtpc-button--border-radius--hover, var(--dtpc-button--border-radius--hover, var(--_dtpc-button--border-radius)));
+  --_dtpc-button--border-radius--active: var(--__dtpc-button--border-radius--active, var(--dtpc-button--border-radius--active, var(--_dtpc-button--border-radius)));
+  --_dtpc-button--border-thickness: var(--__dtpc-button--border-thickness, var(--dtpc-button--border-thickness, 0));
+  --_dtpc-button--border-thickness--hover: var(--__dtpc-button--border-thickness--hover, var(--dtpc-button--border-thickness--hover, var(--_dtpc-button--border-thickness)));
+  --_dtpc-button--border-thickness--active: var(--__dtpc-button--border-thickness--active, var(--dtpc-button--border-thickness--active, var(--_dtpc-button--border-thickness)));
+  --_dtpc-button--focus-ring-color: var(--__dtpc-button--focus-ring-color, var(--dtpc-button--focus-ring-color, var(--_dtpc-player--highlight)));
+  --_dtpc-button--focus-ring-offset: var(--__dtpc-button--focus-ring-offset, var(--dtpc-button--focus-ring-offset, 0.125rem));
+  --_dtpc-button--focus-ring-thickness: var(--__dtpc-button--focus-ring-thickness, var(--dtpc-button--focus-ring-thickness, 2px));
 }
 
 :host {
-  transition-property: background-color, border-color, border-width, border-radius, color;
+  --_dtpc-host--foreground: var(--_dtpc-button--foreground);
+  --_dtpc-host--surface: var(--_dtpc-button--surface);
+  --_dtpc-host--surface-opacity: var(--_dtpc-button--surface-opacity);
+  --_dtpc-host--border-color: var(--_dtpc-button--border-color);
+  --_dtpc-host--border-thickness: var(--_dtpc-button--border-thickness);
+  --_dtpc-host--border-radius: var(--_dtpc-button--border-radius);
+
+  transition-property: background-color, box-shadow, border-radius, color;
   transition-duration: 200ms;
   transition-timing-function: ease;
 
@@ -39,42 +49,39 @@
 
   padding: var(--_dtpc-button--padding);
 
-  border-style: solid;
-  border-color: var(--_dtpc-button--border-color);
-  border-width: var(--_dtpc-button--border-width);
-  border-radius: var(--_dtpc-button--border-radius);
+  box-shadow: 0 0 0 var(--_dtpc-host--border-thickness) var(--_dtpc-host--border-color);
 
-  background-color: color-mix(in oklch, var(--_dtpc-button--surface) var(--_dtpc-button--surface-opacity), transparent);
+  border-radius: var(--_dtpc-host--border-radius);
+
+  background-color: var(--_dtpc-host--surface);
 
   backdrop-filter: blur(var(--_dtpc-button--surface-blur));
 
-  color: var(--_dtpc-button--foreground);
+  color: var(--_dtpc-host--foreground);
 
   cursor: pointer;
   user-select: none;
 }
 
 :host(:hover) {
-  --_dtpc-button--foreground: var(--_dtpc-button--foreground--hover);
-  --_dtpc-button--surface: var(--_dtpc-button--surface--hover);
-  --_dtpc-button--surface-opacity: var(--_dtpc-button--surface-opacity--hover);
-  --_dtpc-button--border-color: var(--_dtpc-button--border-color--hover);
-  --_dtpc-button--border-width: var(--_dtpc-button--border-width--hover);
-  --_dtpc-button--border-radius: var(--_dtpc-button--border-radius--hover);
+  --_dtpc-host--foreground: var(--_dtpc-button--foreground--hover);
+  --_dtpc-host--surface: var(--_dtpc-button--surface--hover);
+  --_dtpc-host--border-color: var(--_dtpc-button--border-color--hover);
+  --_dtpc-host--border-thickness: var(--_dtpc-button--border-thickness--hover);
+  --_dtpc-host--border-radius: var(--_dtpc-button--border-radius--hover);
 }
 
 :host(:active) {
-  --_dtpc-button--foreground: var(--_dtpc-button--foreground--active);
-  --_dtpc-button--surface: var(--_dtpc-button--surface--active);
-  --_dtpc-button--surface-opacity: var(--_dtpc-button--surface-opacity--active);
-  --_dtpc-button--border-color: var(--_dtpc-button--border-color--active);
-  --_dtpc-button--border-width: var(--_dtpc-button--border-width--active);
-  --_dtpc-button--border-radius: var(--_dtpc-button--border-radius--active);
+  --_dtpc-host--foreground: var(--_dtpc-button--foreground--active);
+  --_dtpc-host--surface: var(--_dtpc-button--surface--active);
+  --_dtpc-host--border-color: var(--_dtpc-button--border-color--active);
+  --_dtpc-host--border-thickness: var(--_dtpc-button--border-thickness--active);
+  --_dtpc-host--border-radius: var(--_dtpc-button--border-radius--active);
 }
 
 :host(:focus-visible) {
   outline-style: solid;
   outline-offset: var(--_dtpc-button--focus-ring-offset);
   outline-color: var(--_dtpc-button--focus-ring-color);
-  outline-width: var(--_dtpc-button--focus-ring-width);
+  outline-width: var(--_dtpc-button--focus-ring-thickness);
 }

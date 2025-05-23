@@ -1,11 +1,7 @@
 {
   "autoload": {
-    "files": [],
-    "psr-4": {
-      "DovetailPodcasts\\": "src/"
-    },
     "classmap": [
-      "src/DovetailPodcasts.php"
+      "src/"
     ]
   },
   "autoload-dev": {

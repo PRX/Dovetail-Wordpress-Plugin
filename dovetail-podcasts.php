@@ -34,11 +34,11 @@ function dovetail_podcasts_require_bootstrap_files(): void {
 	if ( file_exists( __DIR__ . '/deactivation.php' ) ) {
 		require_once __DIR__ . '/deactivation.php';
 	}
-	if ( file_exists( __DIR__ . '/access-functions.php' ) ) {
-		require_once __DIR__ . '/access-functions.php';
+	if ( file_exists( __DIR__ . '/src/includes/dtpc-functions.php' ) ) {
+		require_once __DIR__ . '/src/includes/dtpc-functions.php';
 	}
-	if ( file_exists( __DIR__ . '/src/class-dovetailpodcasts.php' ) ) {
-		require_once __DIR__ . '/src/class-dovetailpodcasts.php';
+	if ( file_exists( __DIR__ . '/src/classes/DovetailPodcasts.php' ) ) {
+		require_once __DIR__ . '/src/classes/DovetailPodcasts.php';
 	}
 }
 
@@ -64,7 +64,7 @@ function dovetail_podcasts_can_load_plugin(): bool {
 
 	// If DTPODCASTS is already loaded,
 	// We can assume that DTPODCASTS has been installed as a composer dependency of a parent project.
-	if ( class_exists( 'DovetailPodcasts' ) ) {
+	if ( class_exists( 'DovetailPodcasts' ) && class_exists( 'DovetailPodcasts\Admin' ) ) {
 		return true;
 	}
 

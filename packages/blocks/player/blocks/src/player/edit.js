@@ -30,7 +30,7 @@ import {
 	FlexBlock,
 	__experimentalText as Text,
 } from "@wordpress/components";
-import { FileAudio2Icon } from "lucide-react";
+import { FileAudio2Icon, SquareIcon, SquareSquareIcon } from "lucide-react";
 
 /**
  * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
@@ -67,8 +67,8 @@ export default function Edit(props) {
 	);
 	const { post_types } = generalSettings || {};
 	const blockProps = useBlockProps();
-	const { attributes, context, setAttributes } = props;
-	const { post_id, post_type, src } = attributes;
+	const { attributes, setAttributes } = props;
+	const { post_id, post_type, src, backdrop } = attributes;
 	const [isLinkPopoverOpen, setIsLinkPopoverOpen] = useState(false);
 	const { record, isResolving } = useEntityRecord(
 		"postType",
@@ -115,6 +115,16 @@ export default function Edit(props) {
 	console.log("player.edit: record", record);
 	console.log("player.edit: memoizedLinkValue", memoizedLinkValue);
 
+	function toggleBackdrop() {
+		setAttributes({
+			backdrop: !backdrop,
+		});
+	}
+
+	function toggleLinkPopover() {
+		setIsLinkPopoverOpen((c) => !c);
+	}
+
 	function handleLinkChange(newLink) {
 		console.log("player.edit: newLink", newLink);
 		const atts =
@@ -144,10 +154,6 @@ export default function Edit(props) {
 		});
 	}
 
-	function toggleLinkPopover() {
-		setIsLinkPopoverOpen((c) => !c);
-	}
-
 	useEffect(() => {
 		if (!src) return;
 
@@ -174,9 +180,20 @@ export default function Edit(props) {
 	}, [record, isResolving, memoizedLinkValue]);
 
 	return (
-		<DtpcPlayer {...blockProps}>
+		<DtpcPlayer {...{ ...blockProps, backdrop }}>
 			<BlockControls>
 				<ToolbarGroup>
+					<ToolbarButton
+						label={
+							!backdrop
+								? __("Add Backdrop", "dovetail-podcasts")
+								: __("Remove Backdrop", "dovetail-podcasts")
+						}
+						showTooltip
+						icon={<SquareSquareIcon style={{ fill: "none" }} />}
+						onClick={() => toggleBackdrop()}
+						isActive={backdrop}
+					/>
 					<ToolbarButton
 						label={__("Set Player Audio", "dovetail-podcasts")}
 						showTooltip
@@ -208,6 +225,7 @@ export default function Edit(props) {
 					)}
 				</ToolbarGroup>
 			</BlockControls>
+			{backdrop && <div className="backdrop"></div>}
 			<div className="main">
 				<InnerBlocks
 					placeholder={

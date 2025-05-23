@@ -109,8 +109,18 @@ export type DovetailEpisode = {
   enclosure?: Maybe<DovetailEpisodeEnclosure>,
 
   /**
-   * Episode media.
-   * Should only be set by the frontend when audio is added or updated.
+   * Episode media for single file format.
+   * Episodes created by the plugin should use this property to provide
+   * href for original audio file URL.
+   * Metabox should use this prop to get original audio URL when not available
+   * in Wordpress media library post (if deleted after publish.)
+   */
+  uncut?: DovetailMedia,
+
+  /**
+   * Episode processed media.
+   * Should only be set by the frontend when audio is added or updated, and
+   * uncut was not set from Dovetail.
    * Do not initialize post meta box episode data with this prop.
    */
   media?: DovetailMedia[],
