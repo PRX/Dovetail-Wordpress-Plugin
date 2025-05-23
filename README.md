@@ -17,11 +17,11 @@ Dovetail Podcasts plugin connects your Wordpress site to Dovetail Podcasts.
 ## 🚀 Get Started
 
 1. [Sign up for a Dovetail account](https://id.prx.org).
-2. [Request creation of a Client Application](mailto:help@prx.org?subject=Request%20For%20%Wordpress%20Plugin%20Client%20Application) for your Wordpress site. Please include the following information in your request:
+2. [Request creation of a Client Application](mailto:podcast-support@prx.org?subject=Request%20For%20%Wordpress%20Plugin%20Client%20Application) for your Wordpress site. Please include the following information in your request:
 
-- Email for the user the application should created for.
+- Email of the user the application should be created for.
 - URL of the Wordpress site using the plugin.
-- If you require a staging application for your sites staging and development environments, include user email and staging site URL in your request.
+- If you require a staging application for your site's staging or development environments, include your staging site URL in your request, and [Sign up for a Dovetail Staging account](https://id.staging.prx.org).
 
 3. [Install Dovetail Podcasts](./docs/installation.md): `wp plugin install dovetail-podcasts --activate`
 4. [Connect Wordpress to Dovetail](./docs/settings-client-application.md) using your Client Application credentials.
@@ -33,7 +33,8 @@ Dovetail Podcasts plugin connects your Wordpress site to Dovetail Podcasts.
 - [Connect Dovetail Podcasts](./docs/settings-client-application.md)
 - [Configure Dovetail Podcasts](./docs/settings-general.md)
 - [Add Dovetail Podcasts Player](./docs/player.md)
+- [Publish Podcast Episodes](./docs/podcast-episodes.md)
 
 > ## 🫶 Thank You For Choosing Dovetail
 >
-> We look forward to aiding you on your podcasting adventure! If you need any assistance setting up Dovetail Podcasts on your Wordpress site, feel free to contact [our amazing support team](mailto:help@prx.org?subject=Help%20With%20Dovetai%20Podcasts%20Wordpress%20Plugin). Submit any bugs you find to our [Github Issues](https://github.com/PRX/Dovetail-Wordpress-Plugin/issues).
+> We look forward to aiding you on your podcasting adventure! If you need any assistance setting up Dovetail Podcasts on your Wordpress site, feel free to contact [our amazing support team](mailto:podcast-support@prx.org?subject=Help%20With%20Dovetail%20Podcasts%20Wordpress%20Plugin). Submit any bugs you find to our [Github Issues](https://github.com/PRX/Dovetail-Wordpress-Plugin/issues).

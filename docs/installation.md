@@ -14,11 +14,11 @@ wp plugin install dovetail-podcasts --activate
 
 ## Manual Installation
 
-1. Downloading the [latest release](https://github.com/PRX/Dovetail-Wordpress-Plugin/releases).
+1. Download the `.zip` file for the [latest release](https://github.com/PRX/Dovetail-Wordpress-Plugin/releases).
 2. Log into your Wordpress admin, and go to **Plugins > Add Plugin**.
 3. Click the **Upload Plugin** button.
-4. Click the **Choose File** input, then select the release .zip file you downloaded.
-5. Click **Install Now** to upload the .zip file to your site.
+4. Click the **Choose File** input, then select the release `.zip` file you downloaded.
+5. Click **Install Now** to upload the `.zip` file to your site.
 6. When prompted, activate the plugin.
 
-Look for the **Dovetail** link in the main admin menu. Click it to [setup Dovetail Podcasts](./settings-client-application.md).
+Look for the **Dovetail** link in the main admin menu. Click it to begin setup by [connecting Dovetail Podcasts to your Dovetail Client Application](./settings-client-application.md).

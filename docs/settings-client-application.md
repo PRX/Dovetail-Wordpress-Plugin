@@ -1,6 +1,6 @@
 # Connect To Dovetail
 
-To connect the plugin to Dovetail, got to **Dovetail** settings and provide your Client Application key and secret, which can be found by logging into your [Dovetail account](https://id.prx.tech/). Go to the **Client Applications** tab and select which application you want to use. Use the Key and Secret values to connect Wordpress plugin to Dovetail. Once connected, you should be presented with a confirmation, your user information, and a list of podcasts you have access to.
+To connect the plugin to Dovetail, go to **Dovetail** settings and provide your Client Application key and secret, which can be found by logging into your [Dovetail account](https://id.prx.tech/). Go to the **Client Applications** tab and select which application you want to use. Use the Key and Secret values to connect the Wordpress plugin. Once connected, you should be presented with a confirmation, your user information, and a list of podcasts you have access to.
 
 > Do not see the **Client Applications** tab? Contact PRX Support to request an application be setup for you. If your site has a staging or development environment, also request a staging application be created, so your testing doesn't affect your actual podcast episodes and feeds.
 
