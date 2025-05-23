@@ -12,15 +12,7 @@
 	],
 	"example": {},
 	"supports": {
-		"html": false,
-		"color": {
-			"background": true,
-			"text": true
-		},
-		"spacing": {
-			"margin": false,
-			"padding": true
-		}
+		"html": false
 	},
 	"textdomain": "dovetail-podcasts",
 	"editorScript": "file:./index.js",

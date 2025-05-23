@@ -17,15 +17,7 @@ return array(
 			
 		),
 		'supports' => array(
-			'html' => false,
-			'color' => array(
-				'background' => true,
-				'text' => true
-			),
-			'spacing' => array(
-				'margin' => false,
-				'padding' => true
-			)
+			'html' => false
 		),
 		'textdomain' => 'dovetail-podcasts',
 		'editorScript' => 'file:./index.js',
@@ -53,11 +45,7 @@ return array(
 			
 		),
 		'supports' => array(
-			'html' => false,
-			'color' => array(
-				'background' => false,
-				'text' => true
-			)
+			'html' => false
 		),
 		'textdomain' => 'dovetail-podcasts',
 		'editorScript' => 'file:./index.js',
@@ -128,10 +116,7 @@ return array(
 			
 		),
 		'supports' => array(
-			'html' => false,
-			'color' => array(
-				'text' => true
-			)
+			'html' => false
 		),
 		'textdomain' => 'dovetail-podcasts',
 		'editorScript' => 'file:./index.js',
@@ -162,13 +147,7 @@ return array(
 			
 		),
 		'supports' => array(
-			'html' => false,
-			'color' => array(
-				'text' => true
-			),
-			'typography' => array(
-				'fontSize' => true
-			)
+			'html' => false
 		),
 		'textdomain' => 'dovetail-podcasts',
 		'editorScript' => 'file:./index.js',
@@ -196,13 +175,7 @@ return array(
 			
 		),
 		'supports' => array(
-			'html' => false,
-			'color' => array(
-				'text' => true
-			),
-			'typography' => array(
-				'fontSize' => true
-			)
+			'html' => false
 		),
 		'textdomain' => 'dovetail-podcasts',
 		'editorScript' => 'file:./index.js',
@@ -233,13 +206,7 @@ return array(
 			
 		),
 		'supports' => array(
-			'html' => false,
-			'color' => array(
-				'text' => true
-			),
-			'typography' => array(
-				'fontSize' => true
-			)
+			'html' => false
 		),
 		'textdomain' => 'dovetail-podcasts',
 		'editorScript' => 'file:./index.js',

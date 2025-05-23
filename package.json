@@ -9,8 +9,9 @@
     "test": "tests"
   },
   "scripts": {
-    "postinstall": "npm --prefix ./packages/metabox/podcast-episode install --legacy-peer-deps",
+    "postinstall": "npm run install:metabox",
     "build:player": "npm run build --workspace=packages/blocks/player/web-components --workspace=packages/blocks/player/blocks",
+    "install:metabox": "npm --prefix ./packages/metabox/podcast-episode install --legacy-peer-deps",
     "build:metabox": "npm --prefix ./packages/metabox/podcast-episode run build",
     "build": "npm run build:metabox && npm run build:player",
     "test": "echo \"Error: no test specified\" && exit 1",

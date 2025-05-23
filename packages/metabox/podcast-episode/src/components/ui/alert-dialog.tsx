@@ -46,8 +46,26 @@ function AlertDialogContent({
   className,
   ...props
 }: React.ComponentProps<typeof AlertDialogPrimitive.Content>) {
+  const [container, setContainer] = React.useState(null);
+
+  React.useEffect(() => {
+    const divId = 'dtpc-dialogs';
+    let dialogsDiv = document.getElementById(divId);
+
+    if (!dialogsDiv) {
+      dialogsDiv = document.createElement('div');
+
+      dialogsDiv.id = divId;
+      dialogsDiv.classList.add('dtpc-tw');
+
+      document.querySelector('body').appendChild(dialogsDiv);
+    }
+
+    setContainer(dialogsDiv);
+  }, [])
+
   return (
-    <AlertDialogPortal>
+    <AlertDialogPortal container={container}>
       <AlertDialogOverlay />
       <AlertDialogPrimitive.Content
         data-slot="alert-dialog-content"
