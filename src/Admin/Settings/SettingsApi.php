@@ -59,7 +59,10 @@ class SettingsApi {
 	 */
 	public function __construct( array $args = null ) {
 		$key_ascii = get_option( 'dovetail_podcasts_key' );
-		$this->key = Key::loadFromAsciiSafeString( $key_ascii );
+
+		if ( ! empty( $key_ascii ) ) {
+			$this->key = Key::loadFromAsciiSafeString( $key_ascii );
+		}
 
 		if ( is_array( $args ) && isset( $args['page_slugs'] ) ) {
 			$this->page_slugs = is_array( $args['page_slugs'] ) ? $args['page_slugs'] : [ $args['page_slugs'] ];
@@ -110,9 +113,9 @@ class SettingsApi {
 			return;
 		}
 
-		wp_enqueue_style( DTPODCASTS_SETTINGS_SECTION_PREFIX, DTPODCASTS_PLUGIN_URL . 'styles/admin-settings.css', [ 'wp-color-picker' ], DTPODCASTS_VERSION );
+		wp_enqueue_style( DTPODCASTS_SETTINGS_SECTION_PREFIX, DTPODCASTS_PLUGIN_URL . 'build/admin/settings/admin-settings.css', [ 'wp-color-picker' ], DTPODCASTS_VERSION );
 		wp_enqueue_media();
-		wp_enqueue_script( DTPODCASTS_SETTINGS_SECTION_PREFIX, DTPODCASTS_PLUGIN_URL . 'scripts/admin-settings.js', [ 'wp-color-picker', 'jquery' ], DTPODCASTS_VERSION, [ 'strategy' => 'defer' ] );
+		wp_enqueue_script( DTPODCASTS_SETTINGS_SECTION_PREFIX, DTPODCASTS_PLUGIN_URL . 'build/admin/settings/admin-settings.js', [ 'wp-color-picker', 'jquery' ], DTPODCASTS_VERSION, [ 'strategy' => 'defer' ] );
 
 		// Action to enqueue scripts on the Dovetail Podcasts Settings page.
 		do_action( 'dovetail_podcasts_settings_enqueue_scripts' );
