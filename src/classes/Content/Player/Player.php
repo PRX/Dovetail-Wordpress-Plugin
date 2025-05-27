@@ -238,7 +238,7 @@ class Player {
 
 		if ( empty( $inner_blocks_html ) ) {
 			$atts['layout'] = 'default';
-		} else {
+		} elseif ( empty( $atts['layout'] ) ) {
 			unset( $atts['layout'] );
 		}
 
