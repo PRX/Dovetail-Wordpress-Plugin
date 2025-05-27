@@ -12,8 +12,8 @@
   --_dtpc-slider--track--thickness: var(--__dtpc-slider--track--thickness, var(--dtpc-slider--track--thickness, 0.25rem));
   --_dtpc-slider--track--radius: var(--__dtpc-slider--track--radius, var(--dtpc-slider--track--radius, 100vw));
   --_dtpc-slider--track--border-color: var(--__dtpc-slider--track--border-color, var(--dtpc-slider--track--border-color, transparent));
-  --_dtpc-slider--track--border-thickness: var(--__dtpc-slider--track--border-thickness, var(--dtpc-slider--track--border-thickness, 0));
-  --_dtpc-slider--track--border-offset: var(--__dtpc-slider--track--border-offset, var(--dtpc-slider--track--border-offset, 0));
+  --_dtpc-slider--track--border-thickness: var(--__dtpc-slider--track--border-thickness, var(--dtpc-slider--track--border-thickness, 0px));
+  --_dtpc-slider--track--border-offset: var(--__dtpc-slider--track--border-offset, var(--dtpc-slider--track--border-offset, 0px));
 
   display: contents;
 }
