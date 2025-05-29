@@ -187,7 +187,7 @@ class Player {
 	 * @param \WP_Block            $block Block instance object.
 	 * @return string
 	 */
-	public function render_player_block( $atts, string $content, \WP_Block $block ) {
+	public function render_player_block( $atts, string $content, \WP_Block $block = null ) {
 
 		global $dtpc_player_show_controls;
 
@@ -232,8 +232,10 @@ class Player {
 		}
 
 		$inner_blocks_html = '';
-		foreach ( $block->inner_blocks as $inner_block ) {
-			$inner_blocks_html .= $inner_block->render();
+		if ( $block && ! empty( $block->inner_blocks ) ) {
+			foreach ( $block->inner_blocks as $inner_block ) {
+				$inner_blocks_html .= $inner_block->render();
+			}
 		}
 
 		if ( empty( $inner_blocks_html ) ) {
@@ -247,6 +249,8 @@ class Player {
 		} else {
 			unset( $atts['backdrop'] );
 		}
+
+		$atts = array_filter( $atts );
 
 		$wrapper_attributes = get_block_wrapper_attributes(
 			$atts
@@ -291,6 +295,10 @@ class Player {
 	 */
 	public function render_player_shortcode( array $atts, string $content = null ) {
 
+		global $dtpc_player_show_controls;
+
+		$dtpc_player_show_controls = true;
+
 		$default_atts = $this->get_block_attributes_defaults( 'player' );
 
 		if ( ! is_array( $atts ) ) {
@@ -307,61 +315,49 @@ class Player {
 			// Try to get one from the post meta data.
 			$ctx_atts = $this->get_attributes_from_post_context( $atts['post_id'] );
 
-			if ( ! empty( $ctx_atts ) ) {
-				// Use enclosure href and continue.
-				$atts = shortcode_atts(
-					$default_atts,
-					array_merge(
-						$atts,
-						$ctx_atts
-					)
-				);
+			if ( empty( $ctx_atts ) ) {
+				$dtpc_player_show_controls = false;
 			}
+
+			// Use post context attributes.
+			$atts = array_merge(
+				$atts,
+				$ctx_atts
+			);
 		}
 
-		$block = [
-			'blockName'   => 'dovetail-podcasts-player/player',
-			'attrs'       => $atts,
-			'innerBlocks' => [],
-		];
+		$inner_html = do_shortcode( $content );
+		if ( empty( $inner_html ) ) {
+			$atts['layout'] = 'default';
+		} elseif ( empty( $atts['layout'] ) ) {
+			unset( $atts['layout'] );
+		}
 
-		if ( $content ) {
-			// Only render player block shortcodes in the content.
-
-			// Get registered player blocks.
-			$blocks_manifest_path = DTPODCASTS_PLUGIN_DIR . 'build/blocks/player/blocks-manifest.php';
-			$manifest_data        = require $blocks_manifest_path;
-
-			// Generate the short code tags of the blocks.
-			$shortcode_tags = [];
-			foreach ( array_keys( $manifest_data ) as $block_type ) {
-				if ( 'player' !== $block_type ) {
-					$shortcode_tags[] = DTPODCASTS_SHORTCODE_PREFIX . $block_type;
-				}
-			}
-
-			// Get content that matches our player block short codes.
-			$pattern = get_shortcode_regex( $shortcode_tags );
-			preg_match_all( "/{$pattern}/", $content, $matches, PREG_SET_ORDER );
-
-			// Add inner blocks for matching content.
-			foreach ( $matches as $match ) {
-				$block_type             = preg_replace( '~^' . DTPODCASTS_SHORTCODE_PREFIX . '~', '', $match[2] );
-				$default_atts           = $this->get_block_attributes_defaults( $block_type );
-				$block['innerBlocks'][] = [
-					'blockName' => "dovetail-podcasts-player/{$block_type}",
-					'attrs'     => shortcode_atts(
-						$default_atts,
-						array_merge( shortcode_parse_atts( $match[3] ), $atts )
-					),
-				];
-			}
+		if ( $dtpc_player_show_controls && in_array( $atts['backdrop'], [ 1,'1',true,'true','on' ], true ) ) {
+			$atts['backdrop'] = 'true';
 		} else {
-			// Make sure there are default controls when the shortcode has no content.
-			$block['attrs']['layout'] = 'default';
+			unset( $atts['backdrop'] );
 		}
 
-		return render_block( $block );
+		$atts['class'] = 'wp-block-dovetail-podcasts-player-player';
+
+		$atts = array_filter( $atts );
+
+		$normalized_attributes = [];
+		foreach ( $atts as $key => $value ) {
+			$normalized_attributes[] = $key . '="' . esc_attr( $value ) . '"';
+		}
+
+		$wrapper_attributes = implode( ' ', $normalized_attributes );
+
+		return implode(
+			'',
+			[
+				sprintf( '<dtpc-player %1$s>', $wrapper_attributes ),
+				$inner_html,
+				'</dtpc-player>',
+			]
+		);
 	}
 
 	/**
