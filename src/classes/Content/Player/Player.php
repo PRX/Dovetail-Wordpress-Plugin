@@ -236,6 +236,10 @@ class Player {
 			foreach ( $block->inner_blocks as $inner_block ) {
 				$inner_blocks_html .= $inner_block->render();
 			}
+		} elseif ( $block && ! empty( $block->inner_html ) ) {
+			$inner_blocks_html = $block->inner_html;
+		} else {
+			$inner_blocks_html = $content;
 		}
 
 		if ( empty( $inner_blocks_html ) ) {
@@ -295,69 +299,15 @@ class Player {
 	 */
 	public function render_player_shortcode( array $atts, string $content = null ) {
 
-		global $dtpc_player_show_controls;
-
-		$dtpc_player_show_controls = true;
-
-		$default_atts = $this->get_block_attributes_defaults( 'player' );
-
-		if ( ! is_array( $atts ) ) {
-			$atts = [];
-		}
-
-		$atts = shortcode_atts(
-			$default_atts,
-			$atts
-		);
-
-		if ( empty( $atts['src'] ) ) {
-			// No src passed as an attribute.
-			// Try to get one from the post meta data.
-			$ctx_atts = $this->get_attributes_from_post_context( $atts['post_id'] );
-
-			if ( empty( $ctx_atts ) ) {
-				$dtpc_player_show_controls = false;
-			}
-
-			// Use post context attributes.
-			$atts = array_merge(
-				$atts,
-				$ctx_atts
-			);
-		}
-
-		$inner_html = do_shortcode( $content );
-		if ( empty( $inner_html ) ) {
-			$atts['layout'] = 'default';
-		} elseif ( empty( $atts['layout'] ) ) {
-			unset( $atts['layout'] );
-		}
-
-		if ( $dtpc_player_show_controls && in_array( $atts['backdrop'], [ 1,'1',true,'true','on' ], true ) ) {
-			$atts['backdrop'] = 'true';
-		} else {
-			unset( $atts['backdrop'] );
-		}
-
-		$atts['class'] = 'wp-block-dovetail-podcasts-player-player';
-
-		$atts = array_filter( $atts );
-
-		$normalized_attributes = [];
-		foreach ( $atts as $key => $value ) {
-			$normalized_attributes[] = $key . '="' . esc_attr( $value ) . '"';
-		}
-
-		$wrapper_attributes = implode( ' ', $normalized_attributes );
-
-		return implode(
-			'',
+		$player_html = render_block(
 			[
-				sprintf( '<dtpc-player %1$s>', $wrapper_attributes ),
-				$inner_html,
-				'</dtpc-player>',
+				'blockName' => 'dovetail-podcasts-player/player',
+				'attrs'     => $atts,
+				'innerHTML' => '__inner_html__',
 			]
 		);
+
+		return str_replace( '__inner_html__', do_shortcode( $content ), $player_html );
 	}
 
 	/**
