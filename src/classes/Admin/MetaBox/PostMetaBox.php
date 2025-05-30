@@ -209,7 +209,7 @@ class PostMetaBox {
 							$meta = [];
 						}
 						$meta['podcastId'] = $p['id'];
-						$meta['dovetail']  = $this->parse_episode_api_data( $e );
+						$meta['dovetail']  = Utils::parse_episode_api_data( $e );
 
 						// Try to get media data from uncut prop first...
 						if ( isset( $e['uncut'] ) && ! empty( $e['uncut'] ) ) {
@@ -228,7 +228,7 @@ class PostMetaBox {
 						$meta['enclosure']['filename'] = basename( $e['_links']['enclosure']['href'] );
 
 						// Check if an attachment exists for the enclosure href filename.
-						$media_id = $this->get_attachment_id( $e['_links']['enclosure']['href'] );
+						$media_id = Utils::get_attachment_id( $e['_links']['enclosure']['href'] );
 						if ( $media_id > 0 ) {
 							$meta['enclosure']['mediaId'] = $media_id;
 							// Update enclosure URL in case the media original URL was altered during processing.
@@ -246,7 +246,7 @@ class PostMetaBox {
 			list( $e, $resp ) = $this->dovetail_api->get_episode( $meta['dovetail']['id'] );
 			$status           = wp_remote_retrieve_response_code( $resp );
 			if ( $e ) {
-				$meta['dovetail'] = $this->parse_episode_api_data( $e );
+				$meta['dovetail'] = Utils::parse_episode_api_data( $e );
 			} elseif ( '404' === $status ) {
 				// Episode was not found? May have been deleted in Dovetail.
 				// Remove dovetail id, enclosure, and media meta data.
@@ -265,41 +265,6 @@ class PostMetaBox {
 		}
 
 		return $meta;
-	}
-
-	/**
-	 * Parse Dovetail episode API data into our meta data model.
-	 *
-	 * @param array<string,mixed> $data Dovetail episode API data.
-	 * @return array<string,mixed> Dovetail meta data array.
-	 */
-	private function parse_episode_api_data( array $data ) {
-		if ( ! empty( $data ) ) {
-			$parsed_data = [
-				'id'              => $data['id'],
-				'media'           => $data['media'],
-				'enclosure'       => $data['_links']['enclosure'],
-				'itunesType'      => $data['itunesType'],
-				'explicitContent' => $data['explicitContent'],
-				'explicit'        => isset( $data['explicit'] ) ? 'true' === $data['explicit'] : $data['explicitContent'],
-				'seasonNumber'    => isset( $data['seasonNumber'] ) ? $data['seasonNumber'] : null,
-				'episodeNumber'   => isset( $data['episodeNumber'] ) ? $data['episodeNumber'] : null,
-				'cleanTitle'      => isset( $data['cleanTitle'] ) ? $data['cleanTitle'] : null,
-				'author'          => isset( $data['author'] ) && ! empty( $data['author'] ) ? $data['author'] : null,
-				'image'           => isset( $data['image'] ) && ! empty( $data['image'] ) ? [
-					'id'          => isset( $data['image']['id'] ) ? $data['image']['id'] : null,
-					'originalUrl' => $data['image']['originalUrl'],
-				] : null,
-			];
-
-			if ( isset( $data['uncut'] ) ) {
-				$parsed_data['uncut'] = $data['uncut'];
-			}
-
-			return $parsed_data;
-		}
-
-		return $data;
 	}
 
 	/**
@@ -556,7 +521,7 @@ class PostMetaBox {
 
 				// When we still have Dovetail episode data...
 				if ( ! empty( $response_data ) ) {
-					$episode_data = $this->parse_episode_api_data( $response_data );
+					$episode_data = Utils::parse_episode_api_data( $response_data );
 
 					if ( isset( $episode_data['uncut'] ) ) {
 						// ...set uncut when it was used on the Dovetail episode.
@@ -607,7 +572,7 @@ class PostMetaBox {
 
 			// Update meta box data with Dovetail data.
 			if ( ! empty( $response_data ) ) {
-				$meta['dovetail'] = $this->parse_episode_api_data( $response_data );
+				$meta['dovetail'] = Utils::parse_episode_api_data( $response_data );
 			}
 		}
 
@@ -876,54 +841,6 @@ class PostMetaBox {
 		}
 
 		return false;
-	}
-
-	/**
-	 * Get an attachment ID given a URL.
-	 *
-	 * @param string $url Attachment file url.
-	 * @return int Attachment ID on success, 0 on failure
-	 */
-	private function get_attachment_id( $url ) {
-
-		$attachment_id = 0;
-
-		$dir = wp_upload_dir();
-
-		if ( false !== strpos( $url, $dir['baseurl'] . '/' ) ) { // Is URL in uploads directory?
-			$file = basename( $url );
-
-			$query_args = [
-				'post_type'   => 'attachment',
-				'post_status' => 'inherit',
-				'fields'      => 'ids',
-				'meta_query'  => [
-					[
-						'value'   => $file,
-						'compare' => 'LIKE',
-						'key'     => '_wp_attachment_metadata',
-					],
-				],
-			];
-
-			$query = new WP_Query( $query_args );
-
-			if ( $query->have_posts() ) {
-				foreach ( $query->posts as $post_id ) {
-					$meta = wp_get_attachment_metadata( $post_id );
-
-					$original_file       = basename( $meta['file'] );
-					$cropped_image_files = wp_list_pluck( $meta['sizes'], 'file' );
-
-					if ( $original_file === $file || in_array( $file, $cropped_image_files, true ) ) {
-						$attachment_id = $post_id;
-						break;
-					}
-				}
-			}
-		}
-
-		return $attachment_id;
 	}
 
 	/**

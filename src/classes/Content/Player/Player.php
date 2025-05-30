@@ -8,6 +8,8 @@
 namespace DovetailPodcasts\Content\Player;
 
 use DovetailPodcasts\Admin\Settings\SettingsApi;
+use DovetailPodcasts\Dovetail\DovetailApi;
+use DovetailPodcasts\Utils\Utils;
 
 /**
  * Player class
@@ -15,6 +17,20 @@ use DovetailPodcasts\Admin\Settings\SettingsApi;
  * @package DovetailPodcasts\Content\Player
  */
 class Player {
+
+	/**
+	 * Dovetail Api instance.
+	 *
+	 * @var \DovetailPodcasts\Dovetail\DovetailApi
+	 */
+	public $dovetail_api;
+
+	/**
+	 * Class construct.
+	 */
+	public function __construct() {
+		$this->dovetail_api = new DovetailApi();
+	}
 
 	/**
 	 * Initialize Admin functionality for WPGraphQL
@@ -256,6 +272,11 @@ class Player {
 
 		$atts = array_filter( $atts );
 
+		// Don't render anything if we are not rendering controls in the default layout.
+		if ( ! $dtpc_player_show_controls && isset( $atts['layout'] ) && 'default' === $atts['layout'] ) {
+			return '';
+		}
+
 		$wrapper_attributes = get_block_wrapper_attributes(
 			$atts
 		);
@@ -410,9 +431,68 @@ class Player {
 		}
 
 		$post = get_post( $post_id );
+
+		if ( ! $post ) {
+			return $atts;
+		}
+
 		$meta = get_post_meta( $post_id, DTPODCASTS_POST_META_KEY, true );
 
-		// TODO: If meta data is missing, check Dovetail for the episode using post guid.
+		// If meta data is missing, check Dovetail for the episode using post guid.
+		if ( ! isset( $meta['dovetail']['id'] ) ) {
+			// Check if this post was imported into Dovetail.
+			list( $podcasts_api ) = $this->dovetail_api->get_podcasts();
+			if (
+				$podcasts_api &&
+				is_array( $podcasts_api ) &&
+				isset( $podcasts_api['_embedded']['prx:items'] )
+			) {
+				foreach ( $podcasts_api['_embedded']['prx:items'] as $p ) {
+					list( $e ) = $this->dovetail_api->get_podcast_episode_by_guid( $p['id'], $post->guid );
+
+					if ( $e ) {
+						if ( ! is_array( $meta ) ) {
+							$meta = [];
+						}
+						$meta['podcastId'] = $p['id'];
+						$meta['dovetail']  = Utils::parse_episode_api_data( $e );
+
+						// Try to get media data from uncut prop first...
+						if ( isset( $e['uncut'] ) && ! empty( $e['uncut'] ) ) {
+							$media = $e['uncut'];
+						} else {
+							// ...fallback to first media item.
+							$media = $e['media'][0];
+						}
+
+						// Media's original URL should be trusted to be to an existing file.
+						// It may be a Dovetail URL depending on what processing has been done to it.
+						$meta['enclosure']['url'] = $media['originalUrl'];
+						// Media's duration should be the original duration of the uploaded file.
+						$meta['enclosure']['duration'] = $media['duration'];
+						// Enclosure's href should still contain the original filename.
+						$meta['enclosure']['filename'] = basename( $e['_links']['enclosure']['href'] );
+
+						// Check if an attachment exists for the enclosure href filename.
+						$media_id = Utils::get_attachment_id( $e['_links']['enclosure']['href'] );
+						if ( $media_id > 0 ) {
+							$meta['enclosure']['mediaId'] = $media_id;
+							// Update enclosure URL in case the media original URL was altered during processing.
+							$meta['enclosure']['url'] = wp_get_attachment_url( $media_id );
+						}
+
+						break;
+					}
+				}
+
+				// If we have meta data, save it with updates that may have come from Dovetail API.
+				if ( ! empty( $meta ) ) {
+					if ( ! add_post_meta( $post->ID, DTPODCASTS_POST_META_KEY, $meta, true ) ) {
+						update_post_meta( $post->ID, DTPODCASTS_POST_META_KEY, $meta );
+					}
+				}
+			}
+		}
 
 		/**
 		 * Return Dovetail enclosure data when:
