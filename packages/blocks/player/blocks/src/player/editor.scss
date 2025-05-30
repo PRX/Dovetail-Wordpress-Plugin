@@ -1,0 +1,430 @@
+/**
+ * The following styles get applied inside the editor only.
+ *
+ * Replace them with your own styles or remove the file completely.
+ */
+
+dtpc-player {
+	--_dtpc-player--foreground: var(--dtpc-player--foreground, currentColor);
+	--_dtpc-player--surface: var(
+		--dtpc-player--surface,
+		color-mix(in oklch, var(--_dtpc-player--foreground) 10%, transparent)
+	);
+	--_dtpc-player--surface-image: var(--dtpc-player--surface-image, none);
+	--_dtpc-player--surface-image-position: var(
+		--dtpc-player--surface-image-position,
+		center center
+	);
+	--_dtpc-player--surface-image-size: var(
+		--dtpc-player--surface-image-size,
+		cover
+	);
+	--_dtpc-player--surface-blur: var(--dtpc-player--bg-blur, 0);
+	--_dtpc-player--border-radius: var(--dtpc-player--border-radius, 0.25rem);
+	--_dtpc-player--padding: var(--dtpc-player--padding, 0.5rem);
+	--_dtpc-player--padding-inline: var(
+		--dtpc-player--padding-inline,
+		var(--_dtpc-player--padding)
+	);
+	--_dtpc-player--padding-block: var(
+		--dtpc-player--padding-block,
+		var(--_dtpc-player--padding)
+	);
+
+	/* Time */
+	--_dtpc-player--time--color: var(
+		--dtpc-player--time--color,
+		var(--_dtpc-player--foreground)
+	);
+	--_dtpc-player--time--font-size: var(
+		--dtpc-player--time--font-size,
+		0.875rem
+	);
+	--_dtpc-player--time--font-family: var(
+		--dtpc-player--time--font-family,
+		ui-monospace,
+		"Cascadia Code",
+		"Source Code Pro",
+		Menlo,
+		Consolas,
+		"DejaVu Sans Mono",
+		monospace
+	);
+	--_dtpc-player--time--font-weight: var(
+		--dtpc-player--time--font-weight,
+		inherit
+	);
+
+	min-height: 1rem;
+
+	.backdrop {
+		display: block;
+		position: absolute;
+		isolation: isolate;
+		inset: 0;
+		z-index: -1;
+		overflow: clip;
+
+		border-radius: var(--_dtpc-player--border-radius);
+
+		* {
+			position: absolute;
+			inset: 0;
+		}
+
+		&::before {
+			content: "";
+			position: absolute;
+			inset: 0;
+			z-index: -1;
+
+			background-image: var(--_dtpc-player--surface-image);
+			background-size: var(--_dtpc-player--surface-image-size);
+			background-position: var(--_dtpc-player--surface-image-position);
+		}
+
+		&::after {
+			content: "";
+			position: absolute;
+			inset: -1px;
+			z-index: 1;
+
+			border: solid 1px transparent;
+
+			background-color: var(--_dtpc-player--surface);
+			backdrop-filter: blur(var(--_dtpc-player--surface-blur));
+		}
+
+		& + .main {
+			padding-inline: var(--_dtpc-player--padding-inline);
+			padding-block: var(--_dtpc-player--padding-block);
+		}
+	}
+}
+
+dtpc-button {
+	/* Button */
+	--_dtpc-button--size: var(
+		--__dtpc-button--size,
+		var(--dtpc-button--size, 1.5rem)
+	);
+	--_dtpc-button--padding: var(
+		--__dtpc-button--padding,
+		var(--dtpc-button--padding, 0.325rem)
+	);
+	--_dtpc-button--foreground: var(
+		--__dtpc-button--foreground,
+		var(--dtpc-button--foreground, var(--_dtpc-player--foreground))
+	);
+	--_dtpc-button--foreground--hover: var(
+		--__dtpc-button--foreground--hover,
+		var(--dtpc-button--foreground--hover, var(--_dtpc-button--foreground))
+	);
+	--_dtpc-button--foreground--active: var(
+		--__dtpc-button--foreground--active,
+		var(--dtpc-button--foreground--active, var(--_dtpc-button--foreground))
+	);
+	--_dtpc-button--surface: var(
+		--__dtpc-button--surface,
+		var(
+			--dtpc-button--surface,
+			color-mix(in oklch, var(--_dtpc-button--foreground) 0%, transparent)
+		)
+	);
+	--_dtpc-button--surface--hover: var(
+		--__dtpc-button--surface--hover,
+		var(
+			--dtpc-button--surface--hover,
+			color-mix(
+				in oklch,
+				var(--_dtpc-button--foreground--hover) 20%,
+				transparent
+			)
+		)
+	);
+	--_dtpc-button--surface--active: var(
+		--__dtpc-button--surface--active,
+		var(
+			--dtpc-button--surface--active,
+			color-mix(
+				in oklch,
+				var(--_dtpc-button--foreground--active) 10%,
+				transparent
+			)
+		)
+	);
+	--_dtpc-button--surface-blur: var(
+		--__dtpc-button--surface-blur,
+		var(--dtpc-button--surface-blur, var(--_dtpc-player--surface-blur))
+	);
+	--_dtpc-button--border-color: var(
+		--__dtpc-button--border-color,
+		var(--dtpc-button--border-color, transparent)
+	);
+	--_dtpc-button--border-color--hover: var(
+		--__dtpc-button--border-color--hover,
+		var(--dtpc-button--border-color--hover, var(--_dtpc-button--border-color))
+	);
+	--_dtpc-button--border-color--active: var(
+		--__dtpc-button--border-color--active,
+		var(--dtpc-button--border-color--active, var(--_dtpc-button--border-color))
+	);
+	--_dtpc-button--border-radius: var(
+		--__dtpc-button--border-radius,
+		var(--dtpc-button--border-radius, 100vw)
+	);
+	--_dtpc-button--border-radius--hover: var(
+		--__dtpc-button--border-radius--hover,
+		var(--dtpc-button--border-radius--hover, var(--_dtpc-button--border-radius))
+	);
+	--_dtpc-button--border-radius--active: var(
+		--__dtpc-button--border-radius--active,
+		var(
+			--dtpc-button--border-radius--active,
+			var(--_dtpc-button--border-radius)
+		)
+	);
+	--_dtpc-button--border-thickness: var(
+		--__dtpc-button--border-thickness,
+		var(--dtpc-button--border-thickness, 0)
+	);
+	--_dtpc-button--border-thickness--hover: var(
+		--__dtpc-button--border-thickness--hover,
+		var(
+			--dtpc-button--border-thickness--hover,
+			var(--_dtpc-button--border-thickness)
+		)
+	);
+	--_dtpc-button--border-thickness--active: var(
+		--__dtpc-button--border-thickness--active,
+		var(
+			--dtpc-button--border-thickness--active,
+			var(--_dtpc-button--border-thickness)
+		)
+	);
+	--_dtpc-button--focus-ring-color: var(
+		--__dtpc-button--focus-ring-color,
+		var(--dtpc-button--focus-ring-color, var(--_dtpc-player--highlight))
+	);
+	--_dtpc-button--focus-ring-offset: var(
+		--__dtpc-button--focus-ring-offset,
+		var(--dtpc-button--focus-ring-offset, 0.125rem)
+	);
+	--_dtpc-button--focus-ring-thickness: var(
+		--__dtpc-button--focus-ring-thickness,
+		var(--dtpc-button--focus-ring-thickness, 2px)
+	);
+
+	box-sizing: content-box;
+	display: inline-grid;
+	place-items: stretch;
+	justify-content: stretch;
+	aspect-ratio: 1;
+	width: var(--_dtpc-button--size);
+
+	padding: var(--_dtpc-button--padding);
+
+	border-style: solid;
+	border-color: var(--_dtpc-button--border-color);
+	border-width: var(--_dtpc-button--border-width);
+	border-radius: var(--_dtpc-button--border-radius);
+
+	background-color: var(--_dtpc-button--surface);
+
+	color: var(--_dtpc-button--foreground);
+
+	svg {
+		width: 100%;
+		height: auto;
+	}
+}
+
+dtpc-slider {
+	/* Slider */
+	--_dtpc-slider--scrubber--color: var(
+		--__dtpc-slider--scrubber--color,
+		var(
+			--dtpc-slider--scrubber--color,
+			var(--_dtpc-player--foreground, currentColor)
+		)
+	);
+	--_dtpc-slider--scrubber--size: var(
+		--__dtpc-slider--scrubber--size,
+		var(--dtpc-slider--scrubber--size, 1.25rem)
+	);
+	--_dtpc-slider--scrubber--border-color: var(
+		--__dtpc-slider--scrubber--border-color,
+		var(--dtpc-slider--scrubber--border-color, transparent)
+	);
+	--_dtpc-slider--scrubber--border-thickness: var(
+		--__dtpc-slider--scrubber--border-thickness,
+		var(--dtpc-slider--scrubber--border-thickness, 0)
+	);
+	--_dtpc-slider--scrubber--border-radius: var(
+		--__dtpc-slider--scrubber--border-radius,
+		var(--dtpc-slider--scrubber--border-radius, 100vw)
+	);
+	--_dtpc-slider--scrubber--focus-ring-color: var(
+		--__dtpc-slider--scrubber--focus-ring-color,
+		var(
+			--dtpc-slider--focus-ring-color,
+			var(--_dtpc-player--highlight, LinkText)
+		)
+	);
+	--_dtpc-slider--scrubber--focus-ring-offset: var(
+		--__dtpc-slider--scrubber--focus-ring-offset,
+		var(--dtpc-slider--focus-ring-offset, 0.125rem)
+	);
+	--_dtpc-slider--scrubber--focus-ring-thickness: var(
+		--__dtpc-slider--scrubber--focus-ring-thickness,
+		var(--dtpc-slider--focus-ring-thickness, 0.125rem)
+	);
+	--_dtpc-slider--progress--color: var(
+		--__dtpc-slider--progress--color,
+		var(
+			--dtpc-slider--progress--color,
+			var(--_dtpc-player--foreground, currentColor)
+		)
+	);
+	--_dtpc-slider--track--color: var(
+		--__dtpc-slider--track--color,
+		var(
+			--dtpc-slider--track--color,
+			color-mix(in oklch, var(--_dtpc-slider--progress--color) 20%, transparent)
+		)
+	);
+	--_dtpc-slider--track--thickness: var(
+		--__dtpc-slider--track--thickness,
+		var(--dtpc-slider--track--thickness, 0.25rem)
+	);
+	--_dtpc-slider--track--radius: var(
+		--__dtpc-slider--track--radius,
+		var(--dtpc-slider--track--radius, 100vw)
+	);
+	--_dtpc-slider--track--border-color: var(
+		--__dtpc-slider--track--border-color,
+		var(--dtpc-slider--track--border-color, transparent)
+	);
+	--_dtpc-slider--track--border-thickness: var(
+		--__dtpc-slider--track--border-thickness,
+		var(--dtpc-slider--track--border-thickness, 0)
+	);
+	--_dtpc-slider--track--border-offset: var(
+		--__dtpc-slider--track--border-offset,
+		var(--dtpc-slider--track--border-offset, 0)
+	);
+
+	--progress: 0.3;
+
+	display: block;
+	min-width: 100px;
+
+	.track {
+		--_dtpc-slider--track--gutter: calc(
+			var(--_dtpc-slider--scrubber--size) / 2
+		);
+
+		isolation: isolate;
+		display: grid;
+		align-items: center;
+		grid-template-columns:
+			[range-start] var(--_dtpc-slider--track--gutter)
+			[track-start] 1fr [track-end] var(--_dtpc-slider--track--gutter)
+			[range-end];
+		grid-template-rows:
+			[range-start] [track-start] var(--_dtpc-slider--track--thickness)
+			[track-end] [range-end];
+
+		&::before {
+			content: "";
+
+			grid-area: track;
+			grid-row: 1;
+			place-self: stretch;
+
+			outline-style: solid;
+			outline-color: var(--_dtpc-slider--track--border-color);
+			outline-width: var(--_dtpc-slider--track--border-width);
+			outline-offset: var(--_dtpc-slider--track--border-offset);
+
+			border-radius: var(--_dtpc-slider--track--radius);
+
+			background-color: var(--_dtpc-slider--track--color);
+		}
+
+		&:has(input[orient="vertical"]) {
+			writing-mode: vertical-lr;
+			direction: rtl;
+			height: 100px;
+
+			margin-block: calc(var(--_dtpc-slider--scrubber--size) / 2);
+		}
+	}
+
+	.progress {
+		--_progress--color: var(--_dtpc-slider--progress--color);
+		--_length: calc(
+			var(--progress, 0) * (100% - var(--_dtpc-slider--track--gutter) * 2)
+		);
+
+		grid-area: range;
+		grid-row: 1;
+		place-self: stretch;
+
+		display: grid;
+		grid-template-columns:
+			var(--_dtpc-slider--track--gutter) minmax(
+				var(--_dtpc-slider--track--thickness),
+				var(--_length)
+			)
+			1fr var(--_dtpc-slider--track--gutter);
+
+		&::before {
+			content: "";
+			grid-column: 2;
+
+			border-radius: var(--_dtpc-slider--track--radius);
+
+			background-color: var(--_dtpc-slider--progress--color);
+		}
+	}
+
+	.range {
+		grid-area: range;
+		grid-row: 1;
+
+		display: grid;
+		grid-template-columns:
+			calc(var(--progress, 0) * (100% - var(--_dtpc-slider--scrubber--size)))
+			[thumb-start] var(--_dtpc-slider--scrubber--size) [thumb-end];
+		grid-template-rows: [thumb-start] var(--_dtpc-slider--track--thickness) [thumb-end];
+		align-items: center;
+		justify-items: center;
+
+		min-width: var(--_dtpc-slider--track--thickness);
+	}
+
+	.scrubber {
+		grid-area: thumb;
+		display: grid;
+		aspect-ratio: 1;
+		width: var(--_dtpc-slider--scrubber--size);
+
+		&::after {
+			content: "";
+
+			transition-property: scale, opacity;
+			transition-duration: 200ms;
+			transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+			display: block;
+
+			border-style: solid;
+			border-color: var(--_dtpc-slider--scrubber--border-color);
+			border-width: var(--_dtpc-slider--scrubber--border-width);
+			border-radius: var(--_dtpc-slider--scrubber--border-radius);
+
+			background-color: var(--_dtpc-slider--scrubber--color);
+		}
+	}
+}

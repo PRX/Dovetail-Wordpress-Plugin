@@ -1,0 +1,21 @@
+:host {
+  --_dtpc-time-display--spacing: var(--dtpc-time-display--spacing, 0.25rem);
+  --_dtpc-time-display--separator--color: var(--dtpc-time-display--separator--color);
+
+  color: var(--_dtpc-player--time--color, currentColor);
+  font-family: var(--_dtpc-player--time--font-family, inherit);
+  font-size: var(--_dtpc-player--time--font-size, inherit);
+  font-weight: var(--_dtpc-player--time--font-weight, inherit);
+}
+
+.wrapper {
+  --_spacing: var(--_dtpc-time-display--spacing);
+
+  display: flex;
+  align-items: baseline;
+  gap: var(--_spacing);
+}
+
+.separator {
+  color: var(--_dtpc-time-display--separator--color);
+}
