@@ -20,6 +20,11 @@ export class DtpcPlayer {
   @Prop() layout: 'flex' | 'default';
 
   /**
+   * Add backdrop to player. Backdrop can be used to add background color and image, and background filter blur effect.
+   */
+  @Prop() backdrop: boolean = false;
+
+  /**
    * Audio source URL.
    */
   @Prop() src: string;
@@ -99,11 +104,12 @@ export class DtpcPlayer {
   }
 
   render() {
-    console.log(this.layout);
+    const { playing } = this.state;
+
     return (
-      <Host>
+      <Host playing={playing}>
         <div class="wrapper">
-          <div part="backdrop"></div>
+          {this.backdrop && <slot name="backdrop" /> }
           <div class="main">
             {(!this.layout || this.layout === 'flex') && (
               <slot />

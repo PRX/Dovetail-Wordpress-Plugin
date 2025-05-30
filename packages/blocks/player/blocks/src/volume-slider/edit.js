@@ -45,14 +45,16 @@ export default function Edit(props) {
 
 	return (
 		<DtpcVolumeSlider {...blockProps}>
-			<DtpcSlider>
-				<div className="track">
-					<div className="progress"></div>
-					<div className="range">
-						<span className="scrubber"></span>
+			<div className="wrapper">
+				<DtpcSlider>
+					<div className="track">
+						<div className="progress"></div>
+						<div className="range">
+							<span className="scrubber"></span>
+						</div>
 					</div>
-				</div>
-			</DtpcSlider>
+				</DtpcSlider>
+			</div>
 		</DtpcVolumeSlider>
 	);
 }

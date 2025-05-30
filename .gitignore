@@ -34,7 +34,7 @@ Thumbs.db
 # Composer Vendor Files #
 #########################
 vendor
-!/wp-content/plugins/**/vendor
+!/assets/vendor
 
 # Node Dependencies #
 #####################
@@ -45,6 +45,7 @@ node_modules
 #######################
 /tests/_output/*.json
 
-# Temp Build Directories #
+# Build Directories #
 #####################
+build
 plugin-build
