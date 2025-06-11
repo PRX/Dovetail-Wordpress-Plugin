@@ -25,7 +25,7 @@
   --_dtpc-button--border-thickness--active: var(--__dtpc-button--border-thickness--active, var(--dtpc-button--border-thickness--active, var(--_dtpc-button--border-thickness)));
   --_dtpc-button--focus-ring-color: var(--__dtpc-button--focus-ring-color, var(--dtpc-button--focus-ring-color, var(--_dtpc-player--highlight)));
   --_dtpc-button--focus-ring-offset: var(--__dtpc-button--focus-ring-offset, var(--dtpc-button--focus-ring-offset, 0.125rem));
-  --_dtpc-button--focus-ring-thickness: var(--__dtpc-button--focus-ring-thickness, var(--dtpc-button--focus-ring-thickness, 2px));
+  --_dtpc-button--focus-ring-thickness: var(--__dtpc-button--focus-ring-thickness, var(--dtpc-button--focus-ring-thickness, 0.125rem));
 }
 
 :host {
