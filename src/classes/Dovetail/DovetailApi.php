@@ -224,7 +224,7 @@ class DovetailApi {
 	/**
 	 * Get information about user the client application belongs to.
 	 *
-	 * @return array<string,mixed>
+	 * @return array<int,array<string,mixed>|false>
 	 */
 	public function get_user_info() {
 		$api_url = "https://{$this->id_domain}/userinfo";
@@ -234,7 +234,7 @@ class DovetailApi {
 	/**
 	 * Get collection of podcasts user has access to.
 	 *
-	 * @return array<string,mixed>
+	 * @return array<int,array<string,mixed>|false>
 	 */
 	public function get_podcasts() {
 		$api_url = "https://{$this->feeder_domain}/api/v1/authorization/podcasts";
@@ -251,7 +251,7 @@ class DovetailApi {
 	 * Get a specific podcast by id.
 	 *
 	 * @param int $id Dovetail podcast id.
-	 * @return array<string,mixed>
+	 * @return array<int,array<string,mixed>|false>
 	 */
 	public function get_podcast( int $id ) {
 		$api_url = "https://{$this->feeder_domain}/api/v1/authorization/podcasts/{$id}";
@@ -262,7 +262,7 @@ class DovetailApi {
 	 * Get collection of episodes belonging to a podcast.
 	 *
 	 * @param int $id Dovetail podcast id.
-	 * @return array<string,mixed>
+	 * @return array<int,array<string,mixed>|false>
 	 */
 	public function get_podcast_episodes( int $id ) {
 		$api_url = "https://{$this->feeder_domain}/api/v1/authorization/podcasts/{$id}/episodes";
@@ -270,10 +270,74 @@ class DovetailApi {
 	}
 
 	/**
+	 * Get collection of episodes belonging to a podcast, published on a specific date.
+	 *
+	 * @param int    $id Dovetail podcast id.
+	 * @param string $publish_date Date episodes are published on.
+	 * @return array<int,array<string,mixed>|false>
+	 */
+	public function get_podcast_episodes_by_publish_date( int $id, string $publish_date = null ) {
+		$api_url = "https://{$this->feeder_domain}/api/v1/authorization/podcasts/{$id}/episodes";
+		$on_date = $publish_date ? new \DateTime( $publish_date ) : new \DateTime();
+		$one_day = new \DateInterval( 'P1D' );
+		$after   = $on_date->format( 'Y-m-d' );
+		$before  = $on_date->add( $one_day )->format( 'Y-m-d' );
+
+		$api_url = add_query_arg(
+			[
+				'after'  => $after,
+				'before' => $before,
+			],
+			$api_url
+		);
+
+		return $this->get( $api_url );
+	}
+
+	/**
+	 * Get collection of episodes belonging to a podcast, published on a specific date, with a specific title.
+	 *
+	 * @param int    $id Dovetail podcast id.
+	 * @param string $publish_date Date episodes are published on.
+	 * @param string $title Title of episode.
+	 * @return array<int,array<string,mixed>|false>
+	 */
+	public function get_podcast_episodes_by_publish_date_and_title( int $id, string $publish_date, string $title ) {
+		$episode_api = false;
+
+		// Dovetail API only has publish date filtering for podcast episodes.
+		// Fetch episodes published on post's publish data,...
+		list( $episodes_api, $api_response ) = $this->get_podcast_episodes_by_publish_date( $id, $publish_date );
+
+		if (
+			$episodes_api &&
+			is_array( $episodes_api ) &&
+			isset( $episodes_api['_embedded']['prx:items'] ) &&
+			! empty( $episodes_api['_embedded']['prx:items'] )
+		) {
+			// ...then filter them by title.
+			$matches = array_filter(
+				$episodes_api['_embedded']['prx:items'],
+				static function ( $episode ) use ( $title ) {
+					// ????: Filter title by whole value match, contains, or starts-with. 🤔?
+					return $episode['title'] === $title;
+				}
+			);
+
+			// Only consider single match an accurate result.
+			if ( 1 === count( $matches ) ) {
+				$episode_api = $matches[0];
+			}
+		}
+
+		return [ $episode_api, $api_response ];
+	}
+
+	/**
 	 * Get a specific episode by id.
 	 *
 	 * @param string $id Dovetail episode id.
-	 * @return array<string,mixed>
+	 * @return array<int,array<string,mixed>|false>
 	 */
 	public function get_episode( string $id ) {
 		$api_url = "https://{$this->feeder_domain}/api/v1/authorization/episodes/{$id}";
@@ -296,7 +360,7 @@ class DovetailApi {
 	 *
 	 * @param string              $id Dovetail episode id.
 	 * @param array<string,mixed> $data Dovetail episode data.
-	 * @return array<string,mixed>
+	 * @return array<int,array<string,mixed>|false>
 	 */
 	public function update_episode( string $id, array $data ) {
 		$api_url = "https://{$this->feeder_domain}/api/v1/authorization/episodes/{$id}";
@@ -315,7 +379,7 @@ class DovetailApi {
 	 *
 	 * @param string              $id Dovetail podcast id.
 	 * @param array<string,mixed> $data Dovetail episode data.
-	 * @return array<string,mixed>|false
+	 * @return array<int,array<string,mixed>|false>
 	 */
 	public function create_podcast_episode( string $id, array $data ) {
 		$api_url = "https://{$this->feeder_domain}/api/v1/authorization/podcasts/{$id}/episodes";
@@ -339,7 +403,7 @@ class DovetailApi {
 	 *
 	 * @param int    $id Dovetail podcast id.
 	 * @param string $guid Dovetail episode guid.
-	 * @return array<string,mixed>|false
+	 * @return array<int,array<string,mixed>|false>
 	 */
 	public function get_podcast_episode_by_guid( int $id, string $guid ) {
 		// Query for episode using sanitized and url encoded guid.
@@ -391,7 +455,7 @@ class DovetailApi {
 	 * Internal method to send API GET requests.
 	 *
 	 * @param string $api_url API URL to request.
-	 * @return array<string,mixed>|false
+	 * @return array<int,array<string,mixed>|false>
 	 */
 	private function get( string $api_url ) {
 
@@ -405,7 +469,7 @@ class DovetailApi {
 	 *
 	 * @param string              $api_url API URL to request.
 	 * @param array<string,mixed> $body Body to send with the request. Default null.
-	 * @return array<string,mixed>|false
+	 * @return array<int,array<string,mixed>|false>
 	 */
 	private function post( string $api_url, array $body = null ) {
 		$args         = [
@@ -421,7 +485,7 @@ class DovetailApi {
 	 *
 	 * @param string              $api_url API URL to request.
 	 * @param array<string,mixed> $body Body to send with the request. Default null.
-	 * @return array<string,mixed>|false
+	 * @return array<int,array<string,mixed>|false>
 	 */
 	private function put( string $api_url, array $body = null ) {
 		$args         = [
