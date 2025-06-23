@@ -2,11 +2,11 @@
 
 Dovetail Podcasts provides a customizable audio player intended for manual placement within your site’s templates or content areas. The plugin does not automatically insert the player into posts or pages. This approach gives you complete control over when, where, and how the player appears on your site.
 
-## Implementation Docs
+## Documentation
 
 - [Player Components](./player-components.md)
-- [Add Player Using Block Editor](./player-block-editor.md)
-- [Add Player Using Shortcodes](./player-shortcodes.md)
+  <!-- - [Add Player Using Block Editor](./player-block-editor.md) -->
+  <!-- - [Add Player Using Shortcodes](./player-shortcodes.md) -->
 
 ## Player Features
 
