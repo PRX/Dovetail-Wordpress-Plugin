@@ -41,7 +41,10 @@
     "build-test": "@docker-build -t",
     "run-app": "@docker-run -a",
     "run-test": "@docker-run -t",
-    "app:db:mysql": "bash bin/run-mysql.sh",
+    "app:db:mysql": [
+      "Composer\\Config::disableProcessTimeout",
+      "bash bin/run-mysql.sh"
+    ],
     "build-plugin": [
       "composer install --no-dev && composer run-script zip && composer install"
     ],

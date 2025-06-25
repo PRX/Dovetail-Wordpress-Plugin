@@ -176,6 +176,7 @@ class PostMetaBox {
 
 		if ( isset( $meta['enclosure']['mediaId'] ) ) {
 			$media = get_post( $meta['enclosure']['mediaId'] );
+
 			if ( ! $media ) {
 				// Episode media was deleted since the last time this post was edited.
 				// Remove media id and url, and update post metadata.
@@ -196,27 +197,50 @@ class PostMetaBox {
 		if ( ! isset( $meta['dovetail']['id'] ) ) {
 			// Check if this post was imported into Dovetail.
 			list( $podcasts_api ) = $this->dovetail_api->get_podcasts();
+
 			if (
 				$podcasts_api &&
 				is_array( $podcasts_api ) &&
 				isset( $podcasts_api['_embedded']['prx:items'] )
 			) {
 				foreach ( $podcasts_api['_embedded']['prx:items'] as $p ) {
-					list( $e ) = $this->dovetail_api->get_podcast_episode_by_guid( $p['id'], $post->guid );
+					// TODO: Check podcast taxonomy hash for podcast term id,...
+					// TODO: If no hash is found, get podcasts taxonomy from settings and check for term matching name of DT podcast title.
+					// TODO: If term is found,...
+					// TODO: ...store hash of DT podcast id to term id,...
+					// TODO: ...add DT podcast id to term meta data,...
+					// ????: Should everything before this be a Util method?
+					// TODO: ...`continue` loop if post is not assigned the term.
 
-					if ( $e ) {
+					list( $episode_api ) = $this->dovetail_api->get_podcast_episode_by_guid( $p['id'], $post->guid );
+
+					// If there isn't a Dovetail episode using the WordPress generated post guid, the episode
+					// could have been imported from a third party feed that used mirrored post data that did not preserve
+					// the WordPress post guid, eg. SSP Plugin to Castos.
+					// Look for Dovetail episode with the same publish date and title...
+					if ( ! $episode_api && property_exists( $post, 'post_date_gmt' ) && $post->post_date_gmt ) {
+						list( $episode_api ) = $this->dovetail_api->get_podcast_episodes_by_publish_date_and_title( $p['id'], $post->post_date_gmt, $post->post_title );
+
+						// ????: How could we handle multiple matches?
+						// It is not likely for a podcast to have two episodes published with the same name on the same day. Right?
+						// Should we pass these matches as "suggested episodes" for the meta box UI to present to the user?
+						// Could multiple podcasts have an episode of the same title on the same publish date? This logic returns the found
+						// episode in the first podcasts to have a match, but may not be the the correct podcast.
+					}
+
+					if ( $episode_api ) {
 						if ( ! is_array( $meta ) ) {
 							$meta = [];
 						}
 						$meta['podcastId'] = $p['id'];
-						$meta['dovetail']  = Utils::parse_episode_api_data( $e );
+						$meta['dovetail']  = Utils::parse_episode_api_data( $episode_api );
 
 						// Try to get media data from uncut prop first...
-						if ( isset( $e['uncut'] ) && ! empty( $e['uncut'] ) ) {
-							$media = $e['uncut'];
+						if ( isset( $episode_api['uncut'] ) && ! empty( $episode_api['uncut'] ) ) {
+							$media = $episode_api['uncut'];
 						} else {
 							// ...fallback to first media item.
-							$media = $e['media'][0];
+							$media = $episode_api['media'][0];
 						}
 
 						// Media's original URL should be trusted to be to an existing file.
@@ -225,10 +249,10 @@ class PostMetaBox {
 						// Media's duration should be the original duration of the uploaded file.
 						$meta['enclosure']['duration'] = $media['duration'];
 						// Enclosure's href should still contain the original filename.
-						$meta['enclosure']['filename'] = basename( $e['_links']['enclosure']['href'] );
+						$meta['enclosure']['filename'] = basename( $episode_api['_links']['enclosure']['href'] );
 
 						// Check if an attachment exists for the enclosure href filename.
-						$media_id = Utils::get_attachment_id( $e['_links']['enclosure']['href'] );
+						$media_id = Utils::get_attachment_id( $episode_api['_links']['enclosure']['href'] );
 						if ( $media_id > 0 ) {
 							$meta['enclosure']['mediaId'] = $media_id;
 							// Update enclosure URL in case the media original URL was altered during processing.
@@ -243,10 +267,12 @@ class PostMetaBox {
 			// This post has been connected to a Dovetail episode.
 			// Get current Dovetail episode data so changes in Dovetail do not get reverted
 			// when user saves post changes to post.
-			list( $e, $resp ) = $this->dovetail_api->get_episode( $meta['dovetail']['id'] );
-			$status           = wp_remote_retrieve_response_code( $resp );
-			if ( $e ) {
-				$meta['dovetail'] = Utils::parse_episode_api_data( $e );
+			list( $episode_api, $resp ) = $this->dovetail_api->get_episode( $meta['dovetail']['id'] );
+
+			$status = wp_remote_retrieve_response_code( $resp );
+
+			if ( $episode_api ) {
+				$meta['dovetail'] = Utils::parse_episode_api_data( $episode_api );
 			} elseif ( '404' === $status ) {
 				// Episode was not found? May have been deleted in Dovetail.
 				// Remove dovetail id, enclosure, and media meta data.
@@ -366,19 +392,19 @@ class PostMetaBox {
 
 		if ( is_array( $this->post_types ) && in_array( $post_type, $this->post_types, true ) ) {
 			add_action( 'admin_enqueue_scripts', [ $this, 'admin_enqueue_scripts' ] );
-		}
 
-		add_meta_box(
-			'dovetail-podcasts-episode',
-			'Dovetail Podcasts Episode',
-			[ $this, 'render_meta_box' ],
-			$this->post_types,
-			'normal',
-			'default',
-			[
-				'__block_editor_compatible_meta_box' => true,
-			]
-		);
+			add_meta_box(
+				'dovetail-podcasts-episode',
+				'Dovetail Podcasts Episode',
+				[ $this, 'render_meta_box' ],
+				$this->post_types,
+				'normal',
+				'default',
+				[
+					'__block_editor_compatible_meta_box' => true,
+				]
+			);
+		}
 	}
 
 	/**
