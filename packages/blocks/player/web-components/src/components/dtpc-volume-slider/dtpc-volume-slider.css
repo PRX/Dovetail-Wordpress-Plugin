@@ -16,7 +16,7 @@
   --__dtpc-slider--scrubber--focus-ring-thickness: var(--dtpc-volume-slider--scrubber--focus-ring-thickness);
 
   --_dtpc-volume-slider--border-color: var(--__dtpc-volume-slider--border-color, var(--dtpc-volume-slider--border-color, transparent));
-  --_dtpc-volume-slider--border-width: var(--__dtpc-volume-slider--border-width, var(--dtpc-volume-slider--border-width, 0));
+  --_dtpc-volume-slider--border-thickness: var(--__dtpc-volume-slider--border-thickness, var(--dtpc-volume-slider--border-thickness, 0));
   --_dtpc-volume-slider--border-radius: var(--__dtpc-volume-slider--border-radius, var(--dtpc-volume-slider--border-radius, 100vw));
   --_dtpc-volume-slider--padding: var(--__dtpc-volume-slider--padding, var(--dtpc-volume-slider--padding, 0));
   --_dtpc-volume-slider--padding-inline: var(--__dtpc-volume-slider--padding-inline, var(--dtpc-volume-slider--padding-inline, var(--_dtpc-volume-slider--padding)));
@@ -28,14 +28,6 @@
 }
 
 .wrapper {
-  --_border-color: var(--_dtpc-slider--border-color);
-  --_border-width: var(--_dtpc-slider--border-width);
-  --_border-radius: var(--_dtpc-slider--border-radius);
-  --_padding-inline: var(--_dtpc-volume-slider--padding-inline);
-  --_padding-block: var(--_dtpc-volume-slider--padding-block);
-  --_surface: var(--_dtpc-volume-slider--surface);
-  --_surface-blur: var(--_dtpc-volume-slider--surface-blur);
-
   display: grid;
   place-content: center;
 
@@ -45,7 +37,7 @@
   background-color: var(--_dtpc-volume-slider--surface);
 
   border-style: solid;
-  border-width: var(--_dtpc-volume-slider--border-width);
+  border-width: var(--_dtpc-volume-slider--border-thickness);
   border-color: var(--_dtpc-volume-slider--border-color);
   border-radius: var(--_dtpc-volume-slider--border-radius);
 
