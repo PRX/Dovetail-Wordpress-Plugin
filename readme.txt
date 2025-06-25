@@ -29,3 +29,4 @@ Dovetail Podcasts plugin connects your Wordpress site to Dovetail Podcasts.
 5. [Configure Dovetail Podcasts settings.](https://github.com/PRX/Dovetail-Wordpress-Plugin/blob/main/docs/settings-general.md)
 
 == Changelog ==
+
