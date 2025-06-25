@@ -5,8 +5,8 @@ Dovetail Podcasts provides a customizable audio player intended for manual place
 ## Documentation
 
 - [Player Components](./player-components.md)
-  <!-- - [Add Player Using Block Editor](./player-block-editor.md) -->
-  <!-- - [Add Player Using Shortcodes](./player-shortcodes.md) -->
+- [Add Player Using Block Editor](./player-block-editor.md)
+- [Add Player Using Shortcodes](./player-shortcodes.md)
 
 ## Player Features
 

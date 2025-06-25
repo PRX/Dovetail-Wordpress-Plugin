@@ -242,7 +242,7 @@ function bumpVersion() {
     updateConstantsFile(newVersion);
     updatePluginFile(newVersion);
     updatePackageJson(newVersion);
-    updateReadmeTxt(newVersion);
+    // updateReadmeTxt(newVersion);
 
     console.log(chalk.green("✓ Version bump complete!"));
 
