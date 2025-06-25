@@ -1,0 +1,57 @@
+:host {
+  --_dtpc-play-button--foreground--playing: var(--dtpc-play-button--foreground--playing, var(--dtpc-play-button--foreground, var(--dtpc-button--foreground)));
+  --_dtpc-play-button--foreground--playing--hover: var(
+    --dtpc-play-button--foreground--playing--hover,
+    var(--dtpc-play-button--foreground--hover, var(--dtpc-button--foreground--hover))
+  );
+  --_dtpc-play-button--foreground--playing--active: var(
+    --dtpc-play-button--foreground--playing--active,
+    var(--dtpc-play-button--foreground--active, var(--dtpc-button--foreground--active))
+  );
+  --_dtpc-play-button--surface--playing: var(--dtpc-play-button--surface--playing, var(--dtpc-play-button--surface));
+  --_dtpc-play-button--border-color--playing: var(--dtpc-play-button--border-color--playing, var(--_dtpc-play-button--foreground--playing));
+  --_dtpc-play-button--border-thickness--playing: var(--dtpc-play-button--border-thickness--playing, var(--dtpc-play-button--border-thickness, 0.125rem));
+  --_dtpc-play-button--border-radius--playing: var(--dtpc-play-button--border-radius--playing, var(--dtpc-play-button--border-radius));
+
+  --__dtpc-button--size: var(--dtpc-play-button--size, 2rem);
+  --__dtpc-button--padding: var(--dtpc-play-button--padding, 0.5rem);
+  --__dtpc-button--foreground: var(--dtpc-play-button--foreground);
+  --__dtpc-button--foreground--hover: var(--dtpc-play-button--foreground--hover);
+  --__dtpc-button--foreground--active: var(--dtpc-play-button--foreground--active);
+  --__dtpc-button--surface: var(--dtpc-play-button--surface);
+  --__dtpc-button--surface--hover: var(--dtpc-play-button--surface--hover);
+  --__dtpc-button--surface--active: var(--dtpc-play-button--surface--active);
+  --__dtpc-button--surface-blur: var(--dtpc-play-button--surface-blur);
+  --__dtpc-button--border-color: var(--dtpc-play-button--border-color);
+  --__dtpc-button--border-color--hover: var(--dtpc-play-button--border-color--hover);
+  --__dtpc-button--border-color--active: var(--dtpc-play-button--border-color--active, var(--dtpc-button--foreground, currentColor));
+  --__dtpc-button--border-radius: var(--dtpc-play-button--border-radius);
+  --__dtpc-button--border-radius--hover: var(--dtpc-play-button--border-radius--hover);
+  --__dtpc-button--border-radius--active: var(--dtpc-play-button--border-radius--active);
+  --__dtpc-button--border-thickness: var(--dtpc-play-button--border-thickness, 0.125rem);
+  --__dtpc-button--border-thickness--hover: var(--dtpc-play-button--border-thickness--hover, var(--dtpc-play-button--border-thickness, 0.125rem));
+  --__dtpc-button--border-thickness--active: var(--dtpc-play-button--border-thickness--active, var(--dtpc-play-button--border-thickness, 0.125rem));
+  --__dtpc-button--focus-ring-color: var(--dtpc-play-button--focus-ring-color);
+  --__dtpc-button--focus-ring-offset: var(--dtpc-play-button--focus-ring-offset);
+  --__dtpc-button--focus-ring-thickness: var(--dtpc-play-button--focus-ring-thickness);
+}
+
+:host([data-status='playing']) {
+  --__dtpc-button--foreground: var(--_dtpc-play-button--foreground--playing);
+  --__dtpc-button--surface: var(--_dtpc-play-button--surface--playing, var(--dtpc-play-button--surface));
+  --__dtpc-button--border-color: var(--_dtpc-play-button--border-color--playing, var(--dtpc-play-button--border-color));
+  --__dtpc-button--border-thickness: var(--_dtpc-play-button--border-thickness--playing, var(--dtpc-play-button--border-thickness));
+  --__dtpc-button--border-radius: var(--_dtpc-play-button--border-radius--playing, var(--dtpc-play-button--border-radius));
+
+  --__dtpc-button--foreground--hover: var(--_dtpc-play-button--foreground--playing--hover);
+  --__dtpc-button--surface--hover: var(--dtpc-play-button--surface--playing--hover, var(--_dtpc-play-button--surface--playing));
+  --__dtpc-button--border-color--hover: var(--dtpc-play-button--border-color--playing--hover, var(--dtpc-play-button--foreground--playing--hover));
+  --__dtpc-button--border-thickness--hover: var(--dtpc-play-button--border-thickness--playing--hover, var(--_dtpc-play-button--border-thickness--playing));
+  --__dtpc-button--border-radius--hover: var(--dtpc-play-button--border-radius--playing--hover, var(--_dtpc-play-button--border-radius--playing));
+
+  --__dtpc-button--foreground--active: var(--_dtpc-play-button--foreground--playing--active);
+  --__dtpc-button--surface--active: var(--dtpc-play-button--surface--playing--active, var(--dtpc-play-button--surface--active));
+  --__dtpc-button--border-color--active: var(--dtpc-play-button--border-color--playing--active, var(--dtpc-play-button--foreground--playing--active));
+  --__dtpc-button--border-thickness--active: var(--dtpc-play-button--border-thickness--playing--active, var(--_dtpc-play-button--border-thickness--playing));
+  --__dtpc-button--border-radius--active: var(--dtpc-play-button--border-radius--playing--active, var(--_dtpc-play-button--border-radius--playing));
+}

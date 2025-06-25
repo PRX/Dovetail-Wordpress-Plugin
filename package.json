@@ -1,0 +1,49 @@
+{
+  "name": "dovetail-podcasts",
+  "version": "0.0.0",
+  "description": "Javascript packages for Dovetail Podcasts Wordpress plugin.",
+  "author": "PRX",
+  "license": "GPL-3.0-or-later",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "postinstall": "npm run install:metabox",
+    "build:player": "npm run build --workspace=packages/blocks/player/web-components --workspace=packages/blocks/player/blocks",
+    "install:metabox": "npm --prefix ./packages/metabox/podcast-episode install --legacy-peer-deps",
+    "build:metabox": "npm --prefix ./packages/metabox/podcast-episode run build",
+    "build": "npm run build:metabox && npm run build:player",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "changeset:generate": "node scripts/generate-changeset.js",
+    "changeset:analyze": "node scripts/analyze-changesets.js",
+    "release:notes": "node scripts/generate-release-notes.js",
+    "version:bump": "node scripts/bump-version.js",
+    "since-tags:update": "node scripts/update-since-tags.js",
+    "upgrade-notice:update": "node scripts/update-upgrade-notice.js",
+    "changelog:update": "node scripts/update-changelog.js",
+    "changelogs:update": "node scripts/update-changelogs.js",
+    "readme:update": "node scripts/update-readme.js",
+    "release:prepare": "npm run version:bump && npm run changelogs:update"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PRX/Dovetail-Wordpress-Plugin.git"
+  },
+  "bugs": {
+    "url": "https://github.com/PRX/Dovetail-Wordpress-Plugin/issues"
+  },
+  "homepage": "https://github.com/PRX/Dovetail-Wordpress-Plugin#readme",
+  "workspaces": [
+    "packages/blocks/player/blocks",
+    "packages/blocks/player/web-components"
+  ],
+  "devDependencies": {
+    "archiver": "^7.0.1",
+    "chalk": "^5.4.1",
+    "dotenv": "^16.5.0",
+    "fs-extra": "^11.3.0",
+    "glob": "^11.0.1",
+    "yargs": "^17.7.2"
+  }
+}

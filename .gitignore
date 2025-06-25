@@ -34,8 +34,18 @@ Thumbs.db
 # Composer Vendor Files #
 #########################
 vendor
-!/wp-content/plugins/**/vendor
+!/assets/vendor
 
 # Node Dependencies #
 #####################
 node_modules
+
+
+# PHPCS cached files. #
+#######################
+/tests/_output/*.json
+
+# Build Directories #
+#####################
+build
+plugin-build

@@ -32,6 +32,11 @@ function dovetail_podcasts_setup_constants() {
 		define( 'DTPODCASTS_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 	}
 
+	// Plugin Folder URL.
+	if ( ! defined( 'DTPODCASTS_PLUGIN_URL' ) ) {
+		define( 'DTPODCASTS_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
+	}
+
 	// Plugin Root File.
 	if ( ! defined( 'DTPODCASTS_PLUGIN_FILE' ) ) {
 		define( 'DTPODCASTS_PLUGIN_FILE', DTPODCASTS_PLUGIN_DIR . '/dovetail-podcasts.php' );

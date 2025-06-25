@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0" />
+    <title>Stencil Component Starter</title>
+
+    <link rel="stylesheet" href="/build/dovetail-podcasts-player-web-components.css" />
+
+    <style>
+      :root {
+        font-family: Avenir, Montserrat, Corbel, 'URW Gothic', source-sans-pro, sans-serif;
+        font-weight: normal;
+
+        padding: 1.25rem;
+      }
+
+      :where(body) > * {
+        margin-block: 0;
+        & + * {
+          margin-block-start: 1.25em;
+        }
+      }
+
+      [slot="backdrop"] {
+        position: absolute;
+        inset: 0;
+
+        img {
+          object-fit: cover;
+          width: 100%;
+          height: 100%;
+        }
+      }
+
+      .player-layout {
+        display: grid;
+        gap: 0.5rem;
+        padding: 1rem;
+
+        border-style: solid;
+        border-color: color-mix(in oklch, currentColor 10%, transparent);
+        border-width: 0.125rem;
+
+        & > * {
+          margin: 0;
+        }
+      }
+
+      .component-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+      }
+
+      .component-card {
+        display: grid;
+        align-content: start;
+        place-items: center;
+
+        &.grow {
+          flex-grow: 1;
+          justify-items: stretch;
+        }
+      }
+
+      table.icons {
+        width: 100%;
+
+        border-spacing: 0;
+        border-block: 3px solid #cdcdcd;
+
+
+        :where(th,td) {
+          padding: 0.5rem 1rem;
+          align-items: center;
+        }
+        th {
+          border-block-end: 2px solid #cdcdcd;
+        }
+        th:first-of-type {
+          text-align: start;
+        }
+        td:not(:first-of-type) {
+          text-align: center;
+        }
+        tr + tr {
+          td {
+            border-block-start: 1px solid #cdcdcd;
+          }
+        }
+        td {
+          .lucide-icon {
+            width: 1.5rem;
+          }
+        }
+      }
+    </style>
+
+    <script type="module" src="/build/dovetail-podcasts-player-web-components.esm.js"></script>
+    <script nomodule src="/build/dovetail-podcasts-player-web-components.js"></script>
+  </head>
+  <body>
+    <h1>Dovetail Podcast Player</h1>
+
+    <h2>Layouts</h2>
+
+    <section class="player-layout">
+      <h3>Default</h3>
+      <div class="content">
+        <dtpc-player
+          layout="default"
+          src="https://dts.podtrac.com/redirect.mp3/dovetail.prxu.org/_/93/0af0c559-ce0d-472e-b406-1f029ca8b157/SongExploder267_GreenDay_1.mp3"
+          duration="1300.166531"></dtpc-player>
+      </div>
+    </section>
+
+    <section class="player-layout">
+      <h3>Default w/ Backdrop</h3>
+      <div class="content">
+        <dtpc-player
+          layout="default"
+          backdrop
+          src="https://dts.podtrac.com/redirect.mp3/dovetail.prxu.org/_/93/0af0c559-ce0d-472e-b406-1f029ca8b157/SongExploder267_GreenDay_1.mp3"
+          duration="1300.166531"></dtpc-player>
+      </div>
+    </section>
+
+    <section class="player-layout">
+      <h3>Default w/ Radial Gradient Backdrop</h3>
+      <div class="content">
+        <dtpc-player
+          layout="default"
+          src="https://dts.podtrac.com/redirect.mp3/dovetail.prxu.org/_/93/0af0c559-ce0d-472e-b406-1f029ca8b157/SongExploder267_GreenDay_1.mp3"
+          duration="1300.166531"
+          backdrop
+          style="--dtpc-player--surface-image: radial-gradient(circle at 2.15rem 50%, hsl(0 0% 100% / 0.5) 2.125rem, hsl(0 0% 100% / 0.1) 60%, transparent); --dtpc-player--surface: transparent; --dtpc-player--border-radius: 100vw 0.5rem 0.5rem 100vw; --dtpc-play-button--surface: #000; --dtpc-play-button--surface-opacity: 60%; --dtpc-play-button--surface-opacity--hover: 80%; --dtpc-play-button--surface-opacity--active: 80%;"
+        ></dtpc-player>
+      </div>
+    </section>
+
+    <section class="player-layout">
+      <h3>Flex</h3>
+      <div class="content">
+        <dtpc-player
+          layout="flex"
+          src="https://dts.podtrac.com/redirect.mp3/dovetail.prxu.org/_/93/0af0c559-ce0d-472e-b406-1f029ca8b157/SongExploder267_GreenDay_1.mp3"
+          duration="1300.166531"
+        >
+          <dtpc-play-button></dtpc-play-button>
+          <dtpc-time-current></dtpc-time-current>
+          <dtpc-progress-bar></dtpc-progress-bar>
+          <dtpc-time-duration></dtpc-time-duration>
+          <dtpc-volume-controls></dtpc-volume-controls>
+        </dtpc-player>
+      </div>
+    </section>
+
+    <section class="player-layout">
+      <h3>Flex w/ Blurred Image Backdrop</h3>
+      <div class="content">
+        <dtpc-player
+          layout="flex"
+          src="https://dts.podtrac.com/redirect.mp3/dovetail.prxu.org/_/93/0af0c559-ce0d-472e-b406-1f029ca8b157/SongExploder267_GreenDay_1.mp3"
+          duration="1300.166531"
+          backdrop
+          style="--dtpc-player--surface-image: url('http://media-pri-dev.s3.amazonaws.com/wp-content/uploads/2025/02/28004911/SongExploder233_RickAstley_Portrait-1.jpg'); --dtpc-player--surface: hsla(0, 80%, 50%, 0.6); --dtpc-player--surface-opacity: 33.333%; --dtpc-player--surface-blur: 16px;"
+        >
+          <dtpc-play-button></dtpc-play-button>
+          <dtpc-time-current></dtpc-time-current>
+          <dtpc-progress-bar></dtpc-progress-bar>
+          <dtpc-time-duration></dtpc-time-duration>
+          <dtpc-volume-controls></dtpc-volume-controls>
+        </dtpc-player>
+      </div>
+    </section>
+
+    <section class="player-layout">
+      <h3>Flex w/ Blurred Slotted Image Backdrop</h3>
+      <div class="content">
+        <dtpc-player
+          layout="flex"
+          src="https://dts.podtrac.com/redirect.mp3/dovetail.prxu.org/_/93/0af0c559-ce0d-472e-b406-1f029ca8b157/SongExploder267_GreenDay_1.mp3"
+          duration="1300.166531"
+          backdrop
+          style="--dtpc-player--surface: hsl(222 30% 30% / 50%); --dtpc-player--surface-blur: 0px;"
+        >
+          <div slot="backdrop"><img src="https://picsum.photos/id/223/1200" /></div>
+          <dtpc-play-button></dtpc-play-button>
+          <dtpc-time-current></dtpc-time-current>
+          <dtpc-progress-bar></dtpc-progress-bar>
+          <dtpc-time-duration></dtpc-time-duration>
+          <dtpc-volume-controls></dtpc-volume-controls>
+        </dtpc-player>
+      </div>
+    </section>
+
+    <h2>Shared UI</h2>
+
+    <section class="player-layout">
+      <h3>Slider</h3>
+      <div class="content">
+          <h4>Horizontal</h4>
+          <dtpc-slider default-value="40" min="0" max="100" step="1"></dtpc-slider>
+
+          <h4>Vertical</h4>
+          <dtpc-slider default-value="40" min="0" max="100" step="1" orient="vertical"></dtpc-slider>
+      </div>
+    </section>
+
+    <h2>Icons</h2>
+    <table class="icons">
+      <thead>
+          <th></th>
+          <th>Outline</th>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Play</td>
+          <td>
+            <icon-play></icon-play>
+          </td>
+        </tr>
+        <tr>
+          <td>Pause</td>
+          <td>
+            <icon-pause></icon-pause>
+          </td>
+        </tr>
+        <tr>
+          <td>Volume</td>
+          <td>
+            <icon-volume muted></icon-volume>
+            <icon-volume level="0"></icon-volume>
+            <icon-volume level="0.25"></icon-volume>
+            <icon-volume></icon-volume>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+  </body>
+</html>

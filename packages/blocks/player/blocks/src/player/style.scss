@@ -1,0 +1,19 @@
+/**
+ * The following styles get applied both on the front of your site
+ * and in the editor.
+ *
+ * Replace them with your own styles or remove the file completely.
+ */
+
+.wp-block-dovetail-podcasts-player-player {
+	box-sizing: border-box;
+	display: block;
+
+	/* Override WP block focus style on child blocks. */
+	:where(.wp-site-blocks) & {
+		&:focus,
+		:is(:focus) {
+			outline: none;
+		}
+	}
+}

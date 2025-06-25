@@ -1,0 +1,58 @@
+:host {
+  --_dtpc-volume-controls--spacing: var(--dtpc-volume-controls--spacing, 0.25rem);
+
+  --__dtpc-volume-slider--padding-inline: 0.75rem;
+  --__dtpc-volume-slider--padding-block: 0.25rem;
+  --__dtpc-volume-slider--surface: var(
+    --dtpc-volume-controls--slider--surface,
+    var(--dtpc-button--surface, var(--dtpc-player--surface, color-mix(in oklch, var(--_dtpc-player--foreground) 20%, transparent)))
+  );
+  --__dtpc-volume-slider--surface-blur: none;
+}
+
+.wrapper {
+  --_spacing: var(--_dtpc-volume-controls--spacing);
+  --_button-size: var(--dtpc-mute-button--size, var(--dtpc-button--size, 1.5rem));
+  --_button-padding: var(--dtpc-mute-button--padding, var(--dtpc-button--padding, 0.325rem));
+
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  gap: var(--_spacing);
+  height: calc(var(--_button-size) + var(--_button-padding) * 2);
+}
+
+dtpc-volume-slider {
+  transition-property: display, opacity, translate;
+  transition-duration: 200ms;
+  transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition-behavior: allow-discrete;
+
+  position: relative;
+  display: none;
+  opacity: 0;
+  translate: 0 1rem;
+  pointer-events: none;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    top: 100%;
+    bottom: auto;
+    height: var(--_spacing);
+  }
+
+  :where(:hover, :focus-within) > &,
+  &:where(:hover, :focus-within) {
+    display: block;
+    opacity: 1;
+    translate: 0 0;
+    pointer-events: all;
+
+    @starting-style {
+      opacity: 0;
+      translate: 0 1rem;
+    }
+  }
+}

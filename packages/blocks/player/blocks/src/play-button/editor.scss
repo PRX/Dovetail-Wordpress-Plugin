@@ -1,0 +1,19 @@
+/**
+ * The following styles get applied inside the editor only.
+ *
+ * Replace them with your own styles or remove the file completely.
+ */
+
+dtpc-play-button {
+	--__dtpc-button--size: var(--dtpc-play-button--size, 2rem);
+	--__dtpc-button--padding: var(--dtpc-play-button--padding, 0.5rem);
+	--__dtpc-button--foreground: var(--dtpc-play-button--foreground);
+	--__dtpc-button--surface: var(--dtpc-play-button--surface);
+	--__dtpc-button--surface-opacity: var(--dtpc-play-button--surface-opacity);
+	--__dtpc-button--border-color: var(
+		--dtpc-play-button--border-color,
+		transparent
+	);
+	--__dtpc-button--border-radius: var(--dtpc-play-button--border-radius);
+	--__dtpc-button--border-width: var(--dtpc-play-button--border-width, 0.125);
+}
