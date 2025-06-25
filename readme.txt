@@ -4,7 +4,7 @@ Tags: Dovetail, podcasting
 Requires at least: 6.0
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 0.0.0
+Stable tag: 0.1.0
 License: GPL-3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -29,4 +29,22 @@ Dovetail Podcasts plugin connects your Wordpress site to Dovetail Podcasts.
 5. [Configure Dovetail Podcasts settings.](https://github.com/PRX/Dovetail-Wordpress-Plugin/blob/main/docs/settings-general.md)
 
 == Changelog ==
+
+= 0.1.0 =
+
+**New Features**
+
+* feat: Existing episode detection using publish date and title (https://github.com/jasonbahl/automation-tests/pull/18)
+* feat: Player customization settings (https://github.com/jasonbahl/automation-tests/pull/17)
+* feat(player): Add volume controls component and block (https://github.com/jasonbahl/automation-tests/pull/5)
+
+**Other Changes**
+
+* chore(readmetxt): add newline to changelog section (https://github.com/jasonbahl/automation-tests/pull/26)
+* chore(readmetxt): add changelog section (https://github.com/jasonbahl/automation-tests/pull/24)
+* chore: add readme.txt (https://github.com/jasonbahl/automation-tests/pull/22)
+* chore: downgrade chalk to v4 (https://github.com/jasonbahl/automation-tests/pull/20)
+* docs: Player usage documentation (https://github.com/jasonbahl/automation-tests/pull/19)
+* docs: Initial repo docs (https://github.com/jasonbahl/automation-tests/pull/6)
+* chore: add dev deps used by workflow scripts (https://github.com/jasonbahl/automation-tests/pull/3)
 
