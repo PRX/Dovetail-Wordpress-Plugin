@@ -90,10 +90,6 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      # Adding step to explicitly install chalk since it doesn't seem to be installing with the other dependencies.
-      - name: Install Chalk
-        run: npm i chalk --no-save
-
       - name: Check for changesets
         id: check_changesets
         run: |
