@@ -15,13 +15,12 @@
  *   --version  Specific version to set
  */
 
-const fs = require("fs-extra");
-const path = require("path");
-const yargs = require("yargs/yargs");
-const { hideBin } = require("yargs/helpers");
-const glob = require("glob");
-const { execSync } = require("child_process");
-const chalk = require("chalk");
+import fs from "fs-extra";
+import path from "path";
+import yargs from "yargs/yargs";
+import { hideBin } from "yargs/helpers";
+import { execSync } from "child_process";
+import chalk from "chalk";
 
 // Parse command line arguments
 const argv = yargs(hideBin(process.argv))
@@ -242,7 +241,7 @@ function bumpVersion() {
     updateConstantsFile(newVersion);
     updatePluginFile(newVersion);
     updatePackageJson(newVersion);
-    // updateReadmeTxt(newVersion);
+    updateReadmeTxt(newVersion);
 
     console.log(chalk.green("✓ Version bump complete!"));
 
