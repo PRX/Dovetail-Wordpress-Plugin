@@ -27,3 +27,5 @@ Dovetail Podcasts plugin connects your Wordpress site to Dovetail Podcasts.
 3. [Install Dovetail Podcasts](https://github.com/PRX/Dovetail-Wordpress-Plugin/blob/main/docs/installation.md): `wp plugin install dovetail-podcasts --activate`
 4. [Connect Wordpress to Dovetail](https://github.com/PRX/Dovetail-Wordpress-Plugin/blob/main/docs/settings-client-application.md) using your Client Application credentials.
 5. [Configure Dovetail Podcasts settings.](https://github.com/PRX/Dovetail-Wordpress-Plugin/blob/main/docs/settings-general.md)
+
+== Changelog ==
