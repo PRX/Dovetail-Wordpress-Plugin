@@ -22,6 +22,9 @@ import { hideBin } from "yargs/helpers";
 import { execSync } from "child_process";
 import chalk from "chalk";
 
+import { createRequire } from "module";
+const require = createRequire(import.meta.url);
+
 // Parse command line arguments
 const argv = yargs(hideBin(process.argv))
   .option("type", {
