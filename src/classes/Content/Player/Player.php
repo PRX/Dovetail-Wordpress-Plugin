@@ -463,8 +463,8 @@ class Player {
 					// could have been imported from a third party feed that used mirrored post data that did not preserve
 					// the WordPress post guid, eg. SSP Plugin to Castos.
 					// Look for Dovetail episode with the same publish date and title...
-					if ( ! $episode_api && property_exists( $post, 'post_date_gmt' ) && $post->post_date_gmt ) {
-						list( $episode_api ) = $this->dovetail_api->get_podcast_episodes_by_publish_date_and_title( $p['id'], $post->post_date_gmt, $post->post_title );
+					if ( ! $episode_api && property_exists( $post, 'date' ) && $post->date ) {
+						list( $episode_api ) = $this->dovetail_api->get_podcast_episodes_by_publish_date_and_title( $p['id'], $post->date, $post->post_title );
 					}
 
 					if ( $episode_api ) {

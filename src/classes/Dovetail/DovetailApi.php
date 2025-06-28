@@ -278,7 +278,7 @@ class DovetailApi {
 	 */
 	public function get_podcast_episodes_by_publish_date( int $id, string $publish_date = null ) {
 		$api_url = "https://{$this->feeder_domain}/api/v1/authorization/podcasts/{$id}/episodes";
-		$on_date = $publish_date ? new \DateTime( $publish_date, new \DateTimeZone( 'GMT' ) ) : new \DateTime( 'now', new \DateTimeZone( 'GMT' ) );
+		$on_date = $publish_date ? new \DateTime( $publish_date ) : new \DateTime();
 		$one_day = new \DateInterval( 'P1D' );
 		$after   = $on_date->format( 'Y-m-d' );
 		$before  = $on_date->add( $one_day )->format( 'Y-m-d' );
