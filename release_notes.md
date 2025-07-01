@@ -7,7 +7,7 @@
 **Bump Type:** patch
 
 ### 🐛 Bug Fixes
-- fix(player): episodes query with post_date_gmt ([#30](https://github.com/PRX/Dovetail-Wordpress-Plugin/pull/30))
+- fix: Update DovetailApi to widen date range used for publish date + title queries ([#34](https://github.com/PRX/Dovetail-Wordpress-Plugin/pull/34))
 
 ### 👏 Contributors
 

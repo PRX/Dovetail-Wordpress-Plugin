@@ -1,5 +1,13 @@
 # Changelog
 
+## v0.1.2 - 2025-07-01
+
+### Bug Fixes
+
+- fix: Update DovetailApi to widen date range used for publish date + title queries ([#34](https://github.com/jasonbahl/automation-tests/pull/34))
+
+
+
 ## v0.1.1 - 2025-06-28
 
 ### Bug Fixes
