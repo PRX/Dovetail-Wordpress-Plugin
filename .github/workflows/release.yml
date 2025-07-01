@@ -236,8 +236,12 @@ jobs:
             echo "Committing changes to develop first"
             git add *.php *.md *.txt package.json
             git commit -m "release: prepare v${{ steps.version_bump.outputs.version }}"
-            git push origin ${HEAD_REF}:develop
-            git fetch origin develop
+            if [[ "${HEAD_REF}" != "develop" ]]; then
+              git push origin ${HEAD_REF}:develop
+              git fetch origin develop
+            else
+              git push origin develop
+            fi
           fi
 
           # Now switch to main
