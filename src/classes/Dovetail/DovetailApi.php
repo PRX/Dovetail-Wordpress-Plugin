@@ -295,6 +295,32 @@ class DovetailApi {
 	}
 
 	/**
+	 * Get collection of episodes belonging to a podcast, published around a specific date.
+	 *
+	 * @param int    $id Dovetail podcast id.
+	 * @param string $publish_date Date episodes are published on.
+	 * @return array<int,array<string,mixed>|false>
+	 */
+	public function get_podcast_episodes_around_publish_date( int $id, string $publish_date = null ) {
+		$api_url = "https://{$this->feeder_domain}/api/v1/authorization/podcasts/{$id}/episodes";
+		$on_date = $publish_date ? new \DateTime( $publish_date, new \DateTimeZone( 'GMT' ) ) : new \DateTime( 'now', new \DateTimeZone( 'GMT' ) );
+		$one_day = new \DateInterval( 'P1D' );
+		$two_day = new \DateInterval( 'P2D' );
+		$after   = $on_date->sub( $one_day )->format( 'Y-m-d' );
+		$before  = $on_date->add( $two_day )->format( 'Y-m-d' );
+
+		$api_url = add_query_arg(
+			[
+				'after'  => $after,
+				'before' => $before,
+			],
+			$api_url
+		);
+
+		return $this->get( $api_url );
+	}
+
+	/**
 	 * Get collection of episodes belonging to a podcast, published on a specific date, with a specific title.
 	 *
 	 * @param int    $id Dovetail podcast id.
@@ -307,7 +333,7 @@ class DovetailApi {
 
 		// Dovetail API only has publish date filtering for podcast episodes.
 		// Fetch episodes published on post's publish data,...
-		list( $episodes_api, $api_response ) = $this->get_podcast_episodes_by_publish_date( $id, $publish_date );
+		list( $episodes_api, $api_response ) = $this->get_podcast_episodes_around_publish_date( $id, $publish_date );
 
 		if (
 			$episodes_api &&
