@@ -234,14 +234,10 @@ jobs:
           # First commit changes to develop
           if [[ -n "$(git status --porcelain)" ]]; then
             echo "Committing changes to develop first"
+            git checkout develop
             git add *.php *.md *.txt package.json
             git commit -m "release: prepare v${{ steps.version_bump.outputs.version }}"
-            if [[ "${HEAD_REF}" != "develop" ]]; then
-              git push origin ${HEAD_REF}:develop
-              git fetch origin develop
-            else
-              git push origin develop
-            fi
+            git push origin develop
           fi
 
           # Now switch to main
