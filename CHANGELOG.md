@@ -1,5 +1,18 @@
 # Changelog
 
+## v0.1.3 - 2025-07-01
+
+### Bug Fixes
+
+- fix: Update DovetailApi to widen date range used for publish date + title queries ([#34](https://github.com/jasonbahl/automation-tests/pull/34))
+
+### Other Changes
+
+- chore(release): version bump changes always commit to develop ([#38](https://github.com/jasonbahl/automation-tests/pull/38))
+- chore(release): version bump push to develop ([#36](https://github.com/jasonbahl/automation-tests/pull/36))
+
+
+
 ## v0.1.2 - 2025-07-01
 
 ### Bug Fixes
