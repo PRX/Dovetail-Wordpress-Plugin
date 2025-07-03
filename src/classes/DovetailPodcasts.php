@@ -175,7 +175,7 @@ final class DovetailPodcasts {
 	 *
 	 * Each update routine (callback that hooks into "graphql_do_update_routine") should handle backward compatibility as gracefully as possible.
 	 *
-	 * @since next-version
+	 * @since 0.2.0
 	 * @param string|null $stored_version The version number currently stored in the database.
 	 *                                    Null if no version has been previously stored.
 	 */

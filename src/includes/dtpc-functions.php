@@ -77,7 +77,7 @@ if ( ! function_exists( 'dtpc_post_meta_podcast_episode' ) ) {
 	 * @param int $post_id Post id to get meta data for. Uses global post when not provided.
 	 * @return array<string,mixed>|false Dovetail podcast episode meta data. Returns `false` when no meta data found.
 	 *
-	 * @since @next-version
+	 * @since 0.2.0
 	 */
 	function dtpc_post_meta_podcast_episode( int $post_id = null ) {
 
@@ -102,7 +102,7 @@ if ( ! function_exists( 'dtpc_post_has_dovetail_podcast_episode' ) ) {
 	 * @param int $post_id Post id to check for Dovetail episode meta data. Uses global post when not provided.
 	 * @return bool Returns `true` if post meta data has a Dovetail episode id, `false` otherwise.
 	 *
-	 * @since @next-version
+	 * @since 0.2.0
 	 */
 	function dtpc_post_has_dovetail_podcast_episode( int $post_id = null ) {
 
@@ -123,7 +123,7 @@ if ( ! function_exists( 'dtpc_post_podcast_player_attributes' ) ) {
 	 * @param int $post_id Post id to check for podcast player attributes. Uses global post when not provided.
 	 * @return array<string,mixed>|false Podcast player attributes. Returns `false` when player attributes can not be generated.
 	 *
-	 * @since @next-version
+	 * @since 0.2.0
 	 */
 	function dtpc_post_podcast_player_attributes( int $post_id = null ) {
 
