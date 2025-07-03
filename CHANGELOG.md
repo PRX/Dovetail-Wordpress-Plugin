@@ -1,5 +1,13 @@
 # Changelog
 
+## v0.2.2 - 2025-07-03
+
+### Other Changes
+
+- chore: Sync version changes ([#47](https://github.com/jasonbahl/automation-tests/pull/47))
+
+
+
 ## v0.2.1 - 2025-07-03
 
 ### Other Changes
