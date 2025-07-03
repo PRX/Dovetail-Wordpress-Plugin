@@ -6,14 +6,14 @@
  * Description: Dovetail Podcasts publishing integration.
  * Author: PRX
  * Author URI: http://prx.org
- * Version: 0.2.0
+ * Version: 0.2.1
  * Text Domain: dovetail-podcasts
  * License: GPL-3
  * License URI: https://www.gnu.org/licenses/gpl-3.0.html
  *
  * @package DovetailPodcasts
  * @author PRX
- * @version  0.2.0
+ * @version  0.2.1
  */
 
 // Exit if accessed directly.
