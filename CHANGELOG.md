@@ -1,5 +1,13 @@
 # Changelog
 
+## v0.2.1 - 2025-07-03
+
+### Other Changes
+
+- chore(release): fix set_ref outputs ref usage ([#45](https://github.com/jasonbahl/automation-tests/pull/45))
+
+
+
 ## v0.2.0 - 2025-07-03
 
 ### New Features

@@ -1,10 +1,7 @@
 ## Release Notes
 
+This release was triggered by merging a PR from develop to main.
 
-
-### `@since` Tag / Deprecation Placeholder Updates
-
-Updated 4 version placeholders in the following files:
-
-* `src/includes/dtpc-functions.php` (3 updates)
-* `src/classes/DovetailPodcasts.php` (1 update)
+No changesets were found for this release. This typically means:
+- No features, fixes, or breaking changes were added, or
+- The changes made did not require a changeset
