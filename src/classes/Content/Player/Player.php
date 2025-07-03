@@ -281,7 +281,7 @@ class Player {
 			$atts
 		);
 
-		return implode(
+		$player_html = implode(
 			'',
 			[
 				sprintf( '<dtpc-player %1$s>', $wrapper_attributes ),
@@ -289,6 +289,8 @@ class Player {
 				'</dtpc-player>',
 			]
 		);
+
+		return apply_filters( 'dtpc_player_block_html', $player_html, $atts );
 	}
 
 	/**
