@@ -1,5 +1,18 @@
 # Changelog
 
+## v0.2.0 - 2025-07-03
+
+### New Features
+
+- feat: Post podcast episode data helper functions ([#42](https://github.com/jasonbahl/automation-tests/pull/42))
+
+### Other Changes
+
+- chore(release): fix steps with uses and run keys ([#43](https://github.com/jasonbahl/automation-tests/pull/43))
+- chore: clean up old release workflow files ([#40](https://github.com/jasonbahl/automation-tests/pull/40))
+
+
+
 ## v0.1.3 - 2025-07-01
 
 ### Bug Fixes
