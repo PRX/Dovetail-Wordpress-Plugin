@@ -234,13 +234,16 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.REPO_PAT }}
 
-      - name: Commit changes to main
+      - name: Checkout main
         if: steps.set_ref.output.ref != 'main' && (github.event_name == 'pull_request_target' || github.event_name == 'workflow_dispatch')
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
           ref: main
           token: ${{ secrets.REPO_PAT }}
+
+      - name: Merge changes to main
+        if: steps.set_ref.output.ref != 'main' && (github.event_name == 'pull_request_target' || github.event_name == 'workflow_dispatch')
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
@@ -249,13 +252,16 @@ jobs:
           git merge ${{ steps.set_ref.output.ref }} --no-ff -m "release: merge ${{ steps.set_ref.output.ref }} into main for v${{ steps.version_bump.outputs.version }}"
           git push
 
-      - name: Commit changes to develop
+      - name: Checkout develop
         if: steps.set_ref.output.ref != 'develop' && (github.event_name == 'pull_request_target' || github.event_name == 'workflow_dispatch')
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
           ref: develop
           token: ${{ secrets.REPO_PAT }}
+
+      - name: Merge changes to develop
+        if: steps.set_ref.output.ref != 'develop' && (github.event_name == 'pull_request_target' || github.event_name == 'workflow_dispatch')
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
@@ -264,13 +270,16 @@ jobs:
           git merge ${{ steps.set_ref.output.ref }} --no-ff -m "release: merge ${{ steps.set_ref.output.ref }} into develop for v${{ steps.version_bump.outputs.version }}"
           git push
 
-      - name: Create and push tag
+      - name: Checkout job base
         if: github.event_name == 'pull_request_target' || github.event_name == 'workflow_dispatch'
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
           ref: ${{ steps.set_ref.output.ref }}
           token: ${{ secrets.REPO_PAT }}
+
+      - name: Create and push tag
+        if: github.event_name == 'pull_request_target' || github.event_name == 'workflow_dispatch'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
@@ -393,13 +402,16 @@ jobs:
 
       # Add a cleanup step to ensure temporary files are removed
       # This step runs AFTER the GitHub release is created
-      - name: Cleanup temporary files
+      - name: Checkout main
         if: always()
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
           ref: main
           token: ${{ secrets.REPO_PAT }}
+
+      - name: Cleanup temporary files
+        if: always()
         run: |
           # Check if the temporary directory exists before attempting to remove it
           if [ -d "/tmp/release-notes" ]; then
@@ -461,13 +473,16 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.REPO_PAT }}
 
-      - name: Sync deleted changeset files to develop
+      - name: Checkout develop to sync deleted changeset
         if: (github.event_name == 'pull_request_target' || github.event_name == 'workflow_dispatch') && steps.delete_changesets.outputs.files_were_deleted == 'true'
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
           ref: develop
           token: ${{ secrets.REPO_PAT }}
+
+      - name: Sync deleted changeset files to develop
+        if: (github.event_name == 'pull_request_target' || github.event_name == 'workflow_dispatch') && steps.delete_changesets.outputs.files_were_deleted == 'true'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
