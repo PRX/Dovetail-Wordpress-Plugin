@@ -19,7 +19,7 @@ export function useEditorSaving(): [boolean,boolean] {
       const unsubscribe = wp.data.subscribe(() => {
         const select = wp.data.select('core/editor');
 
-        // console.log('wp.data.subscribe', select.getEditedPostAttribute('meta')?.['_dovetail_podcasts_episode'] );
+        if (!select) return;
 
         setIsSavingPost( select.isSavingPost() );
         setIsAutosavingPost( select.isAutosavingPost() );
