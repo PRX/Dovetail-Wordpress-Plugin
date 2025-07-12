@@ -1,5 +1,17 @@
 # Changelog
 
+## v0.2.4 - 2025-07-12
+
+### Bug Fixes
+
+- fix(postmetabox): Yoast SEO init error ([#51](https://github.com/jasonbahl/automation-tests/pull/51))
+
+### Other Changes
+
+- chore: clean up release_notes file ([#49](https://github.com/jasonbahl/automation-tests/pull/49))
+
+
+
 ## v0.2.2 - 2025-07-03
 
 ### Other Changes

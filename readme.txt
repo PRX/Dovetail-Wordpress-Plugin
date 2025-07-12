@@ -4,7 +4,7 @@ Tags: Dovetail, podcasting
 Requires at least: 6.0
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 0.2.3
+Stable tag: 0.2.4
 License: GPL-3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -29,6 +29,16 @@ Dovetail Podcasts plugin connects your Wordpress site to Dovetail Podcasts.
 5. [Configure Dovetail Podcasts settings.](https://github.com/PRX/Dovetail-Wordpress-Plugin/blob/main/docs/settings-general.md)
 
 == Changelog ==
+
+= 0.2.4 =
+
+**Bug Fixes**
+
+* fix(postmetabox): Yoast SEO init error (https://github.com/jasonbahl/automation-tests/pull/51)
+
+**Other Changes**
+
+* chore: clean up release_notes file (https://github.com/jasonbahl/automation-tests/pull/49)
 
 = 0.2.2 =
 
