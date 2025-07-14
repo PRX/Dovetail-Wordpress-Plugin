@@ -353,9 +353,17 @@ class Settings {
 					</div>
 					<div class="dovetail-podcasts">
 						<?php foreach ( $podcasts['_embedded']['prx:items'] as $podcast ) : ?>
+							<?php
+							$image = false;
+							if ( isset( $podcast['itunesImage'] ) ) {
+								$image = $podcast['itunesImage'];
+							} elseif ( isset( $podcast['feedImage'] ) ) {
+								$image = $podcast['feedImage'];
+							}
+							?>
 						<span class="dovetail-podcast">
-							<?php if ( isset( $podcast['feedImage'] ) ) : ?>
-							<img class="dovetail-podcast-thumbnail" src="<?php echo esc_url( $podcast['feedImage']['href'] ); ?>" width="32" height="32" alt="Thumbnail"/>
+							<?php if ( $image ) : ?>
+							<img class="dovetail-podcast-thumbnail" src="<?php echo esc_url( $image['href'] ); ?>" width="32" height="32" alt="Thumbnail"/>
 							<?php else : ?>
 							<span class="dovetail-podcast-thumbnail dashicons-before dashicons-microphone"></span>
 							<?php endif ?>
