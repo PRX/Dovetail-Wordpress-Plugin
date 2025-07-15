@@ -1,5 +1,13 @@
 # Changelog
 
+## v0.2.5 - 2025-07-15
+
+### Bug Fixes
+
+- fix: Settings page podcasts list thumbnails should have images when only the cover image is set on the podcast. ([#52](https://github.com/jasonbahl/automation-tests/pull/52))
+
+
+
 ## v0.2.4 - 2025-07-12
 
 ### Bug Fixes
