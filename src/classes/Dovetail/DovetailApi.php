@@ -72,8 +72,6 @@ class DovetailApi {
 	 */
 	public function __construct() {
 
-		error_log( print_r( getenv(), true ) );
-
 		$this->id_domain     = getenv( 'DTPODCASTS_ID_DOMAIN' ) ?: 'id.prx.org';
 		$this->feeder_domain = getenv( 'DTPODCASTS_FEEDER_DOMAIN' ) ?: 'feeder.prx.org';
 
