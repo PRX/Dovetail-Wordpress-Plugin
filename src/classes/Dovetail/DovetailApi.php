@@ -71,13 +71,9 @@ class DovetailApi {
 	 * Class construct.
 	 */
 	public function __construct() {
-		$wp_environment_type = 'production';
-		if ( function_exists( 'wp_get_environment_type' ) ) {
-			$wp_environment_type = wp_get_environment_type();
-		}
 
-		$this->id_domain     = 'production' === $wp_environment_type ? 'id.prx.org' : 'id.staging.prx.tech';
-		$this->feeder_domain = 'production' === $wp_environment_type ? 'feeder.prx.org' : 'feeder.staging.prx.tech';
+		$this->id_domain     = getenv( 'DTPODCASTS_ID_DOMAIN' ) ?: 'id.prx.org';
+		$this->feeder_domain = getenv( 'DTPODCASTS_FEEDER_DOMAIN' ) ?: 'feeder.prx.org';
 
 		$key_ascii          = get_option( 'dovetail_podcasts_key' );
 		$client_credentials = get_option( DTPODCASTS_SETTINGS_SECTION_PREFIX . 'authentication' );
