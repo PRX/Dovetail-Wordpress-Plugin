@@ -1,5 +1,13 @@
 # Changelog
 
+## v0.3.0 - 2025-08-18
+
+### New Features
+
+- feat: API requests always go to production Dovetail API domains ([#56](https://github.com/jasonbahl/automation-tests/pull/56))
+
+
+
 ## v0.2.5 - 2025-07-15
 
 ### Bug Fixes
