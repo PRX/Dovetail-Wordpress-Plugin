@@ -10,6 +10,8 @@ License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
 Dovetail Podcasts plugin connects your Wordpress site to Dovetail Podcasts.
 
+=== Description ===
+
 **Key Features**
 
 - **Turn your Posts into Dovetail podcast episodes.** You can even use your own custom post type.
