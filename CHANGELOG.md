@@ -1,5 +1,17 @@
 # Changelog
 
+## v0.3.1 - 2025-08-25
+
+### Bug Fixes
+
+- fix(settings): Reduce post types supports requirements ([#60](https://github.com/jasonbahl/automation-tests/pull/60))
+
+### Other Changes
+
+- chore: Fix Plugin Check errors ([#58](https://github.com/jasonbahl/automation-tests/pull/58))
+
+
+
 ## v0.3.0 - 2025-08-18
 
 ### New Features
