@@ -39,6 +39,7 @@ jest.config.js
 .gitignore
 .github_changelog_generator
 .phpcs.xml
+build-phar.sh
 c3.php
 CHANGELOG.md
 codeception.dist.yml

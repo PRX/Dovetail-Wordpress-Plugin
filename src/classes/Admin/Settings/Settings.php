@@ -108,8 +108,6 @@ class Settings {
 			$post_types_by_supports = get_post_types_by_support(
 				[
 					'title',
-					'editor',
-					'thumbnail',
 					'custom-fields',
 				],
 				'and'
