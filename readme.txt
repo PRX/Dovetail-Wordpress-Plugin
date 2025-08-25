@@ -8,7 +8,9 @@ Stable tag: 0.3.0
 License: GPL-3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
-Dovetail Podcasts plugin connects your Wordpress site to Dovetail Podcasts.
+Easily integrate with Dovetail, PRX's podcasting publishing platform, to streamline your podcast production workflow.
+
+=== Description ===
 
 **Key Features**
 

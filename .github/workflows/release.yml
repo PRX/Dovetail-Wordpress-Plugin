@@ -168,7 +168,7 @@ jobs:
 
             # For debugging
             echo "Extracted PR content:"
-            echo "$PR_CONTENT"
+            echo "${PR_CONTENT}"
 
             RELEASE_NOTES="${RELEASE_NOTES}${PR_CONTENT}"
           else
