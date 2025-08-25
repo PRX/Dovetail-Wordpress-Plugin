@@ -752,6 +752,9 @@ class PostMetaBox {
 		}
 
 		if ( $post && ! empty( $meta ) ) {
+			$uses_post_content = post_type_supports( $post->post_type, 'editor' );
+			$uses_post_excerpt = post_type_supports( $post->post_type, 'excerpt' );
+
 			$data = is_array( $meta['dovetail'] ) ? $meta['dovetail'] : [];
 			$data = array_merge(
 				$data,
@@ -759,13 +762,21 @@ class PostMetaBox {
 					'guid'        => $post->guid,
 					'publishedAt' => null,
 					'title'       => $post->post_title,
-					'description' => $post->post_content,
-					'subtitle'    => $post->post_excerpt,
 					'url'         => get_permalink( $post ),
 					'image'       => null,
 					'categories'  => null,
 				]
 			);
+
+			if ( $uses_post_content ) {
+				$data['description'] = $post->post_content;
+			} elseif ( $uses_post_excerpt ) {
+				$data['description'] = $post->post_excerpt;
+			}
+
+			if ( $uses_post_excerpt ) {
+				$data['subtitle'] = $post->post_excerpt;
+			}
 
 			if ( in_array( $post->post_status, [ 'publish', 'future' ], true ) ) {
 				$data['publishedAt'] = $post->post_date_gmt;
