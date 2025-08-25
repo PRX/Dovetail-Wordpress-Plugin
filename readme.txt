@@ -8,7 +8,7 @@ Stable tag: 0.3.0
 License: GPL-3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
-Easily integrate with Dovetail from PRX's podcasting publishing platform to streamline your podcast production workflow.
+Easily integrate with Dovetail, PRX's podcasting publishing platform, to streamline your podcast production workflow.
 
 === Description ===
 

@@ -3,7 +3,7 @@
  * Plugin Name: Dovetail Podcasts
  * Plugin URI: https://github.com/PRX/Dovetail-Wordpress-Plugin
  * GitHub Plugin URI: https://github.com/PRX/Dovetail-Wordpress-Plugin
- * Description: Easily integrate with Dovetail from PRX's podcasting publishing platform to streamline your podcast production workflow.
+ * Description: Easily integrate with Dovetail, PRX's podcasting publishing platform, to streamline your podcast production workflow.
  * Author: PRX
  * Author URI: http://prx.org
  * Version: 0.3.0
