@@ -1,5 +1,13 @@
 # Changelog
 
+## v0.3.2 - 2025-10-01
+
+### Bug Fixes
+
+- fix(dovetailapi): Add cache-control header ([#63](https://github.com/jasonbahl/automation-tests/pull/63))
+
+
+
 ## v0.3.1 - 2025-08-25
 
 ### Bug Fixes
