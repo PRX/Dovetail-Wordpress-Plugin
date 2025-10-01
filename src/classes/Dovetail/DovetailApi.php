@@ -145,7 +145,13 @@ class DovetailApi {
 			];
 		}
 
-		return $this->rest_response( $return, $resp );
+		return $this->rest_response(
+			$return,
+			$resp,
+			[
+				'Cache-Control' => 'no-cache, no-store, must-revalidate',
+			]
+		);
 	}
 
 	/**
@@ -153,13 +159,14 @@ class DovetailApi {
 	 *
 	 * @param array<string,mixed>|false $data REST response data.
 	 * @param array<string,mixed>       $api_response Response array from WP_Http methods.
+	 * @param array<string,mixed>       $headers Headers array.
 	 * @return \WP_REST_Response|\WP_Error
 	 */
-	private function rest_response( $data, $api_response ) {
+	private function rest_response( $data, $api_response, $headers ) {
 		$status = wp_remote_retrieve_response_code( $api_response );
 
 		if ( $data ) {
-			return new \WP_REST_Response( $data, $status );
+			return new \WP_REST_Response( $data, $status, $headers );
 		}
 
 		return new \WP_Error( 'rest_no_route', __( 'Not Found.', 'dovetail-podcasts' ), $api_response );
