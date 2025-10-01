@@ -149,7 +149,7 @@ class DovetailApi {
 			$return,
 			$resp,
 			[
-				'Cache-Control' => 'no-cache, no-store, must-revalidate',
+				'Cache-Control' => 'no-cache, no-store, must-revalidate, max-age=0, s-max-age=0',
 			]
 		);
 	}
