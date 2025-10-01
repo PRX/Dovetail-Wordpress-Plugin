@@ -70,7 +70,7 @@ async function getAudioDuration(url: string) {
 export function Enclosure({ onChange}: EnclosureProps) {
   const { audioFormats, postStatus } = window.appLocalizer;
   const { state, options } = useContext(PostMetaboxContext);
-  const { episode, podcast } = state || {};
+  const { episode } = state || {};
   const { enclosure, dovetail } = episode || {};
   const { mediaId, url, duration, filename: audioSrcFilename } = enclosure || {};
   const regexAudioUrlPattern = `^https?:\\/\\/.+\\/[\\w\\.\\-%]+\\.(${audioFormats.join('|')})$`;
@@ -103,6 +103,10 @@ export function Enclosure({ onChange}: EnclosureProps) {
   // Store initial episode data.
   initialEpisode.current = initialEpisode.current || episode;
 
+  const openFileDialog = useCallback(() => {
+    fileInputRef.current?.click();
+  },[]);
+
   const doOnChange = useCallback((enclosure: EpisodeEnclosure) => {
     // Trigger `onChange` callback.
     if ( onChange && typeof onChange === 'function') {
@@ -127,7 +131,7 @@ export function Enclosure({ onChange}: EnclosureProps) {
       // Play/Pause audio.
       setPlaying((isPlaying) => !isPlaying);
     }
-  }, [status]);
+  }, [status, openFileDialog]);
 
   const handleAudioLoadedMetadata = useCallback(() => {
     setAudioInfo({
@@ -173,7 +177,7 @@ export function Enclosure({ onChange}: EnclosureProps) {
         setStatus('audio-ready');
         setEditingRemoteUrl(false);
       })
-      .catch((error: ErrorEvent) => {
+      .catch((_error: ErrorEvent) => {
         if (!newRemoteUrl) {
           const newEnclosure = {
             url: null,
@@ -192,7 +196,7 @@ export function Enclosure({ onChange}: EnclosureProps) {
         setStatus('no-audio');
         setEditingRemoteUrl(false);
       });
-  }, [onChange, remoteUrl, dovetail?.id])
+  }, [dovetail?.id, doOnChange])
 
   const handleRemoteUrlChange = useCallback((evt: ChangeEvent<HTMLInputElement>) => {
     const { validity, value } = evt.target;
@@ -203,7 +207,7 @@ export function Enclosure({ onChange}: EnclosureProps) {
     } else if (validity.valid) {
       setRemoteUrl(newRemoteUrl);
     }
-  }, [commitRemoteUrlChange, setRemoteUrl])
+  }, [commitRemoteUrlChange])
 
   const message = {
     'no-audio': (
@@ -236,13 +240,9 @@ export function Enclosure({ onChange}: EnclosureProps) {
     'dovetail-error': 'There was an error processing episode audio. Try again by selecting another audio source, and saving post.',
   }[status];
 
-  function openFileDialog() {
-    fileInputRef.current?.click();
-  }
-
-  function handleAudioTimeUpdate() {
+  const handleAudioTimeUpdate = useCallback(() => {
     setAudioCurrentTime(audioRef.current.currentTime);
-  }
+  }, []);
 
   function handleEditFileClick() {
     openFileDialog();
@@ -343,7 +343,7 @@ export function Enclosure({ onChange}: EnclosureProps) {
       audioRef.current.pause();
       audioRef.current = null;
     }
-  }, [])
+  }, [handleAudioLoadedMetadata, handleAudioTimeUpdate])
 
   useEffect(() => {
     if (!audioSrcUrl) return;
@@ -359,7 +359,8 @@ export function Enclosure({ onChange}: EnclosureProps) {
    */
   if (typeof window !== 'undefined') {
     // eslint-disable-next-line react-hooks/rules-of-hooks
-    useLayoutEffect(() => {
+    // biome-ignore lint/correctness/useHookAtTopLevel: We only want this running in client.
+        useLayoutEffect(() => {
       if (playing) {
         audioRef.current?.play();
       } else {
@@ -380,15 +381,11 @@ export function Enclosure({ onChange}: EnclosureProps) {
   }, [mediaId, media])
 
   useEffect(() => {
-    if (initialEpisode.current?.enclosure?.dateUpdated != episode?.enclosure?.dateUpdated) {
+    if (initialEpisode.current?.enclosure?.dateUpdated !== episode?.enclosure?.dateUpdated) {
       initialEpisode.current = episode;
     }
     setStatus(getEnclosureStatus(episode));
-  }, [episode?.dovetail?.enclosure?.status])
-
-  useEffect(() => {
-    setStatus(getEnclosureStatus(episode));
-  }, [episode?.enclosure?.url])
+  }, [episode])
 
   useEffect(() => {
     setRemoteUrl(!mediaId ? url : null);
@@ -437,7 +434,7 @@ export function Enclosure({ onChange}: EnclosureProps) {
               'dovetail-error': 'error',
             }[status] || !playing ? 'Play' : 'Pause'}
           >
-            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" className='size-full'>
+            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" className='size-full' aria-hidden="true">
               <circle cx="50" cy="50" r="40" className='fill-none stroke-slate-200 stroke-4' />
               <circle cx="50" cy="50" r="40" pathLength={100} strokeLinecap='round' strokeDasharray={100}
                 className={cn('fill-none stroke-current stroke-4', {

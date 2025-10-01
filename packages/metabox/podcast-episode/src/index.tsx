@@ -10,7 +10,7 @@ const el = appContainerId && document.getElementById(appContainerId);
 const episodeData = JSON.parse(episodeMetaDataJson) as EpisodeData;
 const postMetaboxOptions = JSON.parse(postMetaboxOptionsJson) as PostMetaboxOptions;
 const { attachedMedia } = postMetaboxOptions || {};
-let episode = episodeData;
+const episode = episodeData;
 const portalDivs = ['dtpc-dialogs', 'dtpc-dropdowns', 'dtpc-tooltips'];
 
 portalDivs.forEach((divId) => {
