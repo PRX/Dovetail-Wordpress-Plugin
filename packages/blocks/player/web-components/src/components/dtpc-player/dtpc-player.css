@@ -29,6 +29,10 @@
   }
 }
 
+.main {
+  line-height: 1;
+}
+
 slot[name='backdrop'] {
   display: block;
   position: relative;

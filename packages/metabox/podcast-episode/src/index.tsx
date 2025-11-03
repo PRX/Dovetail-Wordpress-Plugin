@@ -9,7 +9,6 @@ const { appContainerId, episodeMetaDataField, episodeMetaDataJson, postMetaboxOp
 const el = appContainerId && document.getElementById(appContainerId);
 const episodeData = JSON.parse(episodeMetaDataJson) as EpisodeData;
 const postMetaboxOptions = JSON.parse(postMetaboxOptionsJson) as PostMetaboxOptions;
-const { attachedMedia } = postMetaboxOptions || {};
 const episode = episodeData;
 const portalDivs = ['dtpc-dialogs', 'dtpc-dropdowns', 'dtpc-tooltips'];
 
@@ -25,12 +24,6 @@ portalDivs.forEach((divId) => {
     document.querySelector('body').appendChild(portalDiv);
   }
 })
-
-if (typeof attachedMedia === 'object' && attachedMedia !== null ) {
-  postMetaboxOptions.attachedMedia = new Map(Object.entries(attachedMedia));
-} else {
-  postMetaboxOptions.attachedMedia = new Map();
-}
 
 if (el) {
   ReactDOM.createRoot(el).render(

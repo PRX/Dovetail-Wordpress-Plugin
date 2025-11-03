@@ -1,8 +1,9 @@
-import type { WP_REST_API_Attachment, WP_REST_API_Error } from 'wp-types';
-import type { dovetailEnclosureStatuses } from '@_types/api';
+import type { WP_REST_API_Error } from 'wp-types';
+import type { dovetailEnclosureStatuses, DovetailAuthUpload } from '@_types/api';
 import type { EpisodeData, EpisodeEnclosure } from '@/types/state/episode';
 import { type ChangeEvent, useCallback, useContext, useEffect, useLayoutEffect, useRef, useState } from 'react';
-import axios, { type AxiosProgressEvent, type AxiosRequestConfig, type AxiosResponse } from 'axios';
+import axios, { type AxiosProgressEvent, type AxiosRequestConfig } from 'axios';
+import type { PostMetaBoxPayloadEnclosures } from '@/types/state/postMetabox';
 import { AlertCircleIcon, BanIcon, CheckIcon, CircleAlertIcon, CircleCheckBigIcon, FileWarningIcon, LinkIcon, LoaderIcon, PauseIcon, PlayIcon, SkipBackIcon, Undo2Icon, UnlinkIcon, UploadIcon } from 'lucide-react';
 import { PostMetaboxContext } from '@/lib/contexts/PostMetaboxContext';
 import { cn, formatDuration } from '@/lib/utils';
@@ -29,7 +30,8 @@ export type AudioInfo = {
 }
 
 export type EnclosureProps = {
-  onChange?(enclosure: EpisodeEnclosure): void
+  episode: EpisodeData,
+  onChange?(enclosures: PostMetaBoxPayloadEnclosures): void
 }
 
 function getEnclosureStatus(episode: EpisodeData): EnclosureStatus {
@@ -67,50 +69,56 @@ async function getAudioDuration(url: string) {
   });
 }
 
-export function Enclosure({ onChange}: EnclosureProps) {
+export function Enclosure({ episode: _episode, onChange }: EnclosureProps) {
   const { audioFormats, postStatus } = window.appLocalizer;
-  const { state, options } = useContext(PostMetaboxContext);
+  const { state } = useContext(PostMetaboxContext);
   const { episode } = state || {};
   const { enclosure, dovetail } = episode || {};
-  const { mediaId, url, duration, filename: audioSrcFilename } = enclosure || {};
+  const { url, playbackUrl, playbackExpires, duration, filename: audioSrcFilename } = enclosure || {};
+  const wasUploaded = `${url}`.startsWith('s3://');
   const regexAudioUrlPattern = `^https?:\\/\\/.+\\/[\\w\\.\\-%]+\\.(${audioFormats.join('|')})$`;
-  const initialEpisode = useRef<EpisodeData>(episode);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const urlInputRef = useRef<HTMLInputElement>(null);
   const audioRef = useRef<HTMLAudioElement>(null);
   const [status, setStatus] = useState<EnclosureStatus>(getEnclosureStatus(episode));
-  const [attachedMedia, setAttachedMedia] = useState(options?.attachedMedia)
-  const [media, setMedia] = useState<WP_REST_API_Attachment>(attachedMedia.get(`${mediaId}`));
-  const [remoteUrl, setRemoteUrl] = useState(!mediaId ? url : null);
+  const [remoteUrl, setRemoteUrl] = useState(!wasUploaded ? url : null);
   const [audioInfo, setAudioInfo] = useState<AudioInfo>({
-    duration: dovetail.enclosure?.duration || media?.media_details?.length as number || duration || 0
+    duration: dovetail.enclosure?.duration || duration || 0
   });
   const [uploadProgress, setUploadProgress] = useState(0);
   const [seekTime, setSeekTime] = useState<number>();
   const [playing, setPlaying] = useState(false);
   const [audioCurrentTime, setAudioCurrentTime] = useState(0);
   const [editingRemoteUrl, setEditingRemoteUrl] = useState(false);
-  const hasUnsavedChanges = (url !== initialEpisode.current?.enclosure?.url);
-  const useOriginalUrl = hasUnsavedChanges || 'publish' !== postStatus || 'complete' !== dovetail?.enclosure?.status;
-  const audioSrcUrl = useOriginalUrl ?
-    // Try to use initial dovetail media's original URL in cases when offloaded media was deleted and url is missing.
-    remoteUrl || url || initialEpisode.current?.dovetail?.uncut?.originalUrl || initialEpisode.current?.dovetail?.media?.[0]?.originalUrl :
+  const hasUnsavedChanges = (url !== _episode.enclosure?.url);
+  const audioSrcUrl = hasUnsavedChanges ?
+    // Audio has been edited. Could not have been saved yet, or is still processing.
+    // Use enclosure URL when it is playable. This is for remote URL input, before saving.
+    remoteUrl ||
+    // Use dovetail uncut URL when uncut processing is complete. This is for uploads after saving while being processed.
+    (dovetail.uncut && dovetail.uncut.status === 'complete' && dovetail.uncut.href) ||
+    // Use playback URL after upload for as long as it exists and has not expired. This is for uploads before saving and while being processed.
+    (playbackUrl && (!playbackExpires || playbackExpires < Date.now()) && playbackUrl) ||
+    // Make sure any boolean failures fall though to an undefined value.
+    undefined :
+    // Otherwise, dovetail data should be saved and have accessible audio URL for processed audio.
     // Construct a dovetail enclosure URL. We do not want use the href from the dovetail enclosure
     // since it will be prefixed with analytics prefixes, and audio played in the admin should not
     // affect those metrics.
-    dovetail.uncut?.href || dovetail.media[0].href;
-
-  // Store initial episode data.
-  initialEpisode.current = initialEpisode.current || episode;
+    (dovetail.uncut && dovetail.uncut.status === 'complete' && dovetail.uncut.href) ||
+    // Legacy fallback to media for the brief period when the Dovetail API didn't support the `uncut` property.
+    dovetail.enclosure?.status === 'complete' && dovetail.media?.[0].href ||
+    undefined;
+  const audioIsPlayable = `${audioSrcUrl}`.startsWith('http');
 
   const openFileDialog = useCallback(() => {
     fileInputRef.current?.click();
   },[]);
 
-  const doOnChange = useCallback((enclosure: EpisodeEnclosure) => {
+  const doOnChange = useCallback((enclosuresData: PostMetaBoxPayloadEnclosures) => {
     // Trigger `onChange` callback.
     if ( onChange && typeof onChange === 'function') {
-      onChange(enclosure);
+      onChange(enclosuresData);
     }
   }, [onChange]);
 
@@ -146,29 +154,58 @@ export function Enclosure({ onChange}: EnclosureProps) {
 
     const newRemoteUrl = urlInput.value.trim();
     const { valid } = urlInput.validity;
-    const hasUrlChanged = newRemoteUrl !== initialEpisode.current?.enclosure?.url;
-    const wasUsingMedia = !!initialEpisode.current?.enclosure?.mediaId;
+    const hasUrlChanged = newRemoteUrl !== _episode.enclosure?.url;
+    const wasUsingUploadedMedia = !!_episode.enclosure?.url?.startsWith('s3://');
     const isPublishedToDovetail = !!dovetail?.id;
 
     // Bail if:
-    // - URL is empty and was using media
+    // - URL is empty and was using uploaded media
     // - URL is empty and is published in Dovetail
     // - Invalid input
-    if (!valid || (!newRemoteUrl && (wasUsingMedia || isPublishedToDovetail))) {
+    if (!valid || !newRemoteUrl) {
       setEditingRemoteUrl(false);
+      if (!wasUsingUploadedMedia && !isPublishedToDovetail) {
+        // User decided wants to clear the remote URL prior to first save.
+
+        doOnChange({
+          enclosure: {
+            url: null,
+            filename: null,
+            dateUpdated: null,
+            duration: null
+          },
+          dovetail: {
+            uncut: null,
+            media: null
+          }
+        });
+
+        setAudioInfo({
+          duration: 0
+        });
+        setRemoteUrl(null);
+        setStatus('no-audio');
+        setEditingRemoteUrl(false);
+      }
       return
     };
 
     await getAudioDuration(newRemoteUrl)
       .then((audioDuration) => {
-        const newEnclosure = {
-          url: newRemoteUrl,
-          filename: newRemoteUrl.split('?')[0].split('/').pop(),
-          dateUpdated: hasUrlChanged ? new Date() : initialEpisode.current?.enclosure?.dateUpdated || null,
-          duration: audioDuration
-        } as EpisodeEnclosure;
-
-        doOnChange(newEnclosure);
+        doOnChange({
+          enclosure: {
+            url: newRemoteUrl,
+            filename: newRemoteUrl.split('?')[0].split('/').pop(),
+            dateUpdated: hasUrlChanged ? new Date() : _episode.enclosure?.dateUpdated || null,
+            duration: audioDuration
+          },
+          dovetail: {
+            uncut: {
+              href: newRemoteUrl
+            },
+            media: [ { href: newRemoteUrl } ]
+          }
+        });
 
         setAudioInfo({
           duration: audioDuration
@@ -178,42 +215,28 @@ export function Enclosure({ onChange}: EnclosureProps) {
         setEditingRemoteUrl(false);
       })
       .catch((_error: ErrorEvent) => {
-        if (!newRemoteUrl) {
-          const newEnclosure = {
-            url: null,
-            filename: null,
-            dateUpdated: initialEpisode.current?.enclosure?.dateUpdated || null,
-            duration: null
-          } as EpisodeEnclosure;
-
-          doOnChange(newEnclosure);
-        }
-
-        setAudioInfo({
-          duration: null
-        });
         setRemoteUrl(null);
-        setStatus('no-audio');
         setEditingRemoteUrl(false);
       });
-  }, [dovetail?.id, doOnChange])
+  }, [_episode, dovetail, doOnChange])
 
   const handleRemoteUrlChange = useCallback((evt: ChangeEvent<HTMLInputElement>) => {
     const { validity, value } = evt.target;
     const newRemoteUrl = value.trim();
 
-    if (!initialEpisode.current?.enclosure?.url && newRemoteUrl) {
+    if (!_episode.enclosure?.url && newRemoteUrl) {
       commitRemoteUrlChange();
     } else if (validity.valid) {
       setRemoteUrl(newRemoteUrl);
     }
-  }, [commitRemoteUrlChange])
+  }, [_episode, commitRemoteUrlChange])
 
   const message = {
     'no-audio': (
       <div className='flex items-center gap-2'>
         <Input ref={urlInputRef} type='url'
           pattern={regexAudioUrlPattern}
+          required
           placeholder='Paste remote URL to audio file...'
           onChange={handleRemoteUrlChange}
         />
@@ -230,7 +253,7 @@ export function Enclosure({ onChange}: EnclosureProps) {
   }[status];
   const info = {
     'no-audio': <>Supported audio formats: <samp>{audioFormats.map((v) => `.${v}`).join(', ')}</samp></>,
-    'media-uploading': uploadProgress < 1 ? `${Math.round(uploadProgress * 100)}%` : 'Media is being added to your library...',
+    'media-uploading': `${Math.round(uploadProgress * 100)}%`,
     'audio-ready': null,
     'media-error': 'Try uploading your file again. If error persists, contact your Dovetail support representative.',
     'dovetail-processing': null,
@@ -259,39 +282,44 @@ export function Enclosure({ onChange}: EnclosureProps) {
     // DO NOT trigger the change event, so we don't call this handler infinitely.
     evt.target.value = '';
 
-    // Check for attached media that has the same file name and size as the selected file.
-    const existingMedia = [...attachedMedia.values()].find(({media_details: { filesize }, source_url}) => {
-      const filename = source_url.split('/').pop();
-      return filename === file.name && filesize === file.size;
-    });
-
-    if (existingMedia) {
-      // This file was uploaded before but page may have been refreshed,
-      // or previous edit was abandoned.
-      handleUploadComplete(existingMedia);
-      return;
-    }
+    // Get signed upload URL.
+    const signed = await axios.get<DovetailAuthUpload>(`/wp-json/dovetail/v1/auth/upload?filename=${file.name}`)
+      .then((res) => res.data)
+      .catch((err): null => {
+        handleUploadError(err);
+        return null;
+      });
 
     // Start upload.
     const fd = new FormData();
     const headers = {
-      'Content-Disposition': `attachment; filename=${file.name}`,
-      'X-Wp-Nonce': window.appLocalizer.nonce,
-      'content-type': file.type
+      'content-type': 'multipart/form-data'
     }
     const config: AxiosRequestConfig = {
       headers,
       onUploadProgress: handleUploadProgress
     }
+
     fd.append('file', file);
-    fd.append('title', file.name);
-    fd.append('post', `${window.appLocalizer.postId}`);
 
     setStatus('media-uploading');
 
-    await axios.post<WP_REST_API_Attachment, AxiosResponse<WP_REST_API_Attachment>, FormData>('/wp-json/wp/v2/media', fd, config)
-      .then((res) => {
-        handleUploadComplete(res.data);
+    await axios.put(signed.uploadUrl, fd, config)
+      .then(async () => {
+        await getAudioDuration(signed.playbackUrl)
+          .then((audioDuration) => {
+            handleUploadComplete({
+              url: signed.originalUrl,
+              playbackUrl: signed.playbackUrl,
+              playbackExpires: signed.expiration,
+              filename: signed.filename,
+              duration: audioDuration,
+              dateUpdated: new Date()
+            });
+          })
+          .catch((err) => {
+            handleUploadError(err);
+          });
       })
       .catch((err) => {
         handleUploadError(err);
@@ -303,23 +331,16 @@ export function Enclosure({ onChange}: EnclosureProps) {
     setUploadProgress(evt.progress);
   }
 
-  function handleUploadComplete(data: WP_REST_API_Attachment) {
-    const mediaDuration = data.media_details.length as number;
+  function handleUploadComplete(data: EpisodeEnclosure) {
     doOnChange({
-      mediaId: data.id,
-      url: data.source_url,
-      filename: data.source_url.split('/').pop(),
-      dateUpdated: new Date(),
-      duration: mediaDuration
-    })
-    setAttachedMedia((currentAttachedMedia) => {
-      const newAttachedMedia = new Map(currentAttachedMedia);
-      newAttachedMedia.set(`${data.id}`, data);
-      return newAttachedMedia;
-    })
-    setMedia(data);
+      enclosure: data,
+      dovetail: {
+        uncut: { href: data.url },
+        media: [{ href: data.url }]
+      }
+    });
     setAudioInfo({
-      duration: mediaDuration
+      duration: data.duration
     });
     setStatus('audio-ready');
   }
@@ -346,9 +367,8 @@ export function Enclosure({ onChange}: EnclosureProps) {
   }, [handleAudioLoadedMetadata, handleAudioTimeUpdate])
 
   useEffect(() => {
-    if (!audioSrcUrl) return;
-
     audioRef.current.src = audioSrcUrl;
+    setPlaying(false);
   }, [audioSrcUrl])
 
   /**
@@ -370,26 +390,12 @@ export function Enclosure({ onChange}: EnclosureProps) {
   }
 
   useEffect(() => {
-    if (mediaId && (!media || media.id !== mediaId)) {
-      (async () => {
-        await axios.get<WP_REST_API_Attachment>(`/wp-json/wp/v2/media/${mediaId}`)
-          .then((res) => {
-            setMedia(res.data);
-          });
-      })()
-    }
-  }, [mediaId, media])
-
-  useEffect(() => {
-    if (initialEpisode.current?.enclosure?.dateUpdated !== episode?.enclosure?.dateUpdated) {
-      initialEpisode.current = episode;
-    }
     setStatus(getEnclosureStatus(episode));
   }, [episode])
 
   useEffect(() => {
-    setRemoteUrl(!mediaId ? url : null);
-  }, [mediaId, url])
+    setRemoteUrl(url?.startsWith('http') ? url : null);
+  }, [url])
 
   return (
     <div data-status={status} className='max-w-full @container/enclosure'>
@@ -402,7 +408,7 @@ export function Enclosure({ onChange}: EnclosureProps) {
               'grid place-items-center [&_>_*]:col-span-full [&_>_*]:row-span-full w-[clamp(4rem,10cqw,5rem)] h-auto aspect-square rounded-full',
               {
                 'text-sky-200 hover:text-sky-500': 'no-audio' === status,
-                'text-sky-500 hover:text-sky-500 animate-color-cycle': ([
+                'hover:text-green-500 animate-color-cycle': ([
                   'media-uploading',
                   'dovetail-processing'
                 ] as EnclosureStatus[]).includes(status),
@@ -420,14 +426,14 @@ export function Enclosure({ onChange}: EnclosureProps) {
               'media-uploading',
               'dovetail-invalid',
               'dovetail-error'
-            ] as EnclosureStatus[]).includes(status)}
+            ] as EnclosureStatus[]).includes(status) || (audioSrcUrl && !audioIsPlayable)}
             onClick={handleMainButtonClick}
             aria-label={{
               'no-audio': 'Upload Audio File',
               'media-uploading': 'Uploading...',
               'media-error': 'Media Error',
               'audio-ready': null,
-              'dovetail-processing': null,
+              'dovetail-processing': !audioIsPlayable ? 'Processing Audio File...' : null,
               'dovetail-complete': null,
               'dovetail-incomplete': 'Incomplete',
               'dovetail-invalid': 'Invalid',
@@ -450,7 +456,7 @@ export function Enclosure({ onChange}: EnclosureProps) {
               'media-uploading': <UploadIcon className='size-[40%]' />,
               'media-error': <UploadIcon className='size-[40%]' />,
               'audio-ready': null,
-              'dovetail-processing': null,
+              'dovetail-processing': !audioIsPlayable ? <LoaderIcon className='size-[40%] animate-spin' /> : null,
               'dovetail-incomplete': null,
               'dovetail-invalid': <FileWarningIcon className='size-[40%]' />,
               'dovetail-error': <CircleAlertIcon className='size-[40%]' />,
@@ -470,17 +476,7 @@ export function Enclosure({ onChange}: EnclosureProps) {
                   (
                     <>
                     <span className='grow'>
-                      <Tooltip>
-                        <TooltipTrigger asChild><span className='max-w-[80ch] inline-block break-all'>{audioSrcFilename}</span></TooltipTrigger>
-                        <TooltipContent>
-                          {useOriginalUrl ? (
-                            <p>Listening to source audio file:</p>
-                          ) : (
-                            <p>Listening to Dovetail audio file:</p>
-                          )}
-                          <p><samp>{audioSrcUrl}</samp></p>
-                        </TooltipContent>
-                      </Tooltip>
+                      <span className='max-w-[80ch] min-h-9 inline-block break-all'>{audioSrcFilename}</span>
                     </span>
                     {!([
                         'media-uploading',
@@ -489,18 +485,18 @@ export function Enclosure({ onChange}: EnclosureProps) {
                       <span className='flex flex-wrap gap-1 min-w-fit'>
                         <Tooltip>
                           <TooltipTrigger asChild>
-                            <Button type='button' variant={mediaId ? 'outline' : 'ghost'} size='icon'
+                            <Button type='button' variant={wasUploaded ? 'outline' : 'ghost'} size='icon'
                               className='w-[1.5em] min-w-[1.5rem] h-auto p-1 aspect-square'
                               onClick={handleEditFileClick}
                             >
                               <UploadIcon className='size-full' />
                             </Button>
                           </TooltipTrigger>
-                          <TooltipContent>Upload {mediaId ? 'New' : ''} Audio File</TooltipContent>
+                          <TooltipContent>Upload {url && wasUploaded ? 'New' : ''} Audio File</TooltipContent>
                         </Tooltip>
                         <Tooltip>
                           <TooltipTrigger asChild>
-                            <Button type='button' variant={url && !mediaId ? 'outline' : 'ghost'} size='icon'
+                            <Button type='button' variant={url && !wasUploaded ? 'outline' : 'ghost'} size='icon'
                               className='w-[1.5em] min-w-[1.5rem] h-auto p-1 aspect-square'
                               onClick={() => {
                                 setEditingRemoteUrl(true);
@@ -510,55 +506,56 @@ export function Enclosure({ onChange}: EnclosureProps) {
                               <LinkIcon className='size-full' />
                             </Button>
                           </TooltipTrigger>
-                          <TooltipContent>{url && !mediaId ? 'Change' : 'Use'} Remote Audio URL</TooltipContent>
+                          <TooltipContent>{url && !wasUploaded ? 'Change' : 'Use'} Remote Audio URL</TooltipContent>
                         </Tooltip>
                       </span>
                     )}
                     </>
                   ) : (
                     <>
-                    <Input ref={urlInputRef} type='url'
-                      defaultValue={remoteUrl}
-                      pattern={regexAudioUrlPattern}
-                      placeholder='Paste remote URL to audio file...'
-                      onChange={handleRemoteUrlChange}
-                      onFocus={(evt) => { evt.target.select() }}
-                      autoFocus
-                    />
-                    {(!!remoteUrl?.trim().length || !dovetail?.id) && remoteUrl !== url && (
+                      <Input ref={urlInputRef} type='url'
+                        defaultValue={remoteUrl}
+                        pattern={regexAudioUrlPattern}
+                        required
+                        placeholder='Paste remote URL to audio file...'
+                        onChange={handleRemoteUrlChange}
+                        onFocus={(evt) => { evt.target.select() }}
+                        autoFocus
+                      />
+                      {(!!remoteUrl?.trim().length || !dovetail?.id) && remoteUrl !== url && (
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                            <Button type='button' variant={url && !wasUploaded ? 'outline' : 'ghost'} size='icon'
+                              className='w-[1.5em] min-w-[1.5rem] h-auto p-1 aspect-square'
+                              onClick={() => {
+                                commitRemoteUrlChange();
+                              }}
+                            >
+                              {!wasUploaded && !remoteUrl?.trim().length ? (
+                                <UnlinkIcon className='size-full' />
+                              ) : (
+                                <CheckIcon className='size-full' />
+                              )}
+                            </Button>
+                          </TooltipTrigger>
+                          <TooltipContent>{!wasUploaded && !remoteUrl?.trim().length ? 'Remove' : 'Confirm'}</TooltipContent>
+                        </Tooltip>
+                      )}
                       <Tooltip>
                         <TooltipTrigger asChild>
-                          <Button type='button' variant={url && !mediaId ? 'outline' : 'ghost'} size='icon'
+                          <Button type='button' variant={url && !wasUploaded ? 'outline' : 'ghost'} size='icon'
                             className='w-[1.5em] min-w-[1.5rem] h-auto p-1 aspect-square'
                             onClick={() => {
-                              commitRemoteUrlChange();
+                              setRemoteUrl(!wasUploaded ? url : null);
+                              setEditingRemoteUrl(false);
                             }}
                           >
-                            {!mediaId && !remoteUrl?.trim().length ? (
-                              <UnlinkIcon className='size-full' />
-                            ) : (
-                              <CheckIcon className='size-full' />
-                            )}
+                            <BanIcon className='size-full' />
                           </Button>
                         </TooltipTrigger>
-                        <TooltipContent>{!mediaId && !remoteUrl?.trim().length ? 'Remove' : 'Confirm'}</TooltipContent>
+                        <TooltipContent>Cancel</TooltipContent>
                       </Tooltip>
-                    )}
-                    <Tooltip>
-                      <TooltipTrigger asChild>
-                        <Button type='button' variant={url && !mediaId ? 'outline' : 'ghost'} size='icon'
-                          className='w-[1.5em] min-w-[1.5rem] h-auto p-1 aspect-square'
-                          onClick={() => {
-                            setRemoteUrl(!mediaId ? url : null);
-                            setEditingRemoteUrl(false);
-                          }}
-                        >
-                          <BanIcon className='size-full' />
-                        </Button>
-                      </TooltipTrigger>
-                      <TooltipContent>Cancel</TooltipContent>
-                    </Tooltip>
-                  </>
+                    </>
                   )
                 }
               </div>
@@ -590,8 +587,19 @@ export function Enclosure({ onChange}: EnclosureProps) {
                           <Button type='button' variant='secondary' size='icon'
                             className='w-[1.5em] h-auto aspect-square p-0.5 rounded-full rounded-s-none'
                             onClick={() => {
+                              setPlaying(false);
                               setEditingRemoteUrl(false);
-                              doOnChange(initialEpisode.current?.enclosure || null);
+                              setStatus(getEnclosureStatus(_episode));
+                              setAudioInfo({
+                                duration: _episode.enclosure?.duration || 0
+                              })
+                              doOnChange(_episode.enclosure ? {
+                                enclosure: _episode.enclosure,
+                                dovetail: {
+                                  uncut: _episode.dovetail.uncut,
+                                  media: _episode.dovetail.media
+                                }
+                              } : null);
                             }}
                           >
                             <Undo2Icon className='size-full' />

@@ -1,3 +1,4 @@
+// biome-ignore lint/correctness/noUnusedImports: h needs to be loaded for JSX to be recognized by syntax linter.
 import { Component, Host, Listen, Prop, Watch, h, State, Fragment } from '@stencil/core';
 import { playerState } from '@/store';
 import type { PlayerState } from '@/store/player';
@@ -56,16 +57,16 @@ export class DtpcPlayer {
       }
       previousSeekTime = seekTime;
     });
-    onChange('muted', (muted) => audioElm.muted = muted);
-    onChange('volume', (volume) => audioElm.volume = volume);
+    onChange('muted', (muted) => { audioElm.muted = muted });
+    onChange('volume', (volume) => { audioElm.volume = volume });
 
     state.audioElm.addEventListener('loadedmetadata', (e: Event) => {
       state.currentTime = (e.target as HTMLAudioElement).currentTime;
       state.duration = (e.target as HTMLAudioElement).duration;
     });
-    state.audioElm.addEventListener('timeupdate', (e: Event) => state.currentTime = (e.target as HTMLAudioElement).currentTime);
-    state.audioElm.addEventListener('play', () => state.playing = true);
-    state.audioElm.addEventListener('pause', () => state.playing = false);
+    state.audioElm.addEventListener('timeupdate', (e: Event) => { state.currentTime = (e.target as HTMLAudioElement).currentTime });
+    state.audioElm.addEventListener('play', () => { state.playing = true });
+    state.audioElm.addEventListener('pause', () => { state.playing = false });
   }
 
   disconnectedCallback() {
@@ -77,7 +78,7 @@ export class DtpcPlayer {
     if (this.state.audioElm.paused) {
       this.state.audioElm.play()
         .then(() => {
-          // Setup media session.
+          // TODO: Setup media session.
         })
         .catch((e) => {
           console.error(e);

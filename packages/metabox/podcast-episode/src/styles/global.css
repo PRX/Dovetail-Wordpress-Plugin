@@ -111,31 +111,7 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
-}
 
-
-@layer base {
-  body {
-    font-feature-settings:
-      "rlig" 1,
-      "calt" 1;
-  }
-  button:not(:disabled),
-  [role="button"]:not(:disabled) {
-    cursor: pointer;
-  }
-  input[type="number"]::-webkit-inner-spin-button {
-    display: none;
-  }
-}
-
-@layer utilities {
-  .text-wrap-balance {
-    text-wrap: balance;
-  }
-}
-
-@theme {
   --animate-color-cycle: color-cycle 10s linear infinite alternate;
   --animate-processing-spinner:
     processing-spinner 3s ease infinite,
@@ -171,6 +147,28 @@
     50% {
       stroke-dashoffset: 78;
     }
+  }
+}
+
+
+@layer base {
+  body {
+    font-feature-settings:
+      "rlig" 1,
+      "calt" 1;
+  }
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+  input[type="number"]::-webkit-inner-spin-button {
+    display: none;
+  }
+}
+
+@layer utilities {
+  .text-wrap-balance {
+    text-wrap: balance;
   }
 }
 
