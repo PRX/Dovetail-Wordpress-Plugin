@@ -522,31 +522,27 @@ class Player {
 			update_post_meta( $post->ID, DTPODCASTS_POST_META_KEY, $meta );
 		}
 
+		/**
+		 * Default to uncut data when.
+		 * - Uncut processing is complete.
+		 */
+		if ( isset( $meta['dovetail']['uncut']['status'] ) && 'complete' === $meta['dovetail']['uncut']['status'] ) {
+			$atts['src']      = $meta['dovetail']['uncut']['href'];
+			$atts['duration'] = $meta['dovetail']['uncut']['duration'];
+		}
+
 		// When post is published...
 		if ( 'publish' === $post->post_status ) {
 			/**
 			 * Return Dovetail enclosure data when:
 			 * - Dovetail Enclosure data exists.
-			 * - Audio has been processed
-			 *   - `size` is > 0. Initial enclosure processing will have an href, but the URL will not return audio.
 			 */
 			if (
-				isset( $meta['dovetail']['enclosure'] ) && ! empty( $meta['dovetail']['enclosure'] ) &&
-				$meta['dovetail']['enclosure']['size'] > 0
+				isset( $meta['dovetail']['enclosure'] ) && ! empty( $meta['dovetail']['enclosure'] )
 			) {
-				// TODO: Get latest prefix from podcast and construct fresh href.
 				$atts['src']      = $meta['dovetail']['enclosure']['href'];
 				$atts['duration'] = $meta['dovetail']['enclosure']['duration'];
 			}
-		}
-
-		/**
-		 * When we do not have attrs at this point, return uncut data when.
-		 * - Uncut processing is complete.
-		 */
-		if ( ! isset( $atts['src'] ) && isset( $meta['dovetail']['uncut']['status'] ) && 'complete' === $meta['dovetail']['uncut']['status'] ) {
-			$atts['src']      = $meta['dovetail']['uncut']['href'];
-			$atts['duration'] = $meta['dovetail']['uncut']['duration'];
 		}
 
 		return $atts;

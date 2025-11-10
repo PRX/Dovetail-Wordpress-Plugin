@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils"
 
 function Slider({
   className,
+  disabled,
   defaultValue,
   value,
   min = 0,
@@ -24,6 +25,7 @@ function Slider({
   return (
     <SliderPrimitive.Root
       data-slot="slider"
+      disabled={disabled}
       defaultValue={defaultValue}
       value={value}
       min={min}
@@ -47,7 +49,7 @@ function Slider({
           )}
         />
       </SliderPrimitive.Track>
-      {Array.from({ length: _values.length }, (_, index) => (
+      {!disabled && Array.from({ length: _values.length }, (_, index) => (
         <SliderPrimitive.Thumb
           data-slot="slider-thumb"
           key={index}
