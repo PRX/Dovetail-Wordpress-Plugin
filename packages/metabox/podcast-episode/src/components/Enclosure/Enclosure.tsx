@@ -8,7 +8,6 @@ import { AlertCircleIcon, BanIcon, CheckIcon, CircleAlertIcon, CircleCheckBigIco
 import { PostMetaboxContext } from '@/lib/contexts/PostMetaboxContext';
 import { cn, formatDuration } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
-import { Skeleton } from '@/components/ui/skeleton';
 import { Badge } from '@/components/ui/badge';
 import { Slider } from '@/components/ui/slider';
 import { Separator } from '@/components/ui/separator';
