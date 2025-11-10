@@ -14,9 +14,19 @@ export type EpisodeEnclosure = {
   /**
    * URL of audio file.
    * When `mediaId` is set, should be the public URL to the uploaded audio file.
-   * Otherwise, should be the URL to third-party hosting (S3, Google Cloud, etc.).
+   * Otherwise, should be the http URL to third-party hosting (S3, Google Cloud, etc.).
    */
   url: string,
+
+  /**
+   * Temporary URL to use for playback when `url` does not use http protocol.
+   */
+  playbackUrl?: string,
+
+  /**
+   * Timestamp at which playback URL will not be accessible.
+   */
+  playbackExpires?: number,
 
   /**
    * Duration (or length) of audio file.
