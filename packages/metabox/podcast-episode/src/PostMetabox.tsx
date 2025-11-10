@@ -360,21 +360,14 @@ function PostMetabox({ field, episode: _episode, options }: PostMetaboxProps) {
 
     return res.data;
   }, (data) => {
-    const { id, enclosure, uncut } = data || {};
+    const { id, enclosure } = data || {};
     const inProgressStatuses = ['created', 'processing'];
 
     if (!id || !enclosure) return !!dovetail?.id;
 
     const isEnclosureProcessing = inProgressStatuses.includes(enclosure?.status);
-    const isUncutProcessing = inProgressStatuses.includes(uncut?.status);
 
-    if (! isUncutProcessing ) {
-      dispatch({ type: 'UPDATE_EPISODE_DOVETAIL', payload: data });
-    }
-
-    if (! isEnclosureProcessing ) {
-      dispatch({ type: 'UPDATE_EPISODE_DOVETAIL', payload: data });
-    }
+    dispatch({ type: 'UPDATE_EPISODE_DOVETAIL', payload: data });
 
     return isEnclosureProcessing;
   }, 2000, [dovetail?.id, dovetail?.enclosure?.status]);

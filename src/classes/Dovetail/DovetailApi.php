@@ -174,6 +174,16 @@ class DovetailApi {
 		$return              = false;
 
 		if ( is_array( $data ) && ! empty( $data ) ) {
+			if ( isset( $data['uncut'] ) && is_array( $data['uncut'] ) ) {
+				$data['uncut']['duration'] = (float) $data['uncut']['duration'];
+			}
+
+			if ( isset( $data['media'] ) && is_array( $data['media'] ) ) {
+				foreach ( $data['media'] as $i => $media ) {
+					$data['media'][ $i ]['duration'] = (float) $media['duration'];
+				}
+			}
+
 			$return = [
 				'id'              => $data['id'],
 				'enclosure'       => $data['_links']['enclosure'],

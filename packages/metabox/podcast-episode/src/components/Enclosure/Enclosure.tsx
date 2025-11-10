@@ -83,7 +83,7 @@ export function Enclosure({ episode: _episode, onChange }: EnclosureProps) {
   const [status, setStatus] = useState<EnclosureStatus>(getEnclosureStatus(episode));
   const [remoteUrl, setRemoteUrl] = useState(!wasUploaded ? url : null);
   const [audioInfo, setAudioInfo] = useState<AudioInfo>({
-    duration: dovetail.enclosure?.duration || duration || 0
+    duration: dovetail.uncut?.duration || dovetail.enclosure?.duration || duration || 0
   });
   const [uploadProgress, setUploadProgress] = useState(0);
   const [seekTime, setSeekTime] = useState<number>();
@@ -91,24 +91,23 @@ export function Enclosure({ episode: _episode, onChange }: EnclosureProps) {
   const [audioCurrentTime, setAudioCurrentTime] = useState(0);
   const [editingRemoteUrl, setEditingRemoteUrl] = useState(false);
   const hasUnsavedChanges = (url !== _episode.enclosure?.url);
-  const audioSrcUrl = hasUnsavedChanges ?
+  const [audioSrcType, audioSrcUrl, audioSrcDuration] = hasUnsavedChanges ?
     // Audio has been edited. Could not have been saved yet, or is still processing.
     // Use enclosure URL when it is playable. This is for remote URL input, before saving.
-    remoteUrl ||
-    // Use dovetail uncut URL when uncut processing is complete. This is for uploads after saving while being processed.
-    (dovetail.uncut && dovetail.uncut.status === 'complete' && dovetail.uncut.href) ||
+    remoteUrl && ['remote-url', remoteUrl, audioInfo?.duration || duration] ||
+    // Use dovetail uncut URL when uncut processing is complete. This is for uploads after saving (async block-editor).
+    (dovetail.uncut && dovetail.uncut.status === 'complete' && dovetail.uncut.href && ['dovetail-href', dovetail.uncut.href, dovetail.uncut.duration]) ||
     // Use playback URL after upload for as long as it exists and has not expired. This is for uploads before saving and while being processed.
-    (playbackUrl && (!playbackExpires || playbackExpires < Date.now()) && playbackUrl) ||
+    (playbackUrl && (!playbackExpires || playbackExpires < Date.now()) && playbackUrl && ['playback-url', playbackUrl, audioInfo?.duration || duration]) ||
     // Make sure any boolean failures fall though to an undefined value.
-    undefined :
+    ['no-audio-src', undefined, 0] :
     // Otherwise, dovetail data should be saved and have accessible audio URL for processed audio.
-    // Construct a dovetail enclosure URL. We do not want use the href from the dovetail enclosure
-    // since it will be prefixed with analytics prefixes, and audio played in the admin should not
-    // affect those metrics.
-    (dovetail.uncut && dovetail.uncut.status === 'complete' && dovetail.uncut.href) ||
+    // Use uncut href when processing is complete. We do not want use the href from the dovetail enclosure since it will be
+    // contain analytics prefixes, and audio played in the admin should not affect those metrics.
+    (dovetail.uncut && dovetail.uncut.status === 'complete' && dovetail.uncut.href && ['dovetail-href', dovetail.uncut.href, dovetail.uncut.duration]) ||
     // Legacy fallback to media for the brief period when the Dovetail API didn't support the `uncut` property.
-    dovetail.enclosure?.status === 'complete' && dovetail.media?.[0].href ||
-    undefined;
+    dovetail.enclosure?.status === 'complete' && dovetail.media?.[0].href && ['dovetail-href', dovetail.media[0].href, dovetail.media[0].duration] ||
+    ['no-audio-src', undefined, 0];
   const audioIsPlayable = `${audioSrcUrl}`.startsWith('http');
 
   const openFileDialog = useCallback(() => {
@@ -565,7 +564,7 @@ export function Enclosure({ episode: _episode, onChange }: EnclosureProps) {
             {info || (
               <div className='grid gap-2'>
                 <div className='flex flex-wrap gap-2'>
-                  { audioInfo?.duration ? <Badge variant='secondary'>{formatDuration(audioInfo.duration)}</Badge> : <Skeleton className='w-[8ch] h-[1em]' /> }
+                  { !!audioSrcDuration && <Badge variant='secondary'>{formatDuration(audioSrcDuration)}</Badge> }
                   { 'dovetail-processing' === status && <Badge variant='outline'><LoaderIcon className='text-sky-500 animate-spin' />Dovetail Processing Audio...</Badge> }
                   { 'dovetail-complete' === status && !hasUnsavedChanges && <Badge variant='outline'><CircleCheckBigIcon className='text-green-500' />Dovetail Audio {'publish' === postStatus ? 'Published' : 'Ready'}</Badge> }
                   { !!dovetail?.enclosure?.size && 'dovetail-incomplete' === status && (
@@ -610,28 +609,31 @@ export function Enclosure({ episode: _episode, onChange }: EnclosureProps) {
                     </Tooltip>
                   )}
                 </div>
-                <div className='flex items-center gap-3'>
-                  <Button type='button' size='icon' variant='ghost' className='rounded-full aspect-square' aria-label='Return To Beginning'
-                    onClick={() => {
-                      audioRef.current.currentTime = 0;
-                    }}
-                  ><SkipBackIcon /></Button>
-                  <Slider min={0} max={audioInfo.duration} step={0.1} value={[seekTime || audioCurrentTime]}
-                    onValueChange={(v) => {
-                      setSeekTime(v[0]);
-                    }}
-                    onValueCommit={(v) => {
-                      setSeekTime(null);
-                      setAudioCurrentTime(v[0]);
-                      audioRef.current.currentTime = v[0];
-                    }}
-                  />
-                  <span className='flex items-center gap-1 h-[1em] font-mono'>
-                    <span>{formatDuration(seekTime || audioCurrentTime)}</span>
-                    <Separator orientation='vertical' />
-                    <span className='text-gray-300'>{formatDuration(audioInfo.duration)}</span>
-                  </span>
-                </div>
+                {!!audioSrcDuration && (
+                  <div className='flex items-center gap-3'>
+                    <Button type='button' size='icon' variant='ghost' className='rounded-full aspect-square' aria-label='Return To Beginning'
+                      onClick={() => {
+                        audioRef.current.currentTime = 0;
+                      }}
+                    ><SkipBackIcon /></Button>
+                    <Slider min={0} max={audioSrcDuration || 0} step={0.1} value={[seekTime || audioCurrentTime]}
+                      disabled={['playback-url', 'no-audio-src'].includes(audioSrcType)}
+                      onValueChange={(v) => {
+                        setSeekTime(v[0]);
+                      }}
+                      onValueCommit={(v) => {
+                        setSeekTime(null);
+                        setAudioCurrentTime(v[0]);
+                        audioRef.current.currentTime = v[0];
+                      }}
+                    />
+                    <span className='flex items-center gap-1 h-[1em] font-mono'>
+                      <span>{formatDuration(seekTime || audioCurrentTime)}</span>
+                      <Separator orientation='vertical' />
+                      <span className='text-gray-300'>{formatDuration(audioSrcDuration || 0)}</span>
+                    </span>
+                  </div>
+                )}
               </div>
             )}
           </div>
