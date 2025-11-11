@@ -4,7 +4,7 @@ Tags: Dovetail, podcasting
 Requires at least: 6.0
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 0.3.2
+Stable tag: 0.4.0
 License: GPL-3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -31,6 +31,16 @@ Easily integrate with Dovetail, PRX's podcasting publishing platform, to streaml
 5. [Configure Dovetail Podcasts settings.](https://github.com/PRX/Dovetail-Wordpress-Plugin/blob/main/docs/settings-general.md)
 
 == Changelog ==
+
+= 0.4.0 =
+
+**New Features**
+
+* feat: Upload files directly to Dovetail (https://github.com/jasonbahl/automation-tests/pull/66)
+
+**Bug Fixes**
+
+* fix(postmetabox): Disable scrubbing of upload playback url (https://github.com/jasonbahl/automation-tests/pull/68)
 
 = 0.3.2 =
 

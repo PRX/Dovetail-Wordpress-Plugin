@@ -1,5 +1,17 @@
 # Changelog
 
+## v0.4.0 - 2025-11-11
+
+### New Features
+
+- feat: Upload files directly to Dovetail ([#66](https://github.com/jasonbahl/automation-tests/pull/66))
+
+### Bug Fixes
+
+- fix(postmetabox): Disable scrubbing of upload playback url ([#68](https://github.com/jasonbahl/automation-tests/pull/68))
+
+
+
 ## v0.3.2 - 2025-10-01
 
 ### Bug Fixes

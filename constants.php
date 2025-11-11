@@ -24,7 +24,7 @@ function dovetail_podcasts_setup_constants() {
 
 	// Plugin version.
 	if ( ! defined( 'DTPODCASTS_VERSION' ) ) {
-		define( 'DTPODCASTS_VERSION', '0.3.2' );
+		define( 'DTPODCASTS_VERSION', '0.4.0' );
 	}
 
 	// Plugin Folder Path.
