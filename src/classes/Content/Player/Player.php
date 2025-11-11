@@ -503,41 +503,46 @@ class Player {
 						break;
 					}
 				}
+			}
+		} else {
+			// This post has been connected to a Dovetail episode.
+			// Get current Dovetail episode data.
+			list( $episode_api ) = $this->dovetail_api->get_episode( $meta['dovetail']['id'] );
 
-				// If we have meta data, save it with updates that may have come from Dovetail API.
-				if ( ! empty( $meta ) ) {
-					if ( ! add_post_meta( $post->ID, DTPODCASTS_POST_META_KEY, $meta, true ) ) {
-						update_post_meta( $post->ID, DTPODCASTS_POST_META_KEY, $meta );
-					}
-				}
+			if ( $episode_api ) {
+				$meta['dovetail'] = Utils::parse_episode_api_data( $episode_api );
 			}
 		}
 
-		/**
-		 * Return Dovetail enclosure data when:
-		 * - Dovetail Enclosure data exists.
-		 * - Audio has been processed
-		 *   - `size` is > 0. Initial enclosure processing will have an href, but the URL will not return audio.
-		 */
-		if (
-			'publish' === $post->post_status &&
-			! empty( $meta ) &&
-			isset( $meta['dovetail']['enclosure'] ) && ! empty( $meta['dovetail']['enclosure'] ) &&
-			$meta['dovetail']['enclosure']['size'] > 0
-		) {
-			// TODO: Get latest prefix from podcast and construct fresh href.
-			$atts['src']      = $meta['dovetail']['enclosure']['href'];
-			$atts['duration'] = $meta['dovetail']['enclosure']['duration'];
+		// If we don't have metadata, we can't set any attributes. Return empty attributes array.
+		if ( empty( $meta ) ) {
+			return $atts;
+		} elseif ( ! add_post_meta( $post->ID, DTPODCASTS_POST_META_KEY, $meta, true ) ) {
+			// Make sure fresh meta data is saved.
+			update_post_meta( $post->ID, DTPODCASTS_POST_META_KEY, $meta );
 		}
 
 		/**
-		 * Return enclosure data when.
-		 * - Post is not published.
-		 * - Episode meta data has enclosure.
+		 * Default to uncut data when.
+		 * - Uncut processing is complete.
 		 */
-		if ( 'publish' !== $post->post_status && isset( $meta['enclosure'] ) && ! empty( $meta['enclosure'] ) ) {
-			$atts['src']      = $meta['enclosure']['url'];
-			$atts['duration'] = $meta['enclosure']['duration'];
+		if ( isset( $meta['dovetail']['uncut']['status'] ) && 'complete' === $meta['dovetail']['uncut']['status'] ) {
+			$atts['src']      = $meta['dovetail']['uncut']['href'];
+			$atts['duration'] = $meta['dovetail']['uncut']['duration'];
+		}
+
+		// When post is published...
+		if ( 'publish' === $post->post_status ) {
+			/**
+			 * Return Dovetail enclosure data when:
+			 * - Dovetail Enclosure data exists.
+			 */
+			if (
+				isset( $meta['dovetail']['enclosure'] ) && ! empty( $meta['dovetail']['enclosure'] )
+			) {
+				$atts['src']      = $meta['dovetail']['enclosure']['href'];
+				$atts['duration'] = $meta['dovetail']['enclosure']['duration'];
+			}
 		}
 
 		return $atts;

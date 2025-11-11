@@ -26,10 +26,10 @@ export type DovetailMedia = {
 
 export type DovetailEpisodeEnclosure = {
   href: string,
-  type: string,
-  size: number,
-  duration: number,
-  status: DovetailEnclosureStatus
+  type?: string,
+  size?: number,
+  duration?: number,
+  status?: DovetailEnclosureStatus
 }
 
 export type DovetailAuthor = {
@@ -81,14 +81,14 @@ export type DovetailPodcast = {
   /**
    * Info of the usual author of podcast episodes.
    */
-  author?: DovetailAuthor
+  author?: DovetailAuthor,
 
   /**
    * Template for enclosure URL's.
    * Use to construct preview URL in admin players that
    * do not use any URL prefixes.
    */
-  enclosureTemplate: string;
+  enclosureTemplate: string
 }
 
 export type DovetailEpisode = {
@@ -167,4 +167,12 @@ export type DovetailEpisode = {
    * Array of category names.
    */
   categories?: string[]
+}
+
+export type DovetailAuthUpload = {
+  filename: string,
+  originalUrl: string,
+  uploadUrl: string,
+  playbackUrl: string,
+  expiration: number
 }

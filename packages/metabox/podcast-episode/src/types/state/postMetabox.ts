@@ -3,7 +3,7 @@
  */
 
 import type { ActionWithPayload } from "@/types/state/action";
-import type { DovetailEpisode, DovetailPodcast } from "@_types/api";
+import type { DovetailEpisode, DovetailEpisodeEnclosure, DovetailPodcast } from "@_types/api";
 import type { EpisodeData, EpisodeEnclosure } from "@/types/state/episode";
 import type { WP_REST_API_Attachment } from "wp-types";
 
@@ -27,6 +27,14 @@ export type PostMetaboxState = {
   episode: EpisodeData,
 };
 
+export type PostMetaBoxPayloadEnclosures = {
+  enclosure: Partial<EpisodeEnclosure>,
+  dovetail: {
+    uncut: DovetailEpisodeEnclosure
+    media: DovetailEpisodeEnclosure[]
+  }
+}
+
 export type PostMetaboxAction<T = void> = T extends void ? (
   { type: 'SET_TO_DEFAULT' } |
   { type: 'SET_PODCAST_TO_DEFAULT' } |
@@ -35,5 +43,6 @@ export type PostMetaboxAction<T = void> = T extends void ? (
   { type: 'UPDATE_EPISODE', payload: Partial<EpisodeData> } |
   { type: 'SET_EPISODE_ENCLOSURE', payload: EpisodeEnclosure } |
   { type: 'UPDATE_EPISODE_ENCLOSURE', payload: Partial<EpisodeEnclosure> } |
+  { type: 'UPDATE_EPISODE_ENCLOSURES', payload: PostMetaBoxPayloadEnclosures } |
   { type: 'UPDATE_EPISODE_DOVETAIL', payload: Partial<DovetailEpisode> }
 ) : ActionWithPayload<T>;

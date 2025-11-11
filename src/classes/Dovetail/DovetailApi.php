@@ -73,7 +73,7 @@ class DovetailApi {
 	public function __construct() {
 
 		$this->id_domain     = getenv( 'DTPODCASTS_ID_DOMAIN' ) ?: 'id.prx.org';
-		$this->feeder_domain = getenv( 'DTPODCASTS_FEEDER_DOMAIN' ) ?: 'feeder.prx.org';
+		$this->feeder_domain = getenv( 'DTPODCASTS_FEEDER_DOMAIN' ) ?: 'podcasts.dovetail.prx.org';
 
 		$key_ascii          = get_option( 'dovetail_podcasts_key' );
 		$client_credentials = get_option( DTPODCASTS_SETTINGS_SECTION_PREFIX . 'authentication' );
@@ -115,6 +115,50 @@ class DovetailApi {
 				'args'                => [],
 			]
 		);
+
+		register_rest_route(
+			DTPODCASTS_API_ROUTE_BASE,
+			'auth/upload',
+			[
+				'methods'             => \WP_REST_Server::READABLE,
+				'callback'            => [ $this, 'rest_get_auth_upload' ],
+				'permission_callback' => '__return_true',
+				'args'                => [
+					'filename' => [
+						'validate_callback' => [ $this, 'rest_get_auth_upload_validate_filename_arg' ],
+						'type'              => 'string',
+						'required'          => false,
+						'sanitize_callback' => [ $this, 'rest_get_auth_upload_sanitize_filename_arg' ],
+					],
+				],
+			]
+		);
+	}
+
+	/**
+	 * Validate filename param.
+	 *
+	 * @param string                                     $value    Value to validate.
+	 * @param \DovetailPodcasts\Dovetail\WP_REST_Request $request  Request object.
+	 * @param string                                     $key      Parameter key.
+	 * @return bool
+	 */
+	// phpcs:ignore
+	public function rest_get_auth_upload_validate_filename_arg( $value, $request, $key ) {
+		return 1 === preg_match( '/\.\w+$/', $value );
+	}
+
+	/**
+	 * Sanitize filename param.
+	 *
+	 * @param string                                     $value    Value to sanitize.
+	 * @param \DovetailPodcasts\Dovetail\WP_REST_Request $request  Request object.
+	 * @param string                                     $key      Parameter key.
+	 * @return bool
+	 */
+	// phpcs:ignore
+	public function rest_get_auth_upload_sanitize_filename_arg( $value, $request, $key ) {
+		return sanitize_text_field( $value );
 	}
 
 	/**
@@ -130,6 +174,16 @@ class DovetailApi {
 		$return              = false;
 
 		if ( is_array( $data ) && ! empty( $data ) ) {
+			if ( isset( $data['uncut'] ) && is_array( $data['uncut'] ) ) {
+				$data['uncut']['duration'] = (float) $data['uncut']['duration'];
+			}
+
+			if ( isset( $data['media'] ) && is_array( $data['media'] ) ) {
+				foreach ( $data['media'] as $i => $media ) {
+					$data['media'][ $i ]['duration'] = (float) $media['duration'];
+				}
+			}
+
 			$return = [
 				'id'              => $data['id'],
 				'enclosure'       => $data['_links']['enclosure'],
@@ -149,7 +203,38 @@ class DovetailApi {
 			$return,
 			$resp,
 			[
-				'Cache-Control' => 'no-cache, no-store, must-revalidate, max-age=0, s-max-age=0',
+				'Cache-Control' => 'no-cache, no-store, must-revalidate, max-age=0, s-maxage=0',
+			]
+		);
+	}
+
+	/**
+	 * Get signed upload URL.
+	 *
+	 * @param \WP_REST_Request $request REST request object with `filename` parameter.
+	 * @return \WP_REST_Response
+	 */
+	public function rest_get_auth_upload( \WP_REST_Request $request ) {
+
+		$filename            = $request->get_param( 'filename' );
+		list( $data, $resp ) = $this->get_auth_upload( $filename );
+		$return              = false;
+
+		if ( is_array( $data ) && ! empty( $data ) ) {
+			$return = [
+				'filename'    => $data['filename'],
+				'originalUrl' => $data['originalUrl'],
+				'uploadUrl'   => $data['_links']['prx:upload']['href'],
+				'playbackUrl' => $data['_links']['prx:download']['href'],
+				'expiration'  => $data['_links']['prx:upload']['expiration'],
+			];
+		}
+
+		return $this->rest_response(
+			$return,
+			$resp,
+			[
+				'Cache-Control' => 'no-cache, no-store, must-revalidate, max-age=0, s-maxage=0',
 			]
 		);
 	}
@@ -166,6 +251,9 @@ class DovetailApi {
 		$status = wp_remote_retrieve_response_code( $api_response );
 
 		if ( $data ) {
+			$date                    = new \DateTime();
+			$data['_generated_date'] = $date->format( 'r' );
+
 			return new \WP_REST_Response( $data, $status, $headers );
 		}
 
@@ -222,6 +310,26 @@ class DovetailApi {
 		}
 
 		return $this->has_client_credentials && ! empty( $access_token );
+	}
+
+	/**
+	 * Get information about user the client application belongs to.
+	 *
+	 * @param string $filename Optional filename of file being uploaded. If not provided, signed URL's will have a generated filename.
+	 * @return array<int,array<string,mixed>|false>
+	 */
+	public function get_auth_upload( $filename = null ) {
+		$query_args = [
+			'accelerate' => true,
+		];
+
+		if ( $filename ) {
+			$query_args['filename'] = $filename;
+		}
+
+		$api_url = add_query_arg( $query_args, "https://{$this->feeder_domain}/api/v1/authorization/upload" );
+
+		return $this->get( $api_url );
 	}
 
 	/**

@@ -185,7 +185,7 @@ class PostMetaBox {
 				unset( $meta['enclosure']['duration'] );
 				update_post_meta( $post->ID, DTPODCASTS_POST_META_KEY, $meta );
 			} elseif ( 'trash' === $media->post_status ) {
-				// Episode was trashed, probably by `delete_offloaded_media` method.
+				// Episode was trashed.
 				// Remove media id and url, but DO NOT update post metadata.
 				// This will keep frontend from trying to fetch media details.
 				unset( $meta['enclosure']['mediaId'] );
@@ -299,37 +299,6 @@ class PostMetaBox {
 	 * @return array<string,mixed> Episode meta data.
 	 */
 	public function get_post_meta_box_options() {
-		global $post;
-
-		/**
-		 * Check for audio attached to post.
-		 * This can occur when:
-		 *  1) Audio was inserted into content.
-		 *  2) Audio was upload with this meta box.
-		 *
-		 * Media can be attached to a post WITHOUT the user having to save the post.
-		 * Attachment usually happens in the modal the user uses to upload the attachment.
-		 * This means that even if the user leaves the edit screen for the post,
-		 * the media that was upload is in the media library and is attached to the post.
-		 *
-		 * We can use this to "prefetch" the media api data needed to be shown in metabox,
-		 * regardless of parent post status, since AJAX requests for media attached to an
-		 * unpublished post will return a 404 error, due to attachments having an enforced
-		 * status of `inherit`.
-		 *
-		 * We can also use this list to protect from duplicate uploads, in cases where the
-		 * edit screen was refreshed before the post was saved after having podcast audio
-		 * uploaded.
-		 */
-		$post_audio = get_attached_media( 'audio', $post );
-		if ( ! empty( $post_audio ) ) {
-			// Convert WP_Post objects to WP_REST_Attachment objects.
-			$post_audio = array_map(
-				[ $this, 'get_audio_rest_data' ],
-				$post_audio
-			);
-		}
-
 		list( $podcasts_api ) = $this->dovetail_api->get_podcasts();
 		$podcasts             = $podcasts_api && is_array( $podcasts_api ) ? array_map(
 			static function ( $p ) {
@@ -347,8 +316,7 @@ class PostMetaBox {
 		) : null;
 
 		return [
-			'podcasts'      => $podcasts,
-			'attachedMedia' => $post_audio,
+			'podcasts' => $podcasts,
 		];
 	}
 
@@ -616,8 +584,6 @@ class PostMetaBox {
 		if ( ! add_post_meta( $post_id, DTPODCASTS_POST_META_KEY, $meta, true ) ) {
 			update_post_meta( $post_id, DTPODCASTS_POST_META_KEY, $meta );
 		}
-
-		$this->delete_offloaded_media( $meta, $post );
 	}
 
 	/**
@@ -878,38 +844,5 @@ class PostMetaBox {
 		}
 
 		return false;
-	}
-
-	/**
-	 * Delete media when podcast episode has been published to Dovetail.
-	 *
-	 * @param array<string,mixed> $meta Episode meta data to use in the data.
-	 * @param \WP_Post            $post Post object.
-	 * @return void
-	 */
-	private function delete_offloaded_media( array $meta, \WP_Post $post ) {
-		$delete_media = $this->settings_api->get_option( 'delete_media_after_publish', 'general' );
-		$delete_media = isset( $delete_media ) ? 'on' === $delete_media : false;
-
-		if ( ! $delete_media ||
-			'publish' !== $post->post_status ||
-			! isset( $meta['dovetail']['id'] ) ||
-			! isset( $meta['enclosure']['mediaId'] )
-		) {
-			return;
-		}
-
-		// Trash post so file is (hopefully) not deleted immediately.
-		// Dovetail may still be downloading the file during processing. May be a thing when a published
-		// podcast episode post updates audio file.
-		wp_trash_post( $meta['enclosure']['mediaId'] );
-
-		if ( ! get_post_status( $meta['enclosure']['mediaId'] ) ) {
-			// Episode media was deleted.
-			// Remove media id and url, and update metadata.
-			unset( $meta['enclosure']['mediaId'] );
-			unset( $meta['enclosure']['url'] );
-			update_post_meta( $post->ID, DTPODCASTS_POST_META_KEY, $meta );
-		}
 	}
 }

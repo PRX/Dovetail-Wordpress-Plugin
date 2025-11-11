@@ -1,6 +1,6 @@
 import { dovetailEpisodeTypes, type DovetailEpisode, type DovetailEpisodeType, type DovetailPodcast } from '../../../../types/api';
-import { type PostMetaboxAction, POST_META_BOX_KEY, type PostMetaboxOptions, type PostMetaboxState } from '@/types/state/postMetabox';
-import type { EpisodeData, EpisodeEnclosure } from '@/types/state/episode';
+import { type PostMetaboxAction, POST_META_BOX_KEY, type PostMetaboxOptions, type PostMetaboxState, type PostMetaBoxPayloadEnclosures } from '@/types/state/postMetabox';
+import type { EpisodeData } from '@/types/state/episode';
 import type React from 'react';
 import { type ChangeEvent, type CSSProperties, useCallback, useEffect, useReducer, useState } from 'react'
 import axios from 'axios';
@@ -116,8 +116,10 @@ function postMetaboxStateReducer(state: PostMetaboxState, action: PostMetaboxAct
           enclosure: action.payload,
           dovetail: {
             ...dovetail,
-            ...((!dovetail.id || dovetail.uncut) && action.payload ? {
-              uncut: { href: action.payload.url }
+            ...((!dovetail.id || dovetail.uncut) ? {
+              uncut: action.payload ? {
+                href: action.payload.url
+              } : null
             } : {
               media: action.payload ? [
                 { href: action.payload.url }
@@ -144,6 +146,26 @@ function postMetaboxStateReducer(state: PostMetaboxState, action: PostMetaboxAct
               media: [
                 { href: action.payload.url }
               ]
+            })
+          }
+        }
+      }
+
+    case 'UPDATE_EPISODE_ENCLOSURES':
+      return {
+        ...state,
+        episode: {
+          ...episode,
+          enclosure: {
+            ...enclosure,
+            ...(action.payload.enclosure || {})
+          },
+          dovetail: {
+            ...dovetail,
+            ...((!dovetail.id || dovetail.uncut) ? {
+              uncut: action.payload.dovetail.uncut
+            } : {
+              media: action.payload.dovetail.media
             })
           }
         }
@@ -228,7 +250,7 @@ function PostMetabox({ field, episode: _episode, options }: PostMetaboxProps) {
   const { podcasts } = options;
   const [isSaving, isAfterSave] = useEditorSaving();
   const [isUiLocked, setIsUiLocked] = useState(false);
-  const [initialEpisodeData, setInitialEpisodeData] = useState(_episode);
+  const [initialEpisodeData, setInitialEpisodeData] = useState(structuredClone(_episode));
   const [state, dispatch] = useReducer(postMetaboxStateReducer, {
     ...defaultPostMetaboxState,
     podcast: podcasts?.find(({ id }) => initialEpisodeData?.podcastId === id),
@@ -246,10 +268,10 @@ function PostMetabox({ field, episode: _episode, options }: PostMetaboxProps) {
   const alertRestEpisodeDialog = useShowHide();
   const additionalFields = useShowHide(hasAdditionalFieldsValues);
 
-  console.log('Episode', episode);
-  console.log('Options', options);
-  console.log('Podcast', podcast);
-  console.log('REST GET Route', restGetRoute);
+  // console.log('Episode', episode);
+  // console.log('Options', options);
+  // console.log('Podcast', podcast);
+  // console.log('REST GET Route', restGetRoute);
 
   const setEpisode = useCallback((payload: EpisodeData) => {
     dispatch({ type: 'SET_EPISODE', payload });
@@ -273,8 +295,8 @@ function PostMetabox({ field, episode: _episode, options }: PostMetaboxProps) {
     dispatch({ type: 'SET_PODCAST', payload: data});
   }
 
-  function handleEnclosureChange(payload: EpisodeEnclosure) {
-    dispatch({ type: 'SET_EPISODE_ENCLOSURE', payload });
+  function handleEnclosuresChange(payload: PostMetaBoxPayloadEnclosures) {
+    dispatch({ type: 'UPDATE_EPISODE_ENCLOSURES', payload });
   }
 
   function updateEpisodeDovetail(payload: Partial<DovetailEpisode>) {
@@ -292,7 +314,7 @@ function PostMetabox({ field, episode: _episode, options }: PostMetaboxProps) {
   }, [podcast])
 
   useEffect(() => {
-    // Only lock once is is locked.
+    // Make sure lock is retained until explicitly set in after save handler.
     setIsUiLocked((locked) => isSaving || locked );
   }, [isSaving]);
 
@@ -301,33 +323,36 @@ function PostMetabox({ field, episode: _episode, options }: PostMetaboxProps) {
 
     // Update local episode data with last saved data.
     (async () => {
-      const episodeMetaData = await axios.get<WP_REST_API_Post_With_Meta_Data<{
+      await axios.get<WP_REST_API_Post_With_Meta_Data<{
         [POST_META_BOX_KEY]: EpisodeData
       }>>(`/wp-json${restGetRoute}/${postId}`, {
         headers: {
           'X-Wp-Nonce': nonce
         }})
-        .then((r) => r?.data.meta[POST_META_BOX_KEY] )
-        .catch((e) => { console.log('Error fetching post data from REST API.', e); });
+        .then((r) => {
+          const episodeMetaData = r?.data.meta[POST_META_BOX_KEY];
 
-      if (episodeMetaData) {
-        setEpisode(episodeMetaData);
-      } else {
-        resetEpisode();
-      }
+          if (episodeMetaData) {
+            setEpisode(episodeMetaData);
+          }
 
-      // Treat block editor after save as a "page refresh" of the classic editor.
-      // Update initial episode data.
-      setInitialEpisodeData(episodeMetaData || null);
+          // Treat block editor after save as a "page refresh" of the classic editor.
+          // Update initial episode data.
+          setInitialEpisodeData(episodeMetaData || null);
+        } )
+        .catch((e) => {
+          console.log('Error fetching post data from REST API.', e);
+        });
 
       setIsUiLocked(false);
     })()
-  }, [isAfterSave, nonce, postId, setEpisode, restGetRoute, resetEpisode])
+  }, [isAfterSave, nonce, postId, setEpisode, restGetRoute])
 
   useInterval<DovetailEpisode>(async () => {
     const { id, enclosure } = dovetail || {};
+    const inProgressStatuses = ['created', 'processing'];
 
-    const isProcessing = 'processing' === enclosure?.status;
+    const isProcessing = inProgressStatuses.includes(enclosure?.status);
 
     if (!id || !isProcessing) return null;
 
@@ -336,16 +361,15 @@ function PostMetabox({ field, episode: _episode, options }: PostMetaboxProps) {
     return res.data;
   }, (data) => {
     const { id, enclosure } = data || {};
+    const inProgressStatuses = ['created', 'processing'];
 
     if (!id || !enclosure) return !!dovetail?.id;
 
-    const isProcessing = 'processing' === enclosure.status;
+    const isEnclosureProcessing = inProgressStatuses.includes(enclosure?.status);
 
-    if (! isProcessing ) {
-      dispatch({ type: 'UPDATE_EPISODE_DOVETAIL', payload: { enclosure } });
-    }
+    dispatch({ type: 'UPDATE_EPISODE_DOVETAIL', payload: data });
 
-    return isProcessing;
+    return isEnclosureProcessing;
   }, 2000, [dovetail?.id, dovetail?.enclosure?.status]);
 
   if (!podcasts?.length) {
@@ -363,17 +387,18 @@ function PostMetabox({ field, episode: _episode, options }: PostMetaboxProps) {
   return (
     <PostMetaboxContext.Provider value={{ state, options }}>
       <div className='mt-[12px] @container/main relative' {...(isUiLocked && { inert: true })}>
-        {isUiLocked && <Skeleton className='absolute -inset-2 z-10 bg-gradient-to-br from-indigo-500/20 via-purple-500/20 to-pink-500/20' />}
+        {isUiLocked && <Skeleton className='absolute -inset-2 z-10 bg-gradient-to-br from-indigo-500/20 via-purple-500/20 to-pink-500/20 rounded-xl' />}
+        {!episode?.podcastId && !!initialEpisodeData?.podcastId && (
+          <input type='hidden' name={`${field}_DELETE`} value='DELETE' />
+        )}
         {!episode?.podcastId ? (
-          !initialEpisodeData?.podcastId ? (
+          !initialEpisodeData?.podcastId || isSaving || isAfterSave ? (
             <Button size='lg' variant='outline' className='w-full' type='button' onClick={selectPodcastDialog.show}>
               <DiamondPlusIcon />
               <span>Add To Podcast...</span>
             </Button>
           ) : (
-            <>
-            <input type='hidden' name={`${field}_DELETE`} value='DELETE' />
-            {!initialEpisodeData?.dovetail?.id ? (
+            !initialEpisodeData?.dovetail?.id ? (
               <Alert style={{ '--icon-size': '1.75rem' } as CSSProperties}>
                 <EraserIcon className='size-4' />
                 <AlertTitle>Podcast Episode Will Be Removed...</AlertTitle>
@@ -393,8 +418,7 @@ function PostMetabox({ field, episode: _episode, options }: PostMetaboxProps) {
                   <Button variant='secondary' onClick={() => { restoreEpisode() }}><Undo2Icon />Keep Dovetail Episode</Button>
                 </AlertDescription>
               </Alert>
-            )}
-            </>
+            )
           )
         ) : podcast && (
           <>
@@ -441,7 +465,7 @@ function PostMetabox({ field, episode: _episode, options }: PostMetaboxProps) {
             </div>
             <Separator className='my-3' />
             <div className='grid @4xl/main:grid-cols-[1fr_17.5rem] items-center gap-4 max-w-full'>
-              <Enclosure onChange={handleEnclosureChange} />
+              <Enclosure episode={initialEpisodeData} onChange={handleEnclosuresChange} />
 
               <div className='@container/group-1'>
                 <div className='grid @md/group-1:grid-cols-2 gap-3 bg-slate-100 rounded p-4'>
