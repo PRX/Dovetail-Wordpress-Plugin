@@ -3,8 +3,9 @@
  */
 
 function validateVersion(version) {
+  console.log("Validating Version:", version, typeof version);
   return (
-    typeof version !== "string" && /^\d+\.\d+\.\d+(-[\w.]+)?/.test(version)
+    typeof version === "string" && /^\d+\.\d+\.\d+(-[\w.]+)?/.test(version)
   );
 }
 

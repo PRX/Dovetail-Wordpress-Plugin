@@ -1,7 +1,16 @@
 ## Release Notes
 
-This release was triggered by merging a PR from develop to main.
 
-No changesets were found for this release. This typically means:
-- No features, fixes, or breaking changes were added, or
-- The changes made did not require a changeset
+
+## Changelog
+
+**Bump Type:** patch
+
+### 🔄 Other Changes
+- chore(workflows): validate version ([#71](https://github.com/PRX/Dovetail-Wordpress-Plugin/pull/71))
+
+### 👏 Contributors
+
+Thanks to the following contributors for making this release possible:
+
+- [@rpeterman-gp](https://github.com/rpeterman-gp)

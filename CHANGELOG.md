@@ -1,5 +1,13 @@
 # Changelog
 
+## v0.4.1 - 2026-05-19
+
+### Other Changes
+
+- chore(workflows): validate version ([#71](https://github.com/jasonbahl/automation-tests/pull/71))
+
+
+
 ## v0.4.0 - 2025-11-11
 
 ### New Features
