@@ -174,7 +174,7 @@ class DovetailApi {
 		$return              = false;
 
 		if ( is_array( $data ) && ! empty( $data ) ) {
-			if ( isset( $data['uncut'] ) && is_array( $data['uncut'] ) ) {
+			if ( isset( $data['uncut'] ) && is_array( $data['uncut'] ) && isset( $data['uncut']['duration'] ) ) {
 				$data['uncut']['duration'] = (float) $data['uncut']['duration'];
 			}
 
